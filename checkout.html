@@ -98,10 +98,19 @@
         <div class="checkout-body">
           <div class="alert" id="checkoutAlert"></div>
           <div class="checkout-summary">
-            <div class="row"><span>Backtest Tier</span><span><strong id="summaryTier">Advanced</strong></span></div>
+            <div class="row"><span>Data Tier</span><span><strong id="summaryTier">L2 History</strong></span></div>
+            <div class="row"><span>Period</span><span id="summaryPeriod">12 months</span></div>
             <div class="row"><span>Strategy</span><span id="summaryName">—</span></div>
-            <div class="row"><span>Subtotal</span><span>€<span id="summaryPrice">79.00</span></span></div>
-            <div class="row total"><span>Total</span><span>€<span id="summaryTotal">79.00</span></span></div>
+            <div class="row" id="discountRow" style="display:none;color:var(--ch-success);"><span>Discount</span><span id="summaryDiscount">—</span></div>
+            <div class="row total"><span>Total</span><span>€<span id="summaryTotal">480.00</span></span></div>
+          </div>
+          <div class="input-group" style="margin-bottom:var(--ch-space-6);">
+            <label class="input-label">Have a discount code?</label>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <input class="input-field" id="checkoutDiscount" type="text" placeholder="Enter code" style="flex:1;text-transform:uppercase;" onchange="applyCheckoutDiscount()">
+              <button class="btn btn-secondary btn-sm" onclick="applyCheckoutDiscount()" type="button">Apply</button>
+            </div>
+            <span id="checkoutDiscMsg" style="font-size:var(--ch-text-xs);min-height:1.2em;"></span>
           </div>
           <form id="paymentForm" onsubmit="handlePayment(event)">
             <div class="input-group">
@@ -138,15 +147,23 @@
   <script>
     (function() {
       var params = new URLSearchParams(window.location.search);
-      var tier = params.get('tier') || 'advanced';
-      var price = params.get('price') || '79.00';
+      var tier = params.get('tier') || 'l2';
+      var months = parseInt(params.get('months')) || 12;
+      var price = params.get('price') || '480.00';
       var name = params.get('name') || 'Strategy';
-      var tierNames = { standard: 'Standard — OHLC + Trades', advanced: 'Advanced — MBP-10 Order Book', advplus: 'Adv Plus — MBO Full Order Book' };
-      document.getElementById('summaryTier').textContent = tierNames[tier] || tierNames.advanced;
+      var discount = params.get('discount');
+      var discPct = parseInt(params.get('discountPct')) || 0;
+      var tierNames = { base: 'Base — RBBO/Trades/BBO/OHLCV', l2: 'L2 History — MBP-1/MBP-10', l3: 'L3 — MBO Full Order Book' };
+      var periodNames = { 1:'1 month', 3:'3 months', 6:'6 months', 12:'12 months' };
+      document.getElementById('summaryTier').textContent = tierNames[tier] || tierNames.l2;
+      document.getElementById('summaryPeriod').textContent = periodNames[months] || months + ' months';
       document.getElementById('summaryName').textContent = decodeURIComponent(name);
-      document.getElementById('summaryPrice').textContent = price;
       document.getElementById('summaryTotal').textContent = price;
       document.getElementById('payAmount').textContent = '€' + price;
+      if (discount) {
+        document.getElementById('discountRow').style.display = '';
+        document.getElementById('summaryDiscount').textContent = '-' + discPct + '% (' + discount + ')';
+      }
 
       // Format card number
       document.getElementById('cardNumber').addEventListener('input', function(e) {
@@ -161,6 +178,27 @@
         e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
       });
     })();
+    
+    function applyCheckoutDiscount() {
+      var input = document.getElementById('checkoutDiscount');
+      var msg = document.getElementById('checkoutDiscMsg');
+      var price = new URLSearchParams(window.location.search).get('price') || '480.00';
+      var code = input.value.trim().toUpperCase();
+      if (!code) { msg.textContent = ''; return; }
+      var codes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
+      var found = codes.find(function(d) { return d.code === code; });
+      if (!found) { msg.textContent = 'Invalid code.'; msg.style.color = 'var(--ch-error)'; return; }
+      var active = (!found.expiry || found.expiry === 'Never' || found.expiry >= new Date().toISOString().split('T')[0]) && found.used < found.maxUses;
+      if (!active) { msg.textContent = 'Code expired or fully used.'; msg.style.color = 'var(--ch-error)'; return; }
+      var total = parseFloat(price) * (1 - found.pct / 100);
+      document.getElementById('summaryTotal').textContent = total.toFixed(2);
+      document.getElementById('payAmount').textContent = '€' + total.toFixed(2);
+      document.getElementById('discountRow').style.display = '';
+      document.getElementById('summaryDiscount').textContent = '-' + found.pct + '% (' + code + ')';
+      msg.textContent = found.pct + '% off applied!';
+      msg.style.color = 'var(--ch-success)';
+      window._checkoutDiscount = code;
+    }
 
     function handlePayment(e) {
       e.preventDefault();
