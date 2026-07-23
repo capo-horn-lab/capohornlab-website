@@ -2002,9 +2002,18 @@
     }
 
     function showWizard() {
-      // Placeholder: in production redirect to /signup
-      alert('Redirect to /signup');
+      document.getElementById('preauthHero').style.display = 'none';
+      document.getElementById('wizardSection').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Auto-show wizard if ?auth=1 is in URL (coming from dashboard)
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('auth') === '1') {
+        showWizard();
+      }
+    })();
 
     // ---- Wizard state ----
     let currentStep = 1;
