@@ -107,7 +107,7 @@
           <div class="input-group" style="margin-bottom:var(--ch-space-6);">
             <label class="input-label">Have a discount code?</label>
             <div style="display:flex;gap:var(--ch-space-2);">
-              <input class="input-field" id="checkoutDiscount" type="text" placeholder="Enter code" style="flex:1;text-transform:uppercase;" onchange="applyCheckoutDiscount()">
+              <input class="input-field" id="checkoutDiscount" type="text" placeholder="Enter code" style="flex:1;text-transform:uppercase;">
               <button class="btn btn-secondary btn-sm" onclick="applyCheckoutDiscount()" type="button">Apply</button>
             </div>
             <span id="checkoutDiscMsg" style="font-size:var(--ch-text-xs);min-height:1.2em;"></span>
@@ -182,20 +182,38 @@
     function applyCheckoutDiscount() {
       var input = document.getElementById('checkoutDiscount');
       var msg = document.getElementById('checkoutDiscMsg');
+      var priceEl = document.getElementById('summaryTotal');
       var price = new URLSearchParams(window.location.search).get('price') || '480.00';
       var code = input.value.trim().toUpperCase();
-      if (!code) { msg.textContent = ''; return; }
-      var codes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
+      if (!code) { msg.textContent = ''; msg.style.color = ''; return; }
+      var codes;
+      try { codes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]'); }
+      catch(e) { codes = []; }
+      if (!Array.isArray(codes) || codes.length === 0) {
+        msg.textContent = 'No discount codes available. Codes must be created in the admin panel first.';
+        msg.style.color = 'var(--ch-error)';
+        return;
+      }
       var found = codes.find(function(d) { return d.code === code; });
-      if (!found) { msg.textContent = 'Invalid code.'; msg.style.color = 'var(--ch-error)'; return; }
-      var active = (!found.expiry || found.expiry === 'Never' || found.expiry >= new Date().toISOString().split('T')[0]) && found.used < found.maxUses;
-      if (!active) { msg.textContent = 'Code expired or fully used.'; msg.style.color = 'var(--ch-error)'; return; }
+      if (!found) {
+        msg.textContent = 'Invalid code: "' + code + '". Check spelling or create one in admin.';
+        msg.style.color = 'var(--ch-error)';
+        return;
+      }
+      var today = new Date().toISOString().split('T')[0];
+      var expired = found.expiry && found.expiry !== 'Never' && found.expiry < today;
+      var fullyUsed = found.used >= found.maxUses;
+      if (expired || fullyUsed) {
+        msg.textContent = expired ? 'Code expired on ' + found.expiry + '.' : 'Code fully used (' + found.used + '/' + found.maxUses + ').';
+        msg.style.color = 'var(--ch-error)';
+        return;
+      }
       var total = parseFloat(price) * (1 - found.pct / 100);
-      document.getElementById('summaryTotal').textContent = total.toFixed(2);
+      priceEl.textContent = total.toFixed(2);
       document.getElementById('payAmount').textContent = '€' + total.toFixed(2);
       document.getElementById('discountRow').style.display = '';
       document.getElementById('summaryDiscount').textContent = '-' + found.pct + '% (' + code + ')';
-      msg.textContent = found.pct + '% off applied!';
+      msg.textContent = found.pct + '% off applied! Original: €' + parseFloat(price).toFixed(2);
       msg.style.color = 'var(--ch-success)';
       window._checkoutDiscount = code;
     }
@@ -235,5 +253,27 @@
       }, 2000);
     }
   </script>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       STRIPE INTEGRATION — SETUP INSTRUCTIONS
+       ═══════════════════════════════════════════════════════════════
+       To activate real Stripe payments:
+       
+       1. Get your publishable key from https://dashboard.stripe.com/apikeys
+       2. Uncomment the Stripe.js script tag below and add your key:
+          <script src="https://js.stripe.com/v3/"></script>
+       3. Replace the handlePayment() function with:
+          const stripe = Stripe('pk_live_YOUR_KEY');
+          stripe.redirectToCheckout({ sessionId: 'cs_xxx' });
+       
+       For now, the mock handlePayment() simulates the flow.
+       
+       Virtual POS setup (for manual card reader / terminal):
+       - Stripe Terminal: https://stripe.com/docs/terminal
+       - SDK: https://github.com/stripe/stripe-terminal-js
+       - After POS is configured, add terminal reader integration here.
+       ═══════════════════════════════════════════════════════════════ -->
+  <!-- <script src="https://js.stripe.com/v3/"></script> -->
+
 </body>
 </html>
