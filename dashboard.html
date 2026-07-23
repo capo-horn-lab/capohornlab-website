@@ -1187,7 +1187,7 @@
         <a href="test-strategy.html?auth=1">Submit</a>
         <a href="research.html">Research</a>
         <a href="#" onclick="switchTab('profile')">Profile</a>
-        <a href="#" class="logout-link">Log Out</a>
+        <a href="#" class="logout-link" onclick="logout()">Log Out</a>
       </div>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1661,6 +1661,10 @@
       showToast('Password updated successfully.');
     }
 
+    /* ---- Logout ---- */
+    function logout() {
+      window.location.href = 'index.html';
+    }
     /* ---- Toast ---- */
     function showToast(message) {
       var toast = document.getElementById('toast');
