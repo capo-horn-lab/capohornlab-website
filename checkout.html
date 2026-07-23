@@ -287,13 +287,13 @@
        ═══════════════════════════════════════════════════════════════ -->
   <script src="https://js.stripe.com/v3/"></script>
   <script>
-    // 🔑 CONFIG: Replace with your Stripe publishable key when ready
-    var STRIPE_KEY = 'pk_test_YOUR_KEY';
-    var stripeEnabled = false; // Set to true when you have your API key
+    var STRIPE_KEY = 'pk_test_51TwS4hCLUOPGxqrkpsFwdgGSY5xAr6sad3gMPLV2nJEMKkUfYsu2GymD0cpQJliGroSmnZOj03vcAx7Swd9BylaY00Sn9nVaav';
+    var stripeEnabled = true;
+    var stripeBackendReady = false; // Set to true when Netlify backend is deployed
 
     function redirectToStripeCheckout(price, name) {
-      if (!stripeEnabled || STRIPE_KEY.startsWith('pk_test_YOUR')) {
-        // Mock fallback — simulates payment
+      if (!stripeBackendReady) {
+        // Mock fallback — simulates payment (GitHub Pages has no backend)
         mockPayment(price, name);
         return;
       }
