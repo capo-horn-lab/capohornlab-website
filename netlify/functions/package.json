@@ -1,0 +1,8 @@
+{
+  "name": "capohornlab-stripe-checkout",
+  "version": "1.0.0",
+  "description": "Netlify functions for Capo Horn Lab Stripe payments",
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}

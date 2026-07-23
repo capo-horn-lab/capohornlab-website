@@ -297,7 +297,7 @@
         mockPayment(price, name);
         return;
       }
-      // Real Stripe Checkout — requires backend endpoint
+      // Real Stripe Checkout — via Netlify function
       var stripe = Stripe(STRIPE_KEY);
       fetch('/.netlify/functions/checkout', {
         method: 'POST',
