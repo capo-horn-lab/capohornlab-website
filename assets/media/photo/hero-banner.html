@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capo Horn Lab — Hero Banner 1200×630</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #050d1a; }
+
+  /* === BANNER 1200 × 630 px === */
+  .banner {
+    width: 1200px;
+    height: 630px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 35%, #132a52 65%, #0a1628 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* --- Grid / market-data texture --- */
+  .grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* --- Radial glow accents --- */
+  .glow-1 {
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .glow-2 {
+    position: absolute;
+    bottom: -150px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* --- Abstract chart line (equity curve) --- */
+  .chart-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 200px;
+    pointer-events: none;
+  }
+  .chart-line svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* --- Decorative data dots --- */
+  .data-dots {
+    position: absolute;
+    top: 60px; right: 80px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .data-dots span {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #f59e0b;
+  }
+  .data-dots span:nth-child(odd) { background: #2563eb; }
+
+  /* --- CH Monogram Logo (left) --- */
+  .ch-logo {
+    position: absolute;
+    top: 40px; left: 48px;
+    width: 64px; height: 64px;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 22, 40, 0.7);
+    backdrop-filter: blur(2px);
+  }
+  .ch-logo span {
+    font-size: 26px;
+    font-weight: 700;
+    color: #f59e0b;
+    letter-spacing: 2px;
+  }
+
+  /* --- Company name --- */
+  .company-name {
+    position: absolute;
+    top: 50px;
+    left: 130px;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* --- Central headline --- */
+  .headline {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding: 0 60px;
+  }
+  .headline .motto {
+    font-size: 52px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+  }
+  .headline .motto em {
+    font-style: normal;
+    color: #f59e0b;
+  }
+  .headline .sub {
+    margin-top: 18px;
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 1px;
+  }
+  .headline .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #f59e0b, #2563eb);
+    margin: 24px auto 0;
+    border-radius: 2px;
+  }
+
+  /* --- Bottom tagline --- */
+  .bottom-tag {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* --- Quantitative badge (right corner) --- */
+  .badge {
+    position: absolute;
+    top: 44px;
+    right: 48px;
+    padding: 6px 14px;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+
+  /* --- Responsive preview info --- */
+  .info {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.2);
+    font-size: 12px;
+    font-family: monospace;
+    background: rgba(0,0,0,0.6);
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <!-- Background layers -->
+  <div class="grid-overlay"></div>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <!-- Data dots -->
+  <div class="data-dots">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- Chart line (equity curve going up) -->
+  <div class="chart-line">
+    <svg viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="rgba(245,158,11,0.15)"/>
+          <stop offset="100%" stop-color="rgba(245,158,11,0)"/>
+        </linearGradient>
+      </defs>
+      <path d="M0,180 Q100,160 200,140 Q300,90 400,110 Q500,60 600,80 Q700,30 800,45 Q900,15 1000,25 Q1100,5 1200,10 L1200,200 L0,200 Z"
+            fill="url(#chartGrad)" opacity="0.6"/>
+      <path d="M0,180 Q100,160 200,140 Q300,90 400,110 Q500,60 600,80 Q700,30 800,45 Q900,15 1000,25 Q1100,5 1200,10"
+            fill="none" stroke="#f59e0b" stroke-width="2" opacity="0.6"/>
+      <path d="M0,170 Q100,155 200,145 Q300,110 400,125 Q500,85 600,95 Q700,55 800,65 Q900,40 1000,48 Q1100,30 1200,32"
+            fill="none" stroke="#2563eb" stroke-width="1.5" opacity="0.35"/>
+    </svg>
+  </div>
+
+  <!-- CH Logo -->
+  <div class="ch-logo"><span>CH</span></div>
+  <div class="company-name">Capo Horn Lab</div>
+
+  <!-- Badge -->
+  <div class="badge">Quantitative Research</div>
+
+  <!-- Headline -->
+  <div class="headline">
+    <div class="motto">Beyond the <em>Market Edge</em></div>
+    <div class="sub">Data-driven systematic strategies &amp; quantitative research</div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Bottom tag -->
+  <div class="bottom-tag">Capo Horn Lab &nbsp;·&nbsp; Fintech Quantitativo</div>
+</div>
+
+<div class="info">1200 × 630 px — Hero Banner / Social Media Cover</div>
+
+</body>
+</html>

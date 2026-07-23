@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capo Horn Lab — Conversion Funnel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-light: #111f3a;
+      --navy-mid: #1a2d4a;
+      --amber: #f59e0b;
+      --amber-dim: #b8860b;
+      --blue: #2563eb;
+      --blue-glow: #3b82f6;
+      --text-muted: #6b7b99;
+      --text-body: #c8d0dd;
+      --text-bright: #f0f2f5;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--navy);
+      color: var(--text-body);
+      font-family: var(--font-sans);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 3rem 1.5rem;
+      overflow-x: hidden;
+    }
+
+    /* Background grid pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 960px;
+      width: 100%;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .header .brand {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.75rem;
+    }
+
+    .header h1 {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 2rem;
+      color: var(--text-bright);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .header h1 span {
+      color: var(--amber);
+    }
+
+    .header .subtitle {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* Funnel */
+    .funnel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+    }
+
+    .funnel-step {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .funnel-step:hover .funnel-bar {
+      filter: brightness(1.15);
+    }
+
+    .funnel-step:hover .step-label {
+      color: var(--text-bright);
+    }
+
+    .funnel-bar-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .funnel-bar {
+      position: relative;
+      height: 68px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(
+        calc(0% + 12px) 0%,
+        calc(100% - 12px) 0%,
+        100% 50%,
+        calc(100% - 12px) 100%,
+        calc(0% + 12px) 100%,
+        0% 50%
+      );
+    }
+
+    /* Widths shrink as we descend the funnel */
+    .step-awareness .funnel-bar  { width: 100%;   background: linear-gradient(135deg, #1a2d4a, #1e3460); }
+    .step-interest .funnel-bar   { width: 82%;    background: linear-gradient(135deg, #1e3460, #1f3d78); }
+    .step-evaluation .funnel-bar { width: 64%;    background: linear-gradient(135deg, #1f3d78, #1e4488); }
+    .step-trial .funnel-bar      { width: 46%;    background: linear-gradient(135deg, #1e4488, #2563eb); }
+    .step-subscribe .funnel-bar  { width: 30%;    background: linear-gradient(135deg, #2563eb, #f59e0b); }
+
+    .funnel-bar .bar-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: calc(100% - 48px);
+      position: relative;
+      z-index: 2;
+    }
+
+    .funnel-bar .step-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text-bright);
+      letter-spacing: 0.04em;
+    }
+
+    .funnel-bar .step-number {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--amber);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      border-radius: 4px;
+      padding: 0.15rem 0.55rem;
+      font-weight: 500;
+    }
+
+    /* Connector arrow between steps */
+    .connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      width: 100%;
+      color: var(--text-muted);
+      opacity: 0.4;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .connector::before,
+    .connector::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--text-muted), transparent);
+      opacity: 0.3;
+    }
+
+    .connector .arrow-icon {
+      margin: 0 0.75rem;
+      font-size: 0.75rem;
+      color: var(--amber);
+      opacity: 0.6;
+    }
+
+    /* Description grid */
+    .descriptions {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+      width: 100%;
+    }
+
+    .desc-card {
+      background: rgba(17, 31, 58, 0.6);
+      border: 1px solid rgba(245, 158, 11, 0.08);
+      border-radius: 8px;
+      padding: 1rem 0.85rem;
+      text-align: center;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .desc-card:hover {
+      border-color: rgba(245, 158, 11, 0.25);
+      background: rgba(17, 31, 58, 0.85);
+    }
+
+    .desc-card .desc-number {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--amber);
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .desc-card .desc-label {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--text-bright);
+      margin-bottom: 0.35rem;
+    }
+
+    .desc-card .desc-text {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Metrics bar below */
+    .metrics {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      background: rgba(17, 31, 58, 0.4);
+      border: 1px solid rgba(245, 158, 11, 0.06);
+      border-radius: 10px;
+      flex-wrap: wrap;
+    }
+
+    .metric-item {
+      text-align: center;
+    }
+
+    .metric-item .metric-value {
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--amber);
+    }
+
+    .metric-item .metric-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .footer .brand-tag {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      body { padding: 2rem 1rem; }
+      .header h1 { font-size: 1.5rem; }
+      .funnel-bar { height: 56px; }
+      .funnel-bar .step-name { font-size: 0.85rem; }
+      .funnel-bar .step-number { font-size: 0.65rem; padding: 0.1rem 0.4rem; }
+      .descriptions { grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+      .desc-card { padding: 0.65rem 0.5rem; }
+      .desc-card .desc-label { font-size: 0.7rem; }
+      .desc-card .desc-text { font-size: 0.6rem; }
+      .metrics { gap: 1.5rem; padding: 1rem; }
+    }
+
+    @media (max-width: 540px) {
+      .descriptions { grid-template-columns: 1fr; }
+      .funnel-bar .bar-content { flex-direction: column; gap: 2px; }
+      .funnel-bar .step-number { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="brand">Capo Horn Lab</div>
+      <h1>Conversion <span>Funnel</span></h1>
+      <p class="subtitle">
+        From first exposure to active subscription — how serious traders
+        move from awareness to commitment through honest, data-driven engagement.
+      </p>
+    </div>
+
+    <!-- Funnel Bars -->
+    <div class="funnel">
+
+      <!-- 1. Awareness -->
+      <div class="funnel-step step-awareness">
+        <div class="funnel-bar-wrapper">
+          <div class="funnel-bar">
+            <div class="bar-content">
+              <span class="step-name">Awareness</span>
+              <span class="step-number">01</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector">
+        <span class="arrow-icon">▼</span>
+      </div>
+
+      <!-- 2. Interest -->
+      <div class="funnel-step step-interest">
+        <div class="funnel-bar-wrapper">
+          <div class="funnel-bar">
+            <div class="bar-content">
+              <span class="step-name">Interest</span>
+              <span class="step-number">02</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector">
+        <span class="arrow-icon">▼</span>
+      </div>
+
+      <!-- 3. Evaluation -->
+      <div class="funnel-step step-evaluation">
+        <div class="funnel-bar-wrapper">
+          <div class="funnel-bar">
+            <div class="bar-content">
+              <span class="step-name">Evaluation</span>
+              <span class="step-number">03</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector">
+        <span class="arrow-icon">▼</span>
+      </div>
+
+      <!-- 4. Trial -->
+      <div class="funnel-step step-trial">
+        <div class="funnel-bar-wrapper">
+          <div class="funnel-bar">
+            <div class="bar-content">
+              <span class="step-name">Trial</span>
+              <span class="step-number">04</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connector">
+        <span class="arrow-icon">▼</span>
+      </div>
+
+      <!-- 5. Subscribe -->
+      <div class="funnel-step step-subscribe">
+        <div class="funnel-bar-wrapper">
+          <div class="funnel-bar">
+            <div class="bar-content">
+              <span class="step-name">Subscribe</span>
+              <span class="step-number">05</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Description Cards -->
+    <div class="descriptions">
+      <div class="desc-card">
+        <div class="desc-number">01</div>
+        <div class="desc-label">Awareness</div>
+        <div class="desc-text">Trader discovers Capo Horn Lab via LinkedIn, X, or referral. First impression: serious infrastructure, no hype.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-number">02</div>
+        <div class="desc-label">Interest</div>
+        <div class="desc-text">Engages with content: data-driven posts, transparent metrics, honest backtesting philosophy.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-number">03</div>
+        <div class="desc-label">Evaluation</div>
+        <div class="desc-text">Visits website, reads documentation, compares features. Verifies the platform's technical claims.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-number">04</div>
+        <div class="desc-label">Trial</div>
+        <div class="desc-text">Signs up for free trial. Runs first backtest. Experiences realistic execution models firsthand.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-number">05</div>
+        <div class="desc-label">Subscribe</div>
+        <div class="desc-text">Convinced by the tool's honesty and capability. Upgrades to paid plan for full data access and API.</div>
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metrics">
+      <div class="metric-item">
+        <div class="metric-value">100%</div>
+        <div class="metric-label">Awareness → Interest</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">~35%</div>
+        <div class="metric-label">Interest → Trial</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-value">~22%</div>
+        <div class="metric-label">Trial → Subscribe</div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <span class="brand-tag">Beyond the Market Edge</span> &nbsp;·&nbsp; Capo Horn Lab &nbsp;·&nbsp; Quant Backtesting Infrastructure
+    </div>
+
+  </div>
+</body>
+</html>
