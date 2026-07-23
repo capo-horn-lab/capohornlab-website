@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capo Horn Lab — Design System & Tokens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       ╔══════════════════════════════════════════════════════════╗
+       ║           CAPO HORN LAB — DESIGN TOKENS v1.0            ║
+       ║ Stile: Tecnico · Quantitativo · Premium · Mare Aperto   ║
+       ╚══════════════════════════════════════════════════════════╝
+       ============================================================ */
+
+    /* ---- 1. CUSTOM PROPERTIES (The Token Layer) ---- */
+    :root {
+      /* --- Palette Primaria --- */
+      --ch-navy-900: #0a1628;
+      --ch-navy-800: #0f1e36;
+      --ch-navy-700: #152a45;
+      --ch-navy-600: #1c3a5c;
+      --ch-navy-500: #254e77;
+      --ch-navy-400: #3b6fa0;
+      --ch-navy-300: #5e93c2;
+      --ch-navy-200: #8fb8da;
+      --ch-navy-100: #c1d6ec;
+      --ch-navy-50:  #e8f0f8;
+
+      /* --- Neutrals --- */
+      --ch-white:       #ffffff;
+      --ch-off-white:   #f8fafc;
+      --ch-gray-50:     #f1f5f9;
+      --ch-gray-100:    #e2e8f0;
+      --ch-gray-200:    #cbd5e1;
+      --ch-gray-300:    #94a3b8;
+      --ch-gray-400:    #64748b;
+      --ch-gray-500:    #475569;
+      --ch-gray-600:    #334155;
+      --ch-gray-700:    #1e293b;
+      --ch-gray-800:    #0f172a;
+      --ch-gray-900:    #020617;
+
+      /* --- Accent / Interactive --- */
+      --ch-blue-500:    #2563eb;
+      --ch-blue-400:    #3b82f6;
+      --ch-blue-300:    #60a5fa;
+      --ch-blue-200:    #93c5fd;
+      --ch-blue-100:    #dbeafe;
+      --ch-blue-50:     #eff6ff;
+
+      /* --- Data Viz & Highlights --- */
+      --ch-amber-500:   #f59e0b;
+      --ch-amber-400:   #fbbf24;
+      --ch-amber-300:   #fcd34d;
+      --ch-amber-200:   #fde68a;
+      --ch-amber-100:   #fef3c7;
+      --ch-amber-50:    #fffbeb;
+
+      /* --- Semantic --- */
+      --ch-success:     #10b981;
+      --ch-warning:     #f59e0b;
+      --ch-error:       #ef4444;
+      --ch-info:        #3b82f6;
+
+      /* --- Typography --- */
+      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+      --ch-text-xs:     0.75rem;
+      --ch-text-sm:     0.875rem;
+      --ch-text-base:   1rem;
+      --ch-text-lg:     1.125rem;
+      --ch-text-xl:     1.25rem;
+      --ch-text-2xl:    1.5rem;
+      --ch-text-3xl:    1.875rem;
+      --ch-text-4xl:    2.25rem;
+      --ch-text-5xl:    3rem;
+      --ch-text-6xl:    3.75rem;
+
+      --ch-leading-tight:   1.15;
+      --ch-leading-snug:    1.3;
+      --ch-leading-normal:  1.5;
+      --ch-leading-relaxed: 1.65;
+
+      --ch-font-light:      300;
+      --ch-font-regular:    400;
+      --ch-font-medium:     500;
+      --ch-font-semibold:   600;
+      --ch-font-bold:       700;
+      --ch-font-extrabold:  800;
+
+      --ch-letter-spacing-tight:  -0.025em;
+      --ch-letter-spacing-normal: 0em;
+      --ch-letter-spacing-wide:   0.05em;
+
+      /* --- Spacing (4px grid × multiplier) --- */
+      --ch-space-1:     0.25rem;  /*  4px */
+      --ch-space-2:     0.5rem;   /*  8px */
+      --ch-space-3:     0.75rem;  /* 12px */
+      --ch-space-4:     1rem;     /* 16px */
+      --ch-space-5:     1.25rem;  /* 20px */
+      --ch-space-6:     1.5rem;   /* 24px */
+      --ch-space-8:     2rem;     /* 32px */
+      --ch-space-10:    2.5rem;   /* 40px */
+      --ch-space-12:    3rem;     /* 48px */
+      --ch-space-16:    4rem;     /* 64px */
+      --ch-space-20:    5rem;     /* 80px */
+      --ch-space-24:    6rem;     /* 96px */
+
+      /* --- Radii --- */
+      --ch-radius-none:  0;
+      --ch-radius-sm:    0.25rem;   /*  4px */
+      --ch-radius-md:    0.5rem;    /*  8px */
+      --ch-radius-lg:    0.75rem;   /* 12px */
+      --ch-radius-xl:    1rem;      /* 16px */
+      --ch-radius-2xl:   1.5rem;    /* 24px */
+      --ch-radius-full:  9999px;
+
+      /* --- Shadows --- */
+      --ch-shadow-xs:    0 1px 2px rgba(10, 22, 40, 0.05);
+      --ch-shadow-sm:    0 1px 3px rgba(10, 22, 40, 0.08), 0 1px 2px rgba(10, 22, 40, 0.04);
+      --ch-shadow-md:    0 4px 6px rgba(10, 22, 40, 0.07), 0 2px 4px rgba(10, 22, 40, 0.04);
+      --ch-shadow-lg:    0 10px 15px rgba(10, 22, 40, 0.08), 0 4px 6px rgba(10, 22, 40, 0.03);
+      --ch-shadow-xl:    0 20px 25px rgba(10, 22, 40, 0.10), 0 8px 10px rgba(10, 22, 40, 0.04);
+      --ch-shadow-2xl:   0 25px 50px rgba(10, 22, 40, 0.15);
+      --ch-shadow-glow-blue:  0 0 20px rgba(37, 99, 235, 0.25);
+      --ch-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.25);
+
+      /* --- Transitions --- */
+      --ch-transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-spring:  500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* --- Z-index --- */
+      --ch-z-base:      1;
+      --ch-z-dropdown:  10;
+      --ch-z-sticky:    100;
+      --ch-z-nav:       1000;
+      --ch-z-overlay:   5000;
+      --ch-z-modal:     6000;
+
+      /* --- Layout --- */
+      --ch-max-width:   1200px;
+      --ch-content-gap: 1rem;
+    }
+
+    /* ============================================================
+       2. GLOBAL RESET & BASE
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      line-height: var(--ch-leading-normal);
+      color: var(--ch-gray-800);
+      background: var(--ch-off-white);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       3. DESIGN SYSTEM DOCUMENTATION LAYOUT
+       ============================================================ */
+    .ds-header {
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      padding: var(--ch-space-12) var(--ch-space-6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ds-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(37,99,235,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(245,158,11,0.06) 0%, transparent 60%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.015) 40px,
+          rgba(255,255,255,0.015) 41px
+        );
+      pointer-events: none;
+    }
+
+    .ds-header h1 {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-4xl);
+      font-weight: var(--ch-font-extrabold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      position: relative;
+    }
+
+    .ds-header h1 small {
+      display: block;
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-regular);
+      color: var(--ch-navy-200);
+      letter-spacing: var(--ch-letter-spacing-normal);
+      margin-top: var(--ch-space-2);
+    }
+
+    .ds-header .meta-badge {
+      display: inline-block;
+      margin-top: var(--ch-space-4);
+      padding: var(--ch-space-2) var(--ch-space-4);
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.3);
+      border-radius: var(--ch-radius-full);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-blue-300);
+      font-weight: var(--ch-font-medium);
+      position: relative;
+    }
+
+    .ds-header .meta-badge span {
+      color: var(--ch-amber-400);
+    }
+
+    .ds-nav-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--ch-space-6);
+      flex-wrap: wrap;
+      margin-top: var(--ch-space-8);
+      position: relative;
+    }
+
+    .ds-nav-links a {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-1) var(--ch-space-2);
+      border-bottom: 2px solid transparent;
+      transition: color var(--ch-transition-fast), border-color var(--ch-transition-fast);
+    }
+
+    .ds-nav-links a:hover {
+      color: var(--ch-white);
+      border-color: var(--ch-blue-500);
+    }
+
+    .ds-container {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: var(--ch-space-12) var(--ch-space-6);
+    }
+
+    .ds-section {
+      margin-bottom: var(--ch-space-16);
+    }
+
+    .ds-section-title {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-2);
+      letter-spacing: var(--ch-letter-spacing-tight);
+    }
+
+    .ds-section-subtitle {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-400);
+      margin-bottom: var(--ch-space-8);
+      font-weight: var(--ch-font-regular);
+    }
+
+    .ds-section-subtitle code {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      background: var(--ch-gray-100);
+      padding: 2px 6px;
+      border-radius: var(--ch-radius-sm);
+    }
+
+    .ds-grid {
+      display: grid;
+      gap: var(--ch-space-6);
+    }
+
+    .ds-grid-2  { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-3  { grid-template-columns: repeat(3, 1fr); }
+    .ds-grid-4  { grid-template-columns: repeat(4, 1fr); }
+    .ds-grid-5  { grid-template-columns: repeat(5, 1fr); }
+    .ds-grid-auto { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+
+    .ds-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-6);
+      box-shadow: var(--ch-shadow-sm);
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .ds-card:hover {
+      box-shadow: var(--ch-shadow-md);
+    }
+
+    .ds-card-label {
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      color: var(--ch-gray-400);
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .ds-card-value {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-900);
+    }
+
+    .ds-code {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      background: var(--ch-navy-900);
+      color: var(--ch-navy-100);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border-radius: var(--ch-radius-md);
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.6;
+    }
+
+    hr.ds-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, var(--ch-gray-100), var(--ch-blue-200), var(--ch-gray-100));
+      margin: var(--ch-space-12) 0;
+    }
+
+    /* ============================================================
+       4. COMPONENT: COLOR SWATCHES
+       ============================================================ */
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--ch-radius-md);
+      overflow: hidden;
+      box-shadow: var(--ch-shadow-xs);
+      background: var(--ch-white);
+    }
+
+    .swatch-color {
+      height: 60px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: var(--ch-space-1) var(--ch-space-2);
+    }
+
+    .swatch-color .hex-label {
+      font-family: var(--ch-font-mono);
+      font-size: 10px;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .swatch-info {
+      padding: var(--ch-space-2) var(--ch-space-3);
+    }
+
+    .swatch-name {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-gray-800);
+    }
+
+    .swatch-var {
+      font-family: var(--ch-font-mono);
+      font-size: 10px;
+      color: var(--ch-gray-400);
+    }
+
+    /* Palette row */
+    .palette-row {
+      display: flex;
+      border-radius: var(--ch-radius-md);
+      overflow: hidden;
+      box-shadow: var(--ch-shadow-xs);
+      height: 48px;
+    }
+
+    .palette-row .palette-step {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: 9px;
+      color: rgba(255,255,255,0.8);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    /* ============================================================
+       5. COMPONENT: TYPOGRAPHY SPECIMEN
+       ============================================================ */
+    .type-specimen {
+      margin-bottom: var(--ch-space-8);
+    }
+
+    .type-specimen .label {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-bottom: var(--ch-space-1);
+    }
+
+    .type-specimen .label code {
+      font-family: var(--ch-font-mono);
+      background: var(--ch-gray-100);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    .type-display  { font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+    .type-heading1 { font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
+    .type-heading2 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+    .type-heading3 { font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; }
+    .type-heading4 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+    .type-body     { font-weight: 400; letter-spacing: 0; line-height: 1.6; }
+    .type-small    { font-weight: 400; letter-spacing: 0; line-height: 1.5; }
+    .type-mono     { font-family: var(--ch-font-mono); line-height: 1.5; }
+
+    /* ============================================================
+       6. COMPONENT BASE STYLES (for doc preview, also reusable)
+       ============================================================ */
+
+    /* --- BUTTONS --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-2);
+      font-family: var(--ch-font-sans);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-sm);
+      line-height: 1;
+      padding: var(--ch-space-3) var(--ch-space-6);
+      border: 1px solid transparent;
+      border-radius: var(--ch-radius-md);
+      cursor: pointer;
+      transition:
+        background var(--ch-transition-fast),
+        color var(--ch-transition-fast),
+        border-color var(--ch-transition-fast),
+        box-shadow var(--ch-transition-fast),
+        transform var(--ch-transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--ch-blue-400);
+      border-color: var(--ch-blue-400);
+      box-shadow: var(--ch-shadow-glow-blue);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ch-blue-500);
+      border-color: var(--ch-blue-500);
+    }
+    .btn-secondary:hover {
+      background: var(--ch-blue-50);
+      border-color: var(--ch-blue-400);
+      color: var(--ch-blue-400);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ch-gray-400);
+      border-color: transparent;
+    }
+    .btn-ghost:hover {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-700);
+    }
+
+    .btn-disabled,
+    .btn:disabled,
+    .btn[aria-disabled="true"] {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-300);
+      border-color: var(--ch-gray-100);
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+    .btn-disabled:hover,
+    .btn:disabled:hover { background: var(--ch-gray-100); border-color: var(--ch-gray-100); box-shadow: none; }
+
+    .btn-sm  { padding: var(--ch-space-2) var(--ch-space-4); font-size: var(--ch-text-xs); }
+    .btn-lg  { padding: var(--ch-space-4) var(--ch-space-8); font-size: var(--ch-text-base); }
+    .btn-amber { background: var(--ch-amber-500); color: var(--ch-navy-900); border-color: var(--ch-amber-500); }
+    .btn-amber:hover { background: var(--ch-amber-400); border-color: var(--ch-amber-400); box-shadow: var(--ch-shadow-glow-amber); }
+
+    /* --- INPUTS --- */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-1);
+    }
+
+    .input-label {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-600);
+    }
+
+    .input-label .required {
+      color: var(--ch-error);
+      margin-left: 2px;
+    }
+
+    .input-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field::placeholder {
+      color: var(--ch-gray-300);
+    }
+
+    .input-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .input-field:disabled {
+      background: var(--ch-gray-50);
+      color: var(--ch-gray-300);
+      cursor: not-allowed;
+    }
+
+    .input-field.error {
+      border-color: var(--ch-error);
+    }
+    .input-field.error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .input-help {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+
+    .input-help.error {
+      color: var(--ch-error);
+    }
+
+    /* Select field */
+    .select-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      outline: none;
+      width: 100%;
+      cursor: pointer;
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+
+    .select-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* Textarea */
+    .textarea-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      outline: none;
+      width: 100%;
+      min-height: 100px;
+      resize: vertical;
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+    }
+
+    .textarea-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* --- CARDS --- */
+    .ch-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-sm);
+      overflow: hidden;
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .ch-card:hover {
+      box-shadow: var(--ch-shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .ch-card-header {
+      padding: var(--ch-space-6) var(--ch-space-6) 0;
+    }
+
+    .ch-card-body {
+      padding: var(--ch-space-6);
+    }
+
+    .ch-card-footer {
+      padding: var(--ch-space-4) var(--ch-space-6);
+      border-top: 1px solid var(--ch-gray-100);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--ch-space-3);
+    }
+
+    .ch-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    .ch-card-badge.blue  { background: var(--ch-blue-100); color: var(--ch-blue-500); }
+    .ch-card-badge.amber { background: var(--ch-amber-100); color: var(--ch-amber-500); }
+    .ch-card-badge.green { background: #d1fae5; color: var(--ch-success); }
+    .ch-card-badge.gray  { background: var(--ch-gray-100); color: var(--ch-gray-500); }
+
+    .ch-card-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ch-card-stat-value {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+    }
+
+    .ch-card-stat-label {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    /* --- NAVIGATION --- */
+    .ch-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--ch-space-4) var(--ch-space-8);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      box-shadow: var(--ch-shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: var(--ch-z-nav);
+    }
+
+    .ch-nav-brand {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-bold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .ch-nav-brand .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+    }
+
+    .ch-nav-links a {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-2) var(--ch-space-4);
+      border-radius: var(--ch-radius-md);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .ch-nav-links a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links a.active {
+      color: var(--ch-white);
+      background: rgba(37,99,235,0.2);
+    }
+
+    .ch-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* --- FOOTER --- */
+    .ch-footer {
+      background: var(--ch-navy-900);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ch-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(37,99,235,0.4), transparent);
+    }
+
+    .ch-footer-grid {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--ch-space-8);
+    }
+
+    .ch-footer-brand {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+      margin-bottom: var(--ch-space-3);
+      letter-spacing: var(--ch-letter-spacing-tight);
+    }
+
+    .ch-footer-tagline {
+      font-size: var(--ch-text-sm);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 300px;
+    }
+
+    .ch-footer h4 {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-white);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .ch-footer ul li {
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .ch-footer ul li a {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-300);
+      transition: color var(--ch-transition-fast);
+    }
+
+    .ch-footer ul li a:hover {
+      color: var(--ch-amber-400);
+    }
+
+    .ch-footer-bottom {
+      max-width: var(--ch-max-width);
+      margin: var(--ch-space-12) auto 0;
+      padding-top: var(--ch-space-6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--ch-text-xs);
+      flex-wrap: wrap;
+      gap: var(--ch-space-4);
+    }
+
+    .ch-footer-bottom .disclaimer {
+      color: var(--ch-gray-500);
+      max-width: 500px;
+    }
+
+    /* --- SPACING VISUALIZER --- */
+    .spacing-vis {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-4);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .spacing-vis .bar {
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-blue-300));
+      border-radius: var(--ch-radius-sm);
+      flex-shrink: 0;
+    }
+
+    .spacing-vis .info {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-500);
+    }
+
+    .spacing-vis .info strong {
+      color: var(--ch-navy-900);
+    }
+
+    /* --- SHADOW VISUALIZER --- */
+    .shadow-demo {
+      width: 100px;
+      height: 80px;
+      background: var(--ch-white);
+      border-radius: var(--ch-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ch-text-xs);
+      font-family: var(--ch-font-mono);
+      color: var(--ch-gray-400);
+    }
+
+    /* --- RESPONSIVE DEMO --- */
+    .breakpoint-demo {
+      background: var(--ch-navy-800);
+      border-radius: var(--ch-radius-md);
+      padding: var(--ch-space-4);
+      text-align: center;
+      color: var(--ch-white);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+    }
+
+    .breakpoint-demo .current-bp {
+      display: block;
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      margin-top: var(--ch-space-2);
+    }
+
+    /* ============================================================
+       7. RESPONSIVE — MOBILE FIRST
+       ============================================================ */
+    /* Base: mobile (< 768px) is default above */
+    /* Tablet: ≥ 768px */
+    @media (min-width: 768px) {
+      .ds-header { padding: var(--ch-space-16) var(--ch-space-8); }
+      .ds-header h1 { font-size: var(--ch-text-5xl); }
+      .ds-container { padding: var(--ch-space-16) var(--ch-space-8); }
+
+      .ds-grid-2-md  { grid-template-columns: repeat(2, 1fr); }
+      .ds-grid-3-md  { grid-template-columns: repeat(3, 1fr); }
+      .ds-grid-4-md  { grid-template-columns: repeat(4, 1fr); }
+      .ds-grid-auto-md { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    }
+
+    @media (max-width: 767px) {
+      .ds-grid-2  { grid-template-columns: 1fr; }
+      .ds-grid-3  { grid-template-columns: 1fr; }
+      .ds-grid-4  { grid-template-columns: repeat(2, 1fr); }
+      .ds-grid-5  { grid-template-columns: repeat(2, 1fr); }
+
+      .ch-nav-links { display: none; }
+      .ch-nav-actions .btn { display: none; }
+      .nav-toggle { display: block; }
+
+      .ch-footer-grid { grid-template-columns: 1fr; gap: var(--ch-space-6); }
+      .ch-footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* Desktop: ≥ 1024px */
+    @media (min-width: 1024px) {
+      .ds-header { padding: var(--ch-space-20) var(--ch-space-8); }
+      .ds-header h1 { font-size: var(--ch-text-6xl); }
+      .ds-container { padding: var(--ch-space-20) var(--ch-space-8); }
+
+      .ds-grid-2-lg  { grid-template-columns: repeat(2, 1fr); }
+      .ds-grid-3-lg  { grid-template-columns: repeat(3, 1fr); }
+      .ds-grid-4-lg  { grid-template-columns: repeat(4, 1fr); }
+      .ds-grid-5-lg  { grid-template-columns: repeat(5, 1fr); }
+      .ds-grid-auto-lg { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+      .ch-nav-links { gap: var(--ch-space-1); }
+    }
+
+    /* ============================================================
+       8. ANIMATIONS & DECORATIVE
+       ============================================================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ds-animate {
+      animation: fadeInUp 0.5s ease-out both;
+    }
+
+    .ds-animate:nth-child(1) { animation-delay: 0.05s; }
+    .ds-animate:nth-child(2) { animation-delay: 0.10s; }
+    .ds-animate:nth-child(3) { animation-delay: 0.15s; }
+    .ds-animate:nth-child(4) { animation-delay: 0.20s; }
+    .ds-animate:nth-child(5) { animation-delay: 0.25s; }
+    .ds-animate:nth-child(6) { animation-delay: 0.30s; }
+    .ds-animate:nth-child(7) { animation-delay: 0.35s; }
+    .ds-animate:nth-child(8) { animation-delay: 0.40s; }
+
+    /* Mare Aperto (Open Sea) decorative wave */
+    .wave-divider {
+      height: 40px;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      margin: var(--ch-space-8) 0;
+    }
+
+    .wave-divider::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 20px,
+        rgba(37,99,235,0.06) 20px,
+        rgba(37,99,235,0.06) 22px,
+        transparent 22px,
+        transparent 40px
+      );
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+      mask-size: 1200px 100%;
+      mask-repeat: repeat-x;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+      -webkit-mask-size: 1200px 100%;
+      -webkit-mask-repeat: repeat-x;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER — Brand + Navigation
+       ============================================================ -->
+  <header class="ds-header">
+    <h1>
+      ⚓ Capo Horn Lab
+      <small>Design System &amp; Token Reference — v1.0</small>
+    </h1>
+    <div class="meta-badge">
+      Stile: <span>Tecnico</span> · <span>Quantitativo</span> · <span>Premium</span> · <span>Mare Aperto</span>
+      &nbsp;—&nbsp; Sprint 1 · Task 1.2
+    </div>
+    <nav class="ds-nav-links">
+      <a href="#colors">Colori</a>
+      <a href="#typography">Typography</a>
+      <a href="#spacing">Spacing</a>
+      <a href="#shadows">Shadows</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#inputs">Inputs</a>
+      <a href="#cards">Cards</a>
+      <a href="#navigation">Navigation</a>
+      <a href="#footer">Footer</a>
+      <a href="#responsive">Responsive</a>
+      <a href="#tokens-raw">Tokens</a>
+    </nav>
+  </header>
+
+  <!-- ============================================================
+       CONTAINER
+       ============================================================ -->
+  <div class="ds-container">
+
+    <!-- ============================================================
+         SECTION: COLORS
+         ============================================================ -->
+    <section id="colors" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🎨 Palette Colori</h2>
+      <p class="ds-section-subtitle">
+        Navy primario · Off-white sfondo · Blue accent interattivo · Amber per highlights dati.
+        <code>--ch-navy-*</code> <code>--ch-blue-*</code> <code>--ch-amber-*</code> <code>--ch-gray-*</code>
+      </p>
+
+      <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-3);color:var(--ch-navy-700);">
+        Navy — Primary Background
+      </h3>
+      <div class="palette-row" style="margin-bottom:var(--ch-space-6);" role="img" aria-label="Navy color scale">
+        <div class="palette-step" style="background:#0a1628;">900</div>
+        <div class="palette-step" style="background:#0f1e36;">800</div>
+        <div class="palette-step" style="background:#152a45;">700</div>
+        <div class="palette-step" style="background:#1c3a5c;">600</div>
+        <div class="palette-step" style="background:#254e77;">500</div>
+        <div class="palette-step" style="background:#3b6fa0;">400</div>
+        <div class="palette-step" style="background:#5e93c2;color:rgba(0,0,0,0.6);">300</div>
+        <div class="palette-step" style="background:#8fb8da;color:rgba(0,0,0,0.5);">200</div>
+        <div class="palette-step" style="background:#c1d6ec;color:rgba(0,0,0,0.4);">100</div>
+        <div class="palette-step" style="background:#e8f0f8;color:rgba(0,0,0,0.3);">50</div>
+      </div>
+
+      <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-3);color:var(--ch-navy-700);">
+        Blue — Accent / Interactive
+      </h3>
+      <div class="palette-row" style="margin-bottom:var(--ch-space-6);" role="img" aria-label="Blue accent scale">
+        <div class="palette-step" style="background:#1e40af;">600</div>
+        <div class="palette-step" style="background:#2563eb;">500</div>
+        <div class="palette-step" style="background:#3b82f6;">400</div>
+        <div class="palette-step" style="background:#60a5fa;">300</div>
+        <div class="palette-step" style="background:#93c5fd;color:rgba(0,0,0,0.5);">200</div>
+        <div class="palette-step" style="background:#dbeafe;color:rgba(0,0,0,0.3);">100</div>
+        <div class="palette-step" style="background:#eff6ff;color:rgba(0,0,0,0.3);">50</div>
+      </div>
+
+      <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-3);color:var(--ch-navy-700);">
+        Amber — Data Viz / Highlights
+      </h3>
+      <div class="palette-row" style="margin-bottom:var(--ch-space-6);" role="img" aria-label="Amber highlight scale">
+        <div class="palette-step" style="background:#d97706;">600</div>
+        <div class="palette-step" style="background:#f59e0b;">500</div>
+        <div class="palette-step" style="background:#fbbf24;">400</div>
+        <div class="palette-step" style="background:#fcd34d;">300</div>
+        <div class="palette-step" style="background:#fde68a;color:rgba(0,0,0,0.5);">200</div>
+        <div class="palette-step" style="background:#fef3c7;color:rgba(0,0,0,0.3);">100</div>
+        <div class="palette-step" style="background:#fffbeb;color:rgba(0,0,0,0.3);">50</div>
+      </div>
+
+      <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-3);color:var(--ch-navy-700);">
+        Neutral / Gray — Surfaces &amp; Text
+      </h3>
+      <div class="palette-row" style="margin-bottom:var(--ch-space-6);" role="img" aria-label="Neutral gray scale">
+        <div class="palette-step" style="background:#020617;">900</div>
+        <div class="palette-step" style="background:#0f172a;">800</div>
+        <div class="palette-step" style="background:#1e293b;">700</div>
+        <div class="palette-step" style="background:#334155;">600</div>
+        <div class="palette-step" style="background:#475569;">500</div>
+        <div class="palette-step" style="background:#64748b;">400</div>
+        <div class="palette-step" style="background:#94a3b8;">300</div>
+        <div class="palette-step" style="background:#cbd5e1;color:rgba(0,0,0,0.5);">200</div>
+        <div class="palette-step" style="background:#e2e8f0;color:rgba(0,0,0,0.3);">100</div>
+        <div class="palette-step" style="background:#f1f5f9;color:rgba(0,0,0,0.3);">50</div>
+      </div>
+
+      <div class="ds-grid ds-grid-5" style="margin-top:var(--ch-space-4);">
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-navy-900);"></div>
+          <div class="swatch-info"><div class="swatch-name">Navy 900</div><div class="swatch-var">--ch-navy-900 · #0a1628</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-off-white);border-bottom:1px solid #eee;"></div>
+          <div class="swatch-info"><div class="swatch-name">Off White</div><div class="swatch-var">--ch-off-white · #f8fafc</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-blue-500);"></div>
+          <div class="swatch-info"><div class="swatch-name">Blue 500</div><div class="swatch-var">--ch-blue-500 · #2563eb</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-amber-500);"></div>
+          <div class="swatch-info"><div class="swatch-name">Amber 500</div><div class="swatch-var">--ch-amber-500 · #f59e0b</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-white);border:1px solid #ddd;"></div>
+          <div class="swatch-info"><div class="swatch-name">White</div><div class="swatch-var">--ch-white · #ffffff</div></div>
+        </div>
+      </div>
+
+      <div class="ds-grid ds-grid-4" style="margin-top:var(--ch-space-4);">
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-success);"></div>
+          <div class="swatch-info"><div class="swatch-name">Success</div><div class="swatch-var">--ch-success · #10b981</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-warning);"></div>
+          <div class="swatch-info"><div class="swatch-name">Warning</div><div class="swatch-var">--ch-warning · #f59e0b</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-error);"></div>
+          <div class="swatch-info"><div class="swatch-name">Error</div><div class="swatch-var">--ch-error · #ef4444</div></div>
+        </div>
+        <div class="swatch ds-animate">
+          <div class="swatch-color" style="background:var(--ch-info);"></div>
+          <div class="swatch-info"><div class="swatch-name">Info</div><div class="swatch-var">--ch-info · #3b82f6</div></div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: TYPOGRAPHY
+         ============================================================ -->
+    <section id="typography" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🔤 Typography</h2>
+      <p class="ds-section-subtitle">
+        Inter per UI (sans-serif) · JetBrains Mono per dati e codice (monospace).
+        <code>--ch-font-sans</code> <code>--ch-font-mono</code>
+      </p>
+
+      <div class="ds-card" style="margin-bottom:var(--ch-space-6);">
+        <div class="type-specimen">
+          <div class="label">Display / Hero <code>--ch-text-6xl · 3.75rem · 800 weight</code></div>
+          <div class="type-display" style="font-size:var(--ch-text-6xl);">
+            Beyond the Market Edge
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Heading 1 <code>--ch-text-5xl · 3rem · 700 weight</code></div>
+          <div class="type-heading1" style="font-size:var(--ch-text-5xl);">
+            Quantitative Backtesting
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Heading 2 <code>--ch-text-4xl · 2.25rem · 600 weight</code></div>
+          <div class="type-heading2" style="font-size:var(--ch-text-4xl);">
+            Strategy Performance Metrics
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Heading 3 <code>--ch-text-3xl · 1.875rem · 600 weight</code></div>
+          <div class="type-heading3" style="font-size:var(--ch-text-3xl);">
+            Sharpe Ratio &amp; Maximum Drawdown
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Heading 4 <code>--ch-text-2xl · 1.5rem · 600 weight</code></div>
+          <div class="type-heading4" style="font-size:var(--ch-text-2xl);">
+            Monte Carlo Simulation Results
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Body <code>--ch-text-base · 1rem · 400 weight</code></div>
+          <div class="type-body" style="font-size:var(--ch-text-base);max-width:600px;">
+            Capo Horn Lab applies rigorous statistical methods to strategy backtesting.
+            Every hypothesis is tested across IS/OOS splits, multiple timeframes, and
+            parameter stability analysis. No strategy selling. Just data.
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Small / Caption <code>--ch-text-sm · 0.875rem · 400 weight</code></div>
+          <div class="type-small" style="font-size:var(--ch-text-sm);">
+            Data source: Databento · Tick data · 2015–2025 · Slippage model: 2 ticks
+          </div>
+        </div>
+        <div class="type-specimen">
+          <div class="label">Mono / Code <code>--ch-text-sm · JetBrains Mono · 500 weight</code></div>
+          <div class="type-mono" style="font-size:var(--ch-text-sm);font-weight:500;">
+            Sharpe: 1.42 &nbsp;|&nbsp; CAGR: 18.7% &nbsp;|&nbsp; Max DD: -8.3% &nbsp;|&nbsp; Trades: 1,247
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-grid ds-grid-2">
+        <div class="ds-card">
+          <div class="ds-card-label">Font Stack — Sans</div>
+          <div class="ds-card-value" style="font-family:var(--ch-font-sans);font-weight:400;">
+            'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif
+          </div>
+        </div>
+        <div class="ds-card">
+          <div class="ds-card-label">Font Stack — Mono</div>
+          <div class="ds-card-value" style="font-family:var(--ch-font-mono);font-weight:400;">
+            'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: SPACING
+         ============================================================ -->
+    <section id="spacing" class="ds-section ds-animate">
+      <h2 class="ds-section-title">📐 Spacing Scale</h2>
+      <p class="ds-section-subtitle">
+        Griglia 4px. Token da 4px a 96px. <code>--ch-space-*</code>
+      </p>
+
+      <div class="ds-card">
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-1);height:24px;"></div>
+          <div class="info"><strong>--ch-space-1</strong> 0.25rem / 4px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-2);height:24px;"></div>
+          <div class="info"><strong>--ch-space-2</strong> 0.5rem / 8px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-3);height:24px;"></div>
+          <div class="info"><strong>--ch-space-3</strong> 0.75rem / 12px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-4);height:24px;"></div>
+          <div class="info"><strong>--ch-space-4</strong> 1rem / 16px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-6);height:24px;"></div>
+          <div class="info"><strong>--ch-space-6</strong> 1.5rem / 24px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-8);height:24px;"></div>
+          <div class="info"><strong>--ch-space-8</strong> 2rem / 32px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-12);height:24px;"></div>
+          <div class="info"><strong>--ch-space-12</strong> 3rem / 48px</div>
+        </div>
+        <div class="spacing-vis">
+          <div class="bar" style="width:var(--ch-space-16);height:24px;"></div>
+          <div class="info"><strong>--ch-space-16</strong> 4rem / 64px</div>
+        </div>
+      </div>
+
+      <h3 style="font-size:var(--ch-text-base);font-weight:600;margin:var(--ch-space-8) 0 var(--ch-space-3);color:var(--ch-navy-700);">
+        Radii
+      </h3>
+      <div class="ds-grid ds-grid-4">
+        <div class="ds-card" style="text-align:center;">
+          <div style="width:60px;height:60px;background:var(--ch-blue-100);border-radius:var(--ch-radius-sm);margin:0 auto var(--ch-space-2);"></div>
+          <div class="ds-card-label">sm</div>
+          <div class="ds-card-value">4px</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div style="width:60px;height:60px;background:var(--ch-blue-100);border-radius:var(--ch-radius-md);margin:0 auto var(--ch-space-2);"></div>
+          <div class="ds-card-label">md</div>
+          <div class="ds-card-value">8px</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div style="width:60px;height:60px;background:var(--ch-blue-100);border-radius:var(--ch-radius-lg);margin:0 auto var(--ch-space-2);"></div>
+          <div class="ds-card-label">lg</div>
+          <div class="ds-card-value">12px</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div style="width:60px;height:60px;background:var(--ch-blue-100);border-radius:var(--ch-radius-xl);margin:0 auto var(--ch-space-2);"></div>
+          <div class="ds-card-label">xl</div>
+          <div class="ds-card-value">16px</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: SHADOWS
+         ============================================================ -->
+    <section id="shadows" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🌓 Shadows</h2>
+      <p class="ds-section-subtitle">
+        Base navy ombre. Glow per stati hover. <code>--ch-shadow-*</code>
+      </p>
+
+      <div class="ds-grid ds-grid-3">
+        <div class="ds-card" style="text-align:center;">
+          <div class="shadow-demo" style="box-shadow:var(--ch-shadow-xs);margin:0 auto var(--ch-space-2);">xs</div>
+          <div class="ds-card-value" style="font-size:var(--ch-text-xs);">--ch-shadow-xs</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div class="shadow-demo" style="box-shadow:var(--ch-shadow-sm);margin:0 auto var(--ch-space-2);">sm</div>
+          <div class="ds-card-value" style="font-size:var(--ch-text-xs);">--ch-shadow-sm</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div class="shadow-demo" style="box-shadow:var(--ch-shadow-md);margin:0 auto var(--ch-space-2);">md</div>
+          <div class="ds-card-value" style="font-size:var(--ch-text-xs);">--ch-shadow-md</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div class="shadow-demo" style="box-shadow:var(--ch-shadow-lg);margin:0 auto var(--ch-space-2);">lg</div>
+          <div class="ds-card-value" style="font-size:var(--ch-text-xs);">--ch-shadow-lg</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div class="shadow-demo" style="box-shadow:var(--ch-shadow-xl);margin:0 auto var(--ch-space-2);">xl</div>
+          <div class="ds-card-value" style="font-size:var(--ch-text-xs);">--ch-shadow-xl</div>
+        </div>
+        <div class="ds-card" style="text-align:center;">
+          <div class="shadow-demo" style="box-shadow:var(--ch-shadow-glow-blue);margin:0 auto var(--ch-space-2);border-color:var(--ch-blue-200);">glow</div>
+          <div class="ds-card-value" style="font-size:var(--ch-text-xs);">--ch-shadow-glow-blue</div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: BUTTONS
+         ============================================================ -->
+    <section id="buttons" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🔘 Buttons</h2>
+      <p class="ds-section-subtitle">
+        Primary · Secondary · Ghost · Disabled · Varianti size e colore.
+        <code>.btn</code> <code>.btn-primary</code> <code>.btn-secondary</code> <code>.btn-ghost</code>
+      </p>
+
+      <div class="ds-card">
+        <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-4);color:var(--ch-navy-700);">Variants</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--ch-space-4);margin-bottom:var(--ch-space-6);align-items:center;">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-disabled" disabled>Disabled</button>
+          <button class="btn btn-amber">Amber</button>
+        </div>
+
+        <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-4);color:var(--ch-navy-700);">Sizes</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--ch-space-4);margin-bottom:var(--ch-space-6);align-items:center;">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+        </div>
+
+        <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-4);color:var(--ch-navy-700);">States (Hover)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--ch-space-4);align-items:center;">
+          <button class="btn btn-primary">Submit Strategy</button>
+          <button class="btn btn-secondary">View Research</button>
+          <button class="btn btn-ghost">Cancel</button>
+          <button class="btn btn-amber">Download PDF</button>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: INPUTS
+         ============================================================ -->
+    <section id="inputs" class="ds-section ds-animate">
+      <h2 class="ds-section-title">✏️ Input Fields</h2>
+      <p class="ds-section-subtitle">
+        Testo · Select · Textarea · Stati (default, focus, error, disabled).
+        <code>.input-field</code> <code>.select-field</code> <code>.textarea-field</code>
+      </p>
+
+      <div class="ds-grid ds-grid-2">
+        <div class="ds-card">
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Email <span class="required">*</span></label>
+            <input class="input-field" type="email" placeholder="you@example.com">
+            <span class="input-help">We'll never share your email</span>
+          </div>
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Strategy Name <span class="required">*</span></label>
+            <input class="input-field" type="text" placeholder="e.g. MeanReversion_ES_5m" value="My Breakout Strategy">
+          </div>
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Instrument</label>
+            <select class="select-field">
+              <option>ES — S&P 500 E-mini</option>
+              <option>NQ — Nasdaq 100 E-mini</option>
+              <option>CL — Crude Oil</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Description</label>
+            <textarea class="textarea-field" placeholder="Describe your strategy rules...">Buy when SMA(20) crosses above SMA(50) and RSI(14) &lt; 30. Exit on 2 ATR trailing stop.</textarea>
+          </div>
+        </div>
+        <div class="ds-card">
+          <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-4);color:var(--ch-navy-700);">States</h3>
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Default</label>
+            <input class="input-field" type="text" placeholder="Normal state">
+          </div>
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Focused</label>
+            <input class="input-field" type="text" placeholder="Click to focus" autofocus id="demo-focus">
+          </div>
+          <script>
+            // Auto-focus only if not already focused (prevent scroll jump on load)
+            if (document.getElementById('demo-focus').getAttribute('autofocus') === '') {
+              // keep it
+            }
+          </script>
+          <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+            <label class="input-label">Error <span class="required">*</span></label>
+            <input class="input-field error" type="text" value="invalid_value">
+            <span class="input-help error">Required field — enter a valid strategy name</span>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Disabled</label>
+            <input class="input-field" type="text" placeholder="Not editable" disabled>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: CARDS
+         ============================================================ -->
+    <section id="cards" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🃏 Cards</h2>
+      <p class="ds-section-subtitle">
+        Contenitori con header, body, footer, badge e statistiche.
+        <code>.ch-card</code>
+      </p>
+
+      <div class="ds-grid ds-grid-2">
+        <!-- Research Card -->
+        <div class="ch-card">
+          <div class="ch-card-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div class="ch-card-badge blue">ES · Microstructure</div>
+              <h3 style="font-size:var(--ch-text-lg);font-weight:600;margin-top:var(--ch-space-3);color:var(--ch-navy-900);">
+                Tick-Level Liquidity Analysis
+              </h3>
+            </div>
+            <div class="ch-card-stat" style="text-align:right;">
+              <div class="ch-card-stat-value">1.42</div>
+              <div class="ch-card-stat-label">Sharpe</div>
+            </div>
+          </div>
+          <div class="ch-card-body">
+            <p style="font-size:var(--ch-text-sm);color:var(--ch-gray-500);line-height:1.6;">
+              Analysis of tick-level liquidity patterns on ES over 5 years.
+              Identifies microstructure regimes and their impact on execution quality.
+            </p>
+            <div style="display:flex;gap:var(--ch-space-6);margin-top:var(--ch-space-4);">
+              <div class="ch-card-stat">
+                <div class="ch-card-stat-value" style="font-size:var(--ch-text-base);">18.7%</div>
+                <div class="ch-card-stat-label">CAGR</div>
+              </div>
+              <div class="ch-card-stat">
+                <div class="ch-card-stat-value" style="font-size:var(--ch-text-base);">-8.3%</div>
+                <div class="ch-card-stat-label">Max DD</div>
+              </div>
+              <div class="ch-card-stat">
+                <div class="ch-card-stat-value" style="font-size:var(--ch-text-base);">1,247</div>
+                <div class="ch-card-stat-label">Trades</div>
+              </div>
+            </div>
+          </div>
+          <div class="ch-card-footer">
+            <button class="btn btn-ghost btn-sm">Details</button>
+            <button class="btn btn-amber btn-sm">Download PDF</button>
+          </div>
+        </div>
+
+        <!-- Request Card -->
+        <div class="ch-card">
+          <div class="ch-card-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+            <div>
+              <div class="ch-card-badge amber">In Valutazione</div>
+              <h3 style="font-size:var(--ch-text-lg);font-weight:600;margin-top:var(--ch-space-3);color:var(--ch-navy-900);">
+                MeanReversion_ES_5m
+              </h3>
+            </div>
+            <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);font-family:var(--ch-font-mono);">ID: CH-2024-0042</span>
+          </div>
+          <div class="ch-card-body">
+            <div style="display:flex;gap:var(--ch-space-6);flex-wrap:wrap;">
+              <div><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Instrument</span><br><span style="font-weight:600;">ES</span></div>
+              <div><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Timeframe</span><br><span style="font-weight:600;">5m</span></div>
+              <div><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Submitted</span><br><span style="font-weight:600;">2024-03-15</span></div>
+              <div><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Direction</span><br><span style="font-weight:600;">Long &amp; Short</span></div>
+            </div>
+          </div>
+          <div class="ch-card-footer">
+            <button class="btn btn-primary btn-sm">View Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: NAVIGATION
+         ============================================================ -->
+    <section id="navigation" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🧭 Navigation</h2>
+      <p class="ds-section-subtitle">
+        Sticky navbar navy con brand, link, actions. Mobile toggle sotto 768px.
+        <code>.ch-nav</code> <code>.ch-nav-links</code>
+      </p>
+
+      <div class="ch-card" style="padding:0;overflow:hidden;">
+        <nav class="ch-nav" style="position:relative;z-index:1;">
+          <div class="ch-nav-brand">
+            <div class="brand-icon">CH</div>
+            Capo Horn Lab
+          </div>
+          <div class="ch-nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="#">Method</a>
+            <a href="#">Research</a>
+            <a href="#">Test Strategy</a>
+            <a href="#">Contact</a>
+          </div>
+          <div class="ch-nav-actions">
+            <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+            <button class="btn btn-primary btn-sm">Sign Up</button>
+          </div>
+          <button class="nav-toggle" aria-label="Toggle menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </nav>
+      </div>
+      <p style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);margin-top:var(--ch-space-2);">
+        ↓ Il nav sopra è in-component preview. Il nav principale del DS è nell'header.
+      </p>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: FOOTER
+         ============================================================ -->
+    <section id="footer" class="ds-section ds-animate">
+      <h2 class="ds-section-title">🦶 Footer</h2>
+      <p class="ds-section-subtitle">
+        Four-column layout su desktop, single-column su mobile.
+        <code>.ch-footer</code> <code>.ch-footer-grid</code>
+      </p>
+
+      <div class="ch-card" style="padding:0;overflow:hidden;display:flex;flex-direction:column;">
+        <footer class="ch-footer" style="position:relative;">
+          <div class="ch-footer-grid">
+            <div>
+              <div class="ch-footer-brand">⚓ Capo Horn Lab</div>
+              <p class="ch-footer-tagline">
+                Quantitative backtesting and strategy research.
+                Data-driven, not guru-driven.
+              </p>
+            </div>
+            <div>
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Method</a></li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Services</h4>
+              <ul>
+                <li><a href="#">Test Your Strategy</a></li>
+                <li><a href="#">Documentation</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Pricing</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4>Legal</h4>
+              <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">Disclaimer</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="ch-footer-bottom">
+            <span>© 2026 Capo Horn Lab. All rights reserved.</span>
+            <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: RESPONSIVE
+         ============================================================ -->
+    <section id="responsive" class="ds-section ds-animate">
+      <h2 class="ds-section-title">📱 Responsive Breakpoints</h2>
+      <p class="ds-section-subtitle">
+        Mobile-first. Adatta il viewport per vedere i breakpoint in azione.
+      </p>
+
+      <div class="ds-grid ds-grid-3" style="margin-bottom:var(--ch-space-6);">
+        <div class="breakpoint-demo" style="background:var(--ch-navy-700);">
+          <span style="font-size:var(--ch-text-xs);color:var(--ch-navy-200);">Default (Mobile)</span>
+          <span class="current-bp" style="font-size:var(--ch-text-xl);">&lt; 768px</span>
+          <span style="font-size:var(--ch-text-xs);color:var(--ch-navy-200);">Single column · Nav collassato</span>
+        </div>
+        <div class="breakpoint-demo" style="background:var(--ch-navy-600);">
+          <span style="font-size:var(--ch-text-xs);color:var(--ch-navy-200);">Tablet</span>
+          <span class="current-bp" style="font-size:var(--ch-text-xl);">≥ 768px</span>
+          <span style="font-size:var(--ch-text-xs);color:var(--ch-navy-200);">Grid 2-4 colonne · Nav visibile</span>
+        </div>
+        <div class="breakpoint-demo" style="background:var(--ch-blue-500);">
+          <span style="font-size:var(--ch-text-xs);color:rgba(255,255,255,0.8);">Desktop</span>
+          <span class="current-bp" style="font-size:var(--ch-text-xl);">≥ 1024px</span>
+          <span style="font-size:var(--ch-text-xs);color:rgba(255,255,255,0.8);">Grid 3-5 colonne · Max-width 1200px</span>
+        </div>
+      </div>
+
+      <div class="ds-card">
+        <h3 style="font-size:var(--ch-text-base);font-weight:600;margin-bottom:var(--ch-space-3);color:var(--ch-navy-700);">Responsive Token Reference</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:var(--ch-text-sm);">
+          <thead>
+            <tr style="border-bottom:2px solid var(--ch-gray-100);">
+              <th style="text-align:left;padding:var(--ch-space-2) var(--ch-space-3);font-weight:600;color:var(--ch-gray-500);">Name</th>
+              <th style="text-align:left;padding:var(--ch-space-2) var(--ch-space-3);font-weight:600;color:var(--ch-gray-500);">Min Width</th>
+              <th style="text-align:left;padding:var(--ch-space-2) var(--ch-space-3);font-weight:600;color:var(--ch-gray-500);">Target</th>
+              <th style="text-align:left;padding:var(--ch-space-2) var(--ch-space-3);font-weight:600;color:var(--ch-gray-500);">Layout Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--ch-gray-50);">
+              <td style="padding:var(--ch-space-3);font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-navy-900);">@mobile (default)</td>
+              <td style="padding:var(--ch-space-3);">0px</td>
+              <td style="padding:var(--ch-space-3);">Phone</td>
+              <td style="padding:var(--ch-space-3);">Single col · nav collassato con hamburger · footer stack</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--ch-gray-50);">
+              <td style="padding:var(--ch-space-3);font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-navy-900);">@tablet</td>
+              <td style="padding:var(--ch-space-3);">768px</td>
+              <td style="padding:var(--ch-space-3);">Tablet / Landscape</td>
+              <td style="padding:var(--ch-space-3);">Grid 2-4 col · nav visibile · padding aumentato</td>
+            </tr>
+            <tr>
+              <td style="padding:var(--ch-space-3);font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-navy-900);">@desktop</td>
+              <td style="padding:var(--ch-space-3);">1024px</td>
+              <td style="padding:var(--ch-space-3);">Desktop / Wide</td>
+              <td style="padding:var(--ch-space-3);">Grid fino a 5 col · hero XL · padding generoso</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- ============================================================
+         SECTION: RAW TOKENS (Code Dump)
+         ============================================================ -->
+    <section id="tokens-raw" class="ds-section ds-animate">
+      <h2 class="ds-section-title">📦 Raw CSS Custom Properties</h2>
+      <p class="ds-section-subtitle">
+        Copia-incolla completo dei token. Pronto per <code>:root</code> in qualsiasi progetto del sito.
+      </p>
+
+      <pre class="ds-code" style="white-space:pre-wrap;word-break:break-all;max-height:400px;overflow-y:auto;">
+:root {
+  /* --- Navy Palette --- */
+  --ch-navy-900: #0a1628;
+  --ch-navy-800: #0f1e36;
+  --ch-navy-700: #152a45;
+  --ch-navy-600: #1c3a5c;
+  --ch-navy-500: #254e77;
+  --ch-navy-400: #3b6fa0;
+  --ch-navy-300: #5e93c2;
+  --ch-navy-200: #8fb8da;
+  --ch-navy-100: #c1d6ec;
+  --ch-navy-50:  #e8f0f8;
+
+  /* --- Neutral --- */
+  --ch-white:       #ffffff;
+  --ch-off-white:   #f8fafc;
+
+  /* --- Blue Accent --- */
+  --ch-blue-500:    #2563eb;
+  --ch-blue-400:    #3b82f6;
+  --ch-blue-300:    #60a5fa;
+  --ch-blue-200:    #93c5fd;
+  --ch-blue-100:    #dbeafe;
+  --ch-blue-50:     #eff6ff;
+
+  /* --- Amber (Data) --- */
+  --ch-amber-500:   #f59e0b;
+  --ch-amber-400:   #fbbf24;
+  --ch-amber-300:   #fcd34d;
+  --ch-amber-200:   #fde68a;
+  --ch-amber-100:   #fef3c7;
+  --ch-amber-50:    #fffbeb;
+
+  /* --- Semantic --- */
+  --ch-success:     #10b981;
+  --ch-warning:     #f59e0b;
+  --ch-error:       #ef4444;
+  --ch-info:        #3b82f6;
+
+  /* --- Typography --- */
+  --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+  --ch-text-xs:     0.75rem;
+  --ch-text-sm:     0.875rem;
+  --ch-text-base:   1rem;
+  --ch-text-lg:     1.125rem;
+  --ch-text-xl:     1.25rem;
+  --ch-text-2xl:    1.5rem;
+  --ch-text-3xl:    1.875rem;
+  --ch-text-4xl:    2.25rem;
+  --ch-text-5xl:    3rem;
+  --ch-text-6xl:    3.75rem;
+
+  /* --- Spacing (4px grid) --- */
+  --ch-space-1:     0.25rem;
+  --ch-space-2:     0.5rem;
+  --ch-space-3:     0.75rem;
+  --ch-space-4:     1rem;
+  --ch-space-6:     1.5rem;
+  --ch-space-8:     2rem;
+  --ch-space-12:    3rem;
+  --ch-space-16:    4rem;
+  --ch-space-20:    5rem;
+  --ch-space-24:    6rem;
+
+  /* --- Radii --- */
+  --ch-radius-sm:   0.25rem;
+  --ch-radius-md:   0.5rem;
+  --ch-radius-lg:   0.75rem;
+  --ch-radius-xl:   1rem;
+  --ch-radius-2xl:  1.5rem;
+  --ch-radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --ch-shadow-xs: 0 1px 2px rgba(10,22,40,0.05);
+  --ch-shadow-sm: 0 1px 3px rgba(10,22,40,0.08), 0 1px 2px rgba(10,22,40,0.04);
+  --ch-shadow-md: 0 4px 6px rgba(10,22,40,0.07), 0 2px 4px rgba(10,22,40,0.04);
+  --ch-shadow-lg: 0 10px 15px rgba(10,22,40,0.08), 0 4px 6px rgba(10,22,40,0.03);
+  --ch-shadow-xl: 0 20px 25px rgba(10,22,40,0.10), 0 8px 10px rgba(10,22,40,0.04);
+  --ch-shadow-glow-blue:  0 0 20px rgba(37,99,235,0.25);
+  --ch-shadow-glow-amber: 0 0 20px rgba(245,158,11,0.25);
+
+  /* --- Transitions --- */
+  --ch-transition-fast:   150ms cubic-bezier(0.4,0,0.2,1);
+  --ch-transition-base:   250ms cubic-bezier(0.4,0,0.2,1);
+  --ch-transition-slow:   400ms cubic-bezier(0.4,0,0.2,1);
+  --ch-transition-spring: 500ms cubic-bezier(0.34,1.56,0.64,1);
+
+  /* --- Layout --- */
+  --ch-max-width: 1200px;
+}
+      </pre>
+    </section>
+
+    <!-- ============================================================
+         DECORATIVE WAVE FOOTER
+         ============================================================ -->
+    <div class="wave-divider"></div>
+
+    <div style="text-align:center;padding:var(--ch-space-8) 0;color:var(--ch-gray-400);font-size:var(--ch-text-sm);">
+      <p style="font-weight:600;color:var(--ch-navy-700);margin-bottom:var(--ch-space-2);">⚓ Capo Horn Lab — Design System v1.0</p>
+      <p>Stile: Tecnico · Quantitativo · Premium · Mare Aperto</p>
+      <p style="margin-top:var(--ch-space-2);font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);">
+        Token: 120+ CSS custom properties · Componenti: 6 · Breakpoint: 3 · Sprint 1 · Task 1.2
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

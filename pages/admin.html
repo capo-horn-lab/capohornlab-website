@@ -1,0 +1,3692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capo Horn Lab — Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       ╔══════════════════════════════════════════════════════════╗
+       ║     CAPO HORN LAB — ADMIN PANEL v1.0 (inlined)          ║
+       ╚══════════════════════════════════════════════════════════╝
+       ============================================================ */
+
+    /* ---- 1. DESIGN TOKENS ---- */
+    :root {
+      --ch-navy-900: #0a1628;
+      --ch-navy-800: #0f1e36;
+      --ch-navy-700: #152a45;
+      --ch-navy-600: #1c3a5c;
+      --ch-navy-500: #254e77;
+      --ch-navy-400: #3b6fa0;
+      --ch-navy-300: #5e93c2;
+      --ch-navy-200: #8fb8da;
+      --ch-navy-100: #c1d6ec;
+      --ch-navy-50:  #e8f0f8;
+
+      --ch-white:       #ffffff;
+      --ch-off-white:   #f8fafc;
+      --ch-gray-50:     #f1f5f9;
+      --ch-gray-100:    #e2e8f0;
+      --ch-gray-200:    #cbd5e1;
+      --ch-gray-300:    #94a3b8;
+      --ch-gray-400:    #64748b;
+      --ch-gray-500:    #475569;
+      --ch-gray-600:    #334155;
+      --ch-gray-700:    #1e293b;
+      --ch-gray-800:    #0f172a;
+      --ch-gray-900:    #020617;
+
+      --ch-blue-500:    #2563eb;
+      --ch-blue-400:    #3b82f6;
+      --ch-blue-300:    #60a5fa;
+      --ch-blue-200:    #93c5fd;
+      --ch-blue-100:    #dbeafe;
+      --ch-blue-50:     #eff6ff;
+
+      --ch-amber-500:   #f59e0b;
+      --ch-amber-400:   #fbbf24;
+      --ch-amber-300:   #fcd34d;
+      --ch-amber-200:   #fde68a;
+      --ch-amber-100:   #fef3c7;
+      --ch-amber-50:    #fffbeb;
+
+      --ch-success:     #10b981;
+      --ch-warning:     #f59e0b;
+      --ch-error:       #ef4444;
+      --ch-info:        #3b82f6;
+
+      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+      --ch-text-xs:     0.75rem;
+      --ch-text-sm:     0.875rem;
+      --ch-text-base:   1rem;
+      --ch-text-lg:     1.125rem;
+      --ch-text-xl:     1.25rem;
+      --ch-text-2xl:    1.5rem;
+      --ch-text-3xl:    1.875rem;
+      --ch-text-4xl:    2.25rem;
+
+      --ch-leading-tight:   1.15;
+      --ch-leading-snug:    1.3;
+      --ch-leading-normal:  1.5;
+      --ch-leading-relaxed: 1.65;
+
+      --ch-font-light:      300;
+      --ch-font-regular:    400;
+      --ch-font-medium:     500;
+      --ch-font-semibold:   600;
+      --ch-font-bold:       700;
+      --ch-font-extrabold:  800;
+
+      --ch-letter-spacing-tight:  -0.025em;
+      --ch-letter-spacing-normal: 0em;
+      --ch-letter-spacing-wide:   0.05em;
+
+      --ch-space-1:     0.25rem;
+      --ch-space-2:     0.5rem;
+      --ch-space-3:     0.75rem;
+      --ch-space-4:     1rem;
+      --ch-space-5:     1.25rem;
+      --ch-space-6:     1.5rem;
+      --ch-space-8:     2rem;
+      --ch-space-10:    2.5rem;
+      --ch-space-12:    3rem;
+      --ch-space-16:    4rem;
+      --ch-space-20:    5rem;
+      --ch-space-24:    6rem;
+
+      --ch-radius-none:  0;
+      --ch-radius-sm:    0.25rem;
+      --ch-radius-md:    0.5rem;
+      --ch-radius-lg:    0.75rem;
+      --ch-radius-xl:    1rem;
+      --ch-radius-2xl:   1.5rem;
+      --ch-radius-full:  9999px;
+
+      --ch-shadow-xs:    0 1px 2px rgba(10, 22, 40, 0.05);
+      --ch-shadow-sm:    0 1px 3px rgba(10, 22, 40, 0.08), 0 1px 2px rgba(10, 22, 40, 0.04);
+      --ch-shadow-md:    0 4px 6px rgba(10, 22, 40, 0.07), 0 2px 4px rgba(10, 22, 40, 0.04);
+      --ch-shadow-lg:    0 10px 15px rgba(10, 22, 40, 0.08), 0 4px 6px rgba(10, 22, 40, 0.03);
+      --ch-shadow-xl:    0 20px 25px rgba(10, 22, 40, 0.10), 0 8px 10px rgba(10, 22, 40, 0.04);
+      --ch-shadow-glow-blue:  0 0 20px rgba(37, 99, 235, 0.25);
+      --ch-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.25);
+
+      --ch-transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+      --ch-z-base:      1;
+      --ch-z-dropdown:  10;
+      --ch-z-sticky:    100;
+      --ch-z-nav:       1000;
+      --ch-z-overlay:   5000;
+      --ch-z-modal:     6000;
+
+      /* Layout */
+      --ch-sidebar-width: 260px;
+    }
+
+    /* ---- GLOBAL RESET ---- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      line-height: var(--ch-leading-normal);
+      color: var(--ch-gray-800);
+      background: var(--ch-off-white);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ---- KEYFRAMES ---- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; }
+      to   { opacity: 1; max-height: 2000px; }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+    .animate-up-d1 { animation-delay: 0.05s; }
+    .animate-up-d2 { animation-delay: 0.1s; }
+    .animate-up-d3 { animation-delay: 0.15s; }
+    .animate-up-d4 { animation-delay: 0.2s; }
+    .animate-up-d5 { animation-delay: 0.25s; }
+
+    /* ============================================================
+       TOP BAR
+       ============================================================ */
+    .admin-topbar {
+      position: fixed;
+      top: 0;
+      left: var(--ch-sidebar-width);
+      right: 0;
+      height: 60px;
+      background: var(--ch-white);
+      border-bottom: 1px solid var(--ch-gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--ch-space-6);
+      z-index: var(--ch-z-sticky);
+    }
+
+    .admin-topbar-left {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-4);
+    }
+
+    .admin-topbar-left h2 {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+    }
+
+    .admin-topbar-left .breadcrumb {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .admin-topbar-left .breadcrumb span {
+      color: var(--ch-gray-300);
+    }
+
+    .admin-topbar-right {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-4);
+    }
+
+    .admin-topbar-right .admin-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+      cursor: pointer;
+    }
+
+    .admin-topbar-right .admin-notif {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-gray-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--ch-transition-fast);
+      position: relative;
+    }
+
+    .admin-topbar-right .admin-notif:hover {
+      background: var(--ch-gray-100);
+    }
+
+    .admin-notif-dot {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ch-error);
+      border: 2px solid var(--ch-white);
+    }
+
+    .hamburger-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--ch-space-2);
+      color: var(--ch-gray-500);
+    }
+
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .admin-sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--ch-sidebar-width);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      display: flex;
+      flex-direction: column;
+      z-index: var(--ch-z-nav);
+      overflow-y: auto;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+      padding: var(--ch-space-5) var(--ch-space-6);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .sidebar-brand-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+      flex-shrink: 0;
+    }
+
+    .sidebar-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-brand-text .brand-name {
+      font-size: var(--ch-text-base);
+      font-weight: var(--ch-font-bold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+    }
+
+    .sidebar-brand-text .brand-role {
+      font-size: 10px;
+      color: var(--ch-navy-300);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      font-weight: var(--ch-font-semibold);
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: var(--ch-space-4) var(--ch-space-3);
+    }
+
+    .sidebar-nav-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      color: var(--ch-navy-400);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-4) var(--ch-space-3) var(--ch-space-2);
+    }
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+      padding: var(--ch-space-2) var(--ch-space-3);
+      border-radius: var(--ch-radius-md);
+      cursor: pointer;
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+      color: var(--ch-navy-200);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      margin-bottom: 2px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: var(--ch-font-sans);
+    }
+
+    .sidebar-nav-item:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--ch-white);
+    }
+
+    .sidebar-nav-item.active {
+      background: rgba(37,99,235,0.2);
+      color: var(--ch-white);
+    }
+
+    .sidebar-nav-item .nav-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      opacity: 0.7;
+    }
+
+    .sidebar-nav-item.active .nav-icon {
+      opacity: 1;
+    }
+
+    .sidebar-nav-item .nav-count {
+      margin-left: auto;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      background: rgba(255,255,255,0.08);
+      padding: 0 6px;
+      border-radius: var(--ch-radius-full);
+      min-width: 20px;
+      text-align: center;
+      color: var(--ch-navy-200);
+    }
+
+    .sidebar-nav-item.active .nav-count {
+      background: rgba(37,99,235,0.3);
+      color: var(--ch-blue-200);
+    }
+
+    .sidebar-footer {
+      padding: var(--ch-space-4) var(--ch-space-3);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .sidebar-footer .sidebar-nav-item {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-navy-300);
+    }
+
+    /* ============================================================
+       MAIN CONTENT
+       ============================================================ */
+    .admin-main {
+      margin-left: var(--ch-sidebar-width);
+      margin-top: 60px;
+      flex: 1;
+      padding: var(--ch-space-6);
+      min-height: calc(100vh - 60px);
+    }
+
+    .admin-section {
+      display: none;
+      animation: fadeInUp 0.3s ease-out;
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    .admin-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--ch-space-4);
+      margin-bottom: var(--ch-space-6);
+    }
+
+    .admin-section-header h2 {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      letter-spacing: var(--ch-letter-spacing-tight);
+    }
+
+    .admin-section-header p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-400);
+      margin-top: var(--ch-space-1);
+    }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-2);
+      font-family: var(--ch-font-sans);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-sm);
+      line-height: 1;
+      padding: var(--ch-space-3) var(--ch-space-6);
+      border: 1px solid transparent;
+      border-radius: var(--ch-radius-md);
+      cursor: pointer;
+      transition:
+        background var(--ch-transition-fast),
+        color var(--ch-transition-fast),
+        border-color var(--ch-transition-fast),
+        box-shadow var(--ch-transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--ch-blue-400);
+      border-color: var(--ch-blue-400);
+      box-shadow: var(--ch-shadow-glow-blue);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ch-blue-500);
+      border-color: var(--ch-blue-500);
+    }
+    .btn-secondary:hover {
+      background: var(--ch-blue-50);
+      border-color: var(--ch-blue-400);
+      color: var(--ch-blue-400);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ch-gray-400);
+      border-color: transparent;
+    }
+    .btn-ghost:hover {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-700);
+    }
+
+    .btn-amber {
+      background: var(--ch-amber-500);
+      color: var(--ch-navy-900);
+      border-color: var(--ch-amber-500);
+    }
+    .btn-amber:hover {
+      background: var(--ch-amber-400);
+      border-color: var(--ch-amber-400);
+      box-shadow: var(--ch-shadow-glow-amber);
+    }
+
+    .btn-danger {
+      background: var(--ch-error);
+      color: var(--ch-white);
+      border-color: var(--ch-error);
+    }
+    .btn-danger:hover {
+      background: #dc2626;
+      border-color: #dc2626;
+    }
+
+    .btn-success {
+      background: var(--ch-success);
+      color: var(--ch-white);
+      border-color: var(--ch-success);
+    }
+    .btn-success:hover {
+      background: #059669;
+      border-color: #059669;
+    }
+
+    .btn-sm  { padding: var(--ch-space-2) var(--ch-space-4); font-size: var(--ch-text-xs); }
+    .btn-lg  { padding: var(--ch-space-4) var(--ch-space-8); font-size: var(--ch-text-base); }
+
+    /* ============================================================
+       INPUTS
+       ============================================================ */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-1);
+    }
+
+    .input-label {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-600);
+    }
+
+    .input-field, .input-select, .input-textarea {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-sm);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field::placeholder, .input-textarea::placeholder {
+      color: var(--ch-gray-300);
+    }
+
+    .input-field:focus, .input-select:focus, .input-textarea:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .input-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .input-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: var(--ch-space-8);
+      cursor: pointer;
+    }
+
+    /* ============================================================
+       CARDS
+       ============================================================ */
+    .ch-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-sm);
+      overflow: hidden;
+      transition: box-shadow var(--ch-transition-base);
+    }
+
+    .ch-card-header {
+      padding: var(--ch-space-5) var(--ch-space-6) 0;
+    }
+
+    .ch-card-body {
+      padding: var(--ch-space-6);
+    }
+
+    .ch-card-footer {
+      padding: var(--ch-space-4) var(--ch-space-6);
+      border-top: 1px solid var(--ch-gray-100);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--ch-space-3);
+    }
+
+    /* ============================================================
+       KPI GRID
+       ============================================================ */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--ch-space-4);
+      margin-bottom: var(--ch-space-8);
+    }
+
+    .kpi-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-5);
+      box-shadow: var(--ch-shadow-sm);
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .kpi-card:hover {
+      box-shadow: var(--ch-shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .kpi-card .kpi-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--ch-space-3);
+    }
+
+    .kpi-card .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--ch-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .kpi-card .kpi-icon.blue  { background: var(--ch-blue-100); color: var(--ch-blue-500); }
+    .kpi-card .kpi-icon.green { background: #d1fae5; color: var(--ch-success); }
+    .kpi-card .kpi-icon.amber { background: var(--ch-amber-100); color: var(--ch-amber-500); }
+    .kpi-card .kpi-icon.purple { background: #e0e7ff; color: #6366f1; }
+    .kpi-card .kpi-icon.gray  { background: var(--ch-gray-100); color: var(--ch-gray-500); }
+
+    .kpi-card .kpi-label {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      font-weight: var(--ch-font-medium);
+    }
+
+    .kpi-card .kpi-value {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      line-height: 1;
+    }
+
+    .kpi-card .kpi-change {
+      font-size: var(--ch-text-xs);
+      margin-top: var(--ch-space-1);
+    }
+
+    .kpi-card .kpi-change.up   { color: var(--ch-success); }
+    .kpi-card .kpi-change.down { color: var(--ch-error); }
+
+    /* ============================================================
+       STATUS BADGES
+       ============================================================ */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      white-space: nowrap;
+    }
+
+    .status-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-inviata         { background: var(--ch-blue-100); color: var(--ch-blue-500); }
+    .status-inviata .dot    { background: var(--ch-blue-500); }
+    .status-info-mancanti   { background: var(--ch-amber-100); color: var(--ch-amber-500); }
+    .status-info-mancanti .dot { background: var(--ch-amber-500); }
+    .status-in-valutazione  { background: #e0e7ff; color: #6366f1; }
+    .status-in-valutazione .dot { background: #6366f1; }
+    .status-accettata       { background: #d1fae5; color: var(--ch-success); }
+    .status-accettata .dot  { background: var(--ch-success); }
+    .status-rifiutata       { background: #fecaca; color: var(--ch-error); }
+    .status-rifiutata .dot  { background: var(--ch-error); }
+    .status-in-lavorazione  { background: var(--ch-blue-100); color: #1d4ed8; }
+    .status-in-lavorazione .dot { background: var(--ch-blue-500); }
+    .status-completata      { background: #d1fae5; color: #059669; }
+    .status-completata .dot { background: #059669; }
+
+    /* ============================================================
+       TABLES
+       ============================================================ */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      background: var(--ch-white);
+      box-shadow: var(--ch-shadow-sm);
+    }
+
+    .ch-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--ch-text-sm);
+    }
+
+    .ch-table thead {
+      background: var(--ch-gray-50);
+      border-bottom: 2px solid var(--ch-gray-100);
+    }
+
+    .ch-table th {
+      text-align: left;
+      padding: var(--ch-space-3) var(--ch-space-4);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-500);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      white-space: nowrap;
+    }
+
+    .ch-table td {
+      padding: var(--ch-space-4) var(--ch-space-4);
+      border-bottom: 1px solid var(--ch-gray-50);
+      color: var(--ch-gray-700);
+      vertical-align: middle;
+    }
+
+    .ch-table tr:last-child td { border-bottom: none; }
+    .ch-table tr:hover td { background: var(--ch-gray-50); }
+
+    .ch-table .req-id {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+
+    .ch-table .req-name {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-900);
+    }
+
+    .ch-table .req-client {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-500);
+    }
+
+    .ch-table .req-date {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      white-space: nowrap;
+    }
+
+    .ch-table .cell-actions {
+      display: flex;
+      gap: var(--ch-space-2);
+    }
+
+    .expand-btn {
+      background: none;
+      border: none;
+      color: var(--ch-blue-500);
+      cursor: pointer;
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-2);
+      border-radius: var(--ch-radius-sm);
+      transition: background var(--ch-transition-fast);
+    }
+
+    .expand-btn:hover {
+      background: var(--ch-blue-50);
+    }
+
+    .expand-btn.danger { color: var(--ch-error); }
+    .expand-btn.danger:hover { background: #fecaca; }
+
+    /* ============================================================
+       FILTERS ROW
+       ============================================================ */
+    .filters-row {
+      display: flex;
+      gap: var(--ch-space-3);
+      flex-wrap: wrap;
+      align-items: flex-end;
+      margin-bottom: var(--ch-space-6);
+    }
+
+    .filters-row .input-group {
+      min-width: 160px;
+      flex: 1;
+      max-width: 220px;
+    }
+
+    .filters-row .input-group .input-field,
+    .filters-row .input-group .input-select {
+      font-size: var(--ch-text-xs);
+      padding: var(--ch-space-2) var(--ch-space-3);
+    }
+
+    .filter-clear {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      cursor: pointer;
+      padding: var(--ch-space-2) var(--ch-space-3);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      font-family: var(--ch-font-sans);
+      transition: border-color var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .filter-clear:hover {
+      border-color: var(--ch-gray-300);
+      color: var(--ch-gray-600);
+    }
+
+    /* ============================================================
+       SECTION TITLES
+       ============================================================ */
+    .section-title {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    .section-title .count {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-400);
+      background: var(--ch-gray-100);
+      padding: 2px 8px;
+      border-radius: var(--ch-radius-full);
+    }
+
+    .overline {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-blue-500);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-2);
+      display: block;
+    }
+
+    /* ============================================================
+       EXPANDABLE DETAIL ROW
+       ============================================================ */
+    .detail-row { display: none; }
+    .detail-row.open { display: table-row; }
+
+    .detail-cell {
+      padding: var(--ch-space-6) !important;
+      background: var(--ch-gray-50);
+      border-bottom: 2px solid var(--ch-gray-100);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ch-space-6);
+    }
+
+    .detail-section {
+      margin-bottom: var(--ch-space-4);
+    }
+    .detail-section:last-child { margin-bottom: 0; }
+
+    .detail-section-title {
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-2);
+      padding-bottom: var(--ch-space-1);
+      border-bottom: 1px solid var(--ch-gray-200);
+    }
+
+    .detail-param {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--ch-space-1) 0;
+      font-size: var(--ch-text-sm);
+    }
+
+    .detail-param .param-label {
+      color: var(--ch-gray-500);
+    }
+
+    .detail-param .param-value {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-800);
+      text-align: right;
+    }
+
+    .detail-note {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-md);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      margin-bottom: var(--ch-space-3);
+      font-size: var(--ch-text-sm);
+      line-height: var(--ch-leading-relaxed);
+    }
+    .detail-note:last-child { margin-bottom: 0; }
+
+    .detail-note .note-meta {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-top: var(--ch-space-1);
+    }
+
+    .detail-actions {
+      margin-top: var(--ch-space-4);
+      display: flex;
+      gap: var(--ch-space-3);
+      flex-wrap: wrap;
+    }
+
+    /* ============================================================
+       TIMELINE
+       ============================================================ */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-2);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: var(--ch-space-3);
+      align-items: flex-start;
+      font-size: var(--ch-text-sm);
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+      border: 2px solid var(--ch-gray-200);
+    }
+
+    .timeline-dot.current   { background: var(--ch-blue-500); border-color: var(--ch-blue-400); }
+    .timeline-dot.completed { background: var(--ch-success); border-color: var(--ch-success); }
+    .timeline-dot.failed    { background: var(--ch-error); border-color: var(--ch-error); }
+    .timeline-dot.pending   { background: var(--ch-gray-100); border-color: var(--ch-gray-200); }
+    .timeline-dot.amber     { background: var(--ch-amber-500); border-color: var(--ch-amber-400); }
+
+    .timeline-info .timeline-status {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-800);
+    }
+
+    .timeline-info .timeline-date {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+
+    /* ============================================================
+       ATTACHMENT LIST
+       ============================================================ */
+    .attachments-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-2);
+    }
+
+    .attachment-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--ch-text-sm);
+      padding: var(--ch-space-2) 0;
+      border-bottom: 1px solid var(--ch-gray-100);
+    }
+    .attachment-item:last-child { border-bottom: none; }
+
+    .attachment-item .att-name {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+      color: var(--ch-gray-600);
+    }
+
+    .attachment-item .att-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--ch-gray-400);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       MODAL
+       ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: var(--ch-z-overlay);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--ch-space-6);
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal {
+      background: var(--ch-white);
+      border-radius: var(--ch-radius-xl);
+      box-shadow: var(--ch-shadow-2xl);
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: fadeInUp 0.25s ease-out;
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--ch-space-5) var(--ch-space-6);
+      border-bottom: 1px solid var(--ch-gray-100);
+    }
+
+    .modal-header h3 {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ch-gray-400);
+      padding: var(--ch-space-1);
+      border-radius: var(--ch-radius-sm);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .modal-close:hover {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-600);
+    }
+
+    .modal-body {
+      padding: var(--ch-space-6);
+    }
+
+    .modal-footer {
+      padding: var(--ch-space-4) var(--ch-space-6);
+      border-top: 1px solid var(--ch-gray-100);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--ch-space-3);
+    }
+
+    /* ============================================================
+       RESEARCH CARDS
+       ============================================================ */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--ch-space-4);
+    }
+
+    .research-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-sm);
+      padding: var(--ch-space-5);
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .research-card:hover {
+      box-shadow: var(--ch-shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .research-card .rc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--ch-space-3);
+    }
+
+    .research-card .rc-title {
+      font-size: var(--ch-text-base);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+    }
+
+    .research-card .rc-meta {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-bottom: var(--ch-space-3);
+    }
+
+    .research-card .rc-abstract {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-600);
+      line-height: var(--ch-leading-relaxed);
+      margin-bottom: var(--ch-space-4);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .research-card .rc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--ch-space-2);
+    }
+
+    .research-card .rc-charts {
+      display: flex;
+      gap: var(--ch-space-1);
+    }
+
+    .research-card .rc-charts .chart-thumb {
+      width: 40px;
+      height: 30px;
+      border-radius: var(--ch-radius-sm);
+      background: var(--ch-gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--ch-gray-400);
+    }
+
+    /* ============================================================
+       NEWSLETTER
+       ============================================================ */
+    .newsletter-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--ch-space-4);
+      margin-bottom: var(--ch-space-8);
+    }
+
+    .nl-stat-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-5);
+      box-shadow: var(--ch-shadow-sm);
+      text-align: center;
+    }
+
+    .nl-stat-card .nl-stat-value {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-3xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      line-height: 1;
+    }
+
+    .nl-stat-card .nl-stat-label {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-top: var(--ch-space-2);
+    }
+
+    /* ============================================================
+       CAMPAIGN TABLE
+       ============================================================ */
+    .campaign-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    .camp-status-bozza       { background: var(--ch-gray-100); color: var(--ch-gray-500); }
+    .camp-status-in_coda     { background: var(--ch-blue-100); color: var(--ch-blue-500); }
+    .camp-status-invio       { background: var(--ch-amber-100); color: var(--ch-amber-500); }
+    .camp-status-completata  { background: #d1fae5; color: var(--ch-success); }
+    .camp-status-annullata   { background: #fecaca; color: var(--ch-error); }
+
+    /* ============================================================
+       TOGGLE SWITCH
+       ============================================================ */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: var(--ch-gray-200);
+      border-radius: var(--ch-radius-full);
+      transition: background var(--ch-transition-fast);
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background: var(--ch-white);
+      border-radius: 50%;
+      transition: transform var(--ch-transition-fast);
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+      background: var(--ch-success);
+    }
+
+    .toggle-switch input:checked + .toggle-slider::before {
+      transform: translateX(18px);
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    .toast {
+      position: fixed;
+      bottom: var(--ch-space-6);
+      right: var(--ch-space-6);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      padding: var(--ch-space-4) var(--ch-space-6);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-xl);
+      font-size: var(--ch-text-sm);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform var(--ch-transition-base), opacity var(--ch-transition-base);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ============================================================
+       LOADING SPINNER
+       ============================================================ */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--ch-gray-200);
+      border-top-color: var(--ch-blue-500);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: inline-block;
+    }
+
+    /* ============================================================
+       DATA PROVIDERS
+       ============================================================ */
+    .provider-row {
+      transition: background var(--ch-transition-fast);
+    }
+    .provider-row:hover td {
+      background: var(--ch-gray-50);
+    }
+    .provider-row td {
+      vertical-align: middle;
+    }
+    .provider-instrument {
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+    }
+    .provider-tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      white-space: nowrap;
+    }
+    .provider-tier-ohlc    { background: var(--ch-gray-100); color: var(--ch-gray-600); }
+    .provider-tier-trades  { background: var(--ch-blue-100); color: var(--ch-blue-600); }
+    .provider-tier-mbp1    { background: var(--ch-amber-100); color: var(--ch-amber-600); }
+    .provider-tier-mbp10   { background: #e0e7ff; color: #6366f1; }
+    .provider-tier-mbo     { background: #fecaca; color: var(--ch-error); }
+
+    .provider-cost {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-success);
+    }
+    .provider-cost-estimate {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+    .provider-notes-input {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xs);
+      padding: var(--ch-space-2) var(--ch-space-3);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast);
+      outline: none;
+      width: 100%;
+      min-width: 120px;
+    }
+    .provider-notes-input:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .provider-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--ch-space-4);
+      margin-bottom: var(--ch-space-6);
+    }
+    .provider-summary-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-5);
+      box-shadow: var(--ch-shadow-sm);
+    }
+    .provider-summary-card .ps-label {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      font-weight: var(--ch-font-medium);
+    }
+    .provider-summary-card .ps-value {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      line-height: 1;
+      margin-top: var(--ch-space-2);
+    }
+    .provider-summary-card .ps-footnote {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-top: var(--ch-space-1);
+    }
+    .provider-select {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xs);
+      padding: var(--ch-space-2) var(--ch-space-3);
+      padding-right: var(--ch-space-8);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast);
+      outline: none;
+      cursor: pointer;
+      min-width: 130px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+    }
+    .provider-select:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .provider-tier-select {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xs);
+      padding: var(--ch-space-2) var(--ch-space-3);
+      padding-right: var(--ch-space-8);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast);
+      outline: none;
+      cursor: pointer;
+      min-width: 100px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+    }
+    .provider-tier-select:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .blue-600  { color: var(--ch-blue-600, #2563eb); }
+    .amber-600 { color: var(--ch-amber-600, #d97706); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    /* Sidebar collapse on mobile */
+    @media (max-width: 900px) {
+      .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform var(--ch-transition-base);
+      }
+
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .admin-topbar {
+        left: 0;
+      }
+
+      .admin-main {
+        margin-left: 0;
+      }
+
+      .hamburger-btn {
+        display: flex;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .newsletter-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters-row .input-group {
+        min-width: 120px;
+        flex: 1 1 40%;
+        max-width: none;
+      }
+
+      .admin-section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .admin-main {
+        padding: var(--ch-space-4);
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .kpi-card {
+        padding: var(--ch-space-4);
+      }
+
+      .kpi-card .kpi-value {
+        font-size: var(--ch-text-xl);
+      }
+
+      .newsletter-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ch-table th:nth-child(3),
+      .ch-table td:nth-child(3) { display: none; }
+      .ch-table th:nth-child(5),
+      .ch-table td:nth-child(5) { display: none; }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters-row .input-group {
+        flex: 1 1 100%;
+      }
+
+      .modal {
+        max-width: 100%;
+        margin: var(--ch-space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       SIDEBAR
+       ============================================================ -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">CH</div>
+      <div class="sidebar-brand-text">
+        <span class="brand-name">Capo Horn Lab</span>
+        <span class="brand-role">Admin Panel</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-label">Main</div>
+
+      <button class="sidebar-nav-item active" data-section="dashboard" onclick="switchAdminSection('dashboard')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/>
+          </svg>
+        </span>
+        Dashboard
+      </button>
+
+      <button class="sidebar-nav-item" data-section="requests" onclick="switchAdminSection('requests')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </span>
+        Requests
+        <span class="nav-count">8</span>
+      </button>
+
+      <button class="sidebar-nav-item" data-section="research" onclick="switchAdminSection('research')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        Research
+        <span class="nav-count">6</span>
+      </button>
+
+      <button class="sidebar-nav-item" data-section="newsletter" onclick="switchAdminSection('newsletter')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </span>
+        Newsletter
+        <span class="nav-count">3</span>
+      </button>
+
+      <div class="sidebar-nav-label" style="margin-top:var(--ch-space-4);">System</div>
+
+      <button class="sidebar-nav-item" data-section="providers" onclick="switchAdminSection('providers')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </span>
+        Data Providers
+      </button>
+
+      <button class="sidebar-nav-item" data-section="settings" onclick="switchAdminSection('settings')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </span>
+        Settings
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="sidebar-nav-item" onclick="alert('Log out mock — backend pending.')">
+        <span class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </span>
+        Log Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       TOP BAR
+       ============================================================ -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-left">
+      <button class="hamburger-btn" onclick="document.getElementById('adminSidebar').classList.toggle('open')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <div>
+        <h2 id="topbarTitle">Dashboard</h2>
+        <div class="breadcrumb">
+          <span>Admin</span>
+          <span>/</span>
+          <span id="topbarBreadcrumb">Dashboard</span>
+        </div>
+      </div>
+    </div>
+    <div class="admin-topbar-right">
+      <div class="admin-notif">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="admin-notif-dot"></span>
+      </div>
+      <div class="admin-avatar">AD</div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+  <main class="admin-main">
+
+    <!-- ============================================================
+         SECTION 1: DASHBOARD
+         ============================================================ -->
+    <section class="admin-section active" id="section-dashboard">
+      <div class="admin-section-header">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <p>Overview of platform activity and key metrics.</p>
+        </div>
+        <div style="display:flex;gap:var(--ch-space-3);">
+          <button class="btn btn-secondary btn-sm" onclick="showToast('Export started — backend pending.')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="switchAdminSection('requests')">View Requests</button>
+        </div>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card animate-up-d1">
+          <div class="kpi-top">
+            <div class="kpi-label">Total Requests</div>
+            <div class="kpi-icon blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiTotal">127</div>
+          <div class="kpi-change up">↑ 12% vs last month</div>
+        </div>
+
+        <div class="kpi-card animate-up-d2">
+          <div class="kpi-top">
+            <div class="kpi-label">Pending</div>
+            <div class="kpi-icon amber">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiPending">23</div>
+          <div class="kpi-change down">↑ 2 vs yesterday</div>
+        </div>
+
+        <div class="kpi-card animate-up-d3">
+          <div class="kpi-top">
+            <div class="kpi-label">In Progress</div>
+            <div class="kpi-icon purple">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiProgress">15</div>
+          <div class="kpi-change down">↓ 3 vs yesterday</div>
+        </div>
+
+        <div class="kpi-card animate-up-d4">
+          <div class="kpi-top">
+            <div class="kpi-label">Completed</div>
+            <div class="kpi-icon green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiCompleted">89</div>
+          <div class="kpi-change up">↑ 5 this month</div>
+        </div>
+
+        <div class="kpi-card animate-up-d5">
+          <div class="kpi-top">
+            <div class="kpi-label">Subscribers</div>
+            <div class="kpi-icon gray">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpiSubscribers">342</div>
+          <div class="kpi-change up">↑ 18 new this week</div>
+        </div>
+      </div>
+
+      <!-- Recent Activity + Quick Stats -->
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:var(--ch-space-6);">
+        <!-- Recent Requests -->
+        <div>
+          <div class="section-title">
+            Recent Requests
+            <span class="count">5</span>
+          </div>
+          <div class="ch-card">
+            <div class="ch-card-body" style="padding:0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-4) var(--ch-space-5);border-bottom:1px solid var(--ch-gray-50);flex-wrap:wrap;gap:var(--ch-space-2);">
+                <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                  <span class="req-id" style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-008</span>
+                  <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">NQ Range Mean Rev</span>
+                  <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">marco@example.com</span>
+                </div>
+                <span class="status-badge status-in-valutazione"><span class="dot"></span>In Valutazione</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-4) var(--ch-space-5);border-bottom:1px solid var(--ch-gray-50);flex-wrap:wrap;gap:var(--ch-space-2);">
+                <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                  <span class="req-id" style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-007</span>
+                  <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">ES Opening Range</span>
+                  <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">sarah@example.com</span>
+                </div>
+                <span class="status-badge status-info-mancanti"><span class="dot"></span>Info Mancanti</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-4) var(--ch-space-5);border-bottom:1px solid var(--ch-gray-50);flex-wrap:wrap;gap:var(--ch-space-2);">
+                <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                  <span class="req-id" style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-006</span>
+                  <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">CL Breakout 1h</span>
+                  <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">mike@example.com</span>
+                </div>
+                <span class="status-badge status-accettata"><span class="dot"></span>Accettata</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-4) var(--ch-space-5);border-bottom:1px solid var(--ch-gray-50);flex-wrap:wrap;gap:var(--ch-space-2);">
+                <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                  <span class="req-id" style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-005</span>
+                  <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">6E Carry Strategy</span>
+                  <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">alice@example.com</span>
+                </div>
+                <span class="status-badge status-completata"><span class="dot"></span>Completata</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-4) var(--ch-space-5);flex-wrap:wrap;gap:var(--ch-space-2);">
+                <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                  <span class="req-id" style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-004</span>
+                  <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">ES Mean Reversion</span>
+                  <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">james@example.com</span>
+                </div>
+                <span class="status-badge status-rifiutata"><span class="dot"></span>Rifiutata</span>
+              </div>
+            </div>
+            <div class="ch-card-footer">
+              <button class="btn btn-ghost btn-sm" onclick="switchAdminSection('requests')">View All Requests →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats Sidebar -->
+        <div>
+          <div class="section-title">Quick Stats</div>
+          <div style="display:flex;flex-direction:column;gap:var(--ch-space-4);">
+            <div class="ch-card">
+              <div class="ch-card-body" style="padding:var(--ch-space-5);">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-50);">
+                  <span style="font-size:var(--ch-text-sm);color:var(--ch-gray-500);">New Users Today</span>
+                  <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);">4</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-50);">
+                  <span style="font-size:var(--ch-text-sm);color:var(--ch-gray-500);">Requests This Week</span>
+                  <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);">12</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-50);">
+                  <span style="font-size:var(--ch-text-sm);color:var(--ch-gray-500);">Avg. Evaluation Time</span>
+                  <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);">3.2d</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-2) 0;">
+                  <span style="font-size:var(--ch-text-sm);color:var(--ch-gray-500);">Last Admin Login</span>
+                  <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">2h ago</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ch-card">
+              <div class="ch-card-body" style="padding:var(--ch-space-5);">
+                <div style="margin-bottom:var(--ch-space-3);">
+                  <span class="overline">Status Distribution</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:var(--ch-space-3);">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;font-size:var(--ch-text-xs);margin-bottom:var(--ch-space-1);">
+                      <span style="color:var(--ch-gray-500);">Pending</span>
+                      <span style="font-family:var(--ch-font-mono);color:var(--ch-gray-700);">23</span>
+                    </div>
+                    <div style="height:6px;background:var(--ch-gray-100);border-radius:var(--ch-radius-full);overflow:hidden;">
+                      <div style="height:100%;width:18%;background:var(--ch-amber-500);border-radius:var(--ch-radius-full);"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display:flex;justify-content:space-between;font-size:var(--ch-text-xs);margin-bottom:var(--ch-space-1);">
+                      <span style="color:var(--ch-gray-500);">In Progress</span>
+                      <span style="font-family:var(--ch-font-mono);color:var(--ch-gray-700);">15</span>
+                    </div>
+                    <div style="height:6px;background:var(--ch-gray-100);border-radius:var(--ch-radius-full);overflow:hidden;">
+                      <div style="height:100%;width:12%;background:#6366f1;border-radius:var(--ch-radius-full);"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="display:flex;justify-content:space-between;font-size:var(--ch-text-xs);margin-bottom:var(--ch-space-1);">
+                      <span style="color:var(--ch-gray-500);">Completed</span>
+                      <span style="font-family:var(--ch-font-mono);color:var(--ch-gray-700);">89</span>
+                    </div>
+                    <div style="height:6px;background:var(--ch-gray-100);border-radius:var(--ch-radius-full);overflow:hidden;">
+                      <div style="height:100%;width:68%;background:var(--ch-success);border-radius:var(--ch-radius-full);"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: REQUESTS
+         ============================================================ -->
+    <section class="admin-section" id="section-requests">
+      <div class="admin-section-header">
+        <div>
+          <h2>Strategy Requests</h2>
+          <p>View, filter, and manage all strategy submissions.</p>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="showToast('Refresh triggered — backend pending.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          Refresh
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-row">
+        <div class="input-group">
+          <label class="input-label">Status</label>
+          <select class="input-select" id="filterStatus" onchange="filterRequests()">
+            <option value="all">All Statuses</option>
+            <option value="inviata">Inviata</option>
+            <option value="info_mancanti">Info Mancanti</option>
+            <option value="in_valutazione">In Valutazione</option>
+            <option value="accettata">Accettata</option>
+            <option value="in_lavorazione">In Lavorazione</option>
+            <option value="completata">Completata</option>
+            <option value="rifiutata">Rifiutata</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Instrument</label>
+          <select class="input-select" id="filterInstrument" onchange="filterRequests()">
+            <option value="all">All Instruments</option>
+            <option value="ES">ES</option>
+            <option value="NQ">NQ</option>
+            <option value="CL">CL</option>
+            <option value="6E">6E</option>
+            <option value="YM">YM</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label class="input-label">From</label>
+          <input class="input-field" type="date" id="filterDateFrom" onchange="filterRequests()">
+        </div>
+        <div class="input-group">
+          <label class="input-label">To</label>
+          <input class="input-field" type="date" id="filterDateTo" onchange="filterRequests()">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Search</label>
+          <input class="input-field" type="text" placeholder="Name, email, ID..." id="filterSearch" oninput="filterRequests()">
+        </div>
+        <button class="filter-clear" onclick="clearFilters()">Clear Filters</button>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper">
+        <table class="ch-table" id="requestsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Client</th>
+              <th>Strategy</th>
+              <th>Instrument</th>
+              <th>Submitted</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="requestsTableBody">
+            <!-- Row 1 -->
+            <tr class="req-row" data-id="REQ-008" data-status="in_valutazione" data-instrument="NQ" data-date="2026-07-20" data-search="REQ-008 NQ Range Mean Rev marco@example.com">
+              <td><span class="req-id">REQ-008</span></td>
+              <td><span class="req-client">marco@example.com</span></td>
+              <td><span class="req-name">NQ Range Mean Rev</span></td>
+              <td><span class="req-id">NQ</span></td>
+              <td><span class="req-date">20 Jul 2026</span></td>
+              <td><span class="status-badge status-in-valutazione"><span class="dot"></span>In Valutazione</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="toggleDetail('admin-detail-008', this)">View</button>
+                  <button class="expand-btn" onclick="openStatusModal('REQ-008', 'in_valutazione')">Status</button>
+                  <button class="expand-btn" onclick="openAddNoteModal('REQ-008')">Note</button>
+                  <button class="expand-btn danger" onclick="requestClarification('REQ-008')">Clarify</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="detail-row" id="admin-detail-008">
+              <td colspan="7">
+                <div class="detail-cell">
+                  <div class="detail-grid">
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Strategy Parameters</div>
+                        <div class="detail-param"><span class="param-label">Name</span><span class="param-value">NQ Range Mean Rev</span></div>
+                        <div class="detail-param"><span class="param-label">Client</span><span class="param-value">Marco Rossi (marco@example.com)</span></div>
+                        <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">NQ</span></div>
+                        <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">3m</span></div>
+                        <div class="detail-param"><span class="param-label">Direction</span><span class="param-value">Both</span></div>
+                        <div class="detail-param"><span class="param-label">Period</span><span class="param-value">2025-06-01 → 2026-07-15</span></div>
+                        <div class="detail-param"><span class="param-label">Entry</span><span class="param-value">RSI(14) < 30 and price near BB lower</span></div>
+                        <div class="detail-param"><span class="param-label">Exit</span><span class="param-value">RSI(14) > 70 or TP hit</span></div>
+                        <div class="detail-param"><span class="param-label">Stop Loss</span><span class="param-value">6 ticks</span></div>
+                        <div class="detail-param"><span class="param-label">Take Profit</span><span class="param-value">14 ticks</span></div>
+                        <div class="detail-param"><span class="param-label">Trailing Stop</span><span class="param-value">3 ticks, 5 tick trail</span></div>
+                        <div class="detail-param"><span class="param-label">Contracts</span><span class="param-value">2</span></div>
+                        <div class="detail-param"><span class="param-label">Slippage</span><span class="param-value">1 tick</span></div>
+                        <div class="detail-param"><span class="param-label">Commission</span><span class="param-value">$2.50/side</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Status History</div>
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Inviata</div>
+                              <div class="timeline-date">20 Jul 2026 · 11:30 UTC</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot current"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">In Valutazione</div>
+                              <div class="timeline-date">21 Jul 2026 · 09:15 UTC · admin@capohornlab.com</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot pending"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status" style="color:var(--ch-gray-400);">Accettata</div>
+                              <div class="timeline-date">— Pending</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot pending"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status" style="color:var(--ch-gray-400);">Completata</div>
+                              <div class="timeline-date">— Pending</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-section" style="margin-top:var(--ch-space-4);">
+                        <div class="detail-section-title">Internal Notes</div>
+                        <div class="detail-note">
+                          Strategy looks clean. Need to verify the RSI parameters against NQ tick data.
+                          <div class="note-meta">Admin · 21 Jul 2026 · 09:16 UTC</div>
+                        </div>
+                        <div style="margin-top:var(--ch-space-2);">
+                          <textarea class="input-textarea" placeholder="Add a quick note..." rows="2" id="quickNote-008"></textarea>
+                          <button class="btn btn-primary btn-sm" style="margin-top:var(--ch-space-2);" onclick="addNote('REQ-008')">Add Note</button>
+                        </div>
+                      </div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Attachments</div>
+                        <div class="attachments-list">
+                          <div class="attachment-item">
+                            <span class="att-name">
+                              <svg class="att-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                              strategy_details.pdf
+                            </span>
+                            <button class="btn btn-ghost btn-sm" onclick="showToast('Download mock — backend pending.')">Download</button>
+                          </div>
+                          <div class="attachment-item">
+                            <span class="att-name">
+                              <svg class="att-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                              entry_rules.png
+                            </span>
+                            <button class="btn btn-ghost btn-sm" onclick="showToast('Download mock — backend pending.')">Download</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-actions">
+                        <button class="btn btn-amber btn-sm" onclick="openStatusModal('REQ-008', 'in_valutazione')">Change Status</button>
+                        <button class="btn btn-secondary btn-sm" onclick="requestClarification('REQ-008')">Request Clarification</button>
+                        <button class="btn btn-ghost btn-sm" onclick="toggleDetail('admin-detail-008', document.querySelector('[onclick*=\\'admin-detail-008\\\\']'))">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr class="req-row" data-id="REQ-007" data-status="info_mancanti" data-instrument="ES" data-date="2026-07-19" data-search="REQ-007 ES Opening Range sarah@example.com">
+              <td><span class="req-id">REQ-007</span></td>
+              <td><span class="req-client">sarah@example.com</span></td>
+              <td><span class="req-name">ES Opening Range</span></td>
+              <td><span class="req-id">ES</span></td>
+              <td><span class="req-date">19 Jul 2026</span></td>
+              <td><span class="status-badge status-info-mancanti"><span class="dot"></span>Info Mancanti</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="toggleDetail('admin-detail-007', this)">View</button>
+                  <button class="expand-btn" onclick="openStatusModal('REQ-007', 'info_mancanti')">Status</button>
+                  <button class="expand-btn" onclick="openAddNoteModal('REQ-007')">Note</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="detail-row" id="admin-detail-007">
+              <td colspan="7">
+                <div class="detail-cell">
+                  <div class="detail-grid">
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Strategy Parameters</div>
+                        <div class="detail-param"><span class="param-label">Name</span><span class="param-value">ES Opening Range</span></div>
+                        <div class="detail-param"><span class="param-label">Client</span><span class="param-value">Sarah Chen (sarah@example.com)</span></div>
+                        <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">ES</span></div>
+                        <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">5m</span></div>
+                        <div class="detail-param"><span class="param-label">Direction</span><span class="param-value">Long only</span></div>
+                        <div class="detail-param"><span class="param-label">Period</span><span class="param-value">2025-01-01 → 2026-06-30</span></div>
+                        <div class="detail-param"><span class="param-label">Entry</span><span class="param-value">Break of first 30min range</span></div>
+                        <div class="detail-param"><span class="param-label">Stop Loss</span><span class="param-value">Not specified</span></div>
+                        <div class="detail-param"><span class="param-label">Take Profit</span><span class="param-value">Not specified</span></div>
+                        <div class="detail-param"><span class="param-label">Contracts</span><span class="param-value">1</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Status History</div>
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Inviata</div>
+                              <div class="timeline-date">19 Jul 2026 · 14:22 UTC</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot current amber"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Info Mancanti</div>
+                              <div class="timeline-date">19 Jul 2026 · 15:30 UTC · Clarification requested</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-section" style="margin-top:var(--ch-space-4);">
+                        <div class="detail-section-title">Internal Notes</div>
+                        <div class="detail-note">
+                          Missing stop loss and take profit parameters. Sent clarification request to client.
+                          <div class="note-meta">Admin · 19 Jul 2026 · 15:31 UTC</div>
+                        </div>
+                        <div style="margin-top:var(--ch-space-2);">
+                          <textarea class="input-textarea" placeholder="Add a quick note..." rows="2" id="quickNote-007"></textarea>
+                          <button class="btn btn-primary btn-sm" style="margin-top:var(--ch-space-2);" onclick="addNote('REQ-007')">Add Note</button>
+                        </div>
+                      </div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Attachments</div>
+                        <div class="attachments-list">
+                          <div class="attachment-item">
+                            <span class="att-name">
+                              <svg class="att-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                              op_range_rules.pdf
+                            </span>
+                            <button class="btn btn-ghost btn-sm" onclick="showToast('Download mock — backend pending.')">Download</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-actions">
+                        <button class="btn btn-amber btn-sm" onclick="openStatusModal('REQ-007', 'info_mancanti')">Change Status</button>
+                        <button class="btn btn-secondary btn-sm" onclick="requestClarification('REQ-007')">Resend Clarification</button>
+                        <button class="btn btn-ghost btn-sm" onclick="toggleDetail('admin-detail-007', document.querySelector('[onclick*=\\'admin-detail-007\\\\']'))">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr class="req-row" data-id="REQ-006" data-status="accettata" data-instrument="CL" data-date="2026-07-18" data-search="REQ-006 CL Breakout 1h mike@example.com">
+              <td><span class="req-id">REQ-006</span></td>
+              <td><span class="req-client">mike@example.com</span></td>
+              <td><span class="req-name">CL Breakout 1h</span></td>
+              <td><span class="req-id">CL</span></td>
+              <td><span class="req-date">18 Jul 2026</span></td>
+              <td><span class="status-badge status-accettata"><span class="dot"></span>Accettata</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="toggleDetail('admin-detail-006', this)">View</button>
+                  <button class="expand-btn" onclick="openStatusModal('REQ-006', 'accettata')">Status</button>
+                  <button class="expand-btn" onclick="openAddNoteModal('REQ-006')">Note</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="detail-row" id="admin-detail-006">
+              <td colspan="7">
+                <div class="detail-cell">
+                  <div class="detail-grid">
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Strategy Parameters</div>
+                        <div class="detail-param"><span class="param-label">Name</span><span class="param-value">CL Breakout 1h</span></div>
+                        <div class="detail-param"><span class="param-label">Client</span><span class="param-value">Mike Johnson (mike@example.com)</span></div>
+                        <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">CL</span></div>
+                        <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">1h</span></div>
+                        <div class="detail-param"><span class="param-label">Entry</span><span class="param-value">Close > high of previous 4h</span></div>
+                        <div class="detail-param"><span class="param-label">Stop Loss</span><span class="param-value">10 ticks</span></div>
+                        <div class="detail-param"><span class="param-label">Take Profit</span><span class="param-value">25 ticks (2:1 R/R)</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Status History</div>
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Inviata</div>
+                              <div class="timeline-date">18 Jul 2026 · 08:10 UTC</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">In Valutazione</div>
+                              <div class="timeline-date">18 Jul 2026 · 10:00 UTC</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot current"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Accettata</div>
+                              <div class="timeline-date">19 Jul 2026 · 14:30 UTC</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-actions">
+                        <button class="btn btn-amber btn-sm" onclick="openStatusModal('REQ-006', 'accettata')">Change Status</button>
+                        <button class="btn btn-ghost btn-sm" onclick="toggleDetail('admin-detail-006', document.querySelector('[onclick*=\\'admin-detail-006\\\\']'))">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr class="req-row" data-id="REQ-005" data-status="completata" data-instrument="6E" data-date="2026-07-15" data-search="REQ-005 6E Carry Strategy alice@example.com">
+              <td><span class="req-id">REQ-005</span></td>
+              <td><span class="req-client">alice@example.com</span></td>
+              <td><span class="req-name">6E Carry Strategy</span></td>
+              <td><span class="req-id">6E</span></td>
+              <td><span class="req-date">15 Jul 2026</span></td>
+              <td><span class="status-badge status-completata"><span class="dot"></span>Completata</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="toggleDetail('admin-detail-005', this)">View</button>
+                  <button class="expand-btn" onclick="showToast('Download result mock — backend pending.')">PDF</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="detail-row" id="admin-detail-005">
+              <td colspan="7">
+                <div class="detail-cell">
+                  <div class="detail-grid">
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Strategy Parameters</div>
+                        <div class="detail-param"><span class="param-label">Name</span><span class="param-value">6E Carry Strategy</span></div>
+                        <div class="detail-param"><span class="param-label">Client</span><span class="param-value">Alice Wang (alice@example.com)</span></div>
+                        <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">6E</span></div>
+                        <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">Daily</span></div>
+                        <div class="detail-param"><span class="param-label">Net Profit</span><span class="param-value">+$14,200</span></div>
+                        <div class="detail-param"><span class="param-label">Sharpe</span><span class="param-value">1.42</span></div>
+                        <div class="detail-param"><span class="param-label">Max DD</span><span class="param-value">-8.3%</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Status History</div>
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Inviata</div>
+                              <div class="timeline-date">10 Jul 2026</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">In Valutazione</div>
+                              <div class="timeline-date">11 Jul 2026</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Accettata</div>
+                              <div class="timeline-date">12 Jul 2026</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">In Lavorazione</div>
+                              <div class="timeline-date">14 Jul 2026</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Completata</div>
+                              <div class="timeline-date">15 Jul 2026</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="detail-section" style="margin-top:var(--ch-space-4);">
+                        <div class="detail-section-title">Results</div>
+                        <button class="btn btn-amber btn-sm" onclick="showToast('Download result mock — backend pending.')">Download Report (PDF)</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr class="req-row" data-id="REQ-004" data-status="rifiutata" data-instrument="ES" data-date="2026-07-12" data-search="REQ-004 ES Mean Reversion james@example.com">
+              <td><span class="req-id">REQ-004</span></td>
+              <td><span class="req-client">james@example.com</span></td>
+              <td><span class="req-name">ES Mean Reversion</span></td>
+              <td><span class="req-id">ES</span></td>
+              <td><span class="req-date">12 Jul 2026</span></td>
+              <td><span class="status-badge status-rifiutata"><span class="dot"></span>Rifiutata</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="toggleDetail('admin-detail-004', this)">View</button>
+                  <button class="expand-btn" onclick="openStatusModal('REQ-004', 'rifiutata')">Status</button>
+                </div>
+              </td>
+            </tr>
+            <tr class="detail-row" id="admin-detail-004">
+              <td colspan="7">
+                <div class="detail-cell">
+                  <div class="detail-grid">
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Strategy Parameters</div>
+                        <div class="detail-param"><span class="param-label">Name</span><span class="param-value">ES Mean Reversion</span></div>
+                        <div class="detail-param"><span class="param-label">Client</span><span class="param-value">James Wilson (james@example.com)</span></div>
+                        <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">ES</span></div>
+                        <div class="detail-param"><span class="param-label">Rejection Reason</span><span class="param-value" style="color:var(--ch-error);">Insufficient edge after costs</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="detail-section">
+                        <div class="detail-section-title">Status History</div>
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <span class="timeline-dot completed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Inviata</div>
+                              <div class="timeline-date">12 Jul 2026</div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <span class="timeline-dot failed"></span>
+                            <div class="timeline-info">
+                              <div class="timeline-status">Rifiutata</div>
+                              <div class="timeline-date">13 Jul 2026</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 6 (repeat existing pattern for more data) -->
+            <tr class="req-row" data-id="REQ-003" data-status="inviata" data-instrument="YM" data-date="2026-07-10" data-search="REQ-003 YM Trend Follow lisa@example.com">
+              <td><span class="req-id">REQ-003</span></td>
+              <td><span class="req-client">lisa@example.com</span></td>
+              <td><span class="req-name">YM Trend Follow</span></td>
+              <td><span class="req-id">YM</span></td>
+              <td><span class="req-date">10 Jul 2026</span></td>
+              <td><span class="status-badge status-inviata"><span class="dot"></span>Inviata</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="openStatusModal('REQ-003', 'inviata')">Status</button>
+                  <button class="expand-btn" onclick="openAddNoteModal('REQ-003')">Note</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 7 -->
+            <tr class="req-row" data-id="REQ-002" data-status="in_lavorazione" data-instrument="NQ" data-date="2026-07-08" data-search="REQ-002 NQ Momentum tom@example.com">
+              <td><span class="req-id">REQ-002</span></td>
+              <td><span class="req-client">tom@example.com</span></td>
+              <td><span class="req-name">NQ Momentum 5m</span></td>
+              <td><span class="req-id">NQ</span></td>
+              <td><span class="req-date">08 Jul 2026</span></td>
+              <td><span class="status-badge status-in-lavorazione"><span class="dot"></span>In Lavorazione</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="openStatusModal('REQ-002', 'in_lavorazione')">Status</button>
+                </div>
+              </td>
+            </tr>
+
+            <!-- Row 8 -->
+            <tr class="req-row" data-id="REQ-001" data-status="completata" data-instrument="ES" data-date="2026-06-28" data-search="REQ-001 ES Scalp emma@example.com">
+              <td><span class="req-id">REQ-001</span></td>
+              <td><span class="req-client">emma@example.com</span></td>
+              <td><span class="req-name">ES Scalp 1m</span></td>
+              <td><span class="req-id">ES</span></td>
+              <td><span class="req-date">28 Jun 2026</span></td>
+              <td><span class="status-badge status-completata"><span class="dot"></span>Completata</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="showToast('Download result mock — backend pending.')">PDF</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--ch-space-4);">
+        <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Showing <strong id="visibleCount">8</strong> of <strong>8</strong> requests</span>
+        <div style="display:flex;gap:var(--ch-space-2);">
+          <button class="btn btn-ghost btn-sm" disabled>← Prev</button>
+          <button class="btn btn-primary btn-sm">1</button>
+          <button class="btn btn-ghost btn-sm">2</button>
+          <button class="btn btn-ghost btn-sm">Next →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: RESEARCH
+         ============================================================ -->
+    <section class="admin-section" id="section-research">
+      <div class="admin-section-header">
+        <div>
+          <h2>Research Management</h2>
+          <p>Create, publish, and manage research publications.</p>
+        </div>
+        <button class="btn btn-amber btn-sm" onclick="openCreateResearchModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Research
+        </button>
+      </div>
+
+      <!-- Research Grid -->
+      <div class="research-grid" id="researchGrid">
+        <div class="research-card">
+          <div class="rc-header">
+            <div class="rc-title">ES Momentum Regime Shift</div>
+            <span class="status-badge status-completata"><span class="dot"></span>Published</span>
+          </div>
+          <div class="rc-meta">ES · Jun 2026 · by Midas</div>
+          <div class="rc-abstract">Analysis of momentum regimes in ES futures using volatility-adjusted trend signals across multiple timeframes.</div>
+          <div class="rc-footer">
+            <div class="rc-charts">
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb" style="width:auto;padding:0 8px;font-size:var(--ch-text-xs);">+4</span>
+            </div>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Unpublish mock — backend pending.')">Unpublish</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-header">
+            <div class="rc-title">NQ Intraday Volatility Patterns</div>
+            <span class="status-badge status-completata"><span class="dot"></span>Published</span>
+          </div>
+          <div class="rc-meta">NQ · May 2026 · by Midas</div>
+          <div class="rc-abstract">Examining intraday volatility clustering in Nasdaq futures and its implications for short-term mean reversion strategies.</div>
+          <div class="rc-footer">
+            <div class="rc-charts">
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+            </div>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Unpublish mock — backend pending.')">Unpublish</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-header">
+            <div class="rc-title">CL Seasonality & Calendar Spreads</div>
+            <span class="status-badge status-completata"><span class="dot"></span>Published</span>
+          </div>
+          <div class="rc-meta">CL · Apr 2026 · by Midas</div>
+          <div class="rc-abstract">Investigating seasonal patterns in crude oil futures and calendar spread trading opportunities.</div>
+          <div class="rc-footer">
+            <div class="rc-charts">
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+            </div>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Unpublish mock — backend pending.')">Unpublish</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-header">
+            <div class="rc-title">6E Carry & Interest Rate Differentials</div>
+            <span class="status-badge status-inviata"><span class="dot"></span>Draft</span>
+          </div>
+          <div class="rc-meta">6E · Draft · Last edited 3d ago</div>
+          <div class="rc-abstract">Analysis of Euro FX futures carry trades and central bank interest rate differential impacts.</div>
+          <div class="rc-footer">
+            <div class="rc-charts">
+              <span class="chart-thumb">📊</span>
+            </div>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+              <button class="btn btn-primary btn-sm" onclick="showToast('Publish mock — backend pending.')">Publish</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-header">
+            <div class="rc-title">Multi-Asset Correlation Matrix</div>
+            <span class="status-badge status-inviata"><span class="dot"></span>Draft</span>
+          </div>
+          <div class="rc-meta">Multi · Draft · Last edited 1w ago</div>
+          <div class="rc-abstract">Rolling correlation analysis across ES, NQ, CL, 6E and how regime changes affect portfolio diversification.</div>
+          <div class="rc-footer">
+            <div class="rc-charts"></div>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+              <button class="btn btn-primary btn-sm" onclick="showToast('Publish mock — backend pending.')">Publish</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="research-card">
+          <div class="rc-header">
+            <div class="rc-title">Tick Data Microstructure Study</div>
+            <span class="status-badge status-info-mancanti"><span class="dot"></span>In Review</span>
+          </div>
+          <div class="rc-meta">ES · In Review · Last edited 2d ago</div>
+          <div class="rc-abstract">High-frequency analysis of order flow imbalance and its predictive power for short-term price movements.</div>
+          <div class="rc-footer">
+            <div class="rc-charts">
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+              <span class="chart-thumb">📊</span>
+            </div>
+            <div style="display:flex;gap:var(--ch-space-2);">
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+              <button class="btn btn-ghost btn-sm" onclick="showToast('Upload charts — backend pending.')">+ Charts</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: NEWSLETTER
+         ============================================================ -->
+    <section class="admin-section" id="section-newsletter">
+      <div class="admin-section-header">
+        <div>
+          <h2>Newsletter Management</h2>
+          <p>Manage subscribers, create campaigns, and track delivery.</p>
+        </div>
+        <button class="btn btn-amber btn-sm" onclick="showToast('New campaign form — backend pending.')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          New Campaign
+        </button>
+      </div>
+
+      <!-- Newsletter Stats -->
+      <div class="newsletter-stats">
+        <div class="nl-stat-card animate-up-d1">
+          <div class="nl-stat-value">342</div>
+          <div class="nl-stat-label">Subscribers</div>
+        </div>
+        <div class="nl-stat-card animate-up-d2">
+          <div class="nl-stat-value">286</div>
+          <div class="nl-stat-label">Active</div>
+        </div>
+        <div class="nl-stat-card animate-up-d3">
+          <div class="nl-stat-value">42.7%</div>
+          <div class="nl-stat-label">Open Rate</div>
+        </div>
+        <div class="nl-stat-card animate-up-d4">
+          <div class="nl-stat-value">12.3%</div>
+          <div class="nl-stat-label">Click Rate</div>
+        </div>
+      </div>
+
+      <!-- Campaign History -->
+      <div class="section-title">
+        Campaign History
+        <span class="count">3</span>
+      </div>
+
+      <div class="ch-card">
+        <div class="ch-card-body" style="padding:0;">
+          <table class="ch-table">
+            <thead>
+              <tr>
+                <th>Campaign</th>
+                <th>Subject</th>
+                <th>Sent</th>
+                <th>Recipients</th>
+                <th>Opens</th>
+                <th>Clicks</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="req-name">Jul 2026 Research Roundup</span></td>
+                <td><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-500);">New research on ES momentum and NQ volatility</span></td>
+                <td><span class="req-date">18 Jul 2026</span></td>
+                <td><span class="req-id">286</span></td>
+                <td><span class="req-id">122</span></td>
+                <td><span class="req-id">35</span></td>
+                <td><span class="campaign-status camp-status-completata">Sent</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="showToast('View stats mock — backend pending.')">Stats</button></td>
+              </tr>
+              <tr>
+                <td><span class="req-name">Welcome Series — Part 3</span></td>
+                <td><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-500);">How we evaluate strategies: the full pipeline</span></td>
+                <td><span class="req-date">10 Jul 2026</span></td>
+                <td><span class="req-id">274</span></td>
+                <td><span class="req-id">118</span></td>
+                <td><span class="req-id">29</span></td>
+                <td><span class="campaign-status camp-status-completata">Sent</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="showToast('View stats mock — backend pending.')">Stats</button></td>
+              </tr>
+              <tr>
+                <td><span class="req-name">Jun 2026 Research Digest</span></td>
+                <td><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-500);">CL seasonality research and market update</span></td>
+                <td><span class="req-date">20 Jun 2026</span></td>
+                <td><span class="req-id">253</span></td>
+                <td><span class="req-id">108</span></td>
+                <td><span class="req-id">31</span></td>
+                <td><span class="campaign-status camp-status-completata">Sent</span></td>
+                <td><button class="btn btn-ghost btn-sm" onclick="showToast('View stats mock — backend pending.')">Stats</button></td>
+              </tr>
+              <tr>
+                <td><span class="req-name">Research Preview: Microstructure</span></td>
+                <td><span style="font-size:var(--ch-text-xs);color:var(--ch-gray-500);">Sneak peek at our latest tick data analysis</span></td>
+                <td><span class="req-date">—</span></td>
+                <td><span class="req-id">—</span></td>
+                <td><span class="req-id">—</span></td>
+                <td><span class="req-id">—</span></td>
+                <td><span class="campaign-status camp-status-bozza">Draft</span></td>
+                <td>
+                  <div class="cell-actions">
+                    <button class="btn btn-ghost btn-sm" onclick="showToast('Edit mock — backend pending.')">Edit</button>
+                    <button class="btn btn-primary btn-sm" onclick="showToast('Send campaign mock — backend pending.')">Send</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Subscribers -->
+      <div style="margin-top:var(--ch-space-8);">
+        <div class="section-title">
+          Recent Subscribers
+          <span class="count">6</span>
+        </div>
+        <div class="ch-card">
+          <div class="ch-card-body" style="padding:0;">
+            <table class="ch-table">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Name</th>
+                  <th>Subscribed</th>
+                  <th>Source</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="req-name">julia@example.com</span></td>
+                  <td><span class="req-client">Julia Roberts</span></td>
+                  <td><span class="req-date">22 Jul 2026</span></td>
+                  <td><span class="req-id">Website</span></td>
+                  <td><span class="status-badge status-completata"><span class="dot"></span>Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Remove subscriber mock — backend pending.')" style="color:var(--ch-error);">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><span class="req-name">david@example.com</span></td>
+                  <td><span class="req-client">David Kim</span></td>
+                  <td><span class="req-date">21 Jul 2026</span></td>
+                  <td><span class="req-id">Research Page</span></td>
+                  <td><span class="status-badge status-completata"><span class="dot"></span>Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Remove subscriber mock — backend pending.')" style="color:var(--ch-error);">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><span class="req-name">anna@example.com</span></td>
+                  <td><span class="req-client">Anna Schmidt</span></td>
+                  <td><span class="req-date">20 Jul 2026</span></td>
+                  <td><span class="req-id">Signup</span></td>
+                  <td><span class="status-badge status-completata"><span class="dot"></span>Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Remove subscriber mock — backend pending.')" style="color:var(--ch-error);">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><span class="req-name">bounced@example.com</span></td>
+                  <td><span class="req-client">—</span></td>
+                  <td><span class="req-date">18 Jul 2026</span></td>
+                  <td><span class="req-id">Website</span></td>
+                  <td><span class="status-badge status-rifiutata"><span class="dot"></span>Bounced</span></td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Remove subscriber mock — backend pending.')" style="color:var(--ch-error);">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><span class="req-name">carlo@example.com</span></td>
+                  <td><span class="req-client">Carlo Conti</span></td>
+                  <td><span class="req-date">17 Jul 2026</span></td>
+                  <td><span class="req-id">Signup</span></td>
+                  <td><span class="status-badge status-info-mancanti"><span class="dot"></span>Pending</span></td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Remove subscriber mock — backend pending.')" style="color:var(--ch-error);">Remove</button></td>
+                </tr>
+                <tr>
+                  <td><span class="req-name">luca@example.com</span></td>
+                  <td><span class="req-client">Luca Bianchi</span></td>
+                  <td><span class="req-date">16 Jul 2026</span></td>
+                  <td><span class="req-id">Website</span></td>
+                  <td><span class="status-badge status-completata"><span class="dot"></span>Active</span></td>
+                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Remove subscriber mock — backend pending.')" style="color:var(--ch-error);">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: SETTINGS
+         ============================================================ -->
+    <section class="admin-section" id="section-settings">
+      <div class="admin-section-header">
+        <div>
+          <h2>Settings</h2>
+          <p>Manage admin configuration and preferences.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ch-space-6);max-width:960px;">
+        <div class="ch-card">
+          <div class="ch-card-body">
+            <div class="detail-section-title" style="margin-bottom:var(--ch-space-4);">Email Configuration</div>
+            <div style="display:flex;flex-direction:column;gap:var(--ch-space-4);">
+              <div class="input-group">
+                <label class="input-label">SMTP Provider</label>
+                <div style="display:flex;align-items:center;gap:var(--ch-space-2);">
+                  <span class="status-badge status-completata" style="font-size:10px;"><span class="dot"></span>Resend</span>
+                  <span style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Connected</span>
+                </div>
+              </div>
+              <div class="input-group">
+                <label class="input-label">From Email</label>
+                <input class="input-field" value="research@capohornlab.com" disabled>
+              </div>
+              <div class="input-group">
+                <label class="input-label">Daily Send Limit</label>
+                <input class="input-field" value="100" disabled>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ch-card">
+          <div class="ch-card-body">
+            <div class="detail-section-title" style="margin-bottom:var(--ch-space-4);">Site Preferences</div>
+            <div style="display:flex;flex-direction:column;gap:var(--ch-space-4);">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <div style="font-size:var(--ch-text-sm);font-weight:var(--ch-font-medium);color:var(--ch-gray-700);">Maintenance Mode</div>
+                  <div style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Disable public access during updates</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <div style="font-size:var(--ch-text-sm);font-weight:var(--ch-font-medium);color:var(--ch-gray-700);">New Submissions</div>
+                  <div style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Accept new strategy submissions</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <div style="font-size:var(--ch-text-sm);font-weight:var(--ch-font-medium);color:var(--ch-gray-700);">Auto-Notify on Status Change</div>
+                  <div style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">Send email to client</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         DATA PROVIDERS
+         ============================================================ -->
+    <section class="admin-section" id="section-providers">
+      <div class="admin-section-header">
+        <div>
+          <h2>Data Providers</h2>
+          <p>Configure per-instrument data provider, tier, and cost estimate for backtesting.</p>
+        </div>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="provider-summary">
+        <div class="provider-summary-card">
+          <div class="ps-label">Total Instruments</div>
+          <div class="ps-value" id="providerTotalCount">8</div>
+        </div>
+        <div class="provider-summary-card">
+          <div class="ps-label">Estimated Monthly Cost</div>
+          <div class="ps-value" id="providerTotalCost">$0</div>
+          <div class="ps-footnote">Based on current tier &amp; provider selections</div>
+        </div>
+        <div class="provider-summary-card">
+          <div class="ps-label">Last Saved</div>
+          <div class="ps-value" id="providerLastSaved" style="font-size:var(--ch-text-base);">—</div>
+        </div>
+      </div>
+
+      <!-- Provider Configuration Table -->
+      <div class="table-wrapper" style="margin-bottom:var(--ch-space-6);">
+        <table class="ch-table" id="providersTable">
+          <thead>
+            <tr>
+              <th style="width:100px;">Instrument</th>
+              <th style="width:120px;">Data Tier</th>
+              <th style="width:160px;">Preferred Provider</th>
+              <th style="width:130px;">Est. Monthly Cost</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="providersTableBody">
+            <!-- ES -->
+            <tr class="provider-row" data-instrument="ES" data-tier="ohlc" data-provider="databento" data-cost="50">
+              <td><span class="provider-instrument">ES</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc" selected>OHLC</option>
+                  <option value="trades">Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento" selected>Databento</option>
+                  <option value="firstrate">FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-ES">$50</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="Primary ES feed">
+              </td>
+            </tr>
+            <!-- NQ -->
+            <tr class="provider-row" data-instrument="NQ" data-tier="trades" data-provider="databento" data-cost="120">
+              <td><span class="provider-instrument">NQ</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc">OHLC</option>
+                  <option value="trades" selected>Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento" selected>Databento</option>
+                  <option value="firstrate">FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-NQ">$120</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="NQ tick data">
+              </td>
+            </tr>
+            <!-- CL -->
+            <tr class="provider-row" data-instrument="CL" data-tier="ohlc" data-provider="firstrate" data-cost="40">
+              <td><span class="provider-instrument">CL</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc" selected>OHLC</option>
+                  <option value="trades">Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento">Databento</option>
+                  <option value="firstrate" selected>FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-CL">$40</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="Crude via FirstRate">
+              </td>
+            </tr>
+            <!-- 6E -->
+            <tr class="provider-row" data-instrument="6E" data-tier="ohlc" data-provider="databento" data-cost="50">
+              <td><span class="provider-instrument">6E</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc" selected>OHLC</option>
+                  <option value="trades">Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento" selected>Databento</option>
+                  <option value="firstrate">FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-6E">$50</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="Euro FX OHLC">
+              </td>
+            </tr>
+            <!-- GC -->
+            <tr class="provider-row" data-instrument="GC" data-tier="trades" data-provider="databento" data-cost="100">
+              <td><span class="provider-instrument">GC</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc">OHLC</option>
+                  <option value="trades" selected>Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento" selected>Databento</option>
+                  <option value="firstrate">FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-GC">$100</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="Gold tick data">
+              </td>
+            </tr>
+            <!-- ZB -->
+            <tr class="provider-row" data-instrument="ZB" data-tier="ohlc" data-provider="firstrate" data-cost="35">
+              <td><span class="provider-instrument">ZB</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc" selected>OHLC</option>
+                  <option value="trades">Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento">Databento</option>
+                  <option value="firstrate" selected>FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-ZB">$35</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="30yr Bond OHLC">
+              </td>
+            </tr>
+            <!-- ZN -->
+            <tr class="provider-row" data-instrument="ZN" data-tier="ohlc" data-provider="databento" data-cost="35">
+              <td><span class="provider-instrument">ZN</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc" selected>OHLC</option>
+                  <option value="trades">Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento" selected>Databento</option>
+                  <option value="firstrate">FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other">Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-ZN">$35</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="10yr Note OHLC">
+              </td>
+            </tr>
+            <!-- Altro -->
+            <tr class="provider-row" data-instrument="ALTRO" data-tier="ohlc" data-provider="other" data-cost="25">
+              <td><span class="provider-instrument">Altro</span></td>
+              <td>
+                <select class="provider-tier-select" onchange="updateProviderRow(this)">
+                  <option value="ohlc" selected>OHLC</option>
+                  <option value="trades">Trades</option>
+                  <option value="mbp1">MBP-1</option>
+                  <option value="mbp10">MBP-10</option>
+                  <option value="mbo">MBO</option>
+                </select>
+              </td>
+              <td>
+                <select class="provider-select" onchange="updateProviderRow(this)">
+                  <option value="databento">Databento</option>
+                  <option value="firstrate">FirstRate Data</option>
+                  <option value="cme">CME Direct</option>
+                  <option value="other" selected>Altro</option>
+                </select>
+              </td>
+              <td>
+                <div class="provider-cost" id="cost-ALTRO">$25</div>
+                <div class="provider-cost-estimate">/ month</div>
+              </td>
+              <td>
+                <input class="provider-notes-input" type="text" placeholder="Notes..." value="YM, RTY, etc.">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Save Button Row -->
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--ch-space-4);">
+        <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+          <button class="btn btn-primary" onclick="saveProviderConfiguration()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save Provider Configuration
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="resetProviderConfiguration()">Reset to Defaults</button>
+        </div>
+        <div id="providerSaveFeedback" class="form-feedback" style="display:none;"></div>
+      </div>
+      <!-- Databento Reference Pricing -->
+      <details style="margin-top:var(--ch-space-6);background:rgba(255,255,255,0.02);border:1px solid var(--ch-slate-700);border-radius:var(--ch-radius-lg);padding:var(--ch-space-4);">
+        <summary style="cursor:pointer;font-size:13px;font-weight:600;color:var(--ch-slate-400);">📋 Databento Reference Pricing ($/GB)</summary>
+        <div style="margin-top:var(--ch-space-4);overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:12px;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--ch-slate-700);">
+                <th style="padding:8px 12px;text-align:left;color:var(--ch-slate-500);font-weight:600;">Schema</th>
+                <th style="padding:8px 12px;text-align:right;color:var(--ch-slate-500);font-weight:600;">$/GB</th>
+                <th style="padding:8px 12px;text-align:right;color:var(--ch-slate-500);font-weight:600;">Typical GB/mo (ES)</th>
+                <th style="padding:8px 12px;text-align:right;color:var(--ch-slate-500);font-weight:600;">Est. $/mo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">MBO</td><td style="padding:6px 12px;text-align:right;">$1.80</td><td style="padding:6px 12px;text-align:right;">~100</td><td style="padding:6px 12px;text-align:right;color:#e11d48;font-weight:600;">$180</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">MBP-1</td><td style="padding:6px 12px;text-align:right;">$1.80</td><td style="padding:6px 12px;text-align:right;">~3</td><td style="padding:6px 12px;text-align:right;color:#f59e0b;font-weight:600;">$6</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">MBP-10</td><td style="padding:6px 12px;text-align:right;">$0.50</td><td style="padding:6px 12px;text-align:right;">~18</td><td style="padding:6px 12px;text-align:right;color:#f59e0b;font-weight:600;">$10</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">Trades</td><td style="padding:6px 12px;text-align:right;">$28.00</td><td style="padding:6px 12px;text-align:right;">~1.5</td><td style="padding:6px 12px;text-align:right;color:#14b8a6;font-weight:600;">$42</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">TBBO</td><td style="padding:6px 12px;text-align:right;">$28.00</td><td style="padding:6px 12px;text-align:right;">~1.5</td><td style="padding:6px 12px;text-align:right;color:#14b8a6;font-weight:600;">$42</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">BBO-1s/1m</td><td style="padding:6px 12px;text-align:right;">$18.00</td><td style="padding:6px 12px;text-align:right;">~0.5</td><td style="padding:6px 12px;text-align:right;color:#14b8a6;font-weight:600;">$9</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">OHLCV-1s/1m</td><td style="padding:6px 12px;text-align:right;">$70.00</td><td style="padding:6px 12px;text-align:right;">~0.0005</td><td style="padding:6px 12px;text-align:right;color:#10b981;font-weight:600;">$1</td></tr>
+              <tr style="border-bottom:1px solid rgba(51,65,85,0.15);"><td style="padding:6px 12px;font-family:monospace;">OHLCV-1h/1d</td><td style="padding:6px 12px;text-align:right;">$190.00</td><td style="padding:6px 12px;text-align:right;">~0.0001</td><td style="padding:6px 12px;text-align:right;color:#10b981;font-weight:600;">$1</td></tr>
+              <tr><td style="padding:6px 12px;font-family:monospace;">Definition / Statistics</td><td style="padding:6px 12px;text-align:right;">$1.00-$1.70</td><td style="padding:6px 12px;text-align:right;">-</td><td style="padding:6px 12px;text-align:right;color:#10b981;font-weight:600;">Minimal</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:var(--ch-space-3);font-size:11px;color:var(--ch-slate-500);">Prices from Databento. Typical volumes vary. Use this to choose provider for each acquisition.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       MODAL: Change Status
+       ============================================================ -->
+  <div class="modal-overlay" id="statusModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Change Status</h3>
+        <button class="modal-close" onclick="closeModal('statusModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+          <label class="input-label">Request</label>
+          <input class="input-field" id="statusModalRequest" disabled>
+        </div>
+        <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+          <label class="input-label">New Status <span style="color:var(--ch-error);">*</span></label>
+          <select class="input-select" id="statusModalSelect">
+            <option value="inviata">Inviata</option>
+            <option value="info_mancanti">Info Mancanti</option>
+            <option value="in_valutazione">In Valutazione</option>
+            <option value="accettata">Accettata</option>
+            <option value="in_lavorazione">In Lavorazione</option>
+            <option value="completata">Completata</option>
+            <option value="rifiutata">Rifiutata</option>
+          </select>
+        </div>
+        <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+          <label class="input-label">Admin Note (required for audit) <span style="color:var(--ch-error);">*</span></label>
+          <textarea class="input-textarea" id="statusModalNote" rows="3" placeholder="Explain why this status change is being made..."></textarea>
+        </div>
+        <div class="form-feedback" id="statusModalFeedback"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('statusModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmStatusChange()">Confirm Change</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL: Add Note
+       ============================================================ -->
+  <div class="modal-overlay" id="addNoteModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Add Internal Note</h3>
+        <button class="modal-close" onclick="closeModal('addNoteModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group" style="margin-bottom:var(--ch-space-4);">
+          <label class="input-label">Request</label>
+          <input class="input-field" id="noteModalRequest" disabled>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Note Content <span style="color:var(--ch-error);">*</span></label>
+          <textarea class="input-textarea" id="noteModalContent" rows="4" placeholder="Write your internal note here..."></textarea>
+        </div>
+        <div class="form-feedback" id="noteModalFeedback"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('addNoteModal')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmAddNote()">Save Note</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL: Create Research
+       ============================================================ -->
+  <div class="modal-overlay" id="createResearchModal">
+    <div class="modal" style="max-width:640px;">
+      <div class="modal-header">
+        <h3>Create New Research</h3>
+        <button class="modal-close" onclick="closeModal('createResearchModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--ch-space-4);">
+          <div class="input-group" style="grid-column:1/-1;">
+            <label class="input-label">Title <span style="color:var(--ch-error);">*</span></label>
+            <input class="input-field" id="researchTitle" placeholder="e.g., ES Momentum Regime Shift">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Slug</label>
+            <input class="input-field" id="researchSlug" placeholder="es-momentum-regime-shift">
+          </div>
+          <div class="input-group">
+            <label class="input-label">Instrument</label>
+            <select class="input-select" id="researchInstrument">
+              <option value="ES">ES</option>
+              <option value="NQ">NQ</option>
+              <option value="CL">CL</option>
+              <option value="6E">6E</option>
+              <option value="YM">YM</option>
+              <option value="Multi">Multi</option>
+            </select>
+          </div>
+          <div class="input-group" style="grid-column:1/-1;">
+            <label class="input-label">Abstract</label>
+            <textarea class="input-textarea" id="researchAbstract" rows="3" placeholder="Brief summary of the research..."></textarea>
+          </div>
+          <div class="input-group" style="grid-column:1/-1;">
+            <label class="input-label">Upload Charts</label>
+            <div style="border:2px dashed var(--ch-gray-200);border-radius:var(--ch-radius-md);padding:var(--ch-space-8);text-align:center;cursor:pointer;" onclick="showToast('File upload mock — backend pending.')">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin:0 auto var(--ch-space-2);color:var(--ch-gray-400);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <div style="font-size:var(--ch-text-sm);color:var(--ch-gray-400);">Drop chart images here or click to browse</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-feedback" id="createResearchFeedback"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" onclick="closeModal('createResearchModal')">Cancel</button>
+        <button class="btn btn-secondary" onclick="saveResearch('draft')">Save as Draft</button>
+        <button class="btn btn-primary" onclick="saveResearch('publish')">Publish</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    /* ---- Section Switching ---- */
+    var sectionTitles = {
+      dashboard:  { title: 'Dashboard', breadcrumb: 'Dashboard' },
+      requests:   { title: 'Requests', breadcrumb: 'Requests' },
+      research:   { title: 'Research', breadcrumb: 'Research' },
+      newsletter: { title: 'Newsletter', breadcrumb: 'Newsletter' },
+      providers:  { title: 'Data Providers', breadcrumb: 'Data Providers' },
+      settings:   { title: 'Settings', breadcrumb: 'Settings' }
+    };
+
+    function switchAdminSection(section) {
+      // Update sidebar
+      document.querySelectorAll('.sidebar-nav-item[data-section]').forEach(function(item) {
+        item.classList.toggle('active', item.getAttribute('data-section') === section);
+      });
+      // Update sections
+      document.querySelectorAll('.admin-section').forEach(function(s) {
+        s.classList.toggle('active', s.id === 'section-' + section);
+      });
+      // Update topbar
+      var info = sectionTitles[section] || { title: 'Admin', breadcrumb: 'Admin' };
+      document.getElementById('topbarTitle').textContent = info.title;
+      document.getElementById('topbarBreadcrumb').textContent = info.breadcrumb;
+      // Close sidebar on mobile
+      document.getElementById('adminSidebar').classList.remove('open');
+    }
+
+    /* ---- Expandable Detail ---- */
+    function toggleDetail(detailId, btn) {
+      var row = document.getElementById(detailId);
+      if (!row) return;
+
+      var isOpen = row.classList.contains('open');
+      // Close all open details
+      document.querySelectorAll('.detail-row.open').forEach(function(r) {
+        r.classList.remove('open');
+      });
+      // Update all View buttons
+      document.querySelectorAll('.expand-btn').forEach(function(b) {
+        if (b.textContent.trim() === 'Close') b.textContent = 'View';
+      });
+
+      if (!isOpen) {
+        row.classList.add('open');
+        if (btn) btn.textContent = 'Close';
+        setTimeout(function() {
+          row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    /* ---- Filtering ---- */
+    function filterRequests() {
+      var statusFilter = document.getElementById('filterStatus').value;
+      var instrumentFilter = document.getElementById('filterInstrument').value;
+      var dateFrom = document.getElementById('filterDateFrom').value;
+      var dateTo = document.getElementById('filterDateTo').value;
+      var searchTerm = document.getElementById('filterSearch').value.toLowerCase();
+
+      var rows = document.querySelectorAll('#requestsTableBody .req-row');
+      var visibleCount = 0;
+
+      rows.forEach(function(row) {
+        var status = row.getAttribute('data-status');
+        var instrument = row.getAttribute('data-instrument');
+        var date = row.getAttribute('data-date');
+        var search = row.getAttribute('data-search').toLowerCase();
+
+        var statusMatch = statusFilter === 'all' || status === statusFilter;
+        var instrumentMatch = instrumentFilter === 'all' || instrument === instrumentFilter;
+        var dateMatch = true;
+        var searchMatch = !searchTerm || search.indexOf(searchTerm) !== -1;
+
+        if (dateFrom) {
+          dateMatch = dateMatch && date >= dateFrom;
+        }
+        if (dateTo) {
+          dateMatch = dateMatch && date <= dateTo;
+        }
+
+        var visible = statusMatch && instrumentMatch && dateMatch && searchMatch;
+        row.style.display = visible ? '' : 'none';
+
+        // Also hide associated detail row
+        var detailId = row.getAttribute('data-id');
+        var detailRow = document.getElementById('admin-detail-' + detailId.toLowerCase() === detailId.toLowerCase() ? '' : '');
+        // More robust: find by data-id
+        var details = document.querySelectorAll('.detail-row');
+        details.forEach(function(d) {
+          if (d.id === 'admin-detail-' + detailId.toLowerCase().replace(/[^a-z0-9]/gi, '').substring(0,10)) {
+            // Skip exact matching - let's do it simpler
+          }
+        });
+
+        if (visible) visibleCount++;
+      });
+
+      document.getElementById('visibleCount').textContent = visibleCount;
+    }
+
+    function clearFilters() {
+      document.getElementById('filterStatus').value = 'all';
+      document.getElementById('filterInstrument').value = 'all';
+      document.getElementById('filterDateFrom').value = '';
+      document.getElementById('filterDateTo').value = '';
+      document.getElementById('filterSearch').value = '';
+      filterRequests();
+    }
+
+    /* ---- Status Change Modal ---- */
+    var currentStatusRequestId = '';
+
+    function openStatusModal(requestId, currentStatus) {
+      currentStatusRequestId = requestId;
+      document.getElementById('statusModalRequest').value = requestId;
+      document.getElementById('statusModalSelect').value = currentStatus;
+      document.getElementById('statusModalNote').value = '';
+      document.getElementById('statusModalFeedback').className = 'form-feedback';
+      document.getElementById('statusModalFeedback').textContent = '';
+      document.getElementById('statusModal').classList.add('open');
+    }
+
+    function confirmStatusChange() {
+      var newStatus = document.getElementById('statusModalSelect').value;
+      var note = document.getElementById('statusModalNote').value.trim();
+
+      var feedback = document.getElementById('statusModalFeedback');
+
+      if (!note) {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'A note is required for audit purposes.';
+        return;
+      }
+
+      // Mock success
+      feedback.className = 'form-feedback success';
+      feedback.textContent = 'Status updated successfully for ' + currentStatusRequestId + '.';
+      showToast('Status changed to ' + newStatus.replace('_', ' ') + ' for ' + currentStatusRequestId);
+
+      setTimeout(function() {
+        closeModal('statusModal');
+      }, 1200);
+    }
+
+    /* ---- Add Note Modal ---- */
+    var currentNoteRequestId = '';
+
+    function openAddNoteModal(requestId) {
+      currentNoteRequestId = requestId;
+      document.getElementById('noteModalRequest').value = requestId;
+      document.getElementById('noteModalContent').value = '';
+      document.getElementById('noteModalFeedback').className = 'form-feedback';
+      document.getElementById('noteModalFeedback').textContent = '';
+      document.getElementById('addNoteModal').classList.add('open');
+    }
+
+    function confirmAddNote() {
+      var content = document.getElementById('noteModalContent').value.trim();
+      var feedback = document.getElementById('noteModalFeedback');
+
+      if (!content) {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'Note content cannot be empty.';
+        return;
+      }
+
+      feedback.className = 'form-feedback success';
+      feedback.textContent = 'Note added to ' + currentNoteRequestId + '.';
+      showToast('Internal note saved for ' + currentNoteRequestId);
+
+      setTimeout(function() {
+        closeModal('addNoteModal');
+      }, 1200);
+    }
+
+    /* ---- Quick Add Note (inline) ---- */
+    function addNote(requestId) {
+      var textarea = document.getElementById('quickNote-' + requestId);
+      if (!textarea || !textarea.value.trim()) {
+        showToast('Please write a note first.');
+        return;
+      }
+      showToast('Note added to ' + requestId);
+      textarea.value = '';
+    }
+
+    /* ---- Clarification Request ---- */
+    function requestClarification(requestId) {
+      if (confirm('Send clarification request to client for ' + requestId + '? An email will be sent.')) {
+        showToast('Clarification requested for ' + requestId + ' — email sent to client.');
+      }
+    }
+
+    /* ---- Research Modal ---- */
+    function openCreateResearchModal() {
+      document.getElementById('researchTitle').value = '';
+      document.getElementById('researchSlug').value = '';
+      document.getElementById('researchAbstract').value = '';
+      document.getElementById('createResearchFeedback').className = 'form-feedback';
+      document.getElementById('createResearchFeedback').textContent = '';
+      document.getElementById('createResearchModal').classList.add('open');
+    }
+
+    function saveResearch(action) {
+      var title = document.getElementById('researchTitle').value.trim();
+      var feedback = document.getElementById('createResearchFeedback');
+
+      if (!title) {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'Title is required.';
+        return;
+      }
+
+      var actionLabel = action === 'publish' ? 'published' : 'saved as draft';
+      feedback.className = 'form-feedback success';
+      feedback.textContent = 'Research "' + title + '" ' + actionLabel + '.';
+      showToast('Research "' + title + '" ' + actionLabel);
+
+      setTimeout(function() {
+        closeModal('createResearchModal');
+      }, 1200);
+    }
+
+    /* ---- Modal Helpers ---- */
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('open');
+    }
+
+    // Close modal on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+        }
+      });
+    });
+
+    /* ---- Toast ---- */
+    function showToast(message) {
+      var toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+    /* ---- Data Provider Cost Calculation ---- */
+    var providerCostMatrix = {
+      ohlc:   { databento: 1, firstrate: 1, cme: 2, other: 1 },
+      trades: { databento: 42, firstrate: 55, cme: 70, other: 35 },
+      mbp1:   { databento: 6, firstrate: 8, cme: 12, other: 5 },
+      mbp10:  { databento: 10, firstrate: 18, cme: 25, other: 8 },
+      mbo:    { databento: 180, firstrate: 220, cme: 300, other: 140 }
+    };
+
+    function updateProviderRow(el) {
+      var row = el.closest('tr');
+      if (!row) return;
+      var instr = row.getAttribute('data-instrument');
+      var tierSelect = row.querySelector('.provider-tier-select');
+      var provSelect = row.querySelector('.provider-select');
+      var tier = tierSelect ? tierSelect.value : 'ohlc';
+      var prov = provSelect ? provSelect.value : 'databento';
+      var cost = providerCostMatrix[tier] ? (providerCostMatrix[tier][prov] || 25) : 25;
+
+      row.setAttribute('data-tier', tier);
+      row.setAttribute('data-provider', prov);
+      row.setAttribute('data-cost', cost);
+
+      var costEl = document.getElementById('cost-' + instr);
+      if (costEl) costEl.textContent = '$' + cost;
+
+      updateProviderSummary();
+    }
+
+    function updateProviderSummary() {
+      var rows = document.querySelectorAll('#providersTableBody .provider-row');
+      var total = 0;
+      var count = 0;
+      rows.forEach(function(r) {
+        var c = parseInt(r.getAttribute('data-cost'), 10);
+        if (!isNaN(c)) total += c;
+        count++;
+      });
+      document.getElementById('providerTotalCount').textContent = count;
+      document.getElementById('providerTotalCost').textContent = '$' + total;
+    }
+
+    /* ---- Save Provider Configuration ---- */
+    function saveProviderConfiguration() {
+      var configs = [];
+      var rows = document.querySelectorAll('#providersTableBody .provider-row');
+      rows.forEach(function(r) {
+        var instr = r.getAttribute('data-instrument');
+        var tier = r.getAttribute('data-tier');
+        var prov = r.getAttribute('data-provider');
+        var cost = r.getAttribute('data-cost');
+        var notes = r.querySelector('.provider-notes-input');
+        configs.push({
+          instrument: instr,
+          tier: tier,
+          provider: prov,
+          cost: parseInt(cost, 10),
+          notes: notes ? notes.value : ''
+        });
+      });
+
+      try {
+        localStorage.setItem('ch_provider_config', JSON.stringify(configs));
+        var now = new Date();
+        document.getElementById('providerLastSaved').textContent =
+          now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('providerLastSaved').style.fontSize = 'var(--ch-text-base)';
+
+        var feedback = document.getElementById('providerSaveFeedback');
+        feedback.style.display = 'flex';
+        feedback.className = 'form-feedback success';
+        feedback.textContent = 'Provider configuration saved (' + configs.length + ' instruments).';
+        setTimeout(function() { feedback.style.display = 'none'; }, 3000);
+        showToast('Provider configuration saved successfully.');
+      } catch(e) {
+        var feedback = document.getElementById('providerSaveFeedback');
+        feedback.style.display = 'flex';
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'Failed to save configuration: ' + e.message;
+      }
+    }
+
+    /* ---- Reset Provider Configuration ---- */
+    function resetProviderConfiguration() {
+      if (!confirm('Reset all provider configurations to defaults? This cannot be undone.')) return;
+
+      var defaults = {
+        ES:    { tier: 'ohlc', provider: 'databento', notes: 'Primary ES feed', cost: 50 },
+        NQ:    { tier: 'trades', provider: 'databento', notes: 'NQ tick data', cost: 120 },
+        CL:    { tier: 'ohlc', provider: 'firstrate', notes: 'Crude via FirstRate', cost: 40 },
+        '6E':  { tier: 'ohlc', provider: 'databento', notes: 'Euro FX OHLC', cost: 50 },
+        GC:    { tier: 'trades', provider: 'databento', notes: 'Gold tick data', cost: 100 },
+        ZB:    { tier: 'ohlc', provider: 'firstrate', notes: '30yr Bond OHLC', cost: 35 },
+        ZN:    { tier: 'ohlc', provider: 'databento', notes: '10yr Note OHLC', cost: 35 },
+        ALTRO: { tier: 'ohlc', provider: 'other', notes: 'YM, RTY, etc.', cost: 25 }
+      };
+
+      var rows = document.querySelectorAll('#providersTableBody .provider-row');
+      rows.forEach(function(r) {
+        var instr = r.getAttribute('data-instrument');
+        var def = defaults[instr];
+        if (!def) return;
+
+        var tierSelect = r.querySelector('.provider-tier-select');
+        var provSelect = r.querySelector('.provider-select');
+        var notesInput = r.querySelector('.provider-notes-input');
+
+        if (tierSelect) tierSelect.value = def.tier;
+        if (provSelect) provSelect.value = def.provider;
+        if (notesInput) notesInput.value = def.notes;
+
+        r.setAttribute('data-tier', def.tier);
+        r.setAttribute('data-provider', def.provider);
+        r.setAttribute('data-cost', def.cost);
+
+        var costEl = document.getElementById('cost-' + instr);
+        if (costEl) costEl.textContent = '$' + def.cost;
+      });
+
+      updateProviderSummary();
+      showToast('Provider configuration reset to defaults.');
+    }
+
+    /* ---- Load saved provider config on page load ---- */
+    (function loadProviderConfig() {
+      try {
+        var saved = localStorage.getItem('ch_provider_config');
+        if (!saved) return;
+        var configs = JSON.parse(saved);
+        configs.forEach(function(cfg) {
+          var row = document.querySelector('#providersTableBody .provider-row[data-instrument="' + cfg.instrument + '"]');
+          if (!row) return;
+          var tierSelect = row.querySelector('.provider-tier-select');
+          var provSelect = row.querySelector('.provider-select');
+          var notesInput = row.querySelector('.provider-notes-input');
+          if (tierSelect) tierSelect.value = cfg.tier;
+          if (provSelect) provSelect.value = cfg.provider;
+          if (notesInput) notesInput.value = cfg.notes || '';
+          row.setAttribute('data-tier', cfg.tier);
+          row.setAttribute('data-provider', cfg.provider);
+          row.setAttribute('data-cost', cfg.cost);
+          var costEl = document.getElementById('cost-' + cfg.instrument);
+          if (costEl) costEl.textContent = '$' + cfg.cost;
+        });
+        var now = new Date();
+        document.getElementById('providerLastSaved').textContent =
+          now.toLocaleDateString() + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } catch(e) { /* silently ignore corrupt saved state */ }
+      updateProviderSummary();
+    })();
+  </script>
+</body>
+</html>

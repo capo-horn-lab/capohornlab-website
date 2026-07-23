@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPO HORN LAB — Operations Dashboard</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --bg-primary: #0a0e17;
+    --bg-secondary: #111827;
+    --bg-card: #1a1f2e;
+    --bg-hover: #242b3d;
+    --border: #1e293b;
+    --border-light: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #3b82f6;
+    --accent-glow: rgba(59,130,246,0.15);
+    --green: #10b981;
+    --green-bg: rgba(16,185,129,0.1);
+    --yellow: #f59e0b;
+    --yellow-bg: rgba(245,158,11,0.1);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.1);
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+    --font: 'Inter', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: var(--font);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+  }
+  
+  /* SIDEBAR */
+  .sidebar {
+    width: 260px;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex-shrink: 0;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+  }
+  
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+  }
+  
+  .logo-text {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  
+  .logo-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  
+  .nav-item:hover, .nav-item.active {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+  
+  .nav-item.active {
+    background: var(--accent-glow);
+    color: var(--accent);
+  }
+  
+  .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
+  
+  .nav-section {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    padding: 8px 12px 4px;
+    font-weight: 600;
+  }
+  
+  /* MAIN */
+  .main {
+    flex: 1;
+    padding: 32px 40px;
+    overflow-y: auto;
+    max-width: 1400px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+  
+  .header-left h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  .header-left p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
+  .header-right {
+    text-align: right;
+  }
+  
+  .project-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--green-bg);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .project-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse-dot 2s infinite;
+  }
+  
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  
+  /* STATUS BANNER */
+  .status-banner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  
+  .stat-card .value {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 8px;
+    letter-spacing: -0.5px;
+  }
+  
+  .stat-card .sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+  
+  /* AGENTS */
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  
+  .agent-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: all 0.2s;
+  }
+  
+  .agent-card:hover {
+    border-color: var(--border-light);
+    background: var(--bg-hover);
+  }
+  
+  .agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .agent-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .agent-role {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  
+  .status-dot.green { background: var(--green); box-shadow: 0 0 8px rgba(16,185,129,0.4); }
+  .status-dot.yellow { background: var(--yellow); box-shadow: 0 0 8px rgba(245,158,11,0.4); }
+  .status-dot.red { background: var(--red); box-shadow: 0 0 8px rgba(239,68,68,0.4); }
+  .status-dot.cyan { background: var(--cyan); box-shadow: 0 0 8px rgba(6,182,212,0.4); }
+  
+  .agent-status { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
+  .agent-model { font-size: 10px; color: var(--text-muted); font-family: var(--mono); margin-top: 2px; }
+  
+  /* ACTIVITY */
+  .activity-log {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 32px;
+  }
+  
+  .log-entry {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  
+  .log-entry:last-child { border-bottom: none; }
+  
+  .log-time {
+    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    flex-shrink: 0;
+    min-width: 70px;
+  }
+  
+  .log-agent {
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 60px;
+    font-size: 12px;
+  }
+  
+  .log-msg { color: var(--text-secondary); }
+  
+  /* PHASES */
+  .phase-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  
+  .phase-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  
+  .phase-item.current {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+  
+  .phase-item.completed {
+    border-color: rgba(16,185,129,0.3);
+  }
+  
+  .phase-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  
+  .phase-item.current .phase-num {
+    background: var(--accent);
+    color: white;
+  }
+  
+  .phase-item.completed .phase-num {
+    background: var(--green);
+    color: white;
+  }
+  
+  .phase-item.pending .phase-num {
+    background: var(--bg-hover);
+    color: var(--text-muted);
+  }
+  
+  .phase-name { flex: 1; }
+  .phase-status { font-size: 11px; color: var(--text-muted); }
+  
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+  }
+  
+  /* LOGO ANIMATION */
+  .spinner-ring {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .spinner-ring .ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    animation: spin 2s linear infinite;
+  }
+  
+  .spinner-ring .ring:nth-child(1) {
+    border-top-color: var(--accent);
+    animation-duration: 2s;
+  }
+  .spinner-ring .ring:nth-child(2) {
+    border-right-color: var(--purple);
+    animation-duration: 2.5s;
+    width: 70%;
+    height: 70%;
+    top: 15%;
+    left: 15%;
+  }
+  .spinner-ring .ring:nth-child(3) {
+    border-bottom-color: var(--cyan);
+    animation-duration: 3s;
+    width: 40%;
+    height: 40%;
+    top: 30%;
+    left: 30%;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .energy-sphere {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 20px var(--accent), 0 0 60px rgba(59,130,246,0.3);
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .logo-container .spinner-ring {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .logo-container .energy-sphere {
+    width: 10px;
+    height: 10px;
+  }
+  
+  @media (max-width: 1024px) {
+    .agent-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main { padding: 20px; }
+    .status-banner { grid-template-columns: repeat(2, 1fr); }
+    .agent-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="logo">
+    <div class="logo-icon">CH</div>
+    <div>
+      <div class="logo-text">Capo Horn Lab</div>
+      <div class="logo-sub">Operations Center</div>
+    </div>
+  </div>
+  
+  <div class="nav">
+    <div class="nav-section">Overview</div>
+    <a class="nav-item active" href="#">
+      <span class="icon">◈</span> Project Dashboard
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">◉</span> Agents
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">⊞</span> Board
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">☰</span> Reports
+    </a>
+    <div class="nav-section">Project</div>
+    <a class="nav-item" href="#">
+      <span class="icon">⚑</span> Capo Horn Lab Site
+    </a>
+    <a class="nav-item" href="#">
+      <span class="icon">⚙</span> Settings
+    </a>
+  </div>
+  
+  <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border);">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div style="width:28px; height:28px; border-radius:6px; background:linear-gradient(135deg,var(--accent),var(--purple)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:white;">C</div>
+      <div>
+        <div style="font-size:12px;font-weight:600;">Camilla</div>
+        <div style="font-size:10px;color:var(--text-muted);">Coordinator</div>
+      </div>
+      <div style="margin-left:auto;">
+        <div class="status-dot green"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="header">
+    <div class="header-left">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+        <div class="spinner-ring" style="width:40px;height:40px;">
+          <div class="ring"></div><div class="ring"></div><div class="ring"></div>
+          <div class="energy-sphere" style="width:8px;height:8px;"></div>
+        </div>
+        <h1>Capo Horn Lab Website</h1>
+      </div>
+      <p>Multi-agent project: site build + research integration + backtest platform</p>
+    </div>
+    <div class="header-right">
+      <div class="project-badge">
+        <span class="dot"></span>
+        Active — Phase 1: Brainstorming
+      </div>
+    </div>
+  </div>
+  
+  <!-- STATUS BANNER -->
+  <div class="status-banner">
+    <div class="stat-card">
+      <div class="label">Agents Active</div>
+      <div class="value" style="color:var(--green);">8</div>
+      <div class="sub">▲ 1 standby (Era)</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Project Phase</div>
+      <div class="value" style="color:var(--accent);">1/5</div>
+      <div class="sub">Brainstorming</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Tasks Created</div>
+      <div class="value" style="color:var(--yellow);">12</div>
+      <div class="sub">0 completed</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Est. Delivery</div>
+      <div class="value" style="color:var(--cyan);">TBD</div>
+      <div class="sub">Per plan</div>
+    </div>
+  </div>
+  
+  <!-- PHASES -->
+  <div class="section-title">⏱ Project Phases</div>
+  <div class="phase-list">
+    <div class="phase-item current">
+      <div class="phase-num">1</div>
+      <div class="phase-name">Brainstorming — Gruppi di lavoro</div>
+      <div class="phase-status">🟢 In corso</div>
+    </div>
+    <div class="phase-item pending">
+      <div class="phase-num">2</div>
+      <div class="phase-name">Mappe concettuali & Architettura</div>
+      <div class="phase-status">⏳ In attesa</div>
+    </div>
+    <div class="phase-item pending">
+      <div class="phase-num">3</div>
+      <div class="phase-name">Piano d'azione & Divisione compiti</div>
+      <div class="phase-status">⏳ In attesa</div>
+    </div>
+    <div class="phase-item pending">
+      <div class="phase-num">4</div>
+      <div class="phase-name">Esecuzione & Sviluppo</div>
+      <div class="phase-status">⏳ In attesa</div>
+    </div>
+    <div class="phase-item pending">
+      <div class="phase-num">5</div>
+      <div class="phase-name">Report finale & Verifica</div>
+      <div class="phase-status">⏳ In attesa</div>
+    </div>
+  </div>
+  
+  <!-- AGENT GRID -->
+  <div class="section-title">⚡ Agent Status</div>
+  <div class="agent-grid">
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Atlas</div>
+          <div class="agent-role">Product & Coordination Lead</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Site architecture, UX, pages</div>
+      <div class="agent-model">deepseek/deepseek-v4-flash</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Cratos</div>
+          <div class="agent-role">Security & Infrastructure</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Auth, admin panel, infra</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Midas</div>
+          <div class="agent-role">Data Research & Analytics</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Charts, statistics, research page</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Afrodite</div>
+          <div class="agent-role">Advertising & Content</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Copy, newsletter, brand voice</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Cupido</div>
+          <div class="agent-role">Financial Analysis</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Stats, research methodology</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Odino</div>
+          <div class="agent-role">Web Research</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Competitor analysis, references</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Dioniso</div>
+          <div class="agent-role">Creative & Visual</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟢 Brainstorming — Design system, landing, styles</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Ares</div>
+          <div class="agent-role">Secrets & Security</div>
+        </div>
+        <div class="status-dot green"></div>
+      </div>
+      <div class="agent-status">🟡 Standby — Available for secret management</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+    <div class="agent-card" style="opacity:0.6;">
+      <div class="agent-header">
+        <div>
+          <div class="agent-name">Era</div>
+          <div class="agent-role">Vibe Trading</div>
+        </div>
+        <div class="status-dot yellow"></div>
+      </div>
+      <div class="agent-status">🟡 Standby — Not in scope</div>
+      <div class="agent-model">stepfun/step-3.7-flash:free</div>
+    </div>
+  </div>
+  
+  <!-- ACTIVITY LOG -->
+  <div class="section-title">📋 Activity Log</div>
+  <div class="activity-log" id="activity-log">
+    <div class="log-entry">
+      <div class="log-time">18:23</div>
+      <div class="log-agent">Camilla</div>
+      <div class="log-msg">✅ Delegation repaired — agents now use Nous cloud</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:24</div>
+      <div class="log-agent">Atlas</div>
+      <div class="log-msg">🟢 Communication test — "Pronto a collaborare"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:24</div>
+      <div class="log-agent">Cratos</div>
+      <div class="log-msg">🟢 Communication test — "Canale aperto, tutto nominale"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:35</div>
+      <div class="log-agent">Midas</div>
+      <div class="log-msg">🟢 Communication test — "A disposizione"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:35</div>
+      <div class="log-agent">Afrodite</div>
+      <div class="log-msg">🟢 Communication test — "Pronta e operativa"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:35</div>
+      <div class="log-agent">Cupido</div>
+      <div class="log-msg">🟢 Communication test — "Pronto per il test"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:36</div>
+      <div class="log-agent">Odino</div>
+      <div class="log-msg">🟢 Communication test — "Presente e pronto"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:36</div>
+      <div class="log-agent">Dioniso</div>
+      <div class="log-msg">🟢 Communication test — "Pronto per il test 🍇"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:36</div>
+      <div class="log-agent">Ares</div>
+      <div class="log-msg">🟢 Communication test — "Tutto sotto controllo"</div>
+    </div>
+    <div class="log-entry">
+      <div class="log-time">18:36</div>
+      <div class="log-agent">Era</div>
+      <div class="log-msg">🟡 Communication test — "Standby, pronta a rientrare"</div>
+    </div>
+    <div class="log-entry" style="border-bottom:none;">
+      <div class="log-time">18:38</div>
+      <div class="log-agent">Camilla</div>
+      <div class="log-msg">🚀 Project kickoff — Capo Horn Lab Website launched</div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    CAPO HORN LAB — Operations Dashboard v1.0 — "Beyond the Market Edge"
+  </div>
+</div>
+
+<script>
+// Auto-scroll log
+const log = document.getElementById('activity-log');
+if(log) log.scrollTop = log.scrollHeight;
+
+// Status refresh simulation
+setInterval(() => {
+  const dots = document.querySelectorAll('.status-dot.green');
+  dots.forEach((d, i) => {
+    setTimeout(() => {
+      d.style.opacity = '0.6';
+      setTimeout(() => { d.style.opacity = '1'; }, 200);
+    }, i * 100);
+  });
+}, 5000);
+</script>
+
+</body>
+</html>
