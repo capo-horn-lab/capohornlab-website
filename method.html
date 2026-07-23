@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capo Horn Lab — Method</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       ╔══════════════════════════════════════════════════════════╗
+       ║     CAPO HORN LAB — DESIGN TOKENS v1.0 (inlined)        ║
+       ╚══════════════════════════════════════════════════════════╝
+       ============================================================ */
+
+    :root {
+      --ch-navy-900: #0a1628;
+      --ch-navy-800: #0f1e36;
+      --ch-navy-700: #152a45;
+      --ch-navy-600: #1c3a5c;
+      --ch-navy-500: #254e77;
+      --ch-navy-400: #3b6fa0;
+      --ch-navy-300: #5e93c2;
+      --ch-navy-200: #8fb8da;
+      --ch-navy-100: #c1d6ec;
+      --ch-navy-50:  #e8f0f8;
+
+      --ch-white:       #ffffff;
+      --ch-off-white:   #f8fafc;
+      --ch-gray-50:     #f1f5f9;
+      --ch-gray-100:    #e2e8f0;
+      --ch-gray-200:    #cbd5e1;
+      --ch-gray-300:    #94a3b8;
+      --ch-gray-400:    #64748b;
+      --ch-gray-500:    #475569;
+      --ch-gray-600:    #334155;
+      --ch-gray-700:    #1e293b;
+      --ch-gray-800:    #0f172a;
+      --ch-gray-900:    #020617;
+
+      --ch-blue-500:    #2563eb;
+      --ch-blue-400:    #3b82f6;
+      --ch-blue-300:    #60a5fa;
+      --ch-blue-200:    #93c5fd;
+      --ch-blue-100:    #dbeafe;
+      --ch-blue-50:     #eff6ff;
+
+      --ch-amber-500:   #f59e0b;
+      --ch-amber-400:   #fbbf24;
+      --ch-amber-300:   #fcd34d;
+      --ch-amber-200:   #fde68a;
+      --ch-amber-100:   #fef3c7;
+      --ch-amber-50:    #fffbeb;
+
+      --ch-success:     #10b981;
+      --ch-warning:     #f59e0b;
+      --ch-error:       #ef4444;
+      --ch-info:        #3b82f6;
+
+      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+      --ch-text-xs:     0.75rem;
+      --ch-text-sm:     0.875rem;
+      --ch-text-base:   1rem;
+      --ch-text-lg:     1.125rem;
+      --ch-text-xl:     1.25rem;
+      --ch-text-2xl:    1.5rem;
+      --ch-text-3xl:    1.875rem;
+      --ch-text-4xl:    2.25rem;
+      --ch-text-5xl:    3rem;
+      --ch-text-6xl:    3.75rem;
+
+      --ch-leading-tight:   1.15;
+      --ch-leading-snug:    1.3;
+      --ch-leading-normal:  1.5;
+      --ch-leading-relaxed: 1.65;
+
+      --ch-font-light:      300;
+      --ch-font-regular:    400;
+      --ch-font-medium:     500;
+      --ch-font-semibold:   600;
+      --ch-font-bold:       700;
+      --ch-font-extrabold:  800;
+
+      --ch-letter-spacing-tight:  -0.025em;
+      --ch-letter-spacing-normal: 0em;
+      --ch-letter-spacing-wide:   0.05em;
+
+      --ch-space-1:     0.25rem;
+      --ch-space-2:     0.5rem;
+      --ch-space-3:     0.75rem;
+      --ch-space-4:     1rem;
+      --ch-space-5:     1.25rem;
+      --ch-space-6:     1.5rem;
+      --ch-space-8:     2rem;
+      --ch-space-10:    2.5rem;
+      --ch-space-12:    3rem;
+      --ch-space-16:    4rem;
+      --ch-space-20:    5rem;
+      --ch-space-24:    6rem;
+
+      --ch-radius-none:  0;
+      --ch-radius-sm:    0.25rem;
+      --ch-radius-md:    0.5rem;
+      --ch-radius-lg:    0.75rem;
+      --ch-radius-xl:    1rem;
+      --ch-radius-2xl:   1.5rem;
+      --ch-radius-full:  9999px;
+
+      --ch-shadow-xs:    0 1px 2px rgba(10, 22, 40, 0.05);
+      --ch-shadow-sm:    0 1px 3px rgba(10, 22, 40, 0.08), 0 1px 2px rgba(10, 22, 40, 0.04);
+      --ch-shadow-md:    0 4px 6px rgba(10, 22, 40, 0.07), 0 2px 4px rgba(10, 22, 40, 0.04);
+      --ch-shadow-lg:    0 10px 15px rgba(10, 22, 40, 0.08), 0 4px 6px rgba(10, 22, 40, 0.03);
+      --ch-shadow-xl:    0 20px 25px rgba(10, 22, 40, 0.10), 0 8px 10px rgba(10, 22, 40, 0.04);
+      --ch-shadow-2xl:   0 25px 50px rgba(10, 22, 40, 0.15);
+      --ch-shadow-glow-blue:  0 0 20px rgba(37, 99, 235, 0.25);
+      --ch-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.25);
+
+      --ch-transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-spring:  500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      --ch-z-base:      1;
+      --ch-z-dropdown:  10;
+      --ch-z-sticky:    100;
+      --ch-z-nav:       1000;
+
+      --ch-max-width:   1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      line-height: var(--ch-leading-normal);
+      color: var(--ch-gray-800);
+      background: var(--ch-off-white);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+    }
+
+    /* ---- KEYFRAMES ---- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 0.8; }
+    }
+
+    .animate-up { animation: fadeInUp 0.6s ease-out both; }
+    .animate-up-d1 { animation-delay: 0.1s; }
+    .animate-up-d2 { animation-delay: 0.2s; }
+    .animate-up-d3 { animation-delay: 0.3s; }
+    .animate-up-d4 { animation-delay: 0.4s; }
+    .animate-up-d5 { animation-delay: 0.5s; }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    .ch-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--ch-space-4) var(--ch-space-6);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      box-shadow: var(--ch-shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: var(--ch-z-nav);
+    }
+
+    .ch-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .ch-nav-brand {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-bold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .ch-nav-brand .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+    }
+
+    .ch-nav-links a {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-2) var(--ch-space-4);
+      border-radius: var(--ch-radius-md);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .ch-nav-links a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links a.active {
+      color: var(--ch-white);
+      background: rgba(37,99,235,0.2);
+    }
+
+    .ch-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+
+    .nav-toggle svg { width: 24px; height: 24px; }
+
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--ch-navy-900);
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-8);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .nav-drawer.open { display: flex; }
+
+    .nav-drawer a {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      transition: color var(--ch-transition-fast);
+    }
+
+    .nav-drawer a:hover { color: var(--ch-white); }
+
+    .nav-drawer-close {
+      position: absolute;
+      top: var(--ch-space-6);
+      right: var(--ch-space-6);
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+
+    .nav-drawer-close svg { width: 28px; height: 28px; }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-2);
+      font-family: var(--ch-font-sans);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-sm);
+      line-height: 1;
+      padding: var(--ch-space-3) var(--ch-space-6);
+      border: 1px solid transparent;
+      border-radius: var(--ch-radius-md);
+      cursor: pointer;
+      transition:
+        background var(--ch-transition-fast),
+        color var(--ch-transition-fast),
+        border-color var(--ch-transition-fast),
+        box-shadow var(--ch-transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--ch-blue-400);
+      border-color: var(--ch-blue-400);
+      box-shadow: var(--ch-shadow-glow-blue);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ch-blue-500);
+      border-color: var(--ch-blue-500);
+    }
+    .btn-secondary:hover {
+      background: var(--ch-blue-50);
+      border-color: var(--ch-blue-400);
+      color: var(--ch-blue-400);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ch-gray-400);
+      border-color: transparent;
+    }
+    .btn-ghost:hover {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-700);
+    }
+
+    .btn-amber {
+      background: var(--ch-amber-500);
+      color: var(--ch-navy-900);
+      border-color: var(--ch-amber-500);
+    }
+    .btn-amber:hover {
+      background: var(--ch-amber-400);
+      border-color: var(--ch-amber-400);
+      box-shadow: var(--ch-shadow-glow-amber);
+    }
+
+    .btn-sm  { padding: var(--ch-space-2) var(--ch-space-4); font-size: var(--ch-text-xs); }
+    .btn-lg  { padding: var(--ch-space-4) var(--ch-space-8); font-size: var(--ch-text-base); }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--ch-white);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .btn-outline-light:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    /* ============================================================
+       CARDS
+       ============================================================ */
+    .ch-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-sm);
+      overflow: hidden;
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .ch-card:hover {
+      box-shadow: var(--ch-shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .ch-card-header { padding: var(--ch-space-6) var(--ch-space-6) 0; }
+    .ch-card-body { padding: var(--ch-space-6); }
+
+    .ch-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    .ch-card-badge.blue  { background: var(--ch-blue-100); color: var(--ch-blue-500); }
+    .ch-card-badge.amber { background: var(--ch-amber-100); color: var(--ch-amber-500); }
+    .ch-card-badge.green { background: #d1fae5; color: var(--ch-success); }
+    .ch-card-badge.gray  { background: var(--ch-gray-100); color: var(--ch-gray-500); }
+
+    /* ============================================================
+       INPUTS
+       ============================================================ */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-1);
+    }
+
+    .input-label {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-600);
+    }
+
+    .input-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field::placeholder { color: var(--ch-gray-300); }
+
+    .input-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* ============================================================
+       PAGE HERO
+       ============================================================ */
+    .page-hero {
+      position: relative;
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      overflow: hidden;
+      padding: var(--ch-space-16) 0 var(--ch-space-12);
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37,99,235,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 60%, rgba(245,158,11,0.04) 0%, transparent 60%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.010) 40px,
+          rgba(255,255,255,0.010) 41px
+        );
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      position: relative;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+    }
+
+    .page-hero-inner .overline {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-blue-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-4);
+      display: block;
+    }
+
+    .page-hero-inner h1 {
+      font-size: var(--ch-text-4xl);
+      font-weight: var(--ch-font-extrabold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      line-height: var(--ch-leading-tight);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .page-hero-inner h1 .highlight {
+      background: linear-gradient(135deg, var(--ch-blue-400), var(--ch-amber-400));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .page-hero-inner p {
+      font-size: var(--ch-text-lg);
+      color: var(--ch-navy-200);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ============================================================
+       SECTION BASE
+       ============================================================ */
+    .section {
+      padding: var(--ch-space-16) 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--ch-space-12);
+    }
+
+    .section-header h2 {
+      font-size: var(--ch-text-3xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      margin-bottom: var(--ch-space-3);
+    }
+
+    .section-header p {
+      font-size: var(--ch-text-base);
+      color: var(--ch-gray-400);
+      line-height: var(--ch-leading-relaxed);
+    }
+
+    .section-header .overline {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-blue-500);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-3);
+      display: block;
+    }
+
+    .section-alt { background: var(--ch-white); }
+    .section-dark {
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+    }
+
+    .section-dark .section-header h2 { color: var(--ch-white); }
+    .section-dark .section-header p { color: var(--ch-navy-200); }
+    .section-dark .section-header .overline { color: var(--ch-amber-400); }
+
+    /* ============================================================
+       PIPELINE VISUAL
+       ============================================================ */
+    .pipeline-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-2);
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto var(--ch-space-8);
+    }
+
+    .pipeline-step {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+      padding: var(--ch-space-3) var(--ch-space-5);
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-xs);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-900);
+      transition: box-shadow var(--ch-transition-fast), transform var(--ch-transition-fast);
+    }
+
+    .pipeline-step:hover {
+      box-shadow: var(--ch-shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .pipeline-step .step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ch-blue-500);
+      flex-shrink: 0;
+    }
+
+    .pipeline-step:nth-child(odd) .step-dot { background: var(--ch-blue-500); }
+    .pipeline-step:nth-child(even) .step-dot { background: var(--ch-amber-500); }
+
+    .pipeline-arrow {
+      font-size: var(--ch-text-xl);
+      color: var(--ch-blue-300);
+      font-weight: var(--ch-font-light);
+      flex-shrink: 0;
+    }
+
+    .pipeline-description {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pipeline-description p {
+      font-size: var(--ch-text-base);
+      color: var(--ch-gray-500);
+      line-height: var(--ch-leading-relaxed);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .pipeline-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ============================================================
+       DATA TABLE
+       ============================================================ */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: var(--ch-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--ch-gray-100);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: var(--ch-space-4) var(--ch-space-6);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-gray-600);
+      background: var(--ch-gray-50);
+      border-bottom: 1px solid var(--ch-gray-100);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    .data-table td {
+      padding: var(--ch-space-4) var(--ch-space-6);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-600);
+      border-bottom: 1px solid var(--ch-gray-100);
+      line-height: var(--ch-leading-snug);
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: var(--ch-gray-50); }
+
+    .data-table td:first-child {
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       FAQ ACCORDION
+       ============================================================ */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-3);
+    }
+
+    .faq-item {
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      background: var(--ch-white);
+      overflow: hidden;
+      transition: box-shadow var(--ch-transition-fast);
+    }
+
+    .faq-item:hover {
+      box-shadow: var(--ch-shadow-sm);
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ch-space-4);
+      padding: var(--ch-space-5) var(--ch-space-6);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-900);
+      text-align: left;
+      line-height: var(--ch-leading-snug);
+      transition: color var(--ch-transition-fast);
+    }
+
+    .faq-question:hover {
+      color: var(--ch-blue-500);
+    }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ch-text-lg);
+      color: var(--ch-gray-400);
+      transition: transform var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      color: var(--ch-blue-500);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+      padding: 0 var(--ch-space-6);
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding: 0 var(--ch-space-6) var(--ch-space-6);
+    }
+
+    .faq-answer p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-500);
+      line-height: var(--ch-leading-relaxed);
+      border-top: 1px solid var(--ch-gray-100);
+      padding-top: var(--ch-space-4);
+    }
+
+    .faq-cta {
+      text-align: center;
+      margin-top: var(--ch-space-8);
+    }
+
+    .faq-cta p {
+      font-size: var(--ch-text-base);
+      color: var(--ch-gray-400);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    /* ============================================================
+       WAVE DIVIDER
+       ============================================================ */
+    .wave-divider {
+      height: 40px;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .wave-divider::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 20px,
+        rgba(37,99,235,0.06) 20px,
+        rgba(37,99,235,0.06) 22px,
+        transparent 22px,
+        transparent 40px
+      );
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+      mask-size: 1200px 100%;
+      mask-repeat: repeat-x;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+      -webkit-mask-size: 1200px 100%;
+      -webkit-mask-repeat: repeat-x;
+    }
+
+    /* ============================================================
+       NEWSLETTER
+       ============================================================ */
+    .newsletter-section { position: relative; overflow: hidden; }
+
+    .newsletter-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 50%, rgba(37,99,235,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 70% 30%, rgba(245,158,11,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .newsletter-box {
+      position: relative;
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .newsletter-box h2 {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      margin-bottom: var(--ch-space-3);
+    }
+
+    .newsletter-box p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-200);
+      line-height: var(--ch-leading-relaxed);
+      margin-bottom: var(--ch-space-6);
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: var(--ch-space-3);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form .input-field {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.15);
+      color: var(--ch-white);
+    }
+
+    .newsletter-form .input-field::placeholder { color: var(--ch-navy-300); }
+
+    .newsletter-form .input-field:focus {
+      border-color: var(--ch-blue-400);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .newsletter-disclaimer {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-navy-300);
+      margin-top: var(--ch-space-4);
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .ch-footer {
+      background: var(--ch-navy-900);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ch-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(37,99,235,0.4), transparent);
+    }
+
+    .ch-footer-grid {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--ch-space-8);
+    }
+
+    .ch-footer-brand {
+      font-size: var(--ch-text-xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+      margin-bottom: var(--ch-space-3);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .ch-footer-brand .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: 10px;
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+    }
+
+    .ch-footer-tagline {
+      font-size: var(--ch-text-sm);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 300px;
+    }
+
+    .ch-footer h4 {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-white);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .ch-footer ul li { margin-bottom: var(--ch-space-2); }
+
+    .ch-footer ul li a {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-300);
+      transition: color var(--ch-transition-fast);
+    }
+
+    .ch-footer ul li a:hover { color: var(--ch-amber-400); }
+
+    .ch-footer-bottom {
+      max-width: var(--ch-max-width);
+      margin: var(--ch-space-12) auto 0;
+      padding-top: var(--ch-space-6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--ch-text-xs);
+      flex-wrap: wrap;
+      gap: var(--ch-space-4);
+    }
+
+    .ch-footer-bottom .disclaimer {
+      color: var(--ch-gray-500);
+      max-width: 500px;
+    }
+
+    .ch-footer-social {
+      display: flex;
+      gap: var(--ch-space-3);
+      margin-top: var(--ch-space-4);
+    }
+
+    .ch-footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--ch-radius-md);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ch-navy-300);
+      font-size: var(--ch-text-sm);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .ch-footer-social a:hover {
+      background: rgba(37,99,235,0.15);
+      color: var(--ch-white);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (min-width: 768px) {
+      .ch-nav { padding: var(--ch-space-4) var(--ch-space-8); }
+      .page-hero { padding: var(--ch-space-20) 0 var(--ch-space-16); }
+      .page-hero-inner h1 { font-size: var(--ch-text-5xl); }
+      .section { padding: var(--ch-space-20) 0; }
+      .newsletter-form { flex-direction: row; }
+      .pipeline-step { font-size: var(--ch-text-base); padding: var(--ch-space-4) var(--ch-space-6); }
+    }
+
+    @media (min-width: 1024px) {
+      .page-hero { padding: var(--ch-space-24) 0 var(--ch-space-20); }
+      .section { padding: var(--ch-space-24) 0; }
+      .section-header h2 { font-size: var(--ch-text-4xl); }
+    }
+
+    @media (max-width: 767px) {
+      .ch-nav-links { display: none; }
+      .ch-nav-actions .btn { display: none; }
+      .nav-toggle { display: block; }
+
+      .page-hero-inner h1 { font-size: var(--ch-text-3xl); }
+
+      .ch-footer-grid { grid-template-columns: 1fr; gap: var(--ch-space-6); }
+      .ch-footer-bottom { flex-direction: column; text-align: center; }
+
+      .newsletter-form { flex-direction: column; }
+
+      .data-table th,
+      .data-table td { padding: var(--ch-space-3) var(--ch-space-4); }
+
+      .pipeline-flow { flex-direction: column; gap: var(--ch-space-2); }
+      .pipeline-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ch-nav">
+    <div class="container">
+      <div class="ch-nav-brand">
+        <div class="brand-icon">CH</div>
+        Capo Horn Lab
+      </div>
+      <div class="ch-nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="method.html" class="active">Method</a>
+        <a href="research.html">Research</a>
+        <a href="test-strategy.html">Test Strategy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="ch-nav-actions">
+        <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+        <button class="btn btn-primary btn-sm">Sign Up</button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="document.getElementById('navDrawer').classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <a href="home.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
+    <a href="about.html" onclick="document.getElementById('navDrawer').classList.remove('open')">About</a>
+    <a href="method.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Method</a>
+    <a href="research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
+    <a href="test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
+    <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
+    <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
+      <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAGE HERO
+       ============================================================ -->
+  <section class="page-hero">
+    <div class="page-hero-inner animate-up">
+      <span class="overline animate-up-d1">Methodology</span>
+      <h1 class="animate-up-d2">How We <span class="highlight">Backtest</span></h1>
+      <p class="animate-up-d3">
+        Rigour. Reproducibility. Realism.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PIPELINE
+       ============================================================ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header animate-up">
+        <span class="overline">Pipeline</span>
+        <h2>From Hypothesis to Publication</h2>
+      </div>
+
+      <!-- Visual Pipeline Flow -->
+      <div class="pipeline-flow animate-up-d1">
+        <span class="pipeline-step"><span class="step-dot"></span>Idea</span>
+        <span class="pipeline-arrow">→</span>
+        <span class="pipeline-step"><span class="step-dot"></span>Formalise Rules</span>
+        <span class="pipeline-arrow">→</span>
+        <span class="pipeline-step"><span class="step-dot"></span>Code</span>
+        <span class="pipeline-arrow">→</span>
+        <span class="pipeline-step"><span class="step-dot"></span>Run on Tick Data</span>
+        <span class="pipeline-arrow">→</span>
+        <span class="pipeline-step"><span class="step-dot"></span>Statistical Analysis</span>
+        <span class="pipeline-arrow">→</span>
+        <span class="pipeline-step"><span class="step-dot"></span>Interpretation</span>
+        <span class="pipeline-arrow">→</span>
+        <span class="pipeline-step"><span class="step-dot"></span>Publication</span>
+      </div>
+
+      <div class="pipeline-description animate-up-d2">
+        <p>
+          Every study begins as a hypothesis. We formalise it into a set of
+          unambiguous trading rules, code them into our backtesting pipeline,
+          and run them against tick-level historical data. The output —
+          equity curves, trade logs, and performance metrics — is analysed
+          statistically, interpreted candidly, and published in full.
+        </p>
+        <p>
+          No black boxes. No cherry-picked results. No skipped steps.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RIGOUR STANDARDS
+       ============================================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header animate-up">
+        <span class="overline">Standards</span>
+        <h2>Rigour Standards</h2>
+        <p>
+          Every study is held to the same five standards — regardless of outcome.
+        </p>
+      </div>
+
+      <table class="data-table animate-up-d1">
+        <thead>
+          <tr>
+            <th>Standard</th>
+            <th>What It Means</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IS/OOS Split</td>
+            <td>70% of data for development, 30% held out for validation. We never test on data used during development.</td>
+          </tr>
+          <tr>
+            <td>Monte Carlo Simulation</td>
+            <td>1,000+ randomised trade sequences to estimate the distribution of possible outcomes — not just the one path that happened.</td>
+          </tr>
+          <tr>
+            <td>Parameter Stability</td>
+            <td>Parameters are varied across a defined grid. If performance collapses outside a narrow optimal zone, that is a red flag for data-mining, not a valid edge.</td>
+          </tr>
+          <tr>
+            <td>Transaction Costs</td>
+            <td>Realistic slippage and commissions per instrument. ES: 1 tick slippage, NQ: 2 ticks. Commissions: $2.50 per side per contract. Every result is net of costs.</td>
+          </tr>
+          <tr>
+            <td>Multiple Timeframes</td>
+            <td>A strategy must hold up across resolutions. If it works on 1-minute but fails on 5-minute and 1-hour, the edge is not structural.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DATA & EXECUTION PARAMETERS
+       ============================================================ -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header animate-up">
+        <span class="overline">Data</span>
+        <h2>Data &amp; Execution Parameters</h2>
+      </div>
+
+      <table class="data-table animate-up-d1">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tick data source</td>
+            <td>Databento MDP3</td>
+          </tr>
+          <tr>
+            <td>Instruments</td>
+            <td>ES (E-mini S&amp;P 500), NQ (Nasdaq-100), CL (Crude Oil), 6E (Euro FX) — others on request</td>
+          </tr>
+          <tr>
+            <td>Historical depth</td>
+            <td>2020–present, growing with each new data ingestion cycle</td>
+          </tr>
+          <tr>
+            <td>Resolution</td>
+            <td>Tick → 1m / 5m / 15m / 1h / Daily</td>
+          </tr>
+          <tr>
+            <td>Default slippage</td>
+            <td>ES: 1 tick · NQ: 2 ticks (configurable per request)</td>
+          </tr>
+          <tr>
+            <td>Default commissions</td>
+            <td>$2.50 per side per contract (configurable per request)</td>
+          </tr>
+          <tr>
+            <td>Execution model</td>
+            <td>Bar-close execution with configurable order delay</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header animate-up">
+        <span class="overline">FAQ</span>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-list animate-up-d1">
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Do you sell trading strategies?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. We test yours. We never sell strategies, indicators, signals, or subscriptions. Our revenue comes from backtesting services — not from the performance of any strategy.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>How is this different from backtesting on TradingView?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>We use tick-level data, realistic slippage and commission models, Monte Carlo simulation, and strict IS/OOS validation. TradingView bar-replay runs on OHLC data with no slippage model. That difference matters — especially for high-frequency or intraday strategies where tick dynamics change outcomes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>How long does a backtest take?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Typically 3–10 business days depending on complexity, data volume, and our current queue. Simple single-instrument tests are faster; multi-parameter or cross-instrument studies take longer.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Do you test crypto strategies?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Not in MVP. Our current data infrastructure covers futures: ES, NQ, CL, 6E. Crypto may be added in a future phase.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What if my strategy does not work?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>That is the most valuable outcome. A clear, data-backed "this does not produce an edge" saves you time, capital, and the cognitive bias of believing otherwise. We publish negative results — they are not failures, they are successful falsifications.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>Can I see an example before submitting?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. All our published research is available on the Research page. You will see the exact format, rigour standards, and candid language before you submit anything.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-cta animate-up-d2">
+        <p>Have a question we did not answer?</p>
+        <a href="contact.html" class="btn btn-secondary">Contact Us →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider"></div>
+
+  <!-- ============================================================
+       NEWSLETTER
+       ============================================================ -->
+  <section class="section section-dark newsletter-section">
+    <div class="container">
+      <div class="newsletter-box">
+        <h2>Stay Ahead of the Curve</h2>
+        <p>
+          Get notified when new research is published. No spam, no strategy pitches —
+          just raw data and honest analysis delivered to your inbox.
+        </p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup — backend integration pending (Sprint 4).');">
+          <input class="input-field" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-disclaimer">
+          No spam. Unsubscribe anytime. Read our <a href="#" style="color:var(--ch-blue-300);text-decoration:underline;">Privacy Policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="ch-footer">
+    <div class="ch-footer-grid">
+      <div>
+        <div class="ch-footer-brand">
+          <div class="brand-icon">CH</div>
+          Capo Horn Lab
+        </div>
+        <p class="ch-footer-tagline">
+          Quantitative backtesting and strategy research.
+          Data-driven, not guru-driven.
+        </p>
+        <div class="ch-footer-social">
+          <a href="https://github.com/capohornlab" aria-label="GitHub" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://twitter.com/capohornlab" aria-label="Twitter / X" title="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://linkedin.com/company/capohornlab" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="method.html">Method</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="test-strategy.html">Test Your Strategy</a></li>
+          <li><a href="#docs">Documentation</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#cookies">Cookie Policy</a></li>
+          <li><a href="#disclaimer">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ch-footer-bottom">
+      <span>© 2026 Capo Horn Lab. All rights reserved.</span>
+      <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Close FAQ items when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.faq-item')) {
+        document.querySelectorAll('.faq-item.open').forEach(function(item) {
+          item.classList.remove('open');
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

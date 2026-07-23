@@ -1,788 +1,1835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAPO HORN LAB — Operations Dashboard</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
-  
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  :root {
-    --bg-primary: #0a0e17;
-    --bg-secondary: #111827;
-    --bg-card: #1a1f2e;
-    --bg-hover: #242b3d;
-    --border: #1e293b;
-    --border-light: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --accent: #3b82f6;
-    --accent-glow: rgba(59,130,246,0.15);
-    --green: #10b981;
-    --green-bg: rgba(16,185,129,0.1);
-    --yellow: #f59e0b;
-    --yellow-bg: rgba(245,158,11,0.1);
-    --red: #ef4444;
-    --red-bg: rgba(239,68,68,0.1);
-    --purple: #8b5cf6;
-    --cyan: #06b6d4;
-    --font: 'Inter', -apple-system, sans-serif;
-    --mono: 'JetBrains Mono', monospace;
-  }
-  
-  html { scroll-behavior: smooth; }
-  
-  body {
-    font-family: var(--font);
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    min-height: 100vh;
-    display: flex;
-  }
-  
-  /* SIDEBAR */
-  .sidebar {
-    width: 260px;
-    background: var(--bg-secondary);
-    border-right: 1px solid var(--border);
-    padding: 24px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    flex-shrink: 0;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 0 8px;
-  }
-  
-  .logo-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--accent), var(--purple));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: 800;
-    color: white;
-  }
-  
-  .logo-text {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-  
-  .logo-sub {
-    font-size: 10px;
-    color: var(--text-muted);
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  
-  .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.15s;
-    text-decoration: none;
-  }
-  
-  .nav-item:hover, .nav-item.active {
-    background: var(--bg-hover);
-    color: var(--text-primary);
-  }
-  
-  .nav-item.active {
-    background: var(--accent-glow);
-    color: var(--accent);
-  }
-  
-  .nav-item .icon { font-size: 16px; width: 20px; text-align: center; }
-  
-  .nav-section {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    padding: 8px 12px 4px;
-    font-weight: 600;
-  }
-  
-  /* MAIN */
-  .main {
-    flex: 1;
-    padding: 32px 40px;
-    overflow-y: auto;
-    max-width: 1400px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
-  }
-  
-  .header-left h1 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-  
-  .header-left p {
-    color: var(--text-secondary);
-    font-size: 14px;
-    margin-top: 4px;
-  }
-  
-  .header-right {
-    text-align: right;
-  }
-  
-  .project-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: var(--green-bg);
-    border: 1px solid rgba(16,185,129,0.2);
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 600;
-  }
-  
-  .project-badge .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse-dot 2s infinite;
-  }
-  
-  @keyframes pulse-dot {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-  
-  /* STATUS BANNER */
-  .status-banner {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  
-  .stat-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-  }
-  
-  .stat-card .label {
-    font-size: 12px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-  }
-  
-  .stat-card .value {
-    font-size: 32px;
-    font-weight: 700;
-    margin-top: 8px;
-    letter-spacing: -0.5px;
-  }
-  
-  .stat-card .sub {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-top: 4px;
-  }
-  
-  /* AGENTS */
-  .section-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .agent-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  
-  .agent-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    transition: all 0.2s;
-  }
-  
-  .agent-card:hover {
-    border-color: var(--border-light);
-    background: var(--bg-hover);
-  }
-  
-  .agent-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  
-  .agent-name {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
-  .agent-role {
-    font-size: 11px;
-    color: var(--text-muted);
-  }
-  
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  
-  .status-dot.green { background: var(--green); box-shadow: 0 0 8px rgba(16,185,129,0.4); }
-  .status-dot.yellow { background: var(--yellow); box-shadow: 0 0 8px rgba(245,158,11,0.4); }
-  .status-dot.red { background: var(--red); box-shadow: 0 0 8px rgba(239,68,68,0.4); }
-  .status-dot.cyan { background: var(--cyan); box-shadow: 0 0 8px rgba(6,182,212,0.4); }
-  
-  .agent-status { font-size: 11px; color: var(--text-secondary); margin-top: 4px; }
-  .agent-model { font-size: 10px; color: var(--text-muted); font-family: var(--mono); margin-top: 2px; }
-  
-  /* ACTIVITY */
-  .activity-log {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 32px;
-  }
-  
-  .log-entry {
-    display: flex;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-  
-  .log-entry:last-child { border-bottom: none; }
-  
-  .log-time {
-    color: var(--text-muted);
-    font-family: var(--mono);
-    font-size: 11px;
-    flex-shrink: 0;
-    min-width: 70px;
-  }
-  
-  .log-agent {
-    font-weight: 600;
-    color: var(--accent);
-    flex-shrink: 0;
-    min-width: 60px;
-    font-size: 12px;
-  }
-  
-  .log-msg { color: var(--text-secondary); }
-  
-  /* PHASES */
-  .phase-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-  
-  .phase-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 13px;
-  }
-  
-  .phase-item.current {
-    border-color: var(--accent);
-    background: var(--accent-glow);
-  }
-  
-  .phase-item.completed {
-    border-color: rgba(16,185,129,0.3);
-  }
-  
-  .phase-num {
-    width: 24px;
-    height: 24px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 12px;
-  }
-  
-  .phase-item.current .phase-num {
-    background: var(--accent);
-    color: white;
-  }
-  
-  .phase-item.completed .phase-num {
-    background: var(--green);
-    color: white;
-  }
-  
-  .phase-item.pending .phase-num {
-    background: var(--bg-hover);
-    color: var(--text-muted);
-  }
-  
-  .phase-name { flex: 1; }
-  .phase-status { font-size: 11px; color: var(--text-muted); }
-  
-  /* FOOTER */
-  .footer {
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-muted);
-    padding: 24px 0;
-    border-top: 1px solid var(--border);
-  }
-  
-  /* LOGO ANIMATION */
-  .spinner-ring {
-    width: 80px;
-    height: 80px;
-    position: relative;
-    margin: 0 auto;
-  }
-  
-  .spinner-ring .ring {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    animation: spin 2s linear infinite;
-  }
-  
-  .spinner-ring .ring:nth-child(1) {
-    border-top-color: var(--accent);
-    animation-duration: 2s;
-  }
-  .spinner-ring .ring:nth-child(2) {
-    border-right-color: var(--purple);
-    animation-duration: 2.5s;
-    width: 70%;
-    height: 70%;
-    top: 15%;
-    left: 15%;
-  }
-  .spinner-ring .ring:nth-child(3) {
-    border-bottom-color: var(--cyan);
-    animation-duration: 3s;
-    width: 40%;
-    height: 40%;
-    top: 30%;
-    left: 30%;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .energy-sphere {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 20px var(--accent), 0 0 60px rgba(59,130,246,0.3);
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
-  
-  .logo-container .spinner-ring {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .logo-container .energy-sphere {
-    width: 10px;
-    height: 10px;
-  }
-  
-  @media (max-width: 1024px) {
-    .agent-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .main { padding: 20px; }
-    .status-banner { grid-template-columns: repeat(2, 1fr); }
-    .agent-grid { grid-template-columns: 1fr; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capo Horn Lab — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       ╔══════════════════════════════════════════════════════════╗
+       ║     CAPO HORN LAB — DESIGN TOKENS v1.0 (inlined)        ║
+       ╚══════════════════════════════════════════════════════════╝
+       ============================================================ */
+
+    /* ---- 1. CUSTOM PROPERTIES ---- */
+    :root {
+      /* Navy Palette */
+      --ch-navy-900: #0a1628;
+      --ch-navy-800: #0f1e36;
+      --ch-navy-700: #152a45;
+      --ch-navy-600: #1c3a5c;
+      --ch-navy-500: #254e77;
+      --ch-navy-400: #3b6fa0;
+      --ch-navy-300: #5e93c2;
+      --ch-navy-200: #8fb8da;
+      --ch-navy-100: #c1d6ec;
+      --ch-navy-50:  #e8f0f8;
+
+      /* Neutrals */
+      --ch-white:       #ffffff;
+      --ch-off-white:   #f8fafc;
+      --ch-gray-50:     #f1f5f9;
+      --ch-gray-100:    #e2e8f0;
+      --ch-gray-200:    #cbd5e1;
+      --ch-gray-300:    #94a3b8;
+      --ch-gray-400:    #64748b;
+      --ch-gray-500:    #475569;
+      --ch-gray-600:    #334155;
+      --ch-gray-700:    #1e293b;
+      --ch-gray-800:    #0f172a;
+      --ch-gray-900:    #020617;
+
+      /* Blue Accent */
+      --ch-blue-500:    #2563eb;
+      --ch-blue-400:    #3b82f6;
+      --ch-blue-300:    #60a5fa;
+      --ch-blue-200:    #93c5fd;
+      --ch-blue-100:    #dbeafe;
+      --ch-blue-50:     #eff6ff;
+
+      /* Amber (Data Viz) */
+      --ch-amber-500:   #f59e0b;
+      --ch-amber-400:   #fbbf24;
+      --ch-amber-300:   #fcd34d;
+      --ch-amber-200:   #fde68a;
+      --ch-amber-100:   #fef3c7;
+      --ch-amber-50:    #fffbeb;
+
+      /* Semantic */
+      --ch-success:     #10b981;
+      --ch-warning:     #f59e0b;
+      --ch-error:       #ef4444;
+      --ch-info:        #3b82f6;
+
+      /* Typography */
+      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+      --ch-text-xs:     0.75rem;
+      --ch-text-sm:     0.875rem;
+      --ch-text-base:   1rem;
+      --ch-text-lg:     1.125rem;
+      --ch-text-xl:     1.25rem;
+      --ch-text-2xl:    1.5rem;
+      --ch-text-3xl:    1.875rem;
+      --ch-text-4xl:    2.25rem;
+      --ch-text-5xl:    3rem;
+      --ch-text-6xl:    3.75rem;
+
+      --ch-leading-tight:   1.15;
+      --ch-leading-snug:    1.3;
+      --ch-leading-normal:  1.5;
+      --ch-leading-relaxed: 1.65;
+
+      --ch-font-light:      300;
+      --ch-font-regular:    400;
+      --ch-font-medium:     500;
+      --ch-font-semibold:   600;
+      --ch-font-bold:       700;
+      --ch-font-extrabold:  800;
+
+      --ch-letter-spacing-tight:  -0.025em;
+      --ch-letter-spacing-normal: 0em;
+      --ch-letter-spacing-wide:   0.05em;
+
+      /* Spacing (4px grid) */
+      --ch-space-1:     0.25rem;
+      --ch-space-2:     0.5rem;
+      --ch-space-3:     0.75rem;
+      --ch-space-4:     1rem;
+      --ch-space-5:     1.25rem;
+      --ch-space-6:     1.5rem;
+      --ch-space-8:     2rem;
+      --ch-space-10:    2.5rem;
+      --ch-space-12:    3rem;
+      --ch-space-16:    4rem;
+      --ch-space-20:    5rem;
+      --ch-space-24:    6rem;
+
+      /* Radii */
+      --ch-radius-none:  0;
+      --ch-radius-sm:    0.25rem;
+      --ch-radius-md:    0.5rem;
+      --ch-radius-lg:    0.75rem;
+      --ch-radius-xl:    1rem;
+      --ch-radius-2xl:   1.5rem;
+      --ch-radius-full:  9999px;
+
+      /* Shadows */
+      --ch-shadow-xs:    0 1px 2px rgba(10, 22, 40, 0.05);
+      --ch-shadow-sm:    0 1px 3px rgba(10, 22, 40, 0.08), 0 1px 2px rgba(10, 22, 40, 0.04);
+      --ch-shadow-md:    0 4px 6px rgba(10, 22, 40, 0.07), 0 2px 4px rgba(10, 22, 40, 0.04);
+      --ch-shadow-lg:    0 10px 15px rgba(10, 22, 40, 0.08), 0 4px 6px rgba(10, 22, 40, 0.03);
+      --ch-shadow-xl:    0 20px 25px rgba(10, 22, 40, 0.10), 0 8px 10px rgba(10, 22, 40, 0.04);
+      --ch-shadow-2xl:   0 25px 50px rgba(10, 22, 40, 0.15);
+      --ch-shadow-glow-blue:  0 0 20px rgba(37, 99, 235, 0.25);
+      --ch-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.25);
+
+      /* Transitions */
+      --ch-transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-spring:  500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* Z-index */
+      --ch-z-base:      1;
+      --ch-z-dropdown:  10;
+      --ch-z-sticky:    100;
+      --ch-z-nav:       1000;
+
+      /* Layout */
+      --ch-max-width:   1200px;
+    }
+
+    /* ---- GLOBAL RESET ---- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      line-height: var(--ch-leading-normal);
+      color: var(--ch-gray-800);
+      background: var(--ch-off-white);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+    }
+
+    /* ---- KEYFRAMES ---- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; }
+      to   { opacity: 1; max-height: 2000px; }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 0.8; }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    .animate-up-d1 { animation-delay: 0.1s; }
+    .animate-up-d2 { animation-delay: 0.2s; }
+    .animate-up-d3 { animation-delay: 0.3s; }
+    .animate-up-d4 { animation-delay: 0.4s; }
+
+    /* ============================================================
+       NAVIGATION (.ch-nav)
+       ============================================================ */
+    .ch-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--ch-space-3) var(--ch-space-6);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      box-shadow: var(--ch-shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: var(--ch-z-nav);
+    }
+
+    .ch-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .ch-nav-brand {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-bold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .ch-nav-brand .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+    }
+
+    .ch-nav-links a {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-2) var(--ch-space-4);
+      border-radius: var(--ch-radius-md);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .ch-nav-links a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links a.active {
+      color: var(--ch-white);
+      background: rgba(37,99,235,0.2);
+    }
+
+    .ch-nav-links a.logout-link {
+      color: var(--ch-error);
+    }
+    .ch-nav-links a.logout-link:hover {
+      background: rgba(239,68,68,0.1);
+      color: var(--ch-error);
+    }
+
+    .ch-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+
+    .nav-toggle svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--ch-navy-900);
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-8);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .nav-drawer.open {
+      display: flex;
+    }
+
+    .nav-drawer a {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      transition: color var(--ch-transition-fast);
+    }
+
+    .nav-drawer a:hover {
+      color: var(--ch-white);
+    }
+
+    .nav-drawer-close {
+      position: absolute;
+      top: var(--ch-space-6);
+      right: var(--ch-space-6);
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+
+    .nav-drawer-close svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* ============================================================
+       BUTTONS (.btn)
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-2);
+      font-family: var(--ch-font-sans);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-sm);
+      line-height: 1;
+      padding: var(--ch-space-3) var(--ch-space-6);
+      border: 1px solid transparent;
+      border-radius: var(--ch-radius-md);
+      cursor: pointer;
+      transition:
+        background var(--ch-transition-fast),
+        color var(--ch-transition-fast),
+        border-color var(--ch-transition-fast),
+        box-shadow var(--ch-transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--ch-blue-400);
+      border-color: var(--ch-blue-400);
+      box-shadow: var(--ch-shadow-glow-blue);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ch-blue-500);
+      border-color: var(--ch-blue-500);
+    }
+    .btn-secondary:hover {
+      background: var(--ch-blue-50);
+      border-color: var(--ch-blue-400);
+      color: var(--ch-blue-400);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ch-gray-400);
+      border-color: transparent;
+    }
+    .btn-ghost:hover {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-700);
+    }
+
+    .btn-amber {
+      background: var(--ch-amber-500);
+      color: var(--ch-navy-900);
+      border-color: var(--ch-amber-500);
+    }
+    .btn-amber:hover {
+      background: var(--ch-amber-400);
+      border-color: var(--ch-amber-400);
+      box-shadow: var(--ch-shadow-glow-amber);
+    }
+
+    .btn-sm  { padding: var(--ch-space-2) var(--ch-space-4); font-size: var(--ch-text-xs); }
+    .btn-lg  { padding: var(--ch-space-4) var(--ch-space-8); font-size: var(--ch-text-base); }
+
+    .btn-danger {
+      background: var(--ch-error);
+      color: var(--ch-white);
+      border-color: var(--ch-error);
+    }
+    .btn-danger:hover {
+      background: #dc2626;
+      border-color: #dc2626;
+    }
+
+    /* ============================================================
+       INPUTS
+       ============================================================ */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-1);
+    }
+
+    .input-label {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-600);
+    }
+
+    .input-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field::placeholder {
+      color: var(--ch-gray-300);
+    }
+
+    .input-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* ============================================================
+       CARDS (.ch-card)
+       ============================================================ */
+    .ch-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-sm);
+      overflow: hidden;
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .ch-card-header {
+      padding: var(--ch-space-6) var(--ch-space-6) 0;
+    }
+
+    .ch-card-body {
+      padding: var(--ch-space-6);
+    }
+
+    .ch-card-footer {
+      padding: var(--ch-space-4) var(--ch-space-6);
+      border-top: 1px solid var(--ch-gray-100);
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--ch-space-3);
+    }
+
+    /* ============================================================
+       STATUS BADGES
+       ============================================================ */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      white-space: nowrap;
+    }
+
+    .status-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-inviata         { background: var(--ch-blue-100); color: var(--ch-blue-500); }
+    .status-inviata .dot    { background: var(--ch-blue-500); }
+    .status-info-mancanti   { background: var(--ch-amber-100); color: var(--ch-amber-500); }
+    .status-info-mancanti .dot { background: var(--ch-amber-500); }
+    .status-in-valutazione  { background: #e0e7ff; color: #6366f1; }
+    .status-in-valutazione .dot { background: #6366f1; }
+    .status-accettata       { background: #d1fae5; color: var(--ch-success); }
+    .status-accettata .dot  { background: var(--ch-success); }
+    .status-rifiutata       { background: #fecaca; color: var(--ch-error); }
+    .status-rifiutata .dot  { background: var(--ch-error); }
+    .status-in-lavorazione  { background: var(--ch-blue-100); color: var(--ch-blue-600, #1d4ed8); }
+    .status-in-lavorazione .dot { background: var(--ch-blue-500); }
+    .status-completata      { background: #d1fae5; color: #059669; }
+    .status-completata .dot { background: #059669; }
+
+    /* ============================================================
+       DASHBOARD LAYOUT
+       ============================================================ */
+    .dash-header {
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      padding: var(--ch-space-8) 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dash-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37,99,235,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 70% at 80% 60%, rgba(245,158,11,0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .dash-header-inner {
+      position: relative;
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--ch-space-4);
+    }
+
+    .dash-header h1 {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+    }
+
+    .dash-header p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-200);
+      margin-top: var(--ch-space-1);
+    }
+
+    .dash-body {
+      padding: var(--ch-space-8) 0 var(--ch-space-16);
+    }
+
+    .dash-body .container {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+    }
+
+    /* ============================================================
+       SECTION TABS
+       ============================================================ */
+    .dash-tabs {
+      display: flex;
+      gap: var(--ch-space-1);
+      margin-bottom: var(--ch-space-8);
+      border-bottom: 1px solid var(--ch-gray-200);
+      padding-bottom: 0;
+      overflow-x: auto;
+    }
+
+    .dash-tab {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-400);
+      padding: var(--ch-space-3) var(--ch-space-5);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color var(--ch-transition-fast), border-color var(--ch-transition-fast);
+      white-space: nowrap;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: var(--ch-font-sans);
+    }
+
+    .dash-tab:hover {
+      color: var(--ch-gray-600);
+    }
+
+    .dash-tab.active {
+      color: var(--ch-blue-500);
+      border-bottom-color: var(--ch-blue-500);
+    }
+
+    .dash-tab-content {
+      display: none;
+    }
+
+    .dash-tab-content.active {
+      display: block;
+      animation: fadeInUp 0.3s ease-out;
+    }
+
+    /* ============================================================
+       SUMMARY CARDS (Riepilogo)
+       ============================================================ */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--ch-space-4);
+      margin-bottom: var(--ch-space-8);
+    }
+
+    .summary-card {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-5);
+      box-shadow: var(--ch-shadow-sm);
+      transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base);
+    }
+
+    .summary-card:hover {
+      box-shadow: var(--ch-shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .summary-card .label {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      font-weight: var(--ch-font-medium);
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .summary-card .value {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      line-height: 1;
+    }
+
+    .summary-card .sub {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-top: var(--ch-space-1);
+    }
+
+    .summary-card .sub strong {
+      color: var(--ch-gray-600);
+      font-weight: var(--ch-font-semibold);
+    }
+
+    /* ============================================================
+       REQUESTS TABLE
+       ============================================================ */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      background: var(--ch-white);
+      box-shadow: var(--ch-shadow-sm);
+    }
+
+    .ch-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--ch-text-sm);
+    }
+
+    .ch-table thead {
+      background: var(--ch-gray-50);
+      border-bottom: 2px solid var(--ch-gray-100);
+    }
+
+    .ch-table th {
+      text-align: left;
+      padding: var(--ch-space-3) var(--ch-space-4);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-500);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      white-space: nowrap;
+    }
+
+    .ch-table td {
+      padding: var(--ch-space-4) var(--ch-space-4);
+      border-bottom: 1px solid var(--ch-gray-50);
+      color: var(--ch-gray-700);
+      vertical-align: middle;
+    }
+
+    .ch-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .ch-table tr:hover td {
+      background: var(--ch-gray-50);
+    }
+
+    .ch-table .req-id {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+
+    .ch-table .req-name {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-900);
+    }
+
+    .ch-table .req-date {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      white-space: nowrap;
+    }
+
+    .ch-table .cell-actions {
+      display: flex;
+      gap: var(--ch-space-2);
+    }
+
+    .expand-btn {
+      background: none;
+      border: none;
+      color: var(--ch-blue-500);
+      cursor: pointer;
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      padding: var(--ch-space-1) var(--ch-space-2);
+      border-radius: var(--ch-radius-sm);
+      transition: background var(--ch-transition-fast);
+    }
+
+    .expand-btn:hover {
+      background: var(--ch-blue-50);
+    }
+
+    /* ============================================================
+       EXPANDABLE DETAIL ROW
+       ============================================================ */
+    .detail-row {
+      display: none;
+    }
+
+    .detail-row.open {
+      display: table-row;
+    }
+
+    .detail-cell {
+      padding: var(--ch-space-6) !important;
+      background: var(--ch-gray-50);
+      border-bottom: 2px solid var(--ch-gray-100);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ch-space-4);
+    }
+
+    .detail-section {
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .detail-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-section-title {
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-2);
+      padding-bottom: var(--ch-space-1);
+      border-bottom: 1px solid var(--ch-gray-200);
+    }
+
+    .detail-param {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--ch-space-1) 0;
+      font-size: var(--ch-text-sm);
+    }
+
+    .detail-param .param-label {
+      color: var(--ch-gray-500);
+    }
+
+    .detail-param .param-value {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-800);
+      text-align: right;
+    }
+
+    .detail-note {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-md);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      margin-bottom: var(--ch-space-3);
+      font-size: var(--ch-text-sm);
+      line-height: var(--ch-leading-relaxed);
+    }
+
+    .detail-note .note-meta {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-top: var(--ch-space-1);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-2);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: var(--ch-space-3);
+      align-items: flex-start;
+      font-size: var(--ch-text-sm);
+    }
+
+    .timeline-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+      border: 2px solid var(--ch-gray-200);
+    }
+
+    .timeline-dot.current {
+      background: var(--ch-blue-500);
+      border-color: var(--ch-blue-400);
+    }
+
+    .timeline-dot.completed {
+      background: var(--ch-success);
+      border-color: var(--ch-success);
+    }
+
+    .timeline-dot.failed {
+      background: var(--ch-error);
+      border-color: var(--ch-error);
+    }
+
+    .timeline-dot.pending {
+      background: var(--ch-gray-100);
+      border-color: var(--ch-gray-200);
+    }
+
+    .timeline-info .timeline-status {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-800);
+    }
+
+    .timeline-info .timeline-date {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+
+    /* ============================================================
+       EMPTY STATE
+       ============================================================ */
+    .empty-state {
+      text-align: center;
+      padding: var(--ch-space-16) var(--ch-space-6);
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-xl);
+      box-shadow: var(--ch-shadow-sm);
+    }
+
+    .empty-state-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto var(--ch-space-6);
+      background: var(--ch-gray-50);
+      border: 2px dashed var(--ch-gray-200);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--ch-gray-300);
+    }
+
+    .empty-state h3 {
+      font-size: var(--ch-text-xl);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .empty-state p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-400);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 400px;
+      margin: 0 auto var(--ch-space-6);
+    }
+
+    /* ============================================================
+       PROFILE SECTION
+       ============================================================ */
+    .profile-card {
+      max-width: 640px;
+    }
+
+    .profile-card .ch-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-6);
+    }
+
+    .profile-field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-1);
+    }
+
+    .profile-field .field-label {
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    .profile-field .field-value {
+      font-size: var(--ch-text-base);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-900);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    .profile-divider {
+      height: 1px;
+      background: var(--ch-gray-100);
+      border: none;
+      margin: var(--ch-space-2) 0;
+    }
+
+    .password-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-4);
+    }
+
+    .password-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ch-space-4);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--ch-space-3);
+      padding-top: var(--ch-space-2);
+    }
+
+    .form-feedback {
+      display: none;
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border-radius: var(--ch-radius-md);
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+    }
+
+    .form-feedback.success {
+      display: block;
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .form-feedback.error {
+      display: block;
+      background: #fecaca;
+      color: #991b1b;
+    }
+
+    /* ============================================================
+       TOAST NOTIFICATION
+       ============================================================ */
+    .toast {
+      position: fixed;
+      bottom: var(--ch-space-6);
+      right: var(--ch-space-6);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      padding: var(--ch-space-4) var(--ch-space-6);
+      border-radius: var(--ch-radius-lg);
+      box-shadow: var(--ch-shadow-xl);
+      font-size: var(--ch-text-sm);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform var(--ch-transition-base), opacity var(--ch-transition-base);
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ============================================================
+       SECTION TITLES & HEADERS
+       ============================================================ */
+    .section-title {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    .section-title .count {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-400);
+      background: var(--ch-gray-100);
+      padding: 2px 8px;
+      border-radius: var(--ch-radius-full);
+    }
+
+    .overline {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-blue-500);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-2);
+      display: block;
+    }
+
+    /* ============================================================
+       RESPONSIVE — Mobile First
+       ============================================================ */
+
+    /* Tablet: ≥ 768px */
+    @media (min-width: 768px) {
+      .ch-nav { padding: var(--ch-space-4) var(--ch-space-8); }
+
+      .summary-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Desktop: ≥ 1024px */
+    @media (min-width: 1024px) {
+      .dash-header { padding: var(--ch-space-12) 0; }
+      .dash-header h1 { font-size: var(--ch-text-3xl); }
+    }
+
+    /* Mobile: < 768px */
+    @media (max-width: 767px) {
+      .ch-nav-links { display: none; }
+      .ch-nav-actions .btn { display: none; }
+      .nav-toggle { display: block; }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dash-header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .dash-tabs {
+        gap: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .ch-table th:nth-child(3),
+      .ch-table td:nth-child(3) { display: none; }
+      .ch-table th:nth-child(4),
+      .ch-table td:nth-child(4) { display: none; }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .password-form .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .dash-body {
+        padding: var(--ch-space-4) 0 var(--ch-space-8);
+      }
+
+      .summary-card {
+        padding: var(--ch-space-4);
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="sidebar">
-  <div class="logo">
-    <div class="logo-icon">CH</div>
-    <div>
-      <div class="logo-text">Capo Horn Lab</div>
-      <div class="logo-sub">Operations Center</div>
+  <!-- ============================================================
+       NAVIGATION (Authenticated User)
+       ============================================================ -->
+  <nav class="ch-nav">
+    <div class="container">
+      <div class="ch-nav-brand">
+        <div class="brand-icon">CH</div>
+        Capo Horn Lab
+      </div>
+      <div class="ch-nav-links">
+        <a href="#" class="active">Dashboard</a>
+        <a href="test-strategy.html">Submit</a>
+        <a href="research.html">Research</a>
+        <a href="#" onclick="switchTab('profile')">Profile</a>
+        <a href="#" class="logout-link">Log Out</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
     </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="document.getElementById('navDrawer').classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <a href="#" onclick="document.getElementById('navDrawer').classList.remove('open')">Dashboard</a>
+    <a href="#" onclick="document.getElementById('navDrawer').classList.remove('open')">Submit Strategy</a>
+    <a href="research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
+    <a href="#" onclick="document.getElementById('navDrawer').classList.remove('open'); switchTab('profile')">Profile</a>
+    <a href="#" onclick="document.getElementById('navDrawer').classList.remove('open')" style="color:var(--ch-error);">Log Out</a>
   </div>
-  
-  <div class="nav">
-    <div class="nav-section">Overview</div>
-    <a class="nav-item active" href="#">
-      <span class="icon">◈</span> Project Dashboard
-    </a>
-    <a class="nav-item" href="#">
-      <span class="icon">◉</span> Agents
-    </a>
-    <a class="nav-item" href="#">
-      <span class="icon">⊞</span> Board
-    </a>
-    <a class="nav-item" href="#">
-      <span class="icon">☰</span> Reports
-    </a>
-    <div class="nav-section">Project</div>
-    <a class="nav-item" href="#">
-      <span class="icon">⚑</span> Capo Horn Lab Site
-    </a>
-    <a class="nav-item" href="#">
-      <span class="icon">⚙</span> Settings
-    </a>
-  </div>
-  
-  <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border);">
-    <div style="display:flex; align-items:center; gap:8px;">
-      <div style="width:28px; height:28px; border-radius:6px; background:linear-gradient(135deg,var(--accent),var(--purple)); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:white;">C</div>
+
+  <!-- ============================================================
+       DASHBOARD HEADER
+       ============================================================ -->
+  <div class="dash-header" id="dashHeader">
+    <div class="dash-header-inner">
       <div>
-        <div style="font-size:12px;font-weight:600;">Camilla</div>
-        <div style="font-size:10px;color:var(--text-muted);">Coordinator</div>
+        <h1>Dashboard</h1>
+        <p>Track your strategy submissions and access results.</p>
       </div>
-      <div style="margin-left:auto;">
-        <div class="status-dot green"></div>
-      </div>
+      <button class="btn btn-amber btn-lg" onclick="alert('Redirect to wizard — Sprint 4.2 mock.')">+ New Submission</button>
     </div>
   </div>
-</div>
 
-<div class="main">
-  <div class="header">
-    <div class="header-left">
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
-        <div class="spinner-ring" style="width:40px;height:40px;">
-          <div class="ring"></div><div class="ring"></div><div class="ring"></div>
-          <div class="energy-sphere" style="width:8px;height:8px;"></div>
-        </div>
-        <h1>Capo Horn Lab Website</h1>
-      </div>
-      <p>Multi-agent project: site build + research integration + backtest platform</p>
-    </div>
-    <div class="header-right">
-      <div class="project-badge">
-        <span class="dot"></span>
-        Active — Phase 1: Brainstorming
-      </div>
-    </div>
-  </div>
-  
-  <!-- STATUS BANNER -->
-  <div class="status-banner">
-    <div class="stat-card">
-      <div class="label">Agents Active</div>
-      <div class="value" style="color:var(--green);">8</div>
-      <div class="sub">▲ 1 standby (Era)</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Project Phase</div>
-      <div class="value" style="color:var(--accent);">1/5</div>
-      <div class="sub">Brainstorming</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Tasks Created</div>
-      <div class="value" style="color:var(--yellow);">12</div>
-      <div class="sub">0 completed</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Est. Delivery</div>
-      <div class="value" style="color:var(--cyan);">TBD</div>
-      <div class="sub">Per plan</div>
-    </div>
-  </div>
-  
-  <!-- PHASES -->
-  <div class="section-title">⏱ Project Phases</div>
-  <div class="phase-list">
-    <div class="phase-item current">
-      <div class="phase-num">1</div>
-      <div class="phase-name">Brainstorming — Gruppi di lavoro</div>
-      <div class="phase-status">🟢 In corso</div>
-    </div>
-    <div class="phase-item pending">
-      <div class="phase-num">2</div>
-      <div class="phase-name">Mappe concettuali & Architettura</div>
-      <div class="phase-status">⏳ In attesa</div>
-    </div>
-    <div class="phase-item pending">
-      <div class="phase-num">3</div>
-      <div class="phase-name">Piano d'azione & Divisione compiti</div>
-      <div class="phase-status">⏳ In attesa</div>
-    </div>
-    <div class="phase-item pending">
-      <div class="phase-num">4</div>
-      <div class="phase-name">Esecuzione & Sviluppo</div>
-      <div class="phase-status">⏳ In attesa</div>
-    </div>
-    <div class="phase-item pending">
-      <div class="phase-num">5</div>
-      <div class="phase-name">Report finale & Verifica</div>
-      <div class="phase-status">⏳ In attesa</div>
-    </div>
-  </div>
-  
-  <!-- AGENT GRID -->
-  <div class="section-title">⚡ Agent Status</div>
-  <div class="agent-grid">
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Atlas</div>
-          <div class="agent-role">Product & Coordination Lead</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Site architecture, UX, pages</div>
-      <div class="agent-model">deepseek/deepseek-v4-flash</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Cratos</div>
-          <div class="agent-role">Security & Infrastructure</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Auth, admin panel, infra</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Midas</div>
-          <div class="agent-role">Data Research & Analytics</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Charts, statistics, research page</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Afrodite</div>
-          <div class="agent-role">Advertising & Content</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Copy, newsletter, brand voice</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Cupido</div>
-          <div class="agent-role">Financial Analysis</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Stats, research methodology</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Odino</div>
-          <div class="agent-role">Web Research</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Competitor analysis, references</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Dioniso</div>
-          <div class="agent-role">Creative & Visual</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟢 Brainstorming — Design system, landing, styles</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Ares</div>
-          <div class="agent-role">Secrets & Security</div>
-        </div>
-        <div class="status-dot green"></div>
-      </div>
-      <div class="agent-status">🟡 Standby — Available for secret management</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-    <div class="agent-card" style="opacity:0.6;">
-      <div class="agent-header">
-        <div>
-          <div class="agent-name">Era</div>
-          <div class="agent-role">Vibe Trading</div>
-        </div>
-        <div class="status-dot yellow"></div>
-      </div>
-      <div class="agent-status">🟡 Standby — Not in scope</div>
-      <div class="agent-model">stepfun/step-3.7-flash:free</div>
-    </div>
-  </div>
-  
-  <!-- ACTIVITY LOG -->
-  <div class="section-title">📋 Activity Log</div>
-  <div class="activity-log" id="activity-log">
-    <div class="log-entry">
-      <div class="log-time">18:23</div>
-      <div class="log-agent">Camilla</div>
-      <div class="log-msg">✅ Delegation repaired — agents now use Nous cloud</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:24</div>
-      <div class="log-agent">Atlas</div>
-      <div class="log-msg">🟢 Communication test — "Pronto a collaborare"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:24</div>
-      <div class="log-agent">Cratos</div>
-      <div class="log-msg">🟢 Communication test — "Canale aperto, tutto nominale"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:35</div>
-      <div class="log-agent">Midas</div>
-      <div class="log-msg">🟢 Communication test — "A disposizione"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:35</div>
-      <div class="log-agent">Afrodite</div>
-      <div class="log-msg">🟢 Communication test — "Pronta e operativa"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:35</div>
-      <div class="log-agent">Cupido</div>
-      <div class="log-msg">🟢 Communication test — "Pronto per il test"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:36</div>
-      <div class="log-agent">Odino</div>
-      <div class="log-msg">🟢 Communication test — "Presente e pronto"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:36</div>
-      <div class="log-agent">Dioniso</div>
-      <div class="log-msg">🟢 Communication test — "Pronto per il test 🍇"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:36</div>
-      <div class="log-agent">Ares</div>
-      <div class="log-msg">🟢 Communication test — "Tutto sotto controllo"</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-time">18:36</div>
-      <div class="log-agent">Era</div>
-      <div class="log-msg">🟡 Communication test — "Standby, pronta a rientrare"</div>
-    </div>
-    <div class="log-entry" style="border-bottom:none;">
-      <div class="log-time">18:38</div>
-      <div class="log-agent">Camilla</div>
-      <div class="log-msg">🚀 Project kickoff — Capo Horn Lab Website launched</div>
-    </div>
-  </div>
-  
-  <div class="footer">
-    CAPO HORN LAB — Operations Dashboard v1.0 — "Beyond the Market Edge"
-  </div>
-</div>
+  <!-- ============================================================
+       DASHBOARD BODY
+       ============================================================ -->
+  <div class="dash-body">
+    <div class="container">
 
-<script>
-// Auto-scroll log
-const log = document.getElementById('activity-log');
-if(log) log.scrollTop = log.scrollHeight;
+      <!-- Tabs -->
+      <div class="dash-tabs">
+        <button class="dash-tab active" data-tab="overview" onclick="switchTab('overview')">Overview</button>
+        <button class="dash-tab" data-tab="requests" onclick="switchTab('requests')">My Requests</button>
+        <button class="dash-tab" data-tab="profile" onclick="switchTab('profile')">Profile</button>
+      </div>
 
-// Status refresh simulation
-setInterval(() => {
-  const dots = document.querySelectorAll('.status-dot.green');
-  dots.forEach((d, i) => {
-    setTimeout(() => {
-      d.style.opacity = '0.6';
-      setTimeout(() => { d.style.opacity = '1'; }, 200);
-    }, i * 100);
-  });
-}, 5000);
-</script>
+      <!-- ============================================================
+           TAB 1: OVERVIEW (Riepilogo)
+           ============================================================ -->
+      <div class="dash-tab-content active" id="tab-overview">
 
+        <!-- Summary Cards -->
+        <div class="summary-grid" id="summaryCards">
+          <div class="summary-card animate-up-d1">
+            <div class="label">Total Requests</div>
+            <div class="value">3</div>
+            <div class="sub">Since <strong>Mar 2026</strong></div>
+          </div>
+          <div class="summary-card animate-up-d2">
+            <div class="label">Last Request</div>
+            <div class="value">NQ Breakout</div>
+            <div class="sub"><strong>16 Jul 2026</strong></div>
+          </div>
+          <div class="summary-card animate-up-d3">
+            <div class="label">In Progress</div>
+            <div class="value" style="color:var(--ch-amber-500);">2</div>
+            <div class="sub">In evaluation or running</div>
+          </div>
+          <div class="summary-card animate-up-d4">
+            <div class="label">Completed</div>
+            <div class="value" style="color:var(--ch-success);">1</div>
+            <div class="sub">Ready to download</div>
+          </div>
+        </div>
+
+        <!-- Quick Activity -->
+        <div style="margin-bottom:var(--ch-space-4);">
+          <div class="section-title">Recent Activity</div>
+        </div>
+
+        <div class="ch-card">
+          <div class="ch-card-body" style="padding:var(--ch-space-4);">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-3) 0;border-bottom:1px solid var(--ch-gray-50);flex-wrap:wrap;gap:var(--ch-space-2);">
+              <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-003</span>
+                <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">NQ Breakout 5m</span>
+              </div>
+              <span class="status-badge status-in-valutazione"><span class="dot"></span>In Valutazione</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-3) 0;border-bottom:1px solid var(--ch-gray-50);flex-wrap:wrap;gap:var(--ch-space-2);">
+              <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-002</span>
+                <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">ES Mean Reversion</span>
+              </div>
+              <span class="status-badge status-completata"><span class="dot"></span>Completata</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:var(--ch-space-3) 0;flex-wrap:wrap;gap:var(--ch-space-2);">
+              <div style="display:flex;align-items:center;gap:var(--ch-space-3);">
+                <span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">REQ-001</span>
+                <span style="font-weight:var(--ch-font-medium);font-size:var(--ch-text-sm);">CL Momentum Daily</span>
+              </div>
+              <span class="status-badge status-in-lavorazione"><span class="dot"></span>In Lavorazione</span>
+            </div>
+          </div>
+          <div class="ch-card-footer">
+            <button class="btn btn-ghost btn-sm" onclick="switchTab('requests')">View All Requests →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ============================================================
+           TAB 2: MY REQUESTS (Tabella + Expandibile)
+           ============================================================ -->
+      <div class="dash-tab-content" id="tab-requests">
+
+        <!-- Requests Table -->
+        <div style="margin-bottom:var(--ch-space-4);">
+          <div class="section-title">
+            Strategy Requests
+            <span class="count">3</span>
+          </div>
+        </div>
+
+        <div class="table-wrapper" id="requestsTableWrapper">
+          <table class="ch-table" id="requestsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Strategy</th>
+                <th>Instrument</th>
+                <th>Submitted</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr class="req-row" data-id="REQ-003">
+                <td><span class="req-id">REQ-003</span></td>
+                <td><span class="req-name">NQ Breakout 5m</span></td>
+                <td><span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-500);">NQ</span></td>
+                <td><span class="req-date">16 Jul 2026</span></td>
+                <td><span class="status-badge status-in-valutazione"><span class="dot"></span>In Valutazione</span></td>
+                <td>
+                  <div class="cell-actions">
+                    <button class="expand-btn" onclick="toggleDetail('detail-003', this)">View</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="detail-row" id="detail-003">
+                <td colspan="6">
+                  <div class="detail-cell">
+                    <div class="detail-grid">
+                      <div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Strategy Parameters</div>
+                          <div class="detail-param"><span class="param-label">Name</span><span class="param-value">NQ Breakout 5m</span></div>
+                          <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">NQ</span></div>
+                          <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">5m</span></div>
+                          <div class="detail-param"><span class="param-label">Direction</span><span class="param-value">Both</span></div>
+                          <div class="detail-param"><span class="param-label">Period</span><span class="param-value">2025-01-01 → 2026-06-30</span></div>
+                          <div class="detail-param"><span class="param-label">Entry</span><span class="param-value">Close above VWAP + 2 ATR</span></div>
+                          <div class="detail-param"><span class="param-label">Stop Loss</span><span class="param-value">4 ticks</span></div>
+                          <div class="detail-param"><span class="param-label">Take Profit</span><span class="param-value">12 ticks</span></div>
+                          <div class="detail-param"><span class="param-label">Contracts</span><span class="param-value">2</span></div>
+                          <div class="detail-param"><span class="param-label">Slippage</span><span class="param-value">2 ticks</span></div>
+                          <div class="detail-param"><span class="param-label">Commission</span><span class="param-value">$2.50/side</span></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Status History</div>
+                          <div class="timeline">
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">Inviata</div>
+                                <div class="timeline-date">16 Jul 2026 · 09:42 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot current"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">In Valutazione</div>
+                                <div class="timeline-date">17 Jul 2026 · 14:15 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot pending"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status" style="color:var(--ch-gray-400);">Accettata</div>
+                                <div class="timeline-date">— Pending</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot pending"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status" style="color:var(--ch-gray-400);">Completata</div>
+                                <div class="timeline-date">— Pending</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="detail-section" style="margin-top:var(--ch-space-4);">
+                          <div class="detail-section-title">Admin Notes</div>
+                          <div class="detail-note">
+                            Parameters look reasonable. Requesting additional info on session filter logic.
+                            <div class="note-meta">Admin · 17 Jul 2026 · 14:20 UTC</div>
+                          </div>
+                        </div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Attachments</div>
+                          <div style="display:flex;flex-direction:column;gap:var(--ch-space-2);">
+                            <div style="display:flex;align-items:center;justify-content:space-between;font-size:var(--ch-text-sm);padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-100);">
+                              <span style="color:var(--ch-gray-600);">strategy_notes.pdf</span>
+                              <button class="btn btn-ghost btn-sm" onclick="alert('Download mock — backend pending.')">Download</button>
+                            </div>
+                            <div style="display:flex;align-items:center;justify-content:space-between;font-size:var(--ch-text-sm);padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-100);">
+                              <span style="color:var(--ch-gray-600);">entry_rules_screenshot.png</span>
+                              <button class="btn btn-ghost btn-sm" onclick="alert('Download mock — backend pending.')">Download</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin-top:var(--ch-space-4);display:flex;justify-content:flex-end;gap:var(--ch-space-3);">
+                      <button class="btn btn-ghost btn-sm" onclick="toggleDetail('detail-003', document.querySelector('[onclick*=\\'detail-003\\']'))">Close</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2 -->
+              <tr class="req-row" data-id="REQ-002">
+                <td><span class="req-id">REQ-002</span></td>
+                <td><span class="req-name">ES Mean Reversion</span></td>
+                <td><span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-500);">ES</span></td>
+                <td><span class="req-date">02 Jun 2026</span></td>
+                <td><span class="status-badge status-completata"><span class="dot"></span>Completata</span></td>
+                <td>
+                  <div class="cell-actions">
+                    <button class="expand-btn" onclick="toggleDetail('detail-002', this)">View</button>
+                    <button class="expand-btn" onclick="alert('Download result mock — backend pending.')">PDF</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="detail-row" id="detail-002">
+                <td colspan="6">
+                  <div class="detail-cell">
+                    <div class="detail-grid">
+                      <div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Strategy Parameters</div>
+                          <div class="detail-param"><span class="param-label">Name</span><span class="param-value">ES Mean Reversion</span></div>
+                          <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">ES</span></div>
+                          <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">1m</span></div>
+                          <div class="detail-param"><span class="param-label">Direction</span><span class="param-value">Both</span></div>
+                          <div class="detail-param"><span class="param-label">Period</span><span class="param-value">2024-01-01 → 2026-05-31</span></div>
+                          <div class="detail-param"><span class="param-label">Entry</span><span class="param-value">RSI(14) < 25 and close > lower BB(20,2)</span></div>
+                          <div class="detail-param"><span class="param-label">Stop Loss</span><span class="param-value">6 ticks</span></div>
+                          <div class="detail-param"><span class="param-label">Take Profit</span><span class="param-value">10 ticks</span></div>
+                          <div class="detail-param"><span class="param-label">Contracts</span><span class="param-value">1</span></div>
+                          <div class="detail-param"><span class="param-label">Slippage</span><span class="param-value">1 tick</span></div>
+                          <div class="detail-param"><span class="param-label">Commission</span><span class="param-value">$2.50/side</span></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Status History</div>
+                          <div class="timeline">
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">Inviata</div>
+                                <div class="timeline-date">02 Jun 2026 · 11:23 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">In Valutazione</div>
+                                <div class="timeline-date">03 Jun 2026 · 09:10 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">Accettata</div>
+                                <div class="timeline-date">05 Jun 2026 · 14:45 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">In Lavorazione</div>
+                                <div class="timeline-date">08 Jun 2026 · 08:30 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">Completata</div>
+                                <div class="timeline-date">16 Jun 2026 · 12:00 UTC</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="detail-section" style="margin-top:var(--ch-space-4);">
+                          <div class="detail-section-title">Admin Notes</div>
+                          <div class="detail-note">
+                            Strategy accepted. Clean entry logic, reasonable risk parameters. Starting backtest.
+                            <div class="note-meta">Admin · 05 Jun 2026 · 14:46 UTC</div>
+                          </div>
+                          <div class="detail-note">
+                            Backtest complete. Results available for download.
+                            <div class="note-meta">Admin · 16 Jun 2026 · 12:01 UTC</div>
+                          </div>
+                        </div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Results</div>
+                          <div style="display:flex;gap:var(--ch-space-3);flex-wrap:wrap;">
+                            <button class="btn btn-amber btn-sm" onclick="alert('Download result mock — backend pending.')">Download Report (PDF)</button>
+                            <button class="btn btn-secondary btn-sm" onclick="alert('Download data mock — backend pending.')">Download Raw Data</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin-top:var(--ch-space-4);display:flex;justify-content:flex-end;">
+                      <button class="btn btn-ghost btn-sm" onclick="toggleDetail('detail-002', document.querySelector('[onclick*=\\'detail-002\\']'))">Close</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3 -->
+              <tr class="req-row" data-id="REQ-001">
+                <td><span class="req-id">REQ-001</span></td>
+                <td><span class="req-name">CL Momentum Daily</span></td>
+                <td><span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-500);">CL</span></td>
+                <td><span class="req-date">15 May 2026</span></td>
+                <td><span class="status-badge status-in-lavorazione"><span class="dot"></span>In Lavorazione</span></td>
+                <td>
+                  <div class="cell-actions">
+                    <button class="expand-btn" onclick="toggleDetail('detail-001', this)">View</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="detail-row" id="detail-001">
+                <td colspan="6">
+                  <div class="detail-cell">
+                    <div class="detail-grid">
+                      <div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Strategy Parameters</div>
+                          <div class="detail-param"><span class="param-label">Name</span><span class="param-value">CL Momentum Daily</span></div>
+                          <div class="detail-param"><span class="param-label">Instrument</span><span class="param-value">CL</span></div>
+                          <div class="detail-param"><span class="param-label">Timeframe</span><span class="param-value">Daily</span></div>
+                          <div class="detail-param"><span class="param-label">Direction</span><span class="param-value">Long only</span></div>
+                          <div class="detail-param"><span class="param-label">Period</span><span class="param-value">2023-01-01 → 2026-04-30</span></div>
+                          <div class="detail-param"><span class="param-label">Entry</span><span class="param-value">Close > SMA(50) and MACD line > signal</span></div>
+                          <div class="detail-param"><span class="param-label">Stop Loss</span><span class="param-value">2% of capital</span></div>
+                          <div class="detail-param"><span class="param-label">Take Profit</span><span class="param-value">4% of capital</span></div>
+                          <div class="detail-param"><span class="param-label">Contracts</span><span class="param-value">1</span></div>
+                          <div class="detail-param"><span class="param-label">Slippage</span><span class="param-value">1 tick</span></div>
+                          <div class="detail-param"><span class="param-label">Commission</span><span class="param-value">$2.50/side</span></div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Status History</div>
+                          <div class="timeline">
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">Inviata</div>
+                                <div class="timeline-date">15 May 2026 · 16:05 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">In Valutazione</div>
+                                <div class="timeline-date">16 May 2026 · 10:30 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot completed"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">Accettata</div>
+                                <div class="timeline-date">19 May 2026 · 09:15 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot current"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status">In Lavorazione</div>
+                                <div class="timeline-date">20 May 2026 · 08:00 UTC</div>
+                              </div>
+                            </div>
+                            <div class="timeline-item">
+                              <span class="timeline-dot pending"></span>
+                              <div class="timeline-info">
+                                <div class="timeline-status" style="color:var(--ch-gray-400);">Completata</div>
+                                <div class="timeline-date">— Pending</div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="detail-section" style="margin-top:var(--ch-space-4);">
+                          <div class="detail-section-title">Admin Notes</div>
+                          <div class="detail-note">
+                            Accepted and moved to workflow. Estimated completion: 2-3 weeks.
+                            <div class="note-meta">Admin · 19 May 2026 · 09:16 UTC</div>
+                          </div>
+                        </div>
+                        <div class="detail-section">
+                          <div class="detail-section-title">Attachments</div>
+                          <div style="display:flex;flex-direction:column;gap:var(--ch-space-2);">
+                            <div style="display:flex;align-items:center;justify-content:space-between;font-size:var(--ch-text-sm);padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-100);">
+                              <span style="color:var(--ch-gray-600);">trading_log.csv</span>
+                              <button class="btn btn-ghost btn-sm" onclick="alert('Download mock — backend pending.')">Download</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin-top:var(--ch-space-4);display:flex;justify-content:flex-end;">
+                      <button class="btn btn-ghost btn-sm" onclick="toggleDetail('detail-001', document.querySelector('[onclick*=\\'detail-001\\']'))">Close</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           TAB 3: PROFILE
+           ============================================================ -->
+      <div class="dash-tab-content" id="tab-profile">
+
+        <div style="margin-bottom:var(--ch-space-4);">
+          <div class="section-title">Profile</div>
+        </div>
+
+        <div class="ch-card profile-card">
+          <div class="ch-card-body">
+            <!-- Email -->
+            <div class="profile-field">
+              <span class="field-label">Email Address</span>
+              <div class="field-value">
+                user@example.com
+                <span class="status-badge status-completata" style="font-size:10px;padding:2px 8px;"><span class="dot"></span>Verified</span>
+              </div>
+            </div>
+
+            <hr class="profile-divider">
+
+            <!-- Member since -->
+            <div class="profile-field">
+              <span class="field-label">Member Since</span>
+              <div class="field-value">15 March 2026</div>
+            </div>
+
+            <hr class="profile-divider">
+
+            <!-- Change Password -->
+            <div>
+              <span class="field-label" style="display:block;margin-bottom:var(--ch-space-3);">Change Password</span>
+              <form class="password-form" onsubmit="event.preventDefault(); changePassword();">
+                <div class="form-row">
+                  <div class="input-group">
+                    <label class="input-label" for="currentPw">Current Password</label>
+                    <input class="input-field" id="currentPw" type="password" placeholder="Enter current password">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="input-group">
+                    <label class="input-label" for="newPw">New Password</label>
+                    <input class="input-field" id="newPw" type="password" placeholder="At least 8 characters">
+                  </div>
+                  <div class="input-group">
+                    <label class="input-label" for="confirmPw">Confirm New Password</label>
+                    <input class="input-field" id="confirmPw" type="password" placeholder="Confirm your new password">
+                  </div>
+                </div>
+                <div class="form-feedback" id="passwordFeedback"></div>
+                <div class="form-actions">
+                  <button class="btn btn-primary" type="submit">Update Password</button>
+                </div>
+              </form>
+            </div>
+
+            <hr class="profile-divider">
+
+            <!-- Newsletter -->
+            <div class="profile-field">
+              <span class="field-label">Newsletter</span>
+              <div class="field-value" style="justify-content:space-between;flex-wrap:wrap;">
+                <span>Stay notified when new research is published.</span>
+                <button class="btn btn-secondary btn-sm" onclick="alert('Newsletter toggle mock — backend pending (Sprint 4.1).')">Subscribed</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================================
+           EMPTY STATE (hidden by default, shown via JS toggle)
+           ============================================================ -->
+      <div class="empty-state" id="emptyState" style="display:none;margin-top:var(--ch-space-8);">
+        <div class="empty-state-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <h3>No submissions yet.</h3>
+        <p>Submit your first strategy to get started. Backtests typically take 3–10 business days.</p>
+        <button class="btn btn-primary btn-lg" onclick="alert('Redirect to wizard — Sprint 4.2 mock.')">Submit Your Strategy</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script>
+    /* ---- Tab Switching ---- */
+    function switchTab(tabName) {
+      // Update tabs
+      document.querySelectorAll('.dash-tab').forEach(function(t) {
+        t.classList.toggle('active', t.getAttribute('data-tab') === tabName);
+      });
+      // Update content
+      document.querySelectorAll('.dash-tab-content').forEach(function(c) {
+        c.classList.toggle('active', c.id === 'tab-' + tabName);
+      });
+      // Close mobile drawer if open
+      var drawer = document.getElementById('navDrawer');
+      if (drawer) drawer.classList.remove('open');
+    }
+
+    /* ---- Expandable Detail ---- */
+    function toggleDetail(detailId, btn) {
+      var row = document.getElementById(detailId);
+      if (!row) return;
+
+      var isOpen = row.classList.contains('open');
+      // Close all open details
+      document.querySelectorAll('.detail-row.open').forEach(function(r) {
+        r.classList.remove('open');
+      });
+      // Update all View buttons
+      document.querySelectorAll('.expand-btn').forEach(function(b) {
+        if (b.textContent.trim() === 'Close') b.textContent = 'View';
+      });
+
+      if (!isOpen) {
+        row.classList.add('open');
+        if (btn) btn.textContent = 'Close';
+        // Scroll the detail into view
+        setTimeout(function() {
+          row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    }
+
+    /* ---- Empty State Toggle ---- */
+    /* Uncomment the line below to show empty state instead of table data */
+    // window.addEventListener('DOMContentLoaded', function() { showEmptyState(); });
+
+    function showEmptyState() {
+      var table = document.getElementById('requestsTableWrapper');
+      var summary = document.getElementById('summaryCards');
+      var empty = document.getElementById('emptyState');
+      if (table) table.style.display = 'none';
+      if (summary) summary.style.display = 'none';
+      if (empty) empty.style.display = 'block';
+    }
+
+    function showDataState() {
+      var table = document.getElementById('requestsTableWrapper');
+      var summary = document.getElementById('summaryCards');
+      var empty = document.getElementById('emptyState');
+      if (table) table.style.display = '';
+      if (summary) summary.style.display = '';
+      if (empty) empty.style.display = 'none';
+    }
+
+    /* ---- Change Password Mock ---- */
+    function changePassword() {
+      var current = document.getElementById('currentPw').value;
+      var newPw = document.getElementById('newPw').value;
+      var confirm = document.getElementById('confirmPw').value;
+      var feedback = document.getElementById('passwordFeedback');
+
+      feedback.className = 'form-feedback';
+
+      if (!current) {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'Please enter your current password.';
+        return;
+      }
+      if (newPw.length < 8) {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'Password must be at least 8 characters.';
+        return;
+      }
+      if (newPw !== confirm) {
+        feedback.className = 'form-feedback error';
+        feedback.textContent = 'Passwords do not match.';
+        return;
+      }
+
+      // Mock success
+      feedback.className = 'form-feedback success';
+      feedback.textContent = 'Password updated successfully.';
+      document.getElementById('currentPw').value = '';
+      document.getElementById('newPw').value = '';
+      document.getElementById('confirmPw').value = '';
+
+      showToast('Password updated successfully.');
+    }
+
+    /* ---- Toast ---- */
+    function showToast(message) {
+      var toast = document.getElementById('toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(function() {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+  </script>
 </body>
 </html>

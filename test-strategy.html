@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Your Strategy — Capo Horn Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       ╔══════════════════════════════════════════════════════════╗
+       ║     CAPO HORN LAB — DESIGN TOKENS v1.0 (inlined)        ║
+       ╚══════════════════════════════════════════════════════════╝
+       ============================================================ */
+
+    :root {
+      --ch-navy-900: #0a1628;
+      --ch-navy-800: #0f1e36;
+      --ch-navy-700: #152a45;
+      --ch-navy-600: #1c3a5c;
+      --ch-navy-500: #254e77;
+      --ch-navy-400: #3b6fa0;
+      --ch-navy-300: #5e93c2;
+      --ch-navy-200: #8fb8da;
+      --ch-navy-100: #c1d6ec;
+      --ch-navy-50:  #e8f0f8;
+
+      --ch-white:       #ffffff;
+      --ch-off-white:   #f8fafc;
+      --ch-gray-50:     #f1f5f9;
+      --ch-gray-100:    #e2e8f0;
+      --ch-gray-200:    #cbd5e1;
+      --ch-gray-300:    #94a3b8;
+      --ch-gray-400:    #64748b;
+      --ch-gray-500:    #475569;
+      --ch-gray-600:    #334155;
+      --ch-gray-700:    #1e293b;
+      --ch-gray-800:    #0f172a;
+      --ch-gray-900:    #020617;
+
+      --ch-blue-500:    #2563eb;
+      --ch-blue-400:    #3b82f6;
+      --ch-blue-300:    #60a5fa;
+      --ch-blue-200:    #93c5fd;
+      --ch-blue-100:    #dbeafe;
+      --ch-blue-50:     #eff6ff;
+
+      --ch-amber-500:   #f59e0b;
+      --ch-amber-400:   #fbbf24;
+      --ch-amber-300:   #fcd34d;
+      --ch-amber-200:   #fde68a;
+      --ch-amber-100:   #fef3c7;
+      --ch-amber-50:    #fffbeb;
+
+      --ch-success:     #10b981;
+      --ch-warning:     #f59e0b;
+      --ch-error:       #ef4444;
+      --ch-info:        #3b82f6;
+
+      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+      --ch-text-xs:     0.75rem;
+      --ch-text-sm:     0.875rem;
+      --ch-text-base:   1rem;
+      --ch-text-lg:     1.125rem;
+      --ch-text-xl:     1.25rem;
+      --ch-text-2xl:    1.5rem;
+      --ch-text-3xl:    1.875rem;
+      --ch-text-4xl:    2.25rem;
+      --ch-text-5xl:    3rem;
+      --ch-text-6xl:    3.75rem;
+
+      --ch-leading-tight:   1.15;
+      --ch-leading-snug:    1.3;
+      --ch-leading-normal:  1.5;
+      --ch-leading-relaxed: 1.65;
+
+      --ch-font-light:      300;
+      --ch-font-regular:    400;
+      --ch-font-medium:     500;
+      --ch-font-semibold:   600;
+      --ch-font-bold:       700;
+      --ch-font-extrabold:  800;
+
+      --ch-letter-spacing-tight:  -0.025em;
+      --ch-letter-spacing-normal: 0em;
+      --ch-letter-spacing-wide:   0.05em;
+
+      --ch-space-1:     0.25rem;
+      --ch-space-2:     0.5rem;
+      --ch-space-3:     0.75rem;
+      --ch-space-4:     1rem;
+      --ch-space-5:     1.25rem;
+      --ch-space-6:     1.5rem;
+      --ch-space-8:     2rem;
+      --ch-space-10:    2.5rem;
+      --ch-space-12:    3rem;
+      --ch-space-16:    4rem;
+      --ch-space-20:    5rem;
+      --ch-space-24:    6rem;
+
+      --ch-radius-none:  0;
+      --ch-radius-sm:    0.25rem;
+      --ch-radius-md:    0.5rem;
+      --ch-radius-lg:    0.75rem;
+      --ch-radius-xl:    1rem;
+      --ch-radius-2xl:   1.5rem;
+      --ch-radius-full:  9999px;
+
+      --ch-shadow-xs:    0 1px 2px rgba(10, 22, 40, 0.05);
+      --ch-shadow-sm:    0 1px 3px rgba(10, 22, 40, 0.08), 0 1px 2px rgba(10, 22, 40, 0.04);
+      --ch-shadow-md:    0 4px 6px rgba(10, 22, 40, 0.07), 0 2px 4px rgba(10, 22, 40, 0.04);
+      --ch-shadow-lg:    0 10px 15px rgba(10, 22, 40, 0.08), 0 4px 6px rgba(10, 22, 40, 0.03);
+      --ch-shadow-xl:    0 20px 25px rgba(10, 22, 40, 0.10), 0 8px 10px rgba(10, 22, 40, 0.04);
+      --ch-shadow-2xl:   0 25px 50px rgba(10, 22, 40, 0.15);
+      --ch-shadow-glow-blue:  0 0 20px rgba(37, 99, 235, 0.25);
+      --ch-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.25);
+
+      --ch-transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-spring:  500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      --ch-z-base:      1;
+      --ch-z-dropdown:  10;
+      --ch-z-sticky:    100;
+      --ch-z-nav:       1000;
+
+      --ch-max-width:   1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      line-height: var(--ch-leading-normal);
+      color: var(--ch-gray-800);
+      background: var(--ch-off-white);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+    }
+
+    /* ---- KEYFRAMES ---- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; }
+      50%      { opacity: 0.8; }
+    }
+
+    .animate-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+    .animate-up-d1 { animation-delay: 0.1s; }
+    .animate-up-d2 { animation-delay: 0.2s; }
+    .animate-up-d3 { animation-delay: 0.3s; }
+    .animate-up-d4 { animation-delay: 0.4s; }
+    .animate-up-d5 { animation-delay: 0.5s; }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+    .ch-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--ch-space-4) var(--ch-space-6);
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      box-shadow: var(--ch-shadow-md);
+      position: sticky;
+      top: 0;
+      z-index: var(--ch-z-nav);
+    }
+
+    .ch-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .ch-nav-brand {
+      font-size: var(--ch-text-lg);
+      font-weight: var(--ch-font-bold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .ch-nav-brand .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+    }
+
+    .ch-nav-links a {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-2) var(--ch-space-4);
+      border-radius: var(--ch-radius-md);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .ch-nav-links a:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--ch-white);
+    }
+
+    .ch-nav-links a.active {
+      color: var(--ch-white);
+      background: rgba(37,99,235,0.2);
+    }
+
+    .ch-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+
+    .nav-toggle svg { width: 24px; height: 24px; }
+
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--ch-navy-900);
+      z-index: 9999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-8);
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .nav-drawer.open { display: flex; }
+
+    .nav-drawer a {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-navy-200);
+      transition: color var(--ch-transition-fast);
+    }
+    .nav-drawer a:hover { color: var(--ch-white); }
+
+    .nav-drawer-close {
+      position: absolute;
+      top: var(--ch-space-6);
+      right: var(--ch-space-6);
+      background: none;
+      border: none;
+      color: var(--ch-white);
+      cursor: pointer;
+      padding: var(--ch-space-2);
+    }
+    .nav-drawer-close svg { width: 28px; height: 28px; }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ch-space-2);
+      font-family: var(--ch-font-sans);
+      font-weight: var(--ch-font-semibold);
+      font-size: var(--ch-text-sm);
+      line-height: 1;
+      padding: var(--ch-space-3) var(--ch-space-6);
+      border: 1px solid transparent;
+      border-radius: var(--ch-radius-md);
+      cursor: pointer;
+      transition:
+        background var(--ch-transition-fast),
+        color var(--ch-transition-fast),
+        border-color var(--ch-transition-fast),
+        box-shadow var(--ch-transition-fast);
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--ch-blue-400);
+      border-color: var(--ch-blue-400);
+      box-shadow: var(--ch-shadow-glow-blue);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ch-blue-500);
+      border-color: var(--ch-blue-500);
+    }
+    .btn-secondary:hover {
+      background: var(--ch-blue-50);
+      border-color: var(--ch-blue-400);
+      color: var(--ch-blue-400);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ch-gray-400);
+      border-color: transparent;
+    }
+    .btn-ghost:hover {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-700);
+    }
+
+    .btn-amber {
+      background: var(--ch-amber-500);
+      color: var(--ch-navy-900);
+      border-color: var(--ch-amber-500);
+    }
+    .btn-amber:hover {
+      background: var(--ch-amber-400);
+      border-color: var(--ch-amber-400);
+      box-shadow: var(--ch-shadow-glow-amber);
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--ch-white);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .btn-outline-light:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .btn-disabled,
+    .btn:disabled {
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-300);
+      border-color: var(--ch-gray-100);
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn-sm  { padding: var(--ch-space-2) var(--ch-space-4); font-size: var(--ch-text-xs); }
+    .btn-lg  { padding: var(--ch-space-4) var(--ch-space-8); font-size: var(--ch-text-base); }
+
+    /* ============================================================
+       INPUTS
+       ============================================================ */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-1);
+    }
+
+    .input-label {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-600);
+    }
+
+    .input-label .required {
+      color: var(--ch-error);
+      margin-left: 2px;
+    }
+
+    .input-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      outline: none;
+      width: 100%;
+    }
+
+    .input-field::placeholder { color: var(--ch-gray-300); }
+
+    .input-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .input-field.error {
+      border-color: var(--ch-error);
+    }
+    .input-field.error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+    }
+
+    .input-help {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+    }
+
+    .input-help.error { color: var(--ch-error); }
+
+    .select-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      outline: none;
+      width: 100%;
+      cursor: pointer;
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+    }
+
+    .select-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .textarea-field {
+      font-family: var(--ch-font-sans);
+      font-size: var(--ch-text-base);
+      padding: var(--ch-space-3) var(--ch-space-4);
+      border: 1px solid var(--ch-gray-200);
+      border-radius: var(--ch-radius-md);
+      background: var(--ch-white);
+      color: var(--ch-gray-800);
+      outline: none;
+      width: 100%;
+      min-height: 100px;
+      resize: vertical;
+      transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
+    }
+
+    .textarea-field:focus {
+      border-color: var(--ch-blue-500);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* ============================================================
+       SECTION HEADER
+       ============================================================ */
+    .section {
+      padding: var(--ch-space-12) 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--ch-space-10);
+    }
+
+    .section-header h2 {
+      font-size: var(--ch-text-3xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      margin-bottom: var(--ch-space-3);
+    }
+
+    .section-header p {
+      font-size: var(--ch-text-base);
+      color: var(--ch-gray-400);
+      line-height: var(--ch-leading-relaxed);
+    }
+
+    .section-header .overline {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-blue-500);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-3);
+      display: block;
+    }
+
+    .section-alt { background: var(--ch-white); }
+    .section-dark {
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+    }
+    .section-dark .section-header h2 { color: var(--ch-white); }
+    .section-dark .section-header p { color: var(--ch-navy-200); }
+    .section-dark .section-header .overline { color: var(--ch-amber-400); }
+
+    /* ============================================================
+       PRE-AUTH HERO
+       ============================================================ */
+    .preauth-hero {
+      position: relative;
+      background: var(--ch-navy-900);
+      color: var(--ch-white);
+      overflow: hidden;
+      padding: var(--ch-space-16) 0 var(--ch-space-12);
+    }
+
+    .preauth-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37,99,235,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 70% at 80% 60%, rgba(245,158,11,0.06) 0%, transparent 60%),
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 40px,
+          rgba(255,255,255,0.012) 40px,
+          rgba(255,255,255,0.012) 41px
+        );
+      pointer-events: none;
+    }
+
+    .preauth-hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .preauth-content {
+      position: relative;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 var(--ch-space-6);
+    }
+
+    .preauth-content h1 {
+      font-size: var(--ch-text-4xl);
+      font-weight: var(--ch-font-extrabold);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      line-height: var(--ch-leading-tight);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .preauth-content p {
+      font-size: var(--ch-text-lg);
+      color: var(--ch-navy-200);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 600px;
+      margin: 0 auto var(--ch-space-8);
+    }
+
+    .preauth-actions {
+      display: flex;
+      justify-content: center;
+      gap: var(--ch-space-4);
+      flex-wrap: wrap;
+    }
+
+    .preauth-login-link {
+      display: block;
+      margin-top: var(--ch-space-4);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-300);
+    }
+    .preauth-login-link a {
+      color: var(--ch-blue-300);
+      text-decoration: underline;
+      transition: color var(--ch-transition-fast);
+    }
+    .preauth-login-link a:hover { color: var(--ch-blue-200); }
+
+    /* ============================================================
+       WIZARD LAYOUT
+       ============================================================ */
+    .wizard-section {
+      background: var(--ch-off-white);
+      padding: var(--ch-space-12) 0;
+    }
+
+    .wizard-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: var(--ch-space-8);
+      align-items: start;
+    }
+
+    /* ---- Step Progress Sidebar ---- */
+    .wizard-progress {
+      position: sticky;
+      top: 90px;
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-6);
+      box-shadow: var(--ch-shadow-sm);
+    }
+
+    .wizard-progress-title {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-4);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+    }
+
+    .wizard-step-item {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+      padding: var(--ch-space-2) var(--ch-space-3);
+      border-radius: var(--ch-radius-md);
+      margin-bottom: var(--ch-space-1);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-400);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+      cursor: default;
+    }
+
+    .wizard-step-item.active {
+      background: var(--ch-blue-50);
+      color: var(--ch-blue-500);
+      font-weight: var(--ch-font-semibold);
+    }
+
+    .wizard-step-item.completed {
+      color: var(--ch-success);
+    }
+
+    .wizard-step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-bold);
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-400);
+      flex-shrink: 0;
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .wizard-step-item.active .wizard-step-number {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+    }
+
+    .wizard-step-item.completed .wizard-step-number {
+      background: #d1fae5;
+      color: var(--ch-success);
+    }
+
+    .wizard-step-label {
+      line-height: var(--ch-leading-snug);
+    }
+    .wizard-step-label small {
+      display: block;
+      font-size: 11px;
+      color: var(--ch-gray-400);
+      font-weight: var(--ch-font-regular);
+    }
+
+    /* ---- Wizard Panel ---- */
+    .wizard-panel {
+      background: var(--ch-white);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-xl);
+      box-shadow: var(--ch-shadow-sm);
+      overflow: hidden;
+    }
+
+    .wizard-panel-header {
+      padding: var(--ch-space-8) var(--ch-space-8) 0;
+    }
+
+    .wizard-panel-header h2 {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .wizard-panel-header p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-400);
+      line-height: var(--ch-leading-relaxed);
+    }
+
+    .wizard-panel-body {
+      padding: var(--ch-space-8);
+    }
+
+    .wizard-panel-footer {
+      padding: var(--ch-space-4) var(--ch-space-8);
+      border-top: 1px solid var(--ch-gray-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--ch-space-3);
+    }
+
+    .wizard-step-actions {
+      display: flex;
+      gap: var(--ch-space-3);
+    }
+
+    .wizard-step-indicator {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      font-family: var(--ch-font-mono);
+    }
+
+    /* ---- Form Grid ---- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ch-space-6);
+    }
+
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* ---- Guidance Box ---- */
+    .guidance-box {
+      background: var(--ch-blue-50);
+      border: 1px solid var(--ch-blue-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-6);
+      margin-bottom: var(--ch-space-6);
+      display: flex;
+      gap: var(--ch-space-4);
+    }
+
+    .guidance-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: var(--ch-blue-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--ch-text-lg);
+    }
+
+    .guidance-text {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-600);
+      line-height: var(--ch-leading-relaxed);
+    }
+
+    .guidance-text strong {
+      color: var(--ch-navy-900);
+    }
+
+    /* ---- Upload Zone ---- */
+    .upload-zone {
+      border: 2px dashed var(--ch-gray-200);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-8);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--ch-transition-fast), background var(--ch-transition-fast);
+    }
+
+    .upload-zone:hover {
+      border-color: var(--ch-blue-400);
+      background: var(--ch-blue-50);
+    }
+
+    .upload-zone-icon {
+      font-size: 2rem;
+      margin-bottom: var(--ch-space-3);
+      color: var(--ch-gray-300);
+    }
+
+    .upload-zone-text {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-500);
+    }
+
+    .upload-zone-text strong {
+      color: var(--ch-blue-500);
+    }
+
+    .upload-zone-hint {
+      font-size: var(--ch-text-xs);
+      color: var(--ch-gray-400);
+      margin-top: var(--ch-space-2);
+    }
+
+    .upload-list {
+      margin-top: var(--ch-space-4);
+    }
+
+    .upload-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--ch-space-3) var(--ch-space-4);
+      background: var(--ch-gray-50);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-md);
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .upload-item-info {
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-3);
+      font-size: var(--ch-text-sm);
+    }
+
+    .upload-item-info .file-icon {
+      font-size: var(--ch-text-lg);
+    }
+
+    .upload-item-name {
+      font-weight: var(--ch-font-medium);
+      color: var(--ch-gray-700);
+    }
+
+    .upload-item-size {
+      color: var(--ch-gray-400);
+      font-size: var(--ch-text-xs);
+    }
+
+    .upload-item-remove {
+      background: none;
+      border: none;
+      color: var(--ch-gray-400);
+      cursor: pointer;
+      padding: var(--ch-space-1);
+      border-radius: var(--ch-radius-sm);
+      transition: color var(--ch-transition-fast), background var(--ch-transition-fast);
+    }
+    .upload-item-remove:hover {
+      color: var(--ch-error);
+      background: rgba(239,68,68,0.08);
+    }
+
+    /* ---- Review Card ---- */
+    .review-card {
+      background: var(--ch-gray-50);
+      border: 1px solid var(--ch-gray-100);
+      border-radius: var(--ch-radius-lg);
+      padding: var(--ch-space-6);
+      margin-bottom: var(--ch-space-6);
+    }
+
+    .review-card-title {
+      font-size: var(--ch-text-base);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-4);
+      padding-bottom: var(--ch-space-3);
+      border-bottom: 1px solid var(--ch-gray-100);
+    }
+
+    .review-row {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--ch-space-2) 0;
+      font-size: var(--ch-text-sm);
+      gap: var(--ch-space-4);
+    }
+
+    .review-row + .review-row {
+      border-top: 1px solid var(--ch-gray-100);
+    }
+
+    .review-label {
+      color: var(--ch-gray-500);
+      flex-shrink: 0;
+    }
+
+    .review-value {
+      color: var(--ch-gray-800);
+      font-weight: var(--ch-font-medium);
+      text-align: right;
+    }
+
+    .review-value .truncate {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      max-width: 300px;
+    }
+
+    /* ---- Post-Submission ---- */
+    .submission-confirmation {
+      text-align: center;
+      padding: var(--ch-space-12) var(--ch-space-6);
+    }
+
+    .submission-confirmation .check-icon {
+      width: 64px;
+      height: 64px;
+      background: #d1fae5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--ch-space-6);
+      font-size: 1.75rem;
+      color: var(--ch-success);
+    }
+
+    .submission-confirmation h2 {
+      font-size: var(--ch-text-2xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-navy-900);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .submission-confirmation p {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-500);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 500px;
+      margin: 0 auto var(--ch-space-4);
+    }
+
+    .submission-steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ch-space-3);
+      max-width: 480px;
+      margin: var(--ch-space-6) auto;
+      text-align: left;
+    }
+
+    .submission-step {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--ch-space-3);
+      font-size: var(--ch-text-sm);
+      color: var(--ch-gray-600);
+      line-height: var(--ch-leading-snug);
+    }
+
+    .submission-step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: var(--ch-blue-100);
+      color: var(--ch-blue-500);
+      border-radius: 50%;
+      font-family: var(--ch-font-mono);
+      font-size: 11px;
+      font-weight: var(--ch-font-bold);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .submission-id {
+      font-family: var(--ch-font-mono);
+      font-size: var(--ch-text-sm);
+      background: var(--ch-gray-100);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-md);
+      color: var(--ch-gray-600);
+      display: inline-block;
+      margin: var(--ch-space-2) 0 var(--ch-space-6);
+    }
+
+    /* ---- CHIP / Tag ---- */
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ch-space-2);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--ch-space-1);
+      font-size: var(--ch-text-xs);
+      font-weight: var(--ch-font-medium);
+      padding: var(--ch-space-1) var(--ch-space-3);
+      border-radius: var(--ch-radius-full);
+      background: var(--ch-gray-100);
+      color: var(--ch-gray-600);
+      cursor: pointer;
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .chip:hover {
+      background: var(--ch-blue-100);
+      color: var(--ch-blue-500);
+    }
+
+    .chip.selected {
+      background: var(--ch-blue-500);
+      color: var(--ch-white);
+    }
+
+    /* ---- FOOTER ---- */
+    .ch-footer {
+      background: var(--ch-navy-900);
+      color: var(--ch-navy-200);
+      padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ch-footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(37,99,235,0.4), transparent);
+    }
+
+    .ch-footer-grid {
+      max-width: var(--ch-max-width);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--ch-space-8);
+    }
+
+    .ch-footer-brand {
+      font-size: var(--ch-text-xl);
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+      margin-bottom: var(--ch-space-3);
+      letter-spacing: var(--ch-letter-spacing-tight);
+      display: flex;
+      align-items: center;
+      gap: var(--ch-space-2);
+    }
+
+    .ch-footer-brand .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      border-radius: var(--ch-radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--ch-font-mono);
+      font-size: 10px;
+      font-weight: var(--ch-font-bold);
+      color: var(--ch-white);
+    }
+
+    .ch-footer-tagline {
+      font-size: var(--ch-text-sm);
+      line-height: var(--ch-leading-relaxed);
+      max-width: 300px;
+    }
+
+    .ch-footer h4 {
+      font-size: var(--ch-text-sm);
+      font-weight: var(--ch-font-semibold);
+      color: var(--ch-white);
+      text-transform: uppercase;
+      letter-spacing: var(--ch-letter-spacing-wide);
+      margin-bottom: var(--ch-space-4);
+    }
+
+    .ch-footer ul li {
+      margin-bottom: var(--ch-space-2);
+    }
+
+    .ch-footer ul li a {
+      font-size: var(--ch-text-sm);
+      color: var(--ch-navy-300);
+      transition: color var(--ch-transition-fast);
+    }
+
+    .ch-footer ul li a:hover {
+      color: var(--ch-amber-400);
+    }
+
+    .ch-footer-bottom {
+      max-width: var(--ch-max-width);
+      margin: var(--ch-space-12) auto 0;
+      padding-top: var(--ch-space-6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--ch-text-xs);
+      flex-wrap: wrap;
+      gap: var(--ch-space-4);
+    }
+
+    .ch-footer-bottom .disclaimer {
+      color: var(--ch-gray-500);
+      max-width: 500px;
+    }
+
+    .ch-footer-social {
+      display: flex;
+      gap: var(--ch-space-3);
+      margin-top: var(--ch-space-4);
+    }
+
+    .ch-footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--ch-radius-md);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ch-navy-300);
+      font-size: var(--ch-text-sm);
+      transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
+    }
+
+    .ch-footer-social a:hover {
+      background: rgba(37,99,235,0.15);
+      color: var(--ch-white);
+    }
+
+    /* ============================================================
+       WAVE DIVIDER
+       ============================================================ */
+    .wave-divider {
+      height: 40px;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .wave-divider::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 20px,
+        rgba(37,99,235,0.06) 20px,
+        rgba(37,99,235,0.06) 22px,
+        transparent 22px,
+        transparent 40px
+      );
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+      mask-size: 1200px 100%;
+      mask-repeat: repeat-x;
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E");
+      -webkit-mask-size: 1200px 100%;
+      -webkit-mask-repeat: repeat-x;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (min-width: 768px) {
+      .ch-nav { padding: var(--ch-space-4) var(--ch-space-8); }
+      .section { padding: var(--ch-space-16) 0; }
+      .preauth-hero { padding: var(--ch-space-20) 0 var(--ch-space-16); }
+      .preauth-content h1 { font-size: var(--ch-text-5xl); }
+      .wizard-section { padding: var(--ch-space-16) 0; }
+    }
+
+    @media (min-width: 1024px) {
+      .preauth-hero { padding: var(--ch-space-24) 0 var(--ch-space-20); }
+      .preauth-content h1 { font-size: var(--ch-text-5xl); }
+      .section { padding: var(--ch-space-20) 0; }
+      .section-header h2 { font-size: var(--ch-text-4xl); }
+    }
+
+    @media (max-width: 767px) {
+      .ch-nav-links { display: none; }
+      .ch-nav-actions .btn { display: none; }
+      .nav-toggle { display: block; }
+
+      .preauth-content h1 { font-size: var(--ch-text-3xl); }
+      .preauth-content p { font-size: var(--ch-text-base); }
+
+      .wizard-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .wizard-progress {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--ch-space-2);
+        padding: var(--ch-space-4);
+      }
+
+      .wizard-progress-title {
+        display: none;
+      }
+
+      .wizard-step-item {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--ch-space-2);
+        gap: var(--ch-space-1);
+      }
+
+      .wizard-step-label {
+        font-size: 10px;
+      }
+      .wizard-step-label small {
+        display: none;
+      }
+
+      .wizard-panel-header { padding: var(--ch-space-6) var(--ch-space-6) 0; }
+      .wizard-panel-body { padding: var(--ch-space-6); }
+      .wizard-panel-footer {
+        padding: var(--ch-space-4) var(--ch-space-6);
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
+      .wizard-step-actions {
+        flex-direction: column-reverse;
+        width: 100%;
+      }
+      .wizard-step-actions .btn { width: 100%; }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .guidance-box {
+        flex-direction: column;
+        gap: var(--ch-space-3);
+      }
+
+      .ch-footer-grid { grid-template-columns: 1fr; gap: var(--ch-space-6); }
+      .ch-footer-bottom { flex-direction: column; text-align: center; }
+
+      .wizard-step-indicator {
+        text-align: center;
+        width: 100%;
+      }
+
+      .submission-steps {
+        padding: 0 var(--ch-space-4);
+      }
+
+      .review-row {
+        flex-direction: column;
+        gap: 2px;
+      }
+      .review-value { text-align: left; }
+      .review-value .truncate { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+       ============================================================ -->
+  <nav class="ch-nav">
+    <div class="container">
+      <div class="ch-nav-brand">
+        <div class="brand-icon">CH</div>
+        Capo Horn Lab
+      </div>
+      <div class="ch-nav-links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="method.html">Method</a>
+        <a href="research.html">Research</a>
+        <a href="test-strategy.html"" class="active">Test Strategy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="ch-nav-actions">
+        <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+        <button class="btn btn-primary btn-sm">Sign Up</button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="document.getElementById('navDrawer').classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <a href="home.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
+    <a href="about.html" onclick="document.getElementById('navDrawer').classList.remove('open')">About</a>
+    <a href="method.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Method</a>
+    <a href="research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
+    <a href="test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
+    <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
+    <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
+      <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PRE-AUTH HERO (Anonymous Visitor)
+       ============================================================ -->
+  <section class="preauth-hero" id="preauthHero">
+    <div class="preauth-hero-grid"></div>
+    <div class="preauth-content animate-up">
+      <h1>Test Your Strategy</h1>
+      <p>
+        Describe your strategy. We will backtest it on tick-level historical data.
+        You get a full quantitative report with equity curve, Sharpe ratio,
+        drawdown analysis, and Monte Carlo simulation.
+      </p>
+      <div class="preauth-actions animate-up-d2">
+        <button class="btn btn-primary btn-lg" onclick="showWizard()">Sign Up to Submit</button>
+        <button class="btn btn-outline-light btn-lg" onclick="showAuth('login')">Log In</button>
+      </div>
+      <p class="preauth-login-link animate-up-d3">
+        Already have an account? <a href="dashboard.html"" onclick="showAuth('login')">Log In →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WIZARD (7-Step — shown after auth)
+       ============================================================ -->
+  <section class="wizard-section" id="wizardSection" style="display:none;">
+    <div class="container">
+      <div class="section-header animate-up">
+        <span class="overline">Wizard</span>
+        <h2>Test Your Strategy</h2>
+        <p>Complete all 7 steps to submit your strategy for quantitative backtesting.</p>
+      </div>
+
+      <div class="wizard-layout">
+        <!-- Step Progress Sidebar -->
+        <aside class="wizard-progress animate-up-d1" id="wizardProgress">
+          <div class="wizard-progress-title">Progress</div>
+
+          <div class="wizard-step-item active" data-step="1">
+            <span class="wizard-step-number">1</span>
+            <span class="wizard-step-label">Identity <small>Strategy Basics</small></span>
+          </div>
+          <div class="wizard-step-item" data-step="2">
+            <span class="wizard-step-number">2</span>
+            <span class="wizard-step-label">Time <small>Settings</small></span>
+          </div>
+          <div class="wizard-step-item" data-step="3">
+            <span class="wizard-step-number">3</span>
+            <span class="wizard-step-label">Entry <small>Rules</small></span>
+          </div>
+          <div class="wizard-step-item" data-step="4">
+            <span class="wizard-step-number">4</span>
+            <span class="wizard-step-label">Exit <small>Rules</small></span>
+          </div>
+          <div class="wizard-step-item" data-step="5">
+            <span class="wizard-step-number">5</span>
+            <span class="wizard-step-label">Execution <small>Parameters</small></span>
+          </div>
+          <div class="wizard-step-item" data-step="6">
+            <span class="wizard-step-number">6</span>
+            <span class="wizard-step-label">Attachments <small>Files &amp; Notes</small></span>
+          </div>
+          <div class="wizard-step-item" data-step="7">
+            <span class="wizard-step-number">7</span>
+            <span class="wizard-step-label">Review <small>&amp; Submit</small></span>
+          </div>
+        </aside>
+
+        <!-- Wizard Panel -->
+        <div class="wizard-panel animate-up-d2">
+
+          <!-- ============================================================
+               STEP 1 — Strategy Identity
+               ============================================================ -->
+          <div class="wizard-step" id="step1">
+            <div class="wizard-panel-header">
+              <h2>Strategy Identity</h2>
+              <p>Tell us about your strategy — its name, logic, and what it trades.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Precision matters.</strong> A strategy described as "buy when it goes up" cannot be tested. A strategy described as "enter long when the 20-period SMA crosses above the 50-period SMA on the 5-minute chart" can. The more specific you are, the more accurate your results will be.
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="input-group full-width">
+                  <label class="input-label">Strategy Name <span class="required">*</span></label>
+                  <input class="input-field" type="text" placeholder="e.g. Breakout ES 1m" id="s1_name">
+                  <span class="input-help">Choose a descriptive name for your strategy. This is how it will appear in your dashboard.</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Brief Description <span class="required">*</span></label>
+                  <textarea class="textarea-field" placeholder="Describe your strategy's logic in plain language" id="s1_desc" style="min-height:90px;"></textarea>
+                  <span class="input-help">What is the core idea behind this strategy? Be as specific as possible. This helps us understand intent before we touch the parameters.</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Asset Class <span class="required">*</span></label>
+                  <select class="select-field" id="s1_asset">
+                    <option value="">Select...</option>
+                    <option value="futures">Futures</option>
+                  </select>
+                  <span class="input-help">Which asset class does your strategy trade?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Instrument(s) <span class="required">*</span></label>
+                  <select class="select-field" id="s1_instrument">
+                    <option value="">Select...</option>
+                    <option value="ES">ES — S&amp;P 500 E-mini</option>
+                    <option value="NQ">NQ — Nasdaq-100 E-mini</option>
+                    <option value="CL">CL — Crude Oil</option>
+                    <option value="6E">6E — Euro FX</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <span class="input-help">Which instrument(s) does your strategy trade?</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Direction <span class="required">*</span></label>
+                  <div class="chip-group" id="s1_direction">
+                    <span class="chip" data-value="long">Long only</span>
+                    <span class="chip" data-value="short">Short only</span>
+                    <span class="chip" data-value="both">Both</span>
+                  </div>
+                  <span class="input-help">Does your strategy take long positions, short positions, or both?</span>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 1 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STEP 2 — Time Settings
+               ============================================================ -->
+          <div class="wizard-step" id="step2" style="display:none;">
+            <div class="wizard-panel-header">
+              <h2>Time Settings</h2>
+              <p>Define the timeframe, historical period, and trading sessions.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Choose your period thoughtfully.</strong> Include enough data for statistical significance — typically 2+ years for daily strategies, 6+ months for intraday. The system will default to maximum available data if you leave the range open.
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="input-group">
+                  <label class="input-label">Timeframe <span class="required">*</span></label>
+                  <select class="select-field" id="s2_timeframe">
+                    <option value="">Select...</option>
+                    <option value="1m">1 minute</option>
+                    <option value="5m">5 minutes</option>
+                    <option value="15m">15 minutes</option>
+                    <option value="1h">1 hour</option>
+                    <option value="daily">Daily</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                  <span class="input-help">On what bar resolution does your strategy operate?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Session Times</label>
+                  <select class="select-field" id="s2_session">
+                    <option value="">Select...</option>
+                    <option value="rth">Regular (RTH)</option>
+                    <option value="eth">Electronic (ETH)</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                  <span class="input-help">During which trading session(s) does your strategy take signals?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Start Date <span class="required">*</span></label>
+                  <input class="input-field" type="date" id="s2_start">
+                  <span class="input-help">When should the backtest period begin?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">End Date <span class="required">*</span></label>
+                  <input class="input-field" type="date" id="s2_end">
+                  <span class="input-help">When should the backtest period end?</span>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 2 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-ghost" onclick="prevStep(2)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STEP 3 — Entry Rules
+               ============================================================ -->
+          <div class="wizard-step" id="step3" style="display:none;">
+            <div class="wizard-panel-header">
+              <h2>Entry Rules</h2>
+              <p>Describe the conditions that trigger a position entry.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Detail is better than brevity.</strong> If your strategy uses multiple indicators, list them all. If there is a sequence (e.g. "first check A, then wait for B"), describe it. Ambiguous rules produce ambiguous results.
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="input-group full-width">
+                  <label class="input-label">Entry Trigger <span class="required">*</span></label>
+                  <textarea class="textarea-field" placeholder="Describe the condition that triggers an entry" id="s3_trigger" style="min-height:100px;"></textarea>
+                  <span class="input-help">What specific market condition must be met before you enter? Include indicator values, price levels, or pattern recognition logic. Be precise — "RSI below 30 and price closes above SMA(20)" is clearer than "oversold condition."</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Indicators &amp; Parameters</label>
+                  <textarea class="textarea-field" placeholder="e.g. SMA(20), RSI(14), Bollinger(20,2)" id="s3_indicators" style="min-height:70px;"></textarea>
+                  <span class="input-help">Which indicators does your strategy use, and what are their specific parameters?</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Filter Conditions</label>
+                  <textarea class="textarea-field" placeholder="(optional) e.g. only enter if ADX > 25, skip first 30 minutes of session" id="s3_filters" style="min-height:70px;"></textarea>
+                  <span class="input-help">Any additional filters that must be true before entry?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Max Positions per Day</label>
+                  <input class="input-field" type="number" placeholder="(number)" id="s3_maxpos" min="0">
+                  <span class="input-help">Maximum number of entries per trading day.</span>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 3 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-ghost" onclick="prevStep(3)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(3)">Continue →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STEP 4 — Exit Rules
+               ============================================================ -->
+          <div class="wizard-step" id="step4" style="display:none;">
+            <div class="wizard-panel-header">
+              <h2>Exit Rules</h2>
+              <p>Define how and when positions are closed.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Define risk before reward.</strong> A stop loss is required for every strategy. Take profit, trailing stops, and break-even logic are optional but recommended — they define how the strategy manages open positions.
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="input-group full-width">
+                  <label class="input-label">Stop Loss <span class="required">*</span></label>
+                  <input class="input-field" type="text" placeholder="e.g. 10 ticks, $500, 2% of account" id="s4_sl">
+                  <span class="input-help">How does your strategy define the maximum acceptable loss per trade?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Take Profit</label>
+                  <input class="input-field" type="text" placeholder="e.g. 20 ticks, $1,000, 3:1 reward:risk" id="s4_tp">
+                  <span class="input-help">At what profit level does the strategy exit?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Trailing Stop</label>
+                  <input class="input-field" type="text" placeholder="(optional) Describe trail distance and activation" id="s4_trailing">
+                  <span class="input-help">Does the strategy use a trailing stop? If so, describe the trail distance and activation condition.</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Break-Even Move</label>
+                  <input class="input-field" type="text" placeholder="(optional) e.g. move SL to BE after +5 ticks" id="s4_be">
+                  <span class="input-help">Does the strategy move the stop to break-even after a certain profit level?</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Time-Based Exit</label>
+                  <input class="input-field" type="text" placeholder="(optional) e.g. exit all positions 5 minutes before session close" id="s4_timeexit">
+                  <span class="input-help">Does the strategy exit based on time rather than price?</span>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 4 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-ghost" onclick="prevStep(4)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(4)">Continue →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STEP 5 — Execution Parameters
+               ============================================================ -->
+          <div class="wizard-step" id="step5" style="display:none;">
+            <div class="wizard-panel-header">
+              <h2>Execution Parameters</h2>
+              <p>Set contract sizes, costs, and execution details.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Honest slippage matters.</strong> The biggest gap between backtest and live trading is execution. Using 0 slippage and $0 commissions will produce beautiful equity curves that do not survive real markets. Be realistic.
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="input-group">
+                  <label class="input-label">Contracts per Trade <span class="required">*</span></label>
+                  <input class="input-field" type="number" placeholder="1" id="s5_contracts" min="1">
+                  <span class="input-help">How many contracts does your strategy trade per entry?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Position Sizing</label>
+                  <select class="select-field" id="s5_sizing">
+                    <option value="">Select...</option>
+                    <option value="fixed">Fixed contracts</option>
+                    <option value="pct">Percentage of capital</option>
+                    <option value="risk">Risk-based (% of equity)</option>
+                  </select>
+                  <span class="input-help">How is position size determined?</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Commission per Side <span class="required">*</span></label>
+                  <input class="input-field" type="text" placeholder="Default: $2.50" id="s5_commission">
+                  <span class="input-help">Commission cost per contract per side. Default reflects standard retail futures brokerage.</span>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Slippage per Entry <span class="required">*</span></label>
+                  <input class="input-field" type="text" placeholder="Default varies by instrument" id="s5_slippage">
+                  <span class="input-help">Expected slippage in ticks. Default: 1 tick (ES), 2 ticks (NQ). Adjust if you have empirical data on your fill quality.</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Order Type</label>
+                  <select class="select-field" id="s5_ordertype">
+                    <option value="">Select...</option>
+                    <option value="market">Market</option>
+                    <option value="limit">Limit (specify offset)</option>
+                    <option value="stop">Stop (specify trigger)</option>
+                  </select>
+                  <span class="input-help">What order type does your strategy use to enter and exit?</span>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 5 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-ghost" onclick="prevStep(5)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(5)">Continue →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STEP 6 — Attachments & Notes
+               ============================================================ -->
+          <div class="wizard-step" id="step6" style="display:none;">
+            <div class="wizard-panel-header">
+              <h2>Attachments &amp; Notes</h2>
+              <p>Upload supporting files and add any additional information.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Context helps interpretation.</strong> If you have existing trading logs, spreadsheet models, or indicator screenshots, include them. They help us understand your intent.
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="input-group full-width">
+                  <label class="input-label">Files</label>
+                  <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-zone-icon">📁</div>
+                    <div class="upload-zone-text">
+                      <strong>Click to upload</strong> or drag and drop<br>
+                      Max 5 files, 10MB each
+                    </div>
+                    <div class="upload-zone-hint">Accepted formats: PDF, PNG, JPG, CSV, TXT</div>
+                  </div>
+                  <input type="file" id="fileInput" multiple accept=".pdf,.png,.jpg,.jpeg,.csv,.txt" style="display:none;" onchange="handleFiles(this.files)">
+                  <div class="upload-list" id="uploadList"></div>
+                  <span class="input-help">Upload any supporting material: screenshots of your strategy rules, spreadsheets, indicator configurations, or existing backtest results.</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Additional Notes</label>
+                  <textarea class="textarea-field" placeholder="(optional) Anything else we should know about your strategy that does not fit into the fields above?" id="s6_notes" style="min-height:120px;"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 6 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-ghost" onclick="prevStep(6)">← Back</button>
+                <button class="btn btn-primary" onclick="nextStep(6)">Continue →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STEP 7 — Review & Submit
+               ============================================================ -->
+          <div class="wizard-step" id="step7" style="display:none;">
+            <div class="wizard-panel-header">
+              <h2>Review &amp; Submit</h2>
+              <p>Review your submission before sending.</p>
+            </div>
+            <div class="wizard-panel-body">
+              <div class="guidance-box">
+                <div class="guidance-icon">💡</div>
+                <div class="guidance-text">
+                  <strong>Final check.</strong> Read through every field before submitting. Incomplete or contradictory parameters may delay the review. You will not be able to edit after submission — if something is wrong, submit again with corrections.
+                </div>
+              </div>
+
+              <!-- Summary Card -->
+              <div class="review-card">
+                <div class="review-card-title">Strategy Summary</div>
+                <div class="review-row">
+                  <span class="review-label">Strategy Name</span>
+                  <span class="review-value" id="r_name">—</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Description</span>
+                  <span class="review-value"><span class="truncate" id="r_desc">—</span></span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Instrument</span>
+                  <span class="review-value" id="r_instrument">—</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Timeframe · Period</span>
+                  <span class="review-value" id="r_timeperiod">—</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Direction</span>
+                  <span class="review-value" id="r_direction">—</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Entry Trigger</span>
+                  <span class="review-value"><span class="truncate" id="r_entry">—</span></span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Stop Loss · Take Profit · Trailing</span>
+                  <span class="review-value" id="r_exit">—</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Contracts · Commissions · Slippage</span>
+                  <span class="review-value" id="r_execution">—</span>
+                </div>
+                <div class="review-row">
+                  <span class="review-label">Attachments</span>
+                  <span class="review-value" id="r_attachments">—</span>
+                </div>
+              </div>
+            </div>
+            <div class="wizard-panel-footer">
+              <span class="wizard-step-indicator">Step 7 of 7</span>
+              <div class="wizard-step-actions">
+                <button class="btn btn-ghost" onclick="prevStep(7)">← Edit Sections</button>
+                <button class="btn btn-amber" onclick="submitStrategy()">Submit Strategy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               SUBMISSION CONFIRMATION
+               ============================================================ -->
+          <div class="wizard-step" id="submissionConfirm" style="display:none;">
+            <div class="submission-confirmation">
+              <div class="check-icon">✓</div>
+              <h2>Request Received</h2>
+              <p>
+                We have received your strategy submission. Here is what happens next:
+              </p>
+              <div class="submission-steps">
+                <div class="submission-step">
+                  <span class="submission-step-num">1</span>
+                  <span>Our team reviews your strategy parameters (1–2 business days)</span>
+                </div>
+                <div class="submission-step">
+                  <span class="submission-step-num">2</span>
+                  <span>We may reach out if we need clarification</span>
+                </div>
+                <div class="submission-step">
+                  <span class="submission-step-num">3</span>
+                  <span>We run the backtest against historical tick data (3–10 business days)</span>
+                </div>
+                <div class="submission-step">
+                  <span class="submission-step-num">4</span>
+                  <span>You receive a full quantitative report</span>
+                </div>
+              </div>
+              <div class="submission-id">Request ID: CH-2026-XXXX</div>
+              <p style="margin-bottom:var(--ch-space-6);">
+                You can track its status on your Dashboard.
+              </p>
+              <div class="preauth-actions">
+                <button class="btn btn-primary btn-lg">Go to Dashboard →</button>
+                <button class="btn btn-secondary btn-lg" onclick="resetWizard()">Submit Another Strategy</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.wizard-panel -->
+      </div><!-- /.wizard-layout -->
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider"></div>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="ch-footer">
+    <div class="ch-footer-grid">
+      <div>
+        <div class="ch-footer-brand">
+          <div class="brand-icon">CH</div>
+          Capo Horn Lab
+        </div>
+        <p class="ch-footer-tagline">
+          Quantitative backtesting and strategy research.
+          Data-driven, not guru-driven.
+        </p>
+        <div class="ch-footer-social">
+          <a href="https://github.com/capohornlab" aria-label="GitHub" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://twitter.com/capohornlab" aria-label="Twitter / X" title="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://linkedin.com/company/capohornlab" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="method.html">Method</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="test-strategy.html">Test Your Strategy</a></li>
+          <li><a href="#docs">Documentation</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#cookies">Cookie Policy</a></li>
+          <li><a href="#disclaimer">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ch-footer-bottom">
+      <span>© 2026 Capo Horn Lab. All rights reserved.</span>
+      <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT — Wizard Logic
+       ============================================================ -->
+  <script>
+    // ---- Auth demo toggle ----
+    let isAuthenticated = false;
+
+    function showAuth(type) {
+      // Placeholder: in production this would redirect to /login or /signup
+      alert('Redirect to ' + (type === 'login' ? '/login' : '/signup'));
+    }
+
+    function showWizard() {
+      // Placeholder: in production redirect to /signup
+      alert('Redirect to /signup');
+    }
+
+    // ---- Wizard state ----
+    let currentStep = 1;
+    const totalSteps = 7;
+    let uploadedFiles = [];
+
+    // ---- Navigation ----
+    function nextStep(step) {
+      if (step < totalSteps) {
+        goToStep(step + 1);
+      }
+    }
+
+    function prevStep(step) {
+      if (step > 1) {
+        goToStep(step - 1);
+      }
+    }
+
+    function goToStep(step) {
+      // Hide all steps
+      for (let i = 1; i <= totalSteps; i++) {
+        const el = document.getElementById('step' + i);
+        if (el) el.style.display = 'none';
+      }
+      const confirmEl = document.getElementById('submissionConfirm');
+      if (confirmEl) confirmEl.style.display = 'none';
+
+      // Show target step
+      const target = document.getElementById('step' + step);
+      if (target) target.style.display = 'block';
+
+      // Update progress
+      const items = document.querySelectorAll('.wizard-step-item');
+      items.forEach((item, idx) => {
+        const s = parseInt(item.dataset.step);
+        item.classList.remove('active', 'completed');
+        if (s === step) item.classList.add('active');
+        else if (s < step) item.classList.add('completed');
+      });
+
+      // Populate review if going to step 7
+      if (step === 7) populateReview();
+
+      currentStep = step;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ---- Chips (direction) ----
+    document.querySelectorAll('.chip-group').forEach(group => {
+      group.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+    });
+
+    // ---- File Upload ----
+    function handleFiles(files) {
+      const maxFiles = 5;
+      const maxSize = 10 * 1024 * 1024; // 10MB
+
+      for (let f of files) {
+        if (uploadedFiles.length >= maxFiles) {
+          alert('Maximum 5 files allowed.');
+          break;
+        }
+        if (f.size > maxSize) {
+          alert('File "' + f.name + '" exceeds the 10MB limit.');
+          continue;
+        }
+        uploadedFiles.push(f);
+      }
+      renderFileList();
+    }
+
+    function removeFile(index) {
+      uploadedFiles.splice(index, 1);
+      renderFileList();
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    function renderFileList() {
+      const list = document.getElementById('uploadList');
+      if (uploadedFiles.length === 0) {
+        list.innerHTML = '';
+        return;
+      }
+      let html = '';
+      uploadedFiles.forEach((f, i) => {
+        const ext = f.name.split('.').pop().toUpperCase();
+        html += '<div class="upload-item">' +
+          '<div class="upload-item-info">' +
+            '<span class="file-icon">📄</span>' +
+            '<div>' +
+              '<div class="upload-item-name">' + f.name + '</div>' +
+              '<div class="upload-item-size">' + formatSize(f.size) + ' · ' + ext + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<button class="upload-item-remove" onclick="removeFile(' + i + ')" aria-label="Remove file">✕</button>' +
+        '</div>';
+      });
+      list.innerHTML = html;
+    }
+
+    // ---- Review Population ----
+    function getVal(id) {
+      const el = document.getElementById(id);
+      if (!el) return '—';
+      if (el.tagName === 'SELECT' || el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        return el.value || '—';
+      }
+      // For chip groups
+      const selected = el.querySelector('.chip.selected');
+      return selected ? selected.textContent.trim() : '—';
+    }
+
+    function populateReview() {
+      const name = getVal('s1_name');
+      const desc = getVal('s1_desc');
+      const instr = getVal('s1_instrument');
+      const tf = getVal('s2_timeframe');
+      const start = getVal('s2_start');
+      const end = getVal('s2_end');
+      const dir = getVal('s1_direction');
+      const entry = getVal('s3_trigger');
+      const sl = getVal('s4_sl');
+      const tp = getVal('s4_tp');
+      const trail = getVal('s4_trailing');
+      const contracts = getVal('s5_contracts');
+      const comm = getVal('s5_commission');
+      const slip = getVal('s5_slippage');
+
+      document.getElementById('r_name').textContent = name;
+      document.getElementById('r_desc').textContent = desc;
+      document.getElementById('r_instrument').textContent = instr;
+
+      const tfMap = { '1m': '1m', '5m': '5m', '15m': '15m', '1h': '1h', 'daily': 'Daily', 'custom': 'Custom' };
+      const tfLabel = tfMap[tf] || tf;
+      document.getElementById('r_timeperiod').textContent = tfLabel + ' · ' + start + ' → ' + end;
+
+      document.getElementById('r_direction').textContent = dir;
+      document.getElementById('r_entry').textContent = entry;
+
+      const trailing = trail !== '—' ? 'Yes' : 'No';
+      document.getElementById('r_exit').textContent = 'SL: ' + sl + ' · TP: ' + tp + ' · Trailing: ' + trailing;
+
+      document.getElementById('r_execution').textContent = contracts + ' contracts · ' + comm + '/side · ' + slip + ' slippage';
+
+      const fileCount = uploadedFiles.length;
+      document.getElementById('r_attachments').textContent = fileCount > 0 ? fileCount + ' file(s)' : 'None';
+    }
+
+    // ---- Submit ----
+    function submitStrategy() {
+      // Show loading (simulated)
+      const btn = document.querySelector('#step7 .btn-amber');
+      const origText = btn.textContent;
+      btn.textContent = 'Submitting…';
+      btn.disabled = true;
+
+      setTimeout(function() {
+        // Hide all steps
+        for (let i = 1; i <= totalSteps; i++) {
+          const el = document.getElementById('step' + i);
+          if (el) el.style.display = 'none';
+        }
+
+        // Show confirmation
+        const confirmEl = document.getElementById('submissionConfirm');
+        if (confirmEl) confirmEl.style.display = 'block';
+
+        // Update progress — mark step 7 as completed
+        const items = document.querySelectorAll('.wizard-step-item');
+        items.forEach(item => {
+          item.classList.remove('active', 'completed');
+          item.classList.add('completed');
+        });
+
+        btn.textContent = origText;
+        btn.disabled = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1500);
+    }
+
+    // ---- Reset Wizard (submit another) ----
+    function resetWizard() {
+      // Reset all form fields
+      document.querySelectorAll('.input-field, .select-field, .textarea-field').forEach(el => {
+        el.value = '';
+      });
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+      uploadedFiles = [];
+      renderFileList();
+
+      // Hide confirmation
+      document.getElementById('submissionConfirm').style.display = 'none';
+      goToStep(1);
+    }
+  </script>
+
+</body>
+</html>
