@@ -1871,12 +1871,41 @@
                   <span class="review-value" id="r_attachments">—</span>
                 </div>
               </div>
+
+              <!-- Backtest Tier Selection -->
+              <div class="review-card" style="margin-top:var(--ch-space-4);border-color:var(--ch-amber-200);">
+                <div class="review-card-title">Select Backtest Tier</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--ch-space-3);margin-top:var(--ch-space-3);">
+                  <label class="tier-option" style="display:flex;flex-direction:column;align-items:center;padding:var(--ch-space-4);border:2px solid var(--ch-gray-200);border-radius:var(--ch-radius-lg);cursor:pointer;transition:all var(--ch-transition-fast);background:var(--ch-white);" onclick="selectTier('standard', this)">
+                    <input type="radio" name="tier" value="standard" style="display:none;">
+                    <div style="font-family:var(--ch-font-mono);font-weight:var(--ch-font-bold);font-size:var(--ch-text-xs);color:var(--ch-gray-400);text-transform:uppercase;letter-spacing:0.05em;">Standard</div>
+                    <div style="font-family:var(--ch-font-mono);font-size:var(--ch-text-2xl);font-weight:var(--ch-font-bold);color:var(--ch-navy-900);margin:var(--ch-space-2) 0;">€29</div>
+                    <div style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);text-align:center;">OHLC + Trades<br>Full report</div>
+                  </label>
+                  <label class="tier-option" style="display:flex;flex-direction:column;align-items:center;padding:var(--ch-space-4);border:2px solid var(--ch-blue-400);border-radius:var(--ch-radius-lg);cursor:pointer;transition:all var(--ch-transition-fast);background:var(--ch-blue-50);" onclick="selectTier('advanced', this)">
+                    <input type="radio" name="tier" value="advanced" checked style="display:none;">
+                    <div style="font-family:var(--ch-font-mono);font-weight:var(--ch-font-bold);font-size:var(--ch-text-xs);color:var(--ch-blue-500);text-transform:uppercase;letter-spacing:0.05em;">Advanced</div>
+                    <div style="font-family:var(--ch-font-mono);font-size:var(--ch-text-2xl);font-weight:var(--ch-font-bold);color:var(--ch-navy-900);margin:var(--ch-space-2) 0;">€79</div>
+                    <div style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);text-align:center;">MBP-10 Order Book<br>Deep analysis</div>
+                    <div style="font-size:10px;color:var(--ch-blue-500);font-weight:var(--ch-font-semibold);margin-top:var(--ch-space-1);">★ RECOMMENDED</div>
+                  </label>
+                  <label class="tier-option" style="display:flex;flex-direction:column;align-items:center;padding:var(--ch-space-4);border:2px solid var(--ch-gray-200);border-radius:var(--ch-radius-lg);cursor:pointer;transition:all var(--ch-transition-fast);background:var(--ch-white);" onclick="selectTier('advplus', this)">
+                    <input type="radio" name="tier" value="advplus" style="display:none;">
+                    <div style="font-family:var(--ch-font-mono);font-weight:var(--ch-font-bold);font-size:var(--ch-text-xs);color:var(--ch-gray-400);text-transform:uppercase;letter-spacing:0.05em;">Adv Plus</div>
+                    <div style="font-family:var(--ch-font-mono);font-size:var(--ch-text-2xl);font-weight:var(--ch-font-bold);color:var(--ch-navy-900);margin:var(--ch-space-2) 0;">€199</div>
+                    <div style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);text-align:center;">MBO Full Order Book<br>Maximum detail</div>
+                  </label>
+                </div>
+                <div id="tierInfo" style="margin-top:var(--ch-space-3);font-size:var(--ch-text-xs);color:var(--ch-gray-400);text-align:center;">
+                  Selected: <strong id="selectedTierName">Advanced</strong> — <strong id="selectedTierPrice">€79</strong>
+                </div>
+              </div>
             </div>
             <div class="wizard-panel-footer">
               <span class="wizard-step-indicator">Step 7 of 7</span>
               <div class="wizard-step-actions">
                 <button class="btn btn-ghost" onclick="prevStep(7)">← Edit Sections</button>
-                <button class="btn btn-amber" onclick="submitStrategy()">Submit Strategy</button>
+                <button class="btn btn-amber" onclick="submitStrategy()">Submit & Pay</button>
               </div>
             </div>
           </div>
@@ -2173,36 +2202,31 @@
       document.getElementById('r_attachments').textContent = fileCount > 0 ? fileCount + ' file(s)' : 'None';
     }
 
+    // ---- Tier Selection ----
+    var selectedTier = 'advanced';
+    var tierPrices = { standard: 29, advanced: 79, advplus: 199 };
+    var tierNames = { standard: 'Standard', advanced: 'Advanced', advplus: 'Adv Plus' };
+    function selectTier(tier, el) {
+      selectedTier = tier;
+      // Update visual
+      document.querySelectorAll('.tier-option').forEach(function(l) {
+        l.style.borderColor = 'var(--ch-gray-200)';
+        l.style.background = 'var(--ch-white)';
+      });
+      el.style.borderColor = 'var(--ch-blue-400)';
+      el.style.background = 'var(--ch-blue-50)';
+      el.querySelector('input[type="radio"]').checked = true;
+      document.getElementById('selectedTierName').textContent = tierNames[tier];
+      document.getElementById('selectedTierPrice').textContent = '€' + tierPrices[tier];
+    }
+
     // ---- Submit ----
     function submitStrategy() {
-      // Show loading (simulated)
-      const btn = document.querySelector('#step7 .btn-amber');
-      const origText = btn.textContent;
-      btn.textContent = 'Submitting…';
-      btn.disabled = true;
-
-      setTimeout(function() {
-        // Hide all steps
-        for (let i = 1; i <= totalSteps; i++) {
-          const el = document.getElementById('step' + i);
-          if (el) el.style.display = 'none';
-        }
-
-        // Show confirmation
-        const confirmEl = document.getElementById('submissionConfirm');
-        if (confirmEl) confirmEl.style.display = 'block';
-
-        // Update progress — mark step 7 as completed
-        const items = document.querySelectorAll('.wizard-step-item');
-        items.forEach(item => {
-          item.classList.remove('active', 'completed');
-          item.classList.add('completed');
-        });
-
-        btn.textContent = origText;
-        btn.disabled = false;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 1500);
+      // Redirect to checkout with the selected tier
+      var tier = selectedTier || 'advanced';
+      var price = (tierPrices[tier] || 79) + '.00';
+      var name = encodeURIComponent(document.getElementById('r_name').textContent || 'Strategy');
+      window.location.href = 'checkout.html?tier=' + tier + '&price=' + price + '&name=' + name;
     }
 
     // ---- Reset Wizard (submit another) ----
