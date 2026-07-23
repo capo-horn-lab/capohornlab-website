@@ -1660,6 +1660,11 @@
         Data Providers
       </button>
 
+      <button class="sidebar-nav-item" data-section="discounts" onclick="switchAdminSection('discounts')">
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
+        Discount Codes
+      </button>
+
       <button class="sidebar-nav-item" data-section="settings" onclick="switchAdminSection('settings')">
         <span class="nav-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2248,7 +2253,75 @@
     </section>
 
     <!-- ============================================================
-         SECTION 5: SETTINGS
+         SECTION 6: DISCOUNT CODES
+         ============================================================ -->
+    <section class="admin-section" id="section-discounts">
+      <div class="admin-section-header">
+        <div>
+          <h2>Discount Codes</h2>
+          <p>Create and manage promotional discount codes for clients.</p>
+        </div>
+      </div>
+
+      <!-- Create Discount Code -->
+      <div class="ch-card" style="margin-bottom:var(--ch-space-6);">
+        <div class="ch-card-header">
+          <h3 style="font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);">Create New Code</h3>
+        </div>
+        <div class="ch-card-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--ch-space-4);">
+            <div class="input-group">
+              <label class="input-label">Code <span style="color:var(--ch-error);">*</span></label>
+              <input class="input-field" id="dcCode" placeholder="e.g. SUMMER2026">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Discount % <span style="color:var(--ch-error);">*</span></label>
+              <input class="input-field" id="dcPercent" type="number" placeholder="20" min="1" max="100">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Max Uses</label>
+              <input class="input-field" id="dcMaxUses" type="number" placeholder="100" value="100">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Valid Until</label>
+              <input class="input-field" id="dcExpiry" type="date">
+            </div>
+          </div>
+          <div style="display:flex;gap:var(--ch-space-3);margin-top:var(--ch-space-4);">
+            <button class="btn btn-primary" onclick="createDiscountCode()">Create Code</button>
+            <span id="dcFeedback" style="font-size:var(--ch-text-sm);color:var(--ch-gray-400);align-self:center;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discount Codes History -->
+      <div class="section-title">Code History <span class="count" id="dcCount">0</span></div>
+      <div class="table-wrapper">
+        <table class="ch-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Discount</th>
+              <th>Created</th>
+              <th>Expires</th>
+              <th>Uses</th>
+              <th>Max</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dcTableBody">
+            <tr>
+              <td colspan="7" style="text-align:center;padding:var(--ch-space-8);color:var(--ch-gray-400);font-size:var(--ch-text-sm);">
+                No discount codes created yet.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: SETTINGS
          ============================================================ -->
     <section class="admin-section" id="section-settings">
       <div class="admin-section-header">
@@ -2772,6 +2845,7 @@
       research:   { title: 'Research', breadcrumb: 'Research' },
       newsletter: { title: 'Newsletter', breadcrumb: 'Newsletter' },
       clients:    { title: 'Clients', breadcrumb: 'Client Management' },
+      discounts:  { title: 'Discount Codes', breadcrumb: 'Discount Codes' },
       providers:  { title: 'Data Providers', breadcrumb: 'Data Providers' },
       settings:   { title: 'Settings', breadcrumb: 'Settings' }
     };
@@ -3023,6 +3097,57 @@
       showToast(msg + ' ' + slug + ' — backend pending.');
       // TODO: API call to update published_research.json
     }
+    /* ---- Discount Codes ---- */
+    var discountCodes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
+    function saveDiscountCodes() {
+      localStorage.setItem('ch_discount_codes', JSON.stringify(discountCodes));
+    }
+    function createDiscountCode() {
+      var code = document.getElementById('dcCode').value.trim().toUpperCase();
+      var pct = parseInt(document.getElementById('dcPercent').value);
+      var maxUses = parseInt(document.getElementById('dcMaxUses').value) || 100;
+      var expiry = document.getElementById('dcExpiry').value;
+      var fb = document.getElementById('dcFeedback');
+      if (!code || !pct) { fb.textContent = 'Code and discount % required.'; return; }
+      if (pct < 1 || pct > 100) { fb.textContent = 'Discount must be 1-100%.'; return; }
+      if (discountCodes.find(function(d) { return d.code === code; })) {
+        fb.textContent = 'Code already exists.'; return;
+      }
+      discountCodes.push({
+        code: code, pct: pct, maxUses: maxUses, used: 0,
+        created: new Date().toISOString().split('T')[0],
+        expiry: expiry || 'Never'
+      });
+      saveDiscountCodes();
+      renderDiscountCodes();
+      fb.style.color = 'var(--ch-success)';
+      fb.textContent = '✓ Code ' + code + ' created!';
+      document.getElementById('dcCode').value = '';
+      document.getElementById('dcPercent').value = '';
+      setTimeout(function() { fb.textContent = ''; fb.style.color = ''; }, 3000);
+    }
+    function renderDiscountCodes() {
+      var tbody = document.getElementById('dcTableBody');
+      var count = document.getElementById('dcCount');
+      count.textContent = discountCodes.length;
+      if (discountCodes.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:var(--ch-space-8);color:var(--ch-gray-400);font-size:var(--ch-text-sm);">No discount codes created yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = discountCodes.map(function(d) {
+        var active = (!d.expiry || d.expiry === 'Never' || d.expiry >= new Date().toISOString().split('T')[0]) && d.used < d.maxUses;
+        return '<tr>' +
+          '<td><span class="req-id">' + d.code + '</span></td>' +
+          '<td><span style="font-weight:var(--ch-font-semibold);color:var(--ch-success);">' + d.pct + '%</span></td>' +
+          '<td><span class="req-date">' + d.created + '</span></td>' +
+          '<td><span class="req-date">' + d.expiry + '</span></td>' +
+          '<td><span class="req-id">' + d.used + '</span></td>' +
+          '<td><span class="req-id">' + d.maxUses + '</span></td>' +
+          '<td><span class="status-badge ' + (active ? 'status-completata' : 'status-inviata') + '"><span class="dot"></span>' + (active ? 'Active' : 'Expired') + '</span></td>' +
+          '</tr>';
+      }).join('');
+    }
+    renderDiscountCodes();
     /* ---- Data Provider Cost Calculation ---- */
     var providerCostMatrix = {
       ohlc:   { databento: 1, firstrate: 1, cme: 2, other: 1 },
