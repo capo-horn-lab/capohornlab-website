@@ -1629,14 +1629,15 @@
       </button>
 
       <button class="sidebar-nav-item" data-section="research" onclick="switchAdminSection('research')">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-        </span>
+        <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
         Research
-        <span class="nav-count">6</span>
+        <span class="nav-count">10</span>
       </button>
+          <button class="sidebar-nav-item" data-section="clients" onclick="switchAdminSection('clients')">
+            <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            Clients
+            <span class="nav-count">1</span>
+          </button>
 
       <button class="sidebar-nav-item" data-section="newsletter" onclick="switchAdminSection('newsletter')">
         <span class="nav-icon">
@@ -2146,7 +2147,58 @@
     </section>
 
     <!-- ============================================================
-         SECTION 4: NEWSLETTER
+         SECTION 4: CLIENTS
+         ============================================================ -->
+    <section class="admin-section" id="section-clients">
+      <div class="admin-section-header">
+        <div>
+          <h2>Client Management</h2>
+          <p>View registered clients, their credentials, and submission history.</p>
+        </div>
+      </div>
+
+      <!-- Clients Table -->
+      <div class="table-wrapper">
+        <table class="ch-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Registered</th>
+              <th>Submissions</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="req-name">Test Client</span></td>
+              <td><span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-500);">client@capohornlab.com</span></td>
+              <td><span style="font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);color:var(--ch-gray-400);">••••••••</span></td>
+              <td><span class="req-date">23 Jul 2026</span></td>
+              <td><span class="req-id">0</span></td>
+              <td><span class="status-badge status-completata"><span class="dot"></span>Active</span></td>
+              <td>
+                <div class="cell-actions">
+                  <button class="expand-btn" onclick="showToast('Client detail view — backend pending.')">View</button>
+                  <button class="expand-btn" onclick="showToast('Reset password — backend pending.')">Reset PW</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:var(--ch-space-4);padding:var(--ch-space-4);background:var(--ch-gray-50);border-radius:var(--ch-radius-md);">
+        <p style="font-size:var(--ch-text-xs);color:var(--ch-gray-400);">
+          <strong>Note:</strong> Passwords are hashed and stored securely. The "Reset PW" button sends a password reset email. 
+          Client credentials are for demo purposes — real clients are added through the signup flow.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: NEWSLETTER
          ============================================================ -->
     <section class="admin-section" id="section-newsletter">
       <div class="admin-section-header">
@@ -2719,6 +2771,7 @@
       requests:   { title: 'Requests', breadcrumb: 'Requests' },
       research:   { title: 'Research', breadcrumb: 'Research' },
       newsletter: { title: 'Newsletter', breadcrumb: 'Newsletter' },
+      clients:    { title: 'Clients', breadcrumb: 'Client Management' },
       providers:  { title: 'Data Providers', breadcrumb: 'Data Providers' },
       settings:   { title: 'Settings', breadcrumb: 'Settings' }
     };
