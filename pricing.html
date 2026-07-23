@@ -229,6 +229,14 @@
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-bold);
       color: var(--ch-white);
+      overflow: hidden;
+    }
+
+    .ch-nav-brand .brand-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .ch-nav-links {
@@ -1123,7 +1131,7 @@
   <nav class="ch-nav">
     <div class="container">
       <a href="index.html" class="ch-nav-brand">
-        <div class="brand-icon">CH</div>
+        <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
         Capo Horn Lab
       </a>
       <div class="ch-nav-links">
@@ -1452,7 +1460,7 @@
     <div class="ch-footer-grid">
       <div>
         <div class="ch-footer-brand">
-          <div class="brand-icon">CH</div>
+          <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
           Capo Horn Lab
         </div>
         <p class="ch-footer-tagline">
