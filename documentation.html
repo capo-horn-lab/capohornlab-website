@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capo Horn Lab — Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Capo Horn Lab documentation — Learn how our backtesting pipeline works, how to read and interpret strategy reports, and understand key statistical metrics.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capohornlab.com/documentation.html">
+  <meta property="og:title" content="Capo Horn Lab — Documentation">
+  <meta property="og:description" content="Capo Horn Lab documentation — Learn how our backtesting pipeline works, how to read and interpret strategy reports, and understand key statistical metrics.">
+  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Capo Horn Lab — Documentation">
+  <meta name="twitter:description" content="Capo Horn Lab documentation — Learn how our backtesting pipeline works, how to read and interpret strategy reports, and understand key statistical metrics.">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
+  <style>
+    /* ============================================================
+       ╔══════════════════════════════════════════════════════════╗
+       ║     CAPO HORN LAB — DESIGN TOKENS v1.0 (inlined)        ║
+       ╚══════════════════════════════════════════════════════════╝
+       ============================================================ */
+
+    :root {
+      --ch-navy-900: #0a1628;
+      --ch-navy-800: #0f1e36;
+      --ch-navy-700: #152a45;
+      --ch-navy-600: #1c3a5c;
+      --ch-navy-500: #254e77;
+      --ch-navy-400: #3b6fa0;
+      --ch-navy-300: #5e93c2;
+      --ch-navy-200: #8fb8da;
+      --ch-navy-100: #c1d6ec;
+      --ch-navy-50:  #e8f0f8;
+
+      --ch-white:       #ffffff;
+      --ch-off-white:   #f8fafc;
+      --ch-gray-50:     #f1f5f9;
+      --ch-gray-100:    #e2e8f0;
+      --ch-gray-200:    #cbd5e1;
+      --ch-gray-300:    #94a3b8;
+      --ch-gray-400:    #64748b;
+      --ch-gray-500:    #475569;
+      --ch-gray-600:    #334155;
+      --ch-gray-700:    #1e293b;
+      --ch-gray-800:    #0f172a;
+      --ch-gray-900:    #020617;
+
+      --ch-blue-500:    #2563eb;
+      --ch-blue-400:    #3b82f6;
+      --ch-blue-300:    #60a5fa;
+      --ch-blue-200:    #93c5fd;
+      --ch-blue-100:    #dbeafe;
+      --ch-blue-50:     #eff6ff;
+
+      --ch-amber-500:   #f59e0b;
+      --ch-amber-400:   #fbbf24;
+      --ch-amber-300:   #fcd34d;
+      --ch-amber-200:   #fde68a;
+      --ch-amber-100:   #fef3c7;
+      --ch-amber-50:    #fffbeb;
+
+      --ch-success:     #10b981;
+      --ch-warning:     #f59e0b;
+      --ch-error:       #ef4444;
+      --ch-info:        #3b82f6;
+
+      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+
+      --ch-text-xs:     0.75rem;
+      --ch-text-sm:     0.875rem;
+      --ch-text-base:   1rem;
+      --ch-text-lg:     1.125rem;
+      --ch-text-xl:     1.25rem;
+      --ch-text-2xl:    1.5rem;
+      --ch-text-3xl:    1.875rem;
+      --ch-text-4xl:    2.25rem;
+      --ch-text-5xl:    3rem;
+      --ch-text-6xl:    3.75rem;
+
+      --ch-leading-tight:   1.15;
+      --ch-leading-snug:    1.3;
+      --ch-leading-normal:  1.5;
+      --ch-leading-relaxed: 1.65;
+
+      --ch-font-light:      300;
+      --ch-font-regular:    400;
+      --ch-font-medium:     500;
+      --ch-font-semibold:   600;
+      --ch-font-bold:       700;
+      --ch-font-extrabold:  800;
+
+      --ch-letter-spacing-tight:  -0.025em;
+      --ch-letter-spacing-normal: 0em;
+      --ch-letter-spacing-wide:   0.05em;
+
+      --ch-space-1:     0.25rem;
+      --ch-space-2:     0.5rem;
+      --ch-space-3:     0.75rem;
+      --ch-space-4:     1rem;
+      --ch-space-5:     1.25rem;
+      --ch-space-6:     1.5rem;
+      --ch-space-8:     2rem;
+      --ch-space-10:    2.5rem;
+      --ch-space-12:    3rem;
+      --ch-space-16:    4rem;
+      --ch-space-20:    5rem;
+      --ch-space-24:    6rem;
+
+      --ch-radius-none:  0;
+      --ch-radius-sm:    0.25rem;
+      --ch-radius-md:    0.5rem;
+      --ch-radius-lg:    0.75rem;
+      --ch-radius-xl:    1rem;
+      --ch-radius-2xl:   1.5rem;
+      --ch-radius-full:  9999px;
+
+      --ch-shadow-xs:    0 1px 2px rgba(10, 22, 40, 0.05);
+      --ch-shadow-sm:    0 1px 3px rgba(10, 22, 40, 0.08), 0 1px 2px rgba(10, 22, 40, 0.04);
+      --ch-shadow-md:    0 4px 6px rgba(10, 22, 40, 0.07), 0 2px 4px rgba(10, 22, 40, 0.04);
+      --ch-shadow-lg:    0 10px 15px rgba(10, 22, 40, 0.08), 0 4px 6px rgba(10, 22, 40, 0.03);
+      --ch-shadow-xl:    0 20px 25px rgba(10, 22, 40, 0.10), 0 8px 10px rgba(10, 22, 40, 0.04);
+      --ch-shadow-2xl:   0 25px 50px rgba(10, 22, 40, 0.15);
+      --ch-shadow-glow-blue:  0 0 20px rgba(37, 99, 235, 0.25);
+      --ch-shadow-glow-amber: 0 0 20px rgba(245, 158, 11, 0.25);
+
+      --ch-transition-fast:    150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-base:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-slow:    400ms cubic-bezier(0.4, 0, 0.2, 1);
+      --ch-transition-spring:  500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      --ch-z-base:      1;
+      --ch-z-dropdown:  10;
+      --ch-z-sticky:    100;
+      --ch-z-nav:       1000;
+
+      --ch-max-width:   1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { font-family: var(--ch-font-sans); font-size: var(--ch-text-base); line-height: var(--ch-leading-normal); color: var(--ch-gray-800); background: var(--ch-off-white); }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    .container { max-width: var(--ch-max-width); margin: 0 auto; padding: 0 var(--ch-space-6); }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulseGlow { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+
+    .animate-up { animation: fadeInUp 0.6s ease-out both; }
+    .animate-up-d1 { animation-delay: 0.1s; }
+    .animate-up-d2 { animation-delay: 0.2s; }
+    .animate-up-d3 { animation-delay: 0.3s; }
+    .animate-up-d4 { animation-delay: 0.4s; }
+    .animate-up-d5 { animation-delay: 0.5s; }
+
+    /* NAVIGATION */
+    .ch-nav { display: flex; align-items: center; justify-content: space-between; padding: var(--ch-space-4) var(--ch-space-6); background: var(--ch-navy-900); color: var(--ch-white); box-shadow: var(--ch-shadow-md); position: sticky; top: 0; z-index: var(--ch-z-nav); }
+    .ch-nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--ch-max-width); margin: 0 auto; padding: 0; }
+    .ch-nav-brand { font-size: var(--ch-text-lg); font-weight: var(--ch-font-bold); letter-spacing: var(--ch-letter-spacing-tight); display: flex; align-items: center; gap: var(--ch-space-2); }
+    .ch-nav-brand .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500)); border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); font-weight: var(--ch-font-bold); color: var(--ch-white); overflow: hidden; }
+    .ch-nav-brand .brand-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ch-nav-links { display: flex; align-items: center; gap: var(--ch-space-1); }
+    .ch-nav-links a { font-size: var(--ch-text-sm); font-weight: var(--ch-font-medium); color: var(--ch-navy-200); padding: var(--ch-space-2) var(--ch-space-4); border-radius: var(--ch-radius-md); transition: background var(--ch-transition-fast), color var(--ch-transition-fast); }
+    .ch-nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--ch-white); }
+    .ch-nav-links a.active { color: var(--ch-white); background: rgba(37,99,235,0.2); }
+    .ch-nav-actions { display: flex; align-items: center; gap: var(--ch-space-3); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--ch-white); cursor: pointer; padding: var(--ch-space-2); }
+    .nav-toggle svg { width: 24px; height: 24px; }
+    .nav-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--ch-navy-900); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: var(--ch-space-8); animation: fadeIn 0.2s ease-out; }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-medium); color: var(--ch-navy-200); transition: color var(--ch-transition-fast); }
+    .nav-drawer a:hover { color: var(--ch-white); }
+    .nav-drawer-close { position: absolute; top: var(--ch-space-6); right: var(--ch-space-6); background: none; border: none; color: var(--ch-white); cursor: pointer; padding: var(--ch-space-2); }
+    .nav-drawer-close svg { width: 28px; height: 28px; }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--ch-space-2); font-family: var(--ch-font-sans); font-weight: var(--ch-font-semibold); font-size: var(--ch-text-sm); line-height: 1; padding: var(--ch-space-3) var(--ch-space-6); border: 1px solid transparent; border-radius: var(--ch-radius-md); cursor: pointer; transition: background var(--ch-transition-fast), color var(--ch-transition-fast), border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast); user-select: none; white-space: nowrap; }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--ch-blue-500); color: var(--ch-white); border-color: var(--ch-blue-500); box-shadow: 0 1px 3px rgba(37,99,235,0.3); }
+    .btn-primary:hover { background: var(--ch-blue-400); border-color: var(--ch-blue-400); box-shadow: var(--ch-shadow-glow-blue); }
+    .btn-secondary { background: transparent; color: var(--ch-blue-500); border-color: var(--ch-blue-500); }
+    .btn-secondary:hover { background: var(--ch-blue-50); border-color: var(--ch-blue-400); color: var(--ch-blue-400); }
+    .btn-ghost { background: transparent; color: var(--ch-gray-400); border-color: transparent; }
+    .btn-ghost:hover { background: var(--ch-gray-100); color: var(--ch-gray-700); }
+    .btn-amber { background: var(--ch-amber-500); color: var(--ch-navy-900); border-color: var(--ch-amber-500); }
+    .btn-amber:hover { background: var(--ch-amber-400); border-color: var(--ch-amber-400); box-shadow: var(--ch-shadow-glow-amber); }
+    .btn-sm { padding: var(--ch-space-2) var(--ch-space-4); font-size: var(--ch-text-xs); }
+    .btn-lg { padding: var(--ch-space-4) var(--ch-space-8); font-size: var(--ch-text-base); }
+    .btn-outline-light { background: transparent; color: var(--ch-white); border-color: rgba(255,255,255,0.3); }
+    .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    /* CARDS */
+    .ch-card { background: var(--ch-white); border: 1px solid var(--ch-gray-100); border-radius: var(--ch-radius-lg); box-shadow: var(--ch-shadow-sm); overflow: hidden; transition: box-shadow var(--ch-transition-base), transform var(--ch-transition-base); }
+    .ch-card:hover { box-shadow: var(--ch-shadow-lg); transform: translateY(-2px); }
+    .ch-card-body { padding: var(--ch-space-6); }
+    .ch-card-footer { padding: var(--ch-space-4) var(--ch-space-6); border-top: 1px solid var(--ch-gray-100); display: flex; justify-content: flex-end; gap: var(--ch-space-3); }
+
+    /* HERO */
+    .hero { position: relative; background: var(--ch-navy-900); color: var(--ch-white); overflow: hidden; padding: var(--ch-space-20) 0 var(--ch-space-16); }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37,99,235,0.15) 0%, transparent 70%), radial-gradient(ellipse 60% 70% at 80% 60%, rgba(245,158,11,0.06) 0%, transparent 60%), repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px); pointer-events: none; }
+    .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .hero-content { position: relative; text-align: center; max-width: 800px; margin: 0 auto; padding: 0 var(--ch-space-6); }
+    .hero-badge { display: inline-flex; align-items: center; gap: var(--ch-space-2); margin-bottom: var(--ch-space-6); padding: var(--ch-space-2) var(--ch-space-4); background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.25); border-radius: var(--ch-radius-full); font-size: var(--ch-text-xs); font-weight: var(--ch-font-medium); color: var(--ch-blue-300); font-family: var(--ch-font-mono); letter-spacing: var(--ch-letter-spacing-wide); }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--ch-success); border-radius: 50%; animation: pulseGlow 2s ease-in-out infinite; }
+    .hero h1 { font-size: var(--ch-text-4xl); font-weight: var(--ch-font-extrabold); letter-spacing: var(--ch-letter-spacing-tight); line-height: var(--ch-leading-tight); margin-bottom: var(--ch-space-4); }
+    .hero h1 .highlight { background: linear-gradient(135deg, var(--ch-blue-400), var(--ch-amber-400)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: var(--ch-text-lg); color: var(--ch-navy-200); line-height: var(--ch-leading-relaxed); max-width: 600px; margin: 0 auto var(--ch-space-8); }
+    .hero-actions { display: flex; justify-content: center; gap: var(--ch-space-4); flex-wrap: wrap; }
+
+    /* TRUST BAR */
+    .trust-bar { background: var(--ch-navy-800); border-bottom: 1px solid rgba(255,255,255,0.04); padding: var(--ch-space-4) 0; overflow-x: auto; }
+    .trust-bar-inner { display: flex; align-items: center; justify-content: center; gap: var(--ch-space-8); flex-wrap: nowrap; min-width: fit-content; padding: 0 var(--ch-space-6); }
+    .trust-bar-inner .label { font-size: var(--ch-text-xs); color: var(--ch-gray-500); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); font-weight: var(--ch-font-medium); white-space: nowrap; }
+    .trust-instrument { display: inline-flex; align-items: center; gap: var(--ch-space-2); padding: var(--ch-space-2) var(--ch-space-4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--ch-radius-md); font-family: var(--ch-font-mono); font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-navy-200); white-space: nowrap; transition: background var(--ch-transition-fast), border-color var(--ch-transition-fast); }
+    .trust-instrument:hover { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.2); }
+    .trust-instrument .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .dot-es { background: #2563eb; }
+    .dot-nq { background: #10b981; }
+    .dot-cl { background: #f59e0b; }
+    .dot-6e { background: #8b5cf6; }
+    .dot-ym { background: #ef4444; }
+    .trust-instrument .name { color: var(--ch-white); }
+    .trust-instrument .exchange { color: var(--ch-gray-500); font-size: 9px; font-weight: var(--ch-font-regular); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* SECTIONS */
+    .section { padding: var(--ch-space-16) 0; }
+    .section-header { text-align: center; max-width: 640px; margin: 0 auto var(--ch-space-12); }
+    .section-header h2 { font-size: var(--ch-text-3xl); font-weight: var(--ch-font-bold); color: var(--ch-navy-900); letter-spacing: var(--ch-letter-spacing-tight); margin-bottom: var(--ch-space-3); }
+    .section-header p { font-size: var(--ch-text-base); color: var(--ch-gray-400); line-height: var(--ch-leading-relaxed); }
+    .section-header .overline { font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); font-weight: var(--ch-font-semibold); color: var(--ch-blue-500); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); margin-bottom: var(--ch-space-3); display: block; }
+    .section-alt { background: var(--ch-white); }
+    .section-dark { background: var(--ch-navy-900); color: var(--ch-white); }
+    .section-dark .section-header h2 { color: var(--ch-white); }
+    .section-dark .section-header p { color: var(--ch-navy-200); }
+    .section-dark .section-header .overline { color: var(--ch-amber-400); }
+
+    /* DOC CONTENT */
+    .doc-sidebar { display: none; }
+    .doc-content { max-width: 800px; margin: 0 auto; }
+    .doc-section { margin-bottom: var(--ch-space-12); }
+    .doc-section h2 { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-bold); color: var(--ch-navy-900); margin-bottom: var(--ch-space-4); padding-bottom: var(--ch-space-3); border-bottom: 2px solid var(--ch-blue-100); }
+    .doc-section h3 { font-size: var(--ch-text-xl); font-weight: var(--ch-font-semibold); color: var(--ch-navy-800); margin-bottom: var(--ch-space-3); margin-top: var(--ch-space-8); }
+    .doc-section h4 { font-size: var(--ch-text-lg); font-weight: var(--ch-font-semibold); color: var(--ch-navy-700); margin-bottom: var(--ch-space-2); margin-top: var(--ch-space-6); }
+    .doc-section p { font-size: var(--ch-text-sm); color: var(--ch-gray-500); line-height: var(--ch-leading-relaxed); margin-bottom: var(--ch-space-4); }
+    .doc-section ul, .doc-section ol { font-size: var(--ch-text-sm); color: var(--ch-gray-500); line-height: var(--ch-leading-relaxed); margin-bottom: var(--ch-space-4); padding-left: var(--ch-space-6); list-style: disc; }
+    .doc-section ol { list-style: decimal; }
+    .doc-section li { margin-bottom: var(--ch-space-2); }
+    .doc-section strong { color: var(--ch-navy-900); }
+    .doc-section code { font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); background: var(--ch-gray-50); color: var(--ch-blue-600); padding: 2px 6px; border-radius: var(--ch-radius-sm); border: 1px solid var(--ch-gray-100); }
+    .doc-note { padding: var(--ch-space-4) var(--ch-space-6); background: var(--ch-blue-50); border-left: 3px solid var(--ch-blue-500); border-radius: var(--ch-radius-md); margin-bottom: var(--ch-space-6); }
+    .doc-note p { font-size: var(--ch-text-sm); color: var(--ch-navy-800); margin-bottom: 0; }
+    .doc-warning { padding: var(--ch-space-4) var(--ch-space-6); background: #fefce8; border-left: 3px solid var(--ch-amber-500); border-radius: var(--ch-radius-md); margin-bottom: var(--ch-space-6); }
+    .doc-warning p { font-size: var(--ch-text-sm); color: var(--ch-navy-800); margin-bottom: 0; }
+    .doc-table { width: 100%; border-collapse: collapse; margin-bottom: var(--ch-space-6); font-size: var(--ch-text-sm); }
+    .doc-table th { background: var(--ch-navy-900); color: var(--ch-white); padding: var(--ch-space-3) var(--ch-space-4); text-align: left; font-weight: var(--ch-font-semibold); font-size: var(--ch-text-xs); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); }
+    .doc-table td { padding: var(--ch-space-3) var(--ch-space-4); border-bottom: 1px solid var(--ch-gray-100); color: var(--ch-gray-600); }
+    .doc-table tr:nth-child(even) { background: var(--ch-gray-50); }
+    .doc-table tr:hover { background: var(--ch-blue-50); }
+    .doc-toc { background: var(--ch-white); border: 1px solid var(--ch-gray-100); border-radius: var(--ch-radius-lg); padding: var(--ch-space-6); margin-bottom: var(--ch-space-10); }
+    .doc-toc h3 { font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-navy-900); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); margin-bottom: var(--ch-space-4); }
+    .doc-toc ol { list-style: none; counter-reset: toc-counter; }
+    .doc-toc ol li { counter-increment: toc-counter; margin-bottom: var(--ch-space-2); }
+    .doc-toc ol li::before { content: counter(toc-counter) ". "; color: var(--ch-blue-500); font-weight: var(--ch-font-bold); font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); }
+    .doc-toc ol li a { font-size: var(--ch-text-sm); color: var(--ch-gray-600); transition: color var(--ch-transition-fast); }
+    .doc-toc ol li a:hover { color: var(--ch-blue-500); }
+
+    /* METRIC CARD */
+    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ch-space-4); margin-bottom: var(--ch-space-6); }
+    .metric-card { background: var(--ch-white); border: 1px solid var(--ch-gray-100); border-radius: var(--ch-radius-lg); padding: var(--ch-space-5); box-shadow: var(--ch-shadow-xs); }
+    .metric-card h4 { font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-navy-900); margin-bottom: var(--ch-space-1); margin-top: 0; }
+    .metric-card .desc { font-size: var(--ch-text-xs); color: var(--ch-gray-400); line-height: var(--ch-leading-snug); }
+
+    /* NEWSLETTER */
+    .newsletter-section { position: relative; overflow: hidden; }
+    .newsletter-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(37,99,235,0.10) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 70% 30%, rgba(245,158,11,0.04) 0%, transparent 60%); pointer-events: none; }
+    .newsletter-box { position: relative; max-width: 560px; margin: 0 auto; text-align: center; }
+    .newsletter-box h2 { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-bold); margin-bottom: var(--ch-space-3); }
+    .newsletter-box p { font-size: var(--ch-text-sm); color: var(--ch-navy-200); line-height: var(--ch-leading-relaxed); margin-bottom: var(--ch-space-6); }
+    .newsletter-form { display: flex; gap: var(--ch-space-3); max-width: 480px; margin: 0 auto; }
+    .newsletter-form .input-field { font-family: var(--ch-font-sans); font-size: var(--ch-text-base); padding: var(--ch-space-3) var(--ch-space-4); border: 1px solid var(--ch-gray-200); border-radius: var(--ch-radius-md); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: var(--ch-white); transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast); outline: none; width: 100%; }
+    .newsletter-form .input-field::placeholder { color: var(--ch-navy-300); }
+    .newsletter-form .input-field:focus { border-color: var(--ch-blue-400); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2); }
+    .newsletter-disclaimer { font-size: var(--ch-text-xs); color: var(--ch-navy-300); margin-top: var(--ch-space-4); }
+
+    /* FOOTER */
+    .ch-footer { background: var(--ch-navy-900); color: var(--ch-navy-200); padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8); position: relative; overflow: hidden; }
+    .ch-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(37,99,235,0.4), transparent); }
+    .ch-footer-grid { max-width: var(--ch-max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--ch-space-8); }
+    .ch-footer-brand { font-size: var(--ch-text-xl); font-weight: var(--ch-font-bold); color: var(--ch-white); margin-bottom: var(--ch-space-3); letter-spacing: var(--ch-letter-spacing-tight); display: flex; align-items: center; gap: var(--ch-space-2); }
+    .ch-footer-brand .brand-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500)); border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: 10px; font-weight: var(--ch-font-bold); color: var(--ch-white); }
+    .ch-footer-tagline { font-size: var(--ch-text-sm); line-height: var(--ch-leading-relaxed); max-width: 300px; }
+    .ch-footer h4 { font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-white); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); margin-bottom: var(--ch-space-4); }
+    .ch-footer ul li { margin-bottom: var(--ch-space-2); }
+    .ch-footer ul li a { font-size: var(--ch-text-sm); color: var(--ch-navy-300); transition: color var(--ch-transition-fast); }
+    .ch-footer ul li a:hover { color: var(--ch-amber-400); }
+    .ch-footer-bottom { max-width: var(--ch-max-width); margin: var(--ch-space-12) auto 0; padding-top: var(--ch-space-6); border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; font-size: var(--ch-text-xs); flex-wrap: wrap; gap: var(--ch-space-4); }
+    .ch-footer-bottom .disclaimer { color: var(--ch-gray-500); max-width: 500px; }
+    .ch-footer-social { display: flex; gap: var(--ch-space-3); margin-top: var(--ch-space-4); }
+    .ch-footer-social a { width: 36px; height: 36px; border-radius: var(--ch-radius-md); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: var(--ch-navy-300); font-size: var(--ch-text-sm); transition: background var(--ch-transition-fast), color var(--ch-transition-fast); }
+    .ch-footer-social a:hover { background: rgba(37,99,235,0.15); color: var(--ch-white); }
+    .wave-divider { height: 40px; background: transparent; position: relative; overflow: hidden; margin: 0; }
+    .wave-divider::after { content: ''; position: absolute; left: 0; right: 0; height: 100%; background: repeating-linear-gradient(90deg, transparent 0px, transparent 20px, rgba(37,99,235,0.06) 20px, rgba(37,99,235,0.06) 22px, transparent 22px, transparent 40px); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E"); mask-size: 1200px 100%; mask-repeat: repeat-x; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,0 400,40 600,20 C800,0 1000,40 1200,20 L1200,40 L0,40 Z' fill='black'/%3E%3C/svg%3E"); -webkit-mask-size: 1200px 100%; -webkit-mask-repeat: repeat-x; }
+
+    /* RESPONSIVE */
+    @media (min-width: 768px) {
+      .ch-nav { padding: var(--ch-space-4) var(--ch-space-8); }
+      .hero { padding: var(--ch-space-24) 0 var(--ch-space-20); }
+      .hero h1 { font-size: var(--ch-text-5xl); }
+      .section { padding: var(--ch-space-20) 0; }
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      .newsletter-form { flex-direction: row; }
+    }
+    @media (min-width: 1024px) {
+      .hero { padding: var(--ch-space-28) 0 var(--ch-space-24); }
+      .hero h1 { font-size: var(--ch-text-6xl); }
+      .hero p { font-size: var(--ch-text-xl); }
+      .section { padding: var(--ch-space-24) 0; }
+      .section-header h2 { font-size: var(--ch-text-4xl); }
+    }
+    @media (max-width: 767px) {
+      .ch-nav-links { display: none; }
+      .ch-nav-actions .btn { display: none; }
+      .nav-toggle { display: block; }
+      .container { padding: 0 var(--ch-space-4); }
+      .hero { padding: var(--ch-space-16) 0 var(--ch-space-12); }
+      .hero h1 { font-size: var(--ch-text-3xl); }
+      .hero p { font-size: var(--ch-text-base); line-height: 1.6; }
+      .hero-actions { flex-direction: column; align-items: center; gap: var(--ch-space-3); }
+      .hero-actions .btn { width: 100%; max-width: 280px; }
+      .hero-badge { font-size: 0.65rem; padding: var(--ch-space-1) var(--ch-space-3); }
+      .section { padding: var(--ch-space-12) 0; }
+      .section-header h2 { font-size: var(--ch-text-2xl); }
+      .section-header p { font-size: var(--ch-text-sm); }
+      .overline { font-size: 0.65rem; }
+      .trust-bar-inner { justify-content: flex-start; gap: var(--ch-space-3); padding: 0 var(--ch-space-4); }
+      .trust-bar-inner .label { display: none; }
+      .metric-grid { grid-template-columns: 1fr; }
+      .newsletter-box { padding: var(--ch-space-8) var(--ch-space-4); }
+      .newsletter-box h2 { font-size: var(--ch-text-2xl); }
+      .newsletter-form { flex-direction: column; gap: var(--ch-space-3); }
+      .newsletter-form .input-field { text-align: center; }
+      .newsletter-form .btn { width: 100%; }
+      .ch-footer-grid { grid-template-columns: 1fr; gap: var(--ch-space-8); }
+      .ch-footer-bottom { flex-direction: column; text-align: center; gap: var(--ch-space-2); }
+      .ch-footer { padding: var(--ch-space-12) var(--ch-space-4) var(--ch-space-8); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="ch-nav">
+    <div class="container">
+      <div class="ch-nav-brand">
+        <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+        Capo Horn Lab
+      </div>
+      <div class="ch-nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="method.html">Method</a>
+        <a href="research.html">Research</a>
+        <a href="test-strategy.html">Test Strategy</a>
+        <a href="documentation.html" class="active">Docs</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="ch-nav-actions">
+        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+        <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="document.getElementById('navDrawer').classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <a href="index.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
+    <a href="about.html" onclick="document.getElementById('navDrawer').classList.remove('open')">About</a>
+    <a href="method.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Method</a>
+    <a href="research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
+    <a href="test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
+    <a href="documentation.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Docs</a>
+    <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
+    <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
+      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+      <a href="signup.html" class="btn btn-primary">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-content animate-up">
+      <div class="hero-badge animate-up-d1">
+        <span class="hero-badge-dot"></span>
+        Documentation
+      </div>
+      <h1 class="animate-up-d2">
+        How Our Backtesting<br><span class="highlight">Pipeline Works</span>
+      </h1>
+      <p class="animate-up-d3">
+        A complete guide to understanding our methodology, interpreting your strategy report,
+        and making data-driven decisions about your trading edge.
+      </p>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="trust-bar-inner">
+      <span class="label">Instruments</span>
+      <span class="trust-instrument"><span class="dot dot-es"></span><span class="name">ES</span><span class="exchange">CME</span></span>
+      <span class="trust-instrument"><span class="dot dot-nq"></span><span class="name">NQ</span><span class="exchange">CME</span></span>
+      <span class="trust-instrument"><span class="dot dot-cl"></span><span class="name">CL</span><span class="exchange">NYMEX</span></span>
+      <span class="trust-instrument"><span class="dot dot-6e"></span><span class="name">6E</span><span class="exchange">CME</span></span>
+      <span class="trust-instrument"><span class="dot dot-ym"></span><span class="name">YM</span><span class="exchange">CBOT</span></span>
+    </div>
+  </div>
+
+  <!-- Documentation Content -->
+  <section class="section">
+    <div class="container">
+      <div class="doc-content">
+
+        <!-- Table of Contents -->
+        <div class="doc-toc animate-up">
+          <h3>Table of Contents</h3>
+          <ol>
+            <li><a href="#overview">Overview — How We Test Strategies</a></li>
+            <li><a href="#pipeline">The Backtesting Pipeline</a></li>
+            <li><a href="#metrics">Key Metrics Explained</a></li>
+            <li><a href="#report">How to Read Your Report</a></li>
+            <li><a href="#interpretation">Interpreting Results</a></li>
+            <li><a href="#limitations">Understanding Limitations</a></li>
+            <li><a href="#faq">Common Questions</a></li>
+          </ol>
+        </div>
+
+        <!-- 1. Overview -->
+        <div class="doc-section" id="overview">
+          <h2>1. Overview — How We Test Strategies</h2>
+          <p>
+            Capo Horn Lab provides rigorous, institutional-grade backtesting for systematic trading strategies.
+            Unlike retail backtesting platforms that rely on OHLC bar data and simplistic execution models,
+            we use tick-level market data, realistic slippage models, and statistical validation techniques
+            to give you an honest assessment of whether your strategy has a genuine edge.
+          </p>
+          <p>
+            Our process is: you describe your strategy rules, we encode them in our pipeline, run the analysis
+            against historical tick data, and return a comprehensive report. We never sell strategies or signals.
+            Our only product is rigorous analysis.
+          </p>
+          <div class="doc-note">
+            <p><strong>Key principle:</strong> A backtest is not a prediction of future performance. It is a tool for falsification — a way to test whether your hypothesis about market behaviour can be rejected by historical data. The most valuable backtest result is a clear "no".</p>
+          </div>
+        </div>
+
+        <!-- 2. The Backtesting Pipeline -->
+        <div class="doc-section" id="pipeline">
+          <h2>2. The Backtesting Pipeline</h2>
+          <p>Every strategy submitted to Capo Horn Lab goes through the following pipeline:</p>
+
+          <h3>Step 1 — Strategy Encoding</h3>
+          <p>
+            Our quantitative team translates your strategy description into executable code.
+            Entry and exit rules, stop losses, take profit levels, position sizing, and any
+            filters or conditions are encoded exactly as specified. We document every assumption
+            and parameter choice so there is no ambiguity.
+          </p>
+
+          <h3>Step 2 — Data Sourcing</h3>
+          <p>
+            All historical data is sourced from <strong>Databento</strong>, providing tick-level
+            market data for futures contracts including ES, NQ, CL, 6E, and YM. Data includes
+            bid/ask quotes, trade prices, volumes, and timestamps at nanosecond precision.
+            We handle roll adjustments, contract expiries, and corporate actions automatically.
+          </p>
+
+          <h3>Step 3 — Simulation Engine</h3>
+          <p>
+            The backtest engine processes tick by tick, evaluating strategy conditions at
+            each market event. Order execution uses a realistic model calibrated to market
+            conditions at the time of execution. Configurable parameters include:
+          </p>
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+                <th>Default</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Slippage</td>
+                <td>Basis point cost per side, configurable per request</td>
+                <td>0.5 bps</td>
+              </tr>
+              <tr>
+                <td>Commission</td>
+                <td>Per-contract fee per side</td>
+                <td>$2.50 per side</td>
+              </tr>
+              <tr>
+                <td>Execution model</td>
+                <td>Bar-close, limit, or market-at-tick</td>
+                <td>Bar-close + delay</td>
+              </tr>
+              <tr>
+                <td>Order delay</td>
+                <td>Simulated latency between signal and fill</td>
+                <td>1 tick</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Step 4 — Statistical Validation</h3>
+          <p>
+            The raw equity curve goes through multiple validation layers:
+          </p>
+          <ul>
+            <li><strong>IS/OOS Split:</strong> The data is split into in-sample (development) and out-of-sample (validation) periods. The strategy is tested blind on the OOS data.</li>
+            <li><strong>Monte Carlo Simulation:</strong> Thousands of shuffled trade sequences simulate alternative paths the strategy could have taken, producing confidence intervals around performance metrics.</li>
+            <li><strong>Parameter Stability:</strong> If your strategy has parameters, we test sensitivity across a grid of values to check for overfitting.</li>
+            <li><strong>Distributional Analysis:</strong> Trade returns are tested for normality, autocorrelation, and regime dependency.</li>
+          </ul>
+
+          <h3>Step 5 — Report Generation</h3>
+          <p>
+            All results are compiled into a structured report (see Section 4) with full methodology
+            documentation, raw trade logs, and a clear verdict.
+          </p>
+        </div>
+
+        <!-- 3. Key Metrics Explained -->
+        <div class="doc-section" id="metrics">
+          <h2>3. Key Metrics Explained</h2>
+          <p>
+            Your report includes a range of performance and risk metrics. Here is what each one means:
+          </p>
+
+          <div class="metric-grid">
+            <div class="metric-card">
+              <h4>Sharpe Ratio</h4>
+              <p class="desc">Annualised return divided by annualised volatility of returns. Measures risk-adjusted return. Above 1.0 is generally considered good; above 2.0 is exceptional. We report both the point estimate and its 95% confidence interval.</p>
+            </div>
+            <div class="metric-card">
+              <h4>CAGR</h4>
+              <p class="desc">Compound Annual Growth Rate. The geometric average annual return over the test period. Accounts for compounding effects unlike a simple average return.</p>
+            </div>
+            <div class="metric-card">
+              <h4>Maximum Drawdown</h4>
+              <p class="desc">The largest peak-to-trough decline in the equity curve. Expressed as a percentage. Measures downside risk. Always assess this alongside Sharpe — a high Sharpe with a 40% drawdown tells a different story than one with 10%.</p>
+            </div>
+            <div class="metric-card">
+              <h4>Win Rate</h4>
+              <p class="desc">Percentage of trades that were profitable. A high win rate is not necessarily good — it can mask large average losers (the classic "low win rate, high R:R" vs "high win rate, low R:R" trade-off).</p>
+            </div>
+            <div class="metric-card">
+              <h4>Profit Factor</h4>
+              <p class="desc">Gross profit ÷ gross loss. Values above 1.0 indicate profitability. Above 1.5 is solid. Above 2.0 is strong. Below 1.0 means the strategy lost money overall.</p>
+            </div>
+            <div class="metric-card">
+              <h4>Average R (Risk Multiple)</h4>
+              <p class="desc">Average return per trade measured in units of risk. An R of 1 means the average trade returned 1× the risk amount. Combines win rate and reward-to-risk into a single metric.</p>
+            </div>
+            <div class="metric-card">
+              <h4>Monte Carlo P-Value</h4>
+              <p class="desc">The probability that the observed performance could have been achieved by a random strategy with the same trade distribution. Low values (&lt; 0.05) suggest genuine edge. High values suggest the result may be noise.</p>
+            </div>
+            <div class="metric-card">
+              <h4>Calmar Ratio</h4>
+              <p class="desc">CAGR divided by Maximum Drawdown. Measures return per unit of drawdown risk. Higher values indicate better risk-adjusted performance. Useful for comparing strategies with different drawdown profiles.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. How to Read Your Report -->
+        <div class="doc-section" id="report">
+          <h2>4. How to Read Your Report</h2>
+          <p>
+            Each backtest report is structured into clear sections. Here is what to look for in each:
+          </p>
+
+          <h3>Executive Summary</h3>
+          <p>
+            The first page gives you the bottom line: a verdict box that says <strong>Bullish</strong>,
+            <strong>Neutral</strong>, or <strong>Bearish</strong> on the strategy. This is not a
+            trading recommendation — it is a summary of the statistical evidence for or against
+            the strategy having an edge.
+          </p>
+          <ul>
+            <li><strong>Bullish:</strong> Passes all validation tests with statistically significant results.</li>
+            <li><strong>Neutral:</strong> Shows some positive signals but does not meet the threshold for statistical significance across all tests.</li>
+            <li><strong>Bearish:</strong> Fails one or more validation tests. The strategy likely has no edge, or the data actively contradicts the hypothesis.</li>
+          </ul>
+
+          <h3>Equity Curve</h3>
+          <p>
+            A chart of cumulative P&L over the test period. Look for: steady upward slope (good),
+            flat periods with sharp drops (suspect), equity curve that goes up and never down
+            (almost certainly overfitted or data-snooped). We overlay Monte Carlo confidence bands
+            to show the range of plausible outcomes.
+          </p>
+
+          <h3>Trade Log</h3>
+          <p>
+            Every individual trade with entry/exit timestamps, prices, P&L, and R multiples.
+            Review this for: clustered losses (regime dependency), unrealistic fills (price
+            improvement beyond market conditions), and pattern of winners vs losers.
+          </p>
+
+          <h3>Distribution Charts</h3>
+          <p>
+            Histograms of trade returns, R multiples, and holding periods. A strategy with
+            genuine edge typically shows a right-skewed distribution (more small wins than
+            small losses, with occasional large wins). A symmetric or left-skewed distribution
+            is a warning sign.
+          </p>
+
+          <h3>Validation Results</h3>
+          <p>
+            Detailed results of IS/OOS tests, Monte Carlo simulations, parameter stability
+            checks, and any other validation procedures. This section is where we separate
+            genuine edge from overfitted noise.
+          </p>
+
+          <div class="doc-note">
+            <p><strong>Pro tip:</strong> Always read the trade log before the summary. The summary is our opinion; the trade log is the raw data. If the raw data contradicts the summary, something is wrong.</p>
+          </div>
+        </div>
+
+        <!-- 5. Interpreting Results -->
+        <div class="doc-section" id="interpretation">
+          <h2>5. Interpreting Results</h2>
+
+          <h3>When a Strategy Passes</h3>
+          <p>
+            A <strong>Bullish</strong> verdict means the strategy survived all validation checks:
+          </p>
+          <ul>
+            <li>Sharpe ratio exceeds 1.0 with the lower bound of the 95% confidence interval above 0.5</li>
+            <li>Monte Carlo P-value &lt; 0.05</li>
+            <li>IS/OOS performance gap &lt; 30% (the strategy does not fall apart on unseen data)</li>
+            <li>Parameter stability — the strategy is not overly sensitive to small parameter changes</li>
+            <li>Trade count sufficient for statistical significance (typically &gt; 30 trades)</li>
+          </ul>
+          <p>
+            <strong>Caveat:</strong> Passing these tests does not guarantee future performance.
+            Markets change. What worked in 2020 may not work in 2025. The results are a data
+            point, not a prophecy.
+          </p>
+
+          <h3>When a Strategy Fails</h3>
+          <p>
+            A <strong>Bearish</strong> verdict is valuable information. Common reasons:
+          </p>
+          <ul>
+            <li><strong>Insufficient edge:</strong> The strategy barely beats random, or the Monte Carlo simulation shows the results are within the noise band.</li>
+            <li><strong>Overfitting:</strong> The strategy looks great on in-sample data but collapses out-of-sample. Common symptoms: too many parameters, tight stops that look calibrated to past volatility.</li>
+            <li><strong>Data snooping:</strong> The strategy rules were derived from looking at the same data they are tested on. Our IS/OOS split catches this.</li>
+            <li><strong>Market regime shift:</strong> The strategy worked in some periods but failed in others. We flag this with regime-dependent analysis.</li>
+          </ul>
+
+          <div class="doc-warning">
+            <p><strong>Warning:</strong> Do not cherry-pick time periods. If a strategy only works in 2020–2021 but fails in all other years, that is not a strategy — that is a description of a specific market regime. A robust strategy performs consistently across different market conditions.</p>
+          </div>
+
+          <h3>The Neutral Verdict</h3>
+          <p>
+            A <strong>Neutral</strong> verdict is the most common outcome for strategies that
+            are not obviously bad but also not convincingly good. It means: the data shows
+            some positive signals, but not enough to cross the statistical significance threshold.
+            This is not a failure — it is an invitation to refine the hypothesis and test again.
+          </p>
+        </div>
+
+        <!-- 6. Understanding Limitations -->
+        <div class="doc-section" id="limitations">
+          <h2>6. Understanding Limitations</h2>
+          <p>
+            Every backtesting methodology has limitations. Being transparent about them is
+            part of our commitment to honest research:
+          </p>
+          <ul>
+            <li><strong>No forward-testing substitute:</strong> A backtest is historical analysis. It cannot predict how a strategy will behave in market conditions that have no historical precedent.</li>
+            <li><strong>Execution assumptions:</strong> Our slippage and fill models are realistic but cannot capture every edge case — particularly in fast market conditions or during news events.</li>
+            <li><strong>Survivorship bias:</strong> We use current contract specifications. Delisted contracts or rules changes that would have affected the strategy are noted but cannot always be fully reconstructed.</li>
+            <li><strong>Regime dependency:</strong> A strategy that works across multiple market regimes (trending, ranging, high vol, low vol) is more robust than one that only works in one. Our reports flag regime dependency when detected.</li>
+            <li><strong>Psychological factor:</strong> No backtest captures the emotional difficulty of executing a strategy through a drawdown. A strategy that backtests at a Sharpe of 1.5 may still be impossible to follow in real trading.</li>
+          </ul>
+        </div>
+
+        <!-- 7. Common Questions -->
+        <div class="doc-section" id="faq">
+          <h2>7. Common Questions</h2>
+
+          <h4>How much data do you need to test a strategy?</h4>
+          <p>We recommend at least 2 years of data for statistically meaningful results. More data means more reliable conclusions. The exact amount depends on the strategy's trade frequency — a daily strategy needs more calendar years than a 5-minute strategy.</p>
+
+          <h4>Can you test strategies with multiple instruments?</h4>
+          <p>Yes. Multi-instrument and portfolio-level backtesting is supported. We can test strategies that trade different instruments simultaneously, with correlation analysis and portfolio risk metrics included in the report.</p>
+
+          <h4>How do you handle contract rollovers?</h4>
+          <p>Futures contracts expire. We handle rolls automatically using a configurable roll schedule and method (last day, volume-based, or custom date). The report documents the roll methodology used and any adjustments applied.</p>
+
+          <h4>What happens if I submit a strategy with ambiguous rules?</h4>
+          <p>We will contact you for clarification before running the test. All assumptions are documented in the report. If we cannot resolve the ambiguity, we will flag it and suggest alternatives.</p>
+
+          <h4>Can I get the raw data from my backtest?</h4>
+          <p>Absolutely. Every report includes a full trade log with entry/exit prices, timestamps, P&L per trade, and equity curve data. We believe in reproducible research — you should be able to verify every number in your report.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header animate-up">
+        <span class="overline">Ready?</span>
+        <h2>Test Your Strategy</h2>
+        <p>Submit your strategy for rigorous analysis. Get honest results — no sugar-coating.</p>
+      </div>
+      <div style="text-align:center;" class="animate-up-d1">
+        <a href="test-strategy.html" class="btn btn-primary btn-lg">Get Started →</a>
+        <br><br>
+        <p style="font-size:var(--ch-text-sm);color:var(--ch-gray-400);">
+          Have questions? Check our <a href="faq.html" style="color:var(--ch-blue-500);text-decoration:underline;">FAQ</a> or <a href="contact.html" style="color:var(--ch-blue-500);text-decoration:underline;">contact us</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider"></div>
+
+  <!-- NEWSLETTER -->
+  <section class="section section-dark newsletter-section">
+    <div class="container">
+      <div class="newsletter-box">
+        <h2>Stay Ahead of the Curve</h2>
+        <p>
+          Get notified when new research is published. No spam, no strategy pitches —
+          just raw data and honest analysis delivered to your inbox.
+        </p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); const btn=this.querySelector('button'); const orig=btn.textContent; btn.textContent='✓ Subscribed!'; btn.disabled=true; setTimeout(()=>{btn.textContent=orig; btn.disabled=false}, 3000);">
+          <input class="input-field" type="email" placeholder="you@example.com" required>
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-disclaimer">
+          No spam. Unsubscribe anytime. Read our <a href="privacy-policy.html" style="color:var(--ch-blue-300);text-decoration:underline;">Privacy Policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ch-footer">
+    <div class="ch-footer-grid">
+      <div>
+        <div class="ch-footer-brand">
+          <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+          Capo Horn Lab
+        </div>
+        <p class="ch-footer-tagline">
+          Quantitative backtesting and strategy research.
+          Data-driven, not guru-driven.
+        </p>
+        <div class="ch-footer-social">
+          <a href="https://github.com/capohornlab" aria-label="GitHub" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://twitter.com/capohornlab" aria-label="Twitter / X" title="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://linkedin.com/company/capohornlab" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="method.html">Method</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="investors.html">Investors</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="test-strategy.html">Test Your Strategy</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ch-footer-bottom">
+      <span>&copy; 2026 Capo Horn Lab. All rights reserved.</span>
+      <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test Your Strategy — Capo Horn Lab</title>
+  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Test your trading strategy with Capo Horn Lab's institutional-grade backtesting engine. Validate your quantitative strategies with professional analytics.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capohornlab.com/test-strategy.html">
+  <meta property="og:title" content="Test Your Strategy — Capo Horn Lab">
+  <meta property="og:description" content="Test your trading strategy with Capo Horn Lab's institutional-grade backtesting engine. Validate your quantitative strategies with professional analytics.">
+  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Test Your Strategy — Capo Horn Lab">
+  <meta name="twitter:description" content="Test your trading strategy with Capo Horn Lab's institutional-grade backtesting engine. Validate your quantitative strategies with professional analytics.">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1376,7 +1393,7 @@
         <a href="about.html">About</a>
         <a href="method.html">Method</a>
         <a href="research.html">Research</a>
-        <a href="test-strategy.html"" class="active">Test Strategy</a>
+        <a href="test-strategy.html" class="active">Test Strategy</a>
         <a href="contact.html">Contact</a>
       </div>
       <div class="ch-nav-actions">
@@ -2047,7 +2064,7 @@
 
     function showAuth(type) {
       // Placeholder: in production this would redirect to /login or /signup
-      alert('Redirect to ' + (type === 'login' ? '/login' : '/signup'));
+      window.location.href = type === 'login' ? 'login.html' : 'signup.html';
     }
 
     function showWizard() {

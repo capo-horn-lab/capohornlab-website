@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Capo Horn Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ch-navy-900: #0a1628; --ch-navy-800: #0f1e36; --ch-navy-700: #152a45; --ch-navy-600: #1c3a5c; --ch-navy-500: #254e77; --ch-navy-400: #3b6fa0; --ch-navy-300: #5e93c2; --ch-navy-200: #8fb8da; --ch-navy-100: #c1d6ec; --ch-navy-50: #e8f0f8;
+      --ch-white: #ffffff; --ch-off-white: #f8fafc; --ch-gray-50: #f1f5f9; --ch-gray-100: #e2e8f0; --ch-gray-200: #cbd5e1; --ch-gray-300: #94a3b8; --ch-gray-400: #64748b; --ch-gray-500: #475569; --ch-gray-600: #334155; --ch-gray-700: #1e293b; --ch-gray-800: #0f172a; --ch-gray-900: #020617;
+      --ch-blue-500: #2563eb; --ch-blue-400: #3b82f6; --ch-blue-300: #60a5fa; --ch-blue-200: #93c5fd; --ch-blue-100: #dbeafe; --ch-blue-50: #eff6ff;
+      --ch-amber-500: #f59e0b; --ch-amber-400: #fbbf24; --ch-amber-300: #fcd34d; --ch-amber-200: #fde68a; --ch-amber-100: #fef3c7; --ch-amber-50: #fffbeb;
+      --ch-success: #10b981; --ch-warning: #f59e0b; --ch-error: #ef4444; --ch-info: #3b82f6;
+      --ch-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      --ch-text-xs: 0.75rem; --ch-text-sm: 0.875rem; --ch-text-base: 1rem; --ch-text-lg: 1.125rem; --ch-text-xl: 1.25rem; --ch-text-2xl: 1.5rem; --ch-text-3xl: 1.875rem; --ch-text-4xl: 2.25rem; --ch-text-5xl: 3rem; --ch-text-6xl: 3.75rem;
+      --ch-leading-tight: 1.15; --ch-leading-snug: 1.3; --ch-leading-normal: 1.5; --ch-leading-relaxed: 1.65;
+      --ch-font-light: 300; --ch-font-regular: 400; --ch-font-medium: 500; --ch-font-semibold: 600; --ch-font-bold: 700; --ch-font-extrabold: 800;
+      --ch-letter-spacing-tight: -0.025em; --ch-letter-spacing-normal: 0em; --ch-letter-spacing-wide: 0.05em;
+      --ch-space-1: 0.25rem; --ch-space-2: 0.5rem; --ch-space-3: 0.75rem; --ch-space-4: 1rem; --ch-space-5: 1.25rem; --ch-space-6: 1.5rem; --ch-space-8: 2rem; --ch-space-10: 2.5rem; --ch-space-12: 3rem; --ch-space-16: 4rem; --ch-space-20: 5rem; --ch-space-24: 6rem;
+      --ch-radius-none: 0; --ch-radius-sm: 0.25rem; --ch-radius-md: 0.5rem; --ch-radius-lg: 0.75rem; --ch-radius-xl: 1rem; --ch-radius-2xl: 1.5rem; --ch-radius-full: 9999px;
+      --ch-shadow-xs: 0 1px 2px rgba(10,22,40,0.05); --ch-shadow-sm: 0 1px 3px rgba(10,22,40,0.08),0 1px 2px rgba(10,22,40,0.04); --ch-shadow-md: 0 4px 6px rgba(10,22,40,0.07),0 2px 4px rgba(10,22,40,0.04); --ch-shadow-lg: 0 10px 15px rgba(10,22,40,0.08),0 4px 6px rgba(10,22,40,0.03); --ch-shadow-xl: 0 20px 25px rgba(10,22,40,0.10),0 8px 10px rgba(10,22,40,0.04); --ch-shadow-2xl: 0 25px 50px rgba(10,22,40,0.15);
+      --ch-shadow-glow-blue: 0 0 20px rgba(37,99,235,0.25); --ch-shadow-glow-amber: 0 0 20px rgba(245,158,11,0.25);
+      --ch-transition-fast: 150ms cubic-bezier(0.4,0,0.2,1); --ch-transition-base: 250ms cubic-bezier(0.4,0,0.2,1); --ch-transition-slow: 400ms cubic-bezier(0.4,0,0.2,1); --ch-transition-spring: 500ms cubic-bezier(0.34,1.56,0.64,1);
+      --ch-z-base: 1; --ch-z-dropdown: 10; --ch-z-sticky: 100; --ch-z-nav: 1000; --ch-max-width: 1200px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    body{font-family:var(--ch-font-sans);font-size:var(--ch-text-base);line-height:var(--ch-leading-normal);color:var(--ch-gray-800);background:var(--ch-off-white)}
+    img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}
+    .container{max-width:var(--ch-max-width);margin:0 auto;padding:0 var(--ch-space-6)}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    .ch-nav{display:flex;align-items:center;justify-content:space-between;padding:var(--ch-space-4) var(--ch-space-6);background:var(--ch-navy-900);color:var(--ch-white);box-shadow:var(--ch-shadow-md);position:sticky;top:0;z-index:var(--ch-z-nav)}
+    .ch-nav .container{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:var(--ch-max-width);margin:0 auto;padding:0}
+    .ch-nav-brand{font-size:var(--ch-text-lg);font-weight:var(--ch-font-bold);letter-spacing:var(--ch-letter-spacing-tight);display:flex;align-items:center;gap:var(--ch-space-2)}
+    .ch-nav-brand .brand-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--ch-blue-500),var(--ch-amber-500));border-radius:var(--ch-radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);font-weight:var(--ch-font-bold);color:var(--ch-white)}
+    .ch-nav-links{display:flex;align-items:center;gap:var(--ch-space-1)}
+    .ch-nav-links a{font-size:var(--ch-text-sm);font-weight:var(--ch-font-medium);color:var(--ch-navy-200);padding:var(--ch-space-2) var(--ch-space-4);border-radius:var(--ch-radius-md);transition:background var(--ch-transition-fast),color var(--ch-transition-fast)}
+    .ch-nav-links a:hover{background:rgba(255,255,255,0.06);color:var(--ch-white)}
+    .ch-nav-links a.active{color:var(--ch-white);background:rgba(37,99,235,0.2)}
+    .ch-nav-actions{display:flex;align-items:center;gap:var(--ch-space-3)}
+    .nav-toggle{display:none;background:none;border:none;color:var(--ch-white);cursor:pointer;padding:var(--ch-space-2)}
+    .nav-toggle svg{width:24px;height:24px}
+    .nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--ch-navy-900);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:var(--ch-space-8);animation:fadeIn 0.2s ease-out}
+    .nav-drawer.open{display:flex}
+    .nav-drawer a{font-size:var(--ch-text-2xl);font-weight:var(--ch-font-medium);color:var(--ch-navy-200);transition:color var(--ch-transition-fast)}
+    .nav-drawer a:hover{color:var(--ch-white)}
+    .nav-drawer-close{position:absolute;top:var(--ch-space-6);right:var(--ch-space-6);background:none;border:none;color:var(--ch-white);cursor:pointer;padding:var(--ch-space-2)}
+    .nav-drawer-close svg{width:28px;height:28px}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--ch-space-2);font-family:var(--ch-font-sans);font-weight:var(--ch-font-semibold);font-size:var(--ch-text-sm);line-height:1;padding:var(--ch-space-3) var(--ch-space-6);border:1px solid transparent;border-radius:var(--ch-radius-md);cursor:pointer;transition:background var(--ch-transition-fast),color var(--ch-transition-fast),border-color var(--ch-transition-fast),box-shadow var(--ch-transition-fast);user-select:none;white-space:nowrap}
+    .btn:active{transform:scale(0.97)}
+    .btn-primary{background:var(--ch-blue-500);color:var(--ch-white);border-color:var(--ch-blue-500);box-shadow:0 1px 3px rgba(37,99,235,0.3)}
+    .btn-primary:hover{background:var(--ch-blue-400);border-color:var(--ch-blue-400);box-shadow:var(--ch-shadow-glow-blue)}
+    .btn-ghost{background:transparent;color:var(--ch-gray-400);border-color:transparent}
+    .btn-ghost:hover{background:var(--ch-gray-100);color:var(--ch-gray-700)}
+    .btn-sm{padding:var(--ch-space-2) var(--ch-space-4);font-size:var(--ch-text-xs)}
+
+    .legal-page{padding:var(--ch-space-16) 0 var(--ch-space-20)}
+    .legal-header{text-align:center;margin-bottom:var(--ch-space-12)}
+    .legal-header h1{font-size:var(--ch-text-4xl);font-weight:var(--ch-font-extrabold);color:var(--ch-navy-900);letter-spacing:var(--ch-letter-spacing-tight);line-height:var(--ch-leading-tight);margin-bottom:var(--ch-space-3)}
+    .legal-header .legal-meta{font-size:var(--ch-text-sm);color:var(--ch-gray-400)}
+    .legal-header .legal-meta span{display:inline-block;margin:0 var(--ch-space-2)}
+    .legal-header .legal-meta .separator{color:var(--ch-gray-300)}
+    .legal-content{max-width:860px;margin:0 auto;background:var(--ch-white);border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-xl);box-shadow:var(--ch-shadow-sm);padding:var(--ch-space-12) var(--ch-space-12)}
+    .legal-content h2{font-size:var(--ch-text-xl);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);margin-top:var(--ch-space-8);margin-bottom:var(--ch-space-4);padding-bottom:var(--ch-space-2);border-bottom:1px solid var(--ch-gray-100)}
+    .legal-content h2:first-child{margin-top:0}
+    .legal-content h3{font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);color:var(--ch-navy-800);margin-top:var(--ch-space-6);margin-bottom:var(--ch-space-2)}
+    .legal-content p{font-size:var(--ch-text-sm);line-height:var(--ch-leading-relaxed);color:var(--ch-gray-600);margin-bottom:var(--ch-space-4)}
+    .legal-content ul,.legal-content ol{font-size:var(--ch-text-sm);line-height:var(--ch-leading-relaxed);color:var(--ch-gray-600);margin-bottom:var(--ch-space-4);padding-left:var(--ch-space-6);list-style:disc}
+    .legal-content ol{list-style:decimal}
+    .legal-content li{margin-bottom:var(--ch-space-2)}
+    .legal-content a{color:var(--ch-blue-500);text-decoration:underline;transition:color var(--ch-transition-fast)}
+    .legal-content a:hover{color:var(--ch-blue-400)}
+    .legal-content strong{color:var(--ch-gray-800);font-weight:var(--ch-font-semibold)}
+    .legal-content .legal-notice{background:var(--ch-blue-50);border:1px solid var(--ch-blue-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-4) var(--ch-space-6);margin-bottom:var(--ch-space-6);font-size:var(--ch-text-sm);color:var(--ch-navy-700);line-height:var(--ch-leading-relaxed)}
+    .legal-content .legal-notice strong{color:var(--ch-blue-500)}
+    .legal-toc{background:var(--ch-gray-50);border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-6);margin-bottom:var(--ch-space-8)}
+    .legal-toc h3{font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);text-transform:uppercase;letter-spacing:var(--ch-letter-spacing-wide);margin-top:0;margin-bottom:var(--ch-space-3)}
+    .legal-toc ol{margin-bottom:0;padding-left:var(--ch-space-5)}
+    .legal-toc li{margin-bottom:var(--ch-space-1)}
+    .legal-toc a{color:var(--ch-blue-500);text-decoration:none;font-size:var(--ch-text-sm)}
+    .legal-toc a:hover{text-decoration:underline}
+
+    .ch-footer{background:var(--ch-navy-900);color:var(--ch-navy-200);padding:var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);position:relative;overflow:hidden}
+    .ch-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(37,99,235,0.4),transparent)}
+    .ch-footer-grid{max-width:var(--ch-max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--ch-space-8)}
+    .ch-footer-brand{font-size:var(--ch-text-xl);font-weight:var(--ch-font-bold);color:var(--ch-white);margin-bottom:var(--ch-space-3);letter-spacing:var(--ch-letter-spacing-tight);display:flex;align-items:center;gap:var(--ch-space-2)}
+    .ch-footer-brand .brand-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--ch-blue-500),var(--ch-amber-500));border-radius:var(--ch-radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--ch-font-mono);font-size:10px;font-weight:var(--ch-font-bold);color:var(--ch-white)}
+    .ch-footer-tagline{font-size:var(--ch-text-sm);line-height:var(--ch-leading-relaxed);max-width:300px}
+    .ch-footer h4{font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:var(--ch-white);text-transform:uppercase;letter-spacing:var(--ch-letter-spacing-wide);margin-bottom:var(--ch-space-4)}
+    .ch-footer ul li{margin-bottom:var(--ch-space-2)}
+    .ch-footer ul li a{font-size:var(--ch-text-sm);color:var(--ch-navy-300);transition:color var(--ch-transition-fast)}
+    .ch-footer ul li a:hover{color:var(--ch-amber-400)}
+    .ch-footer-social{display:flex;gap:var(--ch-space-3);margin-top:var(--ch-space-4)}
+    .ch-footer-social a{width:36px;height:36px;border-radius:var(--ch-radius-md);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--ch-navy-300);font-size:var(--ch-text-sm);transition:background var(--ch-transition-fast),color var(--ch-transition-fast)}
+    .ch-footer-social a:hover{background:rgba(37,99,235,0.15);color:var(--ch-white)}
+    .ch-footer-bottom{max-width:var(--ch-max-width);margin:var(--ch-space-12) auto 0;padding-top:var(--ch-space-6);border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:var(--ch-text-xs);flex-wrap:wrap;gap:var(--ch-space-4)}
+    .ch-footer-bottom .disclaimer{color:var(--ch-gray-500);max-width:500px}
+
+    @media(max-width:767px){
+      .ch-nav-links{display:none}.ch-nav-actions .btn{display:none}.nav-toggle{display:block}
+      .legal-content{padding:var(--ch-space-6) var(--ch-space-4)}
+      .legal-header h1{font-size:var(--ch-text-2xl)}
+      .ch-footer-grid{grid-template-columns:1fr;gap:var(--ch-space-6)}
+      .ch-footer-bottom{flex-direction:column;text-align:center}
+      .legal-toc ol{padding-left:var(--ch-space-4)}
+    }
+    @media(min-width:768px){.ch-nav{padding:var(--ch-space-4) var(--ch-space-8)}}
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="ch-nav">
+    <div class="container">
+      <a href="pages/home.html" class="ch-nav-brand">
+        <div class="brand-icon">CH</div>
+        Capo Horn Lab
+      </a>
+      <div class="ch-nav-links">
+        <a href="pages/home.html">Home</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/method.html">Method</a>
+        <a href="pages/research.html">Research</a>
+        <a href="pages/test-strategy.html">Test Strategy</a>
+        <a href="pages/contact.html">Contact</a>
+      </div>
+      <div class="ch-nav-actions">
+        <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+        <button class="btn btn-primary btn-sm">Sign Up</button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="document.getElementById('navDrawer').classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="pages/home.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
+    <a href="pages/about.html" onclick="document.getElementById('navDrawer').classList.remove('open')">About</a>
+    <a href="pages/method.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Method</a>
+    <a href="pages/research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
+    <a href="pages/test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
+    <a href="pages/contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
+    <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
+      <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- LEGAL PAGE — TERMS OF SERVICE -->
+  <section class="legal-page">
+    <div class="container">
+      <div class="legal-header">
+        <h1>Terms of Service</h1>
+        <div class="legal-meta">
+          <span>Last updated: 24 July 2026</span>
+          <span class="separator">|</span>
+          <span>Effective: 24 July 2026</span>
+        </div>
+      </div>
+
+      <div class="legal-content">
+
+        <div class="legal-notice">
+          <strong>Please read these Terms of Service carefully.</strong> By accessing or using the Capo Horn Lab platform, you agree to be bound by these terms. If you do not agree, do not use our services. Capo Horn Lab B.V. is a company registered in the European Union.
+        </div>
+
+        <div class="legal-toc">
+          <h3>Table of Contents</h3>
+          <ol>
+            <li><a href="#definitions">Definitions</a></li>
+            <li><a href="#acceptance">Acceptance of Terms</a></li>
+            <li><a href="#services">Description of Services</a></li>
+            <li><a href="#accounts">User Accounts and Registration</a></li>
+            <li><a href="#fees">Fees and Payment</a></li>
+            <li><a href="#intellectual-property">Intellectual Property Rights</a></li>
+            <li><a href="#user-obligations">User Obligations and Conduct</a></li>
+            <li><a href="#confidentiality">Confidentiality of Strategy Data</a></li>
+            <li><a href="#disclaimers">Disclaimers and Limitations</a></li>
+            <li><a href="#indemnification">Indemnification</a></li>
+            <li><a href="#termination">Termination</a></li>
+            <li><a href="#governing-law">Governing Law and Dispute Resolution</a></li>
+            <li><a href="#changes-tos">Changes to These Terms</a></li>
+            <li><a href="#contact-tos">Contact</a></li>
+          </ol>
+        </div>
+
+        <h2 id="definitions">1. Definitions</h2>
+        <p>In these Terms of Service, the following capitalised terms have the meanings set out below:</p>
+        <p><strong>"Platform"</strong> means the Capo Horn Lab website, web application, and all associated services, including the quantitative backtesting engine, research publications, and user dashboard.</p>
+        <p><strong>"Services"</strong> means the quantitative backtesting, strategy analysis, research publication, and related services offered by Capo Horn Lab through the Platform.</p>
+        <p><strong>"User", "You", "Your"</strong> means any individual or legal entity that accesses or uses the Platform in any capacity.</p>
+        <p><strong>"Strategy Data"</strong> means any trading strategy description, entry/exit rules, parameters, indicators, conditions, or related information submitted by a User for backtesting analysis.</p>
+        <p><strong>"Research Output"</strong> means the backtesting reports, analysis, statistical results, and research publications generated by Capo Horn Lab for a User or published on the Platform.</p>
+        <p><strong>"Agreement"</strong> means these Terms of Service, together with any incorporated policies, schedules, or order forms.</p>
+
+        <h2 id="acceptance">2. Acceptance of Terms</h2>
+        <p>By creating an account, accessing the Platform, or using any of our Services, you acknowledge that you have read, understood, and agree to be bound by this Agreement. If you are entering into this Agreement on behalf of a legal entity, you represent that you have the authority to bind that entity.</p>
+        <p>This Agreement constitutes a legally binding contract between you and Capo Horn Lab B.V. Your use of the Platform is also subject to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="cookie-policy.html">Cookie Policy</a>, which are incorporated by reference.</p>
+
+        <h2 id="services">3. Description of Services</h2>
+        <p>Capo Horn Lab provides quantitative backtesting and strategy research services to traders, quantitative analysts, and financial professionals. Our Services include:</p>
+        <ul>
+          <li><strong>Strategy Backtesting:</strong> Statistical analysis of user-submitted trading strategies using institutional-grade tick data, IS/OOS splits, Monte Carlo simulation, parameter stability tests, and realistic slippage models.</li>
+          <li><strong>Research Publications:</strong> Peer-reviewed quantitative studies on market microstructure, liquidity regimes, momentum dynamics, and other systematic trading topics.</li>
+          <li><strong>Consulting Services:</strong> Custom quantitative analysis engagements as separately agreed in writing.</li>
+        </ul>
+        <p>The Services are provided on an "as is" and "as available" basis, subject to the disclaimers in Section 9 below.</p>
+
+        <h2 id="accounts">4. User Accounts and Registration</h2>
+        <p>4.1 To access certain features of the Platform, you must register for an account. You agree to provide accurate, current, and complete information during registration and to keep your account information up to date.</p>
+        <p>4.2 You are solely responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account. You must notify us immediately of any unauthorised use of your account.</p>
+        <p>4.3 You must be at least 18 years of age to create an account or use our Services. By registering, you represent and warrant that you meet this age requirement.</p>
+        <p>4.4 Capo Horn Lab reserves the right to refuse registration, suspend accounts, or limit access to the Platform at its sole discretion, including where we suspect fraudulent activity, violation of these terms, or regulatory compliance concerns.</p>
+
+        <h2 id="fees">5. Fees and Payment</h2>
+        <p>5.1 Certain Services are subject to fees as set forth in our then-current <a href="pages/pricing.html">Pricing</a> page or as agreed in a separate order form. All fees are exclusive of applicable taxes, which shall be paid by the User.</p>
+        <p>5.2 Payments are due at the time of purchase unless otherwise agreed in writing. We accept payment via credit/debit card, wire transfer, or other methods we may specify.</p>
+        <p>5.3 All fees are stated in Euros (EUR) unless otherwise indicated. Capo Horn Lab is an EU-based company and all transactions are processed in accordance with EU regulations.</p>
+        <p>5.4 Refunds are governed by our <a href="refund-policy.html">Refund Policy</a>. Late payments may result in service suspension and accrual of interest at the statutory rate permitted by applicable law.</p>
+        <p>5.5 We reserve the right to change our fees upon 30 days' notice. Continued use of the Services after a fee change constitutes acceptance of the new pricing.</p>
+
+        <h2 id="intellectual-property">6. Intellectual Property Rights</h2>
+        <p>6.1 <strong>Our IP:</strong> The Platform, its design, code, algorithms, methodologies, research publications, and any proprietary tools or frameworks developed by Capo Horn Lab are our exclusive intellectual property. You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Platform for your personal or internal business purposes.</p>
+        <p>6.2 <strong>Your IP:</strong> You retain all rights to your Strategy Data. Capo Horn Lab does not claim ownership of your trading strategies or the intellectual property contained therein.</p>
+        <p>6.3 <strong>Research Output:</strong> Backtesting reports and analysis generated for you are provided for your internal use. You may not publish, redistribute, or sublicense our Research Output without our prior written consent, except for aggregated, anonymised results that do not identify Capo Horn Lab's proprietary methodology.</p>
+        <p>6.4 <strong>Feedback:</strong> Any suggestions, feedback, or improvement ideas you provide may be used by us without compensation or restriction.</p>
+
+        <h2 id="user-obligations">7. User Obligations and Conduct</h2>
+        <p>You agree that you will not, and will not permit any third party to:</p>
+        <ul>
+          <li>Use the Platform for any illegal, fraudulent, or unauthorised purpose.</li>
+          <li>Submit Strategy Data that infringes the intellectual property rights of any third party.</li>
+          <li>Attempt to reverse-engineer, decompile, or extract the source code of our proprietary algorithms.</li>
+          <li>Interfere with or disrupt the integrity or performance of the Platform.</li>
+          <li>Access or attempt to access any other user's data without authorisation.</li>
+          <li>Use automated scripts, bots, or scraping tools to access the Platform without our express written permission.</li>
+          <li>Misrepresent your identity, affiliation, or the purpose of your use of the Services.</li>
+        </ul>
+
+        <h2 id="confidentiality">8. Confidentiality of Strategy Data</h2>
+        <p>Capo Horn Lab recognises that your Strategy Data represents valuable intellectual property and confidential information. We agree to:</p>
+        <ul>
+          <li>Use your Strategy Data solely for the purpose of performing the backtesting and analysis services you request.</li>
+          <li>Not disclose your Strategy Data to any third party without your consent, except as required by law or as necessary to perform the Services (e.g., to infrastructure providers bound by data processing agreements).</li>
+          <li>Implement appropriate technical and organisational measures to protect your Strategy Data against unauthorised access, disclosure, or loss.</li>
+        </ul>
+        <p>These confidentiality obligations survive termination of this Agreement. Nothing in this section prevents us from using aggregated, anonymised data for research or platform improvement purposes, provided such data cannot be reverse-engineered to identify your specific strategies.</p>
+
+        <h2 id="disclaimers">9. Disclaimers and Limitations of Liability</h2>
+        <p><strong>9.1 No Investment Advice:</strong> Capo Horn Lab is a quantitative backtesting and research firm. We do not provide investment advice, financial advisory services, or recommendations regarding the purchase or sale of any financial instruments. Our Research Output and backtesting reports are for informational and educational purposes only.</p>
+        <p><strong>9.2 Past Performance:</strong> Past performance of any backtested strategy does not guarantee future results. All backtesting results are hypothetical and may not reflect actual trading conditions, including market liquidity, slippage, and execution constraints.</p>
+        <p><strong>9.3 No Warranty:</strong> The Platform and Services are provided "as is" without any warranty, express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+        <p><strong>9.4 Limitation of Liability:</strong> To the maximum extent permitted by applicable law, Capo Horn Lab shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, trading losses, data loss, or business interruption, arising out of or related to your use of the Platform or Services, even if advised of the possibility of such damages. Our total aggregate liability shall not exceed the fees paid by you in the 12 months preceding the claim.</p>
+        <p><strong>9.5 EU Consumer Rights:</strong> Nothing in this section excludes or limits our liability for fraud, death or personal injury caused by negligence, or any other liability that cannot be limited under applicable EU or Member State law.</p>
+
+        <h2 id="indemnification">10. Indemnification</h2>
+        <p>You agree to indemnify, defend, and hold harmless Capo Horn Lab, its affiliates, officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or related to: (a) your use of the Platform in violation of this Agreement; (b) your Strategy Data infringing third-party rights; or (c) your violation of applicable law.</p>
+
+        <h2 id="termination">11. Termination</h2>
+        <p>11.1 Either party may terminate this Agreement at any time by providing written notice. If you terminate, your access to the Platform will cease and we will delete your data in accordance with our Privacy Policy.</p>
+        <p>11.2 We may suspend or terminate your access to the Platform immediately without notice if you materially breach this Agreement, violate applicable law, or engage in conduct that we reasonably believe may harm the Platform or other users.</p>
+        <p>11.3 Upon termination, Sections 6 (Intellectual Property), 8 (Confidentiality), 9 (Disclaimers), 10 (Indemnification), and 12 (Governing Law) shall survive.</p>
+
+        <h2 id="governing-law">12. Governing Law and Dispute Resolution</h2>
+        <p>12.1 This Agreement shall be governed by and construed in accordance with the laws of the Netherlands, without regard to its conflict of law principles.</p>
+        <p>12.2 Any dispute arising out of or relating to this Agreement shall first be submitted to good-faith negotiations between the parties. If the dispute cannot be resolved within 30 days, it shall be referred to the competent courts of Amsterdam, the Netherlands.</p>
+        <p>12.3 For consumers resident in the EU, nothing in this section deprives you of the protection afforded by mandatory provisions of the law of your country of residence, and you may also bring proceedings in your local courts. The European Commission's Online Dispute Resolution (ODR) platform is available at <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.</p>
+
+        <h2 id="changes-tos">13. Changes to These Terms</h2>
+        <p>We may modify these Terms of Service from time to time. Material changes will be communicated to registered users via email and/or a prominent notice on the Platform at least 30 days before they take effect. Your continued use of the Platform after the effective date constitutes acceptance of the modified terms. If you do not agree with the changes, you may terminate your account before the changes take effect.</p>
+
+        <h2 id="contact-tos">14. Contact</h2>
+        <p>If you have any questions about these Terms of Service, please contact us:</p>
+        <p>
+          <strong>Capo Horn Lab B.V.</strong><br>
+          Email: <a href="mailto:legal@capohornlab.com">legal@capohornlab.com</a><br>
+          Support: <a href="mailto:support@capohornlab.com">support@capohornlab.com</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ch-footer">
+    <div class="ch-footer-grid">
+      <div>
+        <a href="pages/home.html" class="ch-footer-brand">
+          <div class="brand-icon">CH</div>
+          Capo Horn Lab
+        </a>
+        <p class="ch-footer-tagline">Quantitative backtesting and strategy research. Data-driven, not guru-driven.</p>
+        <div class="ch-footer-social">
+          <a href="https://github.com/capohornlab" aria-label="GitHub" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://twitter.com/capohornlab" aria-label="Twitter / X" title="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://linkedin.com/company/capohornlab" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/method.html">Method</a></li>
+          <li><a href="pages/research.html">Research</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="pages/test-strategy.html">Test Your Strategy</a></li>
+          <li><a href="pages/pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ch-footer-bottom">
+      <span>&copy; 2026 Capo Horn Lab. All rights reserved.</span>
+      <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

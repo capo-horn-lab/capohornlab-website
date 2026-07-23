@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Policy — Capo Horn Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ch-navy-900: #0a1628; --ch-navy-800: #0f1e36; --ch-navy-700: #152a45; --ch-navy-600: #1c3a5c; --ch-navy-500: #254e77; --ch-navy-400: #3b6fa0; --ch-navy-300: #5e93c2; --ch-navy-200: #8fb8da; --ch-navy-100: #c1d6ec; --ch-navy-50: #e8f0f8;
+      --ch-white: #ffffff; --ch-off-white: #f8fafc; --ch-gray-50: #f1f5f9; --ch-gray-100: #e2e8f0; --ch-gray-200: #cbd5e1; --ch-gray-300: #94a3b8; --ch-gray-400: #64748b; --ch-gray-500: #475569; --ch-gray-600: #334155; --ch-gray-700: #1e293b; --ch-gray-800: #0f172a; --ch-gray-900: #020617;
+      --ch-blue-500: #2563eb; --ch-blue-400: #3b82f6; --ch-blue-300: #60a5fa; --ch-blue-200: #93c5fd; --ch-blue-100: #dbeafe; --ch-blue-50: #eff6ff;
+      --ch-amber-500: #f59e0b; --ch-amber-400: #fbbf24; --ch-amber-300: #fcd34d; --ch-amber-200: #fde68a; --ch-amber-100: #fef3c7; --ch-amber-50: #fffbeb;
+      --ch-success: #10b981; --ch-warning: #f59e0b; --ch-error: #ef4444; --ch-info: #3b82f6;
+      --ch-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --ch-font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      --ch-text-xs: 0.75rem; --ch-text-sm: 0.875rem; --ch-text-base: 1rem; --ch-text-lg: 1.125rem; --ch-text-xl: 1.25rem; --ch-text-2xl: 1.5rem; --ch-text-3xl: 1.875rem; --ch-text-4xl: 2.25rem; --ch-text-5xl: 3rem; --ch-text-6xl: 3.75rem;
+      --ch-leading-tight: 1.15; --ch-leading-snug: 1.3; --ch-leading-normal: 1.5; --ch-leading-relaxed: 1.65;
+      --ch-font-light: 300; --ch-font-regular: 400; --ch-font-medium: 500; --ch-font-semibold: 600; --ch-font-bold: 700; --ch-font-extrabold: 800;
+      --ch-letter-spacing-tight: -0.025em; --ch-letter-spacing-normal: 0em; --ch-letter-spacing-wide: 0.05em;
+      --ch-space-1: 0.25rem; --ch-space-2: 0.5rem; --ch-space-3: 0.75rem; --ch-space-4: 1rem; --ch-space-5: 1.25rem; --ch-space-6: 1.5rem; --ch-space-8: 2rem; --ch-space-10: 2.5rem; --ch-space-12: 3rem; --ch-space-16: 4rem; --ch-space-20: 5rem; --ch-space-24: 6rem;
+      --ch-radius-none: 0; --ch-radius-sm: 0.25rem; --ch-radius-md: 0.5rem; --ch-radius-lg: 0.75rem; --ch-radius-xl: 1rem; --ch-radius-2xl: 1.5rem; --ch-radius-full: 9999px;
+      --ch-shadow-xs: 0 1px 2px rgba(10,22,40,0.05); --ch-shadow-sm: 0 1px 3px rgba(10,22,40,0.08),0 1px 2px rgba(10,22,40,0.04); --ch-shadow-md: 0 4px 6px rgba(10,22,40,0.07),0 2px 4px rgba(10,22,40,0.04); --ch-shadow-lg: 0 10px 15px rgba(10,22,40,0.08),0 4px 6px rgba(10,22,40,0.03); --ch-shadow-xl: 0 20px 25px rgba(10,22,40,0.10),0 8px 10px rgba(10,22,40,0.04); --ch-shadow-2xl: 0 25px 50px rgba(10,22,40,0.15);
+      --ch-shadow-glow-blue: 0 0 20px rgba(37,99,235,0.25); --ch-shadow-glow-amber: 0 0 20px rgba(245,158,11,0.25);
+      --ch-transition-fast: 150ms cubic-bezier(0.4,0,0.2,1); --ch-transition-base: 250ms cubic-bezier(0.4,0,0.2,1); --ch-transition-slow: 400ms cubic-bezier(0.4,0,0.2,1); --ch-transition-spring: 500ms cubic-bezier(0.34,1.56,0.64,1);
+      --ch-z-base: 1; --ch-z-dropdown: 10; --ch-z-sticky: 100; --ch-z-nav: 1000; --ch-max-width: 1200px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    body{font-family:var(--ch-font-sans);font-size:var(--ch-text-base);line-height:var(--ch-leading-normal);color:var(--ch-gray-800);background:var(--ch-off-white)}
+    img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}
+    .container{max-width:var(--ch-max-width);margin:0 auto;padding:0 var(--ch-space-6)}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    .ch-nav{display:flex;align-items:center;justify-content:space-between;padding:var(--ch-space-4) var(--ch-space-6);background:var(--ch-navy-900);color:var(--ch-white);box-shadow:var(--ch-shadow-md);position:sticky;top:0;z-index:var(--ch-z-nav)}
+    .ch-nav .container{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:var(--ch-max-width);margin:0 auto;padding:0}
+    .ch-nav-brand{font-size:var(--ch-text-lg);font-weight:var(--ch-font-bold);letter-spacing:var(--ch-letter-spacing-tight);display:flex;align-items:center;gap:var(--ch-space-2)}
+    .ch-nav-brand .brand-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--ch-blue-500),var(--ch-amber-500));border-radius:var(--ch-radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);font-weight:var(--ch-font-bold);color:var(--ch-white)}
+    .ch-nav-links{display:flex;align-items:center;gap:var(--ch-space-1)}
+    .ch-nav-links a{font-size:var(--ch-text-sm);font-weight:var(--ch-font-medium);color:var(--ch-navy-200);padding:var(--ch-space-2) var(--ch-space-4);border-radius:var(--ch-radius-md);transition:background var(--ch-transition-fast),color var(--ch-transition-fast)}
+    .ch-nav-links a:hover{background:rgba(255,255,255,0.06);color:var(--ch-white)}
+    .ch-nav-links a.active{color:var(--ch-white);background:rgba(37,99,235,0.2)}
+    .ch-nav-actions{display:flex;align-items:center;gap:var(--ch-space-3)}
+    .nav-toggle{display:none;background:none;border:none;color:var(--ch-white);cursor:pointer;padding:var(--ch-space-2)}
+    .nav-toggle svg{width:24px;height:24px}
+    .nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--ch-navy-900);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:var(--ch-space-8);animation:fadeIn 0.2s ease-out}
+    .nav-drawer.open{display:flex}
+    .nav-drawer a{font-size:var(--ch-text-2xl);font-weight:var(--ch-font-medium);color:var(--ch-navy-200);transition:color var(--ch-transition-fast)}
+    .nav-drawer a:hover{color:var(--ch-white)}
+    .nav-drawer-close{position:absolute;top:var(--ch-space-6);right:var(--ch-space-6);background:none;border:none;color:var(--ch-white);cursor:pointer;padding:var(--ch-space-2)}
+    .nav-drawer-close svg{width:28px;height:28px}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--ch-space-2);font-family:var(--ch-font-sans);font-weight:var(--ch-font-semibold);font-size:var(--ch-text-sm);line-height:1;padding:var(--ch-space-3) var(--ch-space-6);border:1px solid transparent;border-radius:var(--ch-radius-md);cursor:pointer;transition:background var(--ch-transition-fast),color var(--ch-transition-fast),border-color var(--ch-transition-fast),box-shadow var(--ch-transition-fast);user-select:none;white-space:nowrap}
+    .btn:active{transform:scale(0.97)}
+    .btn-primary{background:var(--ch-blue-500);color:var(--ch-white);border-color:var(--ch-blue-500);box-shadow:0 1px 3px rgba(37,99,235,0.3)}
+    .btn-primary:hover{background:var(--ch-blue-400);border-color:var(--ch-blue-400);box-shadow:var(--ch-shadow-glow-blue)}
+    .btn-ghost{background:transparent;color:var(--ch-gray-400);border-color:transparent}
+    .btn-ghost:hover{background:var(--ch-gray-100);color:var(--ch-gray-700)}
+    .btn-sm{padding:var(--ch-space-2) var(--ch-space-4);font-size:var(--ch-text-xs)}
+
+    .legal-page{padding:var(--ch-space-16) 0 var(--ch-space-20)}
+    .legal-header{text-align:center;margin-bottom:var(--ch-space-12)}
+    .legal-header h1{font-size:var(--ch-text-4xl);font-weight:var(--ch-font-extrabold);color:var(--ch-navy-900);letter-spacing:var(--ch-letter-spacing-tight);line-height:var(--ch-leading-tight);margin-bottom:var(--ch-space-3)}
+    .legal-header .legal-meta{font-size:var(--ch-text-sm);color:var(--ch-gray-400)}
+    .legal-header .legal-meta span{display:inline-block;margin:0 var(--ch-space-2)}
+    .legal-header .legal-meta .separator{color:var(--ch-gray-300)}
+    .legal-content{max-width:860px;margin:0 auto;background:var(--ch-white);border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-xl);box-shadow:var(--ch-shadow-sm);padding:var(--ch-space-12) var(--ch-space-12)}
+    .legal-content h2{font-size:var(--ch-text-xl);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);margin-top:var(--ch-space-8);margin-bottom:var(--ch-space-4);padding-bottom:var(--ch-space-2);border-bottom:1px solid var(--ch-gray-100)}
+    .legal-content h2:first-child{margin-top:0}
+    .legal-content h3{font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);color:var(--ch-navy-800);margin-top:var(--ch-space-6);margin-bottom:var(--ch-space-2)}
+    .legal-content p{font-size:var(--ch-text-sm);line-height:var(--ch-leading-relaxed);color:var(--ch-gray-600);margin-bottom:var(--ch-space-4)}
+    .legal-content ul,.legal-content ol{font-size:var(--ch-text-sm);line-height:var(--ch-leading-relaxed);color:var(--ch-gray-600);margin-bottom:var(--ch-space-4);padding-left:var(--ch-space-6);list-style:disc}
+    .legal-content ol{list-style:decimal}
+    .legal-content li{margin-bottom:var(--ch-space-2)}
+    .legal-content a{color:var(--ch-blue-500);text-decoration:underline;transition:color var(--ch-transition-fast)}
+    .legal-content a:hover{color:var(--ch-blue-400)}
+    .legal-content strong{color:var(--ch-gray-800);font-weight:var(--ch-font-semibold)}
+    .legal-content .legal-notice{background:var(--ch-blue-50);border:1px solid var(--ch-blue-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-4) var(--ch-space-6);margin-bottom:var(--ch-space-6);font-size:var(--ch-text-sm);color:var(--ch-navy-700);line-height:var(--ch-leading-relaxed)}
+    .legal-content .legal-notice strong{color:var(--ch-blue-500)}
+    .legal-toc{background:var(--ch-gray-50);border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-6);margin-bottom:var(--ch-space-8)}
+    .legal-toc h3{font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:var(--ch-navy-900);text-transform:uppercase;letter-spacing:var(--ch-letter-spacing-wide);margin-top:0;margin-bottom:var(--ch-space-3)}
+    .legal-toc ol{margin-bottom:0;padding-left:var(--ch-space-5)}
+    .legal-toc li{margin-bottom:var(--ch-space-1)}
+    .legal-toc a{color:var(--ch-blue-500);text-decoration:none;font-size:var(--ch-text-sm)}
+    .legal-toc a:hover{text-decoration:underline}
+
+    .cookie-table{width:100%;border-collapse:collapse;margin-bottom:var(--ch-space-6);font-size:var(--ch-text-sm)}
+    .cookie-table th,.cookie-table td{text-align:left;padding:var(--ch-space-3) var(--ch-space-4);border:1px solid var(--ch-gray-100);line-height:var(--ch-leading-snug)}
+    .cookie-table th{background:var(--ch-navy-50);color:var(--ch-navy-900);font-weight:var(--ch-font-semibold);font-size:var(--ch-text-xs);text-transform:uppercase;letter-spacing:var(--ch-letter-spacing-wide)}
+    .cookie-table tr:nth-child(even){background:var(--ch-gray-50)}
+
+    .ch-footer{background:var(--ch-navy-900);color:var(--ch-navy-200);padding:var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);position:relative;overflow:hidden}
+    .ch-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(37,99,235,0.4),transparent)}
+    .ch-footer-grid{max-width:var(--ch-max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--ch-space-8)}
+    .ch-footer-brand{font-size:var(--ch-text-xl);font-weight:var(--ch-font-bold);color:var(--ch-white);margin-bottom:var(--ch-space-3);letter-spacing:var(--ch-letter-spacing-tight);display:flex;align-items:center;gap:var(--ch-space-2)}
+    .ch-footer-brand .brand-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--ch-blue-500),var(--ch-amber-500));border-radius:var(--ch-radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--ch-font-mono);font-size:10px;font-weight:var(--ch-font-bold);color:var(--ch-white)}
+    .ch-footer-tagline{font-size:var(--ch-text-sm);line-height:var(--ch-leading-relaxed);max-width:300px}
+    .ch-footer h4{font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:var(--ch-white);text-transform:uppercase;letter-spacing:var(--ch-letter-spacing-wide);margin-bottom:var(--ch-space-4)}
+    .ch-footer ul li{margin-bottom:var(--ch-space-2)}
+    .ch-footer ul li a{font-size:var(--ch-text-sm);color:var(--ch-navy-300);transition:color var(--ch-transition-fast)}
+    .ch-footer ul li a:hover{color:var(--ch-amber-400)}
+    .ch-footer-social{display:flex;gap:var(--ch-space-3);margin-top:var(--ch-space-4)}
+    .ch-footer-social a{width:36px;height:36px;border-radius:var(--ch-radius-md);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--ch-navy-300);font-size:var(--ch-text-sm);transition:background var(--ch-transition-fast),color var(--ch-transition-fast)}
+    .ch-footer-social a:hover{background:rgba(37,99,235,0.15);color:var(--ch-white)}
+    .ch-footer-bottom{max-width:var(--ch-max-width);margin:var(--ch-space-12) auto 0;padding-top:var(--ch-space-6);border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:var(--ch-text-xs);flex-wrap:wrap;gap:var(--ch-space-4)}
+    .ch-footer-bottom .disclaimer{color:var(--ch-gray-500);max-width:500px}
+
+    @media(max-width:767px){
+      .ch-nav-links{display:none}.ch-nav-actions .btn{display:none}.nav-toggle{display:block}
+      .legal-content{padding:var(--ch-space-6) var(--ch-space-4)}
+      .legal-header h1{font-size:var(--ch-text-2xl)}
+      .ch-footer-grid{grid-template-columns:1fr;gap:var(--ch-space-6)}
+      .ch-footer-bottom{flex-direction:column;text-align:center}
+      .legal-toc ol{padding-left:var(--ch-space-4)}
+      .cookie-table{font-size:var(--ch-text-xs)}
+      .cookie-table th,.cookie-table td{padding:var(--ch-space-2) var(--ch-space-3)}
+    }
+    @media(min-width:768px){.ch-nav{padding:var(--ch-space-4) var(--ch-space-8)}}
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="ch-nav">
+    <div class="container">
+      <a href="pages/home.html" class="ch-nav-brand">
+        <div class="brand-icon">CH</div>
+        Capo Horn Lab
+      </a>
+      <div class="ch-nav-links">
+        <a href="pages/home.html">Home</a>
+        <a href="pages/about.html">About</a>
+        <a href="pages/method.html">Method</a>
+        <a href="pages/research.html">Research</a>
+        <a href="pages/test-strategy.html">Test Strategy</a>
+        <a href="pages/contact.html">Contact</a>
+      </div>
+      <div class="ch-nav-actions">
+        <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+        <button class="btn btn-primary btn-sm">Sign Up</button>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <button class="nav-drawer-close" aria-label="Close menu" onclick="document.getElementById('navDrawer').classList.remove('open')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <a href="pages/home.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
+    <a href="pages/about.html" onclick="document.getElementById('navDrawer').classList.remove('open')">About</a>
+    <a href="pages/method.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Method</a>
+    <a href="pages/research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
+    <a href="pages/test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
+    <a href="pages/contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
+    <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
+      <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
+      <button class="btn btn-primary">Sign Up</button>
+    </div>
+  </div>
+
+  <!-- LEGAL PAGE — COOKIE POLICY -->
+  <section class="legal-page">
+    <div class="container">
+      <div class="legal-header">
+        <h1>Cookie Policy</h1>
+        <div class="legal-meta">
+          <span>Last updated: 24 July 2026</span>
+          <span class="separator">|</span>
+          <span>Effective: 24 July 2026</span>
+        </div>
+      </div>
+
+      <div class="legal-content">
+
+        <div class="legal-notice">
+          <strong>GDPR &amp; ePrivacy Compliance:</strong> This Cookie Policy is provided in compliance with the General Data Protection Regulation (Regulation (EU) 2016/679, "GDPR") and the ePrivacy Directive (Directive 2002/58/EC, as revised by Directive 2009/136/EC). We are committed to transparent disclosure of all tracking technologies used on our Platform.
+        </div>
+
+        <div class="legal-toc">
+          <h3>Table of Contents</h3>
+          <ol>
+            <li><a href="#what-are-cookies">What Are Cookies</a></li>
+            <li><a href="#cookies-we-use">Cookies We Use</a></li>
+            <li><a href="#cookie-purpose">Purpose of Cookies</a></li>
+            <li><a href="#third-party">Third-Party Cookies</a></li>
+            <li><a href="#consent">Your Consent (ePrivacy &amp; GDPR)</a></li>
+            <li><a href="#manage">How to Manage Cookies</a></li>
+            <li><a href="#changes-cp">Changes to This Policy</a></li>
+            <li><a href="#contact-cp">Contact</a></li>
+          </ol>
+        </div>
+
+        <h2 id="what-are-cookies">1. What Are Cookies</h2>
+        <p>Cookies are small text files that are placed on your device (computer, tablet, smartphone) when you visit a website. They are widely used to make websites work efficiently, enhance user experience, and provide information to website owners. Cookies may be "first-party" (set by the website you are visiting) or "third-party" (set by a domain other than the website you are visiting).</p>
+        <p>This policy also covers other tracking technologies, including local storage, session storage, web beacons, and pixel tags, which function similarly to cookies and may be used on our Platform.</p>
+
+        <h2 id="cookies-we-use">2. Cookies We Use</h2>
+        <p>The following table sets out the specific cookies and tracking technologies used on the Capo Horn Lab Platform, their purpose, duration, and type:</p>
+
+        <h3>2.1 Strictly Necessary Cookies</h3>
+        <p>These cookies are essential for the Platform to function properly and cannot be disabled in our systems. They are set in response to actions you take, such as logging in, setting privacy preferences, or filling in forms.</p>
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie Name</th>
+              <th>Provider</th>
+              <th>Purpose</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ch_session</code></td>
+              <td>Capo Horn Lab</td>
+              <td>Maintains your authenticated session after login; prevents unauthorised access to your account.</td>
+              <td>Session</td>
+            </tr>
+            <tr>
+              <td><code>ch_csrf_token</code></td>
+              <td>Capo Horn Lab</td>
+              <td>Cross-Site Request Forgery (CSRF) protection token for form submissions.</td>
+              <td>Session</td>
+            </tr>
+            <tr>
+              <td><code>ch_consent</code></td>
+              <td>Capo Horn Lab</td>
+              <td>Stores your cookie consent preferences so we respect your choices on subsequent visits.</td>
+              <td>6 months</td>
+            </tr>
+            <tr>
+              <td><code>ch_rate_limit</code></td>
+              <td>Capo Horn Lab</td>
+              <td>Rate-limiting token to prevent abuse and ensure fair usage of the Platform.</td>
+              <td>Session</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.2 Functional Cookies</h3>
+        <p>These cookies enhance the functionality and personalisation of the Platform. They may be set by us or by third-party providers whose services we have integrated.</p>
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie Name</th>
+              <th>Provider</th>
+              <th>Purpose</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ch_preferences</code></td>
+              <td>Capo Horn Lab</td>
+              <td>Remembers your display preferences (e.g., theme, default view, chart settings) across sessions.</td>
+              <td>12 months</td>
+            </tr>
+            <tr>
+              <td><code>ch_strat_recent</code></td>
+              <td>Capo Horn Lab</td>
+              <td>Remembers recently viewed strategy analyses for convenience.</td>
+              <td>7 days</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.3 Analytics Cookies</h3>
+        <p>These cookies allow us to count visits, measure traffic sources, and understand how users interact with our Platform. All analytics data is collected in aggregated, anonymised form.</p>
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie Name</th>
+              <th>Provider</th>
+              <th>Purpose</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>_ga</code></td>
+              <td>Google Analytics</td>
+              <td>Distinguishes unique users by assigning a randomly generated client ID.</td>
+              <td>2 years</td>
+            </tr>
+            <tr>
+              <td><code>_ga_*</code></td>
+              <td>Google Analytics</td>
+              <td>Persists session state and tracks page interactions.</td>
+              <td>2 years</td>
+            </tr>
+            <tr>
+              <td><code>_gid</code></td>
+              <td>Google Analytics</td>
+              <td>Distinguishes users within a 24-hour window for usage reporting.</td>
+              <td>24 hours</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2.4 Marketing Cookies (Opt-in Only)</h3>
+        <p>These cookies track your browsing habits across websites to deliver targeted advertising that is relevant to you. These cookies are set only with your explicit prior consent.</p>
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Cookie Name</th>
+              <th>Provider</th>
+              <th>Purpose</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>_fbp</code></td>
+              <td>Meta Platforms</td>
+              <td>Used by Facebook to deliver advertising products, such as real-time bidding from third-party advertisers.</td>
+              <td>3 months</td>
+            </tr>
+            <tr>
+              <td><code>_gcl_aw</code></td>
+              <td>Google Ads</td>
+              <td>Conversion tracking for Google Ads campaigns when users interact with our ads.</td>
+              <td>90 days</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="cookie-purpose">3. Purpose of Cookies</h2>
+        <p>We use cookies and similar tracking technologies for the following purposes:</p>
+        <ul>
+          <li><strong>Strictly Necessary:</strong> To enable core functionality such as authentication, security, and session management. These cookies are essential for the Platform to operate and do not require your prior consent under the ePrivacy Directive.</li>
+          <li><strong>Functional:</strong> To remember your preferences and settings, making your experience more convenient and personalised.</li>
+          <li><strong>Analytics:</strong> To understand how our Platform is used — which features are most popular, where users encounter friction, and how we can improve the service. Analytics data is aggregated and anonymised.</li>
+          <li><strong>Marketing:</strong> To show you relevant Capo Horn Lab content on third-party platforms and measure the effectiveness of our advertising campaigns. These cookies are only placed after you have given explicit consent.</li>
+        </ul>
+
+        <h2 id="third-party">4. Third-Party Cookies</h2>
+        <p>Some cookies on our Platform are placed by third-party service providers. These third parties have their own privacy and cookie policies governing the use of your data:</p>
+        <ul>
+          <li><strong>Google Analytics</strong> (analytics): <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></li>
+          <li><strong>Meta Platforms (Facebook)</strong> (marketing, opt-in): <a href="https://www.facebook.com/policies/cookies" target="_blank">https://www.facebook.com/policies/cookies</a></li>
+          <li><strong>Google Ads</strong> (marketing, opt-in): <a href="https://policies.google.com/technologies/ads" target="_blank">https://policies.google.com/technologies/ads</a></li>
+        </ul>
+        <p>We do not control these third parties' cookie practices. We encourage you to review their respective privacy and cookie policies.</p>
+
+        <h2 id="consent">5. Your Consent (ePrivacy &amp; GDPR)</h2>
+        <p>In accordance with the ePrivacy Directive (Article 5(3)) and the GDPR, we follow a layered consent model:</p>
+        <ul>
+          <li><strong>Strictly Necessary Cookies:</strong> These are set automatically as they are essential for the Platform to function. No prior consent is required under applicable law.</li>
+          <li><strong>Functional and Analytics Cookies:</strong> These are set after you have been informed via our cookie consent banner and have taken affirmative action (e.g., clicking "Accept All" or saving your specific preferences).</li>
+          <li><strong>Marketing Cookies:</strong> These are set only upon your explicit prior consent via the cookie consent banner.</li>
+        </ul>
+        <p>You may withdraw or modify your consent at any time by clicking the "Cookie Preferences" link in the footer of our Platform or by adjusting your browser settings as described in Section 6 below.</p>
+
+        <h2 id="manage">6. How to Manage Cookies</h2>
+        <p>You have full control over cookies placed on your device. You can manage your preferences in the following ways:</p>
+        <h3>6.1 Our Cookie Preference Centre</h3>
+        <p>You can adjust your cookie preferences at any time by clicking the "Cookie Preferences" link in the footer of any page on our Platform. This allows you to grant or withdraw consent for each category of cookies (except strictly necessary).</p>
+        <h3>6.2 Browser Settings</h3>
+        <p>Most web browsers allow you to control cookies through their settings. You can typically:</p>
+        <ul>
+          <li>View which cookies are stored on your device and delete individual or all cookies.</li>
+          <li>Block third-party cookies.</li>
+          <li>Block all cookies (note: this will impact the functionality of our Platform).</li>
+          <li>Set the browser to notify you when a cookie is being set.</li>
+        </ul>
+        <p>For instructions, refer to your browser's help section:</p>
+        <ul>
+          <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Google Chrome</a></li>
+          <li><a href="https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" target="_blank">Mozilla Firefox</a></li>
+          <li><a href="https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac" target="_blank">Apple Safari</a></li>
+          <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank">Microsoft Edge</a></li>
+        </ul>
+
+        <h2 id="changes-cp">7. Changes to This Policy</h2>
+        <p>We may update this Cookie Policy from time to time to reflect changes in the cookies we use, legal requirements, or operational practices. Material changes will be communicated via a notice on our Platform and, where appropriate, through our cookie consent banner. The "Last updated" date at the top of this page indicates when the policy was last revised.</p>
+
+        <h2 id="contact-cp">8. Contact</h2>
+        <p>If you have any questions about this Cookie Policy or our use of cookies and tracking technologies, please contact us:</p>
+        <p>
+          <strong>Capo Horn Lab B.V.</strong><br>
+          Data Protection Officer: <a href="mailto:dpo@capohornlab.com">dpo@capohornlab.com</a><br>
+          Privacy Inquiries: <a href="mailto:privacy@capohornlab.com">privacy@capohornlab.com</a>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ch-footer">
+    <div class="ch-footer-grid">
+      <div>
+        <a href="pages/home.html" class="ch-footer-brand">
+          <div class="brand-icon">CH</div>
+          Capo Horn Lab
+        </a>
+        <p class="ch-footer-tagline">Quantitative backtesting and strategy research. Data-driven, not guru-driven.</p>
+        <div class="ch-footer-social">
+          <a href="https://github.com/capohornlab" aria-label="GitHub" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://twitter.com/capohornlab" aria-label="Twitter / X" title="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://linkedin.com/company/capohornlab" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/method.html">Method</a></li>
+          <li><a href="pages/research.html">Research</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="pages/test-strategy.html">Test Your Strategy</a></li>
+          <li><a href="pages/pricing.html">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms-of-service.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ch-footer-bottom">
+      <span>&copy; 2026 Capo Horn Lab. All rights reserved.</span>
+      <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

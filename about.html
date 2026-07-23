@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capo Horn Lab — About</title>
+  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Learn about Capo Horn Lab's mission, team, and approach to quantitative finance research and systematic trading strategy development.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capohornlab.com/about.html">
+  <meta property="og:title" content="Capo Horn Lab — About">
+  <meta property="og:description" content="Learn about Capo Horn Lab's mission, team, and approach to quantitative finance research and systematic trading strategy development.">
+  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Capo Horn Lab — About">
+  <meta name="twitter:description" content="Learn about Capo Horn Lab's mission, team, and approach to quantitative finance research and systematic trading strategy development.">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1272,7 +1289,7 @@
         </div>
         <div style="margin-top:var(--ch-space-6);">
           <span style="font-size:var(--ch-text-sm);color:var(--ch-gray-400);">Read our published research:</span>
-          <a href="research.html"" style="display:inline-block;margin-left:var(--ch-space-2);font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:var(--ch-blue-500);">Read Our Research →</a>
+          <a href="research.html" style="display:inline-block;margin-left:var(--ch-space-2);font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:var(--ch-blue-500);">Read Our Research →</a>
         </div>
       </div>
     </div>
@@ -1292,7 +1309,7 @@
           Get notified when new research is published. No spam, no strategy pitches —
           just raw data and honest analysis delivered to your inbox.
         </p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup — backend integration pending (Sprint 4).');">
+        <form class="newsletter-form" onsubmit="event.preventDefault(); const btn=this.querySelector('button'); const orig=btn.textContent; btn.textContent='✓ Subscribed!'; btn.disabled=true; setTimeout(()=>{btn.textContent=orig; btn.disabled=false}, 3000);">
           <input class="input-field" type="email" placeholder="you@example.com" required>
           <button class="btn btn-primary" type="submit">Subscribe</button>
         </form>

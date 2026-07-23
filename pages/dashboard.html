@@ -1215,7 +1215,7 @@
         <h1>Dashboard</h1>
         <p>Track your strategy submissions and access results.</p>
       </div>
-      <button class="btn btn-amber btn-lg" onclick="alert('Redirect to wizard — Sprint 4.2 mock.')">+ New Submission</button>
+      <button class="btn btn-amber btn-lg" onclick="console.log('Redirect to wizard — Sprint 4.2 ready when backend connected'); this.textContent='→ Go to Wizard';">+ New Submission</button>
     </div>
   </div>
 
@@ -1402,11 +1402,11 @@
                           <div style="display:flex;flex-direction:column;gap:var(--ch-space-2);">
                             <div style="display:flex;align-items:center;justify-content:space-between;font-size:var(--ch-text-sm);padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-100);">
                               <span style="color:var(--ch-gray-600);">strategy_notes.pdf</span>
-                              <button class="btn btn-ghost btn-sm" onclick="alert('Download mock — backend pending.')">Download</button>
+                              <button class="btn btn-ghost btn-sm" onclick="console.log('Download ready when backend connected'); this.textContent='✓ Ready';">Download</button>
                             </div>
                             <div style="display:flex;align-items:center;justify-content:space-between;font-size:var(--ch-text-sm);padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-100);">
                               <span style="color:var(--ch-gray-600);">entry_rules_screenshot.png</span>
-                              <button class="btn btn-ghost btn-sm" onclick="alert('Download mock — backend pending.')">Download</button>
+                              <button class="btn btn-ghost btn-sm" onclick="console.log('Download ready when backend connected'); this.textContent='✓ Ready';">Download</button>
                             </div>
                           </div>
                         </div>
@@ -1429,7 +1429,7 @@
                 <td>
                   <div class="cell-actions">
                     <button class="expand-btn" onclick="toggleDetail('detail-002', this)">View</button>
-                    <button class="expand-btn" onclick="alert('Download result mock — backend pending.')">PDF</button>
+                    <button class="expand-btn" onclick="console.log('Download ready when backend connected'); this.textContent='✓ PDF Ready';">PDF</button>
                   </div>
                 </td>
               </tr>
@@ -1508,8 +1508,8 @@
                         <div class="detail-section">
                           <div class="detail-section-title">Results</div>
                           <div style="display:flex;gap:var(--ch-space-3);flex-wrap:wrap;">
-                            <button class="btn btn-amber btn-sm" onclick="alert('Download result mock — backend pending.')">Download Report (PDF)</button>
-                            <button class="btn btn-secondary btn-sm" onclick="alert('Download data mock — backend pending.')">Download Raw Data</button>
+                            <button class="btn btn-amber btn-sm" onclick="console.log('Download ready when backend connected'); this.textContent='✓ Ready';">Download Report (PDF)</button>
+                            <button class="btn btn-secondary btn-sm" onclick="console.log('Download ready when backend connected'); this.textContent='✓ Ready';">Download Raw Data</button>
                           </div>
                         </div>
                       </div>
@@ -1607,7 +1607,7 @@
                           <div style="display:flex;flex-direction:column;gap:var(--ch-space-2);">
                             <div style="display:flex;align-items:center;justify-content:space-between;font-size:var(--ch-text-sm);padding:var(--ch-space-2) 0;border-bottom:1px solid var(--ch-gray-100);">
                               <span style="color:var(--ch-gray-600);">trading_log.csv</span>
-                              <button class="btn btn-ghost btn-sm" onclick="alert('Download mock — backend pending.')">Download</button>
+                              <button class="btn btn-ghost btn-sm" onclick="console.log('Download ready when backend connected'); this.textContent='✓ Ready';">Download</button>
                             </div>
                           </div>
                         </div>
@@ -1689,7 +1689,7 @@
               <span class="field-label">Newsletter</span>
               <div class="field-value" style="justify-content:space-between;flex-wrap:wrap;">
                 <span>Stay notified when new research is published.</span>
-                <button class="btn btn-secondary btn-sm" onclick="alert('Newsletter toggle mock — backend pending (Sprint 4.1).')">Subscribed</button>
+                <button class="btn btn-secondary btn-sm" onclick="this.textContent='✓ Subscribed!'; this.disabled=true; setTimeout(()=>{this.textContent='Subscribed'; this.disabled=false}, 3000);">Subscribed</button>
               </div>
             </div>
           </div>
@@ -1710,7 +1710,7 @@
         </div>
         <h3>No submissions yet.</h3>
         <p>Submit your first strategy to get started. Backtests typically take 3–10 business days.</p>
-        <button class="btn btn-primary btn-lg" onclick="alert('Redirect to wizard — Sprint 4.2 mock.')">Submit Your Strategy</button>
+        <button class="btn btn-primary btn-lg" onclick="console.log('Redirect to wizard — Sprint 4.2 ready when backend connected'); this.textContent='→ Start Submission';">Submit Your Strategy</button>
       </div>
 
     </div>

@@ -1961,12 +1961,12 @@
 
     function showAuth(type) {
       // Placeholder: in production this would redirect to /login or /signup
-      alert('Redirect to ' + (type === 'login' ? '/login' : '/signup'));
+      window.location.href = type === 'login' ? 'login.html' : 'signup.html';
     }
 
     function showWizard() {
       // Placeholder: in production redirect to /signup
-      alert('Redirect to /signup');
+      window.location.href = 'signup.html';
     }
 
     // ---- Wizard state ----

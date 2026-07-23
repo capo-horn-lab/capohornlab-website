@@ -1,0 +1,8 @@
+# Capo Horn Lab — Robots Exclusion
+# https://capohornlab.com/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://capohornlab.com/sitemap.xml

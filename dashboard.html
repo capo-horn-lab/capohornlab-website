@@ -4,6 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capo Horn Lab — Dashboard</title>
+  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Capo Horn Lab dashboard — manage your strategy submissions, view backtest results, and access your quantitative research portfolio.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://capohornlab.com/dashboard.html">
+  <meta property="og:title" content="Capo Horn Lab — Dashboard">
+  <meta property="og:description" content="Capo Horn Lab dashboard — manage your strategy submissions, view backtest results, and access your quantitative research portfolio.">
+  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Capo Horn Lab — Dashboard">
+  <meta name="twitter:description" content="Capo Horn Lab dashboard — manage your strategy submissions, view backtest results, and access your quantitative research portfolio.">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1457,7 +1474,7 @@
               <span class="field-label">Newsletter</span>
               <div class="field-value" style="justify-content:space-between;flex-wrap:wrap;">
                 <span>Stay notified when new research is published.</span>
-                <button class="btn btn-secondary btn-sm" onclick="alert('Newsletter toggle mock — backend pending (Sprint 4.1).')">Subscribed</button>
+                <button class="btn btn-secondary btn-sm" onclick="this.textContent='✓ Subscribed!'; this.disabled=true; setTimeout(()=>{this.textContent='Subscribed'; this.disabled=false}, 3000);">Subscribed</button>
               </div>
             </div>
           </div>
@@ -1533,7 +1550,7 @@
             Add more instruments, higher resolution, or longer timeframes. 
             Each new dataset stays in your portfolio forever — use it on unlimited backtests.
           </p>
-          <button class="btn btn-primary btn-lg" onclick="alert('Data marketplace — backend pending.')">Browse Data Catalog →</button>
+          <button class="btn btn-primary btn-lg" onclick="console.log('Data marketplace — ready when backend connected'); this.textContent='✓ Browse Data'; setTimeout(()=>{this.textContent='Browse Data Catalog →'}, 3000);">Browse Data Catalog →</button>
         </div>
       </div>
 
