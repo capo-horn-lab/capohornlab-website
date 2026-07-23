@@ -1101,39 +1101,50 @@
             gap: var(--ch-space-2);
           }
           .ch-footer { padding: var(--ch-space-12) var(--ch-space-4) var(--ch-space-8); }
-        }
-      .ch-nav-actions .btn { display: none; }
-      .nav-toggle { display: block; }
 
-      .hero h1 { font-size: var(--ch-text-3xl); }
+          .research-meta .ch-card-badge {
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex-shrink: 1;
+            min-width: 0;
+          }
 
-      .filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
+          .research-meta .ch-card-badge:first-child {
+            max-width: 60%;
+          }
 
-      .filter-group {
-        justify-content: center;
-      }
+          .filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+          }
 
-      .filter-divider {
-        display: none;
-      }
+          .filter-group {
+            justify-content: center;
+            flex-wrap: wrap;
+          }
 
-      .newsletter-form {
-        flex-direction: column;
-      }
+          .filter-divider {
+            display: none;
+          }
 
-      .ch-footer-grid {
-        grid-template-columns: 1fr;
-        gap: var(--ch-space-6);
-      }
+          .newsletter-form {
+            flex-direction: column;
+          }
 
-      .ch-footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
+          .ch-footer-grid {
+            grid-template-columns: 1fr;
+            gap: var(--ch-space-8);
+          }
+
+          .ch-footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: var(--ch-space-2);
+          }
+          .ch-footer { padding: var(--ch-space-12) var(--ch-space-4) var(--ch-space-8); }
+          }
   </style>
 </head>
 <body>
@@ -1274,7 +1285,7 @@
           </div>
         </div>
         <!-- Time Series Momentum on Global Futures -->
-        <div class="ch-card animate-up-d1" data-instrument="Global futures — equity indices, currencies, commodities, fixed income" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="Global futures — equity indices, currencies, commodities, fixed income" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">Global futures — equity indices, currencies, commodities, fixed income</span>
@@ -1289,7 +1300,7 @@
           </div>
         </div>
         <!-- Opening Range Breakout Intraday — Concretum Replication -->
-        <div class="ch-card animate-up-d1" data-instrument="ES (E-mini S&P 500), NQ (Nasdaq 100), CL (WTI Crude), 6E (Euro FX)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="ES (E-mini S&P 500), NQ (Nasdaq 100), CL (WTI Crude), 6E (Euro FX)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">ES (E-mini S&P 500), NQ (Nasdaq 100), CL (WTI Crude), 6E (Euro FX)</span>
@@ -1304,7 +1315,7 @@
           </div>
         </div>
         <!-- VWAP Mean Reversion — Intraday Mean-Reverting Strategies -->
-        <div class="ch-card animate-up-d1" data-instrument="ES (E-mini S&P 500), NQ (Nasdaq 100)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="ES (E-mini S&P 500), NQ (Nasdaq 100)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">ES (E-mini S&P 500), NQ (Nasdaq 100)</span>
@@ -1319,7 +1330,7 @@
           </div>
         </div>
         <!-- Intraday Momentum on SPY — Demand-Supply Imbalance Strategy -->
-        <div class="ch-card animate-up-d1" data-instrument="SPY (SPDR S&P 500 ETF)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="SPY (SPDR S&P 500 ETF)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">SPY (SPDR S&P 500 ETF)</span>
@@ -1334,7 +1345,7 @@
           </div>
         </div>
         <!-- Confidence Weighted Mean Reversion (CWMR) — Online Portfolio Selection -->
-        <div class="ch-card animate-up-d1" data-instrument="U.S. equity cross-section (S&P 500 constituents with continuous history)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="U.S. equity cross-section (S&P 500 constituents with continuous history)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">U.S. equity cross-section (S&P 500 constituents with continuous history)</span>
@@ -1349,7 +1360,7 @@
           </div>
         </div>
         <!-- Passive-Aggressive Mean Reversion (PAMR) — Online Portfolio Selection -->
-        <div class="ch-card animate-up-d1" data-instrument="U.S. equity cross-section (S&P 500 constituents)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="U.S. equity cross-section (S&P 500 constituents)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">U.S. equity cross-section (S&P 500 constituents)</span>
@@ -1364,7 +1375,7 @@
           </div>
         </div>
         <!-- Follow-the-Regularized-Leader (FRL) — Online Portfolio Selection with Regularization -->
-        <div class="ch-card animate-up-d1" data-instrument="U.S. equity cross-section (S&P 500 constituents)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="U.S. equity cross-section (S&P 500 constituents)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">U.S. equity cross-section (S&P 500 constituents)</span>
@@ -1379,7 +1390,7 @@
           </div>
         </div>
         <!-- Trend Following on Stocks — Concretum Group Replication -->
-        <div class="ch-card animate-up-d1" data-instrument="U.S. equity universe (liquid large-cap stocks)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="U.S. equity universe (liquid large-cap stocks)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">U.S. equity universe (liquid large-cap stocks)</span>
@@ -1394,7 +1405,7 @@
           </div>
         </div>
         <!-- Volatility Risk Premium — VIX ETN Strategy -->
-        <div class="ch-card animate-up-d1" data-instrument="VIX futures and ETNs (VXX, VXZ, SVXY, ZIV)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="VIX futures and ETNs (VXX, VXZ, SVXY, ZIV)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">VIX futures and ETNs (VXX, VXZ, SVXY, ZIV)</span>
@@ -1409,7 +1420,7 @@
           </div>
         </div>
         <!-- 5-Minute Mean Reversion as Alpha Overlay — Tactical Signal Integration -->
-        <div class="ch-card animate-up-d1" data-instrument="ES (E-mini S&P 500), SPY (SPDR S&P 500 ETF)" data-outcome="profitable">
+        <div class="ch-card animate-up-d1" data-instrument="ES (E-mini S&P 500), SPY (SPDR S&P 500 ETF)" data-outcome="positive">
           <div class="ch-card-header">
             <div class="research-meta">
               <span class="ch-card-badge blue">ES (E-mini S&P 500), SPY (SPDR S&P 500 ETF)</span>
@@ -1517,6 +1528,42 @@ ection section-dark newsletter-section">
       <span class="disclaimer">No strategy selling. Past performance does not guarantee future results.</span>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var cards = document.querySelectorAll('.research-gallery-grid > .ch-card');
+      var filters = { instrument: 'all', outcome: 'all' };
+
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var f = this.getAttribute('data-filter');
+          var v = this.getAttribute('data-value');
+
+          if (filters[f] === v) return;
+
+          filters[f] = v;
+
+          // Update active state
+          document.querySelectorAll('.filter-btn[data-filter="' + f + '"]').forEach(function(b) {
+            b.classList.remove('active');
+          });
+          document.querySelectorAll('.filter-btn[data-filter="' + f + '"][data-value="' + v + '"]').forEach(function(b) {
+            b.classList.add('active');
+          });
+
+          // Filter cards
+          cards.forEach(function(card) {
+            var instr = card.getAttribute('data-instrument') || '';
+            var outc = card.getAttribute('data-outcome') || '';
+            var matchInstr = filters.instrument === 'all' || instr.toUpperCase().indexOf(filters.instrument.toUpperCase()) !== -1;
+            var matchOut = filters.outcome === 'all' || outc === filters.outcome;
+            card.style.display = (matchInstr && matchOut) ? '' : 'none';
+          });
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
