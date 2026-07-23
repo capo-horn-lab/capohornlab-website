@@ -222,30 +222,33 @@
       e.preventDefault();
       var alert = document.getElementById('checkoutAlert');
       var btn = document.getElementById('payBtn');
-      var card = document.getElementById('cardNumber').value.replace(/\s/g, '');
       var email = document.getElementById('billingEmail').value.trim();
-
-      if (card.length < 13 || !email) {
+      if (!email) {
         alert.className = 'alert error';
-        alert.textContent = 'Please enter a valid card number and email.';
+        alert.textContent = 'Please enter your email.';
         return;
       }
+      var price = document.getElementById('summaryTotal').textContent;
+      var name = new URLSearchParams(window.location.search).get('name') || 'Strategy Backtest';
+      redirectToStripeCheckout(price, decodeURIComponent(name));
+    }
 
-      // Simulate Stripe payment
+    function mockPayment(price, name) {
+      var alert = document.getElementById('checkoutAlert');
+      var btn = document.getElementById('payBtn');
+      // Increment discount code usage if applied
+      var discCode = new URLSearchParams(window.location.search).get('discount') || window._checkoutDiscount;
+      if (discCode) {
+        var codes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
+        var found = codes.find(function(d) { return d.code === discCode; });
+        if (found) { found.used = (found.used || 0) + 1; }
+        localStorage.setItem('ch_discount_codes', JSON.stringify(codes));
+      }
       btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span> Processing…';
+      btn.innerHTML = '<span class=\"spinner\"></span> Processing…';
       alert.className = 'alert success';
       alert.textContent = 'Processing payment…';
-
       setTimeout(function() {
-        // Increment discount code usage if applied
-        var discCode = new URLSearchParams(window.location.search).get('discount') || window._checkoutDiscount;
-        if (discCode) {
-          var codes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
-          var found = codes.find(function(d) { return d.code === discCode; });
-          if (found) { found.used = (found.used || 0) + 1; }
-          localStorage.setItem('ch_discount_codes', JSON.stringify(codes));
-        }
         alert.className = 'alert success';
         alert.textContent = '✅ Payment successful! Redirecting to dashboard…';
         btn.innerHTML = '✓ Payment Complete';
@@ -260,20 +263,56 @@
        To activate real Stripe payments:
        
        1. Get your publishable key from https://dashboard.stripe.com/apikeys
-       2. Uncomment the Stripe.js script tag below and add your key:
-          <script src="https://js.stripe.com/v3/"></script>
-       3. Replace the handlePayment() function with:
-          const stripe = Stripe('pk_live_YOUR_KEY');
-          stripe.redirectToCheckout({ sessionId: 'cs_xxx' });
+       2. Replace 'pk_test_YOUR_KEY' below with your actual publishable key
+       3. Create a Checkout Session via your backend or Netlify function
+       4. The button below will redirect to Stripe's hosted Checkout page
        
-       For now, the mock handlePayment() simulates the flow.
+       Netlify function example (functions/checkout.js):
+         const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+         exports.handler = async (event) => {
+           const { price, name } = JSON.parse(event.body);
+           const session = await stripe.checkout.sessions.create({
+             mode: 'payment', success_url: 'https://.../dashboard.html?paid=1',
+             cancel_url: 'https://.../checkout.html?canceled=1',
+             line_items: [{ price_data: { currency: 'eur', product_data: { name }, unit_amount: Math.round(parseFloat(price)*100) }, quantity: 1 }]
+           });
+           return { statusCode: 200, body: JSON.stringify({ sessionId: session.id }) };
+         };
        
-       Virtual POS setup (for manual card reader / terminal):
-       - Stripe Terminal: https://stripe.com/docs/terminal
-       - SDK: https://github.com/stripe/stripe-terminal-js
-       - After POS is configured, add terminal reader integration here.
+       Virtual POS setup (Stripe Terminal):
+       - https://stripe.com/docs/terminal
+       - After POS reader is configured, add:
+         const terminal = await StripeTerminal.create({ onFetchConnectionToken: ... });
+         await terminal.connectReader({ ... });
        ═══════════════════════════════════════════════════════════════ -->
-  <!-- <script src="https://js.stripe.com/v3/"></script> -->
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    // 🔑 CONFIG: Replace with your Stripe publishable key when ready
+    var STRIPE_KEY = 'pk_test_YOUR_KEY';
+    var stripeEnabled = false; // Set to true when you have your API key
+
+    function redirectToStripeCheckout(price, name) {
+      if (!stripeEnabled || STRIPE_KEY.startsWith('pk_test_YOUR')) {
+        // Mock fallback — simulates payment
+        mockPayment(price, name);
+        return;
+      }
+      // Real Stripe Checkout — requires backend endpoint
+      var stripe = Stripe(STRIPE_KEY);
+      fetch('/.netlify/functions/checkout', {
+        method: 'POST',
+        body: JSON.stringify({ price: price, name: name })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        return stripe.redirectToCheckout({ sessionId: data.sessionId });
+      })
+      .catch(function(err) {
+        document.getElementById('checkoutAlert').className = 'alert error';
+        document.getElementById('checkoutAlert').textContent = 'Payment error: ' + err.message;
+      });
+    }
+  </script>
 
 </body>
 </html>
