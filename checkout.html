@@ -220,6 +220,14 @@
       alert.textContent = 'Processing payment…';
 
       setTimeout(function() {
+        // Increment discount code usage if applied
+        var discCode = new URLSearchParams(window.location.search).get('discount') || window._checkoutDiscount;
+        if (discCode) {
+          var codes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
+          var found = codes.find(function(d) { return d.code === discCode; });
+          if (found) { found.used = (found.used || 0) + 1; }
+          localStorage.setItem('ch_discount_codes', JSON.stringify(codes));
+        }
         alert.className = 'alert success';
         alert.textContent = '✅ Payment successful! Redirecting to dashboard…';
         btn.innerHTML = '✓ Payment Complete';
