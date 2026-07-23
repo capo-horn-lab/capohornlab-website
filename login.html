@@ -266,6 +266,7 @@
           <li><a href="method.html">Method</a></li>
           <li><a href="research.html">Research</a></li>
           <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html?mode=investor" style="color:var(--ch-amber-400);">Investors</a></li>
         </ul>
       </div>
       <div>
@@ -302,11 +303,20 @@
     function handleLogin(e) {
       e.preventDefault();
       var alert = document.getElementById('loginAlert');
-      var email = document.getElementById('loginEmail').value;
+      var email = document.getElementById('loginEmail').value.trim();
       var pass = document.getElementById('loginPassword').value;
       if (!email || !pass) {
         alert.className = 'auth-alert error';
         alert.textContent = 'Please fill in all fields.';
+        return;
+      }
+      // Check for investor/admin credentials
+      var params = new URLSearchParams(window.location.search);
+      var isInvestor = params.get('mode') === 'investor';
+      if (email.toLowerCase() === 'investor@capohornlab.com' && pass === 'chlab2026') {
+        alert.className = 'auth-alert success';
+        alert.textContent = 'Investor access granted…';
+        setTimeout(function() { window.location.href = 'admin.html'; }, 800);
         return;
       }
       // Mock login — redirect to dashboard when backend is ready
