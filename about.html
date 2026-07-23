@@ -1019,8 +1019,36 @@
       .section-header h2 { font-size: var(--ch-text-4xl); }
     }
 
-    @media (max-width: 767px) {
-      .ch-nav-links { display: none; }
+        @media (max-width: 767px) {
+          .ch-nav-links { display: none; }
+          .ch-nav-actions .btn { display: none; }
+          .nav-toggle { display: block; }
+
+          .container { padding: 0 var(--ch-space-4); }
+
+          .hero { padding: var(--ch-space-16) 0 var(--ch-space-12); }
+          .hero h1 { font-size: var(--ch-text-3xl); }
+          .hero p { font-size: var(--ch-text-base); line-height: 1.6; }
+          .hero-actions { flex-direction: column; align-items: center; gap: var(--ch-space-3); }
+          .hero-actions .btn { width: 100%; max-width: 280px; }
+          .hero-metrics { gap: var(--ch-space-6); }
+          .hero-metric-value { font-size: var(--ch-text-2xl); }
+
+          .section { padding: var(--ch-space-12) 0; }
+          .section-header h2 { font-size: var(--ch-text-2xl); }
+          .section-header p { font-size: var(--ch-text-sm); }
+
+          .ch-footer-grid {
+            grid-template-columns: 1fr;
+            gap: var(--ch-space-8);
+          }
+          .ch-footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: var(--ch-space-2);
+          }
+          .ch-footer { padding: var(--ch-space-12) var(--ch-space-4) var(--ch-space-8); }
+        }
       .ch-nav-actions .btn { display: none; }
       .nav-toggle { display: block; }
 
@@ -1048,7 +1076,7 @@
         Capo Horn Lab
       </div>
       <div class="ch-nav-links">
-        <a href="home.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="about.html" class="active">About</a>
         <a href="method.html">Method</a>
         <a href="research.html">Research</a>
@@ -1056,8 +1084,8 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="ch-nav-actions">
-        <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
-        <button class="btn btn-primary btn-sm">Sign Up</button>
+        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+        <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
       </div>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1077,15 +1105,15 @@
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
     </button>
-    <a href="home.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
+    <a href="index.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Home</a>
     <a href="about.html" onclick="document.getElementById('navDrawer').classList.remove('open')">About</a>
     <a href="method.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Method</a>
     <a href="research.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Research</a>
     <a href="test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
     <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
     <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
-      <button class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</button>
-      <button class="btn btn-primary">Sign Up</button>
+      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+      <a href="signup.html" class="btn btn-primary">Sign Up</a>
     </div>
   </div>
 
@@ -1306,18 +1334,18 @@
         <h4>Services</h4>
         <ul>
           <li><a href="test-strategy.html">Test Your Strategy</a></li>
-          <li><a href="#docs">Documentation</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="index.html#docs">Documentation</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
           <li><a href="pricing.html">Pricing</a></li>
         </ul>
       </div>
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="#privacy">Privacy Policy</a></li>
-          <li><a href="#terms">Terms of Service</a></li>
-          <li><a href="#cookies">Cookie Policy</a></li>
-          <li><a href="#disclaimer">Disclaimer</a></li>
+          <li><a href="index.html#privacy">Privacy Policy</a></li>
+          <li><a href="index.html#terms">Terms of Service</a></li>
+          <li><a href="index.html#cookies">Cookie Policy</a></li>
+          <li><a href="index.html#disclaimer">Disclaimer</a></li>
         </ul>
       </div>
     </div>
