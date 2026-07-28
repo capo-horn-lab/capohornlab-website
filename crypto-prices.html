@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Market Snapshot</title>
+  <style>
+    :root {
+      --background: #0a0e17;
+      --surface: #111827;
+      --border: #263246;
+      --text: #d0e6f0;
+      --muted: #8295a5;
+      --green: #43df9a;
+      --red: #ff6b7d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      background: var(--background);
+      color: var(--text);
+      font: 16px/1.45 "Segoe UI", system-ui, sans-serif;
+    }
+
+    main { width: min(100%, 1040px); }
+
+    header { margin-bottom: 24px; }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      letter-spacing: -0.04em;
+    }
+
+    header p { margin: 0; color: var(--muted); }
+
+    .prices {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 250px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: color-mix(in srgb, var(--coin) 65%, var(--border));
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.32), 0 0 20px color-mix(in srgb, var(--coin) 20%, transparent);
+    }
+
+    .btc { --coin: #f5ae45; }
+    .eth { --coin: #9ba8ff; }
+    .sol { --coin: #a78bfa; }
+
+    .coin {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .coin strong { color: var(--text); }
+
+    .price {
+      margin: 24px 0 8px;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      font-variant-numeric: tabular-nums;
+      font-weight: 750;
+      letter-spacing: -0.05em;
+    }
+
+    .price.positive { animation: flash-green 3.2s ease-in-out infinite; }
+    .price.negative { animation: flash-red 3.2s ease-in-out infinite; }
+
+    .change {
+      display: inline-block;
+      margin: 0;
+      padding: 5px 9px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .change.positive { color: var(--green); background: rgba(67, 223, 154, 0.1); }
+    .change.negative { color: var(--red); background: rgba(255, 107, 125, 0.1); }
+
+    .chart { margin-top: 30px; }
+
+    svg { display: block; width: 100%; height: 72px; overflow: visible; }
+
+    polyline {
+      fill: none;
+      stroke: var(--coin);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 3;
+    }
+
+    @keyframes flash-green {
+      0%, 72%, 100% { color: var(--text); text-shadow: none; }
+      82% { color: var(--green); text-shadow: 0 0 14px rgba(67, 223, 154, 0.45); }
+    }
+
+    @keyframes flash-red {
+      0%, 72%, 100% { color: var(--text); text-shadow: none; }
+      82% { color: var(--red); text-shadow: 0 0 14px rgba(255, 107, 125, 0.45); }
+    }
+
+    @media (max-width: 720px) {
+      .prices { grid-template-columns: 1fr; }
+      .card { min-height: 210px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Crypto market</h1>
+      <p>Sample prices · 24-hour movement</p>
+    </header>
+
+    <section class="prices" aria-label="Cryptocurrency prices">
+      <article class="card btc">
+        <p class="coin"><strong>BITCOIN</strong> · BTC</p>
+        <p class="price positive">$67,842.19</p>
+        <p class="change positive">▲ 2.84% · 24h</p>
+        <div class="chart">
+          <svg viewBox="0 0 280 72" role="img" aria-label="Bitcoin price rising">
+            <polyline points="4,58 48,46 92,53 136,25 180,39 224,12 276,23" />
+          </svg>
+        </div>
+      </article>
+
+      <article class="card eth">
+        <p class="coin"><strong>ETHEREUM</strong> · ETH</p>
+        <p class="price positive">$3,486.72</p>
+        <p class="change positive">▲ 1.37% · 24h</p>
+        <div class="chart">
+          <svg viewBox="0 0 280 72" role="img" aria-label="Ethereum price moving upward">
+            <polyline points="4,52 48,42 92,50 136,30 180,40 224,18 276,27" />
+          </svg>
+        </div>
+      </article>
+
+      <article class="card sol">
+        <p class="coin"><strong>SOLANA</strong> · SOL</p>
+        <p class="price negative">$174.63</p>
+        <p class="change negative">▼ 0.92% · 24h</p>
+        <div class="chart">
+          <svg viewBox="0 0 280 72" role="img" aria-label="Solana price declining">
+            <polyline points="4,16 48,25 92,19 136,42 180,31 224,55 276,47" />
+          </svg>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

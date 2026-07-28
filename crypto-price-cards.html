@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Price Cards</title>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --text: #d0e6f0;
+      --muted: #8aa4b3;
+      --card: #111a29;
+      --border: #23344a;
+      --green: #4ee29a;
+      --red: #ff667d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px 20px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Aptos", "Segoe UI", sans-serif;
+    }
+
+    main { width: min(100%, 1040px); }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .intro {
+      margin: 0 0 28px;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: 0 12px 30px rgb(0 0 0 / 0.18);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #5a9db8;
+      box-shadow: 0 0 26px rgb(80 193 235 / 0.22), 0 18px 36px rgb(0 0 0 / 0.28);
+    }
+
+    .coin-row, .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .coin {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .symbol {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .price-row { margin-top: 28px; }
+
+    .price {
+      font-variant-numeric: tabular-nums;
+      font-size: clamp(1.65rem, 3.4vw, 2.25rem);
+      font-weight: 750;
+      letter-spacing: -0.045em;
+      transition: color 180ms ease;
+    }
+
+    .change {
+      padding: 6px 9px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .positive { color: var(--green); background: rgb(78 226 154 / 0.11); }
+    .negative { color: var(--red); background: rgb(255 102 125 / 0.11); }
+
+    .sparkline {
+      width: 100%;
+      height: 76px;
+      margin-top: auto;
+      overflow: visible;
+    }
+
+    .sparkline line { stroke: var(--border); stroke-dasharray: 3 5; }
+    .sparkline polyline { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .btc polyline, .sol polyline { stroke: var(--green); }
+    .eth polyline { stroke: var(--red); }
+
+    .updated {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .flash-up { animation: flash-up 700ms ease-out; }
+    .flash-down { animation: flash-down 700ms ease-out; }
+
+    @keyframes flash-up {
+      0%, 42% { color: var(--green); text-shadow: 0 0 15px rgb(78 226 154 / 0.7); }
+      100% { color: var(--text); text-shadow: none; }
+    }
+
+    @keyframes flash-down {
+      0%, 42% { color: var(--red); text-shadow: 0 0 15px rgb(255 102 125 / 0.7); }
+      100% { color: var(--text); text-shadow: none; }
+    }
+
+    @media (max-width: 720px) {
+      .cards { grid-template-columns: 1fr; }
+      .card { min-height: 205px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Market pulse</h1>
+    <p class="intro">Sample crypto pricing · simulated live movement</p>
+    <section class="cards" aria-label="Cryptocurrency prices">
+      <article class="card btc" data-direction="up">
+        <div class="coin-row"><h2 class="coin">Bitcoin</h2><span class="symbol">BTC</span></div>
+        <div class="price-row"><strong class="price" data-value="67482.31">$67,482.31</strong><span class="change positive">+2.84%</span></div>
+        <svg class="sparkline" viewBox="0 0 280 76" role="img" aria-label="Bitcoin seven-point price trend rising overall"><line x1="0" y1="62" x2="280" y2="62"/><polyline points="4,58 48,42 92,50 136,26 180,36 224,14 276,22"/></svg>
+      </article>
+      <article class="card eth" data-direction="down">
+        <div class="coin-row"><h2 class="coin">Ethereum</h2><span class="symbol">ETH</span></div>
+        <div class="price-row"><strong class="price" data-value="3481.76">$3,481.76</strong><span class="change negative">−1.37%</span></div>
+        <svg class="sparkline" viewBox="0 0 280 76" role="img" aria-label="Ethereum seven-point price trend falling overall"><line x1="0" y1="62" x2="280" y2="62"/><polyline points="4,18 48,30 92,22 136,44 180,36 224,57 276,50"/></svg>
+      </article>
+      <article class="card sol" data-direction="up">
+        <div class="coin-row"><h2 class="coin">Solana</h2><span class="symbol">SOL</span></div>
+        <div class="price-row"><strong class="price" data-value="184.62">$184.62</strong><span class="change positive">+5.16%</span></div>
+        <svg class="sparkline" viewBox="0 0 280 76" role="img" aria-label="Solana seven-point price trend rising overall"><line x1="0" y1="62" x2="280" y2="62"/><polyline points="4,60 48,51 92,57 136,33 180,43 224,17 276,25"/></svg>
+      </article>
+    </section>
+    <p class="updated">Prices are illustrative samples, not live market data.</p>
+  </main>
+  <script>
+    const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    document.querySelectorAll('.card').forEach((card) => {
+      const price = card.querySelector('.price');
+      setInterval(() => {
+        const direction = card.dataset.direction === 'up' ? 1 : -1;
+        const value = Number(price.dataset.value) * (1 + direction * (Math.random() * 0.0015));
+        price.dataset.value = value.toFixed(2);
+        price.textContent = formatter.format(value);
+        price.classList.remove('flash-up', 'flash-down');
+        void price.offsetWidth;
+        price.classList.add(direction > 0 ? 'flash-up' : 'flash-down');
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

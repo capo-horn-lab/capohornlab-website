@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crypto Price Cards</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:#0a0e17;color:#d0e6f0;
+    font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    padding:2rem}
+  .container{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center}
+
+  .card{
+    background:linear-gradient(145deg,#111827,#0f1420);
+    border:1px solid rgba(208,230,240,0.07);
+    border-radius:20px;padding:2rem;width:280px;
+    transition:box-shadow .35s ease,transform .35s ease,border-color .35s ease;
+    display:flex;flex-direction:column;align-items:center;gap:0.75rem;
+    position:relative;overflow:hidden}
+  .card::before{
+    content:'';position:absolute;inset:-1px;
+    border-radius:21px;padding:1px;
+    background:linear-gradient(135deg,rgba(56,189,248,0.15),transparent 50%,transparent);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    pointer-events:none;opacity:0;transition:opacity .5s ease}
+  .card:hover{border-color:rgba(56,189,248,0.25);transform:translateY(-4px)}
+  .card:hover::before{opacity:1}
+  .card:hover{box-shadow:0 0 30px rgba(56,189,248,0.08),0 8px 32px rgba(0,0,0,0.4)}
+
+  .coin-icon{
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.3rem;font-weight:700;margin-bottom:0.25rem}
+  .btc-icon{background:linear-gradient(135deg,#f7931a,#d47e12);color:#fff}
+  .eth-icon{background:linear-gradient(135deg,#627eea,#3c5ccc);color:#fff}
+  .sol-icon{background:linear-gradient(135deg,#9945ff,#00d18c);color:#fff}
+
+  .coin-name{font-size:1.1rem;font-weight:600;letter-spacing:.02em}
+  .coin-symbol{font-size:.75rem;color:rgba(208,230,240,0.45);font-weight:500}
+
+  .price-row{display:flex;align-items:baseline;gap:.85rem;flex-wrap:wrap;justify-content:center}
+  .price{
+    font-size:2rem;font-weight:700;letter-spacing:-.02em;
+    position:relative}
+  .flash-green{color:#4ade80}
+  .flash-red{color:#f87171}
+
+  .change{
+    font-size:.85rem;font-weight:600;padding:.2rem .6rem;
+    border-radius:8px}
+  .change.pos{color:#4ade80;background:rgba(74,222,128,0.1)}
+  .change.neg{color:#f87171;background:rgba(248,113,113,0.1)}
+
+  .sparkline svg{display:block;width:200px;height:50px}
+  .sparkline{margin-top:.5rem;padding:.25rem 0;width:100%;display:flex;justify-content:center}
+
+  .label{font-size:.7rem;color:rgba(208,230,240,0.3);text-transform:uppercase;letter-spacing:.08em}
+
+  @keyframes flickGreen{0%,100%{color:#4ade80}50%{color:#4ade80;text-shadow:0 0 12px rgba(74,222,128,0.5)}}
+  @keyframes flickRed{0%,100%{color:#f87171}50%{color:#f87171;text-shadow:0 0 12px rgba(248,113,113,0.5)}}
+  .anim-green{animation:flickGreen .6s ease-in-out 3}
+  .anim-red{animation:flickRed .6s ease-in-out 3}
+
+  @media(max-width:700px){.container{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- BTC -->
+<div class="card">
+  <div class="coin-icon btc-icon">₿</div>
+  <div class="coin-name">Bitcoin <span class="coin-symbol">BTC</span></div>
+  <div class="price-row">
+    <span class="price flash-green" id="btc-price">$72,341</span>
+    <span class="change pos" id="btc-change">+3.42%</span>
+  </div>
+  <div class="sparkline">
+    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,40 28,30 56,38 84,18 112,28 140,10 168,22 200,12"
+        fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="label">24h · Vol $28.4B</span>
+</div>
+
+<!-- ETH -->
+<div class="card">
+  <div class="coin-icon eth-icon">◆</div>
+  <div class="coin-name">Ethereum <span class="coin-symbol">ETH</span></div>
+  <div class="price-row">
+    <span class="price flash-red" id="eth-price">$3,215</span>
+    <span class="change neg" id="eth-change">-1.87%</span>
+  </div>
+  <div class="sparkline">
+    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,15 28,20 56,12 84,38 112,28 140,38 168,22 200,30"
+        fill="none" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="label">24h · Vol $16.7B</span>
+</div>
+
+<!-- SOL -->
+<div class="card">
+  <div class="coin-icon sol-icon">◎</div>
+  <div class="coin-name">Solana <span class="coin-symbol">SOL</span></div>
+  <div class="price-row">
+    <span class="price flash-green" id="sol-price">$162.58</span>
+    <span class="change pos" id="sol-change">+5.13%</span>
+  </div>
+  <div class="sparkline">
+    <svg viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,35 28,28 56,40 84,10 112,22 140,8 168,15 200,8"
+        fill="none" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <span class="label">24h · Vol $5.2B</span>
+</div>
+
+</div>
+
+<script>
+(function(){
+  const cards = [
+    {el:document.getElementById('btc-price'),cls:'flash-green',vals:[72341,72398,72115,72450,72280,72510,72341]},
+    {el:document.getElementById('eth-price'),cls:'flash-red',vals:[3215,3198,3220,3185,3205,3172,3215]},
+    {el:document.getElementById('sol-price'),cls:'flash-green',vals:[162.58,163.20,161.95,164.10,162.75,165.00,162.58]}
+  ];
+  let tick=0;
+  function flashAll(){
+    cards.forEach(c=>{
+      c.el.textContent='$'+c.vals[tick%c.vals.length].toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+      c.el.className='price '+c.cls;
+      const anim=c.cls==='flash-green'?'anim-green':'anim-red';
+      c.el.classList.add(anim);
+      c.el.addEventListener('animationend',()=>c.el.classList.remove(anim,anim.replace('anim-','')),{once:true});
+    });
+    tick++;
+  }
+  setInterval(flashAll,4000);
+  flashAll();
+})();
+</script>
+</body>
+</html>
