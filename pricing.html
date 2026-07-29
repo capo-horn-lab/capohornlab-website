@@ -1264,91 +1264,71 @@
   </section>
 
   <!-- ============================================================
-       BACKTEST SERVICES — PER-INSTRUMENT SUBSCRIPTIONS
+       DATA + BACKTEST — ONE-TIME PURCHASE + PAY-PER-TEST
        ============================================================ -->
-  <section class="section" id="backtest">
+  <section class="section section-alt" id="backtest">
     <div class="section-header">
-      <span class="overline">Backtest Services</span>
-      <h2>Multi-Tier <span class="highlight">Backtest Engine</span></h2>
-      <p>Monthly subscriptions per instrument. Choose the data depth that matches your strategy — from standard OHLC to full order book reconstruction.</p>
+      <span class="overline">Data &amp; Backtest</span>
+      <h2>Buy Data Once. <span class="highlight">Backtest Forever.</span></h2>
+      <p>Market data is a one-time acquisition — you own it, you backtest it, forever. Each backtest run costs €3–5, covering only the compute. No subscription, no markup.</p>
     </div>
 
     <div class="backtest-grid">
-      <!-- Standard -->
+      <!-- Data — One-Time -->
       <div class="backtest-card animate-up-d1">
-        <div class="backtest-tier">Standard</div>
-        <h3>OHLC + Trades</h3>
+        <div class="backtest-tier">Data — One-Time</div>
+        <h3>Own the Raw Tick Data</h3>
         <p class="backtest-desc">
-          OHLC bar-level data plus individual trade records with price, size, and direction.
-          Covers daily through 1-minute and tick-level resolution.
+          Level-1 tick data (or deeper) for the instrument, resolution, and period you choose.
+          3 months of NQ tick-level data is a common starting point.
         </p>
-        <div class="backtest-price">
-          <span class="amount"><span class="currency">€</span>29</span>
-          <span class="per">/mese · per strumento</span>
+        <div class="backtest-price" style="padding:var(--ch-space-4) 0;">
+          <span class="amount" style="font-size:var(--ch-text-base);">One-Time Purchase</span>
         </div>
-        <p class="backtest-detail">One instrument · monthly recurring · cancel anytime</p>
+        <p class="backtest-detail">Buy it once. It is yours forever. Backtest it anytime.</p>
         <ul class="backtest-features">
-          <li><span class="check">✓</span> OHLCV 1s/1m/1h/1d bars</li>
-          <li><span class="check">✓</span> Full trade record — price, size, direction</li>
-          <li><span class="check">✓</span> IS/OOS walk-forward validation</li>
-          <li><span class="check">✓</span> Monte Carlo simulation</li>
-          <li><span class="check">✓</span> Sharpe, CAGR, Max DD, Win Rate</li>
-          <li><span class="check">✓</span> Monthly report delivered</li>
+          <li><span class="check">&#10003;</span> NQ, ES, CL, GC, ZN — any CME futures</li>
+          <li><span class="check">&#10003;</span> Tick-level, OHLC, or depth (MBP-10 / MBO)</li>
+          <li><span class="check">&#10003;</span> 3, 6, or 12-month windows</li>
+          <li><span class="check">&#10003;</span> Delivered as clean parquet files</li>
+          <li><span class="check">&#10003;</span> No recurring fees — ever</li>
+          <li><span class="check">&#10003;</span> Ready for backtest immediately</li>
         </ul>
-        <button class="btn btn-outline-light" style="width:100%;">Subscribe Standard</button>
+        <button class="btn btn-amber" style="width:100%;">Request Data Quote</button>
       </div>
 
-      <!-- Advanced -->
+      <!-- Backtest — Per Test -->
       <div class="backtest-card animate-up-d2">
-        <div class="backtest-tier">Advanced</div>
-        <h3>MBP-10 Order Book</h3>
+        <div class="backtest-tier">Backtest — Per Test</div>
+        <h3>Test on Your Data</h3>
         <p class="backtest-desc">
-          Market-by-price depth across 10 levels — bid_px_00 to bid_px_09,
-          ask_px_00 to ask_px_09, with full size and order count per level.
-          Enables limit-order simulation, slippage modeling, and microstructure analysis.
+          Run a full backtest on data you already own. IS/OOS walk-forward, Monte Carlo simulations,
+          equity curve, trade log, and a clear verdict — pass, fail, or inconclusive.
         </p>
         <div class="backtest-price">
-          <span class="amount"><span class="currency">€</span>79</span>
-          <span class="per">/mese · per strumento</span>
+          <span class="amount"><span class="currency">€</span>3<span style="font-size:1.25rem;color:var(--ch-gray-300);margin:0 2px;">–</span>5</span>
+          <span class="per">/test</span>
         </div>
-        <p class="backtest-detail">One instrument · monthly recurring · cancel anytime</p>
+        <p class="backtest-detail">Compute cost only. No markup, no margin, no subscription.</p>
         <ul class="backtest-features">
-          <li><span class="check">✓</span> All Standard features included</li>
-          <li><span class="check">✓</span> Market-by-price top-10 depth</li>
-          <li><span class="check">✓</span> Limit-order book simulation</li>
-          <li><span class="check">✓</span> Realistic slippage at depth</li>
-          <li><span class="check">✓</span> Intraday tick-level granularity</li>
-          <li><span class="check">✓</span> Parameter stability analysis</li>
+          <li><span class="check">&#10003;</span> IS/OOS walk-forward validation</li>
+          <li><span class="check">&#10003;</span> Monte Carlo simulation</li>
+          <li><span class="check">&#10003;</span> Full equity curve + trade log</li>
+          <li><span class="check">&#10003;</span> Sharpe, CAGR, Max DD, Win Rate</li>
+          <li><span class="check">&#10003;</span> Parameter stability analysis</li>
+          <li><span class="check">&#10003;</span> Clear verdict — pass / fail / inconclusive</li>
         </ul>
-        <button class="btn btn-amber" style="width:100%;">Subscribe Advanced</button>
-      </div>
-
-      <!-- Advanced Plus -->
-      <div class="backtest-card animate-up-d3">
-        <div class="backtest-tier">Advanced Plus</div>
-        <h3>MBO Full Order Book</h3>
-        <p class="backtest-desc">
-          Full market-by-order reconstruction with every order, cancellation,
-          and fill. Maximum-fidelity backtesting for market-making, arbitrage,
-          and latency-sensitive strategies that depend on order-book dynamics.
-        </p>
-        <div class="backtest-price">
-          <span class="amount"><span class="currency">€</span>199</span>
-          <span class="per">/mese · per strumento</span>
-        </div>
-        <p class="backtest-detail">One instrument · monthly recurring · cancel anytime</p>
-        <ul class="backtest-features">
-          <li><span class="check">✓</span> All Advanced features included</li>
-          <li><span class="check">✓</span> Full MBO order book reconstruction</li>
-          <li><span class="check">✓</span> Order-by-order fill simulation</li>
-          <li><span class="check">✓</span> Cancel &amp; replace dynamics</li>
-          <li><span class="check">✓</span> Queue-position modeling</li>
-          <li><span class="check">✓</span> Custom metric definition</li>
-        </ul>
-        <button class="btn btn-primary" style="width:100%;">Subscribe Advanced Plus</button>
+        <button class="btn btn-outline-light" style="width:100%;">Start a Backtest</button>
       </div>
     </div>
-    <p class="backtest-note">Each subscription covers a single instrument. Multi-instrument bundles available — contact us for custom configurations.</p>
+
+    <div style="max-width:720px; margin:var(--ch-space-6) auto 0; text-align:center; background:rgba(37,99,235,0.05); border:1px solid rgba(37,99,235,0.12); border-radius:var(--ch-radius-lg); padding:var(--ch-space-5);">
+      <p style="font-size:var(--ch-text-sm); color:var(--ch-navy-600); margin:0; line-height:var(--ch-leading-relaxed);">
+        <strong>Own your data, own your edge.</strong> Data is a one-time purchase — you own it, you backtest it, forever.
+        No recurring fees, no forced subscriptions. Every backtest run costs €3–5, covering only the compute.
+        100% transparent, 100% research-funded.
+      </p>
+    </div>
   </section>
 
   <!-- ============================================================
