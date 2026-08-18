@@ -12,7 +12,7 @@ def read(relative: str) -> str:
 class AccountFlowWiringTests(unittest.TestCase):
     def test_shared_client_uses_real_auth_endpoints(self) -> None:
         client = read("assets/js/account-client.js")
-        self.assertIn("'/api/v1'", client)
+        self.assertIn("https://capohornlab-website.onrender.com/api/v1", client)
         self.assertIn("'/auth/signup'", client)
         self.assertIn("'/auth/login'", client)
         self.assertIn("Authorization", client)
@@ -43,6 +43,18 @@ class AccountFlowWiringTests(unittest.TestCase):
         self.assertNotIn("function mockPayment", page)
         self.assertNotIn("simulates payment", page)
         self.assertIn("Payment provider is not configured", page)
+
+
+    def test_static_frontend_defaults_to_live_render_api(self) -> None:
+        api = "https://capohornlab-website.onrender.com/api/v1"
+        self.assertIn(api, read("assets/js/account-client.js"))
+        self.assertIn(api, read("assets/js/newsletter-client.js"))
+        self.assertIn(api, read("contact.html"))
+        self.assertIn(api, read("pages/contact.html"))
+
+    def test_account_client_includes_cross_origin_credentials(self) -> None:
+        client = read("assets/js/account-client.js")
+        self.assertIn("options.credentials = options.credentials || 'include';", client)
 
 
 if __name__ == "__main__":

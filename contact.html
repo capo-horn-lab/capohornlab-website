@@ -1429,7 +1429,7 @@
 
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-        fetch('/api/v1/contact', {
+        fetch((window.CHL_API_BASE || 'https://capohornlab-website.onrender.com/api/v1') + '/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

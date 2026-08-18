@@ -2,7 +2,7 @@
 (function (global) {
   'use strict';
 
-  var API_BASE = global.CHL_API_BASE || '/api/v1';
+  var API_BASE = global.CHL_API_BASE || 'https://capohornlab-website.onrender.com/api/v1';
   var ACCESS_KEY = 'chl_access_token';
   var USER_KEY = 'chl_user';
 
@@ -17,6 +17,7 @@
 
   function request(path, options) {
     options = options || {};
+    options.credentials = options.credentials || 'include';
     options.headers = Object.assign({'Content-Type': 'application/json'}, options.headers || {});
     return fetch(API_BASE + path, options).then(function (response) {
       if (!response.ok) return errorMessage(response, 'The service could not complete the request.');

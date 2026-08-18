@@ -12,7 +12,8 @@ class ContactFlowWiringTests(unittest.TestCase):
     def test_contact_frontends_call_real_api(self):
         for path in ("contact.html", "pages/contact.html"):
             page = self.read(path)
-            self.assertIn("fetch('/api/v1/contact'", page)
+            self.assertIn("https://capohornlab-website.onrender.com/api/v1", page)
+            self.assertIn("+ '/contact'", page)
             self.assertNotIn("Simulate submission", page)
 
     def test_email_service_fails_closed_without_provider(self):
@@ -32,7 +33,9 @@ class ContactFlowWiringTests(unittest.TestCase):
         page = self.read("index.html")
         self.assertIn("CHLNewsletter.subscribe(event)", page)
         self.assertIn("assets/js/newsletter-client.js", page)
-        self.assertIn("/api/v1/newsletter/subscribe", self.read("assets/js/newsletter-client.js"))
+        newsletter = self.read("assets/js/newsletter-client.js")
+        self.assertIn("https://capohornlab-website.onrender.com/api/v1", newsletter)
+        self.assertIn("API_BASE + '/newsletter/subscribe'", newsletter)
 
 
 if __name__ == "__main__":

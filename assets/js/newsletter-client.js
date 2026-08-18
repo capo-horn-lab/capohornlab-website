@@ -1,6 +1,7 @@
 /* Shared newsletter client. It never claims success before the API confirms it. */
 (function (global) {
   'use strict';
+  var API_BASE = global.CHL_API_BASE || 'https://capohornlab-website.onrender.com/api/v1';
   function subscribe(event) {
     event.preventDefault();
     var form = event.currentTarget;
@@ -21,7 +22,7 @@
     }
     var original = button ? button.textContent : '';
     if (button) { button.disabled = true; button.textContent = 'Subscribing…'; }
-    fetch('/api/v1/newsletter/subscribe', {
+    fetch(API_BASE + '/newsletter/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email.value.trim() })
