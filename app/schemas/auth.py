@@ -21,10 +21,6 @@ class LoginRequest(BaseModel):
     password: str
 
 
-class RefreshRequest(BaseModel):
-    refresh_token: str
-
-
 class VerifyRequest(BaseModel):
     email: EmailStr
     code: str = Field(..., min_length=6, max_length=6)
@@ -62,7 +58,6 @@ class TokenResponse(BaseModel):
 class LoginResponse(BaseModel):
     user: UserResponse
     access_token: str
-    refresh_token: str
     token_type: str = "bearer"
 
 

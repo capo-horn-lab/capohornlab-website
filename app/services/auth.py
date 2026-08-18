@@ -24,6 +24,7 @@ from app.core.security import (
 from app.models.login_history import LoginHistory
 from app.models.user import User
 from app.core.config import settings
+from app.services.email import email_service
 
 security_scheme = HTTPBearer(auto_error=False)
 
@@ -160,7 +161,12 @@ async def send_verification_code(email: str) -> str:
         "code": code,
         "expires_at": datetime.now(timezone.utc) + timedelta(minutes=15),
     }
-    # TODO: Send email via Resend/SendGrid
+    delivered = await email_service.send_account_verification(email, code)
+    if not delivered:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Account created, but verification email delivery is unavailable.",
+        )
     return code
 
 
@@ -202,7 +208,12 @@ async def send_reset_code(email: str) -> str:
         "code": code,
         "expires_at": datetime.now(timezone.utc) + timedelta(minutes=15),
     }
-    # TODO: Send email via Resend/SendGrid
+    delivered = await email_service.send_password_reset(email, code)
+    if not delivered:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="If the address is eligible, reset instructions have been sent.",
+        )
     return code
 
 

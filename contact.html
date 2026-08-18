@@ -1175,6 +1175,7 @@
               <div class="input-error" id="messageError">Please enter your message.</div>
             </div>
 
+            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
             <button class="btn btn-primary btn-lg btn-submit" type="submit">
               <span class="btn-text">Send Message</span>
               <span class="spinner"></span>
@@ -1289,8 +1290,8 @@
           Get notified when new research is published. No spam, no strategy pitches —
           just raw data and honest analysis delivered to your inbox.
         </p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); const btn=this.querySelector('button'); const orig=btn.textContent; btn.textContent='✓ Subscribed!'; btn.disabled=true; setTimeout(()=>{btn.textContent=orig; btn.disabled=false}, 3000);">
-          <input class="input-field" type="email" placeholder="you@example.com" required>
+        <form class="newsletter-form" onsubmit="CHLNewsletter.subscribe(event)">
+          <input class="input-field" type="email" name="email" placeholder="you@example.com" required>
           <button class="btn btn-primary" type="submit">Subscribe</button>
         </form>
         <p class="newsletter-disclaimer">
@@ -1426,19 +1427,40 @@
           return;
         }
 
-        // Simulate submission
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-
-        setTimeout(function() {
-          submitBtn.classList.remove('loading');
-          submitBtn.disabled = false;
+        fetch('/api/v1/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim(),
+            subject: subjectInput.value.trim(),
+            message: messageInput.value.trim(),
+            website: (document.getElementById('website') || {}).value || ''
+          })
+        }).then(async function(response) {
+          const data = await response.json().catch(function() { return {}; });
+          if (!response.ok) throw new Error(data.detail || 'Unable to send your message.');
           form.style.display = 'none';
           success.classList.add('visible');
-        }, 1500);
+        }).catch(function(error) {
+          let errorBox = document.getElementById('contactSubmitError');
+          if (!errorBox) {
+            errorBox = document.createElement('div');
+            errorBox.id = 'contactSubmitError';
+            errorBox.style.cssText = 'margin-top:12px;color:var(--ch-error);font-size:0.875rem;';
+            form.appendChild(errorBox);
+          }
+          errorBox.textContent = error.message;
+        }).finally(function() {
+          submitBtn.classList.remove('loading');
+          submitBtn.disabled = false;
+        });
       });
     })();
   </script>
 
+  <script src="assets/js/newsletter-client.js"></script>
 </body>
 </html>

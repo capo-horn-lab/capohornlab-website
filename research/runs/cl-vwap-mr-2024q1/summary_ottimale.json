@@ -1,0 +1,26 @@
+{
+  "strategy": "VWAPMeanReversion",
+  "symbol": "CL",
+  "period": {
+    "start": "2024-01-01 22:32:00+00:00",
+    "end": "2024-03-01 00:00:00+00:00"
+  },
+  "initial_capital": 100000,
+  "total_trades": 2303,
+  "total_net_pnl": 6094.999999999768,
+  "total_commission": 0.0,
+  "total_slippage": 0.0,
+  "win_rate": 65.04559270516718,
+  "profit_factor": 1.0737313252283285,
+  "sharpe_ratio": 0.09601513032512833,
+  "sortino_ratio": 0.07610469951145232,
+  "calmar_ratio": 2.881622015705033,
+  "cagr": 28.71650072702674,
+  "max_drawdown_pct": -9.965394687616866,
+  "avg_trade_pnl": 2.6465479808943932,
+  "expectancy": 2.6465479808943897,
+  "mc_prob_positive": 100.0,
+  "mode": "ottimale",
+  "source": "D:\\marketdata",
+  "synthetic": false
+}

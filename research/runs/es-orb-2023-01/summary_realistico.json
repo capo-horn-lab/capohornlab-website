@@ -1,0 +1,26 @@
+{
+  "strategy": "OpeningRangeBreakout",
+  "symbol": "ES",
+  "period": {
+    "start": "2023-01-02 23:00:00+00:00",
+    "end": "2023-02-01 00:00:00+00:00"
+  },
+  "initial_capital": 100000,
+  "total_trades": 104,
+  "total_net_pnl": 2462.800000000002,
+  "total_commission": 187.20000000000022,
+  "total_slippage": 275.0,
+  "win_rate": 54.807692307692314,
+  "profit_factor": 1.1150997097737545,
+  "sharpe_ratio": 0.08731122790556257,
+  "sortino_ratio": 0.12693459733334628,
+  "calmar_ratio": 5.79688651026945,
+  "cagr": 25.47689873404153,
+  "max_drawdown_pct": -4.394927982272559,
+  "avg_trade_pnl": 23.68076923076924,
+  "expectancy": 23.6807692307693,
+  "mc_prob_positive": 100.0,
+  "mode": "realistico",
+  "source": "D:\\marketdata",
+  "synthetic": false
+}

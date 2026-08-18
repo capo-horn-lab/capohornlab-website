@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "record_type": "source_file_provenance_manifest",
+  "source": "owned-nq-trades",
+  "dataset_id": "NQ-trades-2024-01-02_2024-01-03",
+  "symbol": "NQ",
+  "source_file": "D:/marketdata/NQ/tick_trades_raw/NQ_trades_2024-01-02_2024-01-03.parquet",
+  "file_name": "NQ_trades_2024-01-02_2024-01-03.parquet",
+  "byte_count": 8842273,
+  "hash_algorithm": "SHA-256",
+  "expected_sha256": "547d5ab92e7673e30b824a1f1cf2fb3098591bec6fbe75c20b8b022a9761a132",
+  "recorded_at_utc": "2026-08-18T12:38:36Z",
+  "recording_scope": "Manifest only; the owned source file was read for hashing and not modified.",
+  "replay_gate": "research.market_data_engine.validate_source_file_provenance"
+}

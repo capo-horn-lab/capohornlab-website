@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test Your Strategy — Capo Horn Lab</title>
+  <meta name="description" content="Submit a futures trading strategy to Capo Horn Lab for structured quantitative backtesting and validation.">
+  <meta property="og:description" content="Submit a futures trading strategy to Capo Horn Lab for structured quantitative backtesting and validation.">
+  <meta name="twitter:description" content="Submit a futures trading strategy to Capo Horn Lab for structured quantitative backtesting and validation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -2130,35 +2133,25 @@
 
     // ---- Submit ----
     function submitStrategy() {
-      // Show loading (simulated)
-      const btn = document.querySelector('#step7 .btn-amber');
-      const origText = btn.textContent;
-      btn.textContent = 'Submitting…';
-      btn.disabled = true;
-
-      setTimeout(function() {
-        // Hide all steps
-        for (let i = 1; i <= totalSteps; i++) {
-          const el = document.getElementById('step' + i);
-          if (el) el.style.display = 'none';
-        }
-
-        // Show confirmation
-        const confirmEl = document.getElementById('submissionConfirm');
-        if (confirmEl) confirmEl.style.display = 'block';
-
-        // Update progress — mark step 7 as completed
-        const items = document.querySelectorAll('.wizard-step-item');
-        items.forEach(item => {
-          item.classList.remove('active', 'completed');
-          item.classList.add('completed');
-        });
-
-        btn.textContent = origText;
-        btn.disabled = false;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 1500);
+      if (!window.CHLAccount || !window.CHLAccount.requireSession()) return;
+      var tier = selectedDataTier || 'l2';
+      var months = parseInt(document.getElementById('periodSelect').value) || 12;
+      var payload = {
+        strategy_name: getVal('s1_name'), description: getVal('s1_desc'), instrument: getVal('s1_instrument'),
+        timeframe: getVal('s2_timeframe'), historical_period: getVal('s2_start') + ' → ' + getVal('s2_end'),
+        session_times: getVal('s2_session'), entry_rules_long: getVal('s3_trigger'), entry_rules_short: getVal('s3_trigger'),
+        exit_rules: getVal('s4_sl') + ' / ' + getVal('s4_tp'), stop_loss: getVal('s4_sl'), take_profit: getVal('s4_tp'),
+        trailing_stop: getVal('s4_trailing'), break_even: getVal('s4_be'), contracts: parseInt(getVal('s5_contracts'), 10) || 1,
+        commission_slippage: getVal('s5_commission') + ' / ' + getVal('s5_slippage'),
+        additional_notes: 'Data tier: ' + tier + '; requested months: ' + months
+      };
+      window.CHLAccount.createRequest(payload).then(function(request) {
+        return Promise.all(uploadedFiles.map(function(file) { return window.CHLAccount.uploadAttachment(request.id, file); })).then(function() { return request; });
+      }).then(function(request) {
+        window.location.href = '../checkout.html?request_id=' + encodeURIComponent(request.id) + '&tier=' + encodeURIComponent(tier) + '&months=' + months;
+      }).catch(function(error) { alert(error.message || 'The strategy request could not be submitted.'); });
     }
+
 
     // ---- Reset Wizard (submit another) ----
     function resetWizard() {
@@ -2176,5 +2169,6 @@
     }
   </script>
 
+  <script src="../assets/js/account-client.js"></script>
 </body>
 </html>

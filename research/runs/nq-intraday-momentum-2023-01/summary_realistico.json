@@ -1,0 +1,26 @@
+{
+  "strategy": "IntradayMomentumSPY",
+  "symbol": "NQ",
+  "period": {
+    "start": "2023-01-02 23:00:00+00:00",
+    "end": "2023-02-01 00:00:00+00:00"
+  },
+  "initial_capital": 100000,
+  "total_trades": 298,
+  "total_net_pnl": 82025.39999999953,
+  "total_commission": 534.6000000000017,
+  "total_slippage": 370.0,
+  "win_rate": 65.1006711409396,
+  "profit_factor": 4.7502125986411965,
+  "sharpe_ratio": 0.7429162965529464,
+  "sortino_ratio": 1.681233095701582,
+  "calmar_ratio": 6097.077257845993,
+  "cagr": 18446.661980970228,
+  "max_drawdown_pct": -3.02549257633766,
+  "avg_trade_pnl": 275.25302013422817,
+  "expectancy": 275.2530201342281,
+  "mc_prob_positive": 100.0,
+  "mode": "realistico",
+  "source": "D:\\marketdata",
+  "synthetic": false
+}

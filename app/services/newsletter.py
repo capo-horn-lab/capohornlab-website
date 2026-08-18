@@ -17,8 +17,8 @@ from app.models.newsletter import (
     NewsletterSubscriber,
 )
 from app.models.user import User
-from app.services.email import email_service
 from app.services.auth import check_rate_limit
+from app.services.email import email_service
 
 
 def _generate_token(length: int = 64) -> str:
@@ -80,11 +80,16 @@ async def subscribe_newsletter(
     # Send verification email
     base_url = settings.FRONTEND_URL or "http://localhost:5173"
     verify_url = f"{base_url}/newsletter/verify?token={subscriber.verification_token}"
-    await email_service.send_verification_email(
+    delivered = await email_service.send_verification_email(
         to_email=subscriber.email,
         to_name=subscriber.name,
         verification_url=verify_url,
     )
+    if not delivered:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Subscription saved, but confirmation email delivery is unavailable.",
+        )
 
     return {"message": "Verification email sent. Please check your inbox."}
 

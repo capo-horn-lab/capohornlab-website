@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://www.bls.gov/schedule",
+      "title": "BLS selected releases schedule",
+      "accessed": "2026-08-18"
+    },
+    {
+      "id": 2,
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "title": "Federal Reserve FOMC calendar",
+      "accessed": "2026-08-18"
+    },
+    {
+      "id": 3,
+      "url": "https://www.bea.gov/news/schedule",
+      "title": "BEA release schedule",
+      "accessed": "2026-08-18"
+    },
+    {
+      "id": 4,
+      "url": "https://www.eia.gov/petroleum/supply/weekly/schedule.php",
+      "title": "EIA WPSR schedule",
+      "accessed": "2026-08-18"
+    }
+  ]
+}

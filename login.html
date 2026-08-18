@@ -603,6 +603,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/account-client.js"></script>
   <script>
     function togglePassword(fieldId, btn) {
       var input = document.getElementById(fieldId);
@@ -627,31 +628,22 @@
       }
     })();
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
       e.preventDefault();
       var alert = document.getElementById('loginAlert');
       var email = document.getElementById('loginEmail').value.trim();
-      var pass = document.getElementById('loginPassword').value.trim();
+      var pass = document.getElementById('loginPassword').value;
       var btn = document.getElementById('loginBtn');
-
-      if (!email || !pass) {
+      if (!email || !pass) { alert.className = 'auth-alert error'; alert.textContent = 'Please enter both email and password.'; return; }
+      btn.classList.add('btn-loading'); btn.disabled = true;
+      try {
+        await window.CHLAccount.login(email, pass);
+        var next = new URLSearchParams(window.location.search).get('next') || 'dashboard.html';
+        window.location.assign(next);
+      } catch (error) {
         alert.className = 'auth-alert error';
-        alert.textContent = 'Please enter both email and password.';
-        return;
-      }
-
-      // Show loading state
-      btn.classList.add('btn-loading');
-      var spinner = document.createElement('div');
-      spinner.className = 'btn-spinner';
-      btn.appendChild(spinner);
-
-      alert.className = 'auth-alert success';
-      alert.textContent = 'Logging in\u2026';
-
-      setTimeout(function() {
-        window.location.href = 'dashboard.html';
-      }, 800);
+        alert.textContent = error.message || 'Login failed. Please try again.';
+      } finally { btn.classList.remove('btn-loading'); btn.disabled = false; }
     }
   </script>
 </body>

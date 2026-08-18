@@ -9,6 +9,7 @@ from typing import Final
 
 import sqlalchemy as sa
 from alembic import op
+from sqlalchemy.dialects.postgresql import ENUM
 
 revision: Final[str] = "0001"
 down_revision: str | None = None
@@ -17,8 +18,9 @@ depends_on: str | None = None
 
 
 def upgrade() -> None:
-    # Create user_role enum
+    # Create the PostgreSQL enum once; the Column reuses it without emitting a second CREATE TYPE.
     op.execute("CREATE TYPE user_role AS ENUM ('client', 'admin')")
+    user_role = ENUM("client", "admin", name="user_role", create_type=False)
 
     # Create users table
     op.create_table(
@@ -29,7 +31,7 @@ def upgrade() -> None:
         sa.Column("name", sa.String(255), nullable=False),
         sa.Column(
             "role",
-            sa.Enum("client", "admin", name="user_role"),
+            user_role,
             nullable=False,
             server_default="client",
         ),

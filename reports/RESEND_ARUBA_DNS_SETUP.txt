@@ -1,0 +1,54 @@
+CAPO HORN LAB — RESEND / ARUBA CONFIGURAZIONE
+===============================================
+
+Dominio: capohornlab.com
+Provider: Resend + Aruba DNS
+Verifica DNS pubblica eseguita il 2026-08-17 tramite Google DNS 8.8.8.8.
+
+RECORD DA AGGIUNGERE
+
+1) DKIM
+Tipo: TXT
+Nome/Host: resend._domainkey
+Valore:
+p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSS303AAwnOv3febdJYAs6bM1n4fHcRWyRC+OH1Ps5eZAB7gWBRiZQcRHigLWZV7tLnNGuGz213GtkPZDx0uA6/rduBlL9Mgu5D2Ea6Uv/Q7hfdEcKP2sfoR9LDcMkLmu6pFW0swY3Q6N5EyKgDu48zPkV0t2NBstAOa8qc2GXvwIDAQAB
+TTL: Auto
+
+2) SPF subdomain Resend
+Tipo: TXT
+Nome/Host: send
+Valore:
+v=spf1 include:amazonses.com ~all
+TTL: Auto
+
+3) Return-path / feedback MX subdomain Resend
+Tipo: MX
+Nome/Host: send
+Valore/Target: feedback-smtp.eu-west-1.amazonses.com
+TTL: Auto
+Priorita': 10
+
+VERIFICA PREVENTIVA
+
+- resend._domainkey.capohornlab.com: non ancora pubblicato (NXDOMAIN).
+- send.capohornlab.com TXT: non ancora pubblicato (NXDOMAIN).
+- send.capohornlab.com MX: non ancora pubblicato (NXDOMAIN).
+- _dmarc.capohornlab.com esiste gia':
+  v=DMARC1; p=none; adkim=r; aspf=r;
+  Non aggiungere un secondo DMARC.
+
+PAYLOAD ARUBA DA APPLICARE
+
+[ ] Aggiungere TXT resend._domainkey con il valore DKIM sopra.
+[ ] Aggiungere TXT send con SPF sopra.
+[ ] Aggiungere MX send verso feedback-smtp.eu-west-1.amazonses.com, priorita' 10.
+[ ] NON modificare i record MX della posta principale capohornlab.com.
+[ ] NON modificare il DMARC esistente.
+
+Dopo l'applicazione:
+[ ] Verificare DNS pubblici.
+[ ] Cliccare Verify in Resend.
+[ ] Attendere stato Verified.
+[ ] Solo dopo configurare API key in secret manager.
+
+API key: NON PRESENTE E NON SALVATA QUI.

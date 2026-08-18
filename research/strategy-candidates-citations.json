@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+      "title": "",
+      "accessed": "2026-08-17"
+    },
+    {
+      "id": 2,
+      "url": "https://ideas.repec.org/p/hhs/umnees/0845.html",
+      "title": "",
+      "accessed": "2026-08-17"
+    },
+    {
+      "id": 3,
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+      "title": "",
+      "accessed": "2026-08-17"
+    },
+    {
+      "id": 4,
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4824172",
+      "title": "",
+      "accessed": "2026-08-17"
+    },
+    {
+      "id": 5,
+      "url": "https://www.nber.org/system/files/working_papers/w12413/w12413.pdf",
+      "title": "",
+      "accessed": "2026-08-17"
+    }
+  ]
+}

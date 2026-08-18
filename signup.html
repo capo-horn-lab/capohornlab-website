@@ -317,37 +317,32 @@
     </div>
   </footer>
 
+  <script src="assets/js/account-client.js"></script>
   <script>
     function togglePassword(fieldId, btn) {
       var input = document.getElementById(fieldId);
       if (input.type === 'password') { input.type = 'text'; btn.textContent = 'Hide'; }
       else { input.type = 'password'; btn.textContent = 'Show'; }
     }
-    function handleSignup(e) {
+    async function handleSignup(e) {
       e.preventDefault();
       var alert = document.getElementById('signupAlert');
-      var name = document.getElementById('signupName').value;
-      var email = document.getElementById('signupEmail').value;
+      var name = document.getElementById('signupName').value.trim();
+      var email = document.getElementById('signupEmail').value.trim();
       var pass = document.getElementById('signupPassword').value;
       var passError = document.getElementById('passError');
-
-      if (!name || !email || !pass) {
-        alert.className = 'auth-alert error';
-        alert.textContent = 'Please fill in all fields.';
-        return;
-      }
-      if (pass.length < 8) {
-        passError.textContent = 'Password must be at least 8 characters.';
-        document.getElementById('signupPassword').classList.add('input-error');
-        return;
-      }
-      passError.textContent = '';
-      document.getElementById('signupPassword').classList.remove('input-error');
-
-      // Mock signup — redirect to dashboard when backend is ready
-      alert.className = 'auth-alert success';
-      alert.textContent = 'Account created! Redirecting…';
-      setTimeout(function() { window.location.href = 'dashboard.html'; }, 800);
+      var btn = document.querySelector('#signupForm button[type="submit"]');
+      if (!name || !email || !pass) { alert.className = 'auth-alert error'; alert.textContent = 'Please fill in all fields.'; return; }
+      if (pass.length < 8) { passError.textContent = 'Password must be at least 8 characters.'; return; }
+      btn.disabled = true; btn.textContent = 'Creating account…';
+      try {
+        await window.CHLAccount.signup(name, email, pass);
+        alert.className = 'auth-alert success';
+        alert.textContent = 'Account created. You can now log in.';
+        window.location.assign('login.html?registered=1');
+      } catch (error) {
+        alert.className = 'auth-alert error'; alert.textContent = error.message || 'Account creation failed.';
+      } finally { btn.disabled = false; btn.textContent = 'Create Account'; }
     }
   </script>
 </body>

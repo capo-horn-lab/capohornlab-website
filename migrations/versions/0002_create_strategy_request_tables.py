@@ -9,7 +9,7 @@ from typing import Final
 
 import sqlalchemy as sa
 from alembic import op
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import ENUM, JSONB, UUID
 
 revision: Final[str] = "0002"
 down_revision: str | None = "0001"
@@ -25,6 +25,10 @@ def upgrade() -> None:
         "'accettata', 'rifiutata', 'in_lavorazione', 'completata'"
         ")"
     )
+    request_status = ENUM(
+        "inviata", "info_mancanti", "in_valutazione", "accettata", "rifiutata",
+        "in_lavorazione", "completata", name="request_status", create_type=False,
+    )
 
     # ── strategy_requests ──
     op.create_table(
@@ -33,16 +37,7 @@ def upgrade() -> None:
         sa.Column("user_id", UUID(), nullable=False),
         sa.Column(
             "status",
-            sa.Enum(
-                "inviata",
-                "info_mancanti",
-                "in_valutazione",
-                "accettata",
-                "rifiutata",
-                "in_lavorazione",
-                "completata",
-                name="request_status",
-            ),
+            request_status,
             nullable=False,
             server_default="inviata",
         ),

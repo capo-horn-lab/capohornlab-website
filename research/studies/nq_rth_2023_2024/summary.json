@@ -1,0 +1,89 @@
+{
+  "overall": {
+    "days": 489,
+    "gross_mean_bps": -1.5284615984180048,
+    "gross_median_bps": -1.6596662794121642,
+    "positive_rate": 0.4601226993865031,
+    "gross_total_bps": -747.4177216264044,
+    "correlation_first_last": -0.024365801209417455,
+    "note": "Gross exploratory returns only: no spread, commission, slippage, roll or latency model has been applied.",
+    "pre_registered_split": {
+      "IS_2023": {
+        "days": 244,
+        "gross_mean_bps": -1.3876192926833169,
+        "gross_median_bps": -2.2591873622923586,
+        "positive_rate": 0.47540983606557374,
+        "gross_total_bps": -338.5791074147293,
+        "correlation_first_last": -0.02967001047500773
+      },
+      "OOS_2024": {
+        "days": 245,
+        "gross_mean_bps": -1.6687290375986739,
+        "gross_median_bps": -1.5135814830768979,
+        "positive_rate": 0.4448979591836735,
+        "gross_total_bps": -408.8386142116751,
+        "correlation_first_last": -0.02265147197043812
+      },
+      "range_thresholds_bps_fitted_on_IS_2023": {
+        "low_cut": 47.06328873707183,
+        "high_cut": 65.49196943708093
+      }
+    }
+  },
+  "conditions": [
+    {
+      "sample": "IS_2023",
+      "range_tercile": "low",
+      "days": 82,
+      "gross_mean_bps": -2.162767889636048,
+      "gross_median_bps": 1.8965248373131738,
+      "positive_rate": 0.524390243902439,
+      "gross_total_bps": -177.34696695015595
+    },
+    {
+      "sample": "IS_2023",
+      "range_tercile": "mid",
+      "days": 81,
+      "gross_mean_bps": -4.298602117174091,
+      "gross_median_bps": -2.912654627694744,
+      "positive_rate": 0.4444444444444444,
+      "gross_total_bps": -348.18677149110135
+    },
+    {
+      "sample": "IS_2023",
+      "range_tercile": "high",
+      "days": 81,
+      "gross_mean_bps": 2.308081864525037,
+      "gross_median_bps": -2.001334222815343,
+      "positive_rate": 0.4567901234567901,
+      "gross_total_bps": 186.95463102652798
+    },
+    {
+      "sample": "OOS_2024",
+      "range_tercile": "low",
+      "days": 116,
+      "gross_mean_bps": 1.9284311185193577,
+      "gross_median_bps": -0.059003315986405624,
+      "positive_rate": 0.49137931034482757,
+      "gross_total_bps": 223.6980097482455
+    },
+    {
+      "sample": "OOS_2024",
+      "range_tercile": "mid",
+      "days": 74,
+      "gross_mean_bps": -6.0588328963215385,
+      "gross_median_bps": -4.17907313045196,
+      "positive_rate": 0.35135135135135137,
+      "gross_total_bps": -448.3536343277938
+    },
+    {
+      "sample": "OOS_2024",
+      "range_tercile": "high",
+      "days": 55,
+      "gross_mean_bps": -3.348781629675032,
+      "gross_median_bps": -4.481822256201529,
+      "positive_rate": 0.4727272727272727,
+      "gross_total_bps": -184.18298963212675
+    }
+  ]
+}

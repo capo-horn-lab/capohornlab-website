@@ -1425,7 +1425,7 @@
             <div class="profile-field">
               <span class="field-label">Email Address</span>
               <div class="field-value">
-                user@example.com
+                <span id="profileEmail">Loading…</span>
                 <span class="status-badge status-completata" style="font-size:10px;padding:2px 8px;"><span class="dot"></span>Verified</span>
               </div>
             </div>
@@ -1435,7 +1435,7 @@
             <!-- Member since -->
             <div class="profile-field">
               <span class="field-label">Member Since</span>
-              <div class="field-value">15 March 2026</div>
+              <div class="field-value" id="memberSince">Loading…</div>
             </div>
 
             <hr class="profile-divider">
@@ -1580,7 +1580,47 @@
   <!-- ============================================================
        JAVASCRIPT
        ============================================================ -->
+  <script src="assets/js/account-client.js"></script>
   <script>
+    if (window.CHLAccount.requireSession()) {
+      window.CHLAccount.getMe().then(function(user) {
+        document.getElementById('profileEmail').textContent = user.email;
+        document.getElementById('memberSince').textContent = new Date(user.created_at).toLocaleDateString();
+        loadRequests();
+      }).catch(function() {
+        // Fail-closed: stale/invalid token must NOT leave the dashboard accessible.
+        sessionStorage.removeItem('chl_access_token');
+        sessionStorage.removeItem('chl_user');
+        window.location.replace('login.html?next=dashboard.html');
+      });
+    }
+
+    function loadRequests() {
+      window.CHLAccount.listRequests().then(function(payload) {
+        var rows = document.querySelector('#requestsTable tbody');
+        var count = document.querySelector('.section-title .count');
+        var items = payload.items || [];
+        if (count) count.textContent = String(payload.total || items.length);
+        if (!rows) return;
+        if (!items.length) {
+          rows.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:var(--ch-space-8);color:var(--ch-gray-400);font-size:var(--ch-text-sm);">No submissions yet. <a href="test-strategy.html?auth=1" style="color:var(--ch-blue-500);text-decoration:underline;">Submit your first strategy →</a></td></tr>';
+          return;
+        }
+        rows.innerHTML = '';
+        items.forEach(function(item) {
+          var row = document.createElement('tr');
+          var id = String(item.id || '').slice(0, 8);
+          var submitted = item.submitted_at || item.created_at;
+          row.innerHTML = '<td><code>' + id + '</code></td><td></td><td></td><td></td><td></td>';
+          row.children[1].textContent = item.strategy_name || '—';
+          row.children[2].textContent = item.instrument || '—';
+          row.children[3].textContent = submitted ? new Date(submitted).toLocaleDateString() : '—';
+          row.children[4].textContent = item.status || '—';
+          rows.appendChild(row);
+        });
+      }).catch(function(error) { showToast(error.message); });
+    }
+
     /* ---- Tab Switching ---- */
     function switchTab(tabName) {
       // Update tabs
@@ -1668,19 +1708,13 @@
         return;
       }
 
-      // Mock success
-      feedback.className = 'form-feedback success';
-      feedback.textContent = 'Password updated successfully.';
-      document.getElementById('currentPw').value = '';
-      document.getElementById('newPw').value = '';
-      document.getElementById('confirmPw').value = '';
-
-      showToast('Password updated successfully.');
+      feedback.className = 'form-feedback error';
+      feedback.textContent = 'Password change endpoint is not enabled yet. Use the password reset flow.';
     }
 
     /* ---- Logout ---- */
     function logout() {
-      window.location.href = 'index.html';
+      window.CHLAccount.logout();
     }
     /* ---- Toast ---- */
     function showToast(message) {

@@ -1,0 +1,26 @@
+{
+  "strategy": "TimeSeriesMomentum",
+  "symbol": "ES",
+  "period": {
+    "start": "2023-01-02 23:00:00+00:00",
+    "end": "2023-02-01 00:00:00+00:00"
+  },
+  "initial_capital": 100000,
+  "total_trades": 5090,
+  "total_net_pnl": -6837.5,
+  "total_commission": 0.0,
+  "total_slippage": 0.0,
+  "win_rate": 32.39685658153242,
+  "profit_factor": 0.9529300404440237,
+  "sharpe_ratio": -0.08079860521788385,
+  "sortino_ratio": -0.13022032480999224,
+  "calmar_ratio": -3.2073909000629035,
+  "cagr": -45.91217214451934,
+  "max_drawdown_pct": -14.314492238416873,
+  "avg_trade_pnl": -1.3433202357563852,
+  "expectancy": -1.3433202357563836,
+  "mc_prob_positive": 0.0,
+  "mode": "ottimale",
+  "source": "D:\\marketdata",
+  "synthetic": false
+}

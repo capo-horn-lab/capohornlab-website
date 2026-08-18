@@ -1615,6 +1615,25 @@
                   <input class="input-field" type="date" id="s2_end">
                   <span class="input-help">When should the backtest period end?</span>
                 </div>
+                <div class="input-group full-width">
+                  <label class="input-label">Market Data Mode <span class="required">*</span></label>
+                  <select class="select-field" id="s2_data_mode">
+                    <option value="tick_trades" selected>Tick &amp; trades — price, volume and time-based research</option>
+                    <option value="depth_10">10-level market depth — liquidity and imbalance research</option>
+                    <option value="news_event">News-event study — scheduled release response research</option>
+                  </select>
+                  <span class="input-help">10-level depth is used for liquidity and imbalance research; it does not claim queue position or exact fills.</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">News Event Families</label>
+                  <input class="input-field" type="text" id="s2_news_events" placeholder="Required for news-event studies, e.g. CPI, Employment Situation, FOMC, PCE or EIA WPSR">
+                  <span class="input-help">For event studies, specify the scheduled releases to test and the instrument/session around each release.</span>
+                </div>
+                <div class="input-group full-width">
+                  <label class="input-label">News Signal Rule</label>
+                  <textarea class="textarea-field" id="s2_news_rule" placeholder="For example: enter only when the published CPI surprise exceeds a defined threshold; define the release window, direction and exit rule." style="min-height:85px;"></textarea>
+                  <span class="input-help">News research requires actual, forecast, prior, revisions and first public availability. Post-release returns are research outcomes, not inputs available before release.</span>
+                </div>
               </div>
             </div>
             <div class="wizard-panel-footer">
@@ -1868,6 +1887,10 @@
                   <span class="review-value" id="r_timeperiod">—</span>
                 </div>
                 <div class="review-row">
+                  <span class="review-label">Data Mode · News Events</span>
+                  <span class="review-value" id="r_data_mode">—</span>
+                </div>
+                <div class="review-row">
                   <span class="review-label">Direction</span>
                   <span class="review-value" id="r_direction">—</span>
                 </div>
@@ -2064,7 +2087,7 @@
     let isAuthenticated = false;
 
     function showAuth(type) {
-      // Placeholder: in production this would redirect to /login or /signup
+      // Real auth flow: send the visitor to the login/signup pages.
       window.location.href = type === 'login' ? 'login.html' : 'signup.html';
     }
 
@@ -2211,6 +2234,8 @@
       const tf = getVal('s2_timeframe');
       const start = getVal('s2_start');
       const end = getVal('s2_end');
+      const dataMode = getVal('s2_data_mode');
+      const newsEvents = getVal('s2_news_events');
       const dir = getVal('s1_direction');
       const entry = getVal('s3_trigger');
       const sl = getVal('s4_sl');
@@ -2227,6 +2252,7 @@
       const tfMap = { '1m': '1m', '5m': '5m', '15m': '15m', '1h': '1h', 'daily': 'Daily', 'custom': 'Custom' };
       const tfLabel = tfMap[tf] || tf;
       document.getElementById('r_timeperiod').textContent = tfLabel + ' · ' + start + ' → ' + end;
+      document.getElementById('r_data_mode').textContent = dataMode + (newsEvents !== '—' ? ' · ' + newsEvents : '');
 
       document.getElementById('r_direction').textContent = dir;
       document.getElementById('r_entry').textContent = entry;
@@ -2286,17 +2312,32 @@
 
     // ---- Submit ----
     function submitStrategy() {
+      if (!window.CHLAccount || !window.CHLAccount.requireSession()) return;
       var tier = selectedDataTier || 'l2';
       var months = parseInt(document.getElementById('periodSelect').value) || 12;
-      var monthly = dataTierPrices[tier] || 40;
-      var total = monthly * months;
-      var disc = window._appliedDiscount;
-      if (disc) total = total * (1 - disc.pct / 100);
-      var name = encodeURIComponent(document.getElementById('r_name').textContent || 'Strategy');
-      var params = '?tier=' + tier + '&months=' + months + '&price=' + total.toFixed(2) + '&name=' + name;
-      if (disc) params += '&discount=' + disc.code + '&discountPct=' + disc.pct;
-      window.location.href = 'checkout.html' + params;
+      var payload = {
+        strategy_name: getVal('s1_name'), description: getVal('s1_desc'), instrument: getVal('s1_instrument'),
+        timeframe: getVal('s2_timeframe'), historical_period: getVal('s2_start') + ' → ' + getVal('s2_end'),
+        session_times: getVal('s2_session'), entry_rules_long: getVal('s3_trigger'), entry_rules_short: getVal('s3_trigger'),
+        exit_rules: getVal('s4_sl') + ' / ' + getVal('s4_tp'), stop_loss: getVal('s4_sl'), take_profit: getVal('s4_tp'),
+        trailing_stop: getVal('s4_trailing'), break_even: getVal('s4_be'), contracts: parseInt(getVal('s5_contracts'), 10) || 1,
+        commission_slippage: getVal('s5_commission') + ' / ' + getVal('s5_slippage'),
+        indicators_params: {
+          data_mode: getVal('s2_data_mode'),
+          news_event_families: getVal('s2_news_events'),
+          news_signal_rule: getVal('s2_news_rule'),
+          technical_indicators: getVal('s3_indicators'),
+          filter_conditions: getVal('s3_filters')
+        },
+        additional_notes: 'Data tier: ' + tier + '; requested months: ' + months
+      };
+      window.CHLAccount.createRequest(payload).then(function(request) {
+        return Promise.all(uploadedFiles.map(function(file) { return window.CHLAccount.uploadAttachment(request.id, file); })).then(function() { return request; });
+      }).then(function(request) {
+        window.location.href = 'checkout.html?request_id=' + encodeURIComponent(request.id) + '&tier=' + encodeURIComponent(tier) + '&months=' + months;
+      }).catch(function(error) { alert(error.message || 'The strategy request could not be submitted.'); });
     }
+
 
     // ---- Reset Wizard (submit another) ----
     function resetWizard() {
@@ -2314,5 +2355,6 @@
     }
   </script>
 
+  <script src="assets/js/account-client.js"></script>
 </body>
 </html>

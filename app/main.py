@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.v1 import admin, auth, newsletter, requests
+from app.api.v1 import admin, auth, contact, newsletter, requests
 from app.core.config import settings
 from app.core.redis import close_redis
 
@@ -42,6 +42,7 @@ app.include_router(auth.router, prefix="/api/v1")
 app.include_router(requests.router, prefix="/api/v1")
 app.include_router(admin.router, prefix="/api/v1")
 app.include_router(newsletter.router, prefix="/api/v1")
+app.include_router(contact.router, prefix="/api/v1")
 
 
 @app.get("/health")

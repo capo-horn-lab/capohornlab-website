@@ -1,0 +1,41 @@
+{
+  "study": "NQ first-30-minute sign to final-30-minute return permutation benchmark",
+  "source": "D:\\CapoHornLab\\projects\\capohornlab-website\\research\\studies\\nq_rth_2023_2024\\daily_observations.csv",
+  "formula": "observed = mean(sign(first30_return_d) * last30_return_d) * 10,000; null permutes sign(first30_return) across days within each sample",
+  "split": "IS_2023 / OOS_2024 fixed by source study; no 2024 fitting",
+  "seed": 20260818,
+  "permutations": 10000,
+  "results": [
+    {
+      "sample": "IS_2023",
+      "days": 244,
+      "observed_mean_bps_per_day": -1.3876192926833135,
+      "null_mean_bps_per_day": 0.07500661265002898,
+      "null_std_bps_per_day": 1.6141924672340433,
+      "null_p05_bps_per_day": -2.590282350412187,
+      "null_p95_bps_per_day": 2.759876253530962,
+      "two_sided_permutation_p_value": 0.397960203979602,
+      "z_score_vs_null": -0.9061037856530123,
+      "permutations": 10000,
+      "seed": 20260818
+    },
+    {
+      "sample": "OOS_2024",
+      "days": 245,
+      "observed_mean_bps_per_day": -1.6687290375986337,
+      "null_mean_bps_per_day": 0.04423107086888974,
+      "null_std_bps_per_day": 1.744004170776359,
+      "null_p05_bps_per_day": -2.8520580512601605,
+      "null_p95_bps_per_day": 2.8823152170384665,
+      "two_sided_permutation_p_value": 0.3448655134486551,
+      "z_score_vs_null": -0.9821995481266447,
+      "permutations": 10000,
+      "seed": 20260818
+    }
+  ],
+  "limitations": [
+    "One-minute OHLCV only; no order-book imbalance, bid/ask, fill, latency, roll, commission or slippage model.",
+    "The permutation test measures directional association against a shuffled-sign control; it does not validate an executable strategy.",
+    "The sample is limited to 2023-2024 and complete RTH days already selected by the source screen."
+  ]
+}

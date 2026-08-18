@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "purpose": "Authoritative public release-calendar sources. Each source requires retrieval timestamp and URL provenance on every ingested event.",
+  "sources": [
+    {
+      "source_id": "bls_release_calendar",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "url": "https://www.bls.gov/schedule/",
+      "machine_readable_url": "https://www.bls.gov/schedule/news_release/bls.ics",
+      "timezone": "America/New_York",
+      "families": ["CPI", "PPI", "Employment Situation", "JOLTS", "Employment Cost Index", "Import/Export Prices"],
+      "markets": ["NQ", "ES", "GC"],
+      "classification": "official_scheduled_release",
+      "historical_actual_forecast_coverage": "not supplied by this calendar; must be joined from a separately licensed or official-release dataset"
+    },
+    {
+      "source_id": "federal_reserve_fomc",
+      "publisher": "Board of Governors of the Federal Reserve System",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+      "timezone": "America/New_York",
+      "families": ["FOMC decision", "FOMC statement", "Summary of Economic Projections", "FOMC minutes"],
+      "markets": ["NQ", "ES", "GC", "CL"],
+      "classification": "official_policy_event",
+      "historical_actual_forecast_coverage": "policy documents and timestamps require event-level ingestion; no consensus field in source"
+    },
+    {
+      "source_id": "bea_release_schedule",
+      "publisher": "U.S. Bureau of Economic Analysis",
+      "url": "https://www.bea.gov/news/schedule",
+      "timezone": "America/New_York",
+      "families": ["GDP", "Personal Income and Outlays / PCE", "International Trade"],
+      "markets": ["NQ", "ES", "GC"],
+      "classification": "official_scheduled_release",
+      "historical_actual_forecast_coverage": "scheduled releases only; values and consensus must be separately ingested with vintage timestamps"
+    },
+    {
+      "source_id": "eia_wpsr",
+      "publisher": "U.S. Energy Information Administration",
+      "url": "https://www.eia.gov/petroleum/supply/weekly/schedule.php",
+      "timezone": "America/New_York",
+      "families": ["Weekly Petroleum Status Report"],
+      "markets": ["CL"],
+      "classification": "official_scheduled_release",
+      "historical_actual_forecast_coverage": "official schedule and tables; market consensus is not supplied by this source"
+    }
+  ],
+  "not_covered_without_additional_licensed_or_authoritative_feeds": [
+    "Full historical wire headlines and revisions with millisecond publication timestamps",
+    "Consensus / forecast vintages and embargo timestamps",
+    "Company-specific earnings and guidance",
+    "Breaking geopolitical news, social media and unscheduled headlines",
+    "Audio/video transcripts with verifiable initial availability time"
+  ]
+}

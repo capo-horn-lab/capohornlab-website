@@ -21,6 +21,7 @@ Dipendenze: numpy, pandas, scipy (no dipendenze pesanti)
 from __future__ import annotations
 
 import math
+import re
 import warnings
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
@@ -160,8 +161,10 @@ class DataLoader:
         if cache_key in self._loaded:
             df = self._loaded[cache_key].copy()
         else:
-            df = self._load_raw(symbol, timeframe, resample_cl)
-            self._loaded[cache_key] = df.copy()
+            df = self._load_raw(symbol, timeframe, resample_cl, start=start, end=end)
+            # Date-limited reads stay uncached to avoid loading the full CL archive.
+            if not (start or end):
+                self._loaded[cache_key] = df.copy()
 
         if start:
             df = df[df.index >= pd.Timestamp(start, tz="UTC")]
@@ -186,13 +189,20 @@ class DataLoader:
             result.append(f"CL: {n} MBP1 files")
         return result
 
-    def _load_raw(self, symbol: str, timeframe: str, resample_cl: bool) -> pd.DataFrame:
+    def _load_raw(
+        self,
+        symbol: str,
+        timeframe: str,
+        resample_cl: bool,
+        start: Optional[str] = None,
+        end: Optional[str] = None,
+    ) -> pd.DataFrame:
         if symbol == "ES":
             return self._load_es()
         elif symbol == "NQ":
             return self._load_nq()
         elif symbol == "CL":
-            return self._load_cl(timeframe) if resample_cl else self._load_cl_mbp1()
+            return self._load_cl(timeframe, start=start, end=end) if resample_cl else self._load_cl_mbp1(start=start, end=end)
         else:
             raise ValueError(f"Simbolo non supportato: {symbol}")
 
@@ -228,11 +238,34 @@ class DataLoader:
         cols = [c for c in ["open", "high", "low", "close", "volume"] if c in df.columns]
         return df[cols].astype({c: float for c in cols if c != "volume"})
 
-    def _load_cl_mbp1(self) -> pd.DataFrame:
+    def _load_cl_mbp1(self, start: Optional[str] = None, end: Optional[str] = None) -> pd.DataFrame:
         cl_dir = self.data_dir / "cl_mbp1" / "parquet"
         files = sorted(cl_dir.glob("*.parquet"))
         if not files:
             raise FileNotFoundError(f"Nessun file CL in {cl_dir}")
+
+        # CL files are monthly and individually very large. Select only months
+        # overlapping the requested interval before touching parquet payloads.
+        if start or end:
+            start_ts = pd.Timestamp(start, tz="UTC") if start else None
+            end_ts = pd.Timestamp(end, tz="UTC") if end else None
+            selected = []
+            for file_path in files:
+                match = re.search(r"(20\d{2})-(\d{2})", file_path.name)
+                if not match:
+                    selected.append(file_path)
+                    continue
+                month_start = pd.Timestamp(f"{match.group(1)}-{match.group(2)}-01", tz="UTC")
+                month_end = month_start + pd.offsets.MonthEnd(1) + pd.Timedelta(days=1) - pd.Timedelta(microseconds=1)
+                if start_ts is not None and month_end < start_ts:
+                    continue
+                if end_ts is not None and month_start > end_ts:
+                    continue
+                selected.append(file_path)
+            files = selected
+        if not files:
+            raise FileNotFoundError("Nessun file CL copre l'intervallo richiesto")
+
         dfs = []
         for f in files:
             df = pd.read_parquet(f)
@@ -241,22 +274,63 @@ class DataLoader:
             elif "ts_event" in df.columns:
                 df = df.set_index("ts_event")
             dfs.append(df)
-        df = pd.concat(dfs).sort_index()
-        return df
+        return pd.concat(dfs).sort_index()
 
-    def _load_cl(self, timeframe: str = "1m") -> pd.DataFrame:
-        df = self._load_cl_mbp1()
-        if "bid_px_00" in df.columns and "ask_px_00" in df.columns:
-            df["mid"] = (df["bid_px_00"] + df["ask_px_00"]) / 2
-        elif "price" in df.columns:
-            df["mid"] = df["price"]
-        else:
-            raise ValueError("CL: no price column found")
-        ohlc = df["mid"].resample(timeframe).agg({"open": "first", "high": "max", "low": "min", "close": "last"})
-        vol = df["size"].resample(timeframe).sum() if "size" in df.columns else pd.Series(0, index=ohlc.index)
-        result = ohlc.copy()
-        result["volume"] = vol
-        result = result.dropna(subset=["open"])
+    def _load_cl(self, timeframe: str = "1m", start: Optional[str] = None, end: Optional[str] = None) -> pd.DataFrame:
+        cl_dir = self.data_dir / "cl_mbp1" / "parquet"
+        files = sorted(cl_dir.glob("*.parquet"))
+        if not files:
+            raise FileNotFoundError(f"Nessun file CL in {cl_dir}")
+
+        # Resample each monthly MBP-1 file independently. Concatenating raw
+        # ticks first can require tens of GB for a short requested interval.
+        if start or end:
+            start_ts = pd.Timestamp(start, tz="UTC") if start else None
+            end_ts = pd.Timestamp(end, tz="UTC") if end else None
+            selected = []
+            for file_path in files:
+                match = re.search(r"(20\d{2})-(\d{2})", file_path.name)
+                if not match:
+                    selected.append(file_path)
+                    continue
+                month_start = pd.Timestamp(f"{match.group(1)}-{match.group(2)}-01", tz="UTC")
+                month_end = month_start + pd.offsets.MonthEnd(1) + pd.Timedelta(days=1) - pd.Timedelta(microseconds=1)
+                if start_ts is not None and month_end < start_ts:
+                    continue
+                if end_ts is not None and month_start > end_ts:
+                    continue
+                selected.append(file_path)
+            files = selected
+        if not files:
+            raise FileNotFoundError("Nessun file CL copre l'intervallo richiesto")
+
+        bar_frames = []
+        resample_freq = "1min" if timeframe.lower() == "1m" else timeframe
+        for file_path in files:
+            raw = pd.read_parquet(file_path)
+            if raw.index.name == "ts_recv" and "ts_event" in raw.columns:
+                raw = raw.reset_index(drop=True).set_index("ts_event")
+            elif "ts_event" in raw.columns:
+                raw = raw.set_index("ts_event")
+            if "bid_px_00" in raw.columns and "ask_px_00" in raw.columns:
+                mid = (raw["bid_px_00"] + raw["ask_px_00"]) / 2
+            elif "price" in raw.columns:
+                mid = raw["price"]
+            else:
+                raise ValueError("CL: no price column found")
+            bars = mid.resample(resample_freq).ohlc()
+            if "size" in raw.columns:
+                bars["volume"] = raw["size"].resample(resample_freq).sum()
+            else:
+                bars["volume"] = 0.0
+            bar_frames.append(bars.dropna(subset=["open"]))
+            del raw, mid
+
+        result = pd.concat(bar_frames).sort_index()
+        if start:
+            result = result[result.index >= pd.Timestamp(start, tz="UTC")]
+        if end:
+            result = result[result.index <= pd.Timestamp(end, tz="UTC")]
         return result[["open", "high", "low", "close", "volume"]].astype(float)
 
 

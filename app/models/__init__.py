@@ -7,6 +7,7 @@ from app.models.status_history import StatusHistory
 from app.models.attachment import Attachment
 from app.models.internal_note import InternalNote
 from app.models.newsletter import NewsletterCampaign, NewsletterSend, NewsletterSubscriber
+from app.models.contact_message import ContactMessage
 
 __all__ = [
     "User",

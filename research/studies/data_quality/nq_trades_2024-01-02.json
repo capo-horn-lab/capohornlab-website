@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "run_type": "owned_data_quality_replay",
+  "symbol": "NQ",
+  "source": "D:/marketdata/NQ/tick_trades_raw/NQ_trades_2024-01-02_2024-01-03.parquet",
+  "processor": "research/market_data_engine.py::TradeBarProcessor",
+  "timeframe": "1min",
+  "bars": 1380,
+  "first_bar_utc": "2024-01-02T00:00:00+00:00",
+  "last_bar_utc": "2024-01-02T23:59:00+00:00",
+  "volume_sum": 629405.0,
+  "trade_count_sum": 374387,
+  "quality": {
+    "row_count": 377859,
+    "accepted_row_count": 374387,
+    "duplicate_sequence_rows": 27968,
+    "duplicate_event_rows_removed": 3472,
+    "out_of_order_rows": 0,
+    "unknown_side_rows": 1,
+    "empty_bars_synthesized": 0,
+    "timestamp_timezone": "UTC"
+  },
+  "interpretation": "The processor retains distinct source events that share a sequence and removes only exact event duplicates. Bars with no trades are omitted rather than forward-filled. This validates historical replay fidelity for trade-derived bars; it does not yet validate bid/ask execution, queue position, market impact, latency, or contract-roll modelling."
+}

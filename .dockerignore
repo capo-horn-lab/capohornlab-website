@@ -1,0 +1,17 @@
+# Keep credentials, local environments, test artifacts and repository history out of images.
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage*
+.git/
+reports/
+uploads/
+node_modules/
+*.sqlite3
+*.log
+.DS_Store

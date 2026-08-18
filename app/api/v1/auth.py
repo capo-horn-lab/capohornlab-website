@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import settings
 from app.core.database import get_async_db
 from app.schemas.auth import (
     LoginRequest,
     LoginResponse,
     MessageResponse,
-    RefreshRequest,
     ResetPasswordConfirmRequest,
     ResetPasswordRequest,
     SignupRequest,
@@ -56,18 +56,16 @@ async def signup(
         name=body.name,
     )
 
-    # Send verification code
-    code = await send_verification_code(user.email)
-
-    return MessageResponse(
-        message=f"User registered. Verification code sent to {user.email} (dev: {code})"
-    )
+    # Generate and dispatch a verification code. Never include it in an HTTP response.
+    await send_verification_code(user.email)
+    return MessageResponse(message="Registration received. Check your email to verify the account.")
 
 
 @router.post("/login", response_model=LoginResponse)
 async def login(
     body: LoginRequest,
     request: Request,
+    response: Response,
     db: AsyncSession = Depends(get_async_db),
 ):
     """Authenticate user and return JWT token pair."""
@@ -82,6 +80,16 @@ async def login(
         request=request,
     )
 
+    # Keep the long-lived credential out of JavaScript. Secure is mandatory in production.
+    response.set_cookie(
+        key="chl_refresh",
+        value=refresh_token,
+        httponly=True,
+        secure=settings.APP_ENV.lower() == "production",
+        samesite="lax",
+        max_age=settings.JWT_REFRESH_EXPIRE_DAYS * 24 * 60 * 60,
+        path="/api/v1/auth",
+    )
     return LoginResponse(
         user=UserResponse(
             id=str(user.id),
@@ -92,18 +100,25 @@ async def login(
             created_at=user.created_at,
         ),
         access_token=access_token,
-        refresh_token=refresh_token,
     )
 
 
 @router.post("/refresh", response_model=TokenResponse)
 async def refresh(
-    body: RefreshRequest,
+    request: Request,
+    response: Response,
     db: AsyncSession = Depends(get_async_db),
 ):
-    """Refresh an expired access token using a valid refresh token."""
-    user, access_token, _ = await refresh_tokens(db, body.refresh_token)
-
+    """Rotate the HttpOnly refresh cookie and return a short-lived access token."""
+    refresh_token = request.cookies.get("chl_refresh")
+    if not refresh_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Missing refresh session")
+    _, access_token, new_refresh_token = await refresh_tokens(db, refresh_token)
+    response.set_cookie(
+        key="chl_refresh", value=new_refresh_token, httponly=True,
+        secure=settings.APP_ENV.lower() == "production", samesite="lax",
+        max_age=settings.JWT_REFRESH_EXPIRE_DAYS * 24 * 60 * 60, path="/api/v1/auth",
+    )
     return TokenResponse(access_token=access_token)
 
 
@@ -124,12 +139,13 @@ async def verify_email(
 @router.post("/reset-password", response_model=MessageResponse)
 async def request_reset_password(
     body: ResetPasswordRequest,
+    request: Request,
 ):
-    """Send a password reset code to the user's email."""
-    code = await send_reset_code(body.email)
-    return MessageResponse(
-        message=f"Reset code sent to {body.email} (dev: {code})"
-    )
+    """Request a reset without revealing whether an account exists."""
+    ip = request.client.host if request.client else "unknown"
+    await check_rate_limit(f"password-reset:{ip}", max_requests=5)
+    await send_reset_code(body.email)
+    return MessageResponse(message="If the address is eligible, reset instructions have been sent.")
 
 
 @router.post("/reset-password/confirm", response_model=MessageResponse)

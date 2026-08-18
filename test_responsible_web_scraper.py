@@ -67,10 +67,15 @@ class ResponsibleScraperTests(unittest.TestCase):
             store.save([record])
 
             self.assertEqual(json.loads((output_dir / "results.json").read_text("utf-8")), [record])
-            with sqlite3.connect(output_dir / "results.sqlite3") as connection:
+            connection = sqlite3.connect(output_dir / "results.sqlite3")
+            try:
                 row = connection.execute(
                     "SELECT url, title, description, heading, text FROM scraped_pages"
                 ).fetchone()
+            finally:
+                # `sqlite3.Connection` context managers commit/rollback but do not close.
+                # Explicit close keeps this test portable on Windows, which locks open DB files.
+                connection.close()
             self.assertEqual(row, tuple(record.values()))
 
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -21,6 +22,15 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     SECRET_KEY: str = "change-me-to-a-long-random-string"
     ALLOWED_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
+
+    @model_validator(mode="after")
+    def reject_placeholder_production_secrets(self) -> "Settings":
+        """Fail closed rather than starting production with publicly-known signing secrets."""
+        if self.APP_ENV.lower() == "production":
+            protected = (self.SECRET_KEY, self.JWT_ACCESS_SECRET, self.JWT_REFRESH_SECRET)
+            if any(len(value) < 32 or "change-me" in value.lower() for value in protected):
+                raise ValueError("production settings require non-placeholder signing secrets of at least 32 characters")
+        return self
 
     @property
     def allowed_origins_list(self) -> List[str]:
@@ -81,8 +91,9 @@ class Settings(BaseSettings):
     # --- Newsletter ---
     FRONTEND_URL: str = "http://localhost:5173"
     RESEND_API_KEY: str | None = None
-    NEWSLETTER_FROM_EMAIL: str = "newsletter@capohornlab.com"
+    NEWSLETTER_FROM_EMAIL: str = "noreply@capohornlab.com"
     NEWSLETTER_FROM_NAME: str = "Capo Horn Lab"
+    SUPPORT_EMAIL: str = "contact@capohornlab.com"
 
     # --- File Upload ---
     UPLOAD_DIR: str = "D:\\CapoHornLab\\uploads"

@@ -1,0 +1,62 @@
+{
+  "slug": "es-orb-2023-01",
+  "symbol": "ES",
+  "start": "2023-01-01",
+  "end": "2023-02-01",
+  "bars": 28796,
+  "synthetic": false,
+  "modes": {
+    "ottimale": {
+      "strategy": "OpeningRangeBreakout",
+      "symbol": "ES",
+      "period": {
+        "start": "2023-01-02 23:00:00+00:00",
+        "end": "2023-02-01 00:00:00+00:00"
+      },
+      "initial_capital": 100000,
+      "total_trades": 104,
+      "total_net_pnl": 3012.5,
+      "total_commission": 0.0,
+      "total_slippage": 0.0,
+      "win_rate": 55.769230769230774,
+      "profit_factor": 1.1426879810538781,
+      "sharpe_ratio": 0.10691431099084522,
+      "sortino_ratio": 0.15549793723673716,
+      "calmar_ratio": 6.89619026104355,
+      "cagr": 29.37439160803974,
+      "max_drawdown_pct": -4.259510033238951,
+      "avg_trade_pnl": 28.966346153846153,
+      "expectancy": 28.96634615384616,
+      "mc_prob_positive": 100.0,
+      "mode": "ottimale",
+      "source": "D:\\marketdata",
+      "synthetic": false
+    },
+    "realistico": {
+      "strategy": "OpeningRangeBreakout",
+      "symbol": "ES",
+      "period": {
+        "start": "2023-01-02 23:00:00+00:00",
+        "end": "2023-02-01 00:00:00+00:00"
+      },
+      "initial_capital": 100000,
+      "total_trades": 104,
+      "total_net_pnl": 2462.800000000002,
+      "total_commission": 187.20000000000022,
+      "total_slippage": 275.0,
+      "win_rate": 54.807692307692314,
+      "profit_factor": 1.1150997097737545,
+      "sharpe_ratio": 0.08731122790556257,
+      "sortino_ratio": 0.12693459733334628,
+      "calmar_ratio": 5.79688651026945,
+      "cagr": 25.47689873404153,
+      "max_drawdown_pct": -4.394927982272559,
+      "avg_trade_pnl": 23.68076923076924,
+      "expectancy": 23.6807692307693,
+      "mc_prob_positive": 100.0,
+      "mode": "realistico",
+      "source": "D:\\marketdata",
+      "synthetic": false
+    }
+  }
+}
