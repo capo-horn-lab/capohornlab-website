@@ -1,0 +1,267 @@
+[
+  {
+    "date": "2020-01-29",
+    "rate_after": "1.50%\u20131.75%",
+    "action": "no_change",
+    "votes": "10\u20130",
+    "source_note": "Supplemented from Federal Reserve statement monetary20200129a.htm (row absent from Wikipedia table)"
+  },
+  {
+    "date": "2020-03-03",
+    "rate_after": "1%\u20131.25%",
+    "action": "easing",
+    "votes": "10\u20130"
+  },
+  {
+    "date": "2020-03-15",
+    "rate_after": "0%\u20130.25%",
+    "action": "easing",
+    "votes": "9\u20131"
+  },
+  {
+    "date": "2020-03-19",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-03-23",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-03-31",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-04-29",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-06-10",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-07-29",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-08-27",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-09-16",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-11-05",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2020-12-16",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-01-27",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-03-17",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-04-28",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-06-16",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-07-28",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-09-22",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-11-03",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2021-12-15",
+    "rate_after": "0%\u20130.25%",
+    "action": "no_change",
+    "votes": null
+  },
+  {
+    "date": "2022-03-16",
+    "rate_after": "0.25%\u20130.50%",
+    "action": "tightening",
+    "votes": "8\u20131"
+  },
+  {
+    "date": "2022-05-04",
+    "rate_after": "0.75%\u20131.00%",
+    "action": "tightening",
+    "votes": "9\u20130"
+  },
+  {
+    "date": "2022-06-15",
+    "rate_after": "1.50%\u20131.75%",
+    "action": "tightening",
+    "votes": "8\u20131"
+  },
+  {
+    "date": "2022-07-27",
+    "rate_after": "2.25%\u20132.50%",
+    "action": "tightening",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2022-09-21",
+    "rate_after": "3.00%\u20133.25%",
+    "action": "tightening",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2022-11-02",
+    "rate_after": "3.75%\u20134.00%",
+    "action": "tightening",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2022-12-14",
+    "rate_after": "4.25%\u20134.50%",
+    "action": "tightening",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2023-02-01",
+    "rate_after": "4.50%\u20134.75%",
+    "action": "tightening",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2023-03-22",
+    "rate_after": "4.75%\u20135.00%",
+    "action": "tightening",
+    "votes": "11\u20130"
+  },
+  {
+    "date": "2023-05-03",
+    "rate_after": "5.00%\u20135.25%",
+    "action": "tightening",
+    "votes": "11\u20130"
+  },
+  {
+    "date": "2023-06-14",
+    "rate_after": "5.00%\u20135.25%",
+    "action": "no_change",
+    "votes": "11\u20130"
+  },
+  {
+    "date": "2023-07-26",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "tightening",
+    "votes": "11\u20130"
+  },
+  {
+    "date": "2023-09-20",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2023-11-01",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2023-12-13",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-01-31",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-03-20",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-05-01",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-06-12",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-07-31",
+    "rate_after": "5.25%\u20135.50%",
+    "action": "no_change",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-09-18",
+    "rate_after": "4.75%\u20135.00%",
+    "action": "easing",
+    "votes": "11\u20131"
+  },
+  {
+    "date": "2024-11-07",
+    "rate_after": "4.50%\u20134.75%",
+    "action": "easing",
+    "votes": "12\u20130"
+  },
+  {
+    "date": "2024-12-18",
+    "rate_after": "4.25%\u20134.50%",
+    "action": "easing",
+    "votes": "11\u20131"
+  }
+]

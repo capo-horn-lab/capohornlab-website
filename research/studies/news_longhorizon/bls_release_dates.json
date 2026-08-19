@@ -1,0 +1,516 @@
+{
+  "2020": [
+    {
+      "date": "20200110",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200114",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200207",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200213",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200306",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200311",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200319",
+      "release": "Employment Situation of Veterans"
+    },
+    {
+      "date": "20200403",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200410",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200508",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200512",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200605",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200610",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200702",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200714",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200807",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200812",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20200904",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20200911",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20201002",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20201013",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20201106",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20201112",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20201204",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20201210",
+      "release": "Consumer Price Index"
+    }
+  ],
+  "2021": [
+    {
+      "date": "20210108",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210113",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210205",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210210",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210305",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210310",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210318",
+      "release": "Employment Situation of Veterans"
+    },
+    {
+      "date": "20210402",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210413",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210507",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210512",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210604",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210610",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210702",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210713",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210806",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210811",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20210903",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20210914",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20211008",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20211013",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20211105",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20211110",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20211203",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20211210",
+      "release": "Consumer Price Index"
+    }
+  ],
+  "2022": [
+    {
+      "date": "20220107",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220112",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220204",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220210",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220304",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220310",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220317",
+      "release": "Employment Situation of Veterans"
+    },
+    {
+      "date": "20220401",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220412",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220421",
+      "release": "Employment Situation of Veterans"
+    },
+    {
+      "date": "20220506",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220511",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220603",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220610",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220708",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220713",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220805",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220810",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20220902",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20220913",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20221007",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20221013",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20221104",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20221110",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20221202",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20221213",
+      "release": "Consumer Price Index"
+    }
+  ],
+  "2023": [
+    {
+      "date": "20230106",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230112",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230203",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230214",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230310",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230314",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230321",
+      "release": "Employment Situation of Veterans"
+    },
+    {
+      "date": "20230407",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230412",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230505",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230510",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230602",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230613",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230707",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230712",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230804",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230810",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20230901",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20230913",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20231006",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20231012",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20231103",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20231114",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20231208",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20231212",
+      "release": "Consumer Price Index"
+    }
+  ],
+  "2024": [
+    {
+      "date": "20240105",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240111",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240202",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240213",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240308",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240312",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240320",
+      "release": "Employment Situation of Veterans"
+    },
+    {
+      "date": "20240405",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240410",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240503",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240515",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240607",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240612",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240705",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240711",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240802",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240814",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20240906",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20240911",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20241004",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20241010",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20241101",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20241113",
+      "release": "Consumer Price Index"
+    },
+    {
+      "date": "20241206",
+      "release": "Employment Situation"
+    },
+    {
+      "date": "20241211",
+      "release": "Consumer Price Index"
+    }
+  ]
+}
