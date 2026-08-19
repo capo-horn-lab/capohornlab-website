@@ -1632,7 +1632,7 @@
           institutional-grade backtesting with honest results — no sugar-coating.
         </p>
         <div class="cta-actions">
-          <button class="btn btn-primary btn-lg" onclick="window.location.href='#'">Submit Your Strategy →</button>
+          <button class="btn btn-primary btn-lg" onclick="window.location.href='test-strategy.html'">Submit Your Strategy →</button>
           <button class="btn btn-outline-light btn-lg" onclick="window.location.href='research.html'">Browse All Research</button>
         </div>
       </div>
@@ -1700,7 +1700,6 @@
         <h4>Services</h4>
         <ul>
           <li><a href="test-strategy.html">Test Your Strategy</a></li>
-          <li><a href="#docs">Documentation</a></li>
           <li><a href="documentation.html">Documentation</a></li>
           <li><a href="faq.html">FAQ</a></li>
         </ul>
@@ -1935,10 +1934,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",            "label": "Equity Curve" },
                 { "id": "02_drawdown",                "label": "Drawdown Analysis" },
-                { "id": "03_rolling_sharpe",          "label": "Rolling Sharpe (3-year)" },
-                { "id": "04_sub_portfolio_performance","label": "Sub-Portfolio Performance" },
-                { "id": "05_trade_distribution",       "label": "Trade Distribution" },
-                { "id": "06_correlation_matrix",       "label": "Asset Class Correlation" },
+                { "id": "03_trade_distribution",          "label": "Rolling Sharpe (3-year)" },
+                { "id": "04_monthly_heatmap","label": "Sub-Portfolio Performance" },
+                { "id": "05_long_vs_short",       "label": "Trade Distribution" },
+                { "id": "06_performance_table",       "label": "Asset Class Correlation" },
                 { "id": "07_is_vs_oos",               "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2047,10 +2046,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",            "label": "Equity Curve" },
                 { "id": "02_drawdown",                "label": "Drawdown Analysis" },
-                { "id": "03_daily_pnl_distribution",   "label": "Daily PnL Distribution" },
-                { "id": "04_market_comparison",        "label": "Multi-Market Comparison" },
-                { "id": "05_monte_carlo_distribution", "label": "Monte Carlo Distribution" },
-                { "id": "06_volatility_regime",        "label": "Volatility Regime Analysis" },
+                { "id": "03_trade_distribution",   "label": "Daily PnL Distribution" },
+                { "id": "04_monthly_heatmap",        "label": "Multi-Market Comparison" },
+                { "id": "05_long_vs_short", "label": "Monte Carlo Distribution" },
+                { "id": "06_performance_table",        "label": "Volatility Regime Analysis" },
                 { "id": "07_is_vs_oos",               "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2157,10 +2156,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",              "label": "Equity Curve" },
                 { "id": "02_drawdown",                  "label": "Drawdown Analysis" },
-                { "id": "03_variant_comparison",         "label": "Variant Comparison" },
-                { "id": "04_hold_time_distribution",     "label": "Hold Time Distribution" },
-                { "id": "05_volatility_regime_performance","label": "Volatility Regime Performance" },
-                { "id": "06_monthly_heatmap",            "label": "Monthly Returns Heatmap" },
+                { "id": "03_trade_distribution",         "label": "Variant Comparison" },
+                { "id": "04_monthly_heatmap",     "label": "Hold Time Distribution" },
+                { "id": "05_long_vs_short","label": "Volatility Regime Performance" },
+                { "id": "06_performance_table",            "label": "Monthly Returns Heatmap" },
                 { "id": "07_is_vs_oos",                 "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2266,10 +2265,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",            "label": "Equity Curve" },
                 { "id": "02_drawdown",                "label": "Drawdown Analysis" },
-                { "id": "03_variant_comparison",       "label": "Variant Comparison" },
-                { "id": "04_trade_duration",           "label": "Trade Duration Distribution" },
-                { "id": "05_best_trades_contributions","label": "Top Trades Contribution" },
-                { "id": "06_rolling_sharpe",           "label": "Rolling Sharpe" },
+                { "id": "03_trade_distribution",       "label": "Variant Comparison" },
+                { "id": "04_monthly_heatmap",           "label": "Trade Duration Distribution" },
+                { "id": "05_long_vs_short","label": "Top Trades Contribution" },
+                { "id": "06_performance_table",           "label": "Rolling Sharpe" },
                 { "id": "07_is_vs_oos",               "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2374,10 +2373,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",        "label": "Equity Curve" },
                 { "id": "02_drawdown",            "label": "Drawdown Analysis" },
-                { "id": "03_benchmark_comparison", "label": "Benchmark Comparison" },
-                { "id": "04_turnover_analysis",    "label": "Turnover Analysis" },
-                { "id": "05_rolling_sharpe",       "label": "Rolling Sharpe" },
-                { "id": "06_regime_heatmap",       "label": "Regime Performance Heatmap" },
+                { "id": "03_trade_distribution", "label": "Benchmark Comparison" },
+                { "id": "04_monthly_heatmap",    "label": "Turnover Analysis" },
+                { "id": "05_long_vs_short",       "label": "Rolling Sharpe" },
+                { "id": "06_performance_table",       "label": "Regime Performance Heatmap" },
                 { "id": "07_is_vs_oos",           "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2482,10 +2481,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",        "label": "Equity Curve" },
                 { "id": "02_drawdown",            "label": "Drawdown Analysis" },
-                { "id": "03_benchmark_comparison", "label": "Benchmark Comparison" },
-                { "id": "04_turnover_analysis",    "label": "Turnover Analysis" },
-                { "id": "05_regime_performance",   "label": "Regime Performance" },
-                { "id": "06_rolling_sharpe",       "label": "Rolling Sharpe" },
+                { "id": "03_trade_distribution", "label": "Benchmark Comparison" },
+                { "id": "04_monthly_heatmap",    "label": "Turnover Analysis" },
+                { "id": "05_long_vs_short",   "label": "Regime Performance" },
+                { "id": "06_performance_table",       "label": "Rolling Sharpe" },
                 { "id": "07_is_vs_oos",           "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2590,10 +2589,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",               "label": "Equity Curve" },
                 { "id": "02_drawdown",                   "label": "Drawdown Analysis" },
-                { "id": "03_regularization_comparison",   "label": "Regularization Comparison" },
-                { "id": "04_turnover_analysis",           "label": "Turnover Analysis" },
-                { "id": "05_position_count_distribution",  "label": "Position Count Distribution" },
-                { "id": "06_benchmark_comparison",        "label": "Benchmark Comparison" },
+                { "id": "03_trade_distribution",   "label": "Regularization Comparison" },
+                { "id": "04_monthly_heatmap",           "label": "Turnover Analysis" },
+                { "id": "05_long_vs_short",  "label": "Position Count Distribution" },
+                { "id": "06_performance_table",        "label": "Benchmark Comparison" },
                 { "id": "07_is_vs_oos",                  "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2698,10 +2697,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",             "label": "Equity Curve" },
                 { "id": "02_drawdown",                 "label": "Drawdown Analysis" },
-                { "id": "03_trade_pnl_distribution",    "label": "Trade PnL Distribution" },
-                { "id": "04_top_trades_contribution",   "label": "Top Trades Contribution" },
-                { "id": "05_subperiod_analysis",        "label": "Sub-Period Analysis" },
-                { "id": "06_rolling_sharpe",            "label": "Rolling Sharpe" },
+                { "id": "03_trade_distribution",    "label": "Trade PnL Distribution" },
+                { "id": "04_monthly_heatmap",   "label": "Top Trades Contribution" },
+                { "id": "05_long_vs_short",        "label": "Sub-Period Analysis" },
+                { "id": "06_performance_table",            "label": "Rolling Sharpe" },
                 { "id": "07_is_vs_oos",                "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2806,10 +2805,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",                "label": "Equity Curve" },
                 { "id": "02_drawdown",                    "label": "Drawdown Analysis" },
-                { "id": "03_hedge_comparison",             "label": "Hedge Comparison" },
-                { "id": "04_contango_backwardation_analysis","label": "Contango vs Backwardation" },
-                { "id": "05_tail_event_scatter",           "label": "Tail Event Scatter" },
-                { "id": "06_correlation_matrix",           "label": "Correlation Matrix" },
+                { "id": "03_trade_distribution",             "label": "Hedge Comparison" },
+                { "id": "04_monthly_heatmap","label": "Contango vs Backwardation" },
+                { "id": "05_long_vs_short",           "label": "Tail Event Scatter" },
+                { "id": "06_performance_table",           "label": "Correlation Matrix" },
                 { "id": "07_is_vs_oos",                   "label": "IS vs OOS Comparison" }
               ]
             },
@@ -2915,10 +2914,10 @@ var localPilotBySlug = {
               "chart_descriptions": [
                 { "id": "01_equity_curve",                "label": "Equity Curve" },
                 { "id": "02_drawdown",                    "label": "Drawdown Analysis" },
-                { "id": "03_overlay_vs_base_comparison",   "label": "Overlay vs Base Comparison" },
-                { "id": "04_overlay_weekly_contribution",  "label": "Overlay Weekly Contribution" },
-                { "id": "05_correlation_analysis",         "label": "Correlation Analysis" },
-                { "id": "06_regime_performance_heatmap",   "label": "Regime Performance Heatmap" },
+                { "id": "03_trade_distribution",   "label": "Overlay vs Base Comparison" },
+                { "id": "04_monthly_heatmap",  "label": "Overlay Weekly Contribution" },
+                { "id": "05_long_vs_short",         "label": "Correlation Analysis" },
+                { "id": "06_performance_table",   "label": "Regime Performance Heatmap" },
                 { "id": "07_is_vs_oos",                   "label": "IS vs OOS Comparison" }
               ]
             },
@@ -3306,7 +3305,7 @@ var localPilotBySlug = {
             },
             {
               "number": "06",
-              "title": "Key Findings",
+              "title": "Results",
               "content": [
                 "<strong>1. No single strategy works in all cycles.</strong> The best trend-following (TSMOM Sharpe 0.98) and best mean-reversion (FTRL Sharpe 0.81) strategies are negatively correlated and perform best in opposite regimes.",
                 "<strong>2. VIX is a powerful regime classifier.</strong> VIX < 15: favor mean reversion. VIX 15–30: mixed/allocation. VIX > 30: favor short-term momentum and reversal, avoid unhedged short vol.",
@@ -3333,12 +3332,12 @@ var localPilotBySlug = {
               "is_charts": true,
               "charts_slug": "market-cycle-analysis",
               "chart_descriptions": [
-                { "id": "01_strategy_cycle_matrix",    "label": "Strategy × Cycle Matrix" },
-                { "id": "02_vix_regime_bands",         "label": "VIX Regime Bands" },
-                { "id": "03_regime_performance_heatmap","label": "Regime Performance Heatmap" },
-                { "id": "04_correlation_matrix",       "label": "Correlation Matrix" },
-                { "id": "05_rolling_regime_allocation", "label": "Rolling Regime Allocation" },
-                { "id": "06_cycle_duration_analysis",  "label": "Cycle Duration Analysis" },
+                { "id": "01_equity_curve",    "label": "Strategy × Cycle Matrix" },
+                { "id": "02_drawdown",         "label": "VIX Regime Bands" },
+                { "id": "03_trade_distribution","label": "Regime Performance Heatmap" },
+                { "id": "04_monthly_heatmap",       "label": "Correlation Matrix" },
+                { "id": "05_long_vs_short", "label": "Rolling Regime Allocation" },
+                { "id": "06_performance_table",  "label": "Cycle Duration Analysis" },
                 { "id": "07_is_vs_oos",                "label": "IS vs OOS Comparison" }
               ]
             }

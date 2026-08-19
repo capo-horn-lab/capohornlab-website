@@ -1,0 +1,485 @@
+{
+  "stats": {
+    "html_files": 115,
+    "href_total": 1157,
+    "placeholder_hrefs": 22,
+    "local_assets_checked": 47,
+    "missing_assets": 1
+  },
+  "research_slugs": 13,
+  "unique_research_slugs": 13,
+  "section_title_counts": {
+    "Charts": 13,
+    "Conclusions": 13,
+    "Data": 13,
+    "Hypothesis": 13,
+    "Methodology": 13,
+    "Objective": 13,
+    "Results": 13
+  },
+  "issues": [
+    {
+      "type": "placeholder_text",
+      "file": "admin.html",
+      "value": "TODO"
+    },
+    {
+      "type": "dead_href",
+      "file": "dashboard.html",
+      "value": "#"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "dead_href",
+      "file": "dashboard.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "dashboard.html",
+      "value": "#"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "dead_href",
+      "file": "dashboard.html",
+      "value": "#"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "dashboard.html",
+      "value": "test-strategy.html?auth=1"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pricing.html",
+      "value": "checkout.html?plan=research-monthly"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pricing.html",
+      "value": "checkout.html?plan=research-monthly"
+    },
+    {
+      "type": "missing_local_asset",
+      "file": "research-detail.html",
+      "value": "../research/charts/"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=es-1m-quant-summary"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=when-structure-meets-reality"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=time-series-momentum-futures"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=opening-range-breakout-intraday"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=vwap-mean-reversion-intraday"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=intraday-momentum-spy"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=confidence-weighted-mean-reversion"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=passive-aggressive-mean-reversion"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=follow-the-regularized-leader"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=trend-following-on-stocks-concretum"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=volatility-risk-premium-vix-etns"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=fivemin-mean-reversion-alpha-overlay"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "research.html",
+      "value": "research-detail.html?slug=market-cycle-analysis"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "test-strategy.html",
+      "value": "checkout.html?request_id="
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "dead_href",
+      "file": "design\\design-tokens.html",
+      "value": "#"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\about.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\about.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\about.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\admin.html",
+      "value": "login.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\contact.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\contact.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\contact.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\home.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\home.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\method.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\method.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\method.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\pricing.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\pricing.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\pricing.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\pricing.html",
+      "value": "../checkout.html?plan=research-monthly"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\pricing.html",
+      "value": "../checkout.html?plan=research-monthly"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\pricing.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research-detail.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research-detail.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research-detail.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=es-1m-quant-summary"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=when-structure-meets-reality"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=time-series-momentum-futures"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=opening-range-breakout-intraday"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=vwap-mean-reversion-intraday"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=intraday-momentum-spy"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=confidence-weighted-mean-reversion"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=passive-aggressive-mean-reversion"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=follow-the-regularized-leader"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=trend-following-on-stocks-concretum"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=volatility-risk-premium-vix-etns"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=fivemin-mean-reversion-alpha-overlay"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "research-detail.html?slug=market-cycle-analysis"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\research.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\test-strategy.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\test-strategy.html",
+      "value": "index.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\test-strategy.html",
+      "value": "documentation.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\test-strategy.html",
+      "value": "signup.html"
+    },
+    {
+      "type": "missing_local_href",
+      "file": "pages\\test-strategy.html",
+      "value": "../checkout.html?request_id="
+    },
+    {
+      "type": "account_pattern",
+      "file": "dashboard.html",
+      "value": "sessionStorage",
+      "count": 2
+    },
+    {
+      "type": "account_pattern",
+      "file": "dashboard.html",
+      "value": "setTimeout",
+      "count": 3
+    },
+    {
+      "type": "account_pattern",
+      "file": "dashboard.html",
+      "value": "mock",
+      "count": 1
+    }
+  ]
+}

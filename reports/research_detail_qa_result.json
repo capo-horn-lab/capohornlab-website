@@ -1,0 +1,137 @@
+{
+  "studies": 13,
+  "resultSets": 13,
+  "failures": [],
+  "findings": [
+    {
+      "slug": "time-series-momentum-futures",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "local-es-tsmom-2023-01",
+      "chartCount": 7
+    },
+    {
+      "slug": "opening-range-breakout-intraday",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "local-es-orb-2023-01",
+      "chartCount": 7
+    },
+    {
+      "slug": "vwap-mean-reversion-intraday",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "local-cl-vwap-mr-2024q1",
+      "chartCount": 7
+    },
+    {
+      "slug": "intraday-momentum-spy",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "local-nq-intraday-momentum-2023-01",
+      "chartCount": 7
+    },
+    {
+      "slug": "confidence-weighted-mean-reversion",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "cwmr",
+      "chartCount": 7
+    },
+    {
+      "slug": "passive-aggressive-mean-reversion",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "pamr",
+      "chartCount": 7
+    },
+    {
+      "slug": "follow-the-regularized-leader",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "ftrl",
+      "chartCount": 7
+    },
+    {
+      "slug": "trend-following-on-stocks-concretum",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "trend-following-stocks",
+      "chartCount": 7
+    },
+    {
+      "slug": "volatility-risk-premium-vix-etns",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "vix-vrp",
+      "chartCount": 7
+    },
+    {
+      "slug": "fivemin-mean-reversion-alpha-overlay",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "fivemin-overlay",
+      "chartCount": 7
+    },
+    {
+      "slug": "es-1m-quant-summary",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "es-1m-quant",
+      "chartCount": 7
+    },
+    {
+      "slug": "when-structure-meets-reality",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "when-structure",
+      "chartCount": 7
+    },
+    {
+      "slug": "market-cycle-analysis",
+      "missing": [],
+      "empty": [],
+      "placeholder": 0,
+      "metricIssue": false,
+      "badMode": false,
+      "chartSlug": "market-cycle-analysis",
+      "chartCount": 7
+    }
+  ]
+}

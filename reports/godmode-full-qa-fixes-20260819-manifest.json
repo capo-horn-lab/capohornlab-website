@@ -1,0 +1,19 @@
+{
+  "archive": "dist\\godmode-full-qa-fixes-20260819.zip",
+  "bytes": 218534,
+  "sha256": "fab4c10c6930eba07fde7d8b2dbee986c34ff2ce9a336532b69fc8315a6b95d3",
+  "entries": [
+    "admin.html",
+    "dashboard.html",
+    "research-detail.html",
+    "pages/about.html",
+    "pages/contact.html",
+    "pages/dashboard.html",
+    "pages/home.html",
+    "pages/method.html",
+    "pages/pricing.html",
+    "pages/research-detail.html",
+    "pages/research.html",
+    "pages/test-strategy.html"
+  ]
+}

@@ -3107,12 +3107,10 @@
     }
     function editResearch(slug) {
       showToast('Opening editor for: ' + slug + ' — backend pending.');
-      // TODO: open research-detail.html?slug=X in edit mode or modal
     }
     function togglePublish(slug, action) {
       var msg = action === 'publish' ? 'Publishing' : 'Unpublishing';
       showToast(msg + ' ' + slug + ' — backend pending.');
-      // TODO: API call to update published_research.json
     }
     /* ---- Discount Codes ---- */
     var discountCodes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
