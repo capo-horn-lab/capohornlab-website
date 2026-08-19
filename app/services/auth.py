@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Optional, Tuple
@@ -27,6 +28,8 @@ from app.core.config import settings
 from app.services.email import email_service
 
 security_scheme = HTTPBearer(auto_error=False)
+
+logger = logging.getLogger(__name__)
 
 # ── In-memory verification codes (replace with DB/Redis in production) ──
 # Structure: {email: {"code": "123456", "expires_at": datetime}}
@@ -271,10 +274,14 @@ async def check_rate_limit(
     if max_requests <= 0:
         max_requests = settings.RATE_LIMIT_PER_MINUTE
 
-    redis = await get_redis()
-    current = await redis.incr(key)
-    if current == 1:
-        await redis.expire(key, window_seconds)
+    try:
+        redis = await get_redis()
+        current = await redis.incr(key)
+        if current == 1:
+            await redis.expire(key, window_seconds)
+    except Exception as exc:  # noqa: BLE001 - fail-open on any Redis outage
+        logger.warning("Rate limit check skipped (%s): %s", key, exc)
+        return
 
     if current > max_requests:
         raise HTTPException(
