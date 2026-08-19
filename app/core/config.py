@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+
 from typing import List, Optional
 
 from pydantic import model_validator
@@ -49,19 +51,25 @@ class Settings(BaseSettings):
     def async_database_url(self) -> str:
         if self.DATABASE_URL:
             return self.DATABASE_URL
-        return (
-            f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
-            f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
-        )
+        if os.environ.get("POSTGRES_PASSWORD"):
+            # Postgres explicitly configured (docker-compose / .env)
+            return (
+                f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+                f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+            )
+        # No external DB configured: portable local SQLite file
+        return "sqlite+aiosqlite:///./chl.db"
 
     @property
     def sync_database_url(self) -> str:
         if self.DATABASE_URL_SYNC:
             return self.DATABASE_URL_SYNC
-        return (
-            f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
-            f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
-        )
+        if os.environ.get("POSTGRES_PASSWORD"):
+            return (
+                f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+                f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+            )
+        return "sqlite:///./chl.db"
 
     # --- Redis ---
     REDIS_HOST: str = "redis"

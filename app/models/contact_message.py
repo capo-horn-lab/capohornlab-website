@@ -5,7 +5,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime, String, Text, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -14,7 +14,7 @@ from app.core.database import Base
 class ContactMessage(Base):
     __tablename__ = "contact_messages"
 
-    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    id: Mapped[uuid.UUID] = mapped_column(Uuid(as_uuid=True), primary_key=True, default=uuid.uuid4)
     name: Mapped[str] = mapped_column(String(150), nullable=False)
     email: Mapped[str] = mapped_column(String(255), nullable=False, index=True)
     subject: Mapped[str] = mapped_column(String(255), nullable=False)

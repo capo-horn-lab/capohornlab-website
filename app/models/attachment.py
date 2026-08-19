@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import BigInteger, DateTime, ForeignKey, String, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -16,12 +16,12 @@ class Attachment(Base):
     __tablename__ = "attachments"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
     )
     request_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         ForeignKey("strategy_requests.id", ondelete="CASCADE"),
         nullable=False,
         index=True,

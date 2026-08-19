@@ -9,12 +9,25 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1 import admin, auth, contact, newsletter, requests
 from app.core.config import settings
+import logging
+
+logger = logging.getLogger(__name__)
+
 from app.core.redis import close_redis
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan: startup / shutdown."""
+    # Ensure schema exists (idempotent; Alembic handles PG in docker-compose,
+    # this covers SQLite / fresh deployments).
+    try:
+        from app.core.database import Base, async_engine  # noqa: PLC0415
+        import app.models  # noqa: F401, PLC0415  # register all models
+        async with async_engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+    except Exception:  # noqa: BLE001
+        logger.exception("DB schema init failed - endpoints will report DB errors")
     yield
     # Shutdown
     await close_redis()

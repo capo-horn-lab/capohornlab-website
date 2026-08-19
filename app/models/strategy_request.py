@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime, Enum, ForeignKey, Integer, String, Text, func
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy import JSON, Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -16,12 +16,12 @@ class StrategyRequest(Base):
     __tablename__ = "strategy_requests"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
     )
     user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         ForeignKey("users.id", ondelete="CASCADE"),
         nullable=False,
         index=True,
@@ -85,8 +85,8 @@ class StrategyRequest(Base):
 
     # Parameters
     indicators_params: Mapped[dict | None] = mapped_column(
-        JSONB, nullable=True
-    )  # indicatori_params JSONB
+        JSON, nullable=True
+    )  # indicatori_params JSON
     contracts: Mapped[int | None] = mapped_column(
         Integer, nullable=True
     )  # num_contratti

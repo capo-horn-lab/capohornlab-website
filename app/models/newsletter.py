@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text, UniqueConstraint, func
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Uuid
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
@@ -18,7 +18,7 @@ class NewsletterSubscriber(Base):
     __tablename__ = "newsletter_subscribers"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
     )
@@ -27,7 +27,7 @@ class NewsletterSubscriber(Base):
     )
     name: Mapped[str | None] = mapped_column(String(150), nullable=True)
     user_id: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         ForeignKey("users.id", ondelete="SET NULL"),
         nullable=True,
     )
@@ -62,7 +62,7 @@ class NewsletterCampaign(Base):
     __tablename__ = "newsletter_campaigns"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
     )
@@ -82,7 +82,7 @@ class NewsletterCampaign(Base):
         DateTime(timezone=True), nullable=True
     )
     created_by: Mapped[uuid.UUID | None] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         ForeignKey("users.id", ondelete="SET NULL"),
         nullable=True,
     )
@@ -111,17 +111,17 @@ class NewsletterSend(Base):
     __tablename__ = "newsletter_sends"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         primary_key=True,
         default=uuid.uuid4,
     )
     campaign_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         ForeignKey("newsletter_campaigns.id", ondelete="CASCADE"),
         nullable=False,
     )
     subscriber_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
+        Uuid(as_uuid=True),
         ForeignKey("newsletter_subscribers.id", ondelete="CASCADE"),
         nullable=False,
     )
