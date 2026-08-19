@@ -8,6 +8,9 @@
 
   <!-- Primary Meta Tags -->
   <meta name="description" content="Capo Horn Lab dashboard — manage your strategy submissions, view backtest results, and access your quantitative research portfolio.">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website">
@@ -1586,6 +1589,7 @@
       window.CHLAccount.getMe().then(function(user) {
         document.getElementById('profileEmail').textContent = user.email;
         document.getElementById('memberSince').textContent = new Date(user.created_at).toLocaleDateString();
+        renderDataPortfolio();
         loadRequests();
       }).catch(function() {
         // Fail-closed: stale/invalid token must NOT leave the dashboard accessible.
@@ -1593,6 +1597,12 @@
         sessionStorage.removeItem('chl_user');
         window.location.replace('login.html?next=dashboard.html');
       });
+    }
+
+    function renderDataPortfolio() {
+      var tab = document.getElementById('tab-data');
+      if (!tab) return;
+      tab.innerHTML = '<div class="section-title">Your Data Portfolio</div><div class="empty-state" style="display:block;margin-top:var(--ch-space-6);"><div class="empty-state-icon">◌</div><h3>No data portfolio items yet.</h3><p>Portfolio holdings are shown only after a completed purchase has been recorded by the account service.</p><a href="pricing.html" class="btn btn-primary btn-lg">Browse Data Options</a></div>';
     }
 
     function loadRequests() {
