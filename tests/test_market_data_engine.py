@@ -206,3 +206,27 @@ def test_cme_globex_equity_index_rules_anchor_in_chicago_time_and_reject_mainten
         TradeBarProcessor(
             symbol="NQ", source="fixture", venue_session_rules="cme_globex_equity_index"
         ).build_bars(maintenance_break)
+
+
+def test_bar_reference_execution_assumptions_are_explicit_and_cannot_claim_executable_fills():
+    from research.market_data_engine import ExecutionAssumptions
+
+    assumptions = ExecutionAssumptions.bar_reference_only(
+        commission_per_contract_per_side=2.50,
+        assumed_slippage_ticks_per_side=1.0,
+    )
+
+    assert assumptions.fill_model == "bar_reference_only"
+    assert assumptions.executable_fills is False
+    assert assumptions.costs_are_calibrated is False
+    assert assumptions.to_provenance()["commission_per_contract_per_side"] == 2.50
+    assert assumptions.to_provenance()["assumed_slippage_ticks_per_side"] == 1.0
+    assert "not executable fills" in assumptions.limitations
+
+    with pytest.raises(ValueError, match="executable fills"):
+        ExecutionAssumptions(
+            fill_model="bar_reference_only",
+            executable_fills=True,
+            commission_per_contract_per_side=2.50,
+            assumed_slippage_ticks_per_side=1.0,
+        )

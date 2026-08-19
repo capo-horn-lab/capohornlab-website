@@ -1,6 +1,6 @@
 # Capo Horn Lab Website — Work Register
 
-**Updated:** 2026-08-18
+**Updated:** 2026-08-19
 **Scope:** Continue local implementation, verify production readiness, and prioritize evidence-based strategy research compatible with owned market data.
 
 ## Active workstreams
@@ -110,3 +110,22 @@
 - **Method declaration:** emitted provenance records the venue rule, `America/Chicago`, maintenance-break window, and explicit limit: regular-session boundary only; no holiday, early-close, product-specific halt, or contract-roll mapping claim. `research/NEWS_AWARE_DATA_ENGINE.md` documents the same scope.
 - **Verification:** `.venv/Scripts/python.exe -m pytest tests/test_market_data_engine.py -q && .venv/Scripts/python.exe -m py_compile research/market_data_engine.py && git diff --check` → `7 passed` (exit 0); full `.venv/Scripts/python.exe -m pytest -q` → `35 passed in 1.27s`.
 - **Next gate:** attach the existing NQ provenance manifest and this CME rule to a replay result, then add only explicitly declared fill limitations/cost assumptions before any candidate strategy backtest. No strategy alpha work was performed.
+
+### Real owned-NQ replay with provenance gate + CME Globex rule — 2026-08-18 (evening)
+
+- **Objective completed:** attached the existing NQ provenance manifest and the `cme_globex_equity_index` venue rule to a real replay of the owned raw NQ trades file (`D:/marketdata/NQ/tick_trades_raw/NQ_trades_2024-01-02_2024-01-03.parquet`), closing the register's next gate before any candidate backtest.
+- **Artifacts:** `research/nq_cme_replay_study.py`; `research/studies/data_quality/nq_cme_globex_replay_2024-01-02_2024-01-03.json`; `nq_cme_globex_replay_2024-01-02_2024-01-03_REPORT.md`.
+- **Verified outcome:** provenance gate `REPLAY_GATE_PASS` (SHA-256 `547d5ab9…` matches the separately recorded manifest, 8,842,273 bytes); 374,387 accepted events; 1,380 non-synthetic 1-minute bars across 2 CME Globex sessions (2024-01-02 and 2024-01-03, 17:00 America/Chicago DST-aware boundary); 0 out-of-order, 0 unknown-side, 0 maintenance-break rows, 0 synthetic bars; quote features `not_available` (source has no bid/ask columns).
+- **Verification:** `.venv/Scripts/python.exe -m py_compile research/nq_cme_replay_study.py` and execution (exit 0, `STUDY_OK gate=REPLAY_GATE_PASS … bars=1380 sessions=2`); independent readback returned `READBACK_PASS bars=1380 sessions=2 sum_bars=1380 sha_match=True`; full suite `.venv/Scripts/python.exe -m pytest -q` → `40 passed in 1.52s`; `git diff --check` → exit 0.
+- **Next gate:** add only explicitly declared fill limitations/cost assumptions (slippage, commissions, fill-model scope) before any candidate strategy backtest; holiday/early-close/contract-roll mapping remains unimplemented. No alpha work was performed in this cycle.
+
+
+### Execution-assumptions declaration update — 2026-08-19
+
+- **Objective completed:** added `ExecutionAssumptions` to `research/market_data_engine.py` so a future bar-based backtest must carry a machine-readable execution classification, stated cost inputs, calibration status, and fill limitations.
+- **Fail-closed policy:** only `bar_reference_only` is currently supported. It explicitly sets `executable_fills: false` and rejects any configuration that attempts to claim executable fills.
+- **Required declaration:** per-contract commission and per-side slippage inputs are accepted as stated assumptions; `costs_are_calibrated` defaults to false. The provenance payload records that the model excludes bid/ask path, queue position, partial-fill probability, market impact, latency, and order priority.
+- **TDD evidence:** the new focused test first failed with `ImportError` because `ExecutionAssumptions` was absent, then passed after the minimal implementation.
+- **Verification:** `.venv/Scripts/python.exe -m pytest tests/test_market_data_engine.py::test_bar_reference_execution_assumptions_are_explicit_and_cannot_claim_executable_fills -q` -> `1 passed in 0.64s`; full `.venv/Scripts/python.exe -m pytest -q` -> `41 passed in 1.60s`; `py_compile research/market_data_engine.py` and `git diff --check` exited 0.
+- **Scope boundary:** this is a declared reference-price stress-assumption contract, not a calibrated broker schedule or a fill simulator. No alpha, candidate strategy, live order, external data access, deployment, or publication was performed.
+- **Next gate:** attach a deliberate `ExecutionAssumptions` instance to each candidate backtest artifact and retain `executable_fills: false` unless a provenance-backed quote/fill validation is implemented.

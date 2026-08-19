@@ -75,6 +75,52 @@ class ProcessedTradeBars:
     provenance: dict[str, Any]
 
 
+@dataclass(frozen=True)
+class ExecutionAssumptions:
+    """Declared cost assumptions without pretending OHLCV bars prove fills."""
+
+    fill_model: str
+    executable_fills: bool
+    commission_per_contract_per_side: float
+    assumed_slippage_ticks_per_side: float
+    costs_are_calibrated: bool = False
+    limitations: str = (
+        "Reference-price assumptions only; not executable fills. Excludes bid/ask path, "
+        "queue position, partial-fill probability, market impact, latency, and order priority."
+    )
+
+    def __post_init__(self) -> None:
+        if self.fill_model != "bar_reference_only":
+            raise ValueError("only bar_reference_only fill_model is supported")
+        if self.executable_fills:
+            raise ValueError("bar_reference_only assumptions cannot claim executable fills")
+        if self.commission_per_contract_per_side < 0:
+            raise ValueError("commission_per_contract_per_side must be non-negative")
+        if self.assumed_slippage_ticks_per_side < 0:
+            raise ValueError("assumed_slippage_ticks_per_side must be non-negative")
+
+    @classmethod
+    def bar_reference_only(
+        cls, commission_per_contract_per_side: float, assumed_slippage_ticks_per_side: float
+    ) -> "ExecutionAssumptions":
+        return cls(
+            fill_model="bar_reference_only",
+            executable_fills=False,
+            commission_per_contract_per_side=float(commission_per_contract_per_side),
+            assumed_slippage_ticks_per_side=float(assumed_slippage_ticks_per_side),
+        )
+
+    def to_provenance(self) -> dict[str, Any]:
+        return {
+            "fill_model": self.fill_model,
+            "executable_fills": self.executable_fills,
+            "commission_per_contract_per_side": self.commission_per_contract_per_side,
+            "assumed_slippage_ticks_per_side": self.assumed_slippage_ticks_per_side,
+            "costs_are_calibrated": self.costs_are_calibrated,
+            "limitations": self.limitations,
+        }
+
+
 class TradeBarProcessor:
     """Convert individual trades to timestamped OHLCV and source-side features.
 

@@ -1,0 +1,74 @@
+{
+  "study": "nq_cme_globex_replay",
+  "recorded_at_utc": "2026-08-18T21:47:36Z",
+  "source_file": "D:/marketdata/NQ/tick_trades_raw/NQ_trades_2024-01-02_2024-01-03.parquet",
+  "gate": {
+    "validator": "research.market_data_engine.validate_source_file_provenance",
+    "result": "REPLAY_GATE_PASS",
+    "sha256": "547d5ab92e7673e30b824a1f1cf2fb3098591bec6fbe75c20b8b022a9761a132",
+    "byte_count": 8842273,
+    "symbol": "NQ",
+    "manifest": "nq_trades_2024-01-02_2024-01-03.provenance.json"
+  },
+  "quality": {
+    "row_count": 377859,
+    "accepted_row_count": 374387,
+    "duplicate_sequence_rows": 27968,
+    "duplicate_event_rows": 3472,
+    "out_of_order_rows": 0,
+    "unknown_side_rows": 1,
+    "empty_bars_synthesized": 0,
+    "session_count": 2,
+    "timestamp_timezone": "UTC",
+    "venue_maintenance_break_rows": 0,
+    "quote_rows": 0
+  },
+  "provenance": {
+    "symbol": "NQ",
+    "source": "owned-nq-trades",
+    "timeframe": "1min",
+    "session_start_utc": "00:00",
+    "venue_session_rules": "cme_globex_equity_index",
+    "venue_timezone": "America/Chicago",
+    "maintenance_break_local": "16:00-17:00",
+    "venue_rules_limit": "Regular CME Globex equity-index session boundary only; excludes holidays, early closes, product-specific halts and contract rolls.",
+    "side_mapping": {
+      "B": 1,
+      "A": -1
+    },
+    "side_mapping_note": "Source-provided B/A classifications; not asserted to be executable aggressor flow.",
+    "quote_features": "not_available"
+  },
+  "bars_summary": {
+    "bar_count": 1380,
+    "session_count": 2,
+    "session_dates": [
+      "2024-01-01",
+      "2024-01-02"
+    ],
+    "bars_per_session": {
+      "2024-01-01": 1320,
+      "2024-01-02": 60
+    },
+    "first_bar_ts": "2024-01-02 00:00:00+00:00",
+    "last_bar_ts": "2024-01-02 23:59:00+00:00",
+    "min_low": 16622.5,
+    "max_high": 17038.5,
+    "total_volume": 629405,
+    "total_trade_count": 374387,
+    "columns": [
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "trade_count",
+      "buy_volume",
+      "sell_volume",
+      "unknown_side_volume",
+      "signed_volume",
+      "imbalance",
+      "session_date"
+    ]
+  }
+}
