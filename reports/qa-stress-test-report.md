@@ -1,104 +1,56 @@
-# QA Stress Test Report — Capo Horn Lab
+# QA Stress Test Report — Capo Horn Lab (Live)
 
-**Date**: 2026-08-16 14:02
-**Agent**: Cratos (QA & Reliability)
-**Base URL**: `https://www.capohornlab.com`
-**Total pages discovered**: 22
-
----
+**Date (UTC):** 2026-08-19 03:33:17
+**Base URL:** `https://www.capohornlab.com/`
+**Sitemap:** HTTP 200
 
 ## 1. Page Status Overview
 
-| Metric | Value |
-|--------|-------|
-| Pages tested | 22 |
-| ✅ Passed (200 OK) | 22 |
+| Pages tested | 14 |
+| ✅ Passed | 14 |
 | ❌ Failed | 0 |
 
-### All Tested Pages
+| Path | HTTP | Bytes |
+|---|---:|---:|
+| `/` | 200 | 60917 |
+| `/about.html` | 200 | 49505 |
+| `/admin.html` | 200 | 139791 |
+| `/checkout.html` | 200 | 12283 |
+| `/contact.html` | 200 | 52042 |
+| `/dashboard.html` | 200 | 63207 |
+| `/index.html` | 200 | 60917 |
+| `/login.html` | 200 | 36513 |
+| `/method.html` | 200 | 53422 |
+| `/pricing.html` | 200 | 54979 |
+| `/research-detail.html` | 200 | 250863 |
+| `/research.html` | 200 | 62121 |
+| `/signup.html` | 200 | 25102 |
+| `/test-strategy.html` | 200 | 97885 |
 
-| # | Page | Status |
-|---|------|--------|
-| 1 | `/` | ✅ 200 |
-| 2 | `/about.html` | ✅ 200 |
-| 3 | `/admin.html` | ✅ 200 |
-| 4 | `/checkout.html` | ✅ 200 |
-| 5 | `/contact.html` | ✅ 200 |
-| 6 | `/cookie-policy.html` | ✅ 200 |
-| 7 | `/dashboard.html` | ✅ 200 |
-| 8 | `/disclaimer.html` | ✅ 200 |
-| 9 | `/documentation.html` | ✅ 200 |
-| 10 | `/faq.html` | ✅ 200 |
-| 11 | `/index.html` | ✅ 200 |
-| 12 | `/investors.html` | ✅ 200 |
-| 13 | `/login.html` | ✅ 200 |
-| 14 | `/method.html` | ✅ 200 |
-| 15 | `/pricing.html` | ✅ 200 |
-| 16 | `/privacy-policy.html` | ✅ 200 |
-| 17 | `/refund-policy.html` | ✅ 200 |
-| 18 | `/research-detail.html` | ✅ 200 |
-| 19 | `/research.html` | ✅ 200 |
-| 20 | `/signup.html` | ✅ 200 |
-| 21 | `/terms-of-service.html` | ✅ 200 |
-| 22 | `/test-strategy.html` | ✅ 200 |
-
----
+### Default document
+- `/`: HTTP 200, title **Capo Horn Lab — Beyond the Market Edge**.
 
 ## 2. Link Analysis
 
-| Metric | Value |
-|--------|-------|
-| ✅ Internal links OK | 41 |
-| ❌ Broken internal links | 0 |
-| External links | 12 |
+| Internal targets | 21 |
+| Internal OK | 20 |
+| Broken internal | 1 |
+| Dead placeholders | 4 |
+| Unresolved anchors | 1 |
+| External URLs | 3 |
 
-### ⚠️ Dead Placeholder Links (`href="#"`)
+### Broken Internal Links
 
-| Page | Bad Links |
-|------|-----------|
-| `/cookie-policy.html` | `#what-are-cookies`, `#cookies-we-use`, `#cookie-purpose`, `#third-party`, `#consent`, `#manage`, `#changes-cp`, `#contact-cp` |
-| `/dashboard.html` | `#`, `#`, `#`, `#` |
-| `/disclaimer.html` | `#no-investment-advice`, `#backtesting-limitations`, `#past-performance`, `#forward-looking`, `#no-solicitation`, `#accuracy`, `#third-party`, `#professional-advice`, `#regulatory`, `#jurisdiction` |
-| `/documentation.html` | `#overview`, `#pipeline`, `#metrics`, `#report`, `#interpretation`, `#limitations`, `#faq` |
-| `/investors.html` | `#contact`, `#offerings` |
-| `/privacy-policy.html` | `#scope`, `#data-collect`, `#data-use`, `#legal-basis`, `#data-share`, `#data-retain`, `#data-rights`, `#international`, `#security`, `#children`, `#changes`, `#contact-dpo` |
-| `/refund-policy.html` | `#scope-rp`, `#subscription`, `#backtesting`, `#right-of-withdrawal`, `#digital-content`, `#how-request`, `#processing`, `#chargebacks`, `#contact-rp` |
-| `/research-detail.html` | `#docs` |
-| `/terms-of-service.html` | `#definitions`, `#acceptance`, `#services`, `#accounts`, `#fees`, `#intellectual-property`, `#user-obligations`, `#confidentiality`, `#disclaimers`, `#indemnification`, `#termination`, `#governing-law`, `#changes-tos`, `#contact-tos` |
+- `capo.horn.lab@gmail.com` → HTTP 404; referenced from /contact.html
 
-### External Links Found
+## 3. HTML Quality
 
-- `https://ec.europa.eu/consumers/odr`
-- `https://ec.europa.eu/info/law/law-topic/consumers/consumer-contract-law/standard-withdrawal-form_en`
-- `https://github.com/capohornlab`
-- `https://linkedin.com/company/capohornlab`
-- `https://policies.google.com/privacy`
-- `https://policies.google.com/technologies/ads`
-- `https://support.apple.com/guide/safari/manage-cookies-and-website-data-sfri11471/mac`
-- `https://support.google.com/chrome/answer/95647`
-- `https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09`
-- `https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences`
-- `https://twitter.com/capohornlab`
-- `https://www.facebook.com/policies/cookies`
+No missing DOCTYPE/UTF-8/viewport/title finding.
 
----
+## 4. Research Publication Governance
 
-## 3. HTML Quality Checks
+- Quarantined slug `news-event-long-horizon-es`: **FAIL — exposed on /research.html, /research-detail.html**.
 
-| Metric | Value |
-|--------|-------|
-| HTML issues found | 0 |
+## 5. Recommendation
 
-No HTML structural issues detected.
-
----
-
-## 4. Recommendation
-
-### ✅ **approve**
-
-All pages load correctly, all internal links resolve, no HTML issues. Ready for deployment.
-
----
-
-*Report generated by Cratos — QA & Reliability Agent*
+- **fix_before_deploy** — remove stale preliminary research from production before release approval.

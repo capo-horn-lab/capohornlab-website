@@ -1,0 +1,191 @@
+{
+  "study": "ES post-release long-horizon fixed-calendar regime sensitivity",
+  "status": "preliminary_non_promotable",
+  "instrument": "ES (E-mini S&P 500)",
+  "period": "2020-01-01..2024-12-30",
+  "horizon": "r20: close-to-close forward 20 CME Globex sessions",
+  "regimes": {
+    "2020_2021": "Events dated 2020-01-01 through 2021-12-31.",
+    "2022_2024": "Events dated 2022-01-01 through 2024-12-31."
+  },
+  "event_classification": "Realized CPI month-over-month, NFP payroll change, and FOMC target-range action; not consensus surprises.",
+  "results": {
+    "2020_2021": {
+      "fomc": {
+        "hold": {
+          "n": 19,
+          "mean_pct": 4.2409,
+          "median_pct": 2.9286,
+          "std_pct": 8.0343,
+          "t_stat": 2.301,
+          "p_value": 0.0336,
+          "win_rate_pct": 73.68
+        },
+        "cut": {
+          "n": 2,
+          "mean_pct": 2.7094,
+          "median_pct": 2.7094,
+          "std_pct": 21.6306,
+          "t_stat": 0.177,
+          "p_value": 0.8884,
+          "win_rate_pct": 50.0
+        }
+      },
+      "cpi": {
+        "moderate": {
+          "n": 8,
+          "mean_pct": -0.602,
+          "median_pct": 2.3398,
+          "std_pct": 7.7418,
+          "t_stat": -0.22,
+          "p_value": 0.8322,
+          "win_rate_pct": 62.5
+        },
+        "cool": {
+          "n": 4,
+          "mean_pct": 4.4976,
+          "median_pct": 2.8483,
+          "std_pct": 6.29,
+          "t_stat": 1.43,
+          "p_value": 0.2481,
+          "win_rate_pct": 50.0
+        },
+        "hot": {
+          "n": 11,
+          "mean_pct": 2.2001,
+          "median_pct": 1.6115,
+          "std_pct": 2.2261,
+          "t_stat": 3.278,
+          "p_value": 0.0083,
+          "win_rate_pct": 90.91
+        }
+      },
+      "nfp": {
+        "moderate": {
+          "n": 1,
+          "mean_pct": -10.811,
+          "median_pct": -10.811,
+          "std_pct": 0.0,
+          "t_stat": null,
+          "p_value": null,
+          "win_rate_pct": 0.0
+        },
+        "strong": {
+          "n": 19,
+          "mean_pct": 0.516,
+          "median_pct": 1.3022,
+          "std_pct": 4.9666,
+          "t_stat": 0.453,
+          "p_value": 0.656,
+          "win_rate_pct": 63.16
+        },
+        "weak": {
+          "n": 3,
+          "mean_pct": 8.1118,
+          "median_pct": 8.6931,
+          "std_pct": 6.1999,
+          "t_stat": 2.266,
+          "p_value": 0.1516,
+          "win_rate_pct": 100.0
+        }
+      }
+    },
+    "2022_2024": {
+      "fomc": {
+        "hike": {
+          "n": 11,
+          "mean_pct": 0.6236,
+          "median_pct": 0.0593,
+          "std_pct": 4.0589,
+          "t_stat": 0.51,
+          "p_value": 0.6214,
+          "win_rate_pct": 54.55
+        },
+        "hold": {
+          "n": 9,
+          "mean_pct": 1.8439,
+          "median_pct": 1.9154,
+          "std_pct": 3.6682,
+          "t_stat": 1.508,
+          "p_value": 0.17,
+          "win_rate_pct": 77.78
+        },
+        "cut": {
+          "n": 2,
+          "mean_pct": 2.3645,
+          "median_pct": 2.3645,
+          "std_pct": 1.478,
+          "t_stat": 2.262,
+          "p_value": 0.2649,
+          "win_rate_pct": 100.0
+        }
+      },
+      "cpi": {
+        "hot": {
+          "n": 12,
+          "mean_pct": -0.1279,
+          "median_pct": -0.1101,
+          "std_pct": 5.8918,
+          "t_stat": -0.075,
+          "p_value": 0.9414,
+          "win_rate_pct": 41.67
+        },
+        "moderate": {
+          "n": 18,
+          "mean_pct": 2.2403,
+          "median_pct": 2.5915,
+          "std_pct": 1.9335,
+          "t_stat": 4.916,
+          "p_value": 0.0001,
+          "win_rate_pct": 77.78
+        },
+        "cool": {
+          "n": 5,
+          "mean_pct": -2.4115,
+          "median_pct": -5.0887,
+          "std_pct": 5.5458,
+          "t_stat": -0.972,
+          "p_value": 0.3859,
+          "win_rate_pct": 40.0
+        }
+      },
+      "nfp": {
+        "strong": {
+          "n": 19,
+          "mean_pct": -0.3259,
+          "median_pct": -0.0304,
+          "std_pct": 5.2873,
+          "t_stat": -0.269,
+          "p_value": 0.7912,
+          "win_rate_pct": 47.37
+        },
+        "moderate": {
+          "n": 8,
+          "mean_pct": 1.7998,
+          "median_pct": 2.0517,
+          "std_pct": 3.1039,
+          "t_stat": 1.64,
+          "p_value": 0.145,
+          "win_rate_pct": 75.0
+        },
+        "weak": {
+          "n": 8,
+          "mean_pct": 3.3734,
+          "median_pct": 4.9796,
+          "std_pct": 3.8819,
+          "t_stat": 2.458,
+          "p_value": 0.0436,
+          "win_rate_pct": 87.5
+        }
+      }
+    }
+  },
+  "limitations": [
+    "This is a fixed-calendar descriptive split, not a causal or volatility-regime model.",
+    "The ES daily source has no attached source-file provenance manifest or as-of actual/forecast-vintage record.",
+    "Twenty-session windows overlap; reported Student-t p-values are not overlap-robust.",
+    "No multiplicity correction is applied across the wider exploratory study family.",
+    "Daily-close reference returns have no executable fill, cost, slippage, roll, or position-sizing model.",
+    "This does not establish a tradeable strategy or a promised edge."
+  ]
+}

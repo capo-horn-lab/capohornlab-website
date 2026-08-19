@@ -34,6 +34,8 @@ import numpy as np
 import pandas as pd
 from scipy import stats as scipy_stats
 
+from research.market_data_engine import ExecutionAssumptions
+
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
@@ -340,32 +342,14 @@ class DataLoader:
 
 
 class SlippageModel:
-    """Modello di slippage realistico. Base = 1 tick, variabile per volume/volatilità."""
-    def __init__(self, symbol: str):
+    """Declared reference-price slippage stress, not an executable fill model."""
+    def __init__(self, symbol: str, assumed_slippage_ticks_per_side: float = 1.0):
         self.symbol = symbol.upper()
         self.tick = TICK_SIZE.get(self.symbol, 0.25)
-        self.pv = POINT_VALUE.get(self.symbol, 50.0)
+        self.assumed_slippage_ticks_per_side = float(assumed_slippage_ticks_per_side)
 
     def compute(self, bar: BarData, order_qty: int, avg_volume: float = 1000.0) -> float:
-        base = self.tick
-        vol_ratio = bar.volume / max(avg_volume, 1)
-        if vol_ratio < 0.3:
-            vol_factor = 1.5
-        elif vol_ratio < 0.7:
-            vol_factor = 1.2
-        elif vol_ratio < 1.5:
-            vol_factor = 1.0
-        elif vol_ratio < 3.0:
-            vol_factor = 0.8
-        else:
-            vol_factor = 0.6
-        bar_range = bar.high - bar.low
-        avg_range = bar.close * 0.002
-        vola_factor = max(0.5, min(3.0, bar_range / max(avg_range, 0.01)))
-        size_factor = 1.0 + (order_qty - 1) * 0.05
-        size_factor = min(size_factor, 3.0)
-        slippage = base * vol_factor * vola_factor * size_factor
-        return round(slippage / self.tick) * self.tick
+        return self.tick * self.assumed_slippage_ticks_per_side
 
 
 class CommissionModel:
@@ -1186,12 +1170,25 @@ class IntradayMomentumSPY(Strategy):
 
 
 class BacktestEngine:
-    """Motore di backtest principale."""
-    def __init__(self, symbol: str = "ES", initial_capital: float = 100_000.0, data_loader: Optional[DataLoader] = None):
+    """Bar-reference research backtester; it does not validate executable fills."""
+    def __init__(
+        self,
+        symbol: str = "ES",
+        initial_capital: float = 100_000.0,
+        data_loader: Optional[DataLoader] = None,
+        execution_assumptions: Optional[ExecutionAssumptions] = None,
+    ):
         self.symbol = symbol.upper()
         self.initial_capital = initial_capital
         self.data_loader = data_loader or DataLoader()
-        self.slippage_model = SlippageModel(self.symbol)
+        self.execution_assumptions = execution_assumptions or ExecutionAssumptions.bar_reference_only(
+            commission_per_contract_per_side=COMMISSION_PER_SIDE,
+            assumed_slippage_ticks_per_side=1.0,
+        )
+        self.slippage_model = SlippageModel(
+            self.symbol,
+            assumed_slippage_ticks_per_side=self.execution_assumptions.assumed_slippage_ticks_per_side,
+        )
         self.fill_model = FillModel(self.symbol, self.slippage_model)
         self.regime_detector = RegimeDetector()
         self.stats_engine = StatisticsEngine()
@@ -1206,6 +1203,14 @@ class BacktestEngine:
         self._orders: list[Order] = []
         self._next_order_id: int = 1
         self._avg_volume: float = 1000.0
+
+    def _commission_for(self, quantity: int) -> float:
+        """Apply the report's declared per-side commission without hidden discounts."""
+        return round(quantity * self.execution_assumptions.commission_per_contract_per_side, 2)
+
+    def _slippage_for_bar(self, quantity: int = 1) -> float:
+        """Expose the stated non-executable reference-price slippage for audit tests."""
+        return self.slippage_model.tick * self.execution_assumptions.assumed_slippage_ticks_per_side
 
     def set_data(self, start: Optional[str] = None, end: Optional[str] = None, df: Optional[pd.DataFrame] = None) -> None:
         if df is not None:
@@ -1222,10 +1227,10 @@ class BacktestEngine:
 
     def run(self, mode: str = "realistico") -> BacktestStats:
         """
-        Esegue il backtest in modalità 'ottimale' o 'realistico'.
+        Esegue il confronto fra un controfattuale senza costi e uno stress a prezzi-barra.
 
-        mode='ottimale':  nessuno slippage, nessuna commissione, fill al 100% al prezzo esatto
-        mode='realistico': slippage variabile, commissioni $2.50/contract, fill model realistico (default)
+        mode='ottimale': controfattuale senza commissioni o slippage; non è eseguibile.
+        mode='realistico': costi dichiarati a prezzi-barra; non valida fill eseguibili.
         """
         if self.data is None:
             raise ValueError("Chiama set_data() prima di run()")
@@ -1319,11 +1324,11 @@ class BacktestEngine:
     def run_both(self) -> dict[str, BacktestStats]:
         """Esegue il backtest in entrambe le modalità e restituisce {'ottimale': ..., 'realistico': ...}."""
         print(f"\n  ╔{'═'*60}╗")
-        print(f"  ║  Modalità OTTIMALE (no slippage, no commissioni, fill 100%)")
+        print(f"  ║  Modalità OTTIMALE (controfattuale, nessun costo; non eseguibile)")
         print(f"  ╚{'═'*60}╝")
         ottimale = self.run(mode="ottimale")
         print(f"\n  ╔{'═'*60}╗")
-        print(f"  ║  Modalità REALISTICO (slippage, commissioni, fill realistico)")
+        print(f"  ║  Modalità REALISTICO (stress costi dichiarati a prezzi-barra; non eseguibile)")
         print(f"  ╚{'═'*60}╝")
         realistico = self.run(mode="realistico")
         return {"ottimale": ottimale, "realistico": realistico}
@@ -1368,7 +1373,7 @@ class BacktestEngine:
             else:
                 result = self.fill_model.try_fill(order, bar, self._avg_volume, self.daily_volume)
                 if result.filled:
-                    commission = CommissionModel.compute(result.fill_qty, result.fill_price, self.daily_volume)
+                    commission = self._commission_for(result.fill_qty)
                     order.filled_qty += result.fill_qty
                     order.commission += commission
                     order.fill_log.append({"bar": bar.timestamp, "price": result.fill_price,
@@ -1441,7 +1446,7 @@ class BacktestEngine:
             trade.slippage = 0.0
             trade.net_pnl = trade.gross_pnl
         else:
-            trade.commission = CommissionModel.compute(trade.quantity, exit_price, self.daily_volume)
+            trade.commission = self._commission_for(trade.quantity)
             trade.net_pnl = trade.gross_pnl - trade.commission
         self.trades.append(trade)
         self.strategy.on_trade(trade)
@@ -1476,6 +1481,7 @@ class BacktestEngine:
         return {
             "stats": stats,
             "trades_df": trades_df,
+            "execution_assumptions": self.execution_assumptions.to_provenance(),
             "summary": {
                 "strategy": self.strategy.name if self.strategy else "Unknown",
                 "symbol": self.symbol,

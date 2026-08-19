@@ -102,6 +102,27 @@ This is descriptive evidence on owned data — not a promised edge, and not cost
 - No transaction costs, slippage, financing or execution model. Daily closes from 1m data; intraday entry timing not tested.
 - The NFP-weak basket (n=11) is small; the FOMC-hold basket (n=28) is larger but regime-concentrated.
 
+## 8.1 Exploratory pre-news screen (not predictive evidence)
+
+We also measured close-to-close ES drift over the five sessions ending before each CPI or NFP release, then tested whether that drift predicted the event-day return (`r0`) or the following 20-session return (`r20`). The screen uses the same event-date alignment as the retrospective study; it does **not** use consensus forecasts, positioning, implied volatility, or a frozen out-of-sample protocol.
+
+| Outcome bucket | N | pre-5 mean % | pre-5 median % | t | two-sided t p | pre-5 → r20 correlation (p) | same-sign r20 hit rate (binomial p vs 50%) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| CPI cool | 9 | +2.480 | +3.126 | 1.56 | 0.1567 | +0.197 (0.6117) | 55.6% (1.0000) |
+| CPI hot | 23 | −0.353 | +0.067 | −0.92 | 0.3698 | −0.045 (0.8384) | 59.1% (0.5235) |
+| CPI moderate | 27 | +0.635 | +1.090 | 1.59 | 0.1250 | −0.143 (0.4863) | 73.1% (0.0290) |
+| NFP weak | 11 | −0.106 | +0.487 | −0.19 | 0.8518 | −0.651 (0.0300) | 54.5% (1.0000) |
+| NFP strong | 38 | +0.892 | +1.375 | 2.36 | 0.0239 | +0.017 (0.9170) | 50.0% (1.0000) |
+| NFP moderate | 10 | +0.661 | +0.813 | 0.97 | 0.3578 | −0.225 (0.5602) | 44.4% (1.0000) |
+
+The apparent inverse NFP-weak `pre5 → r20` correlation is based on only 11 observations and is one of many exploratory comparisons; it is not adjusted for multiple testing, overlapping return windows, or macro regime. The CPI-moderate same-sign rate is likewise an unadjusted exploratory result. Neither is a release-outcome predictor or a trade rule. Exact finite-sample Student-t p-values and exact two-sided binomial hit-rate p-values are used; non-finite trailing 20-session observations are excluded rather than encoded as numerical results.
+
+The implementation and machine-readable output are `pre_news_study.py` and `pre_news_results.json`. This extension remains inside the existing preliminary/quarantined study and is deliberately absent from public research pages.
+
+### 8.2 Robustness update — interactions, regimes, COVID and multiplicity
+
+The pre/post interaction is not confirmed: across all NFP rows, r20 after positive pre5 averaged +0.254% (n=38) versus +2.443% after negative pre5 (n=20), Welch t=−1.57, p=0.1243. The weak-NFP pre5→r20 association is unstable: all NFP r=−0.163 (n=59, p=0.2207), 2020–2021 r=−0.353 (n=23, p=0.0983), 2022–2024 r=−0.007 (n=36, p=0.9676), and excluding 2020 r=−0.054 (n=48, p=0.7166). Its weak-NFP subgroup raw p=0.0300 becomes Holm-adjusted p=0.0900 within the NFP pre5→r20 correlation family. CPI has no all-sample association (r=+0.002, n=59, p=0.9853). Implied volatility is not evaluated because the owned ES daily input contains no VIX/options-implied-volatility field; no proxy series was introduced. These are additional reasons not to promote the screen.
+
 ## 9. Conclusions
 
 Macro news moves ES for weeks, not minutes — but only for a specific class of events. **Weak payrolls are followed by a +4.7% 20-session drift (p=0.001, 91% win rate); FOMC holds by +3.5% (p=0.008, 75% win). Strong payrolls leave zero drift.** The asymmetry is the finding: markets over-price the instant reaction to strong data and under-price the slow repricing after weak data. The long-horizon effect is a policy-path phenomenon, not a high-frequency one — it belongs to the daily time frame, with trades that last days.

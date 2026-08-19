@@ -1,0 +1,12 @@
+# Capo Horn Lab — cache policy
+# HTML: mai in cache (il sito cambia spesso). Assets statici: cache breve.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  <FilesMatch "\.(css|js|png|jpg|jpeg|svg|webp|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
