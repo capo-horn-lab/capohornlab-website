@@ -10,11 +10,16 @@ class ContactFlowWiringTests(unittest.TestCase):
         return (ROOT / path).read_text(encoding="utf-8")
 
     def test_contact_frontends_call_real_api(self):
-        for path in ("contact.html", "pages/contact.html"):
-            page = self.read(path)
-            self.assertIn("https://capohornlab-website.onrender.com/api/v1", page)
-            self.assertIn("+ '/contact'", page)
-            self.assertNotIn("Simulate submission", page)
+        page = self.read("contact.html")
+        self.assertIn("https://capohornlab-website.onrender.com/api/v1", page)
+        self.assertIn("+ '/contact'", page)
+        self.assertNotIn("Simulate submission", page)
+
+        # The legacy route redirects to the canonical contact page; it must not preserve a stale mock.
+        legacy_page = self.read("pages/contact.html")
+        self.assertIn("../contact.html", legacy_page)
+        self.assertIn("window.location.replace", legacy_page)
+        self.assertNotIn("Simulate submission", legacy_page)
 
     def test_email_service_fails_closed_without_provider(self):
         service = self.read("app/services/email.py")

@@ -1812,10 +1812,21 @@ var localPilotBySlug = {
         var r = resultsBySlug[currentSlug];
         if (!r) return;
         var pilot = localPilotBySlug[currentSlug];
-        var m = pilot ? pilot[currentMode] : r[currentMode];
-        if (!m) return;
+        var raw = pilot ? pilot[currentMode] : r[currentMode];
+        if (!raw) return;
 
-        // Build metrics_display from results
+        // Local pilot reports use API field names and percentage units; normalize
+        // them before rendering so every study uses the canonical metric shape.
+        var m = pilot ? {
+          sharpe: raw.sharpe_ratio,
+          cagr: raw.cagr / 100,
+          max_dd: raw.max_drawdown_pct / 100,
+          win_rate: raw.win_rate / 100,
+          profit_factor: raw.profit_factor,
+          total_trades: raw.total_trades
+        } : raw;
+
+        // Build metrics_display from normalized results
         var modeMetrics = [
           { label: "Sharpe Ratio",      value: m.sharpe.toFixed(2),          sub: "Modalità " + currentMode, cls: m.sharpe > 0 ? "km-positive" : "km-negative" },
           { label: "CAGR",              value: (m.cagr * 100).toFixed(1) + "%", sub: currentMode === "ottimale" ? "Senza costi" : "Netto costi", cls: m.cagr > 0 ? "km-positive" : "km-negative" },
@@ -3342,8 +3353,161 @@ var localPilotBySlug = {
               ]
             }
           ]
+        }
+              ,
+{
+        "id": "news-longhorizon-es",
+        "title": "News Trading Long-Horizon: ES Event Study",
+        "slug": "news-longhorizon-es",
+        "published_date": "2026-08-19",
+        "author": "Capo Horn Lab",
+        "instrument": "ES (E-mini S&P 500)",
+        "timeframe": "Daily CME Globex sessions",
+        "period_tested": "2020-01-01 to 2024-12-30",
+        "data_source": "Owned ES 1-minute data aggregated to CME Globex daily sessions; official FOMC, CPI and Employment Situation release calendars",
+        "outcome": "mixed",
+        "tags": [
+                "event-study",
+                "macroeconomics",
+                "fomc",
+                "cpi",
+                "nfp"
+        ],
+        "instrument_short": "ES",
+        "tag_category": "Event Study",
+        "slug_dir": "news-longhorizon-es",
+        "metrics_display": [
+                {
+                        "label": "Sessions",
+                        "value": "1,298",
+                        "sub": "2020–2024",
+                        "cls": "km-neutral"
+                },
+                {
+                        "label": "FOMC holds",
+                        "value": "+3.47%",
+                        "sub": "20-session mean; n=28; p=0.0082",
+                        "cls": "km-positive"
+                },
+                {
+                        "label": "Weak NFP",
+                        "value": "+4.67%",
+                        "sub": "20-session mean; n=11; p=0.0013",
+                        "cls": "km-positive"
+                },
+                {
+                        "label": "CPI moderate",
+                        "value": "73.1%",
+                        "sub": "pre5/r20 same-sign; n=26; p=0.029",
+                        "cls": "km-positive"
+                },
+                {
+                        "label": "NFP pre5 → r20",
+                        "value": "-0.651",
+                        "sub": "weak-NFP correlation; raw p=0.030",
+                        "cls": "km-neutral"
+                },
+                {
+                        "label": "Caveat",
+                        "value": "Indicative",
+                        "sub": "overlapping r20 windows",
+                        "cls": "km-negative"
+                }
+        ],
+        "market_cycles": {
+                "summary": "The event study finds selective, horizon-dependent effects rather than a universal news-trading rule. FOMC holds and weak NFP observations showed the strongest 20-session averages in this sample, while other release buckets were noisy and small. The evidence is descriptive: overlapping 20-session windows and realized-release classifications mean the results are research leads, not execution signals.",
+                "works_in": [
+                        {
+                                "cycle": "Trend-Following Regime",
+                                "reason": "The strongest post-event drift appeared in selected release buckets, notably FOMC holds (+3.47% over 20 sessions, n=28) and weak NFP (+4.67%, n=11), where the subsequent path persisted rather than immediately reversed."
+                        },
+                        {
+                                "cycle": "Low Volatility / Range-Bound",
+                                "reason": "Moderate CPI observations had a 73.1% same-sign relation between the prior five sessions and the subsequent 20 sessions (n=26); this is an association, not an executable rule."
+                        }
+                ],
+                "fails_in": [
+                        {
+                                "cycle": "High Volatility / Risk-Off",
+                                "reason": "Event-window dispersion is high and r20 windows overlap. FOMC cuts have only four usable r20 observations, so the apparently positive average is not statistically reliable."
+                        },
+                        {
+                                "cycle": "Mean-Reverting Regime",
+                                "reason": "CPI hot/cool and most NFP/FOMC buckets show weak or insignificant average post-event effects; conditioning on a release label alone does not establish a durable edge."
+                        }
+                ],
+                "historical_example": "Across 2020–2024, FOMC hold events averaged +3.47% over 20 sessions versus a +1.10% baseline (n=28, p=0.0082). The report explicitly treats the inference as indicative because 20-session windows overlap."
         },
-              ]
+        "sections": [
+                {
+                        "number": "01",
+                        "title": "Objective",
+                        "content": [
+                                "This study tests whether scheduled FOMC decisions, CPI releases and Employment Situation (NFP) releases are associated with persistent, medium-horizon moves in E-mini S&P 500 futures. It separates the immediate event session from 1-, 5- and 20-session horizons rather than treating every news reaction as a same-day trading signal.",
+                                "The research question is deliberately narrow: after grouping events by realized release category, does the subsequent ES path differ meaningfully from the non-event baseline? The goal is to identify research leads and to document where the sample is too small or noisy to support a claim."
+                        ]
+                },
+                {
+                        "number": "02",
+                        "title": "Hypothesis",
+                        "content": [
+                                "<strong>Primary hypothesis:</strong> selected macro release categories are followed by statistically distinguishable 20-session ES returns relative to the ordinary-session baseline.",
+                                "<strong>Secondary hypothesis:</strong> pre-event five-session drift contains information about the sign or magnitude of the subsequent 20-session return for selected release groups. All p-values are interpreted as descriptive unless explicitly adjusted."
+                        ]
+                },
+                {
+                        "number": "03",
+                        "title": "Methodology",
+                        "content": [
+                                "Event dates were aligned to CME Globex session labels. For each FOMC, CPI and NFP observation, the study calculated cumulative returns at the event session (r0), and after 1, 5 and 20 sessions (r1, r5 and r20). Group means, medians, standard deviations, t-statistics, win rates and excess returns versus the non-event baseline were recorded.",
+                                "Pre-event analysis measured five- and one-session drift, Pearson association with r0/r20, and same-sign frequencies. The study applies Holm family-wise adjustment only within the specified pre5-to-r20 correlation families. No transaction-cost, fill or slippage model is applied because this is an event study, not a trade simulation."
+                        ]
+                },
+                {
+                        "number": "04",
+                        "title": "Data",
+                        "content": [
+                                "The dataset contains 1,298 daily ES sessions from 2020-01-01 through 2024-12-30, built by aggregating owned ES 1-minute data to CME Globex-session returns. It includes 44 FOMC events, 59 CPI events and 59 NFP events.",
+                                "Release calendars and dates are retained in the study artifacts. CPI and NFP categories use realized release values rather than market-consensus surprises. This distinction matters: the result does not measure surprise-adjusted tradability."
+                        ]
+                },
+                {
+                        "number": "05",
+                        "title": "Results",
+                        "content": [
+                                "The clearest result is the FOMC-hold bucket: 28 observations averaged +3.47% over the following 20 sessions, versus a +1.10% non-event baseline, with t=2.642 and p=0.0082. Weak NFP observations averaged +4.67% over 20 sessions (n=11, t=3.217, p=0.0013), but the small sample requires caution.",
+                                "Moderate CPI observations showed a 73.1% same-sign relationship between pre-event five-session drift and r20 (19 of 26; p=0.029). For weak NFP, pre5 and r20 were negatively correlated (r=-0.651, raw p=0.030), but the within-release Holm-adjusted value is 0.09.",
+                                "<div class=\"highlight-box warning\"><strong>Interpretation:</strong> these observations identify conditional persistence worth retesting with non-overlapping windows and consensus-surprise data. They do not constitute a production trading rule or a claim of forecastability.</div>"
+                        ]
+                },
+                {
+                        "number": "06",
+                        "title": "Charts",
+                        "is_charts": true,
+                        "charts_slug": "news-longhorizon-es",
+                        "chart_descriptions": [
+                                {
+                                        "id": "01_car_events",
+                                        "label": "Cumulative Abnormal Returns Around Events"
+                                },
+                                {
+                                        "id": "02_mean_returns",
+                                        "label": "Mean Returns by Horizon"
+                                }
+                        ]
+                },
+                {
+                        "number": "07",
+                        "title": "Conclusions",
+                        "content": [
+                                "Scheduled macro events do not produce one uniform ES response. The sample points to persistent post-event returns in a few tightly defined buckets, particularly FOMC holds and weak NFP releases, while many other categories are statistically indistinguishable from the baseline.",
+                                "<strong>1. The good:</strong> the long-horizon effect is visible in independently tabulated event groups, not selected from intraday chart anecdotes. <strong>2. The catch:</strong> samples are small and 20-session windows overlap, so conventional p-values can overstate confidence. <strong>3. The role:</strong> the findings are a research filter for future, costed out-of-sample testing with surprise data and execution assumptions.",
+                                "<div class=\"highlight-box warning\"><strong>Key Takeaway:</strong> macro releases can frame a market regime, but the evidence here is a hypothesis generator—not a license to trade the headline.</div>"
+                        ]
+                }
+        ]
+}
+      ];
 
       /* ============================================================
          UTILITY FUNCTIONS
@@ -3413,13 +3577,14 @@ var localPilotBySlug = {
         chartList.forEach(function(chart, idx) {
           var card = document.createElement('div');
           card.className = 'chart-card animate-up-d' + ((idx % 5) + 1);
-          var imgSrc = '../research/charts/' + (slugDir ? slugDir + '/' : '') + chart.id + '.png';
+          var chartBase = window.location.pathname.indexOf('/pages/') !== -1 ? '../research/charts/' : 'research/charts/';
+          var imgSrc = chartBase + (slugDir ? slugDir + '/' : '') + chart.id + '.png';
           card.innerHTML =
             '<div class="chart-card-header">' +
               '<span class="chart-card-title">' + chart.label + '</span>' +
               '<span class="chart-card-badge">REAL</span>' +
             '</div>' +
-            '<img src="' + imgSrc + '" alt="' + chart.label + '" loading="lazy" style="cursor:pointer;" onerror="if(!this.dataset.fb){this.dataset.fb=\'1\';this.src=\'../research/charts/' + chart.id + '.png\'}" onclick="openLightbox(this.src)">';
+            '<img src="' + imgSrc + '" alt="' + chart.label + '" loading="lazy" style="cursor:pointer;" onerror="if(!this.dataset.fb){this.dataset.fb=\'1\';this.src=\'research/charts/' + chart.id + '.png\'}" onclick="openLightbox(this.src)">';
           container.appendChild(card);
         });
 

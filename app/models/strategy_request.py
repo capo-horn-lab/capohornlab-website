@@ -124,13 +124,13 @@ class StrategyRequest(Base):
     # Relationships
     user: Mapped["User"] = relationship("User", back_populates="strategy_requests")  # type: ignore[name-defined]  # noqa: F821
     status_history: Mapped[list["StatusHistory"]] = relationship(
-        "StatusHistory", back_populates="request", lazy="dynamic"
+        "StatusHistory", back_populates="request", lazy="selectin"
     )
     attachments: Mapped[list["Attachment"]] = relationship(
-        "Attachment", back_populates="request", lazy="dynamic"
+        "Attachment", back_populates="request", lazy="selectin"
     )
     internal_notes: Mapped[list["InternalNote"]] = relationship(
-        "InternalNote", back_populates="request", lazy="dynamic"
+        "InternalNote", back_populates="request", lazy="selectin"
     )
 
     def __repr__(self) -> str:

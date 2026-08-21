@@ -50,7 +50,10 @@ class AccountFlowWiringTests(unittest.TestCase):
         self.assertIn(api, read("assets/js/account-client.js"))
         self.assertIn(api, read("assets/js/newsletter-client.js"))
         self.assertIn(api, read("contact.html"))
-        self.assertIn(api, read("pages/contact.html"))
+        # Legacy /pages route must delegate to, rather than duplicate, the canonical real-API page.
+        legacy_contact = read("pages/contact.html")
+        self.assertIn("../contact.html", legacy_contact)
+        self.assertIn("window.location.replace", legacy_contact)
 
     def test_account_client_includes_cross_origin_credentials(self) -> None:
         client = read("assets/js/account-client.js")

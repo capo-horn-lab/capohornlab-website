@@ -6,6 +6,7 @@ import logging
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Dict, Optional, Tuple
+from uuid import UUID
 
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -139,7 +140,15 @@ async def refresh_tokens(
             detail="Invalid token payload",
         )
 
-    result = await db.execute(select(User).where(User.id == user_id))
+    try:
+        user_uuid = UUID(str(user_id))
+    except (TypeError, ValueError):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token payload",
+        ) from None
+
+    result = await db.execute(select(User).where(User.id == user_uuid))
     user = result.scalar_one_or_none()
     if not user:
         raise HTTPException(
@@ -318,7 +327,15 @@ async def get_current_user(
             detail="Invalid token payload",
         )
 
-    result = await db.execute(select(User).where(User.id == user_id))
+    try:
+        user_uuid = UUID(str(user_id))
+    except (TypeError, ValueError):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token payload",
+        ) from None
+
+    result = await db.execute(select(User).where(User.id == user_uuid))
     user = result.scalar_one_or_none()
     if not user:
         raise HTTPException(
