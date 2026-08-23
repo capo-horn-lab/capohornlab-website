@@ -697,11 +697,27 @@
     }
 
     .detail-section-body .highlight-box.error {
-      border-left-color: var(--ch-error);
-      background: #fef2f2;
-    }
+          border-left-color: var(--ch-error);
+          background: #fef2f2;
+        }
 
-    /* ============================================================
+        /* Suggestion form */
+        .suggestions-layout { max-width: 720px; margin: 0 auto; }
+        .suggestion-form-card {
+          background: var(--ch-white);
+          border: 1px solid var(--ch-gray-100);
+          border-radius: var(--ch-radius-xl);
+          padding: var(--ch-space-8);
+          box-shadow: var(--ch-shadow-sm);
+        }
+        .suggestion-form-card h3 {
+          font-size: var(--ch-text-xl);
+          font-weight: var(--ch-font-semibold);
+          color: var(--ch-navy-900);
+          margin: 0 0 var(--ch-space-6);
+        }
+
+        /* ============================================================
        KEY METRICS BAR
        ============================================================ */
     .key-metrics-bar {
@@ -1662,8 +1678,53 @@
   </section>
 
   <!-- ============================================================
-       FOOTER
-       ============================================================ -->
+         COMMUNITY SUGGESTIONS
+         ============================================================ -->
+    <div class="section section-alt" id="suggestions-section" style="display:none;">
+      <div class="container">
+        <div class="section-header">
+          <span class="overline">Community</span>
+          <h2>Strategic Suggestions</h2>
+          <p>Spot something we missed? Have an improvement idea? Share it. If your insight makes it into the research, you'll be credited as a contributor.</p>
+        </div>
+
+        <div class="suggestions-layout">
+          <!-- Form -->
+          <div class="suggestion-form-card">
+            <h3>Submit a Suggestion</h3>
+            <div id="suggestionSuccess" style="display:none;background:#e8f5e9;border:1px solid #43a047;border-radius:8px;padding:16px;margin-bottom:16px;">
+              <strong>✓ Suggestion submitted successfully!</strong>
+              <p style="margin:4px 0 0;font-size:13px;color:#2e7d32;">Thank you for your contribution. Our research team will review it.</p>
+            </div>
+            <div id="suggestionError" style="display:none;background:#ffebee;border:1px solid #e53935;border-radius:8px;padding:16px;margin-bottom:16px;color:#c62828;font-size:13px;"></div>
+          
+            <div class="input-group">
+              <label class="input-label">Your Name <span style="color:#e53935">*</span></label>
+              <input type="text" id="sugName" class="input-field" placeholder="How should we credit you?" maxlength="100" required>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Email (optional — for reward notification)</label>
+              <input type="email" id="sugEmail" class="input-field" placeholder="you@email.com">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Your Suggestion <span style="color:#e53935">*</span></label>
+              <textarea id="sugContent" class="input-field" rows="6" placeholder="What would you improve, correct, or add? Be specific — mention data, methodology, or market cycles..." maxlength="5000" style="resize:vertical;min-height:120px;" required></textarea>
+              <span class="input-help" id="sugCharCount">0/5000 characters</span>
+            </div>
+            <button class="btn btn-primary" onclick="submitSuggestion()" style="width:100%;">
+              Submit Suggestion
+            </button>
+            <p style="font-size:11px;color:#90a4ae;margin-top:8px;text-align:center;">
+              Submissions are private. If accepted, your name will appear in the research credits and you may receive a discount code.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
   <footer class="ch-footer">
     <div class="ch-footer-grid">
       <div>
@@ -3747,7 +3808,8 @@ var localPilotBySlug = {
         }
 
         // Store current slug for mode toggle
-        currentSlug = data.slug;
+                currentSlug = data.slug;
+                window._currentResearchSlug = data.slug;
 
         // Update browser title
         document.title = 'Capo Horn Lab — ' + data.title;
@@ -3783,8 +3845,12 @@ var localPilotBySlug = {
         renderMarketCycles(data.market_cycles);
 
         // Sections (with real chart images)
-        renderSections(data.sections);
-      }
+                renderSections(data.sections);
+
+                // Show suggestions section
+                var sugSection = document.getElementById('suggestions-section');
+                if (sugSection) sugSection.style.display = 'block';
+              }
 
       // Load on page ready
       var slug = getParam('slug') || 'es-1m-quant-summary';
@@ -3800,9 +3866,59 @@ var localPilotBySlug = {
       document.getElementById('chartLightbox').classList.add('open');
     }
     function closeLightbox() {
-      document.getElementById('chartLightbox').classList.remove('open');
-    }
-  </script>
+          document.getElementById('chartLightbox').classList.remove('open');
+        }
+
+        // ── Community Suggestions ──
+        var SUGGEST_API = 'https://capohornlab-website.onrender.com/api/v1/research/suggestions';
+    
+        document.addEventListener('DOMContentLoaded', function() {
+          var sugContent = document.getElementById('sugContent');
+          if (sugContent) {
+            sugContent.addEventListener('input', function() {
+              var count = this.value.length;
+              document.getElementById('sugCharCount').textContent = count + '/5000 characters';
+            });
+          }
+        });
+    
+        function submitSuggestion() {
+          var name = document.getElementById('sugName').value.trim();
+          var email = document.getElementById('sugEmail').value.trim();
+          var content = document.getElementById('sugContent').value.trim();
+          var slug = currentSlug || window._currentResearchSlug;
+      
+          var errDiv = document.getElementById('suggestionError');
+          var sucDiv = document.getElementById('suggestionSuccess');
+          errDiv.style.display = 'none';
+          sucDiv.style.display = 'none';
+      
+          if (!name) { errDiv.textContent = 'Please enter your name.'; errDiv.style.display = 'block'; return; }
+          if (!content) { errDiv.textContent = 'Please write your suggestion.'; errDiv.style.display = 'block'; return; }
+          if (content.length < 10) { errDiv.textContent = 'Suggestion must be at least 10 characters.'; errDiv.style.display = 'block'; return; }
+      
+          var payload = { research_slug: slug, author_name: name, content: content };
+          if (email) payload.author_email = email;
+      
+          fetch(SUGGEST_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          }).then(function(r) {
+            if (!r.ok) return r.json().then(function(e) { throw new Error(e.detail || 'Error ' + r.status); });
+            return r.json();
+          }).then(function(data) {
+            sucDiv.style.display = 'block';
+            document.getElementById('sugContent').value = '';
+            document.getElementById('sugCharCount').textContent = '0/5000 characters';
+            document.getElementById('sugName').value = '';
+            document.getElementById('sugEmail').value = '';
+          }).catch(function(e) {
+            errDiv.textContent = e.message || 'Submission failed. Please try again.';
+            errDiv.style.display = 'block';
+          });
+        }
+      </script>
 
   <!-- Lightbox -->
   <div class="chart-lightbox" id="chartLightbox" onclick="closeLightbox()">
