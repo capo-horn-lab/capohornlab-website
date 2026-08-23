@@ -47,7 +47,7 @@ async def signup_user(
     password: str,
     name: str,
 ) -> User:
-    """Create a new user account."""
+    """Create a new user account. Pre-approved admin emails get admin role."""
     # Check if email already exists
     result = await db.execute(select(User).where(User.email == email))
     existing = result.scalar_one_or_none()
@@ -57,10 +57,14 @@ async def signup_user(
             detail="Email already registered",
         )
 
+    # Auto-promote admin emails
+    role = "admin" if email.lower() in settings.admin_emails_set else "client"
+
     user = User(
         email=email,
         password_hash=hash_password(password),
         name=name,
+        role=role,
     )
     db.add(user)
     await db.commit()

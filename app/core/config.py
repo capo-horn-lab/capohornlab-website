@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-
 from typing import List, Optional
 
 from pydantic import model_validator
@@ -38,6 +37,10 @@ class Settings(BaseSettings):
     def allowed_origins_list(self) -> List[str]:
         return [o.strip() for o in self.ALLOWED_ORIGINS.split(",") if o.strip()]
 
+    @property
+    def admin_emails_set(self) -> set:
+        return {e.strip().lower() for e in self.ADMIN_EMAILS.split(",") if e.strip()}
+
     # --- Database ---
     POSTGRES_USER: str = "capohorn"
     POSTGRES_PASSWORD: str = "capohorn_secret"
@@ -52,12 +55,10 @@ class Settings(BaseSettings):
         if self.DATABASE_URL:
             return self.DATABASE_URL
         if os.environ.get("POSTGRES_PASSWORD"):
-            # Postgres explicitly configured (docker-compose / .env)
             return (
                 f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
                 f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
             )
-        # No external DB configured: portable local SQLite file
         return "sqlite+aiosqlite:///./chl.db"
 
     @property
@@ -107,6 +108,9 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = "D:\\CapoHornLab\\uploads"
     MAX_FILE_SIZE_MB: int = 10
     MAX_TOTAL_UPLOAD_MB: int = 50
+
+    # --- Admin auto-promotion ---
+    ADMIN_EMAILS: str = "farne022@gmail.com,capo.horn.lab@gmail.com"
 
 
 settings = Settings()
