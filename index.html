@@ -1453,13 +1453,62 @@
           50% { opacity: 0.5; transform: scale(1.3); }
         }
         .live-dot {
-          width: 8px; height: 8px; background: #10b981;
-          border-radius: 50%; display: inline-block;
-          animation: pulseDot 2s ease-in-out infinite;
-        }
+                  width: 8px; height: 8px; background: #10b981;
+                  border-radius: 50%; display: inline-block;
+                  animation: pulseDot 2s ease-in-out infinite;
+                }
+
+                /* ── Hero particles canvas ── */
+                .hero-particles {
+                  position: absolute; inset: 0; width: 100%; height: 100%;
+                  pointer-events: none; z-index: 1; opacity: 0.4;
+                }
+
+                /* ── ECG data pulse line ── */
+                .data-pulse-line {
+                  position: absolute; bottom: 0; left: 0; right: 0; height: 60px;
+                  pointer-events: none; z-index: 2; opacity: 0.15;
+                }
+                .data-pulse-line svg { width: 100%; height: 100%; }
+                @keyframes ecgPulse {
+                  0% { stroke-dashoffset: 2400; }
+                  100% { stroke-dashoffset: 0; }
+                }
+                .ecg-line {
+                  stroke-dasharray: 2400; stroke-dashoffset: 2400;
+                  animation: ecgPulse 4s ease-in-out infinite;
+                }
+
+                /* ── Hero badge group ── */
+                .hero-badge-group { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+
+                /* ── Bold statement cards ── */
+                .statement-card {
+                  background: rgba(18,18,26,0.5);
+                  border: 1px solid rgba(255,255,255,0.04);
+                  border-radius: 12px; padding: 32px 28px;
+                  transition: border-color 0.3s ease;
+                }
+                .statement-card:hover { border-color: rgba(59,130,246,0.2); }
+                .statement-card .statement-icon { font-size: 1.8rem; margin-bottom: 16px; opacity: 0.7; }
+                .statement-card h3 { color: #fff; font-size: 1.05rem; margin-bottom: 8px; font-weight: 600; }
+                .statement-card p { color: #94a3b8; font-size: 0.85rem; line-height: 1.5; }
       </style>
 </head>
 <body>
+
+<!-- SVG defs for animations -->
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+  <defs>
+    <linearGradient id="ecgGradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="transparent"/>
+      <stop offset="20%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="80%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </linearGradient>
+  </defs>
+</svg>
 
   <!-- ============================================================
        NAVIGATION
@@ -1513,46 +1562,62 @@
   </div>
 
   <!-- ============================================================
-       HERO
-       ============================================================ -->
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-content animate-up">
-      <div class="hero-badge animate-up-d1">
-        <span class="hero-badge-dot"></span>
-        Quantitative Backtesting Service
-      </div>
-      <div class="hero-badge animate-up-d1" style="margin-left:8px; background:rgba(5,150,105,0.15); border-color:rgba(5,150,105,0.3);">
-        <span class="hero-badge-dot" style="background:#059669;"></span>
-        100% of revenue reinvested in research
-      </div>
-      <h1 class="animate-up-d2">
-        Beyond the<br><span class="highlight">Market Edge</span>
-      </h1>
-      <p class="animate-up-d3">
-        Rigorous backtesting for serious traders. Institutional-grade tick data,
-        statistical methodology, and honest results — no strategy selling, no hype.
-      </p>
-      <div class="hero-actions animate-up-d4">
-        <a href="test-strategy.html" class="btn btn-primary btn-lg">Test Your Strategy</a>
-        <a href="research.html" class="btn btn-outline-light btn-lg">View Research</a>
-      </div>
-      <div class="hero-metrics animate-up-d5">
-        <div class="hero-metric">
-          <div class="hero-metric-value">10B+</div>
-          <div class="hero-metric-label">Ticks Analyzed</div>
+         HERO — V2 Experiment
+         ============================================================ -->
+    <section class="hero">
+      <!-- Particle canvas -->
+      <canvas id="particleCanvas" class="hero-particles"></canvas>
+      <div class="hero-grid"></div>
+      <div class="hero-content animate-up">
+        <div class="hero-badge-group animate-up-d1">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Quantitative Backtesting
+          </div>
+          <div class="hero-badge" style="background:rgba(5,150,105,0.12);border-color:rgba(5,150,105,0.25);">
+            <span class="hero-badge-dot" style="background:#059669;"></span>
+            <span class="live-dot" style="margin-right:6px;"></span>
+            Research-Funded Model
+          </div>
         </div>
-        <div class="hero-metric">
-          <div class="hero-metric-value">6</div>
-          <div class="hero-metric-label">Instruments</div>
+        <h1 class="animate-up-d2">
+          Strategies don't lie.<br>Markets reveal <span class="highlight">the truth</span>.
+        </h1>
+        <p class="animate-up-d3">
+          We run your trading idea through institutional-grade backtests
+          with real tick data, Monte Carlo validation, and honest reporting.
+          No hype. No fake Sharpe ratios. Just truth.
+        </p>
+        <div class="hero-actions animate-up-d4">
+          <a href="test-strategy.html" class="btn btn-primary btn-lg"><span>▸</span> Test Your Strategy</a>
+          <a href="research.html" class="btn btn-outline-light btn-lg">View Research <span style="opacity:0.4">16 studies</span></a>
         </div>
-        <div class="hero-metric">
-          <div class="hero-metric-value">47</div>
-          <div class="hero-metric-label">Studies Published</div>
+        <div class="hero-metrics animate-up-d5">
+          <div class="hero-metric">
+            <div class="hero-metric-value">10B<span style="color:#3b82f6">+</span></div>
+            <div class="hero-metric-label">Ticks Analyzed</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hero-metric-value">6</div>
+            <div class="hero-metric-label">Futures Markets</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hero-metric-value">16</div>
+            <div class="hero-metric-label">Verified Studies</div>
+          </div>
+          <div class="hero-metric">
+            <div class="hero-metric-value" style="font-size:1.5rem;letter-spacing:0">8-Gate</div>
+            <div class="hero-metric-label">Verification Pipeline</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+      <!-- Animated ECG/data pulse line -->
+      <div class="data-pulse-line">
+        <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+          <path class="ecg-line" d="M0,30 L200,30 L220,30 L230,5 L240,55 L250,30 L260,30 L300,30 L500,30 L520,30 L530,10 L540,50 L550,30 L560,30 L600,30 L800,30 L820,30 L830,8 L840,52 L850,30 L860,30 L900,30 L1100,30 L1120,30 L1130,12 L1140,48 L1150,30 L1160,30 L1200,30" fill="none" stroke="url(#ecgGradient)" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </section>
 
   <!-- ============================================================
        TRUST SIGNALS — Instrument Bar
@@ -1876,5 +1941,9 @@
   </footer>
 
   <script src="assets/js/newsletter-client.js"></script>
+<!-- Particle animation -->
+<script>
+(function(){var c=document.getElementById('particleCanvas');if(!c)return;var ctx=c.getContext('2d');var w,h,particles=[];function resize(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight}resize();window.addEventListener('resize',resize);for(var i=0;i<50;i++){particles.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*1.5+0.5,o:Math.random()*0.5+0.2})}function draw(){ctx.clearRect(0,0,w,h);for(var i=0;i<particles.length;i++){var p=particles[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(59,130,246,'+p.o+')';ctx.fill()}requestAnimationFrame(draw)}draw()})();
+</script>
 </body>
 </html>
