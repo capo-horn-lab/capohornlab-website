@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.v1 import admin, auth, contact, newsletter, requests
+from app.api.v1 import admin, auth, contact, newsletter, requests, research_suggestions
 from app.core.config import settings
 import logging
 
@@ -56,6 +56,8 @@ app.include_router(requests.router, prefix="/api/v1")
 app.include_router(admin.router, prefix="/api/v1")
 app.include_router(newsletter.router, prefix="/api/v1")
 app.include_router(contact.router, prefix="/api/v1")
+app.include_router(research_suggestions.router, prefix="/api/v1")
+app.include_router(research_suggestions.admin_router, prefix="/api/v1")
 
 
 @app.get("/health")

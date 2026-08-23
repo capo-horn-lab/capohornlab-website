@@ -8,6 +8,7 @@ from app.models.attachment import Attachment
 from app.models.internal_note import InternalNote
 from app.models.newsletter import NewsletterCampaign, NewsletterSend, NewsletterSubscriber
 from app.models.contact_message import ContactMessage
+from app.models.research_suggestion import ResearchSuggestion
 
 __all__ = [
     "User",
@@ -19,4 +20,6 @@ __all__ = [
     "NewsletterSubscriber",
     "NewsletterCampaign",
     "NewsletterSend",
+    "ContactMessage",
+    "ResearchSuggestion",
 ]
