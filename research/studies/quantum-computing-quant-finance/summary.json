@@ -1,0 +1,62 @@
+{
+  "id": "quantum-computing-quant-finance",
+  "title": "Quantum Computing in Quantitative Finance \u2014 State of the Art & Capo Horn Lab Roadmap",
+  "slug": "quantum-computing-quant-finance",
+  "instrument": "Theoretical / Cross-asset",
+  "instrument_short": "QC",
+  "timeframe": "N/A",
+  "period_tested": "2024-2030 (forecast horizon)",
+  "data_source": "Academic literature review",
+  "author": "Capo Horn Lab",
+  "published_date": "2026-08-23",
+  "outcome": "positive",
+  "tag_category": "Quantum Computing",
+  "market_cycles": {
+    "summary": "Quantum computing is not yet ready for production finance, but the roadmap is clear: by 2028-2030, quantum advantage will be measurable in portfolio optimization, Monte Carlo simulations, and risk management. Capo Horn Lab is positioning early \u2014 integrating Qiskit and Pennylane now to be ready when quantum hardware crosses the error-correction threshold.",
+    "works_in": [
+      "All regimes (computational augmentation)"
+    ],
+    "fails_in": [
+      "NISQ era (too noisy for production)"
+    ]
+  },
+  "metrics_display": [
+    {
+      "label": "Quantum Advantage Threshold",
+      "value": "~2028-2030",
+      "sub": "per IBM/Google roadmaps",
+      "cls": "km-neutral"
+    },
+    {
+      "label": "Grover Speedup",
+      "value": "O(\u221aN)",
+      "sub": "portfolio optimization",
+      "cls": "km-positive"
+    },
+    {
+      "label": "QUBO Problems",
+      "value": "10,000+ vars",
+      "sub": "D-Wave Advantage2",
+      "cls": "km-positive"
+    },
+    {
+      "label": "Monte Carlo Q-Speedup",
+      "value": "O(1/\u03b5)",
+      "sub": "vs classical O(1/\u03b5\u00b2)",
+      "cls": "km-positive"
+    },
+    {
+      "label": "Risk: NISQ Era",
+      "value": "Noisy qubits",
+      "sub": "error correction pending",
+      "cls": "km-negative"
+    },
+    {
+      "label": "CHL Readiness",
+      "value": "Q3 2027",
+      "sub": "Qiskit + Pennylane integration",
+      "cls": "km-neutral"
+    }
+  ],
+  "n_sections": 7
+}

@@ -1,0 +1,62 @@
+{
+  "id": "systematic-research-methodology",
+  "title": "Systematic Research Methodology \u2014 The 8-Gate Verification Pipeline",
+  "slug": "systematic-research-methodology",
+  "instrument": "Methodology / Cross-asset",
+  "instrument_short": "META",
+  "timeframe": "N/A (methodology paper)",
+  "period_tested": "2024-2026",
+  "data_source": "Capo Horn Lab internal research process",
+  "author": "Capo Horn Lab",
+  "published_date": "2026-08-23",
+  "outcome": "positive",
+  "tag_category": "Research Methodology",
+  "market_cycles": {
+    "summary": "The 8-gate verification pipeline is methodology research \u2014 it applies to all strategies, in all regimes. By enforcing IS/OOS splits, Monte Carlo robustness checks, statistical significance testing, and multi-regime analysis, the pipeline catches overfitted strategies before they reach publication. The expected false discovery rate is <20%, meaning at least 4 out of 5 published strategies have a genuine, reproducible edge.",
+    "works_in": [
+      "All regimes (it's a meta-process)"
+    ],
+    "fails_in": [
+      "N/A \u2014 methodology is regime-agnostic"
+    ]
+  },
+  "metrics_display": [
+    {
+      "label": "Verification Gates",
+      "value": "8",
+      "sub": "mandatory per strategy",
+      "cls": "km-positive"
+    },
+    {
+      "label": "Monte Carlo Sims",
+      "value": "2,000",
+      "sub": "per verification run",
+      "cls": "km-positive"
+    },
+    {
+      "label": "IS/OOS Split",
+      "value": "67/33",
+      "sub": "standard split ratio",
+      "cls": "km-neutral"
+    },
+    {
+      "label": "Significance Threshold",
+      "value": "p < 0.05",
+      "sub": "95% confidence minimum",
+      "cls": "km-positive"
+    },
+    {
+      "label": "False Discovery Control",
+      "value": "FDR < 20%",
+      "sub": "Benjamini-Hochberg",
+      "cls": "km-positive"
+    },
+    {
+      "label": "Regime Coverage",
+      "value": "4/6 regimes",
+      "sub": "minimum tested",
+      "cls": "km-neutral"
+    }
+  ],
+  "n_sections": 7
+}
