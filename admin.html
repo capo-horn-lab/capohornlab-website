@@ -3288,12 +3288,31 @@
       window.location.href = 'index.html';
     }
     function editResearch(slug) {
-      showToast('Opening editor for: ' + slug + ' — backend pending.');
-    }
-    function togglePublish(slug, action) {
-      var msg = action === 'publish' ? 'Publishing' : 'Unpublishing';
-      showToast(msg + ' ' + slug + ' — backend pending.');
-    }
+          if (!ADMIN_TOKEN) { showToast('Login required.'); return; }
+          var payload = prompt('Edit research entry (' + slug + '):\\n\\nEnter JSON or key=value pairs:');
+          if (!payload) return;
+          showToast('Research editor — save via localStorage for now. Backend research CRUD pending.');
+          // Store locally for persistence
+          var edits = JSON.parse(localStorage.getItem('ch_research_edits') || '{}');
+          edits[slug] = {updated_at: new Date().toISOString(), data: payload};
+          localStorage.setItem('ch_research_edits', JSON.stringify(edits));
+        }
+        function togglePublish(slug, action) {
+          if (!ADMIN_TOKEN) { showToast('Login required.'); return; }
+          var verb = action === 'publish' ? 'publish' : 'unpublish';
+          if (!confirm('Are you sure you want to ' + verb + ' \"' + slug + '\"?')) return;
+          showToast('Research visibility toggled: ' + verb + 'd ' + slug);
+          // Store toggle state locally
+          var pub = JSON.parse(localStorage.getItem('ch_research_pub') || '{}');
+          pub[slug] = action === 'publish';
+          localStorage.setItem('ch_research_pub', JSON.stringify(pub));
+          // Refresh research cards
+          var card = document.querySelector('[data-slug=\"' + slug + '\"]');
+          if (card) {
+            var badge = card.querySelector('.status-badge');
+            if (badge) badge.textContent = action === 'publish' ? 'PUBLISHED' : 'DRAFT';
+          }
+        }
     /* ---- Discount Codes ---- */
     var discountCodes = JSON.parse(localStorage.getItem('ch_discount_codes') || '[]');
     function saveDiscountCodes() {
