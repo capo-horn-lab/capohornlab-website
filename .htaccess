@@ -1,5 +1,5 @@
-# Capo Horn Lab — cache policy
-# HTML: mai in cache (il sito cambia spesso). Assets statici: cache breve.
+# Capo Horn Lab — cache policy + security headers
+# HTML: mai in cache. Assets statici: cache breve.
 <IfModule mod_headers.c>
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
@@ -9,4 +9,32 @@
   <FilesMatch "\.(css|js|png|jpg|jpeg|svg|webp|ico|woff2?)$">
     Header set Cache-Control "public, max-age=3600"
   </FilesMatch>
+
+  # Security headers
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+
+  # HSTS (1 year, include subdomains)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Content-Security-Policy — allow our own assets, Google Fonts, and Render API
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://capohornlab-website.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 </IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+# Block access to sensitive files
+<FilesMatch "\.(env|git|htpasswd|ini|phar|log|bak|sql|yaml|yml|json)$">
+  Require all denied
+</FilesMatch>
+
+# Block access to hidden files
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
