@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "time-series-momentum-futures",
+    "name": "Time Series Momentum on Global Futures",
+    "passed": false,
+    "score": 80.0,
+    "n_trades": 5090
+  },
+  {
+    "slug": "opening-range-breakout-intraday",
+    "name": "Opening Range Breakout Intraday \u2014 Concretum Replication",
+    "passed": false,
+    "score": 73.57142857142857,
+    "n_trades": 104
+  },
+  {
+    "slug": "intraday-momentum-spy",
+    "name": "Intraday Momentum on SPY \u2014 Demand-Supply Imbalance Strategy",
+    "passed": true,
+    "score": 87.14285714285714,
+    "n_trades": 298
+  },
+  {
+    "slug": "vwap-mean-reversion-intraday",
+    "name": "VWAP Mean Reversion \u2014 Intraday Mean-Reverting Strategies",
+    "passed": false,
+    "score": 80.0,
+    "n_trades": 2303
+  }
+]

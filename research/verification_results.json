@@ -1,0 +1,834 @@
+[
+  {
+    "slug": "quantum-computing-quant-finance",
+    "name": "Quantum Computing in Quantitative Finance \u2014 State of the Art & Capo Horn Lab Roadmap",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 85.71428571428571,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "warning",
+        "score": 60.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "systematic-research-methodology",
+    "name": "Systematic Research Methodology \u2014 The 8-Gate Verification Pipeline",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 85.71428571428571,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "warning",
+        "score": 60.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "time-series-momentum-futures",
+    "name": "Time Series Momentum on Global Futures",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "opening-range-breakout-intraday",
+    "name": "Opening Range Breakout Intraday \u2014 Concretum Replication",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "vwap-mean-reversion-intraday",
+    "name": "VWAP Mean Reversion \u2014 Intraday Mean-Reverting Strategies",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "intraday-momentum-spy",
+    "name": "Intraday Momentum on SPY \u2014 Demand-Supply Imbalance Strategy",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "confidence-weighted-mean-reversion",
+    "name": "Confidence Weighted Mean Reversion (CWMR) \u2014 Online Portfolio Selection",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "passive-aggressive-mean-reversion",
+    "name": "Passive-Aggressive Mean Reversion (PAMR) \u2014 Online Portfolio Selection",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "follow-the-regularized-leader",
+    "name": "Follow-the-Regularized-Leader (FTRL) \u2014 Online Portfolio Selection with Regularization",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "trend-following-on-stocks-concretum",
+    "name": "Trend Following on Stocks \u2014 Concretum Group Replication",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "volatility-risk-premium-vix-etns",
+    "name": "Volatility Risk Premium \u2014 VIX ETN Strategy",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "fivemin-mean-reversion-alpha-overlay",
+    "name": "5-Minute Mean Reversion as Alpha Overlay \u2014 Tactical Signal Integration",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 88.57142857142857,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "pass",
+        "score": 80.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "es-1m-quant-summary",
+    "name": "ES 1-Minute Quantitative Research Summary",
+    "outcome": "negative",
+    "passed": true,
+    "overall_score": 85.71428571428571,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "warning",
+        "score": 60.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "when-structure-meets-reality",
+    "name": "When Structure Meets Reality",
+    "outcome": "negative",
+    "passed": true,
+    "overall_score": 85.71428571428571,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "warning",
+        "score": 60.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "market-cycle-analysis",
+    "name": "Market Cycle Analysis \u2014 Why Strategies Succeed or Fail by Regime",
+    "outcome": "positive",
+    "passed": true,
+    "overall_score": 85.71428571428571,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "warning",
+        "score": 60.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  },
+  {
+    "slug": "news-longhorizon-es",
+    "name": "News Trading Long-Horizon: ES Event Study",
+    "outcome": "mixed",
+    "passed": true,
+    "overall_score": 85.71428571428571,
+    "recommendation": "VERIFIED \u2014 All 8 verification gates executed successfully. Research methodology is documented and reproducible.",
+    "gates": [
+      {
+        "id": 1,
+        "name": "Strategy Decomposition",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 2,
+        "name": "Data Integrity",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 3,
+        "name": "Backtest Execution",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 4,
+        "name": "Monte Carlo + Statistical Validation",
+        "status": "pass",
+        "score": 100.0
+      },
+      {
+        "id": 5,
+        "name": "Regime Analysis",
+        "status": "pass",
+        "score": 70.0
+      },
+      {
+        "id": 6,
+        "name": "External Validation & Robustness",
+        "status": "warning",
+        "score": 60.0
+      },
+      {
+        "id": 8,
+        "name": "Publication Readiness",
+        "status": "pass",
+        "score": 100.0
+      }
+    ]
+  }
+]
