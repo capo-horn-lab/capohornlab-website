@@ -145,17 +145,25 @@ async def list_requests(
     # Fetch page
     offset = (page - 1) * per_page
     stmt = (
-        select(StrategyRequest)
+        select(StrategyRequest, User.name, User.email)
+        .join(User, StrategyRequest.user_id == User.id)
         .where(StrategyRequest.user_id == current_user.id)
         .order_by(StrategyRequest.created_at.desc())
         .offset(offset)
         .limit(per_page)
     )
     result = await db.execute(stmt)
-    items = list(result.scalars().all())
+    rows = result.all()
+
+    items = []
+    for req, user_name, user_email in rows:
+        resp = StrategyRequestResponse.model_validate(req)
+        resp.user_name = user_name
+        resp.user_email = user_email
+        items.append(resp)
 
     return StrategyRequestListResponse(
-        items=[StrategyRequestResponse.model_validate(r) for r in items],
+        items=items,
         total=total,
         page=page,
         per_page=per_page,
