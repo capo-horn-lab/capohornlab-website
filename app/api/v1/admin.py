@@ -333,6 +333,90 @@ async def admin_get_status_history(
     return list(hist_result.scalars().all())
 
 
+# ── Dashboard Stats ──
+
+
+@router.get("/stats")
+async def admin_get_stats(
+    db: AsyncSession = Depends(get_async_db),
+    admin: User = Depends(require_admin),
+):
+    """Return KPI dashboard stats (admin only)."""
+    from pydantic import BaseModel
+
+    # Total requests
+    total_req_result = await db.execute(
+        select(sa_func.count()).select_from(StrategyRequest)
+    )
+    total_requests = total_req_result.scalar() or 0
+
+    # By status
+    pending_result = await db.execute(
+        select(sa_func.count()).select_from(StrategyRequest).where(
+            StrategyRequest.status == "inviata"
+        )
+    )
+    pending = pending_result.scalar() or 0
+
+    in_progress_result = await db.execute(
+        select(sa_func.count()).select_from(StrategyRequest).where(
+            StrategyRequest.status.in_(["in_valutazione", "in_lavorazione"])
+        )
+    )
+    in_progress = in_progress_result.scalar() or 0
+
+    completed_result = await db.execute(
+        select(sa_func.count()).select_from(StrategyRequest).where(
+            StrategyRequest.status == "completata"
+        )
+    )
+    completed = completed_result.scalar() or 0
+
+    # Total users
+    users_result = await db.execute(
+        select(sa_func.count()).select_from(User)
+    )
+    total_users = users_result.scalar() or 0
+
+    # Subscribers
+    sub_result = await db.execute(
+        select(sa_func.count()).select_from(NewsletterSubscriber).where(
+            NewsletterSubscriber.active == True  # noqa: E712
+        )
+    )
+    subscribers = sub_result.scalar() or 0
+
+    # Last request
+    last_req_stmt = (
+        select(StrategyRequest)
+        .order_by(StrategyRequest.created_at.desc())
+        .limit(5)
+    )
+    last_req_result = await db.execute(last_req_stmt)
+    last_requests = [
+        {
+            "id": str(r.id),
+            "user_name": r.user_name,
+            "user_email": r.user_email,
+            "strategy_name": r.strategy_name,
+            "instrument": r.instrument,
+            "status": r.status,
+            "created_at": r.created_at.isoformat() if r.created_at else None,
+        }
+        for r in last_req_result.scalars().all()
+    ]
+
+    return {
+        "total_requests": total_requests,
+        "pending": pending,
+        "in_progress": in_progress,
+        "completed": completed,
+        "total_users": total_users,
+        "subscribers": subscribers,
+        "last_requests": last_requests,
+    }
+
+
 # ── Newsletter Admin ──
 
 
