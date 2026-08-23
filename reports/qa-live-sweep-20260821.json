@@ -1,0 +1,346 @@
+{
+  "pages": {
+    "/": {
+      "status": 200,
+      "bytes": 60917
+    },
+    "index.html": {
+      "status": 200,
+      "bytes": 60917
+    },
+    "about.html": {
+      "status": 200,
+      "bytes": 49505
+    },
+    "method.html": {
+      "status": 200,
+      "bytes": 53422
+    },
+    "research.html": {
+      "status": 200,
+      "bytes": 62121
+    },
+    "research-detail.html": {
+      "status": 200,
+      "bytes": 250863
+    },
+    "test-strategy.html": {
+      "status": 200,
+      "bytes": 97885
+    },
+    "contact.html": {
+      "status": 200,
+      "bytes": 52042
+    },
+    "login.html": {
+      "status": 200,
+      "bytes": 36513
+    },
+    "signup.html": {
+      "status": 200,
+      "bytes": 25102
+    },
+    "dashboard.html": {
+      "status": 200,
+      "bytes": 63207
+    },
+    "checkout.html": {
+      "status": 200,
+      "bytes": 12283
+    },
+    "faq.html": {
+      "status": 200,
+      "bytes": 53346
+    },
+    "documentation.html": {
+      "status": 200,
+      "bytes": 57538
+    },
+    "privacy-policy.html": {
+      "status": 200,
+      "bytes": 39029
+    },
+    "terms-of-service.html": {
+      "status": 200,
+      "bytes": 34788
+    },
+    "cookie-policy.html": {
+      "status": 200,
+      "bytes": 33737
+    },
+    "disclaimer.html": {
+      "status": 200,
+      "bytes": 29000
+    },
+    "refund-policy.html": {
+      "status": 200,
+      "bytes": 29330
+    },
+    "investors.html": {
+      "status": 200,
+      "bytes": 45043
+    },
+    "pages/about.html": {
+      "status": 200,
+      "bytes": 46404
+    },
+    "pages/admin.html": {
+      "status": 200,
+      "bytes": 167109
+    },
+    "pages/contact.html": {
+      "status": 200,
+      "bytes": 49722
+    },
+    "pages/dashboard.html": {
+      "status": 200,
+      "bytes": 71532
+    },
+    "pages/home.html": {
+      "status": 200,
+      "bytes": 57729
+    },
+    "pages/method.html": {
+      "status": 200,
+      "bytes": 51032
+    },
+    "pages/pricing.html": {
+      "status": 200,
+      "bytes": 52866
+    },
+    "pages/research-detail.html": {
+      "status": 200,
+      "bytes": 245068
+    },
+    "pages/research.html": {
+      "status": 200,
+      "bytes": 57978
+    },
+    "pages/test-strategy.html": {
+      "status": 200,
+      "bytes": 84260
+    }
+  },
+  "resources": {
+    "/about.html": {
+      "status": 200,
+      "bytes": 49505
+    },
+    "/assets/js/account-client.js": {
+      "status": 200,
+      "bytes": 4093
+    },
+    "/assets/js/newsletter-client.js": {
+      "status": 200,
+      "bytes": 1991
+    },
+    "/assets/logo/capo-horn-lab-logo.png": {
+      "status": 200,
+      "bytes": 520211
+    },
+    "/checkout.html": {
+      "status": 200,
+      "bytes": 12283
+    },
+    "/contact.html": {
+      "status": 200,
+      "bytes": 52042
+    },
+    "/cookie-policy.html": {
+      "status": 200,
+      "bytes": 33737
+    },
+    "/dashboard.html": {
+      "status": 200,
+      "bytes": 63207
+    },
+    "/disclaimer.html": {
+      "status": 200,
+      "bytes": 29000
+    },
+    "/documentation.html": {
+      "status": 200,
+      "bytes": 57538
+    },
+    "/faq.html": {
+      "status": 200,
+      "bytes": 53346
+    },
+    "/index.html": {
+      "status": 200,
+      "bytes": 60917
+    },
+    "/investors.html": {
+      "status": 200,
+      "bytes": 45043
+    },
+    "/login.html": {
+      "status": 200,
+      "bytes": 36513
+    },
+    "/method.html": {
+      "status": 200,
+      "bytes": 53422
+    },
+    "/pages/about.html": {
+      "status": 200,
+      "bytes": 46404
+    },
+    "/pages/contact.html": {
+      "status": 200,
+      "bytes": 49722
+    },
+    "/pages/dashboard.html": {
+      "status": 200,
+      "bytes": 71532
+    },
+    "/pages/documentation.html": {
+      "status": 404,
+      "bytes": 196
+    },
+    "/pages/index.html": {
+      "status": 404,
+      "bytes": 196
+    },
+    "/pages/method.html": {
+      "status": 200,
+      "bytes": 51032
+    },
+    "/pages/pricing.html": {
+      "status": 200,
+      "bytes": 52866
+    },
+    "/pages/research-detail.html": {
+      "status": 200,
+      "bytes": 245068
+    },
+    "/pages/research.html": {
+      "status": 200,
+      "bytes": 57978
+    },
+    "/pages/test-strategy.html": {
+      "status": 200,
+      "bytes": 84260
+    },
+    "/pricing.html": {
+      "status": 200,
+      "bytes": 54979
+    },
+    "/privacy-policy.html": {
+      "status": 200,
+      "bytes": 39029
+    },
+    "/refund-policy.html": {
+      "status": 200,
+      "bytes": 29330
+    },
+    "/research-detail.html": {
+      "status": 200,
+      "bytes": 250863
+    },
+    "/research.html": {
+      "status": 200,
+      "bytes": 62121
+    },
+    "/signup.html": {
+      "status": 200,
+      "bytes": 25102
+    },
+    "/terms-of-service.html": {
+      "status": 200,
+      "bytes": 34788
+    },
+    "/test-strategy.html": {
+      "status": 200,
+      "bytes": 97885
+    }
+  },
+  "broken_resources": {
+    "/pages/documentation.html": {
+      "status": 404,
+      "bytes": 196
+    },
+    "/pages/index.html": {
+      "status": 404,
+      "bytes": 196
+    }
+  },
+  "dead_placeholders": [
+    {
+      "page": "dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/about.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/contact.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/dashboard.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/method.html",
+      "tag": "a"
+    },
+    {
+      "page": "pages/research-detail.html",
+      "tag": "a"
+    }
+  ],
+  "auth_negative": {
+    "error": "HTTPSConnectionPool(host='capohornlab-website.onrender.com', port=443): Read timed out. (read timeout=20)"
+  },
+  "research": {
+    "required_labels": {
+      "Objective": 14,
+      "Hypothesis": 30,
+      "Methodology": 14,
+      "Data": 54,
+      "Results": 13,
+      "Charts": 16,
+      "Conclusions": 14
+    },
+    "todo": 0,
+    "news_longhorizon": true
+  }
+}

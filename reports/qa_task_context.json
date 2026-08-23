@@ -1,0 +1,5 @@
+{
+  "objective": "Read-only QA of live research-detail routes and local research content. Do not edit, deploy, submit forms, use credentials, or send requests that dispatch email. Report evidence only.",
+  "site": "https://www.capohornlab.com",
+  "repo": "D:/CapoHornLab/projects/capohornlab-website"
+}
