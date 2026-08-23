@@ -77,7 +77,8 @@ async def admin_list_requests(
     # Build count query
     count_stmt = select(sa_func.count()).select_from(StrategyRequest)
     list_stmt = (
-        select(StrategyRequest)
+        select(StrategyRequest, User.name, User.email)
+        .join(User, StrategyRequest.user_id == User.id)
         .order_by(StrategyRequest.created_at.desc())
     )
 
@@ -97,10 +98,18 @@ async def admin_list_requests(
     offset = (page - 1) * per_page
     list_stmt = list_stmt.offset(offset).limit(per_page)
     result = await db.execute(list_stmt)
-    items = list(result.scalars().all())
+    rows = result.all()
+
+    # Build response with user info
+    items = []
+    for req, user_name, user_email in rows:
+        resp = StrategyRequestResponse.model_validate(req)
+        resp.user_name = user_name
+        resp.user_email = user_email
+        items.append(resp)
 
     return StrategyRequestListResponse(
-        items=[StrategyRequestResponse.model_validate(r) for r in items],
+        items=items,
         total=total,
         page=page,
         per_page=per_page,
@@ -386,9 +395,10 @@ async def admin_get_stats(
     )
     subscribers = sub_result.scalar() or 0
 
-    # Last request
+    # Last requests with user info
     last_req_stmt = (
-        select(StrategyRequest)
+        select(StrategyRequest, User.name, User.email)
+        .join(User, StrategyRequest.user_id == User.id)
         .order_by(StrategyRequest.created_at.desc())
         .limit(5)
     )
@@ -396,14 +406,14 @@ async def admin_get_stats(
     last_requests = [
         {
             "id": str(r.id),
-            "user_name": r.user_name,
-            "user_email": r.user_email,
+            "user_name": user_name,
+            "user_email": user_email,
             "strategy_name": r.strategy_name,
             "instrument": r.instrument,
             "status": r.status,
             "created_at": r.created_at.isoformat() if r.created_at else None,
         }
-        for r in last_req_result.scalars().all()
+        for r, user_name, user_email in last_req_result.all()
     ]
 
     return {

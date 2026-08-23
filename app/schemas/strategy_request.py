@@ -125,6 +125,8 @@ class StrategyRequestResponse(BaseModel):
     """Full response schema for a strategy request."""
     id: UUID
     user_id: UUID
+    user_name: Optional[str] = None
+    user_email: Optional[str] = None
     status: str
     strategy_name: str
     description: Optional[str] = None
