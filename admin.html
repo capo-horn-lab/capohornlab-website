@@ -1724,6 +1724,7 @@
       </div>
     </div>
     <div class="admin-topbar-right">
+          <button class="btn btn-primary btn-sm" onclick="showAdminLogin()" style="font-size:11px;margin-right:8px">🔑 Login Admin</button>
       <div class="admin-notif">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
@@ -1749,10 +1750,10 @@
           <p>Overview of platform activity and key metrics.</p>
         </div>
         <div style="display:flex;gap:var(--ch-space-3);">
-          <button class="btn btn-secondary btn-sm" onclick="showToast('Export started — backend pending.')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Export
-          </button>
+          <button class="btn btn-secondary btn-sm" onclick="exportDashboard()">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                      Export
+                    </button>
           <button class="btn btn-primary btn-sm" onclick="switchAdminSection('requests')">View Requests</button>
         </div>
       </div>
@@ -1906,7 +1907,7 @@
           <h2>Strategy Requests</h2>
           <p>View, filter, and manage all strategy submissions.</p>
         </div>
-        <button class="btn btn-primary btn-sm" onclick="showToast('Refresh triggered — backend pending.')">
+        <button class="btn btn-primary btn-sm" onclick="fetchRequests()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
           Refresh
         </button>
@@ -2203,8 +2204,8 @@
               <td><span class="status-badge status-completata"><span class="dot"></span>Active</span></td>
               <td>
                 <div class="cell-actions">
-                  <button class="expand-btn" onclick="showToast('Client detail view — backend pending.')">View</button>
-                  <button class="expand-btn" onclick="showToast('Reset password — backend pending.')">Reset PW</button>
+                  <button class="expand-btn" onclick="if(ADMIN_TOKEN){var id=this.closest('tr').getAttribute('data-id');if(id){adminFetch('/admin/requests/'+id).then(function(d){alert(JSON.stringify(d,null,2))}).catch(function(){showToast('Error loading detail')})}}else{showToast('Login required')}">View</button>
+                  <button class="expand-btn" onclick="if(ADMIN_TOKEN){var id=this.closest('tr').getAttribute('data-id');if(id){adminFetch('/admin/requests/'+id).then(function(d){var e=d.user_email||'?';alert('User: '+e+'\nPassword reset via admin not implemented. Contact user directly.')}).catch(function(){showToast('Error')})}}else{showToast('Login required')}">Reset PW</button>
                 </div>
               </td>
             </tr>
@@ -2228,7 +2229,7 @@
           <h2>Newsletter Management</h2>
           <p>Manage subscribers, create campaigns, and track delivery.</p>
         </div>
-        <button class="btn btn-amber btn-sm" onclick="showToast('New campaign form — backend pending.')">
+        <button class="btn btn-amber btn-sm" onclick="newCampaign()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           New Campaign
         </button>
@@ -2832,7 +2833,7 @@
           </div>
           <div class="input-group" style="grid-column:1/-1;">
             <label class="input-label">Upload Charts</label>
-            <div style="border:2px dashed var(--ch-gray-200);border-radius:var(--ch-radius-md);padding:var(--ch-space-8);text-align:center;cursor:pointer;" onclick="showToast('File upload mock — backend pending.')">
+            <div style="border:2px dashed var(--ch-gray-200);border-radius:var(--ch-radius-md);padding:var(--ch-space-8);text-align:center;cursor:pointer;" onclick="var f=document.createElement('input');f.type='file';f.onchange=function(e){var fn=e.target.files[0].name;showToast('Selected: '+fn+' — upload via API pending')};f.click()">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin:0 auto var(--ch-space-2);color:var(--ch-gray-400);"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               <div style="font-size:var(--ch-text-sm);color:var(--ch-gray-400);">Drop chart images here or click to browse</div>
             </div>
@@ -2868,6 +2869,183 @@
     };
 
     function switchAdminSection(section) {
+      updateBreadcrumb(section);
+      document.querySelectorAll('.sidebar-nav-item').forEach(function(b) { b.classList.remove('active'); });
+      var navBtn = document.querySelector('.sidebar-nav-item[data-section=\"' + section + '\"]');
+      if (navBtn) navBtn.classList.add('active');
+      document.querySelectorAll('.admin-section').forEach(function(s) { s.classList.remove('active'); });
+      document.getElementById('section-' + section).classList.add('active');
+      
+      // Fetch real data when switching to data sections
+      if (section === 'dashboard') fetchDashboardStats();
+      if (section === 'requests') fetchRequests();
+      if (section === 'newsletter') { fetchSubscribers(); fetchCampaigns(); }
+      if (section === 'clients') fetchClients();
+      
+      var sidebar = document.querySelector('.admin-sidebar');
+      if (sidebar) sidebar.classList.remove('open');
+    }
+
+    // ── Admin API client ──
+    var API_BASE = 'https://capohornlab-website.onrender.com/api/v1';
+    var ADMIN_TOKEN = null;
+    
+    function setAdminToken(token) { ADMIN_TOKEN = token; }
+    
+    function adminFetch(path, opts) {
+      opts = opts || {};
+      opts.headers = opts.headers || {};
+      if (ADMIN_TOKEN) opts.headers['Authorization'] = 'Bearer ' + ADMIN_TOKEN;
+      opts.headers['Content-Type'] = opts.headers['Content-Type'] || 'application/json';
+      return fetch(API_BASE + path, opts).then(function(r) {
+        if (!r.ok) throw new Error(r.status + ' ' + r.statusText);
+        var ct = r.headers.get('content-type') || '';
+        return ct.indexOf('application/json') !== -1 ? r.json() : r.text();
+      });
+    }
+    
+    // ── Dashboard Stats ──
+    function fetchDashboardStats() {
+      if (!ADMIN_TOKEN) return;
+      adminFetch('/admin/stats').then(function(data) {
+        var totalEl = document.querySelector('#section-dashboard .kpi-card:nth-child(1) .kpi-value');
+        var pendingEl = document.querySelector('#section-dashboard .kpi-card:nth-child(2) .kpi-value');
+        var progressEl = document.querySelector('#section-dashboard .kpi-card:nth-child(3) .kpi-value');
+        var completedEl = document.querySelector('#section-dashboard .kpi-card:nth-child(4) .kpi-value');
+        var subsEl = document.querySelector('#section-dashboard .kpi-card:nth-child(5) .kpi-value');
+        if (totalEl) totalEl.textContent = data.total_requests;
+        if (pendingEl) pendingEl.textContent = data.pending;
+        if (progressEl) progressEl.textContent = data.in_progress;
+        if (completedEl) completedEl.textContent = data.completed;
+        if (subsEl) subsEl.textContent = data.subscribers;
+        
+        // Update quick stats
+        var usersEl = document.querySelector('.quick-stats-value');
+        if (usersEl) usersEl.textContent = data.total_users;
+      }).catch(function(e) { console.log('Stats fetch failed: ' + e.message); });
+    }
+    
+    // ── Requests ──
+    function fetchRequests() {
+      if (!ADMIN_TOKEN) return;
+      adminFetch('/admin/requests?per_page=50').then(function(data) {
+        renderRequestsTable(data.items || []);
+      }).catch(function(e) { console.log('Requests fetch failed: ' + e.message); });
+    }
+    
+    function renderRequestsTable(items) {
+      var tbody = document.querySelector('#requestsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      if (items.length === 0) {
+        tbody.innerHTML = '<tr><td colspan=\"7\" style=\"text-align:center;padding:40px\">No requests found.</td></tr>';
+        return;
+      }
+      items.forEach(function(r) {
+        var tr = document.createElement('tr');
+        tr.className = 'req-row';
+        tr.setAttribute('data-id', r.id);
+        tr.setAttribute('data-status', r.status);
+        tr.setAttribute('data-instrument', r.instrument || '');
+        tr.innerHTML = '<td style=\"font-family:monospace;font-size:11px\">' + (r.id || '').substring(0,8) + '</td>' +
+          '<td>' + (r.strategy_name || '—') + '</td>' +
+          '<td>' + (r.user_name || r.user_email || '—') + '</td>' +
+          '<td>' + (r.instrument || '—') + '</td>' +
+          '<td><span class=\"status-badge status-' + (r.status || 'inviata') + '\">' + (r.status || 'inviata') + '</span></td>' +
+          '<td>' + (r.created_at ? new Date(r.created_at).toLocaleDateString() : '—') + '</td>' +
+          '<td class=\"cell-actions\"><button class=\"expand-btn\" onclick=\"toggleDetail(this,' + "'" + r.id + "'" + ')\">View</button></td>';
+        tbody.appendChild(tr);
+      });
+    }
+    
+    // ── Clients ──
+    function fetchClients() {
+      if (!ADMIN_TOKEN) return;
+      var tbody = document.querySelector('#clientsTableBody');
+      if (!tbody) return;
+      adminFetch('/admin/stats').then(function(data) {
+        tbody.innerHTML = '<tr><td colspan=\"5\" style=\"text-align:center;padding:20px\">' + data.total_users + ' registered users. Client management — backend connected.</td></tr>';
+      }).catch(function() {});
+    }
+    
+    // ── Newsletter ──
+    function fetchSubscribers() {
+      if (!ADMIN_TOKEN) return;
+      adminFetch('/admin/newsletter/subscribers').then(function(data) {
+        var countEl = document.querySelector('#newsletterSubscriberCount');
+        if (countEl) countEl.textContent = data.total || 0;
+      }).catch(function() {});
+    }
+    
+    function fetchCampaigns() {
+      if (!ADMIN_TOKEN) return;
+      adminFetch('/admin/newsletter/campaigns').then(function(data) {
+        var countEl = document.querySelector('#campaignCount');
+        if (countEl) countEl.textContent = data.total || 0;
+      }).catch(function() {});
+    }
+    
+    // ── Export CSV (real) ──
+    function exportDashboard() {
+      if (!ADMIN_TOKEN) { showToast('Login required to export.'); return; }
+      adminFetch('/admin/requests?per_page=200').then(function(data) {
+        var csv = 'ID,Strategy,User,Instrument,Status,Date\n';
+        (data.items||[]).forEach(function(r) {
+          csv += [r.id, (r.strategy_name||'').replace(/,/g,';'), (r.user_name||'').replace(/,/g,';'), 
+            r.instrument||'', r.status||'', r.created_at||''].join(',') + '\n';
+        });
+        var blob = new Blob([csv], {type:'text/csv'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = 'requests_export.csv'; a.click();
+        showToast('Export downloaded (' + (data.items||[]).length + ' rows)');
+      }).catch(function(e) { showToast('Export failed: ' + e.message); });
+    }
+    
+    // ── New Campaign (real) ──
+    function newCampaign() {
+      if (!ADMIN_TOKEN) { showToast('Login required.'); return; }
+      var subject = prompt('Campaign subject:');
+      if (!subject) return;
+      var html = prompt('Campaign content (HTML):');
+      if (!html) return;
+      adminFetch('/admin/newsletter/campaigns', {
+        method: 'POST',
+        body: JSON.stringify({subject: subject, content_html: html, content_text: html.replace(/<[^>]*>/g,'')})
+      }).then(function(data) {
+        showToast('Campaign created: ' + (data.subject || subject));
+        fetchCampaigns();
+      }).catch(function(e) { showToast('Error: ' + e.message); });
+    }
+
+    // ── Admin login form ──
+    function showAdminLogin() {
+      var email = prompt('Admin email:');
+      if (!email) return;
+      var pw = prompt('Admin password:');
+      if (!pw) return;
+      fetch(API_BASE + '/auth/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email: email, password: pw})
+      }).then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.access_token) {
+            ADMIN_TOKEN = data.access_token;
+            localStorage.setItem('_chl_admin_token', ADMIN_TOKEN);
+            showToast('Admin logged in — dashboard connected');
+            fetchDashboardStats();
+          } else {
+            showToast('Login failed');
+          }
+        }).catch(function() { showToast('Login error'); });
+    }
+    
+    // Auto-restore token
+    (function() {
+      var saved = localStorage.getItem('_chl_admin_token');
+      if (saved) ADMIN_TOKEN = saved;
+    })();
       // Update sidebar
       document.querySelectorAll('.sidebar-nav-item[data-section]').forEach(function(item) {
         item.classList.toggle('active', item.getAttribute('data-section') === section);
