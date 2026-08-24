@@ -535,7 +535,6 @@
     }
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
-      .orbital-canvas{display:none}
     }
   </style>
 </head>
@@ -886,7 +885,6 @@
       var canvas = document.querySelector('#orbitalCanvas');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
-      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       var w = 0, h = 0, dpr = 1, frame = 0;
       var mouse = { x: 0, y: 0 };
       var researchNodes = [];
@@ -1036,7 +1034,7 @@
           readout.innerHTML = 'AZIMUTH <span class="val">' + az + '</span>&deg;<br>ELEVATION <span class="val">' + el + '</span>&deg;<br><span class="live">&bull; LIVE</span>';
         }
 
-        if (!reduced) requestAnimationFrame(draw);
+        requestAnimationFrame(draw);
       }
 
       canvas.addEventListener('pointermove', function(e) {
