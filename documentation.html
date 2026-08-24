@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="design/observatory-tokens.css">
-  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+  <link rel="icon" type="image/png" href="assets/capo-horn-lab-orbit-mark.svg">
 
   <!-- Primary Meta Tags -->
   <meta name="description" content="Capo Horn Lab documentation — Learn how our backtesting pipeline works, how to read and interpret strategy reports, and understand key statistical metrics.">
@@ -18,12 +18,12 @@
   <meta property="og:url" content="https://capohornlab.com/documentation.html">
   <meta property="og:title" content="Capo Horn Lab — Documentation">
   <meta property="og:description" content="Capo Horn Lab documentation — Learn how our backtesting pipeline works, how to read and interpret strategy reports, and understand key statistical metrics.">
-  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+  <meta property="og:image" content="https://capohornlab.com/assets/capo-horn-lab-orbit-mark.svg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Capo Horn Lab — Documentation">
   <meta name="twitter:description" content="Capo Horn Lab documentation — Learn how our backtesting pipeline works, how to read and interpret strategy reports, and understand key statistical metrics.">
-  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/capo-horn-lab-orbit-mark.svg">
 
   <style>
     /* ============================================================
@@ -173,9 +173,9 @@
     .ch-nav { display: flex; align-items: center; justify-content: space-between; padding: var(--ch-space-4) var(--ch-space-6); background: var(--ch-navy-900); color: var(--ch-white); box-shadow: var(--ch-shadow-md); position: sticky; top: 0; z-index: var(--ch-z-nav); }
     .ch-nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--ch-max-width); margin: 0 auto; padding: 0; }
     .ch-nav-brand { font-size: var(--ch-text-lg); font-weight: var(--ch-font-bold); letter-spacing: var(--ch-letter-spacing-tight); display: flex; align-items: center; gap: var(--ch-space-2); }
-    .ch-nav-brand .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500)); border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); font-weight: var(--ch-font-bold); color: var(--ch-white); overflow: hidden; }
+    .ch-nav-brand .brand-icon { width: 32px; height: 32px; background: transparent; border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); font-weight: var(--ch-font-bold); color: var(--ch-white); overflow: hidden; }
       --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-    .ch-nav-brand .brand-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ch-nav-brand .brand-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .ch-nav-links { display: flex; align-items: center; gap: var(--ch-space-1); }
     .ch-nav-links a { font-size: var(--ch-text-sm); font-weight: var(--ch-font-medium); color: var(--ch-mist); padding: var(--ch-space-2) var(--ch-space-4); border-radius: var(--ch-radius-md); transition: background var(--ch-transition-fast), color var(--ch-transition-fast); }
     .ch-nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--ch-white); }
@@ -309,7 +309,7 @@
     .ch-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(227,59,47,0.4), transparent); }
     .ch-footer-grid { max-width: var(--ch-max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--ch-space-8); }
     .ch-footer-brand { font-size: var(--ch-text-xl); font-weight: var(--ch-font-bold); color: var(--ch-white); margin-bottom: var(--ch-space-3); letter-spacing: var(--ch-letter-spacing-tight); display: flex; align-items: center; gap: var(--ch-space-2); }
-    .ch-footer-brand .brand-icon { width: 28px; height: 28px; background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500)); border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: 10px; font-weight: var(--ch-font-bold); color: var(--ch-white); }
+    .ch-footer-brand .brand-icon { width: 28px; height: 28px; background: transparent; border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: 10px; font-weight: var(--ch-font-bold); color: var(--ch-white); }
       --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
     .ch-footer-tagline { font-size: var(--ch-text-sm); line-height: var(--ch-leading-relaxed); max-width: 300px; }
     .ch-footer h4 { font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-white); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); margin-bottom: var(--ch-space-4); }
@@ -390,6 +390,39 @@
     }
     .page-hero { animation-delay: 0.1s; }
 
+  
+    /* ── Scroll progress bar ── */
+    .ch-scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: var(--ch-signal, #e33b2f);
+      box-shadow: 0 0 8px rgba(227,59,47,.5);
+      z-index: 9999; transition: width .08s linear;
+    }
+    /* ── Scroll reveal ── */
+    .ch-reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                  transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .ch-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .ch-reveal { opacity: 1; transform: none; transition: none; }
+    }
+    /* ── Logo mark animation ── */
+    .brand-icon img, .ch-nav-brand .brand-icon img {
+      animation: chLogoFloat 7s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(227,59,47,.35));
+    }
+    .ch-nav-brand:hover .brand-icon img {
+      transform: rotate(14deg) scale(1.1);
+      transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes chLogoFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(3deg) scale(1.06); }
+    }
+
   </style>
 
     <style>
@@ -404,7 +437,7 @@
   <nav class="ch-nav">
     <div class="container">
       <div class="ch-nav-brand">
-        <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+        <div class="brand-icon"><img src="assets/capo-horn-lab-orbit-mark.svg" alt="CH"></div>
         Capo Horn Lab
       </div>
       <div class="ch-nav-links">
@@ -836,7 +869,7 @@
     <div class="ch-footer-grid">
       <div>
         <div class="ch-footer-brand">
-          <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+          <div class="brand-icon"><img src="assets/capo-horn-lab-orbit-mark.svg" alt="CH"></div>
           Capo Horn Lab
         </div>
         <p class="ch-footer-tagline">
@@ -892,5 +925,44 @@
   </footer>
 
   <script src="assets/js/newsletter-client.js"></script>
+<script>
+  (function() {
+    // Scroll progress bar
+    var bar = document.createElement('div');
+    bar.className = 'ch-scroll-progress';
+    document.body.appendChild(bar);
+    function updateProgress() {
+      var h = document.documentElement;
+      var scrolled = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+      bar.style.width = (scrolled * 100) + '%';
+    }
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    // Scroll reveal via IntersectionObserver
+    var revealSel = 'section, .ch-section, .page-hero, .ch-card, .step-card, ' +
+                    '.research-card, .data-panel, .principle-card, .status-card, .feature-card';
+    var targets = document.querySelectorAll(revealSel);
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function(t, i) {
+        t.classList.add('ch-reveal');
+        t.style.transitionDelay = (i % 7) * 0.04 + 's';
+        io.observe(t);
+      });
+    } else {
+      targets.forEach(function(t) { t.classList.add('is-visible'); });
+    }
+  })();
+</script>
+
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test Your Strategy — Capo Horn Lab</title>
-  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+  <link rel="icon" type="image/png" href="assets/capo-horn-lab-orbit-mark.svg">
 
   <!-- Primary Meta Tags -->
   <meta name="description" content="Test your trading strategy with Capo Horn Lab's institutional-grade backtesting engine. Validate your quantitative strategies with professional analytics.">
@@ -14,12 +14,12 @@
   <meta property="og:url" content="https://capohornlab.com/test-strategy.html">
   <meta property="og:title" content="Test Your Strategy — Capo Horn Lab">
   <meta property="og:description" content="Test your trading strategy with Capo Horn Lab's institutional-grade backtesting engine. Validate your quantitative strategies with professional analytics.">
-  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+  <meta property="og:image" content="https://capohornlab.com/assets/capo-horn-lab-orbit-mark.svg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Test Your Strategy — Capo Horn Lab">
   <meta name="twitter:description" content="Test your trading strategy with Capo Horn Lab's institutional-grade backtesting engine. Validate your quantitative strategies with professional analytics.">
-  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/capo-horn-lab-orbit-mark.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -240,7 +240,7 @@
     .ch-nav-brand .brand-icon {
       width: 32px;
       height: 32px;
-      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      background: transparent;
       border-radius: var(--ch-radius-sm);
       display: flex;
       align-items: center;
@@ -256,7 +256,7 @@
     .ch-nav-brand .brand-icon img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
     }
 
@@ -1141,7 +1141,7 @@
     .ch-footer-brand .brand-icon {
       width: 28px;
       height: 28px;
-      background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500));
+      background: transparent;
       border-radius: var(--ch-radius-sm);
       display: flex;
       align-items: center;
@@ -1407,6 +1407,39 @@
     }
     .page-hero { animation-delay: 0.1s; }
 
+  
+    /* ── Scroll progress bar ── */
+    .ch-scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: var(--ch-signal, #e33b2f);
+      box-shadow: 0 0 8px rgba(227,59,47,.5);
+      z-index: 9999; transition: width .08s linear;
+    }
+    /* ── Scroll reveal ── */
+    .ch-reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                  transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .ch-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .ch-reveal { opacity: 1; transform: none; transition: none; }
+    }
+    /* ── Logo mark animation ── */
+    .brand-icon img, .ch-nav-brand .brand-icon img {
+      animation: chLogoFloat 7s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(227,59,47,.35));
+    }
+    .ch-nav-brand:hover .brand-icon img {
+      transform: rotate(14deg) scale(1.1);
+      transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes chLogoFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(3deg) scale(1.06); }
+    }
+
   </style>
 
     <style>
@@ -1423,7 +1456,7 @@
   <nav class="ch-nav">
     <div class="container">
       <div class="ch-nav-brand">
-        <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+        <div class="brand-icon"><img src="assets/capo-horn-lab-orbit-mark.svg" alt="CH"></div>
         Capo Horn Lab
       </div>
       <div class="ch-nav-links">
@@ -2075,7 +2108,7 @@
     <div class="ch-footer-grid">
       <div>
         <div class="ch-footer-brand">
-          <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+          <div class="brand-icon"><img src="assets/capo-horn-lab-orbit-mark.svg" alt="CH"></div>
           Capo Horn Lab
         </div>
         <p class="ch-footer-tagline">
@@ -2386,5 +2419,44 @@
   </script>
 
   <script src="assets/js/account-client.js"></script>
+<script>
+  (function() {
+    // Scroll progress bar
+    var bar = document.createElement('div');
+    bar.className = 'ch-scroll-progress';
+    document.body.appendChild(bar);
+    function updateProgress() {
+      var h = document.documentElement;
+      var scrolled = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+      bar.style.width = (scrolled * 100) + '%';
+    }
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    // Scroll reveal via IntersectionObserver
+    var revealSel = 'section, .ch-section, .page-hero, .ch-card, .step-card, ' +
+                    '.research-card, .data-panel, .principle-card, .status-card, .feature-card';
+    var targets = document.querySelectorAll(revealSel);
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function(t, i) {
+        t.classList.add('ch-reveal');
+        t.style.transitionDelay = (i % 7) * 0.04 + 's';
+        io.observe(t);
+      });
+    } else {
+      targets.forEach(function(t) { t.classList.add('is-visible'); });
+    }
+  })();
+</script>
+
 </body>
 </html>
