@@ -944,6 +944,7 @@
       var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
       var w = 0, h = 0, dpr = 1, frame = 0;
       var mouse = { x: 0, y: 0 };
+      var researchNodes = [];
       var particles = [];
 
       // Seeded PRNG
@@ -981,6 +982,18 @@
         var rx = x * cy - z * sy, rz = x * sy + z * cy;
         var px = rx / (2.5 - rz), py = y / (2.5 - rz);
         return { x: w * .56 + px * w * .74, y: h * .48 + py * h * .80, z: rz };
+      }
+
+      
+      function unproject(sx, sy, tilt, lift) {
+        var nx = (sx - w * .56) / (w * .74);
+        var ny = (sy - h * .48) / (h * .80);
+        var r = 0.65;
+        var cy = Math.cos(tilt), sy_t = Math.sin(tilt);
+        var x = nx * 2.5 * r;
+        var y = (ny - lift) * 2.5 * r;
+        var z = Math.sqrt(Math.max(0, r * r - x * x - y * y));
+        return { x: x, y: y, z: z };
       }
 
       function draw(t) {
@@ -1048,6 +1061,28 @@
         ctx.arc(core.x, core.y, Math.min(w, h) * .2, 0, Math.PI * 2);
         ctx.fill();
 
+        
+        // ---- RESEARCH NODES (click to place) ----
+        for (var ni = 0; ni < researchNodes.length; ni++) {
+          var node = researchNodes[ni];
+          var np = project(node.x, node.y + lift, node.z, tilt);
+          var nsize = 6 + (np.z + 1) * 3;
+          ctx.save();
+          ctx.translate(np.x, np.y);
+          ctx.rotate(Math.PI / 4);
+          ctx.fillStyle = 'rgba(255,155,100,' + (0.5 + (np.z + 1) * 0.3) + ')';
+          ctx.fillRect(-nsize, -nsize, nsize * 2, nsize * 2);
+          ctx.strokeStyle = 'rgba(255,155,100,' + (0.8 + (np.z + 1) * 0.15) + ')';
+          ctx.lineWidth = 1.2;
+          ctx.strokeRect(-nsize, -nsize, nsize * 2, nsize * 2);
+          ctx.restore();
+          // Glow ring
+          ctx.beginPath();
+          ctx.arc(np.x, np.y, nsize * 2.2, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,155,100,' + (0.06 + (np.z + 1) * 0.04) + ')';
+          ctx.fill();
+        }
+
         // Update readout
         var readout = document.querySelector('#readout');
         if (readout) {
@@ -1065,6 +1100,19 @@
         mouse.y = (e.clientY - box.top) / box.height;
       });
       canvas.addEventListener('pointerleave', function() { mouse = { x: .5, y: .5 }; });
+      canvas.addEventListener('click', function(e) {
+        var box = canvas.getBoundingClientRect();
+        var sx = e.clientX - box.left;
+        var sy = e.clientY - box.top;
+        var tilt = .48 + (mouse.x - .5) * .45;
+        var lift = (mouse.y - .5) * .26;
+        var pos = unproject(sx, sy, tilt, lift);
+        pos.label = 'H' + (researchNodes.length + 1);
+        pos.placedAt = Date.now();
+        researchNodes.push(pos);
+        if (researchNodes.length > 12) researchNodes.shift();
+      });
+
       new ResizeObserver(resize).observe(canvas);
       resize();
       mouse = { x: .5, y: .5 };

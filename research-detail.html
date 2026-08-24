@@ -1514,7 +1514,19 @@
   background: rgba(255,255,255,0.1); border-radius: 50%;
 }
 .chart-lightbox .close-btn:hover { background: rgba(255,255,255,0.2); }
-</style>
+
+    /* Grid overlay */
+    body::before{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:20;
+      opacity:.09;
+      background-image:
+        linear-gradient(var(--ch-line) 1px,transparent 1px),
+        linear-gradient(90deg,var(--ch-line) 1px,transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(#000 10%,transparent 70%);
+    }
+
+  </style>
 
     /* Observatory red — serif display headings */
     h1, h2, .display, .hero h1, .section-header h2 { font-family: var(--ch-font-serif), Georgia, serif !important; letter-spacing: -0.035em; }

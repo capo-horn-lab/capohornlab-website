@@ -366,6 +366,18 @@
       .ch-footer-bottom { flex-direction: column; text-align: center; gap: var(--ch-space-2); }
       .ch-footer { padding: var(--ch-space-12) var(--ch-space-4) var(--ch-space-8); }
     }
+  
+    /* Grid overlay */
+    body::before{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:20;
+      opacity:.09;
+      background-image:
+        linear-gradient(var(--ch-line) 1px,transparent 1px),
+        linear-gradient(90deg,var(--ch-line) 1px,transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(#000 10%,transparent 70%);
+    }
+
   </style>
 
     /* Observatory red — serif display headings */
