@@ -2356,11 +2356,11 @@
     function selectDataTier(tier, el) {
       selectedDataTier = tier;
       document.querySelectorAll('.tier-option').forEach(function(l) {
-        l.style.borderColor = 'var(--ch-gray-200)';
-        l.style.background = 'var(--ch-white)';
+        l.style.borderColor = 'var(--ch-line)';
+        l.style.background = 'var(--ch-deep)';
       });
-      el.style.borderColor = 'var(--ch-blue-400)';
-      el.style.background = 'var(--ch-blue-50)';
+      el.style.borderColor = 'var(--ch-signal)';
+      el.style.background = 'rgba(227,59,47,0.10)';
       el.querySelector('input[type="radio"]').checked = true;
       updatePricing();
     }
