@@ -22,6 +22,12 @@ services:
         value: farne022@gmail.com,capo.horn.lab@gmail.com
       - key: RESEND_API_KEY
         sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
     plan: free
 
   - type: pserv
