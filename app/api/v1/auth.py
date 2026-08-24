@@ -59,8 +59,13 @@ async def signup(
     )
 
     # Generate and dispatch a verification code. Never include it in an HTTP response.
-    await send_verification_code(user.email)
-    return MessageResponse(message="Registration received. Check your email to verify the account.")
+    code_sent = await send_verification_code(user.email)
+    message = (
+        "Registration received. Check your email to verify the account."
+        if code_sent
+        else "Account created. Email verification unavailable — you can log in now."
+    )
+    return MessageResponse(message=message)
 
 
 @router.post("/login", response_model=LoginResponse)
