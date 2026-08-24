@@ -104,6 +104,11 @@ class Settings(BaseSettings):
     NEWSLETTER_FROM_NAME: str = "Capo Horn Lab"
     SUPPORT_EMAIL: str = "contact@capohornlab.com"
 
+    # --- Payments (Stripe) ---
+    STRIPE_SECRET_KEY: str | None = None
+    STRIPE_PUBLISHABLE_KEY: str | None = None
+    STRIPE_WEBHOOK_SECRET: str | None = None
+
     # --- File Upload ---
     UPLOAD_DIR: str = "D:\\CapoHornLab\\uploads"
     MAX_FILE_SIZE_MB: int = 10
