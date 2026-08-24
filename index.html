@@ -188,9 +188,6 @@
       background:linear-gradient(180deg,var(--ch-surface-dim),transparent);
       border:1px solid var(--ch-line);
     }
-    .orbital-canvas{
-      position:absolute;inset:0;width:100%;height:100%;z-index:0;cursor:crosshair;
-    }
     .field>.contour,.field>.route,.field>.coordinates,.field>.legend,.field>.readout{z-index:1}
     .field>.coordinates,.field>.legend,.field>.readout{z-index:2}
 
@@ -578,19 +575,17 @@
       <section class="instrument" aria-label="Interactive research field">
         <h2><span class="status-dot" aria-hidden="true"></span> Live research instrument</h2>
         <div class="field">
-          <canvas class="orbital-canvas" id="orbitalCanvas"
-            aria-label="Interactive orbital research field — move pointer to bend the orbit"></canvas>
           <span class="contour c1"></span><span class="contour c2"></span>
           <span class="contour c3"></span><span class="contour c4"></span>
           <span class="contour c5"></span><span class="route"></span>
           <div class="readout" id="readout" aria-live="polite">
-            AZIMUTH <span class="val">--</span>&deg;<br>
-            ELEVATION <span class="val">--</span>&deg;<br>
+            ORBIT&nbsp;<span class="val">ACTIVE</span><br>
+            FIELD&nbsp;<span class="val">LIVE</span><br>
             <span class="live">&bull; LIVE</span>
           </div>
           <div class="coordinates">
-            OBSERVATION FIELD<br>
-            MOVE TO BEND THE ORBIT<br>
+            ORBITAL FIELD<br>
+            SITE-WIDE BACKGROUND<br>
             TEST / REVISE / DISCARD
           </div>
           <div class="legend"><b>&bull;</b> hypothesis path</div>
@@ -880,187 +875,7 @@
       });
     });
 
-    // ── 3D orbital research field ──
-    (function() {
-      var canvas = document.querySelector('#orbitalCanvas');
-      if (!canvas) return;
-      var ctx = canvas.getContext('2d');
-      var w = 0, h = 0, dpr = 1, frame = 0;
-      var mouse = { x: 0, y: 0 };
-      var researchNodes = [];
-      var particles = [];
-
-      // Seeded PRNG
-      var seed = 1847;
-      var rnd = function() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
-
-      for (var i = 0; i < 148; i++) {
-        var a = rnd() * Math.PI * 2;
-        var lat = (rnd() - .5) * 1.4;
-        var r = .52 + rnd() * .6;
-        particles.push({
-          a: a, lat: lat, r: r,
-          rate: .22 + rnd() * .7,
-          size: .45 + rnd() * 1.9,
-          phase: rnd() * 7
-        });
-      }
-
-      var hexToRgb = function(hex) {
-        var n = parseInt(hex.replace('#', ''), 16);
-        return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-      };
-
-      function resize() {
-        var box = canvas.getBoundingClientRect();
-        dpr = Math.min(devicePixelRatio || 1, 1.5);
-        w = box.width; h = box.height;
-        canvas.width = Math.max(1, Math.round(w * dpr));
-        canvas.height = Math.max(1, Math.round(h * dpr));
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-
-      function project(x, y, z, tilt) {
-        var cy = Math.cos(tilt), sy = Math.sin(tilt);
-        var rx = x * cy - z * sy, rz = x * sy + z * cy;
-        var px = rx / (2.5 - rz), py = y / (2.5 - rz);
-        return { x: w * .56 + px * w * .74, y: h * .48 + py * h * .80, z: rz };
-      }
-
-      
-      function unproject(sx, sy, tilt, lift) {
-        var nx = (sx - w * .56) / (w * .74);
-        var ny = (sy - h * .48) / (h * .80);
-        var r = 0.65;
-        var cy = Math.cos(tilt), sy_t = Math.sin(tilt);
-        var x = nx * 2.5 * r;
-        var y = (ny - lift) * 2.5 * r;
-        var z = Math.sqrt(Math.max(0, r * r - x * x - y * y));
-        return { x: x, y: y, z: z };
-      }
-
-      function draw(t) {
-        frame = t * .00035;
-        ctx.clearRect(0, 0, w, h);
-
-        var signalColor = getComputedStyle(document.body).getPropertyValue('--ch-signal').trim() || '#e33b2f';
-        var rgb = hexToRgb(signalColor);
-        var tilt = .48 + (mouse.x - .5) * .45;
-        var lift = (mouse.y - .5) * .26;
-
-        // Ambient fog
-        var fog = ctx.createRadialGradient(w * .58, h * .47, 0, w * .58, h * .47, Math.max(w, h) * .6);
-        fog.addColorStop(0, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.16)');
-        fog.addColorStop(.55, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.028)');
-        fog.addColorStop(1, 'rgba(0,0,0,0)');
-        ctx.fillStyle = fog; ctx.fillRect(0, 0, w, h);
-
-        // Orbital rings
-        ctx.save(); ctx.lineWidth = .55;
-        for (var ring = 0; ring < 7; ring++) {
-          ctx.beginPath();
-          for (var j = 0; j <= 90; j++) {
-            var q = j / 90 * Math.PI * 2;
-            var rad = .48 + ring * .115;
-            var p = project(
-              Math.cos(q) * rad,
-              Math.sin(q) * rad * .52 + lift,
-              Math.sin(q) * rad * .33,
-              tilt
-            );
-            if (j) { ctx.lineTo(p.x, p.y); } else { ctx.moveTo(p.x, p.y); }
-          }
-          ctx.strokeStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (.02 + ring * .008) + ')';
-          ctx.stroke();
-        }
-        ctx.restore();
-
-        // Particles sorted by depth
-        var draws = particles.map(function(p) {
-          var a = p.a + frame * p.rate;
-          var x = Math.cos(a) * p.r;
-          var y = Math.sin(p.lat + Math.sin(a * 1.7 + p.phase) * .16) * p.r;
-          var z = Math.sin(a) * p.r * .64;
-          return { p: project(x, y + lift, z, tilt), size: p.size, rate: p.rate, a: a, lat: p.lat, r: p.r, phase: p.phase };
-        }).sort(function(a, b) { return a.p.z - b.p.z; });
-
-        for (var k = 0; k < draws.length; k++) {
-          var d = draws[k];
-          var alpha = .12 + (d.p.z + 1) * .26;
-          ctx.beginPath();
-          ctx.arc(d.p.x, d.p.y, d.size * (.7 + (d.p.z + 1) * .5), 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + Math.max(.05, alpha) + ')';
-          ctx.fill();
-        }
-
-        // Central core glow
-        var core = project(0, lift, 0, tilt);
-        var glow = ctx.createRadialGradient(core.x, core.y, 0, core.x, core.y, Math.min(w, h) * .2);
-        glow.addColorStop(0, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.40)');
-        glow.addColorStop(.3, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.10)');
-        glow.addColorStop(1, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',0)');
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(core.x, core.y, Math.min(w, h) * .2, 0, Math.PI * 2);
-        ctx.fill();
-
-        
-        // ---- RESEARCH NODES (click to place) ----
-        for (var ni = 0; ni < researchNodes.length; ni++) {
-          var node = researchNodes[ni];
-          var np = project(node.x, node.y + lift, node.z, tilt);
-          var nsize = 6 + (np.z + 1) * 3;
-          ctx.save();
-          ctx.translate(np.x, np.y);
-          ctx.rotate(Math.PI / 4);
-          ctx.fillStyle = 'rgba(255,155,100,' + (0.5 + (np.z + 1) * 0.3) + ')';
-          ctx.fillRect(-nsize, -nsize, nsize * 2, nsize * 2);
-          ctx.strokeStyle = 'rgba(255,155,100,' + (0.8 + (np.z + 1) * 0.15) + ')';
-          ctx.lineWidth = 1.2;
-          ctx.strokeRect(-nsize, -nsize, nsize * 2, nsize * 2);
-          ctx.restore();
-          // Glow ring
-          ctx.beginPath();
-          ctx.arc(np.x, np.y, nsize * 2.2, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(255,155,100,' + (0.06 + (np.z + 1) * 0.04) + ')';
-          ctx.fill();
-        }
-
-        // Update readout
-        var readout = document.querySelector('#readout');
-        if (readout) {
-          var az = ((mouse.x * 360) % 360).toFixed(1);
-          var el = ((mouse.y * 180 - 90)).toFixed(1);
-          readout.innerHTML = 'AZIMUTH <span class="val">' + az + '</span>&deg;<br>ELEVATION <span class="val">' + el + '</span>&deg;<br><span class="live">&bull; LIVE</span>';
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      canvas.addEventListener('pointermove', function(e) {
-        var box = canvas.getBoundingClientRect();
-        mouse.x = (e.clientX - box.left) / box.width;
-        mouse.y = (e.clientY - box.top) / box.height;
-      });
-      canvas.addEventListener('pointerleave', function() { mouse = { x: .5, y: .5 }; });
-      canvas.addEventListener('click', function(e) {
-        var box = canvas.getBoundingClientRect();
-        var sx = e.clientX - box.left;
-        var sy = e.clientY - box.top;
-        var tilt = .48 + (mouse.x - .5) * .45;
-        var lift = (mouse.y - .5) * .26;
-        var pos = unproject(sx, sy, tilt, lift);
-        pos.label = 'H' + (researchNodes.length + 1);
-        pos.placedAt = Date.now();
-        researchNodes.push(pos);
-        if (researchNodes.length > 12) researchNodes.shift();
-      });
-
-      new ResizeObserver(resize).observe(canvas);
-      resize();
-      mouse = { x: .5, y: .5 };
-      draw(0);
-    })();
   </script>
+  <script src="assets/js/orbit-background.js"></script>
 </body>
 </html>
