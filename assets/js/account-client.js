@@ -96,5 +96,14 @@
       .then(function (data) { sessionStorage.setItem(ACCESS_KEY, data.access_token); return data.access_token; });
   }
 
-  global.CHLAccount = {signup: signup, login: login, getMe: getMe, listRequests: listRequests, createRequest: createRequest, uploadAttachment: uploadAttachment, refresh: refresh, currentUser: currentUser, requireSession: requireSession, logout: logout};
+  function changePassword(currentPassword, newPassword) {
+    if (!token()) return Promise.reject(new Error('Please log in to continue.'));
+    return request('/auth/change-password', {
+      method: 'POST',
+      headers: {Authorization: 'Bearer ' + token()},
+      body: JSON.stringify({current_password: currentPassword, new_password: newPassword})
+    });
+  }
+
+  global.CHLAccount = {signup: signup, login: login, getMe: getMe, listRequests: listRequests, createRequest: createRequest, uploadAttachment: uploadAttachment, refresh: refresh, changePassword: changePassword, currentUser: currentUser, requireSession: requireSession, logout: logout};
 })(window);

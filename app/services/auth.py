@@ -217,6 +217,24 @@ async def mark_user_verified(db: AsyncSession, email: str) -> User:
 # ── Password Reset ──
 
 
+async def change_password(
+    db: AsyncSession,
+    user: User,
+    current_password: str,
+    new_password: str,
+) -> User:
+    """Verify the current password and update to the new one."""
+    if not verify_password(current_password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Current password is incorrect",
+        )
+    user.password_hash = hash_password(new_password)
+    await db.commit()
+    await db.refresh(user)
+    return user
+
+
 async def send_reset_code(email: str) -> str:
     """Generate and store a password reset code."""
     code = f"{secrets.randbelow(1000000):06d}"
