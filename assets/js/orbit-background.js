@@ -8,7 +8,7 @@
   var css = [
     '#orbit-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; width: 100vw; height: 100vh; display: block; }',
     '#orbit-veil { position: fixed; inset: 0; z-index: 1; pointer-events: none; ',
-    '  background: radial-gradient(ellipse at 50% 42%, rgba(7,11,18,0.42) 0%, rgba(7,11,18,0.78) 55%, rgba(7,11,18,0.94) 100%); }',
+    '  background: radial-gradient(ellipse at 50% 42%, rgba(7,11,18,0.10) 0%, rgba(7,11,18,0.42) 55%, rgba(7,11,18,0.70) 100%); }',
     'body > *:not(#orbit-bg):not(#orbit-veil):not(script) { position: relative; z-index: 2; }'
   ].join('\n');
   var st = document.createElement('style');
@@ -94,8 +94,8 @@
 
     // Ambient fog
     var fog = ctx.createRadialGradient(w * 0.5, h * 0.5, 0, w * 0.5, h * 0.5, Math.max(w, h) * 0.75);
-    fog.addColorStop(0, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',0.10)');
-    fog.addColorStop(0.5, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',0.02)');
+    fog.addColorStop(0, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',0.18)');
+    fog.addColorStop(0.5, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',0.04)');
     fog.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = fog;
     ctx.fillRect(0, 0, w, h);
@@ -127,10 +127,10 @@
 
     for (var k = 0; k < draws.length; k++) {
       var d = draws[k];
-      var alpha = 0.08 + (d.p.z + 1) * 0.18;
+      var alpha = 0.14 + (d.p.z + 1) * 0.30;
       ctx.beginPath();
       ctx.arc(d.p.x, d.p.y, d.size * (0.7 + (d.p.z + 1) * 0.5), 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + Math.max(0.04, alpha) + ')';
+      ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + Math.max(0.06, alpha) + ')';
       ctx.fill();
     }
 
