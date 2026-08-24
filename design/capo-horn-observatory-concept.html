@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Capo Horn Lab — Observatory / Design Direction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:#070b12; --deep:#0c1420; --ocean:#102438; --line:rgba(185,218,230,.17);
+      --fog:#f2e7e3; --mist:#cfb6ae; --quiet:#9d746d; --signal:#e33b2f; --signal-ink:#fff7f4;
+      --warm:#ff9b64; --danger:#ff7067; --serif:"Playfair Display", Georgia, serif;
+      --sans:"DM Sans", system-ui, sans-serif; --mono:"DM Mono", monospace;
+    }
+    /* Palette experiments: the composition stays fixed while the identity shifts. */
+    body[data-palette="cobalt"]{--ink:#070a18;--deep:#10163a;--ocean:#172a58;--line:rgba(157,189,255,.20);--fog:#e7efff;--mist:#a9b9e4;--quiet:#7184b8;--signal:#66a8ff;--signal-ink:#07172f;--warm:#ff8a6a}
+    body[data-palette="coral"]{--ink:#17100f;--deep:#241616;--ocean:#3a2020;--line:rgba(255,209,177,.18);--fog:#fff0e8;--mist:#dcb9a9;--quiet:#aa8276;--signal:#ffd452;--signal-ink:#291b00;--warm:#ff7867}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--ink);color:var(--fog);font-family:var(--sans);overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.12;background-image:linear-gradient(rgba(220,231,230,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(220,231,230,.09) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(#000,transparent 65%)}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1340px,calc(100% - 64px));margin:auto}
+    .mast{position:relative;min-height:100svh;isolation:isolate;border-bottom:1px solid var(--line);overflow:hidden}
+    .mast::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 71% 40%,rgba(68,133,162,.24),transparent 23%),radial-gradient(circle at 15% 100%,rgba(227,59,47,.12),transparent 25%),linear-gradient(110deg,#070b12 8%,#0b1725 58%,#101e2e)}
+    .nav{height:92px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:3}.mark{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:-.03em}.brand-mark{width:36px;height:36px;display:block;filter:drop-shadow(0 4px 9px rgba(227,59,47,.22));transition:transform .4s cubic-bezier(.2,.8,.2,1)}.mark:hover .brand-mark{transform:rotate(12deg) scale(1.06)}.logo-orbit{width:32px;height:32px;display:grid;place-items:center;position:relative;border:1px solid var(--signal);border-radius:50%;transform:rotate(-18deg);box-shadow:0 0 22px color-mix(in srgb,var(--signal) 33%,transparent)}.logo-orbit::before,.logo-orbit::after{content:"";position:absolute}.logo-orbit::before{width:17px;height:17px;border:1px solid var(--signal);border-radius:50%;border-left-color:transparent}.logo-orbit::after{width:5px;height:5px;background:var(--warm);border-radius:50%;top:4px;right:5px;box-shadow:0 0 12px var(--warm)}.logo-orbit span{font:9px var(--mono);color:var(--signal);transform:rotate(18deg)}.mark small{display:block;font:10px/1.2 var(--mono);letter-spacing:.12em;color:var(--quiet);margin-top:3px}.palette-lab{display:flex;gap:7px;align-items:center;margin-left:auto;margin-right:24px}.palette-lab span{font:9px var(--mono);letter-spacing:.1em;color:var(--quiet);text-transform:uppercase}.palette{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.25);cursor:pointer;padding:0;background:var(--palette)}.palette.active{outline:1px solid var(--fog);outline-offset:3px}.palette[data-palette="default"]{--palette:#e33b2f}.palette[data-palette="cobalt"]{--palette:#66a8ff}.palette[data-palette="coral"]{--palette:#ffd452}
+    .orbit-label{position:absolute;right:-86px;top:200px;transform:rotate(90deg);font:10px var(--mono);letter-spacing:.18em;color:var(--quiet)}
+    .hero{padding:clamp(72px,11vw,150px) 0 72px;display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:end;min-height:calc(100svh - 92px)}
+    .eyebrow{font:11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--signal);display:flex;align-items:center;gap:10px}.eyebrow i{width:7px;height:7px;background:var(--signal);border-radius:50%;box-shadow:0 0 18px var(--signal)}
+    .brand-lockup{display:inline-flex;align-items:center;gap:12px;margin:20px 0 4px;padding:10px 13px 10px 10px;border:1px solid var(--line);background:rgba(255,255,255,.035);backdrop-filter:blur(14px)}.brand-lockup img{width:46px;height:46px;filter:drop-shadow(0 8px 14px rgba(227,59,47,.22))}.brand-lockup strong{display:block;font:14px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--fog)}.brand-lockup span{display:block;margin-top:4px;font:10px var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--signal)}
+    h1{font:clamp(58px,8.2vw,132px)/.84 var(--serif);letter-spacing:-.075em;margin:22px 0 30px;max-width:880px}.hero h1 em{color:var(--signal);font-style:italic;font-weight:600}.motto-line{display:block;color:var(--fog)}.lead{max-width:520px;color:var(--mist);font-size:clamp(18px,1.7vw,23px);line-height:1.4;letter-spacing:-.025em}.hero-actions{display:flex;gap:12px;margin-top:38px;flex-wrap:wrap}.action{display:inline-flex;min-height:50px;align-items:center;justify-content:center;padding:0 20px;font:12px var(--mono);letter-spacing:.06em;text-transform:uppercase;transition:transform .2s ease,background .2s ease}.action:hover{transform:translateY(-3px)}.primary{background:var(--signal);color:var(--signal-ink)}.secondary{border:1px solid var(--line);color:var(--fog)}
+    .instrument{position:relative;align-self:stretch;min-height:520px;border-left:1px solid var(--line);padding:18px 0 0 28px}.instrument h2{font:11px var(--mono);font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--mist);margin:0}.field{height:calc(100% - 32px);min-height:470px;position:relative;overflow:hidden;margin-top:12px;background:linear-gradient(180deg,rgba(255,255,255,.025),transparent);border:1px solid var(--line)}.orbital-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;cursor:crosshair}.field>.contour,.field>.route,.field>.coordinates,.field>.legend{z-index:1}.field>.coordinates,.field>.legend{z-index:2}
+    .contour{position:absolute;border:1px solid rgba(173,213,223,.22);border-radius:48% 52% 40% 60% / 49% 42% 58% 51%;transform:rotate(-24deg)}.c1{width:520px;height:300px;right:-105px;top:20px}.c2{width:420px;height:270px;right:-80px;top:42px}.c3{width:340px;height:220px;right:-55px;top:68px}.c4{width:250px;height:160px;right:-26px;top:96px}.c5{width:140px;height:90px;right:26px;top:125px;background:rgba(227,59,47,.12);border-color:rgba(227,59,47,.75)}
+    .route{position:absolute;top:43%;left:-2%;width:112%;height:46%;border-top:2px solid var(--signal);transform:rotate(-10deg);filter:drop-shadow(0 0 10px rgba(227,59,47,.48))}.route:after{content:"";position:absolute;right:31%;top:-7px;width:13px;height:13px;border:3px solid var(--signal);background:var(--ink);border-radius:50%}.coordinates{position:absolute;bottom:16px;left:17px;font:10px var(--mono);color:var(--quiet);line-height:1.75}.legend{position:absolute;right:16px;bottom:16px;display:flex;gap:8px;font:10px var(--mono);color:var(--mist)}.legend b{font-weight:400;color:var(--signal)}
+    .bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);min-height:66px;display:flex;align-items:center;overflow:hidden}.bar-track{display:flex;gap:0;white-space:nowrap;animation:drift 30s linear infinite;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}.bar-track span{padding:0 25px}.bar-track strong{color:var(--signal);font-weight:400}@keyframes drift{to{transform:translateX(-35%)}}
+    .thesis{padding:clamp(90px,13vw,180px) 0;display:grid;grid-template-columns:30% 1fr;gap:70px;border-bottom:1px solid var(--line)}.section-kicker{font:11px var(--mono);color:var(--quiet);letter-spacing:.16em;text-transform:uppercase}.section-kicker::before{content:"01 / ";color:var(--signal)}.thesis h2{font:clamp(45px,6vw,90px)/.92 var(--serif);letter-spacing:-.06em;margin:0}.thesis p{font-size:22px;line-height:1.45;color:var(--mist);max-width:790px;margin:30px 0 0}.thesis p b{color:var(--fog);font-weight:500}
+    .systems{padding:22px 0 120px;border-bottom:1px solid var(--line)}.systems-head{display:flex;justify-content:space-between;align-items:end;padding:55px 0 36px}.systems-head h2{font:clamp(36px,4vw,62px)/.95 var(--serif);letter-spacing:-.05em;margin:12px 0 0}.switcher{display:flex;border:1px solid var(--line);font:10px var(--mono)}.switcher button{appearance:none;background:none;color:var(--mist);border:0;border-left:1px solid var(--line);padding:12px 14px;cursor:pointer;font:inherit}.switcher button:first-child{border-left:0}.switcher button.active{color:var(--signal);background:rgba(227,59,47,.07)}
+    .system-grid{display:grid;grid-template-columns:1.08fr .92fr;min-height:490px;border:1px solid var(--line)}.system-nav{border-right:1px solid var(--line);padding:18px}.system-row{padding:20px 6px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;cursor:pointer;transition:background .2s}.system-row:hover,.system-row.current{background:rgba(227,59,47,.07)}.system-row:last-child{border-bottom:0}.system-row .no{font:10px var(--mono);color:var(--quiet)}.system-row h3{margin:0;font-size:22px;font-weight:500;letter-spacing:-.04em}.system-row p{grid-column:2;margin:4px 0 0;color:var(--quiet);font-size:13px}.arrow{color:var(--signal);font-size:20px}.system-detail{padding:34px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.018)}.detail-tag{font:10px var(--mono);letter-spacing:.14em;color:var(--signal)}.system-detail h3{font:clamp(35px,4vw,57px)/.9 var(--serif);letter-spacing:-.06em;margin:14px 0}.system-detail p{font-size:17px;line-height:1.5;color:var(--mist);max-width:400px}.architecture{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:30px}.architecture span{height:9px;border:1px solid var(--line)}.architecture span:nth-child(1),.architecture span:nth-child(4){background:var(--signal);border-color:var(--signal)}
+    .closing{padding:clamp(90px,13vw,170px) 0 36px;position:relative;overflow:hidden}.closing::after{content:"CHL";position:absolute;right:-.06em;bottom:-.18em;font:clamp(150px,30vw,460px)/.7 var(--serif);letter-spacing:-.13em;color:rgba(227,59,47,.07);pointer-events:none}.closing h2{font:clamp(62px,10vw,150px)/.82 var(--serif);letter-spacing:-.08em;max-width:1000px;margin:0}.closing h2 em{font-style:italic;color:var(--warm)}.closing .action{margin-top:42px}.footer{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:26px 0;color:var(--quiet);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    @media(max-width:820px){.wrap{width:min(100% - 36px,1340px)}.brand-system-grid,.progress-grid{grid-template-columns:1fr}.depth-card{min-height:300px}.nav{height:70px}.navlinks a:not(.enter){display:none}.hero{grid-template-columns:1fr;gap:36px;padding-top:72px}.instrument{min-height:380px;border-left:0;padding-left:0}.field{min-height:340px}.thesis{grid-template-columns:1fr;gap:30px}.thesis p{font-size:18px}.systems-head{align-items:start;gap:25px;flex-direction:column}.system-grid{grid-template-columns:1fr}.system-nav{border-right:0;border-bottom:1px solid var(--line)}.system-detail{min-height:330px}.closing h2{font-size:70px}.footer{gap:15px;align-items:start;flex-direction:column}}
+    @media(max-width:520px){.navlinks .enter{padding:9px 10px;font-size:9px}.palette-lab{margin-right:12px;gap:5px}.palette-lab span{display:none}.palette{width:15px;height:15px}.mark{font-size:14px}.mark small{font-size:8px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+  </style>
+</head>
+<body>
+  <header class="mast">
+    <nav class="nav wrap" aria-label="Concept navigation">
+      <a class="mark" href="#top" aria-label="Capo Horn Lab"><img class="brand-mark" src="assets/capo-horn-lab-orbit-mark.svg" alt="Capo Horn Lab orbit mark"><span>Capo Horn Lab<small>Research observatory</small></span></a>
+      <div class="palette-lab" aria-label="Palette experiments"><span>Palette</span><button class="palette active" type="button" data-palette="default" aria-label="Abyss and chartreuse palette"></button><button class="palette" type="button" data-palette="cobalt" aria-label="Cobalt and coral palette"></button><button class="palette" type="button" data-palette="coral" aria-label="Signal gold and coral palette"></button></div>
+      <div class="navlinks"><a href="#method">Method</a><a href="#systems">Systems</a><a href="../test-strategy.html" class="enter">Enter the lab ↗</a></div>
+    </nav>
+    <span class="orbit-label">N 43° 46' / E 11° 15' / RESEARCH, NOT SIGNALS</span>
+    <div class="wrap hero" id="top">
+      <div>
+        <div class="eyebrow"><i></i> Capo Horn Lab · Observatory online · 2026</div>
+        <div class="brand-lockup"><img src="assets/capo-horn-lab-orbit-mark.svg" alt=""><div><strong>Capo Horn Lab</strong><span>Beyond the hedge of the market</span></div></div>
+        <h1><span class="motto-line">Beyond the hedge</span><br><em>of the market.</em></h1>
+        <p class="lead">Capo Horn Lab is becoming a research observatory: a place to test a market idea before anyone has to trust it.</p>
+        <div class="hero-actions"><a class="action primary" href="../test-strategy.html">Start a research request ↗</a><a class="action secondary" href="#method">See the method ↓</a></div>
+      </div>
+      <section class="instrument" aria-label="Conceptual research map">
+        <h2>Live research instrument / no live trading</h2>
+        <div class="field"><canvas class="orbital-canvas" id="orbitalCanvas" aria-label="Interactive three-dimensional orbital research field"></canvas><span class="contour c1"></span><span class="contour c2"></span><span class="contour c3"></span><span class="contour c4"></span><span class="contour c5"></span><span class="route"></span><div class="coordinates">OBSERVATION FIELD<br>MOVE TO BEND THE ORBIT<br>TEST / REVISE / DISCARD</div><div class="legend"><b>●</b> hypothesis path</div></div>
+      </section>
+    </div>
+  </header>
+  <div class="bar" aria-hidden="true"><div class="bar-track"><span>Hypothesis before conviction</span><strong>✦</strong><span>Document assumptions</span><strong>✦</strong><span>Test out of sample</span><strong>✦</strong><span>Keep the failures</span><strong>✦</strong><span>Hypothesis before conviction</span><strong>✦</strong><span>Document assumptions</span><strong>✦</strong><span>Test out of sample</span><strong>✦</strong></div></div>
+  <main>
+    <section class="wrap thesis" id="method"><div class="section-kicker">The operating premise</div><div><h2>A laboratory, not a trading room.</h2><p>The next Capo Horn Lab should not look like a generic fintech landing page. It should feel like an <b>instrument of investigation</b>: deliberate, spatial, disciplined, and a little dangerous in the right way. The visual language is navigation—not neon finance.</p></div></section>
+    <section class="wrap systems" id="systems"><div class="systems-head"><div><div class="section-kicker">The product is the evidence</div><h2>Three rooms. One research trail.</h2></div><div class="switcher" role="tablist"><button class="active" data-room="request">Request</button><button data-room="research">Research</button><button data-room="archive">Archive</button></div></div>
+      <div class="system-grid"><div class="system-nav"><article class="system-row current"><span class="no">01</span><div><h3>Set the question</h3><p>Turn a market intuition into clear rules and constraints.</p></div><span class="arrow">↗</span></article><article class="system-row"><span class="no">02</span><div><h3>Choose the lens</h3><p>Data type, timeframe, news context, execution assumptions.</p></div><span class="arrow">↗</span></article><article class="system-row"><span class="no">03</span><div><h3>Read the evidence</h3><p>Results, limits, invalidations, and the next question.</p></div><span class="arrow">↗</span></article></div>
+        <aside class="system-detail"><div><div class="detail-tag" id="detailTag">01 / REQUEST ROOM</div><h3 id="detailTitle">Start with a question worth breaking.</h3><p id="detailText">A guided intake that treats your strategy as a research object. No false certainty; no push-button promise.</p></div><div class="architecture" aria-label="Process completeness"><span></span><span></span><span></span><span></span><span></span></div></aside>
+      </div>
+    </section>
+
+    <section class="wrap brand-system" id="systems">
+      <div class="section-kicker">Progress mockup / brand system</div>
+      <div class="brand-system-grid">
+        <div class="wordmark-card">
+          <img src="assets/capo-horn-lab-wordmark.svg" alt="Capo Horn Lab — Beyond the hedge of the market wordmark">
+          <p class="wordmark-note">The name stays explicit. The motto stays central. The red identity becomes navigational rather than decorative: a lab crossing the uncertain edge of the market.</p>
+        </div>
+        <div class="depth-card" aria-label="Dynamic data layers mockup">
+          <div class="depth-stack">
+            <span class="data-plane" style="--y:0px" data-label="INTAKE / HYPOTHESIS"></span>
+            <span class="data-plane" data-label="DATA / QUALITY GATES"></span>
+            <span class="data-plane" data-label="BACKTEST / EVIDENCE"></span>
+            <span class="data-plane" data-label="REPORT / DECISION"></span>
+          </div>
+          <div class="system-caption">Animated mockup layer · no stock image · procedural interface study</div>
+        </div>
+      </div>
+      <div class="progress-grid">
+        <article class="progress-card"><b>01</b><h3>Logo system</h3><p>Mark, wordmark and motto are now separate reusable assets.</p></article>
+        <article class="progress-card"><b>02</b><h3>Motion identity</h3><p>The page uses orbital motion, layered data planes and depth instead of generic fintech glow.</p></article>
+        <article class="progress-card"><b>03</b><h3>Next build</h3><p>The homepage can now be rebuilt around this visual language page by page.</p></article>
+      </div>
+    </section>
+    <section class="wrap closing"><h2>Make the unknown<br>feel <em>navigable.</em></h2><a class="action primary" href="../test-strategy.html">Explore the research flow ↗</a></section>
+  </main>
+  <footer class="wrap footer"><span>Capo Horn Lab / Beyond the hedge of the market / Observatory concept</span><span>Exploration 02 — red 3D mockup — reversible</span></footer>
+  <script>
+    const rooms={request:{tag:'01 / REQUEST ROOM',title:'Start with a question worth breaking.',text:'A guided intake that treats your strategy as a research object. No false certainty; no push-button promise.'},research:{tag:'02 / RESEARCH ROOM',title:'The experiment becomes legible.',text:'A dense, calm evidence surface where assumptions, datasets and limitations stay visible beside conclusions.'},archive:{tag:'03 / ARCHIVE ROOM',title:'Failures deserve a map too.',text:'A navigable record of hypotheses that held, broke, or need another season of data—not a trophy shelf.'}};
+    document.querySelectorAll('[data-room]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-room]').forEach(b=>b.classList.remove('active'));button.classList.add('active');const room=rooms[button.dataset.room];document.querySelector('#detailTag').textContent=room.tag;document.querySelector('#detailTitle').textContent=room.title;document.querySelector('#detailText').textContent=room.text;}));
+    document.querySelectorAll('.palette').forEach(button=>button.addEventListener('click',()=>{document.body.dataset.palette=button.dataset.palette==='default'?'':button.dataset.palette;document.querySelectorAll('.palette').forEach(b=>b.classList.toggle('active',b===button));}));
+    // 3D research object: a deterministic orbital field, responsive to the visitor's pointer.
+    (()=>{
+      const canvas=document.querySelector('#orbitalCanvas'); if(!canvas)return;
+      const ctx=canvas.getContext('2d'); const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let w=0,h=0,dpr=1,frame=0,mouse={x:0,y:0},particles=[];
+      let seed=1847; const rnd=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
+      for(let i=0;i<130;i++){const a=rnd()*Math.PI*2,lat=(rnd()-.5)*1.35,r=0.56+rnd()*.55;particles.push({a,lat,r,rate:.25+rnd()*.65,size:.5+rnd()*1.8,phase:rnd()*7});}
+      const hexToRgb=hex=>{const n=parseInt(hex.replace('#',''),16);return[(n>>16)&255,(n>>8)&255,n&255]};
+      function resize(){const box=canvas.getBoundingClientRect();dpr=Math.min(devicePixelRatio||1,1.5);w=box.width;h=box.height;canvas.width=Math.max(1,Math.round(w*dpr));canvas.height=Math.max(1,Math.round(h*dpr));ctx.setTransform(dpr,0,0,dpr,0,0)}
+      function project(x,y,z,tilt){const cy=Math.cos(tilt),sy=Math.sin(tilt),rx=x*cy-z*sy,rz=x*sy+z*cy;const px=rx/(2.5-rz),py=y/(2.5-rz);return{x:w*.56+px*w*.74,y:h*.48+py*h*.80,z:rz}}
+      function draw(t=0){frame=t*.00035;ctx.clearRect(0,0,w,h);const signal=getComputedStyle(document.body).getPropertyValue('--signal').trim()||'#e33b2f';const [r,g,b]=hexToRgb(signal);const tilt=.48+(mouse.x-.5)*.45;const lift=(mouse.y-.5)*.26;
+        const fog=ctx.createRadialGradient(w*.58,h*.47,0,w*.58,h*.47,Math.max(w,h)*.6);fog.addColorStop(0,`rgba(${r},${g},${b},.15)`);fog.addColorStop(.55,`rgba(${r},${g},${b},.025)`);fog.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=fog;ctx.fillRect(0,0,w,h);
+        ctx.save();ctx.lineWidth=.55;for(let ring=0;ring<7;ring++){ctx.beginPath();for(let j=0;j<=90;j++){const q=j/90*Math.PI*2;const rad=.48+ring*.115;const p=project(Math.cos(q)*rad,Math.sin(q)*rad*.52+lift,Math.sin(q)*rad*.33,tilt);j?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y)}ctx.strokeStyle=`rgba(${r},${g},${b},${.018+ring*.007})`;ctx.stroke()}ctx.restore();
+        const draws=particles.map(p=>{const a=p.a+frame*p.rate;const x=Math.cos(a)*p.r,y=Math.sin(p.lat+Math.sin(a*1.7+p.phase)*.16)*p.r,z=Math.sin(a)*p.r*.64;return{...p,p:project(x,y+lift,z,tilt)}}).sort((a,b)=>a.p.z-b.p.z);
+        for(const d of draws){const alpha=.13+(d.p.z+1)*.24;ctx.beginPath();ctx.arc(d.p.x,d.p.y,d.size*(.75+(d.p.z+1)*.5),0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${Math.max(.06,alpha)})`;ctx.fill()}
+        // The central translucent core gives depth without relying on a stock 3D render.
+        const core=project(0,lift,0,tilt);const glow=ctx.createRadialGradient(core.x,core.y,0,core.x,core.y,Math.min(w,h)*.18);glow.addColorStop(0,`rgba(${r},${g},${b},.37)`);glow.addColorStop(.35,`rgba(${r},${g},${b},.10)`);glow.addColorStop(1,`rgba(${r},${g},${b},0)`);ctx.fillStyle=glow;ctx.beginPath();ctx.arc(core.x,core.y,Math.min(w,h)*.18,0,Math.PI*2);ctx.fill();
+        if(!reduced)requestAnimationFrame(draw);
+      }
+      canvas.addEventListener('pointermove',e=>{const box=canvas.getBoundingClientRect();mouse.x=(e.clientX-box.left)/box.width;mouse.y=(e.clientY-box.top)/box.height});canvas.addEventListener('pointerleave',()=>{mouse={x:.5,y:.5}});new ResizeObserver(resize).observe(canvas);resize();mouse={x:.5,y:.5};draw(0);
+    })();
+  </script>
+</body>
+</html>

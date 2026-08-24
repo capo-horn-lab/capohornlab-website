@@ -1,0 +1,3 @@
+GODMODE_SITE_ACTIVE=2026-08-24T02:11:15Z
+SCOPE=site_local_reversible_until_QA
+HARD_NO=secrets,payments,orders,DNS,trading,destructive_deletes

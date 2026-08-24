@@ -4,27 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark">
-  <title>Capo Horn Lab — Beyond the Hedge of the Market</title>
-  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+  <title>Capo Horn Lab — Observatory / Design Direction v2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="design/observatory-tokens.css">
-
-  <!-- Primary Meta Tags -->
-  <meta name="description" content="Capo Horn Lab — Quantitative strategy research and backtesting observatory. Test a market idea before anyone has to trust it. No live trading, no false certainty.">
-
-  <!-- Open Graph / Social -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://capohornlab.com/">
-  <meta property="og:title" content="Capo Horn Lab — Beyond the Hedge of the Market">
-  <meta property="og:description" content="Capo Horn Lab — Quantitative strategy research and backtesting observatory. Test a market idea before anyone has to trust it. No live trading.">
-  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Capo Horn Lab — Beyond the Hedge of the Market">
-  <meta name="twitter:description" content="Capo Horn Lab — Quantitative strategy research and backtesting observatory. No live trading.">
-  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
-
+  <link rel="stylesheet" href="observatory-tokens.css">
   <style>
     /* ═══════════════════════════════════════════
        Capo Horn Lab — Observatory v2
@@ -122,7 +106,6 @@
     .navlinks a{font:11px var(--ch-font-mono);letter-spacing:.1em;text-transform:uppercase;
       color:var(--ch-mist);transition:color var(--ch-duration-fast)}
     .navlinks a:hover{color:var(--ch-signal)}
-    .navlinks a.active{color:var(--ch-signal)}
     .navlinks a.enter{
       padding:10px 18px;border:1px solid var(--ch-line-strong);
       color:var(--ch-fog);transition:background var(--ch-duration-fast),border-color var(--ch-duration-fast);
@@ -495,16 +478,6 @@
       color:var(--ch-quiet);
     }
 
-    .newsletter-band{padding:clamp(70px,9vw,110px) 0;display:grid;grid-template-columns:1fr minmax(280px,.7fr);gap:36px;align-items:end;border-bottom:1px solid var(--ch-line)}
-    .newsletter-band h2{font:clamp(34px,4vw,58px)/.95 var(--ch-font-serif);letter-spacing:-.05em;margin:10px 0 12px}
-    .newsletter-band p{margin:0;color:var(--ch-mist);line-height:1.5;max-width:540px}
-    .newsletter-form{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .newsletter-form input{flex:1 1 190px;min-height:50px;background:var(--ch-surface-dim);color:var(--ch-fog);border:1px solid var(--ch-line-strong);padding:0 14px;font:13px var(--ch-font-sans);outline:none}
-    .newsletter-form input:focus{border-color:var(--ch-signal)}
-    .newsletter-form .action{min-height:50px}
-    .newsletter-status{grid-column:2;color:var(--ch-mist)}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-
     /* ═══════════════ CLOSING ═══════════════ */
     .closing{
       padding:clamp(90px,13vw,170px) 0 36px;
@@ -596,16 +569,15 @@
           aria-label="Coral gold palette"></button>
       </div>
       <div class="navlinks">
-        <a href="method.html">Method</a>
-        <a href="research.html">Research</a>
-        <a href="about.html">About</a>
-        <a href="test-strategy.html" class="enter">Enter the lab &nearr;</a>
+        <a href="#method">Method</a>
+        <a href="#systems">Systems</a>
+        <a href="../test-strategy.html" class="enter">Enter the lab ↗</a>
       </div>
     </nav>
-    <span class="orbit-label">N 43&deg; 46' / E 11&deg; 15' / RESEARCH, NOT SIGNALS</span>
+    <span class="orbit-label">N 43° 46' / E 11° 15' / RESEARCH, NOT SIGNALS</span>
     <div class="wrap hero" id="top">
       <div>
-        <div class="eyebrow"><i aria-hidden="true"></i> Capo Horn Lab &middot; Observatory online &middot; 2026</div>
+        <div class="eyebrow"><i aria-hidden="true"></i> Capo Horn Lab · Observatory online · 2026</div>
         <div class="brand-lockup">
           <img src="assets/capo-horn-lab-orbit-mark.svg" alt="" width="48" height="48">
           <div>
@@ -614,10 +586,10 @@
           </div>
         </div>
         <h1><span class="motto-line">Beyond the hedge</span><br><em>of the market.</em></h1>
-        <p class="lead">Capo Horn Lab is a research observatory &mdash; a place to test a market idea before anyone has to trust it. No live trading, no false certainty.</p>
+        <p class="lead">Capo Horn Lab is a research observatory — a place to test a market idea before anyone has to trust it. No live trading, no false certainty.</p>
         <div class="hero-actions">
-          <a class="action primary" href="test-strategy.html">Start a research request &nearr;</a>
-          <a class="action secondary" href="#method">See the method &darr;</a>
+          <a class="action primary" href="../test-strategy.html">Start a research request ↗</a>
+          <a class="action secondary" href="#method">See the method ↓</a>
         </div>
       </div>
       <section class="instrument" aria-label="Interactive research field">
@@ -629,16 +601,16 @@
           <span class="contour c3"></span><span class="contour c4"></span>
           <span class="contour c5"></span><span class="route"></span>
           <div class="readout" id="readout" aria-live="polite">
-            AZIMUTH <span class="val">--</span>&deg;<br>
-            ELEVATION <span class="val">--</span>&deg;<br>
-            <span class="live">&bull; LIVE</span>
+            AZIMUTH <span class="val">--</span>°<br>
+            ELEVATION <span class="val">--</span>°<br>
+            <span class="live">● LIVE</span>
           </div>
           <div class="coordinates">
             OBSERVATION FIELD<br>
             MOVE TO BEND THE ORBIT<br>
             TEST / REVISE / DISCARD
           </div>
-          <div class="legend"><b>&bull;</b> hypothesis path</div>
+          <div class="legend"><b>●</b> hypothesis path</div>
         </div>
       </section>
     </div>
@@ -647,13 +619,13 @@
   <!-- ═══════════════ TICKER ═══════════════ -->
   <div class="bar" aria-hidden="true">
     <div class="bar-track">
-      <span>Hypothesis before conviction</span><strong>&#10038;</strong>
-      <span>Document assumptions</span><strong>&#10038;</strong>
-      <span>Test out of sample</span><strong>&#10038;</strong>
-      <span>Keep the failures</span><strong>&#10038;</strong>
-      <span>Hypothesis before conviction</span><strong>&#10038;</strong>
-      <span>Document assumptions</span><strong>&#10038;</strong>
-      <span>Test out of sample</span><strong>&#10038;</strong>
+      <span>Hypothesis before conviction</span><strong>✦</strong>
+      <span>Document assumptions</span><strong>✦</strong>
+      <span>Test out of sample</span><strong>✦</strong>
+      <span>Keep the failures</span><strong>✦</strong>
+      <span>Hypothesis before conviction</span><strong>✦</strong>
+      <span>Document assumptions</span><strong>✦</strong>
+      <span>Test out of sample</span><strong>✦</strong>
     </div>
   </div>
 
@@ -663,7 +635,7 @@
       <div class="section-kicker">The operating premise</div>
       <div class="body-col">
         <h2>A laboratory, not a trading room.</h2>
-        <p>The next Capo Horn Lab should not look like a generic fintech landing page. It should feel like an <b>instrument of investigation</b>: deliberate, spatial, disciplined &mdash; and a little dangerous in the right way. The visual language is navigation, not neon finance.</p>
+        <p>The next Capo Horn Lab should not look like a generic fintech landing page. It should feel like an <b>instrument of investigation</b>: deliberate, spatial, disciplined — and a little dangerous in the right way. The visual language is navigation, not neon finance.</p>
         <div class="principle-row">
           <span class="principle-chip">Quantitative research</span>
           <span class="principle-chip">Strategy testing</span>
@@ -679,19 +651,19 @@
       <h2>The lab is always running. These are the conditions, not the results.</h2>
       <div class="status-grid">
         <article class="status-card">
-          <div class="stat-icon">&#9711;</div>
+          <div class="stat-icon">◈</div>
           <h3>Research domains</h3>
           <p class="stat-value"><em>4</em></p>
-          <p class="stat-note">Macro &middot; Momentum &middot; Mean reversion &middot; Volatility</p>
+          <p class="stat-note">Macro · Momentum · Mean reversion · Volatility</p>
         </article>
         <article class="status-card">
-          <div class="stat-icon">&#9881;</div>
+          <div class="stat-icon">⚙</div>
           <h3>Systems online</h3>
           <p class="stat-value"><em>7</em></p>
-          <p class="stat-note">Data pipelines &middot; Validation &middot; Backtest &middot; Reporting</p>
+          <p class="stat-note">Data pipelines · Validation · Backtest · Reporting</p>
         </article>
         <article class="status-card">
-          <div class="stat-icon">&#10227;</div>
+          <div class="stat-icon">⟳</div>
           <h3>Active hypotheses</h3>
           <p class="stat-value"><em>12</em></p>
           <div class="indicator-row" aria-label="4 hypotheses in testing phase">
@@ -699,13 +671,13 @@
             <span class="on"></span><span></span><span></span><span></span><span></span>
             <span></span><span></span><span></span><span></span>
           </div>
-          <p class="stat-note">4 in testing &middot; 8 in design</p>
+          <p class="stat-note">4 in testing · 8 in design</p>
         </article>
         <article class="status-card">
-          <div class="stat-icon">&#9673;</div>
+          <div class="stat-icon">◉</div>
           <h3>Data coverage</h3>
           <p class="stat-value"><em>17</em> yr</p>
-          <p class="stat-note">Equities &middot; Futures &middot; FX &middot; Multi-asset</p>
+          <p class="stat-note">Equities · Futures · FX · Multi-asset</p>
         </article>
       </div>
     </section>
@@ -729,19 +701,19 @@
             <span class="no">01</span>
             <div><h3>Set the question</h3>
             <p>Turn a market intuition into clear rules and constraints.</p></div>
-            <span class="arrow">&nearr;</span>
+            <span class="arrow">↗</span>
           </article>
           <article class="system-row" data-room="research">
             <span class="no">02</span>
             <div><h3>Choose the lens</h3>
             <p>Data type, timeframe, news context, execution assumptions.</p></div>
-            <span class="arrow">&nearr;</span>
+            <span class="arrow">↗</span>
           </article>
           <article class="system-row" data-room="archive">
             <span class="no">03</span>
             <div><h3>Read the evidence</h3>
             <p>Results, limits, invalidations, and the next question.</p></div>
-            <span class="arrow">&nearr;</span>
+            <span class="arrow">↗</span>
           </article>
         </div>
         <aside class="system-detail">
@@ -760,7 +732,7 @@
     <!-- ════════════ PRINCIPLES ════════════ -->
     <section class="wrap principles">
       <div class="section-kicker">Research principles</div>
-      <h2>How we think about research &mdash; not how we decorate it.</h2>
+      <h2>How we think about research — not how we decorate it.</h2>
       <div class="principle-grid">
         <article class="principle-card">
           <div class="p-no">1</div>
@@ -780,7 +752,7 @@
         <article class="principle-card">
           <div class="p-no">4</div>
           <h3>No live trading</h3>
-          <p>Capo Horn Lab is a research environment. We test ideas &mdash; we do not execute orders or manage capital.</p>
+          <p>Capo Horn Lab is a research environment. We test ideas — we do not execute orders or manage capital.</p>
         </article>
         <article class="principle-card">
           <div class="p-no">5</div>
@@ -790,7 +762,7 @@
         <article class="principle-card">
           <div class="p-no">6</div>
           <h3>Archive the failures</h3>
-          <p>A hypothesis that broke is not waste &mdash; it is map data. The archive preserves what did not work and why.</p>
+          <p>A hypothesis that broke is not waste — it is map data. The archive preserves what did not work and why.</p>
         </article>
       </div>
     </section>
@@ -803,7 +775,7 @@
       </div>
       <div class="brand-notes">
         <h2>The identity is built. The pages come next.</h2>
-        <p>The wordmark, orbit mark, and motto are now separate reusable assets. The red identity becomes navigational rather than decorative &mdash; a lab crossing the uncertain edge of the market.</p>
+        <p>The wordmark, orbit mark, and motto are now separate reusable assets. The red identity becomes navigational rather than decorative — a lab crossing the uncertain edge of the market.</p>
         <div class="chip-row">
           <span class="chip">Logo system</span>
           <span class="chip">Motion identity</span>
@@ -817,21 +789,9 @@
     <!-- ════════════ CLOSING ════════════ -->
     <section class="wrap closing">
       <h2>Make the unknown<br>feel <em>navigable.</em></h2>
-      <a class="action primary" href="test-strategy.html">Explore the research flow &nearr;</a>
+      <a class="action primary" href="../test-strategy.html">Explore the research flow ↗</a>
     </section>
-  <section class="wrap newsletter-band" aria-labelledby="newsletter-title">
-      <div>
-        <div class="section-kicker">Research dispatch</div>
-        <h2 id="newsletter-title">Receive published research.</h2>
-        <p>One concise email when a study, dataset note, or methodology update is released.</p>
-      </div>
-      <form class="newsletter-form" onsubmit="CHLNewsletter.subscribe(event)">
-        <label class="sr-only" for="newsletterEmail">Email address</label>
-        <input id="newsletterEmail" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
-        <button class="action primary" type="submit">Subscribe</button>
-      </form>
-    </section>
-</main>
+  </main>
 
   <footer class="wrap footer">
     <div class="col">
@@ -840,15 +800,14 @@
     </div>
     <div class="col">
       <span>Research observatory</span>
-      <span>Strategy testing &middot; No live trading</span>
+      <span>Strategy testing · No live trading</span>
     </div>
     <div class="col">
-      <span>Observatory v2</span>
-      <span>Integrated homepage</span>
+      <span>Exploration 03</span>
+      <span>Observatory v2 — reversible concept</span>
     </div>
   </footer>
 
-  <script src="assets/js/newsletter-client.js"></script>
   <script>
     /* ============================================
        Capo Horn Lab - Observatory v2
@@ -878,97 +837,96 @@
     };
 
     // ── Room switcher with transition ──
-    var detail = document.querySelector('.system-detail');
-    var detailTag = document.querySelector('#detailTag');
-    var detailTitle = document.querySelector('#detailTitle');
-    var detailText = document.querySelector('#detailText');
-    var archBar = document.querySelector('#archBar');
+    const detail = document.querySelector('.system-detail');
+    const detailTag = document.querySelector('#detailTag');
+    const detailTitle = document.querySelector('#detailTitle');
+    const detailText = document.querySelector('#detailText');
+    const archBar = document.querySelector('#archBar');
 
     function setRoom(roomKey, clickedButton) {
-      var room = rooms[roomKey];
+      const room = rooms[roomKey];
       if (!room) return;
 
       // Fade out
       detail.classList.add('switching');
-      setTimeout(function() {
+      setTimeout(() => {
         detailTag.textContent = room.tag;
         detailTitle.textContent = room.title;
         detailText.textContent = room.text;
         // Update architecture bar
-        var spans = archBar.querySelectorAll('span');
-        spans.forEach(function(s, i) {
-          if (room.arch[i]) { s.classList.add('filled'); }
-          else { s.classList.remove('filled'); }
+        const spans = archBar.querySelectorAll('span');
+        spans.forEach((s, i) => {
+          s.classList.toggle('filled', room.arch[i]);
         });
         // Fade in
         detail.classList.remove('switching');
       }, 200);
 
       // Update active states
-      document.querySelectorAll('[data-room]').forEach(function(b) {
+      document.querySelectorAll('[data-room]').forEach(b => {
         b.classList.toggle('active', b === clickedButton);
       });
-      document.querySelectorAll('.system-row[data-room]').forEach(function(r) {
+      document.querySelectorAll('.system-row[data-room]').forEach(r => {
         r.classList.toggle('current', r.dataset.room === roomKey);
       });
     }
 
-    document.querySelectorAll('.switcher [data-room]').forEach(function(button) {
-      button.addEventListener('click', function() { setRoom(button.dataset.room, button); });
+    document.querySelectorAll('.switcher [data-room]').forEach(button => {
+      button.addEventListener('click', () => setRoom(button.dataset.room, button));
     });
 
-    document.querySelectorAll('.system-row[data-room]').forEach(function(row) {
-      row.addEventListener('click', function() {
-        var roomKey = row.dataset.room;
-        var switcherBtn = document.querySelector('.switcher [data-room="' + roomKey + '"]');
+    document.querySelectorAll('.system-row[data-room]').forEach(row => {
+      row.addEventListener('click', () => {
+        const roomKey = row.dataset.room;
+        const switcherBtn = document.querySelector(`.switcher [data-room="${roomKey}"]`);
         setRoom(roomKey, switcherBtn);
       });
     });
 
     // ── Palette switching ──
-    document.querySelectorAll('.palette').forEach(function(button) {
-      button.addEventListener('click', function() {
-        var val = button.dataset.palette;
+    document.querySelectorAll('.palette').forEach(button => {
+      button.addEventListener('click', () => {
+        const val = button.dataset.palette;
         document.body.dataset.palette = val === 'default' ? '' : val;
-        document.querySelectorAll('.palette').forEach(function(b) {
-          b.classList.toggle('active', b === button);
-        });
+        document.querySelectorAll('.palette').forEach(b =>
+          b.classList.toggle('active', b === button)
+        );
       });
     });
 
     // ── 3D orbital research field ──
-    (function() {
-      var canvas = document.querySelector('#orbitalCanvas');
+    (() => {
+      const canvas = document.querySelector('#orbitalCanvas');
       if (!canvas) return;
-      var ctx = canvas.getContext('2d');
-      var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var w = 0, h = 0, dpr = 1, frame = 0;
-      var mouse = { x: 0, y: 0 };
-      var particles = [];
+      const ctx = canvas.getContext('2d');
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let w = 0, h = 0, dpr = 1, frame = 0;
+      let mouse = { x: 0, y: 0 };
+      let particles = [];
 
       // Seeded PRNG
-      var seed = 1847;
-      var rnd = function() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      let seed = 1847;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
 
-      for (var i = 0; i < 148; i++) {
-        var a = rnd() * Math.PI * 2;
-        var lat = (rnd() - .5) * 1.4;
-        var r = .52 + rnd() * .6;
+      for (let i = 0; i < 148; i++) {
+        const a = rnd() * Math.PI * 2;
+        const lat = (rnd() - .5) * 1.4;
+        const r = .52 + rnd() * .6;
         particles.push({
-          a: a, lat: lat, r: r,
+          a, lat, r,
           rate: .22 + rnd() * .7,
           size: .45 + rnd() * 1.9,
           phase: rnd() * 7
         });
       }
 
-      var hexToRgb = function(hex) {
-        var n = parseInt(hex.replace('#', ''), 16);
+      const hexToRgb = hex => {
+        const n = parseInt(hex.replace('#', ''), 16);
         return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
       };
 
       function resize() {
-        var box = canvas.getBoundingClientRect();
+        const box = canvas.getBoundingClientRect();
         dpr = Math.min(devicePixelRatio || 1, 1.5);
         w = box.width; h = box.height;
         canvas.width = Math.max(1, Math.round(w * dpr));
@@ -977,94 +935,93 @@
       }
 
       function project(x, y, z, tilt) {
-        var cy = Math.cos(tilt), sy = Math.sin(tilt);
-        var rx = x * cy - z * sy, rz = x * sy + z * cy;
-        var px = rx / (2.5 - rz), py = y / (2.5 - rz);
+        const cy = Math.cos(tilt), sy = Math.sin(tilt);
+        const rx = x * cy - z * sy, rz = x * sy + z * cy;
+        const px = rx / (2.5 - rz), py = y / (2.5 - rz);
         return { x: w * .56 + px * w * .74, y: h * .48 + py * h * .80, z: rz };
       }
 
-      function draw(t) {
+      function draw(t = 0) {
         frame = t * .00035;
         ctx.clearRect(0, 0, w, h);
 
-        var signalColor = getComputedStyle(document.body).getPropertyValue('--ch-signal').trim() || '#e33b2f';
-        var rgb = hexToRgb(signalColor);
-        var tilt = .48 + (mouse.x - .5) * .45;
-        var lift = (mouse.y - .5) * .26;
+        const signalColor = getComputedStyle(document.body).getPropertyValue('--ch-signal').trim() || '#e33b2f';
+        const [r, g, b] = hexToRgb(signalColor);
+        const tilt = .48 + (mouse.x - .5) * .45;
+        const lift = (mouse.y - .5) * .26;
 
         // Ambient fog
-        var fog = ctx.createRadialGradient(w * .58, h * .47, 0, w * .58, h * .47, Math.max(w, h) * .6);
-        fog.addColorStop(0, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.16)');
-        fog.addColorStop(.55, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.028)');
+        const fog = ctx.createRadialGradient(w * .58, h * .47, 0, w * .58, h * .47, Math.max(w, h) * .6);
+        fog.addColorStop(0, `rgba(${r},${g},${b},.16)`);
+        fog.addColorStop(.55, `rgba(${r},${g},${b},.028)`);
         fog.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = fog; ctx.fillRect(0, 0, w, h);
 
         // Orbital rings
         ctx.save(); ctx.lineWidth = .55;
-        for (var ring = 0; ring < 7; ring++) {
+        for (let ring = 0; ring < 7; ring++) {
           ctx.beginPath();
-          for (var j = 0; j <= 90; j++) {
-            var q = j / 90 * Math.PI * 2;
-            var rad = .48 + ring * .115;
-            var p = project(
+          for (let j = 0; j <= 90; j++) {
+            const q = j / 90 * Math.PI * 2;
+            const rad = .48 + ring * .115;
+            const p = project(
               Math.cos(q) * rad,
               Math.sin(q) * rad * .52 + lift,
               Math.sin(q) * rad * .33,
               tilt
             );
-            if (j) { ctx.lineTo(p.x, p.y); } else { ctx.moveTo(p.x, p.y); }
+            j ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y);
           }
-          ctx.strokeStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + (.02 + ring * .008) + ')';
+          ctx.strokeStyle = `rgba(${r},${g},${b},${.02 + ring * .008})`;
           ctx.stroke();
         }
         ctx.restore();
 
         // Particles sorted by depth
-        var draws = particles.map(function(p) {
-          var a = p.a + frame * p.rate;
-          var x = Math.cos(a) * p.r;
-          var y = Math.sin(p.lat + Math.sin(a * 1.7 + p.phase) * .16) * p.r;
-          var z = Math.sin(a) * p.r * .64;
-          return { p: project(x, y + lift, z, tilt), size: p.size, rate: p.rate, a: a, lat: p.lat, r: p.r, phase: p.phase };
-        }).sort(function(a, b) { return a.p.z - b.p.z; });
+        const draws = particles.map(p => {
+          const a = p.a + frame * p.rate;
+          const x = Math.cos(a) * p.r;
+          const y = Math.sin(p.lat + Math.sin(a * 1.7 + p.phase) * .16) * p.r;
+          const z = Math.sin(a) * p.r * .64;
+          return { ...p, p: project(x, y + lift, z, tilt) };
+        }).sort((a, b) => a.p.z - b.p.z);
 
-        for (var k = 0; k < draws.length; k++) {
-          var d = draws[k];
-          var alpha = .12 + (d.p.z + 1) * .26;
+        for (const d of draws) {
+          const alpha = .12 + (d.p.z + 1) * .26;
           ctx.beginPath();
           ctx.arc(d.p.x, d.p.y, d.size * (.7 + (d.p.z + 1) * .5), 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + Math.max(.05, alpha) + ')';
+          ctx.fillStyle = `rgba(${r},${g},${b},${Math.max(.05, alpha)})`;
           ctx.fill();
         }
 
         // Central core glow
-        var core = project(0, lift, 0, tilt);
-        var glow = ctx.createRadialGradient(core.x, core.y, 0, core.x, core.y, Math.min(w, h) * .2);
-        glow.addColorStop(0, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.40)');
-        glow.addColorStop(.3, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',.10)');
-        glow.addColorStop(1, 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',0)');
+        const core = project(0, lift, 0, tilt);
+        const glow = ctx.createRadialGradient(core.x, core.y, 0, core.x, core.y, Math.min(w, h) * .2);
+        glow.addColorStop(0, `rgba(${r},${g},${b},.40)`);
+        glow.addColorStop(.3, `rgba(${r},${g},${b},.10)`);
+        glow.addColorStop(1, `rgba(${r},${g},${b},0)`);
         ctx.fillStyle = glow;
         ctx.beginPath();
         ctx.arc(core.x, core.y, Math.min(w, h) * .2, 0, Math.PI * 2);
         ctx.fill();
 
         // Update readout
-        var readout = document.querySelector('#readout');
+        const readout = document.querySelector('#readout');
         if (readout) {
-          var az = ((mouse.x * 360) % 360).toFixed(1);
-          var el = ((mouse.y * 180 - 90)).toFixed(1);
-          readout.innerHTML = 'AZIMUTH <span class="val">' + az + '</span>&deg;<br>ELEVATION <span class="val">' + el + '</span>&deg;<br><span class="live">&bull; LIVE</span>';
+          const az = ((mouse.x * 360) % 360).toFixed(1);
+          const el = ((mouse.y * 180 - 90)).toFixed(1);
+          readout.innerHTML = `AZIMUTH <span class="val">${az}</span>°<br>ELEVATION <span class="val">${el}</span>°<br><span class="live">● LIVE</span>`;
         }
 
         if (!reduced) requestAnimationFrame(draw);
       }
 
-      canvas.addEventListener('pointermove', function(e) {
-        var box = canvas.getBoundingClientRect();
+      canvas.addEventListener('pointermove', e => {
+        const box = canvas.getBoundingClientRect();
         mouse.x = (e.clientX - box.left) / box.width;
         mouse.y = (e.clientY - box.top) / box.height;
       });
-      canvas.addEventListener('pointerleave', function() { mouse = { x: .5, y: .5 }; });
+      canvas.addEventListener('pointerleave', () => { mouse = { x: .5, y: .5 }; });
       new ResizeObserver(resize).observe(canvas);
       resize();
       mouse = { x: .5, y: .5 };

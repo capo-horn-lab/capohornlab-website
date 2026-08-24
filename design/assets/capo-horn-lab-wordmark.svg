@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" role="img" aria-labelledby="title desc">
+  <title id="title">Capo Horn Lab wordmark</title>
+  <desc id="desc">Capo Horn Lab wordmark with the motto Beyond the hedge of the market.</desc>
+  <defs>
+    <linearGradient id="red" x1="18" y1="18" x2="142" y2="154" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff7b62"/>
+      <stop offset=".45" stop-color="#e33b2f"/>
+      <stop offset="1" stop-color="#8e1717"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#320c0b" flood-opacity=".42"/>
+    </filter>
+  </defs>
+  <rect width="760" height="180" rx="28" fill="#080d14"/>
+  <g filter="url(#soft)">
+    <circle cx="88" cy="90" r="54" fill="#111822" stroke="#e33b2f" stroke-width="2.5"/>
+    <path d="M88 28c-36 0-61 27-61 62 0 17 7 33 18 45" fill="none" stroke="url(#red)" stroke-width="11" stroke-linecap="round"/>
+    <path d="M130 49c12 11 19 25 19 41 0 36-27 62-61 62-15 0-29-5-40-14" fill="none" stroke="#e33b2f" stroke-width="4" stroke-linecap="round" opacity=".86"/>
+    <circle cx="128" cy="49" r="5.8" fill="#ff9b64" stroke="#ffe3da" stroke-width="1.6"/>
+    <path d="M62 62v56M62 90h27M91 62v56M111 62v56" fill="none" stroke="#f6e6df" stroke-width="8" stroke-linecap="square"/>
+    <path d="M35 126l-8 12 14-3" fill="#ff735c"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="180" y="78" fill="#f5e9e4" font-size="42" font-weight="750" letter-spacing="2">CAPO HORN LAB</text>
+    <rect x="183" y="96" width="418" height="1.6" fill="#e33b2f" opacity=".82"/>
+    <text x="180" y="129" fill="#e33b2f" font-size="17" font-weight="600" letter-spacing="4.8">BEYOND THE HEDGE OF THE MARKET</text>
+    <text x="181" y="153" fill="#967a72" font-size="11" font-family="JetBrains Mono, Consolas, monospace" letter-spacing="2.4">RESEARCH OBSERVATORY · STRATEGY TESTING · NO LIVE TRADING</text>
+  </g>
+</svg>

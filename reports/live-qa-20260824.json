@@ -1,0 +1,459 @@
+{
+  "base": "https://www.capohornlab.com/",
+  "pages": {
+    "/": {
+      "status": 200,
+      "bytes": 68305,
+      "url": "https://www.capohornlab.com/?v=godmodeqa20260819"
+    },
+    "/index.html": {
+      "status": 200,
+      "bytes": 68305,
+      "url": "https://www.capohornlab.com/index.html?v=godmodeqa20260819"
+    },
+    "/about.html": {
+      "status": 200,
+      "bytes": 49564,
+      "url": "https://www.capohornlab.com/about.html?v=godmodeqa20260819"
+    },
+    "/method.html": {
+      "status": 200,
+      "bytes": 53481,
+      "url": "https://www.capohornlab.com/method.html?v=godmodeqa20260819"
+    },
+    "/research.html": {
+      "status": 200,
+      "bytes": 62069,
+      "url": "https://www.capohornlab.com/research.html?v=godmodeqa20260819",
+      "slug_nq-rth-directional-screen": 0,
+      "slug_news-event-long-horizon-es": 0
+    },
+    "/research-detail.html": {
+      "status": 200,
+      "bytes": 276373,
+      "url": "https://www.capohornlab.com/research-detail.html?v=godmodeqa20260819",
+      "slug_nq-rth-directional-screen": 0,
+      "slug_news-event-long-horizon-es": 0
+    },
+    "/test-strategy.html": {
+      "status": 200,
+      "bytes": 97885,
+      "url": "https://www.capohornlab.com/test-strategy.html?v=godmodeqa20260819"
+    },
+    "/contact.html": {
+      "status": 200,
+      "bytes": 52101,
+      "url": "https://www.capohornlab.com/contact.html?v=godmodeqa20260819"
+    },
+    "/login.html": {
+      "status": 200,
+      "bytes": 36722,
+      "url": "https://www.capohornlab.com/login.html?v=godmodeqa20260819"
+    },
+    "/signup.html": {
+      "status": 200,
+      "bytes": 25277,
+      "url": "https://www.capohornlab.com/signup.html?v=godmodeqa20260819"
+    },
+    "/dashboard.html": {
+      "status": 200,
+      "bytes": 59518,
+      "url": "https://www.capohornlab.com/dashboard.html?v=godmodeqa20260819"
+    },
+    "/checkout.html": {
+      "status": 200,
+      "bytes": 12283,
+      "url": "https://www.capohornlab.com/checkout.html?v=godmodeqa20260819"
+    },
+    "/faq.html": {
+      "status": 200,
+      "bytes": 53417,
+      "url": "https://www.capohornlab.com/faq.html?v=godmodeqa20260819"
+    },
+    "/documentation.html": {
+      "status": 200,
+      "bytes": 57609,
+      "url": "https://www.capohornlab.com/documentation.html?v=godmodeqa20260819"
+    },
+    "/privacy-policy.html": {
+      "status": 200,
+      "bytes": 39029,
+      "url": "https://www.capohornlab.com/privacy-policy.html?v=godmodeqa20260819"
+    },
+    "/terms-of-service.html": {
+      "status": 200,
+      "bytes": 34788,
+      "url": "https://www.capohornlab.com/terms-of-service.html?v=godmodeqa20260819"
+    },
+    "/cookie-policy.html": {
+      "status": 200,
+      "bytes": 33737,
+      "url": "https://www.capohornlab.com/cookie-policy.html?v=godmodeqa20260819"
+    },
+    "/disclaimer.html": {
+      "status": 200,
+      "bytes": 29000,
+      "url": "https://www.capohornlab.com/disclaimer.html?v=godmodeqa20260819"
+    },
+    "/refund-policy.html": {
+      "status": 200,
+      "bytes": 29330,
+      "url": "https://www.capohornlab.com/refund-policy.html?v=godmodeqa20260819"
+    },
+    "/investors.html": {
+      "status": 200,
+      "bytes": 45114,
+      "url": "https://www.capohornlab.com/investors.html?v=godmodeqa20260819"
+    },
+    "/pages/about.html": {
+      "status": 200,
+      "bytes": 574,
+      "url": "https://www.capohornlab.com/pages/about.html?v=godmodeqa20260819"
+    },
+    "/pages/admin.html": {
+      "status": 200,
+      "bytes": 574,
+      "url": "https://www.capohornlab.com/pages/admin.html?v=godmodeqa20260819"
+    },
+    "/pages/contact.html": {
+      "status": 200,
+      "bytes": 580,
+      "url": "https://www.capohornlab.com/pages/contact.html?v=godmodeqa20260819"
+    },
+    "/pages/dashboard.html": {
+      "status": 200,
+      "bytes": 466,
+      "url": "https://www.capohornlab.com/pages/dashboard.html?v=godmodeqa20260819"
+    },
+    "/pages/documentation.html": {
+      "status": 200,
+      "bytes": 597,
+      "url": "https://www.capohornlab.com/pages/documentation.html?v=godmodeqa20260819"
+    },
+    "/pages/home.html": {
+      "status": 200,
+      "bytes": 574,
+      "url": "https://www.capohornlab.com/pages/home.html?v=godmodeqa20260819"
+    },
+    "/pages/index.html": {
+      "status": 200,
+      "bytes": 573,
+      "url": "https://www.capohornlab.com/pages/index.html?v=godmodeqa20260819"
+    },
+    "/pages/method.html": {
+      "status": 200,
+      "bytes": 577,
+      "url": "https://www.capohornlab.com/pages/method.html?v=godmodeqa20260819"
+    },
+    "/pages/pricing.html": {
+      "status": 200,
+      "bytes": 580,
+      "url": "https://www.capohornlab.com/pages/pricing.html?v=godmodeqa20260819"
+    },
+    "/pages/research-detail.html": {
+      "status": 200,
+      "bytes": 908,
+      "url": "https://www.capohornlab.com/pages/research-detail.html?v=godmodeqa20260819"
+    },
+    "/pages/research.html": {
+      "status": 200,
+      "bytes": 583,
+      "url": "https://www.capohornlab.com/pages/research.html?v=godmodeqa20260819"
+    },
+    "/pages/test-strategy.html": {
+      "status": 200,
+      "bytes": 598,
+      "url": "https://www.capohornlab.com/pages/test-strategy.html?v=godmodeqa20260819"
+    }
+  },
+  "source": {
+    "about.html": {
+      "bytes": 48167,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "admin.html": {
+      "bytes": 147182,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "checkout.html": {
+      "bytes": 12128,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "contact.html": {
+      "bytes": 50637,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "cookie-policy.html": {
+      "bytes": 33288,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "crypto-cards.html": {
+      "bytes": 6053,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "crypto-price-cards.html": {
+      "bytes": 6303,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "crypto-prices.html": {
+      "bytes": 4974,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "dashboard.html": {
+      "bytes": 57839,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "disclaimer.html": {
+      "bytes": 28702,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "documentation.html": {
+      "bytes": 56762,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "faq.html": {
+      "bytes": 52619,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "index.html": {
+      "bytes": 47880,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "investors.html": {
+      "bytes": 44465,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "login.html": {
+      "bytes": 36063,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "method.html": {
+      "bytes": 51993,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/about.html": {
+      "bytes": 574,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/admin.html": {
+      "bytes": 574,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/contact.html": {
+      "bytes": 580,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/dashboard.html": {
+      "bytes": 453,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/documentation.html": {
+      "bytes": 597,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/home.html": {
+      "bytes": 574,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/index.html": {
+      "bytes": 573,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/method.html": {
+      "bytes": 577,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/pricing.html": {
+      "bytes": 580,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/research-detail.html": {
+      "bytes": 885,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/research.html": {
+      "bytes": 583,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pages/test-strategy.html": {
+      "bytes": 598,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "pricing.html": {
+      "bytes": 53423,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "privacy-policy.html": {
+      "bytes": 38219,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "refund-policy.html": {
+      "bytes": 29011,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "research-detail.html": {
+      "bytes": 252673,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "research.html": {
+      "bytes": 60459,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "signup.html": {
+      "bytes": 24925,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "terms-of-service.html": {
+      "bytes": 34438,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    },
+    "test-strategy.html": {
+      "bytes": 95525,
+      "todo": 0,
+      "lorem": 0,
+      "dead_href": 0,
+      "title": true,
+      "viewport": true
+    }
+  }
+}

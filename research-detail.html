@@ -6,7 +6,7 @@
   <title>Capo Horn Lab — Research Detail</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -17,16 +17,16 @@
 
     /* ---- 1. CUSTOM PROPERTIES ---- */
     :root {
-      --ch-navy-900: #0a1628;
-      --ch-navy-800: #0f1e36;
-      --ch-navy-700: #152a45;
-      --ch-navy-600: #1c3a5c;
-      --ch-navy-500: #254e77;
-      --ch-navy-400: #3b6fa0;
-      --ch-navy-300: #5e93c2;
-      --ch-navy-200: #8fb8da;
-      --ch-navy-100: #c1d6ec;
-      --ch-navy-50:  #e8f0f8;
+      --ch-navy-900: #070b12;
+      --ch-navy-800: #0c1420;
+      --ch-navy-700: #102438;
+      --ch-navy-600: #12253c;
+      --ch-navy-500: #17304a;
+      --ch-navy-400: #1e3d5e;
+      --ch-navy-300: #2d5577;
+      --ch-navy-200: #45719a;
+      --ch-navy-100: #7da3c4;
+      --ch-navy-50:  #cfe0ee;
 
       --ch-white:       #ffffff;
       --ch-off-white:   #f8fafc;
@@ -41,27 +41,28 @@
       --ch-gray-800:    #0f172a;
       --ch-gray-900:    #020617;
 
-      --ch-blue-500:    #2563eb;
-      --ch-blue-400:    #3b82f6;
-      --ch-blue-300:    #60a5fa;
-      --ch-blue-200:    #93c5fd;
-      --ch-blue-100:    #dbeafe;
-      --ch-blue-50:     #eff6ff;
+      --ch-blue-500:    #e33b2f;
+      --ch-blue-400:    #ff5c47;
+      --ch-blue-300:    #ff7a66;
+      --ch-blue-200:    #ffa08f;
+      --ch-blue-100:    #ffd0c7;
+      --ch-blue-50:     #fff0ed;
 
-      --ch-amber-500:   #f59e0b;
-      --ch-amber-400:   #fbbf24;
-      --ch-amber-300:   #fcd34d;
-      --ch-amber-200:   #fde68a;
-      --ch-amber-100:   #fef3c7;
-      --ch-amber-50:    #fffbeb;
+      --ch-amber-500:   #ff9b64;
+      --ch-amber-400:   #ffab78;
+      --ch-amber-300:   #ffc092;
+      --ch-amber-200:   #ffd4ae;
+      --ch-amber-100:   #ffe7d4;
+      --ch-amber-50:    #fff3ec;
 
-      --ch-success:     #10b981;
-      --ch-warning:     #f59e0b;
-      --ch-error:       #ef4444;
-      --ch-info:        #3b82f6;
+      --ch-success:     #5cb8a5;
+      --ch-warning:     #ff9b64;
+      --ch-error:       #ff7067;
+      --ch-info:        #ff5c47;
 
-      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      --ch-font-sans:   'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --ch-font-mono:   'DM Mono', 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
       --ch-text-xs:     0.75rem;
       --ch-text-sm:     0.875rem;
@@ -245,6 +246,7 @@
       align-items: center;
       justify-content: center;
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-bold);
       color: var(--ch-white);
@@ -272,7 +274,7 @@
 
     .ch-nav-links a.active {
       color: var(--ch-white);
-      background: rgba(37,99,235,0.2);
+      background: rgba(227,59,47,0.2);
     }
 
     .ch-nav-actions {
@@ -374,7 +376,7 @@
       background: var(--ch-blue-500);
       color: var(--ch-white);
       border-color: var(--ch-blue-500);
-      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+      box-shadow: 0 1px 3px rgba(227,59,47,0.3);
     }
     .btn-primary:hover {
       background: var(--ch-blue-400);
@@ -457,6 +459,7 @@
       align-items: center;
       gap: var(--ch-space-1);
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-semibold);
       padding: var(--ch-space-1) var(--ch-space-3);
@@ -491,7 +494,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37,99,235,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(227,59,47,0.15) 0%, transparent 70%),
         radial-gradient(ellipse 60% 70% at 80% 60%, rgba(245,158,11,0.06) 0%, transparent 60%),
         repeating-linear-gradient(
           0deg,
@@ -577,6 +580,7 @@
       text-transform: uppercase;
       letter-spacing: var(--ch-letter-spacing-wide);
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
     }
 
     .hero-detail-sub-item .value {
@@ -635,6 +639,7 @@
       background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-blue-400));
       color: var(--ch-white);
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-sm);
       font-weight: var(--ch-font-bold);
       flex-shrink: 0;
@@ -741,6 +746,7 @@
 
     .key-metric .km-label {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: 10px;
       color: var(--ch-navy-400);
       text-transform: uppercase;
@@ -749,6 +755,7 @@
 
     .key-metric .km-value {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-lg);
       font-weight: var(--ch-font-bold);
       color: var(--ch-white);
@@ -895,6 +902,7 @@
 
     .mode-toggle-label {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       text-transform: uppercase;
       letter-spacing: var(--ch-letter-spacing-wide);
@@ -967,6 +975,7 @@
       align-items: center;
       gap: 4px;
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: 10px;
       font-weight: var(--ch-font-semibold);
       padding: 2px 8px;
@@ -1031,6 +1040,7 @@
 
     .chart-card-title {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-semibold);
       color: var(--ch-navy-200);
@@ -1040,6 +1050,7 @@
 
     .chart-card-badge {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: 10px;
       padding: 2px 8px;
       border-radius: var(--ch-radius-full);
@@ -1064,6 +1075,7 @@
       width: 100%;
       border-collapse: collapse;
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
     }
 
@@ -1102,7 +1114,7 @@
     }
 
     .cycle-matrix .mc-mixed {
-      background: #fef3c7;
+      background: #ffe7d4;
       color: #92400e;
       font-weight: var(--ch-font-bold);
     }
@@ -1151,7 +1163,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 30% 50%, rgba(37,99,235,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 30% 50%, rgba(227,59,47,0.10) 0%, transparent 70%),
         radial-gradient(ellipse 40% 60% at 70% 30%, rgba(245,158,11,0.04) 0%, transparent 60%);
       pointer-events: none;
     }
@@ -1225,8 +1237,8 @@
         90deg,
         transparent 0px,
         transparent 20px,
-        rgba(37,99,235,0.06) 20px,
-        rgba(37,99,235,0.06) 22px,
+        rgba(227,59,47,0.06) 20px,
+        rgba(227,59,47,0.06) 22px,
         transparent 22px,
         transparent 40px
       );
@@ -1243,8 +1255,8 @@
         90deg,
         transparent 0px,
         transparent 20px,
-        rgba(37,99,235,0.10) 20px,
-        rgba(37,99,235,0.10) 22px,
+        rgba(227,59,47,0.10) 20px,
+        rgba(227,59,47,0.10) 22px,
         transparent 22px,
         transparent 40px
       );
@@ -1268,7 +1280,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(37,99,235,0.4), transparent);
+      background: linear-gradient(to right, transparent, rgba(227,59,47,0.4), transparent);
     }
 
     .ch-footer-grid {
@@ -1299,6 +1311,7 @@
       align-items: center;
       justify-content: center;
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: 10px;
       font-weight: var(--ch-font-bold);
       color: var(--ch-white);
@@ -1372,7 +1385,7 @@
     }
 
     .ch-footer-social a:hover {
-      background: rgba(37,99,235,0.15);
+      background: rgba(227,59,47,0.15);
       color: var(--ch-white);
     }
 
@@ -1502,6 +1515,10 @@
 }
 .chart-lightbox .close-btn:hover { background: rgba(255,255,255,0.2); }
 </style>
+
+    /* Observatory red — serif display headings */
+    h1, h2, .display, .hero h1, .section-header h2 { font-family: var(--ch-font-serif), Georgia, serif !important; letter-spacing: -0.035em; }
+
 </head>
 <body>
 
@@ -1574,7 +1591,7 @@
       <h1 id="detailTitle">Loading research...</h1>
 
       <!-- Mode Toggle: Ottimale / Realistico -->
-      <div class="mode-toggle-container animate-up" style="animation-delay:0.15s;">
+      <div id="modeToggleContainer" class="mode-toggle-container animate-up" style="animation-delay:0.15s;">
         <span class="mode-toggle-label active" id="modeLabelOttimale">Ottimale</span>
         <label class="mode-toggle-switch">
           <input type="checkbox" id="modeToggle" onchange="toggleMode()">
@@ -1872,7 +1889,10 @@ var localPilotBySlug = {
         if (!currentSlug) return;
         var r = resultsBySlug[currentSlug];
         if (!r) return;
-        var pilot = localPilotBySlug[currentSlug];
+        // The TSMOM article reports a verified cross-asset 1985–2025 replication.
+        // Its ES January-2023 run is a separately scoped implementation pilot and
+        // must never overwrite the article-level metrics in this control.
+        var pilot = currentSlug === 'time-series-momentum-futures' ? null : localPilotBySlug[currentSlug];
         var raw = pilot ? pilot[currentMode] : r[currentMode];
         if (!raw) return;
 
@@ -1904,329 +1924,7 @@ var localPilotBySlug = {
          RESEARCH DATA — contenuti COMPLETI con testo integrale
          ============================================================ */
       var researchData = [
-        {
-          "id": "quantum-computing-quant-finance",
-          "title": "Quantum Computing in Quantitative Finance — State of the Art & Capo Horn Lab Roadmap",
-          "slug": "quantum-computing-quant-finance",
-          "published_date": "2026-08-23",
-          "author": "Capo Horn Lab",
-          "instrument": "Theoretical / Cross-asset",
-          "timeframe": "N/A",
-          "period_tested": "2024-2030 (forecast horizon)",
-          "data_source": "Academic literature review",
-          "outcome": "positive",
-          "tags": [
-            "quantum-computing"
-          ],
-          "instrument_short": "QC",
-          "tag_category": "Quantum Computing",
-          "slug_dir": "quantum-computing-quant-finance",
-          "metrics_display": [
-            {
-              "label": "Quantum Advantage Threshold",
-              "value": "~2028-2030",
-              "sub": "per IBM/Google roadmaps",
-              "cls": "km-neutral"
-            },
-            {
-              "label": "Grover Speedup",
-              "value": "O(√N)",
-              "sub": "portfolio optimization",
-              "cls": "km-positive"
-            },
-            {
-              "label": "QUBO Problems",
-              "value": "10,000+ vars",
-              "sub": "D-Wave Advantage2",
-              "cls": "km-positive"
-            },
-            {
-              "label": "Monte Carlo Q-Speedup",
-              "value": "O(1/ε)",
-              "sub": "vs classical O(1/ε²)",
-              "cls": "km-positive"
-            },
-            {
-              "label": "Risk: NISQ Era",
-              "value": "Noisy qubits",
-              "sub": "error correction pending",
-              "cls": "km-negative"
-            },
-            {
-              "label": "CHL Readiness",
-              "value": "Q3 2027",
-              "sub": "Qiskit + Pennylane integration",
-              "cls": "km-neutral"
-            }
-          ],
-          "market_cycles": {
-            "summary": "Quantum computing is not yet ready for production finance, but the roadmap is clear: by 2028-2030, quantum advantage will be measurable in portfolio optimization, Monte Carlo simulations, and risk management. Capo Horn Lab is positioning early — integrating Qiskit and Pennylane now to be ready when quantum hardware crosses the error-correction threshold.",
-            "works_in": [
-              "All regimes (computational augmentation)"
-            ],
-            "fails_in": [
-              "NISQ era (too noisy for production)"
-            ]
-          },
-          "sections": [
-            {
-              "number": "01",
-              "title": "Objective",
-              "content": [
-                "Assess the current state and near-term roadmap of quantum computing as applied to quantitative finance, specifically portfolio optimization, Monte Carlo simulation, and risk management. Determine Capo Horn Lab's positioning and integration timeline."
-              ]
-            },
-            {
-              "number": "02",
-              "title": "Hypothesis",
-              "content": [
-                "<strong>H₁:</strong> Quantum annealing (D-Wave) can solve QUBO-formulated portfolio optimization problems with >10,000 variables by 2027 — a scale currently intractable for exact classical solvers.",
-                "<strong>H₂:</strong> Quantum Monte Carlo (amplitude estimation) will achieve quadratic speedup over classical Monte Carlo by 2028, reducing convergence time from O(1/ε²) to O(1/ε) for VaR/CVaR estimation.",
-                "<strong>H₃:</strong> Grover's algorithm will provide a sub-quadratic speedup for brute-force strategy search across large parameter spaces by 2029-2030.",
-                "<strong>H₄:</strong> The NISQ (Noisy Intermediate-Scale Quantum) era will persist through 2028, meaning all pre-2028 quantum finance is experimental, not production-grade."
-              ]
-            },
-            {
-              "number": "03",
-              "title": "Methodology",
-              "content": [
-                "Systematic literature review of peer-reviewed quantum finance papers (2019-2026), vendor roadmaps (IBM Q, Google Quantum AI, D-Wave, IonQ, Rigetti), and benchmarks comparing classical vs quantum algorithms for financial workloads. Assessment framework: 1) Hardware maturity (qubit count, coherence time, error rates), 2) Algorithm readiness (theoretical speedup proven, implementation available), 3) Financial applicability (problem maps to QUBO, Monte Carlo, or Grover search)."
-              ]
-            },
-            {
-              "number": "04",
-              "title": "Data",
-              "content": [
-                "This is a literature review, not an empirical study. Sources: IBM Q Development Roadmap 2026, Google Quantum AI roadmap (Willow chip, 105 qubits), D-Wave Advantage2 spec sheet, IonQ Forte Enterprise benchmarks, Qiskit Finance documentation, Pennylane QML library, and 23 peer-reviewed papers indexed on arXiv:quant-ph."
-              ]
-            },
-            {
-              "number": "05",
-              "title": "Results",
-              "content": [
-                "<strong>Portfolio Optimization (QUBO):</strong> D-Wave Advantage2 (7000+ qubits) can solve mean-variance optimization for ~200 assets in ~2 seconds. Classical solvers (CPLEX, Gurobi) solve exactly for up to ~500 assets but scale exponentially. Quantum advantage threshold: ~10,000 assets — expected reachable by 2027-2028.",
-                "<strong>Monte Carlo Simulation:</strong> Quantum Amplitude Estimation (QAE) theoretically converges in O(1/ε) vs classical O(1/ε²). For a VaR calculation requiring 1 million classical paths, QAE would need only ~1,000 quantum samples. Current hardware limitation: ~100 qubits, 10⁻³ gate error rate — insufficient for practical QAE. Expected viable: 2028-2029.",
-                "<strong>Grover's Search:</strong> Theoretical O(√N) speedup for brute-force parameter sweeps. For a strategy with 10⁶ parameter combinations, classical needs 10⁶ evaluations; Grover needs ~1,000. Hardware requirement: >100 logical (error-corrected) qubits — not available before 2029.",
-                "<strong>Capo Horn Lab Integration Roadmap:</strong>",
-                "• Q3 2027: Qiskit + Pennylane integration into backtest_engine.py for hybrid classical-quantum experiments",
-                "• Q1 2028: QUBO portfolio optimization using AWS Braket / D-Wave cloud access",
-                "• Q3 2028: Quantum Monte Carlo pilot for VaR estimation on historical ES data",
-                "• 2029-2030: Production quantum-assisted backtesting when error-corrected qubits reach >100",
-                "<div class='highlight-box'><strong>Key Finding:</strong> Quantum computing IS inevitable for finance. The question is timing, not direction. Being Qiskit-ready in 2027 positions CHL at the front of the curve.</div>"
-              ]
-            },
-            {
-              "number": "06",
-              "title": "Charts",
-              "is_charts": true,
-              "charts_slug": "quantum-computing-quant-finance",
-              "chart_descriptions": [
-                {
-                  "id": "01_qubit_roadmap",
-                  "label": "Qubit Roadmap 2024-2030 by Vendor"
-                },
-                {
-                  "id": "02_quantum_advantage_timeline",
-                  "label": "Quantum Advantage Timeline by Application"
-                },
-                {
-                  "id": "03_classical_vs_quantum_mc",
-                  "label": "Classical vs Quantum Monte Carlo Convergence"
-                },
-                {
-                  "id": "04_qubo_problem_scaling",
-                  "label": "QUBO Portfolio Optimization Scaling"
-                },
-                {
-                  "id": "05_grover_speedup",
-                  "label": "Grover Speedup — Parameter Search"
-                },
-                {
-                  "id": "06_chl_readiness",
-                  "label": "CHL Quantum Readiness Scorecard"
-                },
-                {
-                  "id": "07_nisq_error_rates",
-                  "label": "NISQ Error Rates by Platform"
-                }
-              ]
-            },
-            {
-              "number": "07",
-              "title": "Conclusions",
-              "content": [
-                "<strong>1. Quantum Is Coming, But Not Yet Here.</strong> The NISQ era persists through 2028. No production financial application runs on quantum hardware today. However, the algorithmic advantage is proven on paper, and hardware is on a clear exponential trajectory.",
-                "<strong>2. The Smart Money Is Preparing Now.</strong> Firms integrating Qiskit/Pennylane in 2027 will be ready when quantum hardware crosses the error-correction threshold in 2029-2030. Late adopters will face a 2-3 year catch-up.",
-                "<strong>3. Capo Horn Lab's Strategy Is Correct.</strong> Our Q3 2027 integration timeline for Qiskit/Pennylane positions us ahead of most boutique quant firms and in line with institutional leaders.",
-                "<div class='highlight-box warning'><strong>Key Takeaway:</strong> Quantum computing will change quantitative finance as profoundly as machine learning did. The first-mover window is 2027-2028. Being Qiskit-ready in 2027 is the single highest-ROI research investment CHL can make. The quantum train is leaving the station — and we have a ticket.</div>"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "systematic-research-methodology",
-          "title": "Systematic Research Methodology — The 8-Gate Verification Pipeline",
-          "slug": "systematic-research-methodology",
-          "published_date": "2026-08-23",
-          "author": "Capo Horn Lab",
-          "instrument": "Methodology / Cross-asset",
-          "timeframe": "N/A (methodology paper)",
-          "period_tested": "2024-2026",
-          "data_source": "Capo Horn Lab internal research process",
-          "outcome": "positive",
-          "tags": [
-            "research-methodology"
-          ],
-          "instrument_short": "META",
-          "tag_category": "Research Methodology",
-          "slug_dir": "systematic-research-methodology",
-          "metrics_display": [
-            {
-              "label": "Verification Gates",
-              "value": "8",
-              "sub": "mandatory per strategy",
-              "cls": "km-positive"
-            },
-            {
-              "label": "Monte Carlo Sims",
-              "value": "2,000",
-              "sub": "per verification run",
-              "cls": "km-positive"
-            },
-            {
-              "label": "IS/OOS Split",
-              "value": "67/33",
-              "sub": "standard split ratio",
-              "cls": "km-neutral"
-            },
-            {
-              "label": "Significance Threshold",
-              "value": "p < 0.05",
-              "sub": "95% confidence minimum",
-              "cls": "km-positive"
-            },
-            {
-              "label": "False Discovery Control",
-              "value": "FDR < 20%",
-              "sub": "Benjamini-Hochberg",
-              "cls": "km-positive"
-            },
-            {
-              "label": "Regime Coverage",
-              "value": "4/6 regimes",
-              "sub": "minimum tested",
-              "cls": "km-neutral"
-            }
-          ],
-          "market_cycles": {
-            "summary": "The 8-gate verification pipeline is methodology research — it applies to all strategies, in all regimes. By enforcing IS/OOS splits, Monte Carlo robustness checks, statistical significance testing, and multi-regime analysis, the pipeline catches overfitted strategies before they reach publication. The expected false discovery rate is <20%, meaning at least 4 out of 5 published strategies have a genuine, reproducible edge.",
-            "works_in": [
-              "All regimes (it's a meta-process)"
-            ],
-            "fails_in": [
-              "N/A — methodology is regime-agnostic"
-            ]
-          },
-          "sections": [
-            {
-              "number": "01",
-              "title": "Objective",
-              "content": [
-                "Define and formalize Capo Horn Lab's systematic research methodology — an 8-gate verification pipeline that every strategy must pass before publication. This is our quality guarantee: no strategy reaches the public without passing all gates."
-              ]
-            },
-            {
-              "number": "02",
-              "title": "Hypothesis",
-              "content": [
-                "<strong>H₁:</strong> An 8-gate verification pipeline reduces false positive publications to <20% vs >50% for single-metric strategies.",
-                "<strong>H₂:</strong> Monte Carlo trade-sequence reshuffling with 2,000 simulations reliably identifies overfitted strategies (degradation < 70% = overfitted).",
-                "<strong>H₃:</strong> IS/OOS split with 67/33 ratio is the optimal balance between training data sufficiency and out-of-sample rigor for strategies with 200+ trades.",
-                "<strong>H₄:</strong> Strategies that pass all 8 gates outperform those passing only basic backtest metrics by >2x on a risk-adjusted basis in live trading."
-              ]
-            },
-            {
-              "number": "03",
-              "title": "Methodology — The 8 Gates",
-              "content": [
-                "<strong>Gate 1 — Strategy Decomposition:</strong> Formalize the strategy mathematically. Entry rules, exit rules, position sizing, risk management. If it can't be written as pseudocode, it's not a strategy — it's a vibe.",
-                "<strong>Gate 2 — Data Integrity:</strong> Verify data source, resolution, completeness. No snooping — the data used for backtesting must not have been used for strategy discovery. Survivorship bias must be disclosed.",
-                "<strong>Gate 3 — Backtest Execution:</strong> Run in BOTH modes: ottimale (zero costs, theoretical maximum) and realistico (slippage, commissions, fill model). Report both. If realistico is negative while ottimale is positive, the strategy is an execution pipe dream.",
-                "<strong>Gate 4 — Statistical Validation:</strong> Bootstrap test (5,000 samples), t-test for mean return significance (p < 0.05), Monte Carlo simulation (2,000 trade-sequence reshuffles). The strategy must show: 1) MC degradation ≥ 70%, 2) P(profitable) ≥ 95%, 3) Bootstrap CI does not contain zero.",
-                "<strong>Gate 5 — Regime Analysis:</strong> Test in bull, bear, high-vol, low-vol, trend-following, and mean-reverting regimes. A strategy that only works in one regime gets a WARNING — it must carry that disclosure.",
-                "<strong>Gate 6 — External Validation:</strong> Compare against academic benchmarks (TSMOM, ORB, VWAP MR) and cite the original paper. If the strategy claims to beat TSMOM, prove it with the same data, same period, same instruments.",
-                "<strong>Gate 7 — Robustness Checks:</strong> Parameter sensitivity analysis. If changing the lookback from 20 to 21 days flips the Sharpe sign, the strategy is overfitted. False discovery rate (Benjamini-Hochberg) must be < 20% when testing multiple hypotheses.",
-                "<strong>Gate 8 — Publication Readiness:</strong> Dual reporting (ottimale/realistico), limitations section, forward-looking disclosure, all 7 standard charts generated, no 'TODO' or placeholder content."
-              ]
-            },
-            {
-              "number": "04",
-              "title": "Data",
-              "content": [
-                "This is a methodology paper — it describes the process, not a specific dataset. The pipeline is applied identically to all 14 published CHL strategies using Databento MBP-1 data for ES, NQ, CL, GC, ZN (2018-2025)."
-              ]
-            },
-            {
-              "number": "05",
-              "title": "Results — Pipeline Validation",
-              "content": [
-                "<strong>Pipeline Effectiveness:</strong> Applied retroactively to all 14 CHL strategies. 12/14 passed all gates (85.7%). 2 flagged: News Trading (insufficient trades for MC, only 28 events) and Market Cycle Analysis (methodology paper, not a trading strategy — gates not applicable).",
-                "<strong>Monte Carlo Robustness:</strong> Average degradation across all strategies: 83.4% (range: 71-96%). Average P(profitable): 97.2%. Zero false positives detected.",
-                "<strong>IS/OOS Consistency:</strong> 11/12 strategies showed positive OOS Sharpe. Average degradation: 68%. Only Intraday Momentum SPY showed near-zero OOS performance (degradation 23%) — flagged for re-evaluation.",
-                "<strong>Regime Coverage:</strong> 2 strategies are 'bull market specialists' (TSMOM, ORB). 1 strategy is 'volatility-dependent' (VRP). All others are regime-robust across at least 4/6 regimes.",
-                "<div class='highlight-box'><strong>Pipeline Verdict:</strong> The 8-gate system catches strategy weaknesses that single-metric evaluation misses. Recommended as the permanent CHL research standard.</div>"
-              ]
-            },
-            {
-              "number": "06",
-              "title": "Charts",
-              "is_charts": true,
-              "charts_slug": "systematic-research-methodology",
-              "chart_descriptions": [
-                {
-                  "id": "01_pipeline_gate_scores",
-                  "label": "Pipeline Gate Scores — All 14 Strategies"
-                },
-                {
-                  "id": "02_monte_carlo_degradation",
-                  "label": "Monte Carlo Degradation Distribution"
-                },
-                {
-                  "id": "03_is_oos_scatter",
-                  "label": "IS vs OOS Sharpe Scatter Plot"
-                },
-                {
-                  "id": "04_regime_heatmap",
-                  "label": "Strategies × Regimes Heatmap"
-                },
-                {
-                  "id": "05_false_discovery_rate",
-                  "label": "False Discovery Rate Distribution"
-                },
-                {
-                  "id": "06_p_value_distribution",
-                  "label": "p-value Distribution — All Strategies"
-                },
-                {
-                  "id": "07_pipeline_pass_rate",
-                  "label": "Pipeline Gate Pass Rate"
-                }
-              ]
-            },
-            {
-              "number": "07",
-              "title": "Conclusions",
-              "content": [
-                "<strong>1. The 8-Gate System Works.</strong> Applied to our entire research library, it correctly identifies which strategies have real edges (TSMOM Sharpe 1.8, MC degradation 88%) and which are statistical noise.",
-                "<strong>2. Transparency Beats Complexity.</strong> The dual-reporting system (ottimale/realistico) forces honesty. Strategies that look great in ottimale mode often collapse in realistico — and that's the whole point.",
-                "<strong>3. Monte Carlo Is Mandatory.</strong> No single backtest metric survives contact with random trade reshuffling. If your Sharpe drops below 70% in MC, you're overfitted. Period.",
-                "<strong>4. External Benchmarks Are Accountability.</strong> Claiming to beat TSMOM? Prove it. Same data, same period, same instruments. Academic benchmarks are the ultimate bullshit detector.",
-                "<div class='highlight-box warning'><strong>Key Takeaway:</strong> Every strategy at Capo Horn Lab now runs through the 8-gate pipeline. No gate, no publication. This is our quality guarantee. The verification report is public — you can see exactly which gates a strategy passed and why.</div>"
-              ]
-            }
-          ]
-        },
-        {
+  {
           "id": "time-series-momentum-futures",
           "title": "Time Series Momentum on Global Futures",
           "slug": "time-series-momentum-futures",
@@ -2317,7 +2015,8 @@ var localPilotBySlug = {
                 "<strong>Commodities:</strong> Sub-portfolio Sharpe 0.55. Energy and metals show strong momentum; agricultural commodities are weaker due to seasonal mean-reversion patterns.",
                 "<strong>Post-2014 Performance:</strong> Sharpe declines to 0.38 — a significant decay but not a complete collapse. The strategy still generates positive returns but with higher variance and more frequent losing years. This period includes 2020 (strong trend, positive), 2021 (reversal, negative), 2022 (strong trend in rates, positive), and 2023 (choppy, neutral).",
                 "<strong>Crash Risk:</strong> Maximum drawdown of 22.7% occurred during the 2009 commodity reversal following the GFC trend. Other significant drawdowns: 2022 fixed income reversal (−18.3%). These are consistent with the negative skew (−0.35) that is intrinsic to trend-following strategies.",
-                "<div class='highlight-box error'><strong>Key Risk:</strong> TSMOM's crash risk is concentrated in sharp reversals after prolonged trends. During 2009, the massive commodity trend of 2007–2008 reversed violently in a matter of weeks. The 2022 fixed income drawdown followed a similar pattern. Stop-loss mechanisms and regime filters are essential for practical implementation.</div>"
+                "<div class='highlight-box error'><strong>Key Risk:</strong> TSMOM's crash risk is concentrated in sharp reversals after prolonged trends. During 2009, the massive commodity trend of 2007–2008 reversed violently in a matter of weeks. The 2022 fixed income drawdown followed a similar pattern. Stop-loss mechanisms and regime filters are essential for practical implementation.</div>",
+                "<div class='highlight-box warning'><strong>Chart scope:</strong> The charts below are a separately labelled ES implementation pilot for January 2023. They are not the 58-contract, 1985–2025 replication and do not replace the article-level metrics above.</div>"
               ]
             },
             {
@@ -2326,13 +2025,13 @@ var localPilotBySlug = {
               "is_charts": true,
               "charts_slug": "local-es-tsmom-2023-01",
               "chart_descriptions": [
-                { "id": "01_equity_curve",            "label": "Equity Curve" },
-                { "id": "02_drawdown",                "label": "Drawdown Analysis" },
-                { "id": "03_trade_distribution",          "label": "Rolling Sharpe (3-year)" },
-                { "id": "04_monthly_heatmap","label": "Sub-Portfolio Performance" },
-                { "id": "05_long_vs_short",       "label": "Trade Distribution" },
-                { "id": "06_performance_table",       "label": "Asset Class Correlation" },
-                { "id": "07_is_vs_oos",               "label": "IS vs OOS Comparison" }
+                { "id": "01_equity_curve", "label": "ES implementation pilot — Jan 2023 equity curve" },
+                { "id": "02_drawdown", "label": "ES implementation pilot — Jan 2023 drawdown" },
+                { "id": "03_trade_distribution", "label": "ES implementation pilot — trade distribution" },
+                { "id": "04_monthly_heatmap", "label": "ES implementation pilot — monthly heatmap" },
+                { "id": "05_long_vs_short", "label": "ES implementation pilot — long vs short" },
+                { "id": "06_performance_table", "label": "ES implementation pilot — performance table" },
+                { "id": "07_is_vs_oos", "label": "ES implementation pilot — IS/OOS comparison" }
               ]
             },
             {
@@ -4156,10 +3855,18 @@ var localPilotBySlug = {
         document.getElementById('detailPeriod').textContent = data.period_tested + (pilotNote ? ' · Local pilot validated' : '');
         document.getElementById('detailDataSrc').textContent = data.data_source + (pilotNote ? ' · Local data validation' : '');
 
-        // Key Metrics Bar — use mode-aware results if available
+        // Key Metrics Bar — dual-mode economics apply only to executable strategy studies.
+        // Event studies retain their source-derived metrics and do not expose a misleading cost toggle.
+        var modeToggleContainer = document.getElementById('modeToggleContainer');
+        var modeToggle = document.getElementById('modeToggle');
         if (resultsBySlug[data.slug]) {
+          modeToggleContainer.style.display = '';
+          modeToggle.checked = currentMode === 'realistico';
           updateMetricsForMode();
         } else {
+          currentMode = 'ottimale';
+          modeToggle.checked = false;
+          modeToggleContainer.style.display = 'none';
           renderKeyMetrics(data.metrics_display);
         }
 

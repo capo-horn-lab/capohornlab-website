@@ -23,7 +23,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -34,16 +34,16 @@
 
     /* ---- 1. CUSTOM PROPERTIES ---- */
     :root {
-      --ch-navy-900: #0a1628;
-      --ch-navy-800: #0f1e36;
-      --ch-navy-700: #152a45;
-      --ch-navy-600: #1c3a5c;
-      --ch-navy-500: #254e77;
-      --ch-navy-400: #3b6fa0;
-      --ch-navy-300: #5e93c2;
-      --ch-navy-200: #8fb8da;
-      --ch-navy-100: #c1d6ec;
-      --ch-navy-50:  #e8f0f8;
+      --ch-navy-900: #070b12;
+      --ch-navy-800: #0c1420;
+      --ch-navy-700: #102438;
+      --ch-navy-600: #12253c;
+      --ch-navy-500: #17304a;
+      --ch-navy-400: #1e3d5e;
+      --ch-navy-300: #2d5577;
+      --ch-navy-200: #45719a;
+      --ch-navy-100: #7da3c4;
+      --ch-navy-50:  #cfe0ee;
 
       --ch-white:       #ffffff;
       --ch-off-white:   #f8fafc;
@@ -58,27 +58,28 @@
       --ch-gray-800:    #0f172a;
       --ch-gray-900:    #020617;
 
-      --ch-blue-500:    #2563eb;
-      --ch-blue-400:    #3b82f6;
-      --ch-blue-300:    #60a5fa;
-      --ch-blue-200:    #93c5fd;
-      --ch-blue-100:    #dbeafe;
-      --ch-blue-50:     #eff6ff;
+      --ch-blue-500:    #e33b2f;
+      --ch-blue-400:    #ff5c47;
+      --ch-blue-300:    #ff7a66;
+      --ch-blue-200:    #ffa08f;
+      --ch-blue-100:    #ffd0c7;
+      --ch-blue-50:     #fff0ed;
 
-      --ch-amber-500:   #f59e0b;
-      --ch-amber-400:   #fbbf24;
-      --ch-amber-300:   #fcd34d;
-      --ch-amber-200:   #fde68a;
-      --ch-amber-100:   #fef3c7;
-      --ch-amber-50:    #fffbeb;
+      --ch-amber-500:   #ff9b64;
+      --ch-amber-400:   #ffab78;
+      --ch-amber-300:   #ffc092;
+      --ch-amber-200:   #ffd4ae;
+      --ch-amber-100:   #ffe7d4;
+      --ch-amber-50:    #fff3ec;
 
-      --ch-success:     #10b981;
-      --ch-warning:     #f59e0b;
-      --ch-error:       #ef4444;
-      --ch-info:        #3b82f6;
+      --ch-success:     #5cb8a5;
+      --ch-warning:     #ff9b64;
+      --ch-error:       #ff7067;
+      --ch-info:        #ff5c47;
 
-      --ch-font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --ch-font-mono:   'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      --ch-font-sans:   'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --ch-font-mono:   'DM Mono', 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
       --ch-text-xs:     0.75rem;
       --ch-text-sm:     0.875rem;
@@ -243,6 +244,7 @@
       align-items: center;
       justify-content: center;
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-bold);
       color: var(--ch-white);
@@ -278,7 +280,7 @@
 
     .ch-nav-links a.active {
       color: var(--ch-white);
-      background: rgba(37,99,235,0.2);
+      background: rgba(227,59,47,0.2);
     }
 
     .ch-nav-actions {
@@ -369,7 +371,7 @@
       background: var(--ch-blue-500);
       color: var(--ch-white);
       border-color: var(--ch-blue-500);
-      box-shadow: 0 1px 3px rgba(37,99,235,0.3);
+      box-shadow: 0 1px 3px rgba(227,59,47,0.3);
     }
     .btn-primary:hover {
       background: var(--ch-blue-400);
@@ -447,6 +449,7 @@
       align-items: center;
       gap: var(--ch-space-1);
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-semibold);
       padding: var(--ch-space-1) var(--ch-space-3);
@@ -516,7 +519,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(37,99,235,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(227,59,47,0.12) 0%, transparent 70%),
         radial-gradient(ellipse 50% 60% at 80% 60%, rgba(245,158,11,0.04) 0%, transparent 60%),
         repeating-linear-gradient(
           0deg,
@@ -538,6 +541,7 @@
 
     .page-hero-inner .overline {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-semibold);
       color: var(--ch-blue-400);
@@ -599,6 +603,7 @@
 
     .section-header .overline {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-semibold);
       color: var(--ch-blue-500);
@@ -700,6 +705,7 @@
 
     .team-role {
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       font-weight: var(--ch-font-semibold);
       color: var(--ch-blue-500);
@@ -757,6 +763,7 @@
       font-weight: var(--ch-font-semibold);
       color: var(--ch-navy-900);
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: var(--ch-text-xs);
       text-transform: uppercase;
       letter-spacing: var(--ch-letter-spacing-wide);
@@ -823,8 +830,8 @@
         90deg,
         transparent 0px,
         transparent 20px,
-        rgba(37,99,235,0.06) 20px,
-        rgba(37,99,235,0.06) 22px,
+        rgba(227,59,47,0.06) 20px,
+        rgba(227,59,47,0.06) 22px,
         transparent 22px,
         transparent 40px
       );
@@ -846,7 +853,7 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 30% 50%, rgba(37,99,235,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 30% 50%, rgba(227,59,47,0.10) 0%, transparent 70%),
         radial-gradient(ellipse 40% 60% at 70% 30%, rgba(245,158,11,0.04) 0%, transparent 60%);
       pointer-events: none;
     }
@@ -915,7 +922,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(37,99,235,0.4), transparent);
+      background: linear-gradient(to right, transparent, rgba(227,59,47,0.4), transparent);
     }
 
     .ch-footer-grid {
@@ -946,6 +953,7 @@
       align-items: center;
       justify-content: center;
       font-family: var(--ch-font-mono);
+      --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
       font-size: 10px;
       font-weight: var(--ch-font-bold);
       color: var(--ch-white);
@@ -1015,7 +1023,7 @@
     }
 
     .ch-footer-social a:hover {
-      background: rgba(37,99,235,0.15);
+      background: rgba(227,59,47,0.15);
       color: var(--ch-white);
     }
 
@@ -1088,6 +1096,10 @@
       .data-table td { padding: var(--ch-space-3) var(--ch-space-4); }
     }
   </style>
+
+    /* Observatory red — serif display headings */
+    h1, h2, .display, .hero h1, .section-header h2 { font-family: var(--ch-font-serif), Georgia, serif !important; letter-spacing: -0.035em; }
+
 </head>
 <body>
 
@@ -1373,7 +1385,7 @@
         <h4>Services</h4>
         <ul>
           <li><a href="test-strategy.html">Test Your Strategy</a></li>
-          <li><a href="index.html#docs">Documentation</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
           <li><a href="documentation.html">Documentation</a></li>
           <li><a href="faq.html">FAQ</a></li>
         </ul>

@@ -1,0 +1,27 @@
+[
+  [
+    "login_unknown",
+    "ERR",
+    "The read operation timed out"
+  ],
+  [
+    "me_fake_jwt",
+    401,
+    "{\"detail\":\"Invalid or expired access token\"}"
+  ],
+  [
+    "signup_empty",
+    422,
+    "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"email\"],\"msg\":\"Field required\",\"input\":{}},{\"type\":\"missing\",\"loc\":[\"body\",\"password\"],\"msg\":\"Field required\",\"input\":{}},{\"type\":\"missing\",\"loc\":[\"body\",\"name\"],\"msg\":\"Field required\",\"input\":{}}]}"
+  ],
+  [
+    "contact_empty",
+    422,
+    "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"name\"],\"msg\":\"Field required\",\"input\":{}},{\"type\":\"missing\",\"loc\":[\"body\",\"email\"],\"msg\":\"Field required\",\"input\":{}},{\"type\":\"missing\",\"loc\":[\"body\",\"subject\"],\"msg\":\"Field required\",\"input\":{}},{\"type\":\"missing\",\"loc\":[\"body\",\"message\"],\"msg\":\"Field requ"
+  ],
+  [
+    "newsletter_empty",
+    422,
+    "{\"detail\":[{\"type\":\"missing\",\"loc\":[\"body\",\"email\"],\"msg\":\"Field required\",\"input\":{}}]}"
+  ]
+]

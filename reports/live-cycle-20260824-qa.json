@@ -1,0 +1,194 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "bytes": 68305,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Beyond the Market Edge"
+  },
+  {
+    "path": "/index.html",
+    "status": 200,
+    "bytes": 68305,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Beyond the Market Edge"
+  },
+  {
+    "path": "/about.html",
+    "status": 200,
+    "bytes": 49564,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 About"
+  },
+  {
+    "path": "/method.html",
+    "status": 200,
+    "bytes": 53481,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Method"
+  },
+  {
+    "path": "/research.html",
+    "status": 200,
+    "bytes": 62069,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Research"
+  },
+  {
+    "path": "/research-detail.html?slug=time-series-momentum-futures",
+    "status": 200,
+    "bytes": 276373,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Research Detail"
+  },
+  {
+    "path": "/research-detail.html?slug=news-longhorizon-es",
+    "status": 200,
+    "bytes": 276373,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Research Detail"
+  },
+  {
+    "path": "/test-strategy.html",
+    "status": 200,
+    "bytes": 97885,
+    "title": "Test Your Strategy \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/contact.html",
+    "status": 200,
+    "bytes": 52101,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Contact"
+  },
+  {
+    "path": "/login.html",
+    "status": 200,
+    "bytes": 36722,
+    "title": "Log In \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/signup.html",
+    "status": 200,
+    "bytes": 25277,
+    "title": "Sign Up \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/dashboard.html",
+    "status": 200,
+    "bytes": 59518,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Dashboard"
+  },
+  {
+    "path": "/checkout.html",
+    "status": 200,
+    "bytes": 12283,
+    "title": "Checkout \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/faq.html",
+    "status": 200,
+    "bytes": 53417,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 FAQ"
+  },
+  {
+    "path": "/documentation.html",
+    "status": 200,
+    "bytes": 57609,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Documentation"
+  },
+  {
+    "path": "/privacy-policy.html",
+    "status": 200,
+    "bytes": 39029,
+    "title": "Privacy Policy \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/terms-of-service.html",
+    "status": 200,
+    "bytes": 34788,
+    "title": "Terms of Service \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/cookie-policy.html",
+    "status": 200,
+    "bytes": 33737,
+    "title": "Cookie Policy \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/disclaimer.html",
+    "status": 200,
+    "bytes": 29000,
+    "title": "Disclaimer \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/refund-policy.html",
+    "status": 200,
+    "bytes": 29330,
+    "title": "Refund Policy \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/investors.html",
+    "status": 200,
+    "bytes": 45114,
+    "title": "Capo Horn Lab \u00e2\u0080\u0094 Institutional Investors"
+  },
+  {
+    "path": "/pages/index.html",
+    "status": 200,
+    "bytes": 573,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/about.html",
+    "status": 200,
+    "bytes": 574,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/method.html",
+    "status": 200,
+    "bytes": 577,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/research.html",
+    "status": 200,
+    "bytes": 583,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/research-detail.html",
+    "status": 200,
+    "bytes": 908,
+    "title": "Research Detail \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/test-strategy.html",
+    "status": 200,
+    "bytes": 598,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/contact.html",
+    "status": 200,
+    "bytes": 580,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/dashboard.html",
+    "status": 200,
+    "bytes": 466,
+    "title": "Redirecting to Dashboard \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/documentation.html",
+    "status": 200,
+    "bytes": 597,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/pricing.html",
+    "status": 200,
+    "bytes": 580,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  },
+  {
+    "path": "/pages/admin.html",
+    "status": 200,
+    "bytes": 574,
+    "title": "Redirecting \u00e2\u0080\u0094 Capo Horn Lab"
+  }
+]

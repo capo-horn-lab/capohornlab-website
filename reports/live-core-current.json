@@ -1,0 +1,146 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "bytes": 68305,
+    "expected": true
+  },
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 68305,
+    "expected": true
+  },
+  {
+    "path": "about.html",
+    "status": 200,
+    "bytes": 49564,
+    "expected": true
+  },
+  {
+    "path": "method.html",
+    "status": 200,
+    "bytes": 53481,
+    "expected": true
+  },
+  {
+    "path": "research.html",
+    "status": 200,
+    "bytes": 62069,
+    "expected": true
+  },
+  {
+    "path": "research-detail.html?slug=time-series-momentum-futures",
+    "status": 200,
+    "bytes": 276373,
+    "expected": true
+  },
+  {
+    "path": "research-detail.html?slug=news-longhorizon-es",
+    "status": 200,
+    "bytes": 276373,
+    "expected": true
+  },
+  {
+    "path": "test-strategy.html",
+    "status": 200,
+    "bytes": 97885,
+    "expected": true
+  },
+  {
+    "path": "contact.html",
+    "status": 200,
+    "bytes": 52101,
+    "expected": true
+  },
+  {
+    "path": "login.html",
+    "status": 200,
+    "bytes": 36722,
+    "expected": true
+  },
+  {
+    "path": "signup.html",
+    "status": 200,
+    "bytes": 25277,
+    "expected": true
+  },
+  {
+    "path": "dashboard.html",
+    "status": 200,
+    "bytes": 59518,
+    "expected": true
+  },
+  {
+    "path": "checkout.html",
+    "status": 200,
+    "bytes": 12283,
+    "expected": true
+  },
+  {
+    "path": "faq.html",
+    "status": 200,
+    "bytes": 53417,
+    "expected": true
+  },
+  {
+    "path": "documentation.html",
+    "status": 200,
+    "bytes": 57609,
+    "expected": true
+  },
+  {
+    "path": "privacy-policy.html",
+    "status": 200,
+    "bytes": 39029,
+    "expected": true
+  },
+  {
+    "path": "terms-of-service.html",
+    "status": 200,
+    "bytes": 34788,
+    "expected": true
+  },
+  {
+    "path": "cookie-policy.html",
+    "status": 200,
+    "bytes": 33737,
+    "expected": true
+  },
+  {
+    "path": "disclaimer.html",
+    "status": 200,
+    "bytes": 29000,
+    "expected": true
+  },
+  {
+    "path": "refund-policy.html",
+    "status": 200,
+    "bytes": 29330,
+    "expected": true
+  },
+  {
+    "path": "investors.html",
+    "status": 200,
+    "bytes": 45114,
+    "expected": true
+  },
+  {
+    "path": "pages/index.html",
+    "status": 200,
+    "bytes": 573,
+    "expected": true
+  },
+  {
+    "path": "pages/dashboard.html",
+    "status": 200,
+    "bytes": 466,
+    "expected": true
+  },
+  {
+    "path": "pages/research-detail.html",
+    "status": 200,
+    "bytes": 908,
+    "expected": true
+  }
+]

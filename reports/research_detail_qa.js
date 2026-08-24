@@ -31,11 +31,13 @@ const findings = studies.map(item => {
   const empty=(item.sections||[]).filter(s=>!s.is_charts&&(!Array.isArray(s.content)||!s.content.join('').trim())).map(s=>s.title);
   const charts=(item.sections||[]).find(s=>s.title==='Charts');
   const r=results[item.slug];
-  const metricIssue=!r || !r.ottimale || !r.realistico || ['ottimale','realistico'].some(mode=>keys.some(k=>typeof r[mode][k] !== 'number'));
+  const hasSourceMetrics=Array.isArray(item.metrics_display) && item.metrics_display.length >= 6 && item.metrics_display.every(m=>m && String(m.value || '').trim());
+  // Non-executable event studies intentionally use published source metrics instead of an artificial cost model.
+  const metricIssue=(!r && !hasSourceMetrics) || (r && (!r.ottimale || !r.realistico || ['ottimale','realistico'].some(mode=>keys.some(k=>typeof r[mode][k] !== 'number'))));
   const badMode=r && keys.some(k=>r.realistico[k] > r.ottimale[k] && k !== 'max_dd');
   const placeholder=(JSON.stringify(item).match(/\bTODO\b|lorem ipsum|placeholder/ig)||[]).length;
   return {slug:item.slug,missing,empty,placeholder,metricIssue,badMode,chartSlug:charts&&charts.charts_slug,chartCount:charts&&charts.chart_descriptions&&charts.chart_descriptions.length};
 });
 const failures=findings.filter(x=>x.missing.length||x.empty.length||x.placeholder||x.metricIssue||x.badMode||!x.chartSlug||!x.chartCount);
 console.log(JSON.stringify({studies:studies.length,resultSets:Object.keys(results).length,failures,findings},null,2));
-if(studies.length!==13||Object.keys(results).length!==13||failures.length)process.exit(1);
+if(studies.length!==14||Object.keys(results).length!==13||failures.length)process.exit(1);
