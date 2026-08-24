@@ -65,3 +65,13 @@ app.include_router(payments.router)
 async def health_check():
     """Basic health check endpoint."""
     return {"status": "ok", "version": settings.APP_VERSION}
+
+
+@app.get("/api/v1/config")
+async def public_config():
+    """Non-sensitive frontend configuration."""
+    return {
+        "stripe_publishable_key": settings.STRIPE_PUBLISHABLE_KEY or "",
+        "app_name": settings.APP_NAME,
+        "support_email": settings.SUPPORT_EMAIL,
+    }
