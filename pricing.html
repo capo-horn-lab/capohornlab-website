@@ -1216,6 +1216,92 @@
   </style>
 
 <link rel="stylesheet" href="assets/css/sidebar.css?v=4">
+<style>
+  /* === COST OF VALIDATION === */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--ch-space-6);
+    margin-top: var(--ch-space-8);
+  }
+  .cost-card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid var(--ch-gray-600);
+    border-radius: var(--ch-radius-xl);
+    padding: var(--ch-space-8);
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--ch-transition-base), transform var(--ch-transition-base);
+  }
+  .cost-card:hover {
+    border-color: var(--ch-amber-500);
+    transform: translateY(-4px);
+  }
+  .cost-card-featured {
+    border-color: var(--ch-signal, #e33b2f);
+    background: rgba(227, 59, 47, 0.08);
+  }
+  .cost-card-label {
+    font-size: var(--ch-text-xs);
+    font-weight: var(--ch-font-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--ch-letter-spacing-wide);
+    color: var(--ch-amber-400);
+    margin-bottom: var(--ch-space-2);
+  }
+  .cost-card-featured .cost-card-label { color: var(--ch-signal, #e33b2f); }
+  .cost-card-figure {
+    font-family: var(--ch-font-serif);
+    font-size: var(--ch-text-5xl);
+    font-weight: 700;
+    color: var(--ch-white);
+    line-height: 1;
+    margin-bottom: var(--ch-space-2);
+  }
+  .cost-card-figure span {
+    font-size: var(--ch-text-lg);
+    font-weight: 400;
+    color: var(--ch-mist);
+    font-family: var(--ch-font-sans);
+  }
+  .cost-card-sub {
+    font-size: var(--ch-text-sm);
+    color: var(--ch-mist);
+    line-height: var(--ch-leading-relaxed);
+    margin-bottom: var(--ch-space-6);
+  }
+  .cost-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ch-space-3);
+  }
+  .cost-card ul li {
+    font-size: var(--ch-text-sm);
+    color: var(--ch-mist);
+    line-height: var(--ch-leading-relaxed);
+    padding-left: var(--ch-space-5);
+    position: relative;
+  }
+  .cost-card ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--ch-amber-400);
+  }
+  .cost-card-featured ul li::before { color: var(--ch-signal, #e33b2f); }
+  .cost-note {
+    margin-top: var(--ch-space-6);
+    font-size: var(--ch-text-xs);
+    color: var(--ch-gray-400);
+    line-height: var(--ch-leading-relaxed);
+  }
+  @media (max-width: 900px) {
+    .cost-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -1528,9 +1614,54 @@
       </div>
     </section>
 
-           CTA
-       ============================================================ -->
-  <section class="cta-section">
+    <!-- ═══════════════ THE COST OF VALIDATION ═══════════════ -->
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-header">
+          <span class="overline">The Real Cost</span>
+          <h2>What it costs to <span class="highlight">validate a strategy</span></h2>
+          <p>A serious trader pays in two currencies: time and money. Before you can trust an idea, you need data, tooling, and weeks of backtesting — and most of it has to be paid for again every month.</p>
+        </div>
+        <div class="cost-grid">
+          <div class="cost-card">
+            <div class="cost-card-label">Doing it alone</div>
+            <div class="cost-card-figure">2–6 <span>months</span></div>
+            <div class="cost-card-sub">from a market idea to a strategy you can actually trust.</div>
+            <ul>
+              <li>Learn the tooling, data formats and execution assumptions</li>
+              <li>Source, clean and align historical data</li>
+              <li>Build, debug and validate the backtest</li>
+              <li>No guarantee the result is trustworthy</li>
+            </ul>
+          </div>
+          <div class="cost-card">
+            <div class="cost-card-label">Institutional platforms</div>
+            <div class="cost-card-figure">$10–$250<span>/mo</span></div>
+            <div class="cost-card-sub">subscription only — data and your time are on top.</div>
+            <ul>
+              <li>QuantConnect: Researcher $10 · Firm $100 · Institution $250</li>
+              <li>Databento tick data: $125 credit entry, per-GB billing</li>
+              <li>Historical tick data runs into hundreds of dollars</li>
+              <li>You still run and interpret the tests yourself</li>
+            </ul>
+          </div>
+          <div class="cost-card cost-card-featured">
+            <div class="cost-card-label">Capo Horn Lab</div>
+            <div class="cost-card-figure">€3–5<span>/test</span></div>
+            <div class="cost-card-sub">institutional-grade backtest, verdict included.</div>
+            <ul>
+              <li>IS/OOS walk-forward + Monte Carlo simulations</li>
+              <li>Equity curve, trade log, clear pass/fail verdict</li>
+              <li>Data you buy stays in your portfolio — no repeat fees</li>
+              <li>€10.99/mo for full research access</li>
+            </ul>
+          </div>
+        </div>
+        <p class="cost-note">Sources: QuantConnect and Databento public pricing pages (retrieved August 2026). Time estimates reflect the typical solo-trader workflow of sourcing data, building, and validating a backtest from scratch.</p>
+      </div>
+    </section>
+
+      <section class="cta-section">
     <div class="container">
       <h2>Ready to Get Started?</h2>
       <p>Subscribe for full research access, or choose a backtest tier and start running institutional-grade analysis on your strategies today.</p>
