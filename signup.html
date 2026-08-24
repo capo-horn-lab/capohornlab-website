@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up — Capo Horn Lab</title>
-  <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
+  <link rel="icon" type="image/png" href="assets/capo-horn-lab-orbit-mark.svg">
 
   <!-- Primary Meta Tags -->
   <meta name="description" content="Sign up for Capo Horn Lab and start testing your trading strategies with institutional-grade quantitative analytics.">
@@ -17,12 +17,12 @@
   <meta property="og:url" content="https://capohornlab.com/signup.html">
   <meta property="og:title" content="Sign Up — Capo Horn Lab">
   <meta property="og:description" content="Sign up for Capo Horn Lab and start testing your trading strategies with institutional-grade quantitative analytics.">
-  <meta property="og:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+  <meta property="og:image" content="https://capohornlab.com/assets/capo-horn-lab-orbit-mark.svg">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Sign Up — Capo Horn Lab">
   <meta name="twitter:description" content="Sign up for Capo Horn Lab and start testing your trading strategies with institutional-grade quantitative analytics.">
-  <meta name="twitter:image" content="https://capohornlab.com/assets/logo/capo-horn-lab-logo.png">
+  <meta name="twitter:image" content="https://capohornlab.com/assets/capo-horn-lab-orbit-mark.svg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,9 +92,9 @@
     }
     .ch-nav .container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--ch-max-width); margin: 0 auto; padding: 0; }
     .ch-nav-brand { font-size: var(--ch-text-lg); font-weight: var(--ch-font-bold); letter-spacing: var(--ch-letter-spacing-tight); display: flex; align-items: center; gap: var(--ch-space-2); }
-    .ch-nav-brand .brand-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500)); border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); font-weight: var(--ch-font-bold); color: var(--ch-white); overflow: hidden; }
+    .ch-nav-brand .brand-icon { width: 32px; height: 32px; background: transparent; border-radius: var(--ch-radius-sm); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-size: var(--ch-text-xs); font-weight: var(--ch-font-bold); color: var(--ch-white); overflow: hidden; }
       --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-    .ch-nav-brand .brand-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ch-nav-brand .brand-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .ch-nav-links { display: flex; align-items: center; gap: var(--ch-space-1); }
     .ch-nav-links a { font-size: var(--ch-text-sm); font-weight: var(--ch-font-medium); color: var(--ch-mist); padding: var(--ch-space-2) var(--ch-space-4); border-radius: var(--ch-radius-md); transition: background var(--ch-transition-fast), color var(--ch-transition-fast); }
     .ch-nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--ch-white); }
@@ -140,7 +140,7 @@
       width: 100%; max-width: 420px; animation: fadeInUp 0.5s ease-out both;
     }
     .auth-header { text-align: center; margin-bottom: var(--ch-space-8); }
-    .auth-header .auth-icon { width: 48px; height: 48px; margin: 0 auto var(--ch-space-4); background: linear-gradient(135deg, var(--ch-blue-500), var(--ch-amber-500)); border-radius: var(--ch-radius-lg); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-weight: var(--ch-font-bold); color: var(--ch-white); font-size: var(--ch-text-lg); }
+    .auth-header .auth-icon { width: 48px; height: 48px; margin: 0 auto var(--ch-space-4); background: transparent; border-radius: var(--ch-radius-lg); display: flex; align-items: center; justify-content: center; font-family: var(--ch-font-mono); font-weight: var(--ch-font-bold); color: var(--ch-white); font-size: var(--ch-text-lg); }
       --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
     .auth-header h1 { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-bold); color: var(var(--ch-ink)); }
     .auth-header p { font-size: var(--ch-text-sm); color: var(--ch-gray-400); margin-top: var(--ch-space-2); }
@@ -225,6 +225,39 @@
     }
     .page-hero { animation-delay: 0.1s; }
 
+  
+    /* ── Scroll progress bar ── */
+    .ch-scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: var(--ch-signal, #e33b2f);
+      box-shadow: 0 0 8px rgba(227,59,47,.5);
+      z-index: 9999; transition: width .08s linear;
+    }
+    /* ── Scroll reveal ── */
+    .ch-reveal {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                  transform .7s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .ch-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .ch-reveal { opacity: 1; transform: none; transition: none; }
+    }
+    /* ── Logo mark animation ── */
+    .brand-icon img, .ch-nav-brand .brand-icon img {
+      animation: chLogoFloat 7s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(227,59,47,.35));
+    }
+    .ch-nav-brand:hover .brand-icon img {
+      transform: rotate(14deg) scale(1.1);
+      transition: transform .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes chLogoFloat {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(3deg) scale(1.06); }
+    }
+
   </style>
 
     <style>
@@ -238,7 +271,7 @@
   <nav class="ch-nav">
     <div class="container">
       <a href="index.html" class="ch-nav-brand">
-        <div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>
+        <div class="brand-icon"><img src="assets/capo-horn-lab-orbit-mark.svg" alt="CH"></div>
         Capo Horn Lab
       </a>
       <div class="ch-nav-links">
@@ -332,7 +365,7 @@
   <footer class="ch-footer">
     <div class="ch-footer-grid">
       <div>
-        <div class="ch-footer-brand"><div class="brand-icon"><img src="assets/logo/capo-horn-lab-logo.png" alt="CH"></div>Capo Horn Lab</div>
+        <div class="ch-footer-brand"><div class="brand-icon"><img src="assets/capo-horn-lab-orbit-mark.svg" alt="CH"></div>Capo Horn Lab</div>
         <p class="ch-footer-tagline">Quantitative backtesting and strategy research. Data-driven, not guru-driven.</p>
         <div class="ch-footer-social">
           <a href="https://github.com/capohornlab" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
@@ -404,5 +437,44 @@
       } finally { btn.disabled = false; btn.textContent = 'Create Account'; }
     }
   </script>
+<script>
+  (function() {
+    // Scroll progress bar
+    var bar = document.createElement('div');
+    bar.className = 'ch-scroll-progress';
+    document.body.appendChild(bar);
+    function updateProgress() {
+      var h = document.documentElement;
+      var scrolled = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+      bar.style.width = (scrolled * 100) + '%';
+    }
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    // Scroll reveal via IntersectionObserver
+    var revealSel = 'section, .ch-section, .page-hero, .ch-card, .step-card, ' +
+                    '.research-card, .data-panel, .principle-card, .status-card, .feature-card';
+    var targets = document.querySelectorAll(revealSel);
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function(t, i) {
+        t.classList.add('ch-reveal');
+        t.style.transitionDelay = (i % 7) * 0.04 + 's';
+        io.observe(t);
+      });
+    } else {
+      targets.forEach(function(t) { t.classList.add('is-visible'); });
+    }
+  })();
+</script>
+
 </body>
 </html>
