@@ -170,7 +170,7 @@
       font-size: var(--ch-text-base);
       line-height: var(--ch-leading-normal);
       color:#f2e7e3;
-      background:#0c1420;
+      background:var(--ch-ink);
     }
 
     img { max-width: 100%; display: block; }
@@ -222,7 +222,7 @@
       align-items: center;
       justify-content: space-between;
       padding: var(--ch-space-4) var(--ch-space-6);
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-white);
       box-shadow: var(--ch-shadow-md);
       position: sticky;
@@ -325,7 +325,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--ch-navy-900);
+      background:transparent;
       z-index: 9999;
       flex-direction: column;
       align-items: center;
@@ -442,7 +442,7 @@
        CARDS (.ch-card)
        ============================================================ */
     .ch-card {
-      background:#0c1420;
+      background:var(--ch-ink);
       border: 1px solid var(--ch-gray-100);
       border-radius: var(--ch-radius-lg);
       box-shadow: var(--ch-shadow-sm);
@@ -503,7 +503,7 @@
        ============================================================ */
     .hero {
       position: relative;
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-white);
       overflow: hidden;
       padding: var(--ch-space-20) 0 var(--ch-space-16);
@@ -624,11 +624,11 @@
     }
 
     .section-alt {
-      background:#0c1420;
+      background:var(--ch-ink);
     }
 
     .section-dark {
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-white);
     }
 
@@ -680,7 +680,7 @@
       padding: var(--ch-space-2) var(--ch-space-4);
       border: 1px solid var(--ch-gray-200);
       border-radius: var(--ch-radius-full);
-      background:#0c1420;
+      background:var(--ch-ink);
       color:#9d746d;
       cursor: pointer;
       transition: all var(--ch-transition-fast);
@@ -779,7 +779,7 @@
       font-size: 10px;
       font-weight: var(--ch-font-medium);
       padding: 2px 8px;
-      background:#0c1420;
+      background:var(--ch-ink);
       color:#9d746d;
       border-radius: var(--ch-radius-full);
       text-transform: uppercase;
@@ -913,7 +913,7 @@
        FOOTER (.ch-footer)
        ============================================================ */
     .ch-footer {
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-mist);
       padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
       position: relative;
@@ -1057,7 +1057,7 @@
       padding: var(--ch-space-3) var(--ch-space-4);
       border: 1px solid var(--ch-gray-200);
       border-radius: var(--ch-radius-md);
-      background:#0c1420;
+      background:var(--ch-ink);
       color:#f2e7e3;
       transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
       outline: none;
@@ -1243,6 +1243,7 @@
     h1, h2, .display, .hero h1, .section-header h2 { font-family: var(--ch-font-serif), Georgia, serif !important; letter-spacing: -0.035em; }
   </style>
 
+<link rel="stylesheet" href="assets/css/sidebar.css">
 </head>
 <body>
 
@@ -1732,5 +1733,6 @@ ection section-dark newsletter-section">
 </script>
 
   <script src="assets/js/orbit-background.js"></script>
+<script src="assets/js/sidebar.js"></script>
 </body>
 </html>
