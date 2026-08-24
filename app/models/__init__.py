@@ -9,6 +9,8 @@ from app.models.internal_note import InternalNote
 from app.models.newsletter import NewsletterCampaign, NewsletterSend, NewsletterSubscriber
 from app.models.contact_message import ContactMessage
 from app.models.research_suggestion import ResearchSuggestion
+from app.models.payment import PaymentMethod
+from app.models.order import Order
 
 __all__ = [
     "User",
@@ -22,4 +24,6 @@ __all__ = [
     "NewsletterSend",
     "ContactMessage",
     "ResearchSuggestion",
+    "PaymentMethod",
+    "Order",
 ]

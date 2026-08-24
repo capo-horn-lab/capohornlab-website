@@ -52,6 +52,12 @@ class User(Base):
     strategy_requests: Mapped[list["StrategyRequest"]] = relationship(
         "StrategyRequest", back_populates="user", lazy="dynamic"
     )
+    payment_methods: Mapped[list["PaymentMethod"]] = relationship(
+        "PaymentMethod", back_populates="user", lazy="dynamic"
+    )
+    orders: Mapped[list["Order"]] = relationship(
+        "Order", back_populates="user", lazy="dynamic"
+    )
 
     def __repr__(self) -> str:
         return f"<User {self.email} ({self.role})>"
