@@ -170,20 +170,15 @@ async def refresh_tokens(
 # ── Email Verification ──
 
 
-async def send_verification_code(email: str) -> str:
-    """Generate and store a 6-digit verification code."""
+async def send_verification_code(email: str) -> bool:
+    """Generate and store a 6-digit verification code. Return delivery success."""
     code = f"{secrets.randbelow(1000000):06d}"
     _verification_codes[email] = {
         "code": code,
         "expires_at": datetime.now(timezone.utc) + timedelta(minutes=15),
     }
     delivered = await email_service.send_account_verification(email, code)
-    if not delivered:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Account created, but verification email delivery is unavailable.",
-        )
-    return code
+    return delivered
 
 
 async def verify_email_code(email: str, code: str) -> bool:
