@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.config import settings
 from app.core.database import get_async_db
 from app.schemas.auth import (
+    ChangePasswordRequest,
     LoginRequest,
     LoginResponse,
     MessageResponse,
@@ -20,6 +21,7 @@ from app.schemas.auth import (
 )
 from app.services.auth import (
     authenticate_user,
+    change_password,
     check_rate_limit,
     get_current_user,
     mark_user_verified,
@@ -176,3 +178,19 @@ async def get_me(
         verified=current_user.verified,
         created_at=current_user.created_at,
     )
+
+
+@router.post("/change-password", response_model=MessageResponse)
+async def change_password_endpoint(
+    body: ChangePasswordRequest,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_async_db),
+):
+    """Change the authenticated user's password after verifying the current one."""
+    await change_password(
+        db,
+        user=current_user,
+        current_password=body.current_password,
+        new_password=body.new_password,
+    )
+    return MessageResponse(message="Password updated successfully")

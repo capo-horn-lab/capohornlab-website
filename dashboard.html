@@ -1757,8 +1757,21 @@
         return;
       }
 
-      feedback.className = 'form-feedback error';
-      feedback.textContent = 'Password change endpoint is not enabled yet. Use the password reset flow.';
+      feedback.className = 'form-feedback';
+      feedback.textContent = 'Updating password…';
+
+      window.CHLAccount.changePassword(current, newPw)
+        .then(function (res) {
+          feedback.className = 'form-feedback success';
+          feedback.textContent = res.message || 'Password updated.';
+          document.getElementById('currentPw').value = '';
+          document.getElementById('newPw').value = '';
+          document.getElementById('confirmPw').value = '';
+        })
+        .catch(function (err) {
+          feedback.className = 'form-feedback error';
+          feedback.textContent = err.message;
+        });
     }
 
     /* ---- Logout ---- */
