@@ -32,21 +32,6 @@
        References: BMW (weight extremes, sharp geometry),
                    Sanity (colorimetric depth, achromatic neutrals)
        ═══════════════════════════════════════════ */
-    /* Palette variants — now override canonical observatory-tokens.css */
-    body[data-palette="cobalt"]{
-      --ch-ink:#070a18;--ch-abyss:#0b122e;--ch-deep:#101d48;--ch-ocean:#172a58;
-      --ch-line:rgba(140,175,240,.17);--ch-line-strong:rgba(140,175,240,.30);
-      --ch-fog:#e7efff;--ch-mist:#a9b9e4;--ch-quiet:#7184b8;--ch-whisper:#4e5f8c;
-      --ch-signal:#66a8ff;--ch-signal-bright:#8ac0ff;--ch-signal-deep:#1a4a8c;--ch-signal-ink:#07172f;
-      --ch-warm:#ff8a6a;
-    }
-    body[data-palette="coral"]{
-      --ch-ink:#17100f;--ch-abyss:#1f1514;--ch-deep:#2a1a18;--ch-ocean:#3a2020;
-      --ch-line:rgba(235,185,160,.18);--ch-line-strong:rgba(235,185,160,.32);
-      --ch-fog:#fff0e8;--ch-mist:#dcb9a9;--ch-quiet:#aa8276;--ch-whisper:#7d5f55;
-      --ch-signal:#ffd452;--ch-signal-bright:#ffe08a;--ch-signal-deep:#8c6a1a;--ch-signal-ink:#291b00;
-      --ch-warm:#ff7867;
-    }
     *,*::before,*::after{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
@@ -101,23 +86,6 @@
       font:9px/1.2 var(--ch-font-mono);letter-spacing:.14em;
       color:var(--ch-quiet);margin-top:2px;
     }
-    .palette-lab{
-      display:flex;gap:6px;align-items:center;margin-left:auto;margin-right:20px;
-    }
-    .palette-lab span{
-      font:9px var(--ch-font-mono);letter-spacing:.1em;color:var(--ch-quiet);
-      text-transform:uppercase;
-    }
-    .palette{
-      width:16px;height:16px;border-radius:50%;
-      border:1px solid rgba(255,255,255,.22);cursor:pointer;padding:0;
-      background:var(--palette);transition:transform var(--ch-duration-fast) var(--ch-ease-out);
-    }
-    .palette:hover{transform:scale(1.2)}
-    .palette.active{outline:1px solid var(--ch-fog);outline-offset:3px}
-    .palette[data-palette="default"]{--palette:#e33b2f}
-    .palette[data-palette="cobalt"]{--palette:#66a8ff}
-    .palette[data-palette="coral"]{--palette:#ffd452}
     .navlinks{display:flex;gap:20px;align-items:center}
     .navlinks a{font:11px var(--ch-font-mono);letter-spacing:.1em;text-transform:uppercase;
       color:var(--ch-mist);transition:color var(--ch-duration-fast)}
@@ -560,9 +528,6 @@
     }
     @media(max-width:520px){
       .navlinks .enter{padding:8px 10px;font-size:9px}
-      .palette-lab{margin-right:10px;gap:4px}
-      .palette-lab span{display:none}
-      .palette{width:14px;height:14px}
       .mark-text strong{font-size:13px}
       .mark-text small{font-size:8px}
       .status-grid{grid-template-columns:1fr}
@@ -586,15 +551,6 @@
           <small>Research observatory</small>
         </span>
       </a>
-      <div class="palette-lab" aria-label="Palette variant selector">
-        <span>Palette</span>
-        <button class="palette active" type="button" data-palette="default"
-          aria-label="Signal red — default palette"></button>
-        <button class="palette" type="button" data-palette="cobalt"
-          aria-label="Cobalt blue palette"></button>
-        <button class="palette" type="button" data-palette="coral"
-          aria-label="Coral gold palette"></button>
-      </div>
       <div class="navlinks">
         <a href="method.html">Method</a>
         <a href="research.html">Research</a>
@@ -922,17 +878,6 @@
         var roomKey = row.dataset.room;
         var switcherBtn = document.querySelector('.switcher [data-room="' + roomKey + '"]');
         setRoom(roomKey, switcherBtn);
-      });
-    });
-
-    // ── Palette switching ──
-    document.querySelectorAll('.palette').forEach(function(button) {
-      button.addEventListener('click', function() {
-        var val = button.dataset.palette;
-        document.body.dataset.palette = val === 'default' ? '' : val;
-        document.querySelectorAll('.palette').forEach(function(b) {
-          b.classList.toggle('active', b === button);
-        });
       });
     });
 
