@@ -164,3 +164,17 @@
 ### Gate aggiornato
 
 🔴 **Non pubblicare e non pausare God Mode.** Il backend locale e le correzioni sono verificati, ma il rilascio Aruba richiede il canale sicuro già predisposto e non può essere eseguito leggendo/esponendo credenziali. Dopo il deploy: cache-buster live, click-through browser isolato e controllo del marker dashboard/wizard. Nessun pagamento, segreto, ordine, DNS o email reale è stato toccato.
+
+
+## QA ciclo 2026-08-24 — verifica auth, integrità e browser isolato
+
+- **Auth live negativa**: `POST /api/v1/auth/login` con account valido ma non registrato ha restituito `401 Invalid email or password`; la precedente prova con dominio `.invalid` ha dato correttamente `422` di validazione, quindi non è stata conteggiata come test di autenticazione. Nessun invio email o creazione account effettuati.
+- **Auth source/E2E**: `app/api/v1/auth.py` autentica tramite servizio server-side e risponde con JWT solo dopo `authenticate_user`; `assets/js/account-client.js` chiama esclusivamente `/auth/*` e conserva il token ricevuto. Nessun fallback client-side rilevato.
+- **Regressioni locali**: `56 passed`; audit statico `39` pagine / `859` riferimenti / `0` mancanti; renderer ricerca `14` studi completi, `13` set dual-mode, `0` failure.
+- **Live cache-buster**: probe su `32` route canoniche/legacy → tutte `200`, senza failure.
+- **Browser isolato**: Chromium driver-owned avviato senza riuso di sessioni personali. Il binding CDP è esatto, ma il driver rifiuta la prima navigazione con `browser_verification_required` anche dopo snapshot fresco; BrowserUse non espone un endpoint CDP. I click-through visivi non sono quindi attestabili in questo runtime.
+- **Deleghe read-only**: task `chl-20260824-0027` e `chl-20260824-0028` archiviati come failed: dispatcher `401 Missing Authentication header` prima delle tool call; nessun risultato specialistico è stato accettato.
+
+### Gate aggiornato
+
+🔴 **Non pausare God Mode.** Non c'è un delta sorgente nuovo in questo ciclo, ma restano bloccati il deploy Aruba del delta locale già presente (nessun helper sicuro senza lettura di credenziali nel repository) e il click-through browser completo. Nessuna email reale, pagamento, segreto, ordine, DNS o modifica provider è stata eseguita.

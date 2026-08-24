@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design/observatory-tokens.css">
 
   <style>
     /* ============================================================
@@ -34,16 +35,16 @@
 
     /* ---- 1. CUSTOM PROPERTIES ---- */
     :root {
-      --ch-navy-900: #070b12;
-      --ch-navy-800: #0c1420;
+      var(--ch-ink): #070b12;
+      var(--ch-abyss): #0c1420;
       --ch-navy-700: #102438;
       --ch-navy-600: #12253c;
-      --ch-navy-500: #17304a;
+      --ch-quiet0: #17304a;
       --ch-navy-400: #1e3d5e;
       --ch-navy-300: #2d5577;
-      --ch-navy-200: #45719a;
-      --ch-navy-100: #7da3c4;
-      --ch-navy-50:  #cfe0ee;
+      --ch-mist: #45719a;
+      --ch-fog: #7da3c4;
+      --ch-quiet:  #cfe0ee;
 
       --ch-white:       #ffffff;
       --ch-off-white:   #f8fafc;
@@ -171,7 +172,7 @@
       font-size: var(--ch-text-base);
       line-height: var(--ch-leading-normal);
       color: var(--ch-gray-200);
-      background: var(--ch-navy-900);
+      background: var(var(--ch-ink));
     }
 
     img { max-width: 100%; display: block; }
@@ -208,7 +209,7 @@
       align-items: center;
       justify-content: space-between;
       padding: var(--ch-space-4) var(--ch-space-6);
-      background: var(--ch-navy-900);
+      background: var(var(--ch-ink));
       color: var(--ch-white);
       box-shadow: var(--ch-shadow-md);
       position: sticky;
@@ -267,7 +268,7 @@
     .ch-nav-links a {
       font-size: var(--ch-text-sm);
       font-weight: var(--ch-font-medium);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       padding: var(--ch-space-2) var(--ch-space-4);
       border-radius: var(--ch-radius-md);
       transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
@@ -310,7 +311,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--ch-navy-900);
+      background: var(var(--ch-ink));
       z-index: 9999;
       flex-direction: column;
       align-items: center;
@@ -326,7 +327,7 @@
     .nav-drawer a {
       font-size: var(--ch-text-2xl);
       font-weight: var(--ch-font-medium);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       transition: color var(--ch-transition-fast);
     }
 
@@ -410,7 +411,7 @@
 
     .btn-amber {
       background: var(--ch-amber-500);
-      color: var(--ch-navy-900);
+      color: var(var(--ch-ink));
       border-color: var(--ch-amber-500);
     }
     .btn-amber:hover {
@@ -455,7 +456,7 @@
     }
 
     .section-alt {
-      background: var(--ch-navy-800);
+      background: var(var(--ch-abyss));
     }
 
     .section-header {
@@ -481,7 +482,7 @@
 
     .section-header p {
       font-size: var(--ch-text-base);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
     }
 
@@ -500,7 +501,7 @@
     /* === HERO === */
     .hero {
       position: relative;
-      background: var(--ch-navy-900);
+      background: var(var(--ch-ink));
       color: var(--ch-white);
       overflow: hidden;
       padding: var(--ch-space-20) 0 var(--ch-space-16);
@@ -558,7 +559,7 @@
 
     .hero p {
       font-size: var(--ch-text-lg);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
       max-width: 600px;
       margin: 0 auto var(--ch-space-8);
@@ -624,7 +625,7 @@
 
     .pricing-card .plan-subtitle {
       font-size: var(--ch-text-base);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
       margin-bottom: var(--ch-space-6);
     }
@@ -670,7 +671,7 @@
       align-items: flex-start;
       gap: var(--ch-space-3);
       font-size: var(--ch-text-sm);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
     }
 
@@ -732,7 +733,7 @@
 
     .backtest-card .backtest-desc {
       font-size: var(--ch-text-sm);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
       margin-bottom: var(--ch-space-6);
     }
@@ -784,7 +785,7 @@
       align-items: flex-start;
       gap: var(--ch-space-2);
       font-size: var(--ch-text-sm);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
     }
 
@@ -858,7 +859,7 @@
 
     .step-card p {
       font-size: var(--ch-text-sm);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
     }
 
@@ -907,7 +908,7 @@
 
     .faq-item p {
       font-size: var(--ch-text-sm);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
     }
 
@@ -940,7 +941,7 @@
     }
 
     .cta-section p {
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       font-size: var(--ch-text-base);
       max-width: 520px;
       margin: 0 auto var(--ch-space-8);
@@ -961,8 +962,8 @@
 
     /* === FOOTER (.ch-footer) === */
     .ch-footer {
-      background: var(--ch-navy-900);
-      color: var(--ch-navy-200);
+      background: var(var(--ch-ink));
+      color: var(--ch-mist);
       padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
       position: relative;
       overflow: hidden;
@@ -1159,6 +1160,29 @@
       mask-image:linear-gradient(#000 10%,transparent 70%);
     }
 
+  
+    /* Ticker bar */
+    .bar{border-top:1px solid var(--ch-line);border-bottom:1px solid var(--ch-line);
+      min-height:48px;display:flex;align-items:center;overflow:hidden;margin:0;}
+    .bar-track{display:flex;gap:0;white-space:nowrap;
+      animation:drift 30s linear infinite;
+      font:10px var(--ch-font-mono);letter-spacing:.12em;text-transform:uppercase;
+      color:var(--ch-quiet);}
+    .bar-track span{padding:0 28px}
+    .bar-track strong{color:var(--ch-signal);font-weight:400}
+    @keyframes drift{to{transform:translateX(-35%)}}
+
+  
+    /* Page entrance animation */
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section, .page-hero, .section, .ch-section {
+      animation: sectionIn 0.6s var(--ch-ease-out, cubic-bezier(0.16,1,0.3,1)) both;
+    }
+    .page-hero { animation-delay: 0.1s; }
+
   </style>
 
     /* Observatory red — serif display headings */
@@ -1186,7 +1210,7 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="ch-nav-actions">
-        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-mist);border-color:rgba(255,255,255,0.15);">Log In</a>
         <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
       </div>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
@@ -1198,6 +1222,17 @@
       </button>
     </div>
   </nav>
+
+  <!-- ═══ TICKER ═══ -->
+  <div class="bar" aria-hidden="true">
+    <div class="bar-track">
+      <span>Hypothesis before conviction</span><strong>&#10038;</strong>
+      <span>Document assumptions</span><strong>&#10038;</strong>
+      <span>Test out of sample</span><strong>&#10038;</strong>
+      <span>Research observatory — no live trading</span><strong>&#10038;</strong>
+      <span>Beyond the hedge of the market</span><strong>&#10038;</strong>
+    </div>
+  </div>
 
   <!-- Mobile Nav Drawer -->
   <div class="nav-drawer" id="navDrawer">
@@ -1215,7 +1250,7 @@
     <a href="pricing.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Pricing</a>
     <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
     <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
-      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-mist);border-color:rgba(255,255,255,0.15);">Log In</a>
       <a href="signup.html" class="btn btn-primary">Sign Up</a>
     </div>
   </div>
