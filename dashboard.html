@@ -1267,6 +1267,9 @@
   </style>
 
 <link rel="stylesheet" href="assets/css/sidebar.css?v=4">
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="assets/js/stripe-buy.js"></script>
 </head>
 <body>
 
@@ -1603,7 +1606,158 @@
     </div>
   </div>
 
-  <!-- Toast Notification -->
+      <!-- ═══════════════ PAYMENT DASHBOARD ═══════════════ -->
+    <div class="payment-dashboard" style="max-width: var(--ch-container, 1120px); margin: var(--ch-space-8) auto; padding: 0 var(--ch-space-4);">
+      <!-- Saved Card -->
+      <div class="ch-card" style="margin-bottom: var(--ch-space-6);">
+        <div class="ch-card-body">
+          <h3 style="margin-bottom: var(--ch-space-4); display:flex; align-items:center; gap:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E33B2F" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Payment Card
+          </h3>
+          <div id="chl-card-status" style="color: var(--ch-muted, #7a7f8a); font-size: var(--ch-text-sm);">
+            Loading card info…
+          </div>
+          <div id="chl-card-setup" style="display:none; margin-top: var(--ch-space-4);">
+            <p style="font-size: var(--ch-text-sm); margin-bottom: 8px;">Add a card to buy data and backtests.</p>
+            <div id="card-element" style="background: rgba(255,255,255,0.05); border: 1px solid var(--ch-gray-600); border-radius: var(--ch-radius-md); padding: 12px 14px;"></div>
+            <button id="save-card-btn" class="btn btn-primary" style="margin-top: 12px;" onclick="saveStripeCard()">Save Card</button>
+            <div id="card-error" style="color: #E33B2F; font-size: 0.8rem; margin-top: 6px; display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Purchases -->
+      <div class="ch-card">
+        <div class="ch-card-body">
+          <h3 style="margin-bottom: var(--ch-space-4); display:flex; align-items:center; gap:8px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E33B2F" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            My Data &amp; Purchases
+          </h3>
+          <div id="chl-purchases" style="color: var(--ch-muted, #7a7f8a); font-size: var(--ch-text-sm);">
+            Loading purchases…
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    // ── Card Setup + Purchases Loader ──
+    var stripe = null, cardElement = null;
+
+    function loadPaymentDashboard() {
+      if (!window.CHLPay || !window.CHLPay.hasToken()) {
+        document.getElementById('chl-card-status').textContent = 'Log in to manage payments.';
+        document.getElementById('chl-purchases').innerHTML = '<p>Log in to see your purchases.</p>';
+        return;
+      }
+
+      window.CHLPay.init().then(function() {
+        window.CHLPay.getDashboard().then(function(d) {
+          renderCard(d.cards);
+          renderPurchases(d.purchases);
+        }).catch(function(e) {
+          document.getElementById('chl-card-status').textContent = 'Login required.';
+          document.getElementById('chl-purchases').textContent = 'Login required.';
+        });
+      });
+    }
+
+    function renderCard(cards) {
+      var status = document.getElementById('chl-card-status');
+      var setup = document.getElementById('chl-card-setup');
+      if (cards && cards.length > 0) {
+        var c = cards[0];
+        status.innerHTML = '<span style="color: var(--ch-success); font-weight: 600;">&#10003;</span> ' +
+          c.card_brand.toUpperCase() + ' ending in ' + c.card_last4 +
+          ' (expires ' + c.card_exp_month + '/' + c.card_exp_year + ')' +
+          ' <button class="btn btn-sm btn-outline-light" style="margin-left:12px;" onclick="showCardSetup()">Update Card</button>';
+        setup.style.display = 'none';
+      } else {
+        status.textContent = 'No card on file. Add one to purchase data and backtests.';
+        setup.style.display = 'block';
+        initStripeElements();
+      }
+    }
+
+    function showCardSetup() {
+      document.getElementById('chl-card-status').textContent = 'Enter new card details:';
+      document.getElementById('chl-card-setup').style.display = 'block';
+      initStripeElements();
+    }
+
+    function initStripeElements() {
+      if (stripe) { cardElement.unmount(); cardElement.mount('#card-element'); return; }
+      fetch('https://capohornlab-website.onrender.com/api/v1/config')
+        .then(function(r) { return r.json(); })
+        .then(function(cfg) {
+          if (!cfg.stripe_publishable_key) {
+            document.getElementById('card-error').textContent = 'Stripe not configured.';
+            document.getElementById('card-error').style.display = 'block';
+            return;
+          }
+          stripe = Stripe(cfg.stripe_publishable_key);
+          var elements = stripe.elements();
+          cardElement = elements.create('card', {
+            style: { base: { color: '#f6e6df', fontFamily: '"DM Sans", sans-serif', fontSize: '14px', '::placeholder': { color: '#7a7f8a' } } }
+          });
+          cardElement.mount('#card-element');
+          cardElement.on('change', function(e) {
+            document.getElementById('card-error').style.display = e.error ? 'block' : 'none';
+            if (e.error) document.getElementById('card-error').textContent = e.error.message;
+          });
+        }).catch(function(e) {
+          document.getElementById('card-error').textContent = 'Cannot connect to payment service.';
+          document.getElementById('card-error').style.display = 'block';
+        });
+    }
+
+    function saveStripeCard() {
+      if (!stripe || !cardElement) return;
+      var btn = document.getElementById('save-card-btn');
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+      stripe.createPaymentMethod({ type: 'card', card: cardElement }).then(function(result) {
+        if (result.error) {
+          document.getElementById('card-error').textContent = result.error.message;
+          document.getElementById('card-error').style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Save Card';
+          return;
+        }
+        window.CHLPay.setupCard(result.paymentMethod.id).then(function() {
+          btn.textContent = 'Card Saved!';
+          setTimeout(function() { loadPaymentDashboard(); }, 500);
+        }).catch(function(e) {
+          document.getElementById('card-error').textContent = e.message;
+          document.getElementById('card-error').style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Save Card';
+        });
+      });
+    }
+
+    function renderPurchases(purchases) {
+      var el = document.getElementById('chl-purchases');
+      if (!purchases || purchases.length === 0) {
+        el.innerHTML = '<p>No purchases yet. <a href="pricing.html" style="color: var(--ch-red);">Buy data or backtests</a> to see them here.</p>';
+        return;
+      }
+      var html = '<table style="width:100%; border-collapse:collapse;"><thead><tr style="border-bottom:1px solid var(--ch-gray-700);"><th style="text-align:left;padding:8px 4px;">Product</th><th style="text-align:left;padding:8px 4px;">Type</th><th style="text-align:right;padding:8px 4px;">Price</th><th style="text-align:right;padding:8px 4px;">Purchased</th></tr></thead><tbody>';
+      for (var i = 0; i < purchases.length; i++) {
+        var p = purchases[i];
+        html += '<tr style="border-bottom:1px solid var(--ch-gray-800);"><td style="padding:8px 4px;">' + p.product_name + '</td><td style="padding:8px 4px;color:var(--ch-muted);">' + p.product_type + '</td><td style="text-align:right;padding:8px 4px;">' + p.currency + ' ' + p.amount.toFixed(2) + '</td><td style="text-align:right;padding:8px 4px;color:var(--ch-muted);font-size:0.8rem;">' + p.purchased_at.split('T')[0] + '</td></tr>';
+      }
+      html += '</tbody></table>';
+      el.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(loadPaymentDashboard, 800);
+    });
+    </script>
+
+    <!-- Toast Notification -->
   <div class="toast" id="toast"></div>
 
   <!-- ============================================================

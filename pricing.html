@@ -1302,6 +1302,9 @@
     .cost-grid { grid-template-columns: 1fr; }
   }
 </style>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="assets/js/stripe-buy.js"></script>
 </head>
 <body>
 
@@ -1432,7 +1435,7 @@
           <li><span class="check-icon">✓</span> New research delivered on publication</li>
           <li><span class="check-icon">✓</span> Priority email support</li>
         </ul>
-        <a class="btn btn-primary" style="width:100%;text-align:center;" href="checkout.html?plan=research-monthly">Subscribe €10.99/mese</a>
+        <button class="btn btn-primary" style="width:100%;text-align:center;" onclick="CHLPay.buy('research-monthly','Research Monthly Access','subscription',10.99).then(function(r){ if(r&&r.status==='paid'){alert('Subscription active! Check your dashboard.'); window.location.reload();} }).catch(function(e){ alert(e.message); })">Subscribe €10.99/mo</button>
       </div>
     </div>
   </section>
@@ -1492,7 +1495,7 @@
           <li><span class="check">&#10003;</span> Parameter stability analysis</li>
           <li><span class="check">&#10003;</span> Clear verdict — pass / fail / inconclusive</li>
         </ul>
-        <button class="btn btn-outline-light" style="width:100%;">Start a Backtest</button>
+        <button class="btn btn-outline-light" style="width:100%;" onclick="CHLPay.buy('backtest-single','Single Strategy Backtest','backtest',4.0).then(function(r){ if(r&&r.status==='paid'){alert('Backtest purchased! Check your dashboard.'); window.location.reload();} }).catch(function(e){ alert(e.message); })">Buy Backtest — €4</button>
       </div>
     </div>
 
