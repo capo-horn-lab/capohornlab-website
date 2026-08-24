@@ -46,9 +46,25 @@
     html += '</a>';
   }
   html += '</nav>';
+
+  // ── Auth section: user avatar + name (logged in) or login/signup links ──
+  var user = null;
+  try { user = JSON.parse(localStorage.getItem('chl_user') || 'null'); } catch (_) {}
+
   html += '<div class="sb-foot">';
-  html += '<a href="login.html">Log in</a>';
-  html += '<a href="signup.html">Sign up</a>';
+  if (user && user.email) {
+    // Avatar from first letters of name or first email letter
+    var initials = (user.name || user.email).split(/\s+/).slice(0,2).map(function(w){return (w[0]||'').toUpperCase();}).join('');
+    if (!initials || initials.length < 2) initials = (user.email[0] || '').toUpperCase();
+    html += '<a href="dashboard.html" class="sb-user">';
+    html += '<span class="sb-avatar">' + initials + '</span>';
+    html += '<span class="sb-user-name">' + (user.name || user.email.split('@')[0]) + '</span>';
+    html += '</a>';
+    html += '<a href="#" class="sb-logout" onclick="window.CHLAccount.logout();return false">Log out</a>';
+  } else {
+    html += '<a href="login.html">Log in</a>';
+    html += '<a href="signup.html">Sign up</a>';
+  }
   html += '</div>';
 
   aside.innerHTML = html;
