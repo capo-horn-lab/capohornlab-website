@@ -4,7 +4,8 @@
 
   var API_BASE = global.CHL_API_BASE || 'https://capohornlab-website.onrender.com/api/v1';
   var ACCESS_KEY = 'chl_access_token';
-  var USER_KEY = 'chl_user';
+    var USER_KEY = 'chl_user';
+    var storage = (function() { try { global.localStorage.setItem('_test_', '1'); global.localStorage.removeItem('_test_'); return global.localStorage; } catch (_) { return global.sessionStorage; } })();
 
   function errorMessage(response, fallback) {
     return response.json().then(function (body) {
@@ -26,8 +27,8 @@
   }
 
   function remember(login) {
-    sessionStorage.setItem(ACCESS_KEY, login.access_token);
-    sessionStorage.setItem(USER_KEY, JSON.stringify(login.user));
+    storage.setItem(ACCESS_KEY, login.access_token);
+        storage.setItem(USER_KEY, JSON.stringify(login.user));
     return login.user;
   }
 
@@ -43,20 +44,20 @@
     }).then(remember);
   }
 
-  function token() { return sessionStorage.getItem(ACCESS_KEY); }
+  function token() { return storage.getItem(ACCESS_KEY); }
 
   function getMe() {
-    if (!token()) return Promise.reject(new Error('Please log in to continue.'));
-    return request('/auth/me', {headers: {Authorization: 'Bearer ' + token()}}).then(function (user) {
-      sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-      return user;
-    });
-  }
+      if (!token()) return Promise.reject(new Error('Please log in to continue.'));
+      return request('/auth/me', {headers: {Authorization: 'Bearer ' + token()}}).then(function (user) {
+        storage.setItem(USER_KEY, JSON.stringify(user));
+        return user;
+      });
+    }
 
-  function currentUser() {
-    try { return JSON.parse(sessionStorage.getItem(USER_KEY) || 'null'); }
-    catch (_) { return null; }
-  }
+    function currentUser() {
+      try { return JSON.parse(storage.getItem(USER_KEY) || 'null'); }
+      catch (_) { return null; }
+    }
 
   function requireSession() {
     if (!token()) { global.location.replace('login.html?next=dashboard.html'); return false; }
@@ -64,10 +65,10 @@
   }
 
   function logout() {
-    sessionStorage.removeItem(ACCESS_KEY);
-    sessionStorage.removeItem(USER_KEY);
-    global.location.assign('index.html');
-  }
+      storage.removeItem(ACCESS_KEY);
+      storage.removeItem(USER_KEY);
+      global.location.assign('index.html');
+    }
 
   function listRequests() {
     if (!token()) return Promise.reject(new Error('Please log in to continue.'));
@@ -92,8 +93,8 @@
 
   function refresh() {
     return fetch(API_BASE + '/auth/refresh', {method: 'POST', credentials: 'include'})
-      .then(function (response) { if (!response.ok) throw new Error('Session expired.'); return response.json(); })
-      .then(function (data) { sessionStorage.setItem(ACCESS_KEY, data.access_token); return data.access_token; });
+          .then(function (response) { if (!response.ok) throw new Error('Session expired.'); return response.json(); })
+          .then(function (data) { storage.setItem(ACCESS_KEY, data.access_token); return data.access_token; });
   }
 
   function changePassword(currentPassword, newPassword) {
