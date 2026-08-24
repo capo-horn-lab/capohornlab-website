@@ -24,6 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design/observatory-tokens.css">
 
   <style>
     /* ============================================================
@@ -37,12 +38,12 @@
       --ch-navy-800: #0c1420;
       --ch-navy-700: #102438;
       --ch-navy-600: #12253c;
-      --ch-navy-500: #17304a;
+      --ch-quiet0: #17304a;
       --ch-navy-400: #1e3d5e;
       --ch-navy-300: #2d5577;
-      --ch-navy-200: #45719a;
-      --ch-navy-100: #7da3c4;
-      --ch-navy-50:  #cfe0ee;
+      --ch-mist: #45719a;
+      --ch-fog: #7da3c4;
+      --ch-quiet:  #cfe0ee;
 
       --ch-white:       #ffffff;
       --ch-off-white:   #f8fafc;
@@ -268,7 +269,7 @@
     .ch-nav-links a {
       font-size: var(--ch-text-sm);
       font-weight: var(--ch-font-medium);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       padding: var(--ch-space-2) var(--ch-space-4);
       border-radius: var(--ch-radius-md);
       transition: background var(--ch-transition-fast), color var(--ch-transition-fast);
@@ -322,7 +323,7 @@
     .nav-drawer a {
       font-size: var(--ch-text-2xl);
       font-weight: var(--ch-font-medium);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       transition: color var(--ch-transition-fast);
     }
     .nav-drawer a:hover { color: var(--ch-white); }
@@ -575,7 +576,7 @@
       color: var(--ch-white);
     }
     .section-dark .section-header h2 { color: var(--ch-white); }
-    .section-dark .section-header p { color: var(--ch-navy-200); }
+    .section-dark .section-header p { color: var(--ch-mist); }
     .section-dark .section-header .overline { color: var(--ch-amber-400); }
 
     /* ============================================================
@@ -634,7 +635,7 @@
 
     .preauth-content p {
       font-size: var(--ch-text-lg);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       line-height: var(--ch-leading-relaxed);
       max-width: 600px;
       margin: 0 auto var(--ch-space-8);
@@ -1102,7 +1103,7 @@
     /* ---- FOOTER ---- */
     .ch-footer {
       background: var(--ch-navy-900);
-      color: var(--ch-navy-200);
+      color: var(--ch-mist);
       padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
       position: relative;
       overflow: hidden;
@@ -1395,6 +1396,17 @@
       mask-image:linear-gradient(#000 10%,transparent 70%);
     }
 
+  
+    /* Page entrance animation */
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section, .page-hero, .section, .ch-section {
+      animation: sectionIn 0.6s var(--ch-ease-out, cubic-bezier(0.16,1,0.3,1)) both;
+    }
+    .page-hero { animation-delay: 0.1s; }
+
   </style>
 
     /* Observatory red — serif display headings */
@@ -1421,7 +1433,7 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="ch-nav-actions">
-        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-mist);border-color:rgba(255,255,255,0.15);">Log In</a>
         <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
       </div>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
@@ -1449,7 +1461,7 @@
     <a href="test-strategy.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Test Strategy</a>
     <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
     <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
-      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-mist);border-color:rgba(255,255,255,0.15);">Log In</a>
       <a href="signup.html" class="btn btn-primary">Sign Up</a>
     </div>
   </div>

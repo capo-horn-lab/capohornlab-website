@@ -1,3 +1,5 @@
-GODMODE_SITE_ACTIVE=2026-08-24T02:11:15Z
-SCOPE=site_local_reversible_until_QA
+GODMODE_SITE_ENDED=2026-08-24T02:00:00Z
+REASON=Francesco approved the completed website and ended God Mode.
+MODE=computer_assistant_standby
+AUTONOMOUS_SITE_CHANGES=false
 HARD_NO=secrets,payments,orders,DNS,trading,destructive_deletes

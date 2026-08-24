@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design/observatory-tokens.css">
   <link rel="icon" type="image/png" href="assets/logo/capo-horn-lab-logo.png">
 
   <!-- Primary Meta Tags -->
@@ -36,12 +37,12 @@
       --ch-navy-800: #0c1420;
       --ch-navy-700: #102438;
       --ch-navy-600: #12253c;
-      --ch-navy-500: #17304a;
+      --ch-quiet0: #17304a;
       --ch-navy-400: #1e3d5e;
       --ch-navy-300: #2d5577;
-      --ch-navy-200: #45719a;
-      --ch-navy-100: #7da3c4;
-      --ch-navy-50:  #cfe0ee;
+      --ch-mist: #45719a;
+      --ch-fog: #7da3c4;
+      --ch-quiet:  #cfe0ee;
 
       --ch-white:       #ffffff;
       --ch-off-white:   #f8fafc;
@@ -176,7 +177,7 @@
       --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
     .ch-nav-brand .brand-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .ch-nav-links { display: flex; align-items: center; gap: var(--ch-space-1); }
-    .ch-nav-links a { font-size: var(--ch-text-sm); font-weight: var(--ch-font-medium); color: var(--ch-navy-200); padding: var(--ch-space-2) var(--ch-space-4); border-radius: var(--ch-radius-md); transition: background var(--ch-transition-fast), color var(--ch-transition-fast); }
+    .ch-nav-links a { font-size: var(--ch-text-sm); font-weight: var(--ch-font-medium); color: var(--ch-mist); padding: var(--ch-space-2) var(--ch-space-4); border-radius: var(--ch-radius-md); transition: background var(--ch-transition-fast), color var(--ch-transition-fast); }
     .ch-nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--ch-white); }
     .ch-nav-links a.active { color: var(--ch-white); background: rgba(227,59,47,0.2); }
     .ch-nav-actions { display: flex; align-items: center; gap: var(--ch-space-3); }
@@ -184,7 +185,7 @@
     .nav-toggle svg { width: 24px; height: 24px; }
     .nav-drawer { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--ch-navy-900); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; gap: var(--ch-space-8); animation: fadeIn 0.2s ease-out; }
     .nav-drawer.open { display: flex; }
-    .nav-drawer a { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-medium); color: var(--ch-navy-200); transition: color var(--ch-transition-fast); }
+    .nav-drawer a { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-medium); color: var(--ch-mist); transition: color var(--ch-transition-fast); }
     .nav-drawer a:hover { color: var(--ch-white); }
     .nav-drawer-close { position: absolute; top: var(--ch-space-6); right: var(--ch-space-6); background: none; border: none; color: var(--ch-white); cursor: pointer; padding: var(--ch-space-2); }
     .nav-drawer-close svg { width: 28px; height: 28px; }
@@ -221,14 +222,14 @@
     .hero-badge-dot { width: 6px; height: 6px; background: var(--ch-success); border-radius: 50%; animation: pulseGlow 2s ease-in-out infinite; }
     .hero h1 { font-size: var(--ch-text-4xl); font-weight: var(--ch-font-extrabold); letter-spacing: var(--ch-letter-spacing-tight); line-height: var(--ch-leading-tight); margin-bottom: var(--ch-space-4); }
     .hero h1 .highlight { background: linear-gradient(135deg, var(--ch-blue-400), var(--ch-amber-400)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero p { font-size: var(--ch-text-lg); color: var(--ch-navy-200); line-height: var(--ch-leading-relaxed); max-width: 600px; margin: 0 auto var(--ch-space-8); }
+    .hero p { font-size: var(--ch-text-lg); color: var(--ch-mist); line-height: var(--ch-leading-relaxed); max-width: 600px; margin: 0 auto var(--ch-space-8); }
     .hero-actions { display: flex; justify-content: center; gap: var(--ch-space-4); flex-wrap: wrap; }
 
     /* TRUST BAR */
     .trust-bar { background: var(--ch-navy-800); border-bottom: 1px solid rgba(255,255,255,0.04); padding: var(--ch-space-4) 0; overflow-x: auto; }
     .trust-bar-inner { display: flex; align-items: center; justify-content: center; gap: var(--ch-space-8); flex-wrap: nowrap; min-width: fit-content; padding: 0 var(--ch-space-6); }
     .trust-bar-inner .label { font-size: var(--ch-text-xs); color: var(--ch-gray-500); text-transform: uppercase; letter-spacing: var(--ch-letter-spacing-wide); font-weight: var(--ch-font-medium); white-space: nowrap; }
-    .trust-instrument { display: inline-flex; align-items: center; gap: var(--ch-space-2); padding: var(--ch-space-2) var(--ch-space-4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--ch-radius-md); font-family: var(--ch-font-mono); font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-navy-200); white-space: nowrap; transition: background var(--ch-transition-fast), border-color var(--ch-transition-fast); }
+    .trust-instrument { display: inline-flex; align-items: center; gap: var(--ch-space-2); padding: var(--ch-space-2) var(--ch-space-4); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--ch-radius-md); font-family: var(--ch-font-mono); font-size: var(--ch-text-sm); font-weight: var(--ch-font-semibold); color: var(--ch-mist); white-space: nowrap; transition: background var(--ch-transition-fast), border-color var(--ch-transition-fast); }
       --ch-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
     .trust-instrument:hover { background: rgba(227,59,47,0.1); border-color: rgba(227,59,47,0.2); }
     .trust-instrument .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
@@ -250,7 +251,7 @@
     .section-alt { background: var(--ch-white); }
     .section-dark { background: var(--ch-navy-900); color: var(--ch-white); }
     .section-dark .section-header h2 { color: var(--ch-white); }
-    .section-dark .section-header p { color: var(--ch-navy-200); }
+    .section-dark .section-header p { color: var(--ch-mist); }
     .section-dark .section-header .overline { color: var(--ch-amber-400); }
 
     /* DOC CONTENT */
@@ -296,7 +297,7 @@
     .newsletter-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(227,59,47,0.10) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 70% 30%, rgba(245,158,11,0.04) 0%, transparent 60%); pointer-events: none; }
     .newsletter-box { position: relative; max-width: 560px; margin: 0 auto; text-align: center; }
     .newsletter-box h2 { font-size: var(--ch-text-2xl); font-weight: var(--ch-font-bold); margin-bottom: var(--ch-space-3); }
-    .newsletter-box p { font-size: var(--ch-text-sm); color: var(--ch-navy-200); line-height: var(--ch-leading-relaxed); margin-bottom: var(--ch-space-6); }
+    .newsletter-box p { font-size: var(--ch-text-sm); color: var(--ch-mist); line-height: var(--ch-leading-relaxed); margin-bottom: var(--ch-space-6); }
     .newsletter-form { display: flex; gap: var(--ch-space-3); max-width: 480px; margin: 0 auto; }
     .newsletter-form .input-field { font-family: var(--ch-font-sans); font-size: var(--ch-text-base); padding: var(--ch-space-3) var(--ch-space-4); border: 1px solid var(--ch-gray-200); border-radius: var(--ch-radius-md); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: var(--ch-white); transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast); outline: none; width: 100%; }
     .newsletter-form .input-field::placeholder { color: var(--ch-navy-300); }
@@ -304,7 +305,7 @@
     .newsletter-disclaimer { font-size: var(--ch-text-xs); color: var(--ch-navy-300); margin-top: var(--ch-space-4); }
 
     /* FOOTER */
-    .ch-footer { background: var(--ch-navy-900); color: var(--ch-navy-200); padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8); position: relative; overflow: hidden; }
+    .ch-footer { background: var(--ch-navy-900); color: var(--ch-mist); padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8); position: relative; overflow: hidden; }
     .ch-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, rgba(227,59,47,0.4), transparent); }
     .ch-footer-grid { max-width: var(--ch-max-width); margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--ch-space-8); }
     .ch-footer-brand { font-size: var(--ch-text-xl); font-weight: var(--ch-font-bold); color: var(--ch-white); margin-bottom: var(--ch-space-3); letter-spacing: var(--ch-letter-spacing-tight); display: flex; align-items: center; gap: var(--ch-space-2); }
@@ -378,6 +379,17 @@
       mask-image:linear-gradient(#000 10%,transparent 70%);
     }
 
+  
+    /* Page entrance animation */
+    @keyframes sectionIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section, .page-hero, .section, .ch-section {
+      animation: sectionIn 0.6s var(--ch-ease-out, cubic-bezier(0.16,1,0.3,1)) both;
+    }
+    .page-hero { animation-delay: 0.1s; }
+
   </style>
 
     /* Observatory red — serif display headings */
@@ -403,7 +415,7 @@
         <a href="contact.html">Contact</a>
       </div>
       <div class="ch-nav-actions">
-        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+        <a href="login.html" class="btn btn-ghost" style="color:var(--ch-mist);border-color:rgba(255,255,255,0.15);">Log In</a>
         <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
       </div>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="document.getElementById('navDrawer').classList.add('open')">
@@ -432,7 +444,7 @@
     <a href="documentation.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Docs</a>
     <a href="contact.html" onclick="document.getElementById('navDrawer').classList.remove('open')">Contact</a>
     <div style="display:flex;gap:var(--ch-space-4);margin-top:var(--ch-space-4);">
-      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-navy-200);border-color:rgba(255,255,255,0.15);">Log In</a>
+      <a href="login.html" class="btn btn-ghost" style="color:var(--ch-mist);border-color:rgba(255,255,255,0.15);">Log In</a>
       <a href="signup.html" class="btn btn-primary">Sign Up</a>
     </div>
   </div>
