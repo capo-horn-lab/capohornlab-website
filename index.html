@@ -108,8 +108,8 @@
     /* ── HERO ── */
     .hero{
       padding:clamp(64px,10vw,140px) 0 72px;
-      display:grid;grid-template-columns:1.08fr .92fr;gap:72px;
-      align-items:end;min-height:calc(100svh - 92px);
+      display:block;max-width:880px;
+      min-height:calc(100svh - 92px);
     }
     .eyebrow{
       font:10px var(--ch-font-mono);letter-spacing:.18em;text-transform:uppercase;
@@ -572,25 +572,6 @@
           <a class="action secondary" href="#method">See the method &darr;</a>
         </div>
       </div>
-      <section class="instrument" aria-label="Interactive research field">
-        <h2><span class="status-dot" aria-hidden="true"></span> Live research instrument</h2>
-        <div class="field">
-          <span class="contour c1"></span><span class="contour c2"></span>
-          <span class="contour c3"></span><span class="contour c4"></span>
-          <span class="contour c5"></span><span class="route"></span>
-          <div class="readout" id="readout" aria-live="polite">
-            ORBIT&nbsp;<span class="val">ACTIVE</span><br>
-            FIELD&nbsp;<span class="val">LIVE</span><br>
-            <span class="live">&bull; LIVE</span>
-          </div>
-          <div class="coordinates">
-            ORBITAL FIELD<br>
-            SITE-WIDE BACKGROUND<br>
-            TEST / REVISE / DISCARD
-          </div>
-          <div class="legend"><b>&bull;</b> hypothesis path</div>
-        </div>
-      </section>
     </div>
   </header>
 
