@@ -164,7 +164,7 @@
       font-size: var(--ch-text-base);
       line-height: var(--ch-leading-normal);
       color:#f2e7e3;
-      background:#0c1420;
+      background:var(--ch-ink);
     }
 
     img { max-width: 100%; display: block; }
@@ -208,7 +208,7 @@
       align-items: center;
       justify-content: space-between;
       padding: var(--ch-space-4) var(--ch-space-6);
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-white);
       box-shadow: var(--ch-shadow-md);
       position: sticky;
@@ -307,7 +307,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--ch-navy-900);
+      background:transparent;
       z-index: 9999;
       flex-direction: column;
       align-items: center;
@@ -428,7 +428,7 @@
        CARDS
        ============================================================ */
     .ch-card {
-      background:#0c1420;
+      background:var(--ch-ink);
       border: 1px solid var(--ch-gray-100);
       border-radius: var(--ch-radius-lg);
       box-shadow: var(--ch-shadow-sm);
@@ -484,7 +484,7 @@
       padding: var(--ch-space-3) var(--ch-space-4);
       border: 1px solid var(--ch-gray-200);
       border-radius: var(--ch-radius-md);
-      background:#0c1420;
+      background:var(--ch-ink);
       color:#f2e7e3;
       transition: border-color var(--ch-transition-fast), box-shadow var(--ch-transition-fast);
       outline: none;
@@ -503,7 +503,7 @@
        ============================================================ */
     .page-hero {
       position: relative;
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-white);
       overflow: hidden;
       padding: var(--ch-space-16) 0 var(--ch-space-12);
@@ -608,9 +608,9 @@
       display: block;
     }
 
-    .section-alt { background:#0c1420; }
+    .section-alt { background:var(--ch-ink); }
     .section-dark {
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-white);
     }
 
@@ -636,7 +636,7 @@
       align-items: center;
       gap: var(--ch-space-2);
       padding: var(--ch-space-3) var(--ch-space-5);
-      background:#0c1420;
+      background:var(--ch-ink);
       border: 1px solid var(--ch-gray-100);
       border-radius: var(--ch-radius-lg);
       box-shadow: var(--ch-shadow-xs);
@@ -705,7 +705,7 @@
       font-size: var(--ch-text-sm);
       font-weight: var(--ch-font-semibold);
       color:#cfb6ae;
-      background:#0c1420;
+      background:var(--ch-ink);
       border-bottom: 1px solid var(--ch-gray-100);
       text-transform: uppercase;
       letter-spacing: var(--ch-letter-spacing-wide);
@@ -720,7 +720,7 @@
     }
 
     .data-table tr:last-child td { border-bottom: none; }
-    .data-table tr:hover td { background:#0c1420; }
+    .data-table tr:hover td { background:var(--ch-ink); }
 
     .data-table td:first-child {
       font-weight: var(--ch-font-semibold);
@@ -747,7 +747,7 @@
     .faq-item {
       border: 1px solid var(--ch-gray-100);
       border-radius: var(--ch-radius-lg);
-      background:#0c1420;
+      background:var(--ch-ink);
       overflow: hidden;
       transition: box-shadow var(--ch-transition-fast);
     }
@@ -926,7 +926,7 @@
        FOOTER
        ============================================================ */
     .ch-footer {
-      background: var(--ch-navy-900);
+      background:transparent;
       color: var(--ch-mist);
       padding: var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);
       position: relative;
@@ -1172,6 +1172,7 @@
     h1, h2, .display, .hero h1, .section-header h2 { font-family: var(--ch-font-serif), Georgia, serif !important; letter-spacing: -0.035em; }
   </style>
 
+<link rel="stylesheet" href="assets/css/sidebar.css">
 </head>
 <body>
 
@@ -1608,5 +1609,6 @@
 </script>
 
   <script src="assets/js/orbit-background.js"></script>
+<script src="assets/js/sidebar.js"></script>
 </body>
 </html>

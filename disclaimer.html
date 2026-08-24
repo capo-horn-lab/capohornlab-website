@@ -29,12 +29,12 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    body{font-family:var(--ch-font-sans);font-size:var(--ch-text-base);line-height:var(--ch-leading-normal);color:#f2e7e3;background:#0c1420}
+    body{font-family:var(--ch-font-sans);font-size:var(--ch-text-base);line-height:var(--ch-leading-normal);color:#f2e7e3;background:var(--ch-ink);}
     img{max-width:100%;display:block}a{color:inherit;text-decoration:none}ul{list-style:none}
     .container{max-width:var(--ch-max-width);margin:0 auto;padding:0 var(--ch-space-6)}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-    .ch-nav{display:flex;align-items:center;justify-content:space-between;padding:var(--ch-space-4) var(--ch-space-6);background:var(--ch-navy-900);color:var(--ch-white);box-shadow:var(--ch-shadow-md);position:sticky;top:0;z-index:var(--ch-z-nav)}
+    .ch-nav{display:flex;align-items:center;justify-content:space-between;padding:var(--ch-space-4) var(--ch-space-6);background:transparent;color:var(--ch-white);box-shadow:var(--ch-shadow-md);position:sticky;top:0;z-index:var(--ch-z-nav)}
     .ch-nav .container{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:var(--ch-max-width);margin:0 auto;padding:0}
     .ch-nav-brand{font-size:var(--ch-text-lg);font-weight:var(--ch-font-bold);letter-spacing:var(--ch-letter-spacing-tight);display:flex;align-items:center;gap:var(--ch-space-2)}
     .ch-nav-brand .brand-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--ch-blue-500),var(--ch-amber-500));border-radius:var(--ch-radius-sm);display:flex;align-items:center;justify-content:center;font-family:var(--ch-font-mono);font-size:var(--ch-text-xs);font-weight:var(--ch-font-bold);color:var(--ch-white)}
@@ -45,7 +45,7 @@
     .ch-nav-actions{display:flex;align-items:center;gap:var(--ch-space-3)}
     .nav-toggle{display:none;background:none;border:none;color:var(--ch-white);cursor:pointer;padding:var(--ch-space-2)}
     .nav-toggle svg{width:24px;height:24px}
-    .nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:var(--ch-navy-900);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:var(--ch-space-8);animation:fadeIn 0.2s ease-out}
+    .nav-drawer{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:transparent;z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:var(--ch-space-8);animation:fadeIn 0.2s ease-out}
     .nav-drawer.open{display:flex}
     .nav-drawer a{font-size:var(--ch-text-2xl);font-weight:var(--ch-font-medium);color:var(--ch-navy-200);transition:color var(--ch-transition-fast)}
     .nav-drawer a:hover{color:var(--ch-white)}
@@ -66,7 +66,7 @@
     .legal-header .legal-meta{font-size:var(--ch-text-sm);color:var(--ch-gray-400)}
     .legal-header .legal-meta span{display:inline-block;margin:0 var(--ch-space-2)}
     .legal-header .legal-meta .separator{color:var(--ch-gray-300)}
-    .legal-content{max-width:860px;margin:0 auto;background:#0c1420;border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-xl);box-shadow:var(--ch-shadow-sm);padding:var(--ch-space-12) var(--ch-space-12)}
+    .legal-content{max-width:860px;margin:0 auto;background:var(--ch-ink);border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-xl);box-shadow:var(--ch-shadow-sm);padding:var(--ch-space-12) var(--ch-space-12)}
     .legal-content h2{font-size:var(--ch-text-xl);font-weight:var(--ch-font-semibold);color:#f2e7e3;margin-top:var(--ch-space-8);margin-bottom:var(--ch-space-4);padding-bottom:var(--ch-space-2);border-bottom:1px solid var(--ch-gray-100)}
     .legal-content h2:first-child{margin-top:0}
     .legal-content h3{font-size:var(--ch-text-base);font-weight:var(--ch-font-semibold);color:#cfb6ae;margin-top:var(--ch-space-6);margin-bottom:var(--ch-space-2)}
@@ -79,14 +79,14 @@
     .legal-content strong{color:#f2e7e3;font-weight:var(--ch-font-semibold)}
     .legal-content .legal-notice{background:var(--ch-amber-50);border:1px solid var(--ch-amber-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-4) var(--ch-space-6);margin-bottom:var(--ch-space-6);font-size:var(--ch-text-sm);color:#cfb6ae;line-height:var(--ch-leading-relaxed)}
     .legal-content .legal-notice strong{color:var(--ch-amber-700, #b45309)}
-    .legal-toc{background:#0c1420;border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-6);margin-bottom:var(--ch-space-8)}
+    .legal-toc{background:var(--ch-ink);border:1px solid var(--ch-gray-100);border-radius:var(--ch-radius-lg);padding:var(--ch-space-6);margin-bottom:var(--ch-space-8)}
     .legal-toc h3{font-size:var(--ch-text-sm);font-weight:var(--ch-font-semibold);color:#f2e7e3;text-transform:uppercase;letter-spacing:var(--ch-letter-spacing-wide);margin-top:0;margin-bottom:var(--ch-space-3)}
     .legal-toc ol{margin-bottom:0;padding-left:var(--ch-space-5)}
     .legal-toc li{margin-bottom:var(--ch-space-1)}
     .legal-toc a{color:var(--ch-blue-500);text-decoration:none;font-size:var(--ch-text-sm)}
     .legal-toc a:hover{text-decoration:underline}
 
-    .ch-footer{background:var(--ch-navy-900);color:var(--ch-navy-200);padding:var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);position:relative;overflow:hidden}
+    .ch-footer{background:transparent;color:var(--ch-navy-200);padding:var(--ch-space-16) var(--ch-space-6) var(--ch-space-8);position:relative;overflow:hidden}
     .ch-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(227,59,47,0.4),transparent)}
     .ch-footer-grid{max-width:var(--ch-max-width);margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:var(--ch-space-8)}
     .ch-footer-brand{font-size:var(--ch-text-xl);font-weight:var(--ch-font-bold);color:var(--ch-white);margin-bottom:var(--ch-space-3);letter-spacing:var(--ch-letter-spacing-tight);display:flex;align-items:center;gap:var(--ch-space-2)}
@@ -112,6 +112,7 @@
     }
     @media(min-width:768px){.ch-nav{padding:var(--ch-space-4) var(--ch-space-8)}}
   </style>
+<link rel="stylesheet" href="assets/css/sidebar.css">
 </head>
 <body>
 
@@ -295,5 +296,6 @@
   </footer>
 
   <script src="assets/js/orbit-background.js"></script>
+<script src="assets/js/sidebar.js"></script>
 </body>
 </html>
