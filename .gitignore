@@ -180,3 +180,10 @@ cython_debug/
 .cursorignore
 .cursorindexingignorechl.db
 *.db
+
+# Local QA/build artifacts
+admin.html.bak.*
+test-results/
+reports/*.png
+.qa-chrome-profile/
+*.bak.*
