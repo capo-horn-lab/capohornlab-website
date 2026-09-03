@@ -1,6 +1,13 @@
 """Backtest artifacts must disclose their non-executable reference-price basis."""
 
+import subprocess
+import sys
+from pathlib import Path
+
 from research.backtest_engine import BacktestEngine, BacktestStats
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_report_carries_machine_readable_non_executable_execution_assumptions():
@@ -27,3 +34,16 @@ def test_declared_reference_costs_drive_engine_commission_and_slippage():
     assert engine._commission_for(quantity=2) == 7.50
     assert engine._slippage_for_bar(quantity=1) == 0.50
     assert engine.slippage_model.assumed_slippage_ticks_per_side == 2.0
+
+
+def test_backtest_script_can_run_directly_from_project_root():
+    result = subprocess.run(
+        [sys.executable, "research/backtest_engine.py", "--list"],
+        cwd=PROJECT_ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "OpeningRangeBreakout" in result.stdout

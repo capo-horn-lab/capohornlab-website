@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import math
 import re
+import sys
 import warnings
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
@@ -33,6 +34,13 @@ from typing import Any, Callable, Optional
 import numpy as np
 import pandas as pd
 from scipy import stats as scipy_stats
+
+# Support both `python -m research.backtest_engine` and the documented direct
+# invocation `python research/backtest_engine.py` from the project root.
+if __package__ in (None, ""):
+    project_root = str(Path(__file__).resolve().parents[1])
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
 
 from research.market_data_engine import ExecutionAssumptions
 

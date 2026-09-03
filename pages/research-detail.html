@@ -5,17 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,follow">
   <title>Research Detail — Capo Horn Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../design/observatory-tokens.css">
   <script>
-    // Keep this legacy route canonical: research content and assets live at the root route.
+    // Legacy compatibility route. Canonical research detail lives at root.
     // Preserve slug, mode, and hash parameters for shared study links.
     (function () {
       var target = '../research-detail.html' + window.location.search + window.location.hash;
       window.location.replace(target);
     }());
   </script>
+  <style>
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      background: radial-gradient(circle at 70% 12%, rgba(227, 59, 47, 0.10), transparent 34%), var(--ch-ink);
+      color: var(--ch-fog);
+      font-family: var(--ch-font-body);
+    }
+    .redirect-card {
+      width: min(92vw, 560px);
+      border: 1px solid var(--ch-line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+      padding: 32px;
+      border-radius: 24px;
+    }
+    .eyebrow {
+      color: var(--ch-signal-bright);
+      font-family: var(--ch-font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    a { color: var(--ch-fog); text-decoration-color: var(--ch-signal); }
+  </style>
 </head>
 <body>
-  <p>Opening the canonical research study… <a id="canonical-link" href="../research-detail.html">Continue</a></p>
+  <main class="redirect-card" aria-live="polite">
+    <div class="eyebrow">Canonical route</div>
+    <p>Opening the canonical research study… <a id="canonical-link" href="../research-detail.html">Continue</a></p>
+  </main>
   <script>
     document.getElementById('canonical-link').href = '../research-detail.html' + window.location.search + window.location.hash;
   </script>
