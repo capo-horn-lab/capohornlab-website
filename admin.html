@@ -2981,23 +2981,7 @@
       var saved = localStorage.getItem('_chl_admin_token');
       if (saved) ADMIN_TOKEN = saved;
     })();
-      // Update sidebar
-      document.querySelectorAll('.sidebar-nav-item[data-section]').forEach(function(item) {
-        item.classList.toggle('active', item.getAttribute('data-section') === section);
-      });
-      // Update sections
-      document.querySelectorAll('.admin-section').forEach(function(s) {
-        s.classList.toggle('active', s.id === 'section-' + section);
-      });
-      // Update topbar
-      var info = sectionTitles[section] || { title: 'Admin', breadcrumb: 'Admin' };
-      document.getElementById('topbarTitle').textContent = info.title;
-      document.getElementById('topbarBreadcrumb').textContent = info.breadcrumb;
-      // Close sidebar on mobile
-      document.getElementById('adminSidebar').classList.remove('open');
-    }
-
-    /* ---- Expandable Detail ---- */
+/* ---- Expandable Detail ---- */
     function toggleDetail(detailId, btn) {
       var row = document.getElementById(detailId);
       if (!row) return;
