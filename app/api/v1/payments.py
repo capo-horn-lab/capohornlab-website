@@ -1,10 +1,11 @@
 """Payment and purchase API endpoints."""
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.v1.auth import get_current_user
+from app.core.config import settings
 from app.core.database import get_async_db
 from app.models.user import User
 from app.schemas.payment import (
@@ -125,3 +126,55 @@ async def payment_dashboard(
             for o in orders
         ],
     )
+
+
+@router.post("/webhook", include_in_schema=True)
+async def stripe_webhook(request: Request, db: AsyncSession = Depends(get_async_db)):
+    """Verify and handle Stripe webhook events (signature-verified)."""
+    import stripe as stripe_lib
+    from datetime import datetime, timezone
+    from sqlalchemy import select
+    from uuid import UUID
+
+    from app.models.order import Order
+
+    payload = await request.body()
+    sig_header = request.headers.get("stripe-signature")
+
+    if not settings.STRIPE_WEBHOOK_SECRET or not sig_header:
+        from fastapi import HTTPException
+
+        raise HTTPException(status_code=400, detail="Webhook not configured")
+
+    try:
+        event = stripe_lib.Webhook.construct_event(
+            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
+        )
+    except (stripe_lib.error.SignatureVerificationError, ValueError) as e:
+        from fastapi import HTTPException
+
+        raise HTTPException(status_code=400, detail=f"Invalid signature: {e}")
+
+    event_type = event["type"]
+    data = event["data"]["object"]
+    metadata = data.get("metadata") or {}
+
+    # One-time purchases are charged synchronously, but keep order status in
+    # sync from async PaymentIntent events too (idempotent).
+    if event_type in ("payment_intent.succeeded", "payment_intent.payment_failed"):
+        order_id = metadata.get("order_id")
+        if order_id:
+            try:
+                result = await db.execute(select(Order).where(Order.id == UUID(order_id)))
+                order = result.scalar()
+            except (ValueError, TypeError):
+                order = None
+            if order and order.status != "paid":
+                order.status = "paid" if event_type.endswith("succeeded") else "failed"
+                if event_type.endswith("succeeded"):
+                    order.paid_at = datetime.now(timezone.utc)
+                await db.commit()
+
+    # checkout.session.completed / invoice.* / customer.subscription.* →
+    # subscription lifecycle handled here when subscriptions are implemented.
+    return {"received": True, "type": event_type}
