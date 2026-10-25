@@ -42,11 +42,6 @@ def _verifica_token(request: Request) -> None:
         raise HTTPException(status_code=401, detail="Invalid publish token.")
 
 
-def _costante_non_valida(nome: str):
-    # NaN/Infinity are not valid JSON; stored, they would make the public GET fail.
-    raise ValueError(nome)
-
-
 @router.put("", status_code=204)
 async def pubblica_frequenze(request: Request, db: AsyncSession = Depends(get_async_db)) -> Response:
     """Replace the single ``frequenze`` snapshot. Requires the ``X-Publish-Token`` header."""
@@ -55,7 +50,10 @@ async def pubblica_frequenze(request: Request, db: AsyncSession = Depends(get_as
     if len(corpo) > MAX_BYTE:
         raise HTTPException(status_code=413, detail="Payload too large.")
     try:
-        dati = json.loads(corpo.decode("utf-8"), parse_constant=_costante_non_valida)
+        dati = json.loads(corpo.decode("utf-8"))
+        # Round-trip exactly as the public GET will render it: rejects NaN/Infinity (also via 1e999)
+        # and lone surrogates, which would otherwise be stored and then fail every GET.
+        json.dumps(dati, ensure_ascii=False, allow_nan=False).encode("utf-8")
     except (UnicodeDecodeError, ValueError, RecursionError):
         raise HTTPException(status_code=422, detail="Body must be a UTF-8 JSON object.") from None
     if not (

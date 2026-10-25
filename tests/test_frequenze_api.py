@@ -137,12 +137,15 @@ class FrequenzeApiTest(unittest.TestCase):
         self.assertIsNone(self.get().json()["dati"])
 
     def test_put_corpo_non_json_422(self):
-        # Never 500: invalid UTF-8, malformed JSON, runaway nesting, and NaN (which would break the public GET).
+        # Never 500, and nothing stored: invalid UTF-8, malformed JSON, runaway nesting, and values that
+        # parse but could not be rendered by the public GET (NaN, 1e999 -> inf, lone surrogate).
         for corpo in (b"\xff\xfe{", b"{", b"[" * 100_000,
-                      b'{"generato":"x","strumenti":{"MNQ":NaN}}'):
+                      b'{"generato":"x","strumenti":{"MNQ":NaN}}',
+                      b'{"generato":"x","strumenti":{"MNQ":1e999}}',
+                      b'{"generato":"\\ud800","strumenti":{}}'):
             with self.subTest(corpo=corpo[:20]):
                 self.assertEqual(self.put(corpo, TOKEN).status_code, 422)
-        self.assertIsNone(self.get().json()["dati"])
+                self.assertIsNone(self.get().json()["dati"])
 
     def test_put_oltre_1mb_413(self):
         corpo = json.dumps({"generato": "x", "strumenti": {"MNQ": "x" * 1_050_000}})
