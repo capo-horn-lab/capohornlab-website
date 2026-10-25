@@ -35,7 +35,7 @@ class ContactFlowWiringTests(unittest.TestCase):
         self.assertIn("503", route)
 
     def test_newsletter_forms_use_shared_client(self):
-        page = self.read("index.html")
+        page = self.read("about.html")
         self.assertIn("CHLNewsletter.subscribe(event)", page)
         self.assertIn("assets/js/newsletter-client.js", page)
         newsletter = self.read("assets/js/newsletter-client.js")
