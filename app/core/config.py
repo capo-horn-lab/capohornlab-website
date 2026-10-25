@@ -109,6 +109,10 @@ class Settings(BaseSettings):
     STRIPE_PUBLISHABLE_KEY: str | None = None
     STRIPE_WEBHOOK_SECRET: str | None = None
 
+    # --- Live frequencies (FREQ-SITO-1) ---
+    # Shared secret the trading engine sends as X-Publish-Token; empty/None disables publishing (503).
+    FREQ_PUBLISH_TOKEN: str | None = None
+
     # --- File Upload ---
     UPLOAD_DIR: str = "D:\\CapoHornLab\\uploads"
     MAX_FILE_SIZE_MB: int = 10

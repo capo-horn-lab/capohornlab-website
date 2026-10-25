@@ -28,6 +28,8 @@ services:
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
+      - key: FREQ_PUBLISH_TOKEN
+        sync: false
     plan: free
 
   - type: pserv

@@ -11,6 +11,7 @@ from app.models.contact_message import ContactMessage
 from app.models.research_suggestion import ResearchSuggestion
 from app.models.payment import PaymentMethod
 from app.models.order import Order
+from app.models.live_snapshot import LiveSnapshot
 
 __all__ = [
     "User",
@@ -26,4 +27,5 @@ __all__ = [
     "ResearchSuggestion",
     "PaymentMethod",
     "Order",
+    "LiveSnapshot",
 ]
