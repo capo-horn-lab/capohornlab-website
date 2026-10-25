@@ -4,12 +4,15 @@
   var API_BASE = global.CHL_API_BASE || 'https://capohornlab-website.onrender.com/api/v1';
   var REFRESH_MS = 60000;
   var STALE_AFTER_S = 180;
+  var ultimoCaricamento = null;  // HH:MM of the last render that showed data; null while the panel has none
 
   function el(id) { return document.getElementById(id); }
   function show(id, text) { el(id).textContent = text; }
   function txt(value) { return value == null ? '?' : String(value); }
+  function ora() { return new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }); }
 
   function render(r) {
+    ultimoCaricamento = null;
     if (r === null || typeof r !== 'object' || Array.isArray(r)) {
       show('freq-stato', '');
       show('freq-dati', '');
@@ -20,7 +23,7 @@
     if (dati == null) {
       show('freq-stato', '');
       show('freq-dati', '');
-      show('freq-avviso', 'Il motore non ha ancora pubblicato.');
+      show('freq-avviso', 'Nessun dato dal motore (spento, o non ha ancora pubblicato).');
       return;
     }
     if (typeof dati !== 'object' || Array.isArray(dati)) {
@@ -37,11 +40,13 @@
     show('freq-dati', JSON.stringify(dati, null, 2));
     show('freq-avviso', typeof r.eta_s === 'number' && r.eta_s > STALE_AFTER_S
       ? 'Motore spento o scollegato da ' + Math.floor(r.eta_s / 60) + ' minuti.' : '');
+    ultimoCaricamento = ora();
   }
 
   function aggiornamentoFallito() {
-    var ora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
-    show('freq-avviso', 'Aggiornamento fallito alle ' + ora + ', dati dell\'ultimo caricamento.');
+    show('freq-avviso', 'Aggiornamento fallito alle ' + ora() + '; ' + (ultimoCaricamento
+      ? 'ultimo caricamento riuscito alle ' + ultimoCaricamento + ', dati di allora.'
+      : 'nessun dato ancora ricevuto.'));
   }
 
   function carica() {

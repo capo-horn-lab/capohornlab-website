@@ -34,10 +34,10 @@ def eta_secondi(ricevuto: str, adesso: datetime) -> int:
 
 
 def _verifica_token(request: Request) -> None:
-    atteso = settings.FREQ_PUBLISH_TOKEN
+    atteso = (settings.FREQ_PUBLISH_TOKEN or "").strip()
     if not atteso:
         raise HTTPException(status_code=503, detail="Publishing is not configured.")
-    inviato = request.headers.get("x-publish-token")
+    inviato = (request.headers.get("x-publish-token") or "").strip()
     if not inviato or not hmac.compare_digest(inviato.encode(), atteso.encode()):
         raise HTTPException(status_code=401, detail="Invalid publish token.")
 

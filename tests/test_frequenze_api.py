@@ -102,6 +102,18 @@ class FrequenzeApiTest(unittest.TestCase):
         self.assertNotIn("test-token", r.text)
         self.assertIsNone(self.get().json()["dati"])
 
+    def test_put_token_con_spazi_accettato(self):
+        # the header is stripped, and so is the configured value; a configured value that is only whitespace means "not configured"
+        self.assertEqual(self.put(json.dumps(OK), {"X-Publish-Token": " test-token\n"}).status_code, 204)
+        prima = settings.FREQ_PUBLISH_TOKEN
+        try:
+            for configurato, atteso in ((" test-token\n", 204), (" \n", 503)):
+                settings.FREQ_PUBLISH_TOKEN = configurato
+                with self.subTest(configurato=configurato):
+                    self.assertEqual(self.put(json.dumps(OK), TOKEN).status_code, atteso)
+        finally:
+            settings.FREQ_PUBLISH_TOKEN = prima
+
     def test_put_ok_poi_get_restituisce_dati(self):
         r = self.put(json.dumps(OK), TOKEN)
         self.assertEqual(r.status_code, 204)
