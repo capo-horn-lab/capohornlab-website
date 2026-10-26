@@ -1,4 +1,4 @@
-"""Live trading-frequency snapshot: the engine PUTs it every ~60 s, the home page GETs it."""
+"""Live snapshots (``frequenze``, ``scenari``): the engine PUTs each every few seconds, the home page GETs them."""
 from __future__ import annotations
 
 import hmac
@@ -13,10 +13,11 @@ from app.core.config import settings
 from app.core.database import get_async_db
 from app.models.live_snapshot import LiveSnapshot
 
-router = APIRouter(prefix="/frequenze", tags=["frequenze"])
+router = APIRouter(prefix="/live", tags=["live"])
+alias = APIRouter(prefix="/frequenze", tags=["live"])  # fase 1 URL, same storage row as /live/frequenze
 
-CHIAVE = "frequenze"
-MAX_BYTE = 1_048_576
+CHIAVI = ("frequenze", "scenari")
+MAX_BYTE = 2_097_152
 _FORMATO = "%Y-%m-%dT%H:%M:%SZ"
 
 
@@ -42,9 +43,14 @@ def _verifica_token(request: Request) -> None:
         raise HTTPException(status_code=401, detail="Invalid publish token.")
 
 
-@router.put("", status_code=204)
-async def pubblica_frequenze(request: Request, db: AsyncSession = Depends(get_async_db)) -> Response:
-    """Replace the single ``frequenze`` snapshot. Requires the ``X-Publish-Token`` header."""
+def _verifica_chiave(chiave: str) -> None:
+    if chiave not in CHIAVI:
+        raise HTTPException(status_code=403, detail="Unknown snapshot key.")
+
+
+async def _salva(chiave: str, request: Request, db: AsyncSession) -> Response:
+    """Replace the snapshot stored under ``chiave``. Requires the ``X-Publish-Token`` header."""
+    _verifica_chiave(chiave)
     _verifica_token(request)
     corpo = await request.body()
     if len(corpo) > MAX_BYTE:
@@ -63,19 +69,19 @@ async def pubblica_frequenze(request: Request, db: AsyncSession = Depends(get_as
     ):
         raise HTTPException(status_code=422, detail="Body needs 'generato' (string) and 'strumenti' (object).")
 
-    riga = await db.get(LiveSnapshot, CHIAVE)
+    riga = await db.get(LiveSnapshot, chiave)
     if riga is None:
-        db.add(LiveSnapshot(chiave=CHIAVE, ricevuto=adesso_iso(), payload=dati, byte=len(corpo)))
+        db.add(LiveSnapshot(chiave=chiave, ricevuto=adesso_iso(), payload=dati, byte=len(corpo)))
     else:
         riga.ricevuto, riga.payload, riga.byte = adesso_iso(), dati, len(corpo)
     await db.commit()
     return Response(status_code=204)
 
 
-@router.get("")
-async def leggi_frequenze(db: AsyncSession = Depends(get_async_db)) -> JSONResponse:
-    """Public: latest snapshot with its age, or nulls when nothing was published yet."""
-    riga = await db.get(LiveSnapshot, CHIAVE)
+async def _leggi(chiave: str, db: AsyncSession) -> JSONResponse:
+    """Public: latest snapshot under ``chiave`` with its age, or nulls when nothing was published yet."""
+    _verifica_chiave(chiave)
+    riga = await db.get(LiveSnapshot, chiave)
     if riga is None:
         risposta = {"ricevuto": None, "eta_s": None, "dati": None}
     else:
@@ -85,3 +91,23 @@ async def leggi_frequenze(db: AsyncSession = Depends(get_async_db)) -> JSONRespo
             "dati": riga.payload,
         }
     return JSONResponse(risposta, headers={"Cache-Control": "no-store"})
+
+
+@router.put("/{chiave}", status_code=204)
+async def pubblica(chiave: str, request: Request, db: AsyncSession = Depends(get_async_db)) -> Response:
+    return await _salva(chiave, request, db)
+
+
+@router.get("/{chiave}")
+async def leggi(chiave: str, db: AsyncSession = Depends(get_async_db)) -> JSONResponse:
+    return await _leggi(chiave, db)
+
+
+@alias.put("", status_code=204)
+async def pubblica_frequenze(request: Request, db: AsyncSession = Depends(get_async_db)) -> Response:
+    return await _salva("frequenze", request, db)
+
+
+@alias.get("")
+async def leggi_frequenze(db: AsyncSession = Depends(get_async_db)) -> JSONResponse:
+    return await _leggi("frequenze", db)

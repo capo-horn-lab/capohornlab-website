@@ -1,4 +1,4 @@
-"""PUT/GET /api/v1/frequenze: live snapshot published by the trading engine."""
+"""PUT/GET /api/v1/live/{chiave} (and the /api/v1/frequenze alias): live snapshots published by the trading engine."""
 from __future__ import annotations
 
 import asyncio
@@ -23,6 +23,7 @@ from app.models.live_snapshot import LiveSnapshot  # noqa: E402
 
 OK = {"generato": "2026-10-26 15:31", "strumenti": {"MNQ": {"contratto": "MNQ 12-26"}}}
 TOKEN = {"X-Publish-Token": "test-token"}
+LIVE = "/api/v1/live"
 
 
 def run(coro_fn):
@@ -60,17 +61,17 @@ class FrequenzeApiTest(unittest.TestCase):
         if os.path.exists("test_frequenze.db"):
             os.remove("test_frequenze.db")
 
-    def put(self, content: bytes | str, headers: dict | None = None) -> httpx.Response:
+    def put(self, content: bytes | str, headers: dict | None = None, path: str = "/api/v1/frequenze") -> httpx.Response:
         async def go():
             async with client() as c:
-                return await c.put("/api/v1/frequenze", content=content, headers=headers or {})
+                return await c.put(path, content=content, headers=headers or {})
 
         return run(go)
 
-    def get(self) -> httpx.Response:
+    def get(self, path: str = "/api/v1/frequenze", headers: dict | None = None) -> httpx.Response:
         async def go():
             async with client() as c:
-                return await c.get("/api/v1/frequenze")
+                return await c.get(path, headers=headers or {})
 
         return run(go)
 
@@ -159,11 +160,66 @@ class FrequenzeApiTest(unittest.TestCase):
                 self.assertEqual(self.put(corpo, TOKEN).status_code, 422)
                 self.assertIsNone(self.get().json()["dati"])
 
-    def test_put_oltre_1mb_413(self):
-        corpo = json.dumps({"generato": "x", "strumenti": {"MNQ": "x" * 1_050_000}})
-        self.assertGreater(len(corpo), 1_048_576)
+    def test_put_oltre_limite_413(self):
+        corpo = json.dumps({"generato": "x", "strumenti": {"MNQ": "x" * 2_100_000}})
+        self.assertGreater(len(corpo), 2_097_152)
         self.assertEqual(self.put(corpo, TOKEN).status_code, 413)
         self.assertIsNone(self.get().json()["dati"])
+
+    def test_live_chiave_ignota_403(self):
+        # unknown key: 403 on both methods (even with a valid token), and no row is created
+        self.assertEqual(self.put(json.dumps(OK), TOKEN, f"{LIVE}/altro").status_code, 403)
+        self.assertEqual(self.get(f"{LIVE}/altro").status_code, 403)
+
+        async def conta():
+            async with AsyncSessionLocal() as db:
+                return (await db.execute(select(func.count()).select_from(LiveSnapshot))).scalar_one()
+
+        self.assertEqual(run(conta), 0)
+
+    def test_live_scenari_put_poi_get(self):
+        scenari = {"generato": "2026-10-26 15:32", "strumenti": {"MNQ": {"da_qui": {}}}}
+        self.assertEqual(self.put(json.dumps(scenari), TOKEN, f"{LIVE}/scenari").status_code, 204)
+        g = self.get(f"{LIVE}/scenari")
+        self.assertEqual(g.status_code, 200)
+        self.assertEqual(g.headers["cache-control"], "no-store")
+        self.assertEqual(g.json()["dati"], scenari)
+        self.assertIsNone(self.get(f"{LIVE}/frequenze").json()["dati"])  # keys are independent
+        self.assertIsNone(self.get().json()["dati"])
+        self.assertEqual(self.put(json.dumps(OK), None, f"{LIVE}/scenari").status_code, 401)  # same token rules
+
+    def test_alias_frequenze_equivale(self):
+        self.assertEqual(self.put(json.dumps(OK), TOKEN).status_code, 204)  # alias -> live/frequenze
+        self.assertEqual(self.get(f"{LIVE}/frequenze").json()["dati"], OK)
+        altro = {"generato": "2026-10-26 15:33", "strumenti": {"MES": {}}}
+        self.assertEqual(self.put(json.dumps(altro), TOKEN, f"{LIVE}/frequenze").status_code, 204)  # live/frequenze -> alias
+        self.assertEqual(self.get().json()["dati"], altro)
+
+        async def conta():
+            async with AsyncSessionLocal() as db:
+                return (await db.execute(select(func.count()).select_from(LiveSnapshot))).scalar_one()
+
+        self.assertEqual(run(conta), 1)  # same storage row
+
+    def test_limite_due_mib(self):
+        base = len(json.dumps({"generato": "x", "strumenti": {"MNQ": ""}}))
+
+        def corpo_di(n: int) -> str:
+            return json.dumps({"generato": "x", "strumenti": {"MNQ": "x" * (n - base)}})
+
+        self.assertEqual(len(corpo_di(2_097_153)), 2_097_153)
+        self.assertEqual(self.put(corpo_di(2_097_153), TOKEN).status_code, 413)
+        self.assertIsNone(self.get().json()["dati"])
+        self.assertEqual(self.put(corpo_di(1_200_000), TOKEN).status_code, 204)
+        self.assertEqual(self.put(corpo_di(2_097_152), TOKEN, f"{LIVE}/scenari").status_code, 204)  # exactly at the limit
+
+    def test_get_gzip(self):
+        grande = {"generato": "x", "strumenti": {"MNQ": {"nota": "abc" * 2000}}}
+        self.assertEqual(self.put(json.dumps(grande), TOKEN).status_code, 204)
+        g = self.get(headers={"Accept-Encoding": "gzip"})
+        self.assertEqual(g.headers["content-encoding"], "gzip")
+        self.assertEqual(g.json()["dati"], grande)
+        self.assertEqual(g.headers["cache-control"], "no-store")
 
     def test_eta_mai_negativa(self):
         adesso = datetime.now(timezone.utc)

@@ -6,6 +6,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 
 from app.api.v1 import admin, auth, contact, frequenze, newsletter, payments, requests, research_suggestions
 from app.core.config import settings
@@ -50,6 +51,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Gzip the larger JSON (the scenari snapshot is ~100 KB); small bodies stay uncompressed.
+app.add_middleware(GZipMiddleware, minimum_size=1024)
+
 # Routers
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(requests.router, prefix="/api/v1")
@@ -59,6 +63,7 @@ app.include_router(contact.router, prefix="/api/v1")
 app.include_router(research_suggestions.router, prefix="/api/v1")
 app.include_router(research_suggestions.admin_router, prefix="/api/v1")
 app.include_router(frequenze.router, prefix="/api/v1")
+app.include_router(frequenze.alias, prefix="/api/v1")
 app.include_router(payments.router)
 
 
