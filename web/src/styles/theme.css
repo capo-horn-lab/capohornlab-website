@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./fonts.css";
+@import "./observatory-tokens.css";
+
+/* Tema scuro fisso: la classe "dark" sta su <html> in index.html. */
+@custom-variant dark (&:is(.dark *));
+
+/* Mappa shadcn/Bklit -> token Observatory. Nessun colore letterale qui: solo var(--ch-*). */
+:root,
+.dark {
+  --background: var(--ch-ink);
+  --foreground: var(--ch-fog);
+  --card: var(--ch-deep);
+  --card-foreground: var(--ch-fog);
+  --popover: var(--ch-ocean);
+  --popover-foreground: var(--ch-fog);
+  --primary: var(--ch-signal);
+  --primary-foreground: var(--ch-signal-ink);
+  --secondary: var(--ch-surface-mid);
+  --secondary-foreground: var(--ch-fog);
+  --muted: var(--ch-surface-dim);
+  --muted-foreground: var(--ch-quiet);
+  --accent: var(--ch-surface-bright);
+  --accent-foreground: var(--ch-fog);
+  --destructive: var(--ch-danger);
+  --border: var(--ch-line);
+  --input: var(--ch-line);
+  --ring: var(--ch-signal);
+  --chart-1: var(--ch-info);
+  --chart-2: var(--ch-warm);
+  --chart-3: var(--ch-success);
+  --chart-4: var(--ch-mist);
+  --chart-5: var(--ch-quiet);
+  --chart-positive: var(--ch-mist);
+  --chart-negative: var(--ch-signal-deep);
+  --radius: var(--ch-radius-md);
+
+  /* Bklit: variabili dei grafici mappate sui token Observatory (tema scuro fisso). */
+  --chart-background: var(--ch-deep);
+  --chart-foreground: var(--ch-fog);
+  --chart-foreground-muted: var(--ch-quiet);
+  --chart-line-primary: var(--chart-1);
+  --chart-line-secondary: var(--chart-2);
+  --chart-crosshair: var(--ch-line-strong);
+  --chart-grid: var(--ch-line);
+  --chart-brush-border: var(--chart-grid);
+  --chart-tooltip-background: var(--popover);
+  --chart-tooltip-foreground: var(--popover-foreground);
+  --chart-tooltip-muted: var(--muted-foreground);
+  --chart-marker-background: var(--ch-ocean);
+  --chart-marker-border: var(--ch-line-strong);
+  --chart-marker-foreground: var(--ch-fog);
+  --chart-label: var(--ch-quiet);
+  --chart-scale-mix: var(--ch-deep);
+  --chart-scale-01: var(--ch-surface-mid);
+  --chart-scale-02: color-mix(in oklab, var(--chart-1) 35%, var(--chart-scale-mix));
+  --chart-scale-03: color-mix(in oklab, var(--chart-1) 55%, var(--chart-scale-mix));
+  --chart-scale-04: color-mix(in oklab, var(--chart-1) 78%, var(--chart-scale-mix));
+  --chart-scale-05: var(--chart-1);
+  --chart-scale-pattern-color: var(--ch-deep);
+  --chart-indicator-color: var(--ch-fog);
+  --chart-indicator-secondary-color: var(--ch-deep);
+  --chart-marker-badge-background: var(--ch-fog);
+  --chart-marker-badge-foreground: var(--ch-ink);
+  --chart-segment-background: var(--ch-surface-bright);
+  --chart-segment-line: var(--ch-line-strong);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-positive: var(--chart-positive);
+  --color-chart-negative: var(--chart-negative);
+  --color-chart-line-primary: var(--chart-line-primary);
+  --color-chart-line-secondary: var(--chart-line-secondary);
+  --color-chart-brush-border: var(--chart-brush-border);
+  --color-chart-tooltip-background: var(--chart-tooltip-background);
+  --color-chart-tooltip-foreground: var(--chart-tooltip-foreground);
+  --color-chart-tooltip-muted: var(--chart-tooltip-muted);
+  --color-chart-scale-02: var(--chart-scale-02);
+  --color-chart-scale-03: var(--chart-scale-03);
+  --color-chart-scale-04: var(--chart-scale-04);
+  --color-chart-scale-05: var(--chart-scale-05);
+  --color-chart-segment-line: var(--chart-segment-line);
+  --color-chart-segment-background: var(--chart-segment-background);
+  --color-chart-marker-badge-foreground: var(--chart-marker-badge-foreground);
+  --color-chart-marker-badge-background: var(--chart-marker-badge-background);
+  --color-chart-indicator-secondary-color: var(--chart-indicator-secondary-color);
+  --color-chart-indicator-color: var(--chart-indicator-color);
+  --color-chart-scale-pattern-color: var(--chart-scale-pattern-color);
+  --color-chart-scale-01: var(--chart-scale-01);
+  --color-chart-scale-mix: var(--chart-scale-mix);
+  --color-chart-label: var(--chart-label);
+  --color-chart-marker-foreground: var(--chart-marker-foreground);
+  --color-chart-marker-border: var(--chart-marker-border);
+  --color-chart-marker-background: var(--chart-marker-background);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-crosshair: var(--chart-crosshair);
+  --color-chart-foreground-muted: var(--chart-foreground-muted);
+  --color-chart-foreground: var(--chart-foreground);
+  --color-chart-background: var(--chart-background);
+  --color-signal: var(--ch-signal);
+  --color-info: var(--ch-info);
+  --color-warm: var(--ch-warm);
+  --color-success: var(--ch-success);
+  --color-mist: var(--ch-mist);
+  --color-abyss: var(--ch-abyss);
+  --font-sans: var(--ch-font-sans);
+  --font-serif: var(--ch-font-serif);
+  --font-mono: var(--ch-font-mono);
+  --radius-sm: var(--ch-radius-sm);
+  --radius-md: var(--ch-radius-md);
+  --radius-lg: var(--ch-radius-lg);
+  --radius-xl: var(--ch-radius-xl);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}

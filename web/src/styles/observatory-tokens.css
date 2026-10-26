@@ -1,0 +1,222 @@
+/* ==========================================================================
+   CAPO HORN LAB — OBSERVATORY DESIGN TOKENS v1.0
+   "Beyond the hedge of the market"
+   --------------------------------------------------------------------------
+   Primary: signal red #E33B2F  |  Surface: deep ocean ink #070b12
+   Type: Playfair Display (serif), DM Sans (system), DM Mono (technical)
+   Motion: orbital, depth-aware, prefers-reduced-motion compliant
+   ========================================================================== */
+
+/* ---- 1. COLOR PALETTE ---- */
+:root {
+  /* Surface layers — ocean depths, darkest to lightest */
+  --ch-ink:        #070b12;   /* page background */
+  --ch-deep:       #0c1420;   /* elevated surfaces */
+  --ch-ocean:      #102438;   /* card backgrounds, panels */
+  --ch-abyss:      #060a10;   /* deepest inset, modal backdrop */
+
+  /* Borders & dividers */
+  --ch-line:       rgba(185, 218, 230, 0.17);  /* primary border */
+  --ch-line-strong:rgba(185, 218, 230, 0.28);  /* emphasis border */
+  --ch-line-signal:rgba(227, 59, 47, 0.35);    /* signal-accented border */
+
+  /* Text — fog to mist hierarchy */
+  --ch-fog:        #f2e7e3;   /* primary text on dark */
+  --ch-mist:       #cfb6ae;   /* secondary text, body */
+  --ch-quiet:      #9d746d;   /* tertiary, labels, captions */
+  --ch-whisper:    #6b4e48;   /* disabled, placeholder */
+
+  /* Signal red — the disciplined accent */
+  --ch-signal:     #e33b2f;   /* primary accent */
+  --ch-signal-deep:#8c1717;   /* shadowed accent */
+  --ch-signal-bright:#ff5c47; /* hover, glow */
+  --ch-signal-ink: #fff7f4;   /* text on signal background */
+
+  /* Warm accent — data highlights, orbital nodes */
+  --ch-warm:       #ff9b64;   /* highlight, active node */
+  --ch-warm-deep:  #d4723f;   /* subdued warm */
+
+  /* Semantic */
+  --ch-danger:     #ff7067;   /* error, invalid */
+  --ch-success:    #5cb8a5;   /* verified, confirmed */
+  --ch-info:       #68a4c4;   /* informational */
+
+  /* Surface overlays */
+  --ch-surface-dim:    rgba(255, 255, 255, 0.025);
+  --ch-surface-mid:    rgba(255, 255, 255, 0.045);
+  --ch-surface-bright: rgba(255, 255, 255, 0.07);
+  --ch-surface-signal: rgba(227, 59, 47, 0.07);
+  --ch-surface-signal-mid: rgba(227, 59, 47, 0.14);
+
+  /* ---- 2. TYPOGRAPHY ---- */
+  --ch-font-serif:  "Playfair Display", Georgia, "Times New Roman", serif;
+  --ch-font-sans:   "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ch-font-mono:   "DM Mono", "JetBrains Mono", "Fira Code", monospace;
+
+  /* Type scale (modular, 1.25 ratio from base 16px) */
+  --ch-text-xs:     0.625rem;   /* 10px — micro labels, coordinates */
+  --ch-text-sm:     0.75rem;    /* 12px — captions, mono UI */
+  --ch-text-base:   0.875rem;   /* 14px — body, navigation */
+  --ch-text-md:     1rem;       /* 16px — paragraph */
+  --ch-text-lg:     1.125rem;   /* 18px — lead */
+  --ch-text-xl:     1.25rem;    /* 20px — section lead */
+  --ch-text-2xl:    1.5rem;     /* 24px — card title */
+  --ch-text-3xl:    2rem;       /* 32px — section heading */
+  --ch-text-4xl:    2.5rem;     /* 40px — hero sub */
+  --ch-text-5xl:    3.5rem;     /* 56px — hero */
+  --ch-text-6xl:    5rem;       /* 80px — display */
+  --ch-text-7xl:    7.5rem;     /* 120px — mega display */
+
+  /* Fluid type (clamp-based, responsive) */
+  --ch-fluid-hero:    clamp(3.5rem, 8vw, 8.25rem);
+  --ch-fluid-display: clamp(2.8rem, 6vw, 5.6rem);
+  --ch-fluid-heading: clamp(2rem, 4vw, 3.5rem);
+  --ch-fluid-lead:    clamp(1.125rem, 1.7vw, 1.5rem);
+
+  /* Line heights */
+  --ch-leading-display: 0.84;
+  --ch-leading-heading: 0.92;
+  --ch-leading-tight:   1.1;
+  --ch-leading-snug:    1.25;
+  --ch-leading-normal:  1.45;
+  --ch-leading-relaxed: 1.65;
+
+  /* Font weights */
+  --ch-weight-regular: 400;
+  --ch-weight-medium:  500;
+  --ch-weight-semibold:600;
+  --ch-weight-bold:    700;
+
+  /* Letter spacing */
+  --ch-tracking-mono:    0.12em;
+  --ch-tracking-mono-wide: 0.16em;
+  --ch-tracking-serif:  -0.06em;
+  --ch-tracking-sans:   -0.025em;
+
+  /* ---- 3. SPACING (4px grid) ---- */
+  --ch-space-0:      0;
+  --ch-space-px:     1px;
+  --ch-space-1:      0.25rem;   /*   4px */
+  --ch-space-2:      0.5rem;    /*   8px */
+  --ch-space-3:      0.75rem;   /*  12px */
+  --ch-space-4:      1rem;      /*  16px */
+  --ch-space-5:      1.25rem;   /*  20px */
+  --ch-space-6:      1.5rem;    /*  24px */
+  --ch-space-8:      2rem;      /*  32px */
+  --ch-space-10:     2.5rem;    /*  40px */
+  --ch-space-12:     3rem;      /*  48px */
+  --ch-space-16:     4rem;      /*  64px */
+  --ch-space-20:     5rem;      /*  80px */
+  --ch-space-24:     6rem;      /*  96px */
+  --ch-space-32:     8rem;      /* 128px */
+  --ch-space-40:     10rem;     /* 160px */
+
+  /* Section padding (fluid) */
+  --ch-section-y:    clamp(5.5rem, 13vw, 11rem);
+  --ch-section-x:    clamp(1.5rem, 4vw, 4rem);
+
+  /* ---- 4. RADII ---- */
+  --ch-radius-none:  0;
+  --ch-radius-sm:    0.25rem;   /* labels, badges */
+  --ch-radius-md:    0.5rem;    /* cards, inputs */
+  --ch-radius-lg:    0.75rem;   /* panels, modals */
+  --ch-radius-xl:    1rem;      /* large containers */
+  --ch-radius-full:  9999px;    /* pills, orbital rings */
+
+  /* ---- 5. SHADOWS & GLOW ---- */
+  --ch-shadow-sm:    0 2px 8px rgba(0, 0, 0, 0.3);
+  --ch-shadow-md:    0 8px 24px rgba(0, 0, 0, 0.4);
+  --ch-shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.5);
+  --ch-shadow-signal:0 0 22px rgba(227, 59, 47, 0.33);
+  --ch-shadow-warm:  0 0 18px rgba(255, 155, 100, 0.28);
+  --ch-shadow-inner: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  /* ---- 6. MOTION ---- */
+  --ch-ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ch-ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
+  --ch-ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ch-ease-orbit:   cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --ch-duration-fast:    120ms;
+  --ch-duration-base:    250ms;
+  --ch-duration-slow:    450ms;
+  --ch-duration-glacial: 800ms;
+
+  /* ---- 7. Z-INDEX ---- */
+  --ch-z-base:      1;
+  --ch-z-above:     2;
+  --ch-z-sticky:    10;
+  --ch-z-nav:       100;
+  --ch-z-overlay:   500;
+  --ch-z-modal:     1000;
+
+  /* ---- 8. LAYOUT ---- */
+  --ch-max-width:    1340px;
+  --ch-wrap-padding: clamp(1.5rem, 4vw, 4rem);
+  --ch-nav-height:   92px;
+}
+
+/* ---- 9. DARK MODE (default) ---- */
+/* The observatory is dark-first. These tokens ARE the dark mode. */
+/* Light-mode overrides can be applied via [data-theme="light"] if needed. */
+
+/* ---- 10. REDUCED MOTION ---- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ch-duration-fast:    0.001ms;
+    --ch-duration-base:    0.001ms;
+    --ch-duration-slow:    0.001ms;
+    --ch-duration-glacial: 0.001ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---- 11. GLOBAL RESET (opt-in via class) ---- */
+.ch-reset,
+.ch-reset *,
+.ch-reset *::before,
+.ch-reset *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.ch-reset {
+  background: var(--ch-ink);
+  color: var(--ch-fog);
+  font-family: var(--ch-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.ch-reset img { max-width: 100%; display: block; }
+.ch-reset a { color: inherit; text-decoration: none; }
+.ch-reset ul { list-style: none; }
+
+/* ---- 12. UTILITY CLASSES ---- */
+.ch-wrap {
+  width: min(var(--ch-max-width), calc(100% - var(--ch-wrap-padding) * 2));
+  margin-inline: auto;
+}
+
+.ch-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ch-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--ch-space-8); }
+.ch-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--ch-space-6); }
+
+@media (max-width: 820px) {
+  .ch-grid-2, .ch-grid-3 { grid-template-columns: 1fr; }
+}
