@@ -7,10 +7,11 @@
 // Fallback: percorsi sconosciuti sotto /ricerche, /metodo, /stato (senza estensione) -> index.html.
 import { createReadStream, statSync } from 'node:fs'
 import http from 'node:http'
+import { pipeline } from 'node:stream'
 import { createGzip } from 'node:zlib'
 import { dirname, extname, join, resolve, sep } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
-import { parseArgs } from 'node:util'
+import { leggiArgomenti } from './args.mjs'
 
 export const ROTTE_SPA = ['ricerche', 'metodo', 'stato']
 const MIME = {
@@ -61,15 +62,21 @@ export function creaServer(dirs) {
     }
     const tipo = MIME[extname(file).toLowerCase()] ?? 'application/octet-stream'
     const gzip = /\b(?:html|javascript|css|json|svg|xml|text\/plain)\b/.test(tipo) && /\bgzip\b/.test(req.headers['accept-encoding'] ?? '')
-    res.writeHead(200, { 'content-type': tipo, 'cache-control': 'no-cache', ...(gzip && { 'content-encoding': 'gzip', vary: 'accept-encoding' }) })
-    if (req.method === 'HEAD') res.end()
-    else if (gzip) createReadStream(file).pipe(createGzip()).pipe(res)
-    else createReadStream(file).pipe(res)
+    const intestazioni = { 'content-type': tipo, 'cache-control': 'no-cache', ...(gzip && { 'content-encoding': 'gzip', vary: 'accept-encoding' }) }
+    if (req.method === 'HEAD') return res.writeHead(200, intestazioni).end()
+    // si risponde 200 solo a file aperto: se l'apertura fallisce (permessi, file sparito) e' un 500 pulito, non un processo morto;
+    // un errore a meta' lettura chiude la connessione (pipeline distrugge res) senza far cadere il server
+    const flusso = createReadStream(file)
+    flusso.on('error', () => res.headersSent || res.writeHead(500, { 'content-type': 'text/plain; charset=utf-8' }).end('errore di lettura'))
+    flusso.on('open', () => {
+      res.writeHead(200, intestazioni)
+      pipeline(...(gzip ? [flusso, createGzip(), res] : [flusso, res]), () => {})
+    })
   })
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const { values } = parseArgs({ options: { dir: { type: 'string', multiple: true }, port: { type: 'string', default: '3000' }, host: { type: 'string', default: '127.0.0.1' } } })
+  const { values } = leggiArgomenti({ options: { dir: { type: 'string', multiple: true }, port: { type: 'string', default: '3000' }, host: { type: 'string', default: '127.0.0.1' } } })
   const dirs = values.dir?.length ? values.dir : [join(dirname(fileURLToPath(import.meta.url)), '..', 'dist')]
   const server = creaServer(dirs)
   server.listen(Number(values.port), values.host, () => console.log(`Servo ${dirs.map((d) => resolve(d)).join(' + ')} su http://${values.host}:${server.address().port}`))

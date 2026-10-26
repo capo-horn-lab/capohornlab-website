@@ -106,3 +106,88 @@ def test_help_dichiara_che_la_prosa_non_si_controlla():
     p = subprocess.run([sys.executable, str(SCRIPT), "--help"], capture_output=True, text=True, encoding="utf-8")
     assert p.returncode == 0
     assert "prosa" in p.stdout and "--rounding" in p.stdout
+
+
+# ---- fix round 1 (FREQ-SITO-3): segno, guard dell'arrotondamento, numeri di riga, uso errato
+
+MENO = "\N{MINUS SIGN}"
+
+
+def prova(tmp_path, sorgente, celle, *opzioni):
+    """Una tabella con una riga per cella di `celle`, tutte con Fonte = prova.txt (= `sorgente`, in una radice di scratch)."""
+    rad = tmp_path / "rad"
+    rad.mkdir(exist_ok=True)
+    (rad / "prova.txt").write_text(sorgente, encoding="utf-8")
+    righe = "".join(f"| r{i} | {c} | prova.txt |\n" for i, c in enumerate(celle))
+    f = md(tmp_path, (TAB + righe).rstrip("\n"), prove="[prova.txt]")
+    return esegui("--root", rad, *opzioni, f)
+
+
+def test_negativo_presente_nella_fonte_e_ok(tmp_path):
+    sorgente = f"Delta -0.2301; Brier {MENO}0.5; Z=-0.12; (-3/5)\n"
+    celle = ["-0.2301", f"{MENO}0.2301", "-0.5", f"{MENO}0,5", f"Z={MENO}0.12", "(-3/5)"]
+    rc, out = prova(tmp_path, sorgente, celle)
+    assert rc == 0, out
+    assert "0 mancanti" in out
+
+
+def test_negativo_con_fonte_positiva_e_mancante_e_nomina_il_segno(tmp_path):
+    rc, out = prova(tmp_path, "Delta 0.2301 e 0.5\n", ["-0.2301", f"{MENO}0.5"])
+    assert rc == 1
+    assert "numero -0.2301 non trovato" in out and "numero -0.5 non trovato" in out  # U+2212 normalizzato a '-'
+    assert out.count("non trovato") == 2
+
+
+def test_positivo_con_fonte_negativa_e_mancante(tmp_path):
+    rc, out = prova(tmp_path, f"Delta -0.5 e {MENO}0.7\n", ["0.5", "0.7"])
+    assert rc == 1 and out.count("non trovato") == 2, out
+
+
+def test_trattini_di_intervallo_e_date_non_sono_segni(tmp_path):
+    sorgente = "tra 10-20 e 0.57-0.58, dal 2026-10-26, righe L10-L20, serie LENTI-1\n"
+    rc, out = prova(tmp_path, sorgente, ["10-20", "0.57-0.58", "2026-10-26", "10, 20", "LENTI-1"])
+    assert rc == 0, out
+
+
+def test_arrotondamento_rispetta_il_segno(tmp_path):
+    sorgente = "x -0.5789\n"
+    assert prova(tmp_path, sorgente, ["-0.58"], "--rounding")[0] == 0
+    rc, out = prova(tmp_path, sorgente, ["0.58"], "--rounding")
+    assert rc == 1 and "numero 0.58 non trovato" in out
+
+
+def test_rounding_non_va_in_crash_su_date_orari_e_migliaia(tmp_path):
+    rc, out = prova(tmp_path, "niente di tutto cio'\n", ["2099-01-01", "10:45", "1,234,567", "1.234.567"], "--rounding")
+    assert rc == 1 and "Traceback" not in out, out
+    assert out.count("non trovato") == 4, out
+
+
+def test_valore_prefisso_di_un_numero_piu_lungo_e_mancante(tmp_path):
+    rc, out = prova(tmp_path, "Tasso 0.5791 su 1234 barre\n", ["0.57", "123", "0.579"])
+    assert rc == 1 and out.count("non trovato") == 3, out
+
+
+def test_numeri_di_riga_come_negli_editor_non_come_splitlines(tmp_path):
+    # splitlines() spezza anche su U+2028: sposterebbe le righe del ledger e quelle dell'md
+    rad = tmp_path / "rad"
+    (rad / "docs").mkdir(parents=True)
+    (rad / "docs" / "EXECUTION_LEDGER.md").write_text("uno\ndue\N{LINE SEPARATOR}due-bis\nvalore 4242\nquattro 5252\n", encoding="utf-8")
+    righe = "prosa\N{LINE SEPARATOR}ancora prosa\n\n" + TAB + "| a | 4242 | ledger L3 |\n| b | 5252 | ledger L3 |"
+    rc, out = esegui("--root", rad, md(tmp_path, righe, prove="[]"))
+    assert rc == 1 and out.count("non trovato") == 1, out  # 4242 sta alla riga 3, 5252 alla 4
+    assert "numero 5252" in out
+    assert "x.md:11:" in out, out  # riga dell'editor: i separatori Unicode non vanno contati
+
+
+def test_crlf_non_sposta_le_righe(tmp_path):
+    rad = tmp_path / "rad"
+    (rad / "docs").mkdir(parents=True)
+    (rad / "docs" / "EXECUTION_LEDGER.md").write_bytes(b"uno\r\ndue\r\nvalore 4242\r\nquattro 5252\r\n")
+    testo = f"---\nid: x\nprove: []\n---\n\n{TAB}| a | 4242 | ledger L3 |\n| b | 5252 | ledger L3 |\n"
+    (tmp_path / "x.md").write_bytes(testo.replace("\n", "\r\n").encode())
+    rc, out = esegui("--root", rad, tmp_path / "x.md")
+    assert rc == 1 and out.count("non trovato") == 1 and "numero 5252" in out and "x.md:9:" in out, out
+
+
+def test_opzione_sconosciuta_esce_2():
+    assert esegui("--non-esiste")[0] == 2

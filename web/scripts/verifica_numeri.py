@@ -16,6 +16,10 @@ Cosa NON controlla: i numeri nella prosa fuori dalle tabelle; le tabelle senza c
 gli identificatori con lettere prima delle cifre (S1, LENTI-1); i numeri della cella Fonte.
 Virgola e punto decimali sono equivalenti ("57,9" = "57.9") e i separatori di migliaia si
 ignorano ("1.234" = "1234"). Le percentuali si confrontano come scritte: "57.9%" cerca "57.9".
+Il segno conta: "-0.5" (o con il meno Unicode U+2212) richiede "-0.5" nella fonte e "0.5" richiede "0.5" non preceduto
+da un meno. Un "-" e' un segno se non segue una lettera, una cifra, "_", ")", "]", "}" o "%":
+"10-20", "L10-L20", "2026-10-26", "LENTI-1" restano intervalli, date, identificatori. I numeri di
+riga sono quelli di editor e GitHub (si va a capo solo su LF; U+2028 e simili non contano).
 
 Uscita: 0 tutto trovato; 1 numeri mancanti o fonti non risolvibili; 2 uso errato / nessun file.
 """
@@ -31,18 +35,31 @@ CONTENUTO = AQUI.parent / "src" / "content" / "ricerche"
 RADICE = os.environ.get("ENGINE_ROOT", r"C:\Users\farne\TradingAgent-NinjaTrader")
 LEDGER = "docs/EXECUTION_LEDGER.md"
 
+MENO = "\N{MINUS SIGN}"
+OPERANDO = r"A-Za-z0-9_)\]}%"  # subito prima di un '-' ne fanno un trattino (intervallo, identificatore), non un segno
+OP = re.compile("[" + OPERANDO + "]")
 NUMERO = re.compile(
     r"(?P<v>\d{4}-\d{2}-\d{2}|\d{1,2}:\d{2}(?::\d{2})?)"
-    r"|(?<![A-Za-z_])(?<![A-Za-z]-)(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:[.,]\d+)?)"
+    r"|(?:(?<![" + OPERANDO + r"])(?P<s>[-" + MENO + r"]))?(?<![A-Za-z_])(?<![A-Za-z]-)(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:[.,]\d+)?)"
 )
 PERCORSO = re.compile(r"[\w./\\-]+\.[A-Za-z][A-Za-z0-9]{0,4}")
 LOC = re.compile(r"\s*(?:#|:|@)?\s*L(\d+)(?:\s*[-–—]\s*L?(\d+))?")
 INTERVALLO = re.compile(r"L(\d+)(?:\s*[-–—]\s*L?(\d+))?")
 
 
+def leggi(percorso, errori="strict"):
+    """Testo del file senza la traduzione delle fine riga: le righe le conta righe_di()."""
+    return Path(percorso).read_bytes().decode("utf-8", errors=errori)
+
+
+def righe_di(testo):
+    """Righe come le numerano editor e GitHub: si va a capo solo su LF (CRLF ok); splitlines() spezzerebbe anche su U+2028, FF, NEL..."""
+    return [r.removesuffix("\r") for r in testo.split("\n")]
+
+
 def frontmatter(testo):
     """Frontmatter YAML minimo (chiave: valore, liste `- x` o `[a, b]`). -> (dict, prima riga del corpo)."""
-    righe = testo.splitlines()
+    righe = righe_di(testo)
     if not righe or righe[0].strip() != "---":
         return {}, 0
     fine = next((i for i in range(1, len(righe)) if righe[i].strip() == "---"), None)
@@ -88,7 +105,7 @@ def tabelle(righe, da):
 
 def numeri(testo):
     t = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", testo).replace("`", "").replace("*", "")
-    return [m.group("v") or m.group("n") for m in NUMERO.finditer(t)]
+    return [m.group("v") or ("-" if m.group("s") else "") + m.group("n") for m in NUMERO.finditer(t)]  # il meno Unicode diventa '-'
 
 
 def varianti(tok):
@@ -104,22 +121,28 @@ class Fonte:
     def __init__(self, etichetta, testo):
         self.etichetta, self.testo, self._tondi = etichetta, testo, {}
 
+    def _neg(self, i):
+        """Il numero che comincia a testo[i] ha subito prima un meno unario (stessa regola della tabella)?"""
+        t = self.testo
+        return i > 0 and t[i - 1] in "-" + MENO and not (i > 1 and OP.match(t[i - 2]))
+
     def ha(self, tok, arrotonda):
-        for v in varianti(tok):
-            if re.search(rf"(?<!\d)(?<!\d\.){re.escape(v)}(?!\d)(?!\.\d)", self.testo):
-                return True
-        if arrotonda:  # solo numeri con decimali: la fonte deve averne di piu'
+        neg, num = tok.startswith("-"), tok.lstrip("-")  # il segno deve coincidere: -0.5 non e' 0.5
+        for v in varianti(num):
+            for m in re.finditer(rf"(?<!\d)(?<!\d\.){re.escape(v)}(?!\d)(?!\.\d)", self.testo):
+                if self._neg(m.start()) == neg:
+                    return True
+        if arrotonda and re.fullmatch(r"\d+[.,]\d+", num):  # solo numeri con decimali: la fonte deve averne di piu'
             d = Decimal(tok.replace(",", "."))
-            nd = -d.as_tuple().exponent
-            if nd >= 1 and d == d.quantize(Decimal(1).scaleb(-nd)) and re.fullmatch(r"\d+[.,]\d+", tok):
-                return d in self._arrotondati(nd)
+            return d in self._arrotondati(-d.as_tuple().exponent)
         return False
 
     def _arrotondati(self, nd):
         if nd not in self._tondi:
             q, s = Decimal(1).scaleb(-nd), set()
-            for x in set(re.findall(rf"(?<![\d.])\d+\.\d{{{nd + 1},}}", self.testo)):
-                s |= {Decimal(x).quantize(q, ROUND_HALF_UP), Decimal(x).quantize(q, ROUND_HALF_EVEN)}
+            for m in re.finditer(rf"(?<![\d.])\d+\.\d{{{nd + 1},}}", self.testo):
+                x = -Decimal(m.group()) if self._neg(m.start()) else Decimal(m.group())
+                s |= {x.quantize(q, ROUND_HALF_UP), x.quantize(q, ROUND_HALF_EVEN)}
             self._tondi[nd] = s
         return self._tondi[nd]
 
@@ -130,7 +153,7 @@ class Radice:
 
     def righe(self, rel):
         if rel not in self._cache:
-            self._cache[rel] = (self.radice / rel).read_text(encoding="utf-8", errors="replace").splitlines()
+            self._cache[rel] = righe_di(leggi(self.radice / rel, "replace"))
         return self._cache[rel]
 
     def fonte(self, rel, intervalli=None):
@@ -181,7 +204,7 @@ def ledger(iv, rad):
 
 def controlla(file, rad, arrotonda, out):
     """-> (tabelle controllate, righe, numeri, mancanti)."""
-    testo = file.read_text(encoding="utf-8")
+    testo = leggi(file)
     fm, corpo = frontmatter(testo)
     prove = fm.get("prove") or []
     prove = [prove] if isinstance(prove, str) else [p.replace("\\", "/") for p in prove]
@@ -191,7 +214,7 @@ def controlla(file, rad, arrotonda, out):
         if not (rad.radice / p).is_file():
             out.append(f"{file.name}: prova del frontmatter non trovata: {p}")
             mancanti += 1
-    for testata, dati in tabelle(testo.splitlines(), corpo):
+    for testata, dati in tabelle(righe_di(testo), corpo):
         col = next((i for i, h in enumerate(testata) if re.sub(r"[`*]", "", h).strip().lower().startswith("font")), None)
         if col is None:
             continue

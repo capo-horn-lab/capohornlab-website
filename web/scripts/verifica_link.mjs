@@ -2,9 +2,11 @@
 // Verifica che nessun link del sito sia rotto: crawl di web/dist (servito in locale con fallback SPA) o di un URL.
 //   node scripts/verifica_link.mjs [--dist dist] [--statici ..] [--base https://sito] [--timeout 30] [--no-esterni]
 //
-// Parte da: /, /ricerche, /metodo, /stato, /ricerche/<id> (da src/content/ricerche/indice.json, se c'e')
-// e da ogni .html di --dist. Da HTML estrae href/src/action; dal JS compilato i letterali tra apici
-// che sono URL http(s), percorsi con estensione di asset o .html, rotte note e chunk relativi (./x.js);
+// Parte da: /, /ricerche, /metodo, /stato, /ricerche/<id> (da src/content/ricerche/indice.json, se c'e': solo
+// gli id di primo livello, array o { ricerche: [...] }, mai i campi annidati come strumenti) e da ogni .html di
+// --dist. Da HTML estrae href/src/action; dal JS compilato i letterali tra apici che sono URL http(s), percorsi
+// con estensione di asset o .html, rotte note, chunk relativi (./x.js) e dipendenze di Vite (cartella-di-dist/x.js);
+// i nomi di proprieta' di oggetti (chiavi di import.meta.glob) non sono richieste;
 // dal CSS url(...); dai .md di src/content i link ](url). Poi controlla ogni URL (2xx/3xx = ok,
 // redirect seguiti; interni con GET, esterni con HEAD e GET di riserva); mailto/tel/javascript/data saltati.
 // API: GET {API_BASE}/live/frequenze e /live/scenari, con API_BASE da $VITE_API_BASE (default Render) e ogni
@@ -14,7 +16,7 @@
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { parseArgs } from 'node:util'
+import { leggiArgomenti } from './args.mjs'
 import { creaServer } from './servi_dist.mjs'
 
 const QUI = dirname(fileURLToPath(import.meta.url))
@@ -25,7 +27,7 @@ const IGNORA = [/^https?:\/\/www\.w3\.org\//, /^https?:\/\/localhost(:\d+)?(\/|$
 const ASSET = /\.(?:js|mjs|css|json|html|woff2?|png|jpe?g|svg|webp|ico|txt|xml|webmanifest|map)$/i
 const SALTA = /^(?:mailto|tel|javascript|data|blob|about):/i
 
-const { values: a } = parseArgs({
+const { values: a } = leggiArgomenti({
   options: {
     base: { type: 'string' }, dist: { type: 'string' }, statici: { type: 'string', multiple: true }, indice: { type: 'string' },
     contenuto: { type: 'string' }, timeout: { type: 'string', default: '30' }, 'no-esterni': { type: 'boolean' }, 'no-contenuto': { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
@@ -86,16 +88,10 @@ if (dist) htmlDi(dist)
 
 const indice = a.indice ?? join(QUI, '..', 'src', 'content', 'ricerche', 'indice.json')
 if (indice && existsSync(indice)) {
-  const ids = []
-  const raccogli = (v) => {
-    if (Array.isArray(v)) v.forEach(raccogli)
-    else if (v && typeof v === 'object') {
-      if (typeof v.id === 'string') ids.push(v.id)
-      Object.values(v).forEach((x) => typeof x === 'object' && raccogli(x))
-    } else if (typeof v === 'string') ids.push(v)
-  }
-  raccogli(JSON.parse(readFileSync(indice, 'utf8')))
-  for (const id of ids) {
+  // solo la lista di primo livello (array, o { ricerche: [...] }): un elemento e' una stringa-id oppure { id }; i campi annidati (strumenti, tag...) non sono ricerche
+  const j = JSON.parse(readFileSync(indice, 'utf8'))
+  const lista = [j, j?.ricerche].find(Array.isArray) ?? []
+  for (const id of lista.map((x) => (typeof x === 'string' ? x : x?.id)).filter((x) => typeof x === 'string')) {
     aggiungi(`/ricerche/${id}`, base + '/', 'indice.json')
     const md = join(dirname(indice), `${id}.md`)
     if (!existsSync(md)) contenuto.push({ ok: false, stato: 'assente', tipo: 'contenuto', url: md, da: 'indice.json' })
@@ -119,7 +115,16 @@ function nuovaApi(b) {
   apiBase.add(b)
   for (const p of API_PERCORSI) aggiungi(b + p, base + '/', 'API nel bundle', 'api')
 }
-const LETTERALE = (re) => new RegExp(`["'\`]${re}["'\`]`, 'g')
+// Letterali di stringa che combaciano con `re` (gruppo 1), esclusi i nomi di proprieta' di un oggetto (`{"../content/x.json":()=>...}`,
+// chiavi di import.meta.glob): non sono richieste. Un ramo di ternario (`?"./a.js":`) segue `?`, non `{` o `,`, e resta un letterale.
+function* letterali(testo, re) {
+  for (const m of testo.matchAll(new RegExp(`["'\`]${re}["'\`]`, 'g'))) {
+    const chiave = /[{,]/.test(testo[m.index - 1] ?? '') && /^\s*:/.test(testo.slice(m.index + m[0].length, m.index + m[0].length + 8))
+    if (!chiave) yield m[1]
+  }
+}
+// cartelle di primo livello di dist (app, fonts...): solo li' stanno le dipendenze di Vite `app/x.js`; "runtime/proofs/x.png" dentro un md incorporato non lo e'
+const RADICI_ASSET = new Set(['app', 'assets', ...(dist ? readdirSync(dist, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => e.name) : [])])
 function estrai(testo, tipo, url) {
   const da = url.startsWith(base) ? url.slice(base.length) || '/' : url
   const vai = (raw) => aggiungi(raw, url, da)
@@ -128,16 +133,18 @@ function estrai(testo, tipo, url) {
   } else if (tipo === 'css') {
     for (const m of testo.matchAll(/url\(\s*(["']?)([^"')\s]+)\1\s*\)/g)) vai(m[2])
   } else if (tipo === 'js') {
-    for (const [, l] of testo.matchAll(LETTERALE('(https?:\\/\\/[^\\s"\'`\\\\$<>{}()]+)'))) {
+    for (const l of letterali(testo, '(https?:\\/\\/[^\\s"\'`\\\\$<>{}()]+)')) {
       if (/\/api\/v1\/?$/.test(l)) nuovaApi(l.replace(/\/$/, ''))
       else vai(l)
     }
-    for (const [, l] of testo.matchAll(LETTERALE('(\\/[A-Za-z0-9_\\-.~%/]*)'))) {
+    for (const l of letterali(testo, '(\\/[A-Za-z0-9_\\-.~%/]*)')) {
       if (l.startsWith('//') || l.startsWith('/live/') || l === '/') continue // /live/* = API, controllata con API_BASE
       if (ASSET.test(l) || ROTTE.some((r) => r !== '/' && (l === r || l.startsWith(r + '/')))) vai(l)
     }
-    for (const [, l] of testo.matchAll(LETTERALE('(\\.{1,2}\\/[A-Za-z0-9_\\-./]+\\.(?:js|mjs|css|json|woff2?|png|jpe?g|svg|webp|ico))'))) vai(l) // chunk relativi al file
-    for (const [, l] of testo.matchAll(LETTERALE('([A-Za-z0-9_\\-]+\\/[A-Za-z0-9_\\-./]+\\.(?:js|css|woff2?|png|jpe?g|svg|webp|ico))'))) aggiungi('/' + l, base + '/', da) // dipendenze di Vite, relative alla radice
+    for (const l of letterali(testo, '(\\.{1,2}\\/[A-Za-z0-9_\\-./]+\\.(?:js|mjs|css|json|woff2?|png|jpe?g|svg|webp|ico))')) vai(l) // chunk relativi al file
+    for (const l of letterali(testo, '([A-Za-z0-9_\\-]+\\/[A-Za-z0-9_\\-./]+\\.(?:js|css|woff2?|png|jpe?g|svg|webp|ico))')) {
+      if (RADICI_ASSET.has(l.split('/')[0])) aggiungi('/' + l, base + '/', da) // dipendenze di Vite, relative alla radice di dist
+    }
   }
 }
 

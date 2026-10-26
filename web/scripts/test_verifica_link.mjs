@@ -1,10 +1,10 @@
 // Test di servi_dist.mjs, verifica_link.mjs e lighthouse.mjs (--da-json).
 // Uso: node web/scripts/test_verifica_link.mjs   (esce con codice diverso da 0 se un test fallisce)
 import assert from 'node:assert/strict'
-import { spawn } from 'node:child_process'
+import { execFileSync, spawn } from 'node:child_process'
 import http from 'node:http'
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
-import { tmpdir } from 'node:os'
+import { chmodSync, existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir, userInfo } from 'node:os'
 import { dirname, join } from 'node:path'
 import { after, describe, it } from 'node:test'
 import { fileURLToPath } from 'node:url'
@@ -116,6 +116,26 @@ describe('servi_dist', () => {
     }
   })
 
+  it('file che esiste ma non si apre -> 500 pulito e il server resta vivo', async (t) => {
+    if (process.platform !== 'win32' && process.getuid?.() === 0) return t.skip('root apre comunque i file con chmod 000')
+    const dir = sito({ 'index.html': HTML('home'), 'chiuso.js': 'x' })
+    const chiuso = join(dir, 'chiuso.js')
+    const blocca = (on) => {
+      if (process.platform === 'win32') execFileSync('icacls', on ? [chiuso, '/deny', `${userInfo().username}:(R)`] : [chiuso, '/reset'], { stdio: 'ignore' })
+      else chmodSync(chiuso, on ? 0 : 0o644)
+    }
+    blocca(true)
+    const s = await avvia(dir)
+    try {
+      const r = await fetch(s.url + '/chiuso.js')
+      assert.equal(r.status, 500)
+      assert.equal((await fetch(s.url + '/')).status, 200) // il processo non e' morto per un errore di lettura
+    } finally {
+      s.ferma()
+      blocca(false)
+    }
+  })
+
   it('--dir ripetuto: il primo che ha il file vince, gli altri fanno da riserva', async () => {
     const a = sito({ 'index.html': HTML('A') })
     const b = sito({ 'index.html': HTML('B'), 'legale.html': HTML('legale') })
@@ -163,6 +183,23 @@ describe('verifica_link --dist', () => {
     assert.match(r.out, /chunk-mancante\.js/)
   })
 
+  it('JS: chiavi di import.meta.glob e testo incorporato non sono richieste; chunk, ternari e dipendenze Vite rotti si', async () => {
+    // chiavi "../content/x.json" di una mappa glob: non sono URL (il chunk vero e' l'import("./c.js"))
+    let r = await lancia({ 'app/i.js': 'const m=Object.assign({"../content/ricerche/a.dati.json":()=>import("./chunk.js"),"../content/ricerche/b.dati.json":()=>import("./chunk.js")});fetch(`${B}/live/frequenze`)' })
+    assert.equal(r.code, 0, r.out)
+    // testo di un md importato come stringa: "runtime/proofs/x.png" non e' una dipendenza Vite (la radice non e' una cartella di dist)
+    r = await lancia({ 'app/i.js': 'const t=`prove:\n  - "runtime/proofs/x/y.png"\n`' })
+    assert.equal(r.code, 0, r.out)
+    // dipendenza Vite mancante sotto una cartella di dist
+    r = await lancia({ 'app/i.js': 'const d=["app/mancante-abc.js"]' })
+    assert.equal(r.code, 1, r.out)
+    assert.match(r.out, /mancante-abc\.js/)
+    // il ramo di un ternario non e' una chiave di oggetto
+    r = await lancia({ 'app/i.js': 'const u=x?"./ternario-mancante.js":"./chunk.js"' })
+    assert.equal(r.code, 1, r.out)
+    assert.match(r.out, /ternario-mancante\.js/)
+  })
+
   it('url() rotto nel CSS -> 1', async () => {
     const r = await lancia({ 'app/s.css': '@font-face{src:url(/fonts/assente.woff2)}' })
     assert.equal(r.code, 1, r.out)
@@ -178,6 +215,18 @@ describe('verifica_link --dist', () => {
     r = await lancia({}, ['--indice', join(dir2, 'indice.json')])
     assert.equal(r.code, 1, r.out)
     assert.match(r.out, /b\.md/)
+  })
+
+  it('indice.json: solo gli id di primo livello (strumenti annidati non sono ricerche), array o { ricerche: [...] }', async () => {
+    const voci = [{ id: 'a', strumenti: ['QQQ', 'MNQ'], tag: { x: ['ZZZ'] } }, 'b', { titolo: 'senza id', strumenti: ['SPY'] }]
+    for (const [nome, indice] of [['array', voci], ['oggetto', { ricerche: voci }]]) {
+      const dir = sito({ 'indice.json': JSON.stringify(indice), 'a.md': '#', 'b.md': '#' }, `indice-annidato-${nome}`)
+      const r = await lancia({}, ['--indice', join(dir, 'indice.json')])
+      assert.equal(r.code, 0, `${nome}: ${r.out}`)
+      assert.match(r.out, /\/ricerche\/a\b/)
+      assert.match(r.out, /\/ricerche\/b\b/)
+      assert.doesNotMatch(r.out, /QQQ|MNQ|ZZZ|SPY|senza id/, nome)
+    }
   })
 
   it('API /live/frequenze e /live/scenari: 503 -> 1; stesso host del bundle controllato in piu\'', async () => {
@@ -281,4 +330,35 @@ describe('lighthouse --da-json', () => {
     r = await esegui(LIGHTHOUSE, ['--da-json', file('a11y.json', 0.95, 0.8)])
     assert.equal(r.code, 1, r.out)
   })
+
+  it('--da-json mancante o non JSON -> 2 senza stack trace', async () => {
+    const rotto = join(radice, 'rotto.json')
+    writeFileSync(rotto, '{non json')
+    for (const f of [join(radice, 'non-esiste.json'), rotto]) {
+      const r = await esegui(LIGHTHOUSE, ['--da-json', f])
+      assert.equal(r.code, 2, r.out)
+      assert.doesNotMatch(r.out, /\n\s+at /)
+    }
+  })
+
+  it('URL non http(s), con virgolette, spazi, % o caratteri di controllo -> 2 senza eseguire nulla', async () => {
+    const canary = join(radice, 'canary.txt')
+    const cattivi = [`http://127.0.0.1/" & echo x > "${canary}" & "`, 'http://127.0.0.1/a b', 'http://127.0.0.1/%25', 'http://127.0.0.1/\u0001', 'http://127.0.0.1/\nx', 'file:///etc/passwd', 'javascript:alert(1)', 'ftp://127.0.0.1/', 'localhost:3000']
+    for (const url of cattivi) {
+      const r = await esegui(LIGHTHOUSE, [url])
+      assert.equal(r.code, 2, `${JSON.stringify(url)}: ${r.out}`)
+      assert.match(r.out, /URL non valido/, JSON.stringify(url))
+    }
+    assert.equal(existsSync(canary), false)
+  })
+})
+
+describe('uso errato -> 2 (non stack trace con 1)', () => {
+  for (const [nome, script] of [['servi_dist', SERVI], ['verifica_link', LINK], ['lighthouse', LIGHTHOUSE]]) {
+    it(`${nome}: opzione sconosciuta -> 2`, async () => {
+      const r = await esegui(script, ['--non-esiste'])
+      assert.equal(r.code, 2, r.out)
+      assert.doesNotMatch(r.out, /\n\s+at /)
+    })
+  }
 })
