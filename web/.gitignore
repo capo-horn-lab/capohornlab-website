@@ -2,3 +2,7 @@ node_modules
 dist
 .env.local
 *.log
+
+# La radice ignora "lib/" (Python): qui web/src/lib va tracciata.
+!lib/
+!src/lib/
