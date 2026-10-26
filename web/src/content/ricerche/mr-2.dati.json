@@ -1,0 +1,26 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["Europa (FESX+FDXM) · R1b_RSI2_10", 113, 16.48, 0.75, "bp/trade", 12.358845196421102, false],
+  ["Europa (FESX+FDXM) · CUMRSI", 105, 12.09, 0.52, "bp/trade", 16.617397463226876, false],
+  ["Europa (FESX+FDXM) · PCTB", 47, 44.14, 0.9, "bp/trade", 44.35528472048358, false],
+  ["Europa (FESX+FDXM) · WR2", 275, 1.12, 0.07, "bp/trade", 20.321552512253227, false],
+  ["Europa (FESX+FDXM) · TT", 93, 28.99, 1.09, "bp/trade", 31.201564505873115, false],
+  ["Europa (FESX+FDXM) · 3WEAK", 76, 26.8, 1.85, "bp/trade", 2.3902763792932844, false],
+  ["Europa (FESX+FDXM) · COMITATO", 324, 3.76, 0.25, "bp/trade", 15.05609388533161, false],
+  ["oro (MGC) · R1a_RSI2_5", 33, 11.09, 0.23, "bp/trade", 29.292088239674854, false],
+  ["oro (MGC) · R1b_RSI2_10", 52, 15.45, 0.53, "bp/trade", 21.778175120809383, false],
+  ["oro (MGC) · CUMRSI", 61, 25.67, 0.97, "bp/trade", 17.466463530352247, false],
+  ["oro (MGC) · R3", 35, 3.74, 0.09, "bp/trade", 55.02606472550552, false],
+  ["oro (MGC) · PCTB", 21, 87.02, 1.61, "bp/trade", 76.69894226180978, false],
+  ["oro (MGC) · WR2", 140, 3.27, 0.22, "bp/trade", 27.23721496172337, false],
+  ["oro (MGC) · TT", 50, 20.51, 1.2, "bp/trade", 46.83079347301253, false],
+  ["oro (MGC) · 3DOWN", 159, 4.35, 0.58, "bp/trade", 21.448298842229928, false],
+  ["oro (MGC) · COMITATO", 143, 11.64, 0.7, "bp/trade", 15.643740028129049, false],
+  ["euro (M6E) · PCTB", 22, 14.66, 0.8, "bp/trade", 19.462873022374787, false],
+  ["euro (M6E) · WR2", 167, 3.87, 0.74, "bp/trade", 5.69002410472717, false],
+  ["euro (M6E) · TT", 5, 11.02, 0.51, "bp/trade", 43.84577640220475, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

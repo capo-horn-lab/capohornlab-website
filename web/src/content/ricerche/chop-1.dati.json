@@ -1,0 +1,31 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES D 0.1 U G1: quota 32% (caso 50%, pareggio 66%), p 1.00", 620, -9.04782544540717, null, "punti/trade", null, false],
+  ["MES D 0.1 U G2: quota 21% (caso 33%, pareggio 47%), p 1.00", 620, -8.272428594500193, null, "punti/trade", null, false],
+  ["MES D 0.15 U G1: quota 46% (caso 50%, pareggio 61%), p 1.00", 662, -5.931482253715359, null, "punti/trade", null, false],
+  ["MES D 0.15 U G2: quota 32% (caso 33%, pareggio 43%), p 1.00", 657, -4.886494740444615, null, "punti/trade", null, false],
+  ["MES D 0.25 U G1: quota 51% (caso 50%, pareggio 57%), p 1.00", 557, -3.812026389160477, null, "punti/trade", null, false],
+  ["MES D 0.25 U G2: quota 32% (caso 33%, pareggio 39%), p 1.00", 543, -4.847843871773138, null, "punti/trade", null, false],
+  ["MNQ D 0.1 U G1: quota 35% (caso 50%, pareggio 55%), p 1.00", 609, -8.054415884935754, null, "punti/trade", null, false],
+  ["MNQ D 0.1 U G2: quota 26% (caso 33%, pareggio 37%), p 1.00", 609, -5.065168716823067, null, "punti/trade", null, false],
+  ["MNQ D 0.15 U G1: quota 47% (caso 50%, pareggio 53%), p 1.00", 670, -3.65776904689124, null, "punti/trade", null, false],
+  ["MNQ D 0.15 U G2: quota 33% (caso 33%, pareggio 36%), p 0.97", 670, -2.0599776729743744, null, "punti/trade", null, false],
+  ["MNQ D 0.25 U G1: quota 49% (caso 50%, pareggio 52%), p 0.95", 610, -3.2982353589126228, null, "punti/trade", null, false],
+  ["MNQ D 0.25 U G2: quota 34% (caso 33%, pareggio 35%), p 0.72", 605, -0.8883866856415972, null, "punti/trade", null, false],
+  ["M2K D 0.1 U G1: quota 29% (caso 50%, pareggio 64%), p 1.00", 602, -18.82838478991675, null, "punti/trade", null, false],
+  ["M2K D 0.1 U G2: quota 19% (caso 33%, pareggio 45%), p 1.00", 602, -16.49977081190681, null, "punti/trade", null, false],
+  ["M2K D 0.15 U G1: quota 46% (caso 50%, pareggio 59%), p 1.00", 670, -10.423236720826322, null, "punti/trade", null, false],
+  ["M2K D 0.15 U G2: quota 31% (caso 33%, pareggio 41%), p 1.00", 670, -9.106826871157512, null, "punti/trade", null, false],
+  ["M2K D 0.25 U G1: quota 49% (caso 50%, pareggio 55%), p 1.00", 627, -8.545990929862977, null, "punti/trade", null, false],
+  ["M2K D 0.25 U G2: quota 34% (caso 33%, pareggio 38%), p 0.99", 624, -6.425335449185251, null, "punti/trade", null, false],
+  ["MYM D 0.1 U G1: quota 23% (caso 50%, pareggio 63%), p 1.00", 585, -12.721000954758054, null, "punti/trade", null, false],
+  ["MYM D 0.1 U G2: quota 16% (caso 33%, pareggio 44%), p 1.00", 585, -10.743410085646675, null, "punti/trade", null, false],
+  ["MYM D 0.15 U G1: quota 39% (caso 50%, pareggio 58%), p 1.00", 662, -9.072934701374265, null, "punti/trade", null, false],
+  ["MYM D 0.15 U G2: quota 27% (caso 33%, pareggio 40%), p 1.00", 661, -7.703059055681562, null, "punti/trade", null, false],
+  ["MYM D 0.25 U G1: quota 47% (caso 50%, pareggio 55%), p 1.00", 652, -6.250174684729497, null, "punti/trade", null, false],
+  ["MYM D 0.25 U G2: quota 32% (caso 33%, pareggio 38%), p 1.00", 645, -5.1823507410480385, null, "punti/trade", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

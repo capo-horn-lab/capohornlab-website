@@ -1,0 +1,31 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["R1a_RSI2_5 · future (bp) (in comune con IBS 52%)", 135, 40.51, 2.45, "bp/trade", 15.940617821888626, true],
+  ["R1a_RSI2_5 · SPY+QQQ (bp) (in comune con IBS 61%)", 185, 39.42, 2.63, "bp/trade", 40.78456860770796, false],
+  ["R1b_RSI2_10 · future (bp) (in comune con IBS 46%)", 247, 25.38, 2.24, "bp/trade", 11.764583893301367, true],
+  ["R1b_RSI2_10 · SPY+QQQ (bp) (in comune con IBS 59%)", 358, 32.72, 3.11, "bp/trade", 34.545028823172004, false],
+  ["CUMRSI · future (bp) (in comune con IBS 39%)", 251, 22.04, 1.84, "bp/trade", 14.97707128458827, false],
+  ["CUMRSI · SPY+QQQ (bp) (in comune con IBS 41%)", 365, 22.0, 2.27, "bp/trade", 30.40863391679181, false],
+  ["R3 · future (bp) (in comune con IBS 48%)", 161, 41.02, 2.5, "bp/trade", 30.367023991794213, true],
+  ["R3 · SPY+QQQ (bp) (in comune con IBS 51%)", 222, 36.64, 2.48, "bp/trade", 41.20901722922161, false],
+  ["3DHL · future (bp) (in comune con IBS 27%)", 158, 20.82, 1.32, "bp/trade", 25.53394377519142, false],
+  ["3DHL · SPY+QQQ (bp) (in comune con IBS 32%)", 232, 35.25, 2.91, "bp/trade", 34.7463825488227, true],
+  ["PCTB · future (bp) (in comune con IBS 22%)", 101, 65.96, 2.74, "bp/trade", 43.901776545175345, true],
+  ["PCTB · SPY+QQQ (bp) (in comune con IBS 30%)", 153, 63.89, 3.0, "bp/trade", 58.18626557333655, true],
+  ["WR2 · future (bp) (in comune con IBS 96%)", 579, 47.87, 5.78, "bp/trade", 21.964504926690257, true],
+  ["WR2 · SPY+QQQ (bp) (in comune con IBS 98%)", 790, 52.3, 6.37, "bp/trade", 25.3199597166195, true],
+  ["TT · future (bp) (in comune con IBS 48%)", 140, 63.76, 3.58, "bp/trade", 39.93302179239, true],
+  ["TT · SPY+QQQ (bp) (in comune con IBS 58%)", 252, 68.35, 4.81, "bp/trade", 19.620589174509615, true],
+  ["3DOWN · future (bp) (in comune con IBS 40%)", 687, 8.29, 2.38, "bp/trade", 6.382577783553353, true],
+  ["3DOWN · SPY+QQQ (bp) (in comune con IBS 43%)", 874, 12.43, 3.45, "bp/trade", 7.315081114309614, true],
+  ["3WEAK · future (bp) (in comune con IBS 34%)", 197, 49.81, 4.78, "bp/trade", 1.5699141733284254, true],
+  ["3WEAK · SPY+QQQ (bp) (in comune con IBS 46%)", 229, 26.02, 2.18, "bp/trade", 18.37076151002406, true],
+  ["BB20 · future (bp) (in comune con IBS 56%)", 182, 29.64, 1.7, "bp/trade", 45.109979738737024, false],
+  ["BB20 · SPY+QQQ (bp) (in comune con IBS 75%)", 256, 49.83, 2.48, "bp/trade", 45.30064651238647, true],
+  ["COMITATO · future (bp) (in comune con IBS 87%)", 638, 33.87, 4.2, "bp/trade", 17.70835569529563, true],
+  ["COMITATO · SPY+QQQ (bp) (in comune con IBS 90%)", 889, 47.49, 6.22, "bp/trade", 23.01620557940281, true]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

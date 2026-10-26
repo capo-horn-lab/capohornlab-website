@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["SPY · comprare e tenere", null, 1.021458161878354, null, "Sharpe", null, false],
+  ["SPY · JM", null, 0.24012792080436, null, "Sharpe", null, false],
+  ["SPY · VIX/VIX3M>1 fuori", null, 0.7019587568892411, null, "Sharpe", null, false],
+  ["SPY · VIX>mediana252 fuori", null, 0.16929384001972814, null, "Sharpe", null, false],
+  ["QQQ · comprare e tenere", null, 0.9355967334039816, null, "Sharpe", null, false],
+  ["QQQ · JM", null, 0.5641879186092292, null, "Sharpe", null, false],
+  ["QQQ · VIX/VIX3M>1 fuori", null, 0.6395259979162229, null, "Sharpe", null, false],
+  ["QQQ · VIX>mediana252 fuori", null, 0.2503866615468148, null, "Sharpe", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

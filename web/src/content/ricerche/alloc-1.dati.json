@@ -1,0 +1,26 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["ALLOC-1", "A_tutte", null, 1.34, 4.16, "bp/sessione · Sharpe 1.61", null, false],
+  ["ALLOC-1", "B_senza_stati", null, 1.63, 3.95, "bp/sessione · Sharpe 1.53", null, false],
+  ["ALLOC-1", "C_alloc", null, 1.7, 4.15, "bp/sessione · Sharpe 1.61", 1.5276638903629771, false],
+  ["PERSIST-1", "Spearman tra le meta: 0.30 (p 0.006)", 180, null, null, "", null, true],
+  ["PERSIST-1", "MES IBS STRESS", null, 16.996646030506, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "MES NDOWN STRESS", null, 6.476725548593959, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "MNQ IBS STRESS", null, 23.529944626828854, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "MNQ TT TREND", null, -3.5378454483223147, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "MNQ NDOWN STRESS", null, 5.592056083675409, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "M2K IBS STRESS", null, 19.880554938030123, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "MYM NDOWN STRESS", null, 6.443228190060563, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "M6E IBS STRESS", null, 4.783738670274518, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "MNQ RSI2 STRESS", null, 9.855668756911488, null, "d bp/sessione", null, true],
+  ["PERSIST-1", "M2K MA STRESS", null, 21.102183383947867, null, "d bp/sessione", null, true],
+  ["ALLOC-2", "B", null, 0.59, 2.81, "bp/sessione · Sharpe 1.09", null, false],
+  ["ALLOC-2", "C8", null, 0.64, 3.22, "bp/sessione · Sharpe 1.25", 1.474308571558376, false],
+  ["ALLOC-2", "CS", null, 0.71, 2.72, "bp/sessione · Sharpe 1.05", 1.355326546195129, false],
+  ["STRESS-OOS-1", "mean reversion SPY+QQQ (bp/trade)", 318, 59.83623406636562, null, "p 0.034", 52.91861596703018, false],
+  ["STRESS-OOS-1", "trend SMA 4 ETF (bp/giorno)", 3840, -9.899492354098316, null, "p 0.982", 7.881568841112735, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

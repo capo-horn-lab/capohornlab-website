@@ -1,0 +1,9 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["ampiezza sessione, evento meno altre (verifica)", 202, 37.40533730133305, 4.0049271382643425, "bp", null, true],
+  ["P8 su 86 strategie MNQ: aiuta 9, positiva 62", 86, null, null, "", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

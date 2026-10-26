@@ -1,0 +1,16 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["stop 0.10 A, obiettivo 8 S, short: scoperta +0.0122 A/giorno (t +0.76, vincenti 13.7% contro pareggio 12.5%); verifica vincenti 12.5% contro 12.2%, +1 tick -0.0199, placebo sopra il reale nel 56%", 384, -0.014996683462972159, -0.9549771665393519, "A per giorno con trade, verifica (media dei 4 micro)", 0.01193446332792275, false],
+  ["stop 0.15 A, obiettivo 8 S, long: scoperta +0.0051 A/giorno (t +0.34, vincenti 20.2% contro pareggio 12.1%); verifica vincenti 20.4% contro 11.9%, +1 tick +0.0027, placebo sopra il reale nel 12%", 565, 0.007811518166257117, 0.4239358954736587, "A per giorno con trade, verifica (media dei 4 micro)", 0.018445240855867743, false],
+  ["stop 0.15 A, obiettivo 4 S, long: scoperta +0.0043 A/giorno (t +0.33, vincenti 22.9% contro pareggio 21.7%); verifica vincenti 21.9% contro 21.3%, +1 tick -0.0069, placebo sopra il reale nel 20%", 565, -0.0018093828232217202, -0.12001055141258093, "A per giorno con trade, verifica (media dei 4 micro)", 0.008096430543615188, false],
+  ["stop 0.15 A, obiettivo 6 S, long: scoperta +0.0049 A/giorno (t +0.32, vincenti 20.3% contro pareggio 15.5%); verifica vincenti 20.5% contro 15.2%, +1 tick +0.0029, placebo sopra il reale nel 6%", 565, 0.008047532813891155, 0.45087132912538974, "A per giorno con trade, verifica (media dei 4 micro)", 0.008352398939593398, false],
+  ["stop 0.10 A, obiettivo 4 S, short: scoperta +0.0036 A/giorno (t +0.32, vincenti 20.1% contro pareggio 22.5%); verifica vincenti 16.9% contro 21.9%, +1 tick -0.0251, placebo sopra il reale nel 78%", 384, -0.020250101177988592, -1.7243978005986649, "A per giorno con trade, verifica (media dei 4 micro)", 0.006297886131100094, false],
+  ["descrittivo, stop 0.05 A senza obiettivo: fermati entro 5 minuti 66% short / 68% long, escursione favorevole mediana 0.039 / 0.037 A, oltre 8 S nel 9.6% / 9.6%", 2223, 0.038580894070284324, null, "escursione favorevole mediana in A, short", null, false],
+  ["descrittivo, stop 0.10 A senza obiettivo: fermati entro 5 minuti 39% short / 44% long, escursione favorevole mediana 0.099 / 0.086 A, oltre 8 S nel 8.0% / 5.9%", 2223, 0.09888529306005034, null, "escursione favorevole mediana in A, short", null, false],
+  ["descrittivo, stop 0.15 A senza obiettivo: fermati entro 5 minuti 22% short / 24% long, escursione favorevole mediana 0.143 / 0.130 A, oltre 8 S nel 4.2% / 2.2%", 2223, 0.14252696456086286, null, "escursione favorevole mediana in A, short", null, false],
+  ["MNQ al 2026-10-20: A = 350 punti, 100 tick = 0.071 A, 800 tick = 0.571 A (la griglia 0,05-0,15 e 4-8 S li copre)", null, 0.07140052122380494, null, "frazione del range giornaliero medio", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

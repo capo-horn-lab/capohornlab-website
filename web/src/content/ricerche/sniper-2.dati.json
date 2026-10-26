@@ -1,0 +1,16 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["ORB 5 minuti, stop strutturale, obiettivo 10 S, filtro nessuno: scoperta +0.0015 A/trade (t +0.18, vincenti 17.3% contro pareggio 10.2%); verifica vincenti 14.7%, +1 tick -0.0189, senza i 3 migliori -6809 USD, placebo sopra il reale: lato a caso 71%, livello spostato 70%", 1112, -0.013467065242354784, -1.4529419965426562, "A per trade, verifica (4 micro), t sui giorni", 0.023217505682888523, false],
+  ["ORB 5 minuti, stop 0,10 A, obiettivo 10 S, filtro nessuno: scoperta +0.0005 A/trade (t +0.08, vincenti 15.4% contro pareggio 10.2%); verifica vincenti 14.6%, +1 tick -0.0117, senza i 3 migliori -2793 USD, placebo sopra il reale: lato a caso 22%, livello spostato 8%", 2760, -0.006466023326987107, -0.9619477192821367, "A per trade, verifica (4 micro), t sui giorni", -0.004452906534270459, false],
+  ["sweep-and-reclaim della notte, stop strutturale, obiettivo zona 0,5 A, filtro ampiezza attesa alta: scoperta -0.0001 A/trade (t -0.01, vincenti 13.6% contro pareggio 13.4%); verifica vincenti 9.9%, +1 tick -0.0187, senza i 3 migliori -2990 USD, placebo sopra il reale: lato a caso 10%, livello spostato 19%", 332, -0.013869961957434118, -1.413313548232281, "A per trade, verifica (4 micro), t sui giorni", -0.0030230175251115443, false],
+  ["ORB 5 minuti, stop strutturale, obiettivo zona 0,5 A, filtro nessuno: scoperta -0.0007 A/trade (t -0.10, vincenti 19.9% contro pareggio 18.8%); verifica vincenti 17.4%, +1 tick -0.0194, senza i 3 migliori -5801 USD, placebo sopra il reale: lato a caso 84%, livello spostato 60%", 1112, -0.013997769806809578, -1.9260811864420722, "A per trade, verifica (4 micro), t sui giorni", 0.013202870877846102, false],
+  ["sweep-and-reclaim di ieri, stop strutturale, obiettivo 6 S, filtro ampiezza attesa alta: scoperta -0.0042 A/trade (t -0.27, vincenti 15.9% contro pareggio 17.1%); verifica vincenti 12.1%, +1 tick -0.0146, senza i 3 migliori -1433 USD, placebo sopra il reale: lato a caso 10%, livello spostato 38%", 141, -0.009624684413685611, -0.5771169421100755, "A per trade, verifica (4 micro), t sui giorni", 0.027108393600381687, false],
+  ["MES: sessioni con ordine sweep-and-reclaim della notte 59% (riempite 87%), sweep-and-reclaim di ieri 40% (riempite 89%), FVG della mattina 85% (riempite 78%), ORB 5 minuti 99% (riempite 100%)", 1780, null, null, "descrittivo", null, false],
+  ["MNQ: sessioni con ordine sweep-and-reclaim della notte 66% (riempite 89%), sweep-and-reclaim di ieri 45% (riempite 90%), FVG della mattina 89% (riempite 79%), ORB 5 minuti 100% (riempite 100%)", 1790, null, null, "descrittivo", null, false],
+  ["M2K: sessioni con ordine sweep-and-reclaim della notte 71% (riempite 87%), sweep-and-reclaim di ieri 49% (riempite 88%), FVG della mattina 90% (riempite 79%), ORB 5 minuti 99% (riempite 100%)", 1762, null, null, "descrittivo", null, false],
+  ["MYM: sessioni con ordine sweep-and-reclaim della notte 68% (riempite 89%), sweep-and-reclaim di ieri 43% (riempite 87%), FVG della mattina 88% (riempite 79%), ORB 5 minuti 99% (riempite 100%)", 1774, null, null, "descrittivo", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

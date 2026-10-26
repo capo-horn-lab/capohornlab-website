@@ -1,0 +1,19 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES IBS (PBO 0.20)", 1414, 4.41, 2.85, "bp/sessione", 5.04, false],
+  ["MNQ RSI2 (PBO 0.85)", 1423, 3.35, 2.65, "bp/sessione", 4.4415, false],
+  ["MNQ IBS (PBO 0.48)", 1423, 5.08, 2.58, "bp/sessione", 6.561499999999999, false],
+  ["MYM NDOWN (PBO 0.22)", 1417, 1.99, 2.39, "bp/sessione", 2.031999999999999, false],
+  ["MYM RSI2 (PBO 0.75)", 1417, 2.24, 2.23, "bp/sessione", 2.7205, false],
+  ["MYM IBS (PBO 0.62)", 1417, 2.85, 1.96, "bp/sessione", 4.821, false],
+  ["MBT RSI2 (PBO 0.76)", 1087, 8.83, 1.9, "bp/sessione", 8.782499999999995, false],
+  ["FESX IBS (PBO 0.19)", 1434, 2.86, 1.85, "bp/sessione", 2.6409999999999996, false],
+  ["MES NDOWN (PBO 0.37)", 1414, 1.45, 1.69, "bp/sessione", 2.86, false],
+  ["FESX RSI2 (PBO 0.33)", 1434, 2.81, 1.69, "bp/sessione", 2.7514999999999996, false],
+  ["M2K RSI2 (PBO 0.30)", 1416, 2.37, 1.64, "bp/sessione", 3.5314999999999994, false],
+  ["MGC MA (PBO 0.31)", 1486, 3.47, 1.56, "bp/sessione", 2.89, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

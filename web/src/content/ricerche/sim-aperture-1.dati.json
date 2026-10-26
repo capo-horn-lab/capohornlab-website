@@ -1,0 +1,14 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["netto per sessione del dibattito (vincenti 0.395; acquisto a mercato con le stesse distanze -5.04; piano non scelto -3.46)", 190, -6.05, -1.42, "USD/contratto per sessione", 2.72, false],
+  ["previsioni prima dell'apertura giuste (errore 8.51 punti contro 7.03 del nessun cambiamento; p 0.12)", 760, 0.522, null, "quota", null, false],
+  ["controlli: entrate mancate 0, risposte finali con numeri inventati 0 su 2090, respinte 169", 2090, 0.0, null, "quota inventati", null, true],
+  ["RizzoFlow arbitro: vendita 138, acquisto 52 (netto -5.37 e -7.84)", 190, 0.726, null, "quota vendita", null, false],
+  ["uscita FINE SESSIONE", 24, 9.45, null, "USD/contratto per sessione", null, false],
+  ["uscita SL", 107, -51.09, null, "USD/contratto per sessione", null, false],
+  ["uscita TP", 59, 69.33, null, "USD/contratto per sessione", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

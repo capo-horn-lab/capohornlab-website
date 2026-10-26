@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES regola in carta uscita/tenuta 0.90/5", 84, 33.96, 2.15, "bp/trade in verifica", 132.46, false],
+  ["MES variante uscita/tenuta 0.80/8 (differenza dalla regola 3.35 bp, t giorni 0.28, q 0.98; t sui giorni di verifica 0.28, q 0.976, placebo non battuto, zona non piatta)", 83, 38.08, 2.89, "bp/trade in verifica", 137.26, false],
+  ["MNQ regola in carta uscita/tenuta 0.90/5", 80, 11.07, 0.5, "bp/trade in verifica", 213.15, false],
+  ["MNQ variante uscita/tenuta 0.80/8 (differenza dalla regola 21.23 bp, t giorni 1.26, q 0.67; t sui giorni di verifica 1.26, q 0.672, placebo non battuto)", 81, 34.0, 1.69, "bp/trade in verifica", 229.93, false],
+  ["M2K regola in carta uscita/tenuta 0.90/5", 96, 39.17, 1.57, "bp/trade in verifica", 54.64, false],
+  ["M2K variante uscita/tenuta 0.80/8 (differenza dalla regola -8.9 bp, t giorni -0.63, q 0.67; differenza di verifica non positiva, t sui giorni di verifica -0.63, q 0.672, placebo non battuto)", 92, 30.52, 1.36, "bp/trade in verifica", 54.83, false],
+  ["MYM regola in carta uscita/tenuta 0.90/5", 90, 29.79, 2.15, "bp/trade in verifica", 69.89, false],
+  ["MYM variante uscita/tenuta 0.80/8 (differenza dalla regola 8.39 bp, t giorni 0.78, q 0.98; t sui giorni di verifica 0.78, q 0.976, zona non piatta)", 86, 40.54, 2.95, "bp/trade in verifica", 83.77, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

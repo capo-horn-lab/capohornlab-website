@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["L D 0.5 U finestra 1 X3 (q 1.00)", 52, 0.1256575123956304, 0.7700176181749775, "U/giorno in scoperta", null, false],
+  ["L D 0.5 U finestra 5 X3 (q 1.00)", 423, 0.01277780199105181, 0.3315827485661066, "U/giorno in scoperta", null, false],
+  ["S D 0.35 U finestra 1 X3 (q 1.00)", 156, 0.022282986193521568, 0.29776899228866516, "U/giorno in scoperta", null, false],
+  ["S D 0.25 U finestra 1 X3 (q 1.00)", 465, 0.008671213496781436, 0.22770453743697638, "U/giorno in scoperta", null, false],
+  ["S D 0.15 U finestra 5 X2 (q 1.00)", 1087, 0.002012518624910996, 0.17369434567274472, "U/giorno in scoperta", null, false],
+  ["S D 0.15 U finestra 5 X3 (q 1.00)", 1087, 0.0013408375322695155, 0.08404532344542279, "U/giorno in scoperta", null, false],
+  ["S D 0.15 U finestra 15 X3 (q 1.00)", 1090, 0.0012823005083332315, 0.08221589631316163, "U/giorno in scoperta", null, false],
+  ["S D 0.15 U finestra 15 X2 (q 1.00)", 1090, 0.00014966135834118254, 0.013354107968725304, "U/giorno in scoperta", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

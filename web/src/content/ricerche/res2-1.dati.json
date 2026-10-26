@@ -1,0 +1,33 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["SPY D1_TOM · fine mese -1..+3", 100, 36.22, 1.82, "bp/trade", null, false],
+  ["SPY D2_DOUBLE7 · Connors", 78, 63.31, 2.61, "bp/trade", 103.95, false],
+  ["SPY D3_OOPS_L · Williams lungo", 224, -10.98, -1.71, "bp/trade", null, false],
+  ["SPY D3s_OOPS_S · Williams corto", 404, -11.68, -3.14, "bp/trade", null, false],
+  ["SPY D4_SMASH_L · Williams 8 giorni", 30, 214.6, 3.73, "bp/trade", null, false],
+  ["SPY D5_PREHOL · pre-festivo", 80, 14.03, 1.59, "bp/trade", null, false],
+  ["SPY D6_PAYDAY · 16 del mese", 100, -6.78, -0.47, "bp/trade", null, false],
+  ["SPY I2_FOMC_WEEKS · Cieslak 2020-2026", 66, 28.89, 1.04, "bp/trade", null, false],
+  ["QQQ D1_TOM · fine mese -1..+3", 100, 49.59, 1.88, "bp/trade", null, false],
+  ["QQQ D2_DOUBLE7 · Connors", 83, 90.3, 2.93, "bp/trade", 129.99, false],
+  ["QQQ D3_OOPS_L · Williams lungo", 217, -1.57, -0.22, "bp/trade", null, false],
+  ["QQQ D3s_OOPS_S · Williams corto", 373, -7.84, -1.57, "bp/trade", null, false],
+  ["QQQ D4_SMASH_L · Williams 8 giorni", 30, 234.96, 2.2, "bp/trade", null, false],
+  ["QQQ D5_PREHOL · pre-festivo", 80, 14.26, 1.2, "bp/trade", null, false],
+  ["QQQ D6_PAYDAY · 16 del mese", 100, -12.38, -0.72, "bp/trade", null, false],
+  ["QQQ I2_FOMC_WEEKS · Cieslak 2020-2026", 66, 33.34, 0.91, "bp/trade", null, false],
+  ["MES I1_PRE_FOMC · 14:00 -> 13:59", 12, 73.0, 1.25, "USD/trade", null, false],
+  ["MNQ I1_PRE_FOMC · 14:00 -> 13:59", 5, 156.3, 0.53, "USD/trade", null, false],
+  ["MES I3_GAP_FILL · 0,05-0,2%, stop 12", 101, 0.12, 0.02, "USD/trade", null, false],
+  ["MES I4_FIRST30 · verde -> lungo fino 15:50", 254, 0.39, 0.04, "USD/trade", null, false],
+  ["MNQ I4_FIRST30 · verde -> lungo fino 15:50", 78, 11.35, 0.36, "USD/trade", null, false],
+  ["MES I5_INSIDE15 · corto 45 min", 6257, -4.81, -12.37, "USD/trade", null, false],
+  ["MES I6_WILLIAMS_VB · 0,25 x range, 2R", 478, -1.83, -0.41, "USD/trade", null, false],
+  ["MNQ I6_WILLIAMS_VB · 0,25 x range, 2R", 152, -1.4, -0.09, "USD/trade", null, false],
+  ["MCL I7_EIA_MOM · 10:30-11:00 -> 14:00-14:30", 35, -15.11, -3.06, "USD/trade", null, false],
+  ["MCL1s I8_EIA_BOX · box 10:15-10:30, 2:1, 20 min", 35, -3.19, -1.09, "USD/trade", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

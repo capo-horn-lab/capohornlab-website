@@ -1,0 +1,11 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["BASE: Sharpe 1.40, drawdown 7189, giorno peggiore -3297", 942, 67783.50000000023, null, "USD netto", null, false],
+  ["ERC: Sharpe 1.51, drawdown 5405, giorno peggiore -2918", 942, 63827.45807977689, null, "USD netto", null, false],
+  ["CAP2: Sharpe 1.00, drawdown 5169, giorno peggiore -2849", 574, 33439.550000000156, null, "USD netto", null, false],
+  ["ERC+CAP2: Sharpe 1.08, drawdown 4207, giorno peggiore -2034", 574, 29954.12581203879, null, "USD netto", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

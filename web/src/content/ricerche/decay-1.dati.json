@@ -1,0 +1,32 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["R1a_RSI2_5 · future: pendenza +5.0 bp/anno, q 0.90, prima meta 35.4", 135, 45.571947325808104, null, "bp/trade meta recente", null, false],
+  ["R1b_RSI2_10 · future: pendenza +3.1 bp/anno, q 0.90, prima meta 25.4", 247, 25.372418770524053, null, "bp/trade meta recente", null, false],
+  ["CUMRSI · future: pendenza +14.5 bp/anno, q 0.92, prima meta 8.1", 251, 35.82095109414503, null, "bp/trade meta recente", null, false],
+  ["R3 · future: pendenza +2.6 bp/anno, q 0.90, prima meta 36.0", 161, 45.977665306244866, null, "bp/trade meta recente", null, false],
+  ["3DHL · future: pendenza +1.9 bp/anno, q 0.90, prima meta 23.1", 158, 18.563485277595266, null, "bp/trade meta recente", null, false],
+  ["PCTB · future: pendenza -15.4 bp/anno, q 0.90, prima meta 77.8", 101, 54.358219253919984, null, "bp/trade meta recente", null, false],
+  ["WR2 · future: pendenza -5.0 bp/anno, q 0.90, prima meta 50.0", 579, 45.717385522088996, null, "bp/trade meta recente", null, false],
+  ["TT · future: pendenza -22.7 bp/anno, q 0.90, prima meta 112.9", 140, 14.65476602395096, null, "bp/trade meta recente", null, false],
+  ["3DOWN · future: pendenza +6.2 bp/anno, q 0.99, prima meta -2.4", 687, 18.92189674936424, null, "bp/trade meta recente", null, false],
+  ["3WEAK · future: pendenza -9.5 bp/anno, q 0.90, prima meta 59.8", 197, 39.9166490688473, null, "bp/trade meta recente", null, false],
+  ["BB20 · future: pendenza +4.7 bp/anno, q 0.90, prima meta 16.4", 182, 42.89732781463702, null, "bp/trade meta recente", null, false],
+  ["COMITATO · future: pendenza +1.6 bp/anno, q 0.90, prima meta 29.2", 638, 38.57972613693088, null, "bp/trade meta recente", null, false],
+  ["IBS-NT · future: pendenza -5.0 bp/anno, q 0.90, prima meta 49.2", 942, 29.82189526689832, null, "bp/trade meta recente", null, false],
+  ["R1a_RSI2_5 · SPY+QQQ: pendenza +0.6 bp/anno, q 0.90, prima meta 47.4", 185, 31.525108786584667, null, "bp/trade meta recente", null, false],
+  ["R1b_RSI2_10 · SPY+QQQ: pendenza +1.0 bp/anno, q 0.90, prima meta 35.2", 358, 30.2527600652663, null, "bp/trade meta recente", null, false],
+  ["CUMRSI · SPY+QQQ: pendenza +0.8 bp/anno, q 0.90, prima meta 23.0", 365, 21.020864119149, null, "bp/trade meta recente", null, false],
+  ["R3 · SPY+QQQ: pendenza -0.2 bp/anno, q 0.90, prima meta 40.9", 222, 32.39884534984295, null, "bp/trade meta recente", null, false],
+  ["3DHL · SPY+QQQ: pendenza -0.2 bp/anno, q 0.90, prima meta 38.1", 232, 32.355904421520165, null, "bp/trade meta recente", null, false],
+  ["PCTB · SPY+QQQ: pendenza -2.3 bp/anno, q 0.90, prima meta 82.3", 153, 45.709547349312096, null, "bp/trade meta recente", null, false],
+  ["WR2 · SPY+QQQ: pendenza +0.7 bp/anno, q 0.90, prima meta 41.7", 790, 62.879566995780124, null, "bp/trade meta recente", null, false],
+  ["TT · SPY+QQQ: pendenza -2.1 bp/anno, q 0.90, prima meta 80.0", 252, 56.67606133778709, null, "bp/trade meta recente", null, false],
+  ["3DOWN · SPY+QQQ: pendenza +0.6 bp/anno, q 0.92, prima meta 11.0", 874, 13.843033279655199, null, "bp/trade meta recente", null, false],
+  ["3WEAK · SPY+QQQ: pendenza +3.1 bp/anno, q 0.92, prima meta 13.4", 229, 38.560722847802104, null, "bp/trade meta recente", null, false],
+  ["BB20 · SPY+QQQ: pendenza +5.1 bp/anno, q 0.99, prima meta 31.9", 256, 67.7627214300163, null, "bp/trade meta recente", null, false],
+  ["COMITATO · SPY+QQQ: pendenza +0.6 bp/anno, q 0.90, prima meta 44.8", 889, 50.203350583148506, null, "bp/trade meta recente", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

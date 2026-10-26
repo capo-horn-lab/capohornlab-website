@@ -1,0 +1,9 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["una unita: Sharpe 1.07, drawdown 1149 bp", 698, 40.70152220042425, null, "bp/unita", null, false],
+  ["con la seconda unita: Sharpe 1.12, drawdown 729 bp, differenza Sharpe +0.038 (IC90 -0.10..+0.18)", 812, 45.9946512104063, null, "bp/unita", null, true]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

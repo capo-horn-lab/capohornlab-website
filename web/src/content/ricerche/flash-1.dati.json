@@ -1,0 +1,31 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["k 1.5 m 15 (45 eventi, 33 grappoli) · H1: evento 0.60 contro placebo 0.07", 45, 0.5266932282388772, null, "differenza · p 0.00", null, true],
+  ["k 1.5 m 15 (45 eventi, 33 grappoli) · H2: evento 0.18 contro placebo 0.25", 45, -0.07290909090909087, null, "differenza · p 0.46", null, false],
+  ["k 1.5 m 15 (45 eventi, 33 grappoli) · H3 +1: evento -1.63 contro placebo 3.05", 45, -4.687691986547721, null, "differenza · p 0.78", null, false],
+  ["k 1.5 m 15 (45 eventi, 33 grappoli) · H3 +5: evento -58.11 contro placebo 15.74", 45, -73.84952643237831, null, "differenza · p 0.05", null, false],
+  ["k 1.5 m 15 (45 eventi, 33 grappoli) · H3 +20: evento -35.46 contro placebo 84.67", 45, -120.12748624664863, null, "differenza · p 0.13", null, false],
+  ["k 1.5 m 15 (45 eventi, 33 grappoli) · H4 IBS: evento – contro placebo –", 45, 22.332775956883005, null, "differenza · p 0.29", null, false],
+  ["k 1.5 m 60 (224 eventi, 90 grappoli) · H1: evento 0.32 contro placebo 0.06", 224, 0.25804876405291766, null, "differenza · p 0.00", null, true],
+  ["k 1.5 m 60 (224 eventi, 90 grappoli) · H2: evento 0.64 contro placebo 0.78", 224, -0.13273333333333348, null, "differenza · p 0.00", null, false],
+  ["k 1.5 m 60 (224 eventi, 90 grappoli) · H3 +1: evento -5.07 contro placebo 1.92", 224, -6.9932608807132475, null, "differenza · p 0.41", null, false],
+  ["k 1.5 m 60 (224 eventi, 90 grappoli) · H3 +5: evento 6.04 contro placebo 12.54", 224, -6.508950877106206, null, "differenza · p 0.72", null, false],
+  ["k 1.5 m 60 (224 eventi, 90 grappoli) · H3 +20: evento 77.46 contro placebo 63.29", 224, 14.173262881403545, null, "differenza · p 0.72", null, false],
+  ["k 1.5 m 60 (224 eventi, 90 grappoli) · H4 IBS: evento – contro placebo –", 224, 13.89258453473013, null, "differenza · p 0.60", null, false],
+  ["k 2.5 m 15 (10 eventi, 8 grappoli) · H1: evento 0.84 contro placebo 0.15", 10, 0.6918655596426041, null, "differenza · p 0.02", null, false],
+  ["k 2.5 m 15 (10 eventi, 8 grappoli) · H2: evento 0.00 contro placebo 0.09", 10, -0.085875, null, "differenza · p 0.95", null, false],
+  ["k 2.5 m 15 (10 eventi, 8 grappoli) · H3 +1: evento -2.49 contro placebo 13.07", 10, -15.560555455964064, null, "differenza · p 0.73", null, false],
+  ["k 2.5 m 15 (10 eventi, 8 grappoli) · H3 +5: evento -148.60 contro placebo 26.89", 10, -175.49145690100582, null, "differenza · p 0.13", null, false],
+  ["k 2.5 m 15 (10 eventi, 8 grappoli) · H3 +20: evento 151.94 contro placebo 141.89", 10, 10.051784281265157, null, "differenza · p 0.95", null, false],
+  ["k 2.5 m 15 (10 eventi, 8 grappoli) · H4 IBS: evento – contro placebo –", 10, 78.00942556413166, null, "differenza · p 0.17", null, false],
+  ["k 2.5 m 60 (32 eventi, 26 grappoli) · H1: evento 0.62 contro placebo 0.16", 32, 0.4615120210475212, null, "differenza · p 0.00", null, true],
+  ["k 2.5 m 60 (32 eventi, 26 grappoli) · H2: evento 0.19 contro placebo 0.16", 32, 0.029423076923076913, null, "differenza · p 0.84", null, false],
+  ["k 2.5 m 60 (32 eventi, 26 grappoli) · H3 +1: evento -4.75 contro placebo 7.95", 32, -12.697764600560674, null, "differenza · p 0.54", null, false],
+  ["k 2.5 m 60 (32 eventi, 26 grappoli) · H3 +5: evento 16.52 contro placebo 22.11", 32, -5.589226645582173, null, "differenza · p 0.89", null, false],
+  ["k 2.5 m 60 (32 eventi, 26 grappoli) · H3 +20: evento 75.55 contro placebo 93.97", 32, -18.41968572432907, null, "differenza · p 0.77", null, false],
+  ["k 2.5 m 60 (32 eventi, 26 grappoli) · H4 IBS: evento – contro placebo –", 32, 55.60350199079197, null, "differenza · p 0.03", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

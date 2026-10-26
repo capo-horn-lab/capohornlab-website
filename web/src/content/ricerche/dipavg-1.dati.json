@@ -1,0 +1,28 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["DIPAVG-1", "MES D 0.25 S 0.5 N 5 T 0.5 swing (q 0.98; verifica +85 USD/sessione, t 3.03, sequenza peggiore -8,031 USD, drawdown 15,877 USD; con 1 unita' +21; unita' medie 2.09)", 989, 32.04, 1.33, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MES D 0.25 S 0.25 N 3 T 0.5 swing (q 0.98; verifica +34 USD/sessione, t 1.24, sequenza peggiore -5,287 USD, drawdown 18,163 USD; con 1 unita' +21; unita' medie 2.13)", 989, 16.39, 0.78, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MES D 0.25 S 0.5 N 3 T 0.5 swing (q 0.98; verifica +58 USD/sessione, t 2.56, sequenza peggiore -5,146 USD, drawdown 10,519 USD; con 1 unita' +21; unita' medie 1.79)", 989, 14.04, 0.75, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MNQ D 0.25 S 0.5 N 5 T 0.5 swing (q 0.65; verifica +71 USD/sessione, t 1.11, sequenza peggiore -12,534 USD, drawdown 45,728 USD; con 1 unita' +11; unita' medie 2.07)", 1000, 65.95, 1.73, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MNQ D 0.25 S 0.25 N 3 T 0.5 swing (q 0.65; verifica +3 USD/sessione, t 0.05, sequenza peggiore -9,025 USD, drawdown 40,286 USD; con 1 unita' +11; unita' medie 2.12)", 1000, 54.42, 1.65, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MNQ D 0.25 S 0.5 N 3 T 0.5 swing (q 0.65; verifica +25 USD/sessione, t 0.48, sequenza peggiore -8,377 USD, drawdown 30,579 USD; con 1 unita' +11; unita' medie 1.77)", 1000, 43.97, 1.5, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "M2K D 0.5 S 0.25 N 5 T 0.5 swing (q 1.00; verifica +22 USD/sessione, t 0.85, sequenza peggiore -5,345 USD, drawdown 28,469 USD; con 1 unita' +4; unita' medie 2.83)", 764, 16.61, 0.74, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "M2K D 0.25 S 0.5 N 5 T 0.5 swing (q 1.00; verifica +26 USD/sessione, t 1.46, sequenza peggiore -5,121 USD, drawdown 27,812 USD; con 1 unita' +5; unita' medie 2.13)", 997, 10.18, 0.66, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "M2K D 0.5 S 0.5 N 3 T 0.5 swing (q 1.00; verifica +12 USD/sessione, t 0.76, sequenza peggiore -3,199 USD, drawdown 17,948 USD; con 1 unita' +4; unita' medie 1.83)", 764, 5.3, 0.36, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MYM D 0.5 S 0.5 N 5 T 0.5 swing (q 0.85; verifica +32 USD/sessione, t 1.15, sequenza peggiore -8,081 USD, drawdown 23,289 USD; con 1 unita' +17; unita' medie 2.08)", 738, 25.06, 1.25, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MYM D 0.5 S 0.25 N 5 T 0.5 swing (q 0.85; verifica +54 USD/sessione, t 1.89, sequenza peggiore -5,150 USD, drawdown 20,419 USD; con 1 unita' +17; unita' medie 2.74)", 738, 19.36, 0.78, "USD/sessione in scoperta", null, false],
+  ["DIPAVG-1", "MYM D 0.5 S 0.5 N 3 T 0.25 swing (q 0.85; verifica +21 USD/sessione, t 1.80, sequenza peggiore -3,123 USD, drawdown 9,373 USD; con 1 unita' +9; unita' medie 1.51)", 738, 6.61, 0.65, "USD/sessione in scoperta", null, false],
+  ["EARLYEXIT-1", "E1 meta' strada verso lo stop: 24 strategie migliorano, 37 peggiorano su 61; confermate 1", 61, 1.1068852459016392, null, "differenza media USD/trade in verifica (regola meno base)", null, true],
+  ["EARLYEXIT-1", "E1 C1_ORB 15m 15m: base -8.77 -> -6.06 USD/trade (q 0.43, uscite anticipate 134 su 480)", 480, 2.71, 2.69, "differenza USD/trade, t sui giorni", null, false],
+  ["EARLYEXIT-1", "E1 SUPERTREND_10_3 4h filtro 1h: base -43.17 -> -2.70 USD/trade (q 0.98, uscite anticipate 46 su 69)", 69, 40.47, 2.26, "differenza USD/trade, t sui giorni", null, false],
+  ["EARLYEXIT-1", "E2 guadagno restituito dopo +0,5 R: 27 strategie migliorano, 34 peggiorano su 61; confermate 0", 61, 1.393770491803279, null, "differenza media USD/trade in verifica (regola meno base)", null, false],
+  ["EARLYEXIT-1", "E2 SUPERTREND_10_3 4h filtro 1h: base -43.17 -> +1.85 USD/trade (q 0.87, uscite anticipate 45 su 69)", 69, 45.02, 2.71, "differenza USD/trade, t sui giorni", null, false],
+  ["EARLYEXIT-1", "E2 SUPERTREND_10_3 base 1h: base -19.22 -> +10.23 USD/trade (q 0.71, uscite anticipate 110 su 178)", 178, 29.46, 2.6, "differenza USD/trade, t sui giorni", null, false],
+  ["EARLYEXIT-1", "E3 = E1 o E2: 21 strategie migliorano, 40 peggiorano su 61; confermate 0", 61, 1.0093442622950821, null, "differenza media USD/trade in verifica (regola meno base)", null, false],
+  ["EARLYEXIT-1", "E3 SUPERTREND_10_3 4h filtro 1h: base -43.17 -> +0.29 USD/trade (q 0.97, uscite anticipate 56 su 69)", 69, 43.46, 2.17, "differenza USD/trade, t sui giorni", null, false],
+  ["EARLYEXIT-1", "E3 SUPERTREND_10_3 base 1h: base -19.22 -> +8.63 USD/trade (q 0.97, uscite anticipate 138 su 178)", 178, 27.86, 2.14, "differenza USD/trade, t sui giorni", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

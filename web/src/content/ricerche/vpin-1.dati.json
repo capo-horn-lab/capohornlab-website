@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES VPIN -> varianza della sessione dopo oltre i ritardi HAR (q 0.64; scoperta t 0.07)", 739, 0.324, 0.53, "beta su log varianza in verifica", 1.87, false],
+  ["MES IBS senza il terzile alto di VPIN: filtrata 38.92 USD su 46 trade contro piena 94.9 su 85 (q 0.91; media per terzile basso/medio/alto 30.61, 45.31, 160.93)", 85, -55.98, -1.37, "differenza USD/trade in verifica", 66.07, false],
+  ["MES VPIN -> |rendimento| della sessione dopo senza controlli (segno: IC 0.0815, t 2.2)", 727, 0.1893, 5.19, "IC in verifica", null, false],
+  ["MES classificatore: regola del tick contro BVC sugli stessi secchi 2026-09-20..2026-10-16 (sbilancio medio tick 0.069, BVC 0.23)", 1107, 0.544, null, "correlazione di Spearman", null, false],
+  ["MNQ VPIN -> varianza della sessione dopo oltre i ritardi HAR (q 0.64; scoperta t 0.68)", 741, 0.038, 0.05, "beta su log varianza in verifica", 1.86, false],
+  ["MNQ IBS senza il terzile alto di VPIN: filtrata 63.83 USD su 47 trade contro piena 51.21 su 81 (q 0.64; media per terzile basso/medio/alto 98.19, 33.6, 33.76)", 81, 12.62, 0.16, "differenza USD/trade in verifica", 112.35, false],
+  ["MNQ VPIN -> |rendimento| della sessione dopo senza controlli (segno: IC 0.033, t 0.89)", 729, 0.1373, 3.74, "IC in verifica", null, false],
+  ["MNQ classificatore: regola del tick contro BVC sugli stessi secchi 2026-09-20..2026-10-16 (sbilancio medio tick 0.037, BVC 0.189)", 1118, 0.632, null, "correlazione di Spearman", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

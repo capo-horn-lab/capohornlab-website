@@ -1,0 +1,27 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["ZN A 13:59-chiusura h=1 (verifica 5.55 bp, q 0.88)", 22, 61.8, 0.72, "USD/contratto per evento in verifica", 99.41, false],
+  ["ZN A 13:59-chiusura h=2 (verifica 8.28 bp, q 0.88)", 21, 90.07, 0.51, "USD/contratto per evento in verifica", 150.36, false],
+  ["ZN A 13:59-chiusura h=5 (verifica 4.14 bp, q 0.88)", 22, 40.49, 0.23, "USD/contratto per evento in verifica", 215.38, false],
+  ["ZN A 13:59-chiusura h=10 (verifica 12.86 bp, q 0.88)", 23, 133.81, 0.6, "USD/contratto per evento in verifica", 215.39, false],
+  ["ZN A 13:59-chiusura h=15 (verifica -1.01 bp, q 0.88)", 22, -24.88, -0.08, "USD/contratto per evento in verifica", 403.8, false],
+  ["ZN B apertura-chiusura h=1 (verifica 9.19 bp, q 0.88)", 23, 103.24, 1.29, "USD/contratto per evento in verifica", 91.81, false],
+  ["ZN B apertura-chiusura h=2 (verifica 13.31 bp, q 0.88)", 22, 146.32, 0.89, "USD/contratto per evento in verifica", 110.63, false],
+  ["ZN B apertura-chiusura h=5 (verifica 0.09 bp, q 0.88)", 23, -1.38, -0.01, "USD/contratto per evento in verifica", 214.58, false],
+  ["ZN B apertura-chiusura h=10 (verifica 8.01 bp, q 0.88)", 24, 81.98, 0.38, "USD/contratto per evento in verifica", 248.03, false],
+  ["ZN B apertura-chiusura h=15 (verifica 8.25 bp, q 0.88)", 23, 86.91, 0.3, "USD/contratto per evento in verifica", 303.73, false],
+  ["MES A 13:59-chiusura h=1 (verifica -14.65 bp, q 0.76)", 23, -52.93, -0.91, "USD/contratto per evento in verifica", 81.45, false],
+  ["MES A 13:59-chiusura h=2 (verifica -29.29 bp, q 0.76)", 23, -91.3, -1.01, "USD/contratto per evento in verifica", 132.23, false],
+  ["MES A 13:59-chiusura h=5 (verifica -69.32 bp, q 0.76)", 23, -220.68, -1.35, "USD/contratto per evento in verifica", 215.49, false],
+  ["MES A 13:59-chiusura h=10 (verifica -55.52 bp, q 0.76)", 23, -186.49, -1.1, "USD/contratto per evento in verifica", 198.11, false],
+  ["MES A 13:59-chiusura h=15 (verifica -105.37 bp, q 0.76)", 22, -315.93, -1.64, "USD/contratto per evento in verifica", 249.19, false],
+  ["MES B apertura-chiusura h=1 (verifica -17.12 bp, q 0.76)", 23, -59.46, -1.03, "USD/contratto per evento in verifica", 86.79, false],
+  ["MES B apertura-chiusura h=2 (verifica -23.92 bp, q 0.76)", 23, -72.72, -0.8, "USD/contratto per evento in verifica", 120.57, false],
+  ["MES B apertura-chiusura h=5 (verifica -59.49 bp, q 0.76)", 23, -185.02, -1.12, "USD/contratto per evento in verifica", 205.84, false],
+  ["MES B apertura-chiusura h=10 (verifica -59.13 bp, q 0.76)", 23, -194.64, -1.15, "USD/contratto per evento in verifica", 238.86, false],
+  ["MES B apertura-chiusura h=15 (verifica -101.27 bp, q 0.76)", 22, -296.73, -1.53, "USD/contratto per evento in verifica", 308.38, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

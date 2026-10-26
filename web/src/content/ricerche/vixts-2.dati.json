@@ -1,0 +1,27 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES IC VIX9D/VIX -> 1 sessioni (scoperta 0.0241, t 0.84; q 0.36)", 732, 0.0444, 1.2, "IC in verifica", null, false],
+  ["MES IC VIX9D/VIX -> 5 sessioni (scoperta 0.0547, t 1.11; q 0.02)", 731, 0.185, 3.0, "IC in verifica", null, true],
+  ["MES IC VIX9D/VIX -> 22 sessioni (scoperta 0.1319, t 1.91; q 0.02)", 724, 0.2664, 2.89, "IC in verifica", null, true],
+  ["MES IC VIX/VIX3M -> 1 sessioni (scoperta 0.0395, t 1.36; q 0.14)", 732, 0.0688, 1.81, "IC in verifica", null, false],
+  ["MES IC VIX/VIX3M -> 5 sessioni (scoperta 0.108, t 2.17; q 0.02)", 731, 0.2033, 3.06, "IC in verifica", null, true],
+  ["MES IC VIX/VIX3M -> 22 sessioni (scoperta 0.221, t 2.46; q 0.03)", 724, 0.2793, 2.53, "IC in verifica", null, true],
+  ["MES IC dVIX 1 giorno -> 1 sessioni (scoperta 0.0134, t 0.43; q 0.26)", 732, 0.058, 1.47, "IC in verifica", null, false],
+  ["MES IC dVIX 1 giorno -> 5 sessioni (scoperta 0.0244, t 0.82; q 0.81)", 731, 0.011, 0.29, "IC in verifica", null, false],
+  ["MES IC dVIX 1 giorno -> 22 sessioni (scoperta -0.0116, t -0.42; q 0.94)", 724, 0.0021, 0.07, "IC in verifica", null, false],
+  ["MES lungo quando VIX/VIX3M > 1 alla chiusura Cboe, apertura seguente -> chiusura dopo 5 sessioni (scoperta 256.23, t 1.73; q 0.47)", 16, 104.3, 0.4, "USD/contratto per trade in verifica", 294.87, false],
+  ["SPY IC VIX9D/VIX -> 1 sessioni (scoperta 0.0317, t 1.55; q 0.36)", 1588, 0.0299, 1.21, "IC in verifica", null, false],
+  ["SPY IC VIX9D/VIX -> 5 sessioni (scoperta 0.058, t 1.78; q 0.02)", 1587, 0.1155, 2.76, "IC in verifica", null, true],
+  ["SPY IC VIX9D/VIX -> 22 sessioni (scoperta 0.0968, t 2.04; q 0.02)", 1580, 0.1762, 2.81, "IC in verifica", null, true],
+  ["SPY IC VIX/VIX3M -> 1 sessioni (scoperta 0.038, t 1.88; q 0.14)", 1719, 0.0446, 1.87, "IC in verifica", null, false],
+  ["SPY IC VIX/VIX3M -> 5 sessioni (scoperta 0.1202, t 3.6; q 0.02)", 1718, 0.1236, 2.92, "IC in verifica", null, true],
+  ["SPY IC VIX/VIX3M -> 22 sessioni (scoperta 0.1753, t 3.15; q 0.02)", 1711, 0.2283, 3.01, "IC in verifica", null, true],
+  ["SPY IC dVIX 1 giorno -> 1 sessioni (scoperta 0.0137, t 0.74; q 0.57)", 2092, 0.0169, 0.74, "IC in verifica", null, false],
+  ["SPY IC dVIX 1 giorno -> 5 sessioni (scoperta 0.0369, t 2.15; q 0.81)", 2091, 0.0065, 0.3, "IC in verifica", null, false],
+  ["SPY IC dVIX 1 giorno -> 22 sessioni (scoperta 0.0146, t 1.02; q 0.63)", 2084, -0.0113, -0.62, "IC in verifica", null, false],
+  ["SPY lungo quando VIX/VIX3M > 1 alla chiusura Cboe, apertura seguente -> chiusura dopo 5 sessioni (bp lordi, controllo) (scoperta 67.86, t 1.94; q 0.47)", 52, 26.62, 0.4, "bp lordi per trade in verifica", 71.74, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

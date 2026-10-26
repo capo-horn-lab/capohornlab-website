@@ -1,0 +1,22 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["BTC R1 (Sharpe 0.56 contro comprare e tenere 0.56, drawdown 50.6% contro 75.1%, investito 0.51, q 0.15)", 303, 44.0, 1.35, "bp/settimana in verifica", 72.4, false],
+  ["BTC R1-4 (Sharpe 1.05 contro comprare e tenere 0.56, drawdown 29.0% contro 75.1%, investito 0.53, q 0.04)", 303, 78.4, 2.53, "bp/settimana in verifica", 64.2, true],
+  ["BTC R2 (Sharpe 0.78 contro comprare e tenere 0.56, drawdown 21.6% contro 75.1%, investito 0.19, q 0.07)", 303, 39.2, 1.89, "bp/settimana in verifica", 43.1, false],
+  ["BTC R3 (Sharpe -0.07 contro comprare e tenere 0.56, drawdown 53.5% contro 75.1%, investito 0.33, q 0.62)", 303, -4.2, -0.17, "bp/settimana in verifica", 57.0, false],
+  ["BTC regressione della settimana seguente sulla corrente (k1; sulle 4 cumulate beta 0.031, t 1.42)", 303, 0.128, 2.43, "beta in verifica", null, false],
+  ["ETH R1 (Sharpe 0.87 contro comprare e tenere 0.58, drawdown 40.6% contro 76.8%, investito 0.49, q 0.07)", 303, 89.3, 2.1, "bp/settimana in verifica", 91.2, false],
+  ["ETH R1-4 (Sharpe 1.04 contro comprare e tenere 0.58, drawdown 52.7% contro 76.8%, investito 0.54, q 0.04)", 303, 118.7, 2.52, "bp/settimana in verifica", 90.0, true],
+  ["ETH R2 (Sharpe 0.83 contro comprare e tenere 0.58, drawdown 31.0% contro 76.8%, investito 0.2, q 0.07)", 303, 57.5, 2.01, "bp/settimana in verifica", 57.6, false],
+  ["ETH R3 (Sharpe 0.1 contro comprare e tenere 0.58, drawdown 63.5% contro 76.8%, investito 0.33, q 0.48)", 303, 8.5, 0.25, "bp/settimana in verifica", 76.1, false],
+  ["ETH regressione della settimana seguente sulla corrente (k1; sulle 4 cumulate beta 0.042, t 1.82)", 303, 0.11, 2.05, "beta in verifica", null, false],
+  ["MBT R1 (Sharpe 0.26 contro comprare e tenere 0.38, drawdown 57.3% contro 66.3%, investito 0.74, q 0.37)", 283, 16.4, 0.6, "bp/settimana in verifica", 50.1, false],
+  ["MBT R1-4 (Sharpe 0.63 contro comprare e tenere 0.38, drawdown 30.9% contro 66.3%, investito 0.6, q 0.14)", 283, 40.6, 1.47, "bp/settimana in verifica", 45.3, false],
+  ["MBT R2 (Sharpe 0.42 contro comprare e tenere 0.38, drawdown 16.5% contro 66.3%, investito 0.27, q 0.25)", 283, 12.8, 0.98, "bp/settimana in verifica", 27.3, false],
+  ["MBT R3 (Sharpe -0.23 contro comprare e tenere 0.38, drawdown 42.5% contro 66.3%, investito 0.43, q 0.71)", 283, -10.1, -0.55, "bp/settimana in verifica", 36.8, false],
+  ["MBT regressione della settimana seguente sulla corrente (k1; sulle 4 cumulate beta 0.022, t 1.05)", 283, 0.039, 0.69, "beta in verifica", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

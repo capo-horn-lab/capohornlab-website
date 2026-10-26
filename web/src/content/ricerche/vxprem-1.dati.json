@@ -1,0 +1,23 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["VX1 IC z(P1) -> corto VX1 fino al rollo (USD) (scoperta -0.0582, t -0.8; q 0.07)", 1956, -0.1281, -2.08, "IC in verifica", null, true],
+  ["MES IC z(P1) -> apertura seguente -> chiusura dopo 5 sessioni (scoperta None, t None; q 0.02)", 1826, -0.109, -2.86, "IC in verifica", null, true],
+  ["MES IC z(P1) -> apertura seguente -> chiusura dopo 22 sessioni (scoperta None, t None; q 0.06)", 1809, -0.1387, -2.21, "IC in verifica", null, true],
+  ["SPY IC z(P1) -> apertura seguente -> chiusura dopo 5 sessioni (scoperta -0.0947, t -1.95; q 0.02)", 1955, -0.1112, -3.01, "IC in verifica", null, true],
+  ["SPY IC z(P1) -> apertura seguente -> chiusura dopo 22 sessioni (scoperta -0.1396, t -1.98; q 0.04)", 1938, -0.1506, -2.46, "IC in verifica", null, true],
+  ["VX1 IC z(P2) -> corto VX1 fino al rollo (USD) (scoperta -0.0732, t -0.94; q 0.76)", 1956, -0.0209, -0.3, "IC in verifica", null, false],
+  ["MES IC z(P2) -> apertura seguente -> chiusura dopo 5 sessioni (scoperta None, t None; q 0.47)", 1826, -0.035, -0.84, "IC in verifica", null, false],
+  ["MES IC z(P2) -> apertura seguente -> chiusura dopo 22 sessioni (scoperta None, t None; q 0.47)", 1809, -0.0531, -0.77, "IC in verifica", null, false],
+  ["SPY IC z(P2) -> apertura seguente -> chiusura dopo 5 sessioni (scoperta -0.0801, t -1.56; q 0.41)", 1955, -0.0407, -1.02, "IC in verifica", null, false],
+  ["SPY IC z(P2) -> apertura seguente -> chiusura dopo 22 sessioni (scoperta -0.1381, t -1.77; q 0.33)", 1938, -0.0796, -1.2, "IC in verifica", null, false],
+  ["VX1 corto VX1 quando z(P1) >= 0.41 (terzile alto di scoperta), Settle seguente (scoperta 23.67, t 1.07; sempre in posizione 48.28, t 1.7; totale verifica 3072.9; q 0.47)", 746, 4.12, 0.16, "USD/contratto per giorno in posizione, verifica", 74.39, false],
+  ["MES lungo MES quando z(P1) > -0.25 (non nel terzile basso), apertura -> apertura (scoperta None, t None; sempre in posizione 11.65, t 2.15; totale verifica 7852.2; q 0.20)", 1221, 6.43, 1.14, "USD/contratto per giorno in posizione, verifica", 16.99, false],
+  ["SPY lungo SPY quando z(P1) > -0.25 (non nel terzile basso), apertura -> apertura (bp lordi, controllo) (scoperta 2.83, t 1.26; sempre in posizione 7.06, t 2.92; totale verifica 7201.7; q 0.03)", 1345, 5.35, 2.36, "bp lordi per giorno in posizione, verifica", 9.58, false],
+  ["VX1 corto VX1 quando z(P2) >= 0.42 (terzile alto di scoperta), Settle seguente (scoperta 2.96, t 0.09; sempre in posizione 48.28, t 1.7; totale verifica 77381.6; q 0.03)", 709, 109.14, 2.5, "USD/contratto per giorno in posizione, verifica", 91.79, true],
+  ["MES lungo MES quando z(P2) > -0.33 (non nel terzile basso), apertura -> apertura (scoperta None, t None; sempre in posizione 11.65, t 2.15; totale verifica 12465.3; q 0.07)", 1127, 11.06, 1.74, "USD/contratto per giorno in posizione, verifica", 18.03, false],
+  ["SPY lungo SPY quando z(P2) > -0.33 (non nel terzile basso), apertura -> apertura (bp lordi, controllo) (scoperta 3.3, t 1.44; sempre in posizione 7.06, t 2.92; totale verifica 9027.7; q 0.02)", 1243, 7.26, 2.73, "bp lordi per giorno in posizione, verifica", 9.84, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

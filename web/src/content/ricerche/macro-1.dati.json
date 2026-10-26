@@ -1,0 +1,13 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["C1 deriva pre-NFP", 308, -4.81, -0.58, "bp/trade", 8.099447643037898, false],
+  ["C4 reversal FOMC", 212, 8.4, 0.7, "bp/trade", 13.18860964744827, false],
+  ["C5 rally FOMC con SEP", 104, 1.42, 0.09, "bp/trade", 3.6019073968099806, false],
+  ["C6 fade dopo FOMC", 212, 16.34, 0.76, "bp/trade", 19.41677340170408, false],
+  ["C10 euro nel giorno FOMC", 53, -0.09, -0.01, "bp/trade", 5.592399203499958, false],
+  ["C11 premio annunci", 818, -2.82, -0.28, "bp/trade", 12.967052887333837, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

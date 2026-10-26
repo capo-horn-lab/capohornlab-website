@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MNQ costo di un ordine a mercato all'apertura delle 8:30 CT: empirico media 30.02, mediana 23.84, p90 55.14 tick contro il vecchio modello della simulazione media 4.9, mediana 5.0 (ottimista)", 20, 30.02, null, "tick (meta' spread di Roll + movimento del primo secondo)", 4.9, false],
+  ["MNQ costo di un ordine a mercato nella giornata 9:00-14:30 CT: empirico media 4.29, mediana 3.3, p90 9.32 tick contro il vecchio modello della simulazione media 2.18, mediana 2.0 (ottimista)", 400, 4.29, null, "tick (meta' spread di Roll + movimento del primo secondo)", 2.18, false],
+  ["MES costo di un ordine a mercato all'apertura delle 8:30 CT: empirico media 5.82, mediana 4.71, p90 12.42 tick contro il vecchio modello della simulazione media 1.6, mediana 2.0 (ottimista)", 20, 5.82, null, "tick (meta' spread di Roll + movimento del primo secondo)", 1.6, false],
+  ["MES costo di un ordine a mercato nella giornata 9:00-14:30 CT: empirico media 0.88, mediana 1.2, p90 1.23 tick contro il vecchio modello della simulazione media 1.02, mediana 1.0 (ottimista)", 400, 0.88, null, "tick (meta' spread di Roll + movimento del primo secondo)", 1.02, false],
+  ["M2K costo di un ordine a mercato all'apertura delle 8:30 CT: empirico media 10.21, mediana 6.17, p90 23.29 tick contro il vecchio modello della simulazione media 2.15, mediana 2.0 (ottimista)", 20, 10.21, null, "tick (meta' spread di Roll + movimento del primo secondo)", 2.15, false],
+  ["M2K costo di un ordine a mercato nella giornata 9:00-14:30 CT: empirico media 0.93, mediana 0.25, p90 2.24 tick contro il vecchio modello della simulazione media 1.08, mediana 1.0 (prudente)", 400, 0.93, null, "tick (meta' spread di Roll + movimento del primo secondo)", 1.08, true],
+  ["MYM costo di un ordine a mercato all'apertura delle 8:30 CT: empirico media 29.04, mediana 29.21, p90 52.65 tick contro il vecchio modello della simulazione media 2.85, mediana 3.0 (ottimista)", 20, 29.04, null, "tick (meta' spread di Roll + movimento del primo secondo)", 2.85, false],
+  ["MYM costo di un ordine a mercato nella giornata 9:00-14:30 CT: empirico media 1.39, mediana 1.26, p90 3.3 tick contro il vecchio modello della simulazione media 1.2, mediana 1.0 (ottimista)", 400, 1.39, null, "tick (meta' spread di Roll + movimento del primo secondo)", 1.2, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

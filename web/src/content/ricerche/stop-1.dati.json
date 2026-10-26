@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["IBS S2 (DD 4655 contro 3525)", 582, 17.508187553985014, -0.8669808072639031, "bp/trade (originale 31.4) · diff Sharpe", null, false],
+  ["IBS S3 (DD 3857 contro 3525)", 582, 17.69234667684953, -1.0021264018719098, "bp/trade (originale 31.4) · diff Sharpe", null, false],
+  ["R1b_RSI2_10 S2 (DD 2811 contro 1409)", 183, 15.725433103988246, -2.5929628207038493, "bp/trade (originale 38.9) · diff Sharpe", null, false],
+  ["R1b_RSI2_10 S3 (DD 2731 contro 1409)", 183, 23.547472077821702, -2.0681721001633275, "bp/trade (originale 38.9) · diff Sharpe", null, false],
+  ["TT S2 (DD 1285 contro 1242)", 83, 13.83750083558742, -0.41069401918344384, "bp/trade (originale 16.1) · diff Sharpe", null, false],
+  ["TT S3 (DD 1242 contro 1242)", 83, 16.07970793426531, 0.0, "bp/trade (originale 16.1) · diff Sharpe", null, false],
+  ["3WEAK S2 (DD 600 contro 576)", 132, 32.09839905277365, -0.4326383749041621, "bp/trade (originale 39.5) · diff Sharpe", null, false],
+  ["3WEAK S3 (DD 453 contro 576)", 132, 40.09274799018101, 0.18075354466333635, "bp/trade (originale 39.5) · diff Sharpe", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

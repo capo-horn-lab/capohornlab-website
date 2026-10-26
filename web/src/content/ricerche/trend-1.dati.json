@@ -1,0 +1,13 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["TREND-1", "TSMOM 12-1 (bp/mese)", 236, 51.89, 1.04, "bp/mese", 42.90238189094796, false],
+  ["TREND-1", "Faber 10 mesi: drawdown 10.3% contro 16.2%", 239, 1.0619532573130193, null, "Sharpe", 1.4134729373597241, false],
+  ["VRP-1", "SPY 5 giorni", 2032, 0.038293278320447446, 0.9625620545370646, "IC", null, false],
+  ["VRP-1", "SPY 22 giorni", 2024, 0.07899129780939369, 1.1401719735451437, "IC", null, false],
+  ["VRP-1", "QQQ 5 giorni", 2032, 0.07987957634764796, 1.925031175809897, "IC", null, false],
+  ["VRP-1", "QQQ 22 giorni", 2024, 0.13011162926741202, 1.7535075844357901, "IC", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

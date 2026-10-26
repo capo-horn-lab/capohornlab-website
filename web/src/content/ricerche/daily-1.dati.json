@@ -1,0 +1,23 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES fine mese -2/+2 (scoperta 105.6 USD, t 2.09, q 0.06; t di verifica 0.62, placebo non battuto)", 36, 60.11, 0.62, "USD/trade in verifica", 218.31, false],
+  ["MES pre fomc chiusura -> 13:59 ET (scoperta 49.9 USD, t 1.92, q 0.06; t di verifica 0.55, placebo non battuto)", 24, 16.38, 0.55, "USD/trade in verifica", 110.71, false],
+  ["MES notte giorno giorno (scoperta -0.19 USD, t -0.04, q 0.58; non scelta in scoperta, media di verifica non positiva, t di verifica -0.01, differenza notte-giorno sotto il p95 degli scambi)", 739, -0.06, -0.01, "USD/trade in verifica", null, false],
+  ["MES ibs IBS<0.20 -> IBS>0.80 o 3 sessioni (scoperta 82.66 USD, t 3.79, q 0.00; t di verifica 1.43, placebo non battuto)", 93, 63.27, 1.43, "USD/trade in verifica", 93.7, false],
+  ["MNQ fine mese -2/+2 (scoperta 206.28 USD, t 2.4, q 0.03; t di verifica 0.39, placebo non battuto)", 36, 82.84, 0.39, "USD/trade in verifica", 482.88, false],
+  ["MNQ pre fomc chiusura -> 13:59 ET (scoperta 93.09 USD, t 2.01, q 0.05; t di verifica 1.37, placebo non battuto)", 24, 92.04, 1.37, "USD/trade in verifica", 203.93, false],
+  ["MNQ notte giorno giorno (scoperta 6.65 USD, t 0.73, q 0.33; non scelta in scoperta, media di verifica non positiva, t di verifica -0.04, differenza notte-giorno sotto il p95 degli scambi)", 741, -0.71, -0.04, "USD/trade in verifica", null, false],
+  ["MNQ ibs IBS<0.20 -> IBS>0.80 o 8 sessioni (scoperta 212.76 USD, t 5.17, q 0.00; t di verifica 1.83, placebo non battuto)", 76, 154.17, 1.83, "USD/trade in verifica", 258.37, false],
+  ["M2K fine mese -2/+2 (scoperta 49.52 USD, t 1.5, q 0.21; non scelta in scoperta, media di verifica non positiva, t di verifica -0.3, placebo non battuto)", 36, -13.9, -0.3, "USD/trade in verifica", 103.15, false],
+  ["M2K pre fomc chiusura -> 13:59 ET (scoperta 33.82 USD, t 1.81, q 0.08; t di verifica 1.2, placebo non battuto)", 24, 23.08, 1.2, "USD/trade in verifica", 53.51, false],
+  ["M2K notte giorno differenza notte - giorno (scoperta 5.56 USD, t 1.24, q –; confermata)", 703, 9.21, 1.47, "USD/trade in verifica", 11.15, false],
+  ["M2K ibs IBS<0.20 -> IBS>0.80 o 8 sessioni (scoperta 46.99 USD, t 2.58, q 0.04; t di verifica 1.78, placebo non battuto)", 77, 39.31, 1.78, "USD/trade in verifica", 63.76, false],
+  ["MYM fine mese +0/+3 (scoperta 78.12 USD, t 1.8, q 0.10; non scelta in scoperta, t di verifica 0.43, placebo non battuto)", 32, 29.27, 0.43, "USD/trade in verifica", 120.32, false],
+  ["MYM pre fomc chiusura -> 13:59 ET (scoperta 20.41 USD, t 1.11, q 0.28; non scelta in scoperta, t di verifica 0.13, placebo non battuto)", 24, 3.1, 0.13, "USD/trade in verifica", 76.62, false],
+  ["MYM notte giorno notte (scoperta 0.7 USD, t 0.2, q 0.65; non scelta in scoperta, t di verifica 0.85, differenza notte-giorno sotto il p95 degli scambi)", 706, 3.87, 0.85, "USD/trade in verifica", null, false],
+  ["MYM ibs IBS<0.30 -> IBS>0.80 o 3 sessioni (scoperta 51.72 USD, t 3.34, q 0.00; t di verifica 0.74, placebo non battuto)", 130, 18.62, 0.74, "USD/trade in verifica", 52.31, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

@@ -1,0 +1,10 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MES", 1041, 3.85, 1.73, "USD/sessione", 0.35899999999999693, false],
+  ["MNQ", 163, 34.37, 2.72, "USD/sessione", 18.644999999999992, false],
+  ["MCL", 241, -0.77, -0.55, "USD/sessione", -0.06850000000000052, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

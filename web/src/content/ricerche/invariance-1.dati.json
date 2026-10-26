@@ -1,0 +1,11 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["scoperta: log numero di scambi su log attivita' (atteso 2/3; errore standard 0.062)", 122, 0.641, null, "pendenza", null, true],
+  ["scoperta: log dimensione media su log attivita' (atteso 1/3; errore standard 0.075)", 122, 0.229, null, "pendenza", null, false],
+  ["verifica: log numero di scambi su log attivita' (atteso 2/3; errore standard 0.071)", 141, 0.641, null, "pendenza", null, true],
+  ["verifica: log dimensione media su log attivita' (atteso 1/3; errore standard 0.078)", 141, 0.252, null, "pendenza", null, true]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

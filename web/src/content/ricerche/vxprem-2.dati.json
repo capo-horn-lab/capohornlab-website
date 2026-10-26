@@ -1,0 +1,14 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["1 originale: P2, terzile alto, VX1 (scoperta 2.96 USD, t 0.09; sempre corto 48.28)", 709, 109.14, 2.5, "USD/contratto per giorno in posizione, verifica", 91.79, true],
+  ["2 soglia alla mediana (scoperta 5.12 USD, t 0.19; sempre corto 48.28)", 1030, 66.75, 1.96, "USD/contratto per giorno in posizione, verifica", 78.74, true],
+  ["3 soglia al quartile alto (scoperta -5.65 USD, t -0.14; sempre corto 48.28)", 560, 85.24, 1.65, "USD/contratto per giorno in posizione, verifica", 95.69, true],
+  ["4 corto sul secondo contratto VX2 (scoperta -9.22 USD, t -0.38; sempre corto 22.6)", 709, 59.22, 1.58, "USD/contratto per giorno in posizione, verifica", 55.86, true],
+  ["5 senza 15/2-30/4/2020 (scoperta 2.96 USD, t 0.09; sempre corto 67.34)", 703, 81.27, 2.27, "USD/contratto per giorno in posizione, verifica", 102.01, true],
+  ["6 un giorno di ritardo in piu (scoperta -0.97 USD, t -0.03; sempre corto 48.28)", 709, 52.27, 1.39, "USD/contratto per giorno in posizione, verifica", 87.71, false],
+  ["controllo: P1, terzile alto, VX1 (scoperta 23.67 USD, t 1.07; sempre corto 48.28)", 746, 4.12, 0.16, "USD/contratto per giorno in posizione, verifica", 74.39, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

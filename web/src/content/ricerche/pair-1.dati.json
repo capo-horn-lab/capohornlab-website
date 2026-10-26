@@ -1,0 +1,11 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["Z 2.0 L 60", 1398, -9.01, -3.8, "USD/trade", null, false],
+  ["Z 2.5 L 60", 1096, -8.36, -2.94, "USD/trade", null, false],
+  ["Z 2.0 L 120", 806, -6.97, -1.81, "USD/trade", null, false],
+  ["Z 2.5 L 120", 586, -6.59, -1.4, "USD/trade", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

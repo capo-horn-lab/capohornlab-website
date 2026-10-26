@@ -1,0 +1,16 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["MGC SUPERTREND_10_3 4h filtro 5m", 487, 13.51, 1.69, "USD/trade", null, false],
+  ["MGC TURTLE 4h filtro 1h", 202, 42.66, 1.5, "USD/trade", null, false],
+  ["M2K SUPERTREND_21_3 base 15m", 771, 3.63, 1.27, "USD/trade", null, false],
+  ["MGC RSI2 4h filtro 1h", 39, 24.16, 1.16, "USD/trade", null, false],
+  ["MGC RSI2 base 1h", 52, 19.18, 1.15, "USD/trade", null, false],
+  ["MGC SUPERTREND_21_3 4h filtro 5m", 508, 8.52, 0.99, "USD/trade", null, false],
+  ["WFO-1 F3 su MGC", 1736, -1.9, -0.77, "USD/sessione", -0.671500000000003, false],
+  ["WFO-1 F3 su M2K", 1666, 1.21, 0.81, "USD/sessione", -1.08, false],
+  ["WFO-1 F3 su M6E", 1708, -1.84, -5.26, "USD/sessione", -2.9195, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

@@ -1,0 +1,10 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["SPY direzione", 118, 3.431731663170189, 0.11676402342978305, "bp", null, false],
+  ["QQQ direzione", 118, 16.722669959613544, 0.5415368294071323, "bp", null, false],
+  ["P7 su 221 strategie: aiuta 18", 221, null, null, "", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

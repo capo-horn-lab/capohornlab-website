@@ -1,0 +1,20 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["WFO-1", "MES F1_net", 1041, 4.9, 1.21, "USD/sessione", 0.08199999999999932, false],
+  ["WFO-1", "MES F2_strength", 1041, -0.68, -0.34, "USD/sessione", 0.08199999999999932, false],
+  ["WFO-1", "MES F3_prudente", 1041, 4.09, 1.54, "USD/sessione", 0.08199999999999932, false],
+  ["WFO-1", "MNQ F1_net", 163, 16.88, 0.53, "USD/sessione", 16.4115, false],
+  ["WFO-1", "MNQ F2_strength", 163, 7.62, 1.68, "USD/sessione", 16.4115, false],
+  ["WFO-1", "MNQ F3_prudente", 163, 36.01, 2.88, "USD/sessione", 16.4115, true],
+  ["WFO-1", "MCL F1_net", 241, 0.44, 0.16, "USD/sessione", 0.17099999999999968, false],
+  ["WFO-1", "MCL F2_strength", 241, 0.23, 0.14, "USD/sessione", 0.17099999999999968, false],
+  ["WFO-1", "MCL F3_prudente", 241, -0.31, -0.21, "USD/sessione", 0.17099999999999968, false],
+  ["WFO-1-LONG", "MNQ F1_net", 695, 12.8, 1.31, "USD/sessione", 5.865499999999995, false],
+  ["WFO-1-LONG", "MNQ F2_strength", 695, 5.98, 1.35, "USD/sessione", 5.865499999999995, false],
+  ["WFO-1-LONG", "MNQ F3_prudente", 695, 6.62, 1.45, "USD/sessione", 5.865499999999995, false],
+  ["WFO-1-LONG", "MNQ PARAM-2 F3 per fase", 695, -9.88, -2.18, "USD/sessione", 1.2629999999999981, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

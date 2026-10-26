@@ -1,0 +1,1473 @@
+[
+ {
+  "id": "regimi-1",
+  "titolo": "REGIMI-1 — classificatore k-means (calma / trend / crisi) sull'indice azionario",
+  "data": "2026-10-25",
+  "strumenti": [
+   "QQQ",
+   "MNQ"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "regimi-strat-1",
+  "titolo": "REGIMI-STRAT-1 — le strategie rendono solo in certi regimi del classificatore k-means?",
+  "data": "2026-10-25",
+  "strumenti": [],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "volsurf-1",
+  "titolo": "VOLSURF-1, VOLSURF-2, VOLSURF-3 / 3B — superficie di volatilità implicita (SVI) e fonte delle catene di opzioni",
+  "data": "2026-10-25",
+  "strumenti": [
+   "NDX",
+   "QQQ",
+   "SPX",
+   "SPY"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "aperture-mondo-1",
+  "titolo": "APERTURE-MONDO-1 — aperture e caso d'apertura dei future europei (DAX, EURO STOXX 50)",
+  "data": "2026-10-23",
+  "strumenti": [
+   "FDXM",
+   "FDXS",
+   "FESX",
+   "FSXE"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "timestral-1",
+  "titolo": "TIMESTRAL-1 e TIMESTRAL-2 — modello di serie temporali di Mistral (Timestral) e suo fine-tuning",
+  "data": "2026-10-23",
+  "strumenti": [
+   "MNQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "assorb-1",
+  "titolo": "ASSORB-1 e ASSORB-2 — l'assorbimento a un prezzo riduce la probabilità che il prezzo lo superi? (mappa del book come controllo)",
+  "data": "2026-10-22",
+  "strumenti": [
+   "MNQ",
+   "ES"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "daqui-1",
+  "titolo": "DAQUI-1 — \"da qui\" (vicini storici) ed escursione residua",
+  "data": "2026-10-22",
+  "strumenti": [
+   "MNQ"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "lenti-1",
+  "titolo": "LENTI-1 — lenti separate sul campione intero (VWAP, gap, volume, range, posizione, calendario) e concordanza",
+  "data": "2026-10-22",
+  "strumenti": [
+   "MNQ"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "freq-live-1",
+  "titolo": "FREQ-LIVE-1 + documento TEORIA_MOVIMENTO — frequenze condizionate dal vivo (quanto e quando, non dove)",
+  "data": "2026-10-21",
+  "strumenti": [
+   "MNQ",
+   "MES",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "ricerca-sniper-1",
+  "titolo": "RICERCA-SNIPER-1 e BRAINSTORM-SNIPER-1/2 — ricerca estesa e brainstorming sulle strategie a basso winrate/alto RR (documenti)",
+  "data": "2026-10-21",
+  "strumenti": [],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "scenari-1",
+  "titolo": "SCENARI-1 — albero degli scenari con percentuali sul grafico live (motore Python + indicatore NinjaScript)",
+  "data": "2026-10-21",
+  "strumenti": [
+   "MNQ",
+   "MES",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "sniper-1",
+  "titolo": "SNIPER-1 — strategia \"cecchino\": trend Ichimoku, limite al bordo della nuvola all'apertura, stop stretto, obiettivo lontano",
+  "data": "2026-10-21",
+  "strumenti": [
+   "MNQ",
+   "MES",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "sniper-2",
+  "titolo": "SNIPER-2 — i setup \"cecchino\" con informazione nel livello (sweep-and-reclaim, FVG della mattina, ORB 5 minuti a 10 R)",
+  "data": "2026-10-21",
+  "strumenti": [
+   "MNQ",
+   "MES",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "cryptomom-1",
+  "titolo": "CRYPTOMOM-1 — momentum settimanale e attenzione sul bitcoin (Liu-Tsyvinski)",
+  "data": "2026-10-20",
+  "strumenti": [
+   "BTC",
+   "ETH",
+   "MBT"
+  ],
+  "verdetto": "parziale",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "fomcdrift-1",
+  "titolo": "FOMCDRIFT-1 — deriva post-FOMC su ZN (Brooks-Katz-Lustig)",
+  "data": "2026-10-20",
+  "strumenti": [
+   "ZN",
+   "MES"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "fxfomc-1",
+  "titolo": "FXFOMC-1 — euro (M6E) attorno al FOMC e incertezza di politica monetaria",
+  "data": "2026-10-20",
+  "strumenti": [
+   "M6E"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "h-next-4c",
+  "titolo": "H-NEXT-4c — la regola IBS su 30 ETF (settori, paesi, stile)",
+  "data": "2026-10-20",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "parziale",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "impact-1",
+  "titolo": "IMPACT-1 — spread effettivo e impatto dai tick; prudenza dello slittamento di SIM-APERTURE",
+  "data": "2026-10-20",
+  "strumenti": [
+   "MNQ",
+   "MES",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "invariance-1",
+  "titolo": "INVARIANCE-1 — invarianza della microstruttura (Kyle-Obizhaeva) sui tick di 11 future",
+  "data": "2026-10-20",
+  "strumenti": [
+   "FDXM",
+   "FESX",
+   "M2K",
+   "M6E",
+   "MBT",
+   "MCL",
+   "MES",
+   "MGC",
+   "MNQ",
+   "MYM",
+   "ZN"
+  ],
+  "verdetto": "parziale",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "krt-1",
+  "titolo": "KRT-1 — due premi nelle materie prime (Kang-Rouwenhorst-Tang): pressione di copertura e inversione degli speculatori",
+  "data": "2026-10-20",
+  "strumenti": [
+   "MCL",
+   "MGC"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "macrowin-1",
+  "titolo": "MACROWIN-1 e MACROWIN-2 — formazione del prezzo di ZN attorno agli annunci; NFP e CPI sui micro azionari",
+  "data": "2026-10-20",
+  "strumenti": [
+   "ZN"
+  ],
+  "verdetto": "parziale",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "paper-program",
+  "titolo": "PAPER-PROGRAM (20/10/2026) — 13 studi dai paper e dalla domanda del proprietario: bilancio",
+  "data": "2026-10-20",
+  "strumenti": [],
+  "verdetto": "corretto",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "safehaven-1",
+  "titolo": "SAFEHAVEN-1, CP-1, GAPFILL-1 — oro come rifugio; fattore Cochrane-Piazzesi su ZN; gap in calo",
+  "data": "2026-10-20",
+  "strumenti": [
+   "GLD",
+   "SPY",
+   "MGC",
+   "ZN",
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "sim-aperture-1",
+  "titolo": "SIM-APERTURE-1 e SIM-APERTURE-2 — simulazione delle aperture di MNQ con modelli locali (poi due agenti Claude Opus) in dibattito, RizzoFlow arbitro e cancello",
+  "data": "2026-10-20",
+  "strumenti": [
+   "MNQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "tugwar-1",
+  "titolo": "TUGWAR-1 e GHLZ-1 — tiro alla fune notte/giorno; momentum della prima alla ultima mezz'ora (sei future azionari)",
+  "data": "2026-10-20",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "FESX",
+   "FDXM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "vixts-2",
+  "titolo": "VIXTS-2 — pendenza della struttura a termine del VIX come predittore del rendimento di MES a 1, 5, 22 sessioni",
+  "data": "2026-10-20",
+  "strumenti": [
+   "MES",
+   "SPY"
+  ],
+  "verdetto": "parziale",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "vpin-1",
+  "titolo": "VPIN-1 — tossicità del flusso (Easley, López de Prado, O'Hara) su MES e MNQ",
+  "data": "2026-10-20",
+  "strumenti": [
+   "MES",
+   "MNQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "vxprem-1",
+  "titolo": "VXPREM-1 — premio dei future VIX (Cheng, RFS 2019) come predittore dei rendimenti di VX, MES e SPY",
+  "data": "2026-10-20",
+  "strumenti": [
+   "VX",
+   "MES",
+   "SPY"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "vxprem-2",
+  "titolo": "VXPREM-2 — robustezza della regola \"corto VX1 quando il premio P2 è nel terzo alto\"",
+  "data": "2026-10-20",
+  "strumenti": [
+   "VX",
+   "VIX"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "xmom-1",
+  "titolo": "XMOM-1 — valore e momentum tra attivi della stessa classe (Asness-Moskowitz-Pedersen)",
+  "data": "2026-10-20",
+  "strumenti": [],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "algo-1",
+  "titolo": "ALGO-1 — strategie dai repository open source (hummingbot, nautilus, lumibot, backtrader)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "alloc-1",
+  "titolo": "ALLOC-1, PERSIST-1, ALLOC-2, STRESS-OOS-1 — allocazione per condizioni di mercato e l'effetto \"stress\"",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "IWM",
+   "DIA"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "auct-1",
+  "titolo": "AUCT-1 — calo prima e recupero dopo le aste dei Treasury",
+  "data": "2026-10-19",
+  "strumenti": [
+   "IEF",
+   "TLT"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "audit-fable",
+  "titolo": "AUDIT-FABLE e REVIEW-FABLE-MAX — revisioni di tutto il codice e di tutte le analisi (ritiri di conferme)",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "bc-1",
+  "titolo": "BC-1 — strategie intraday, di volatilità e cross-asset dalle schede B e C",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "SPY",
+   "QQQ",
+   "FESX",
+   "FDXM",
+   "VIX"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "breadth-1",
+  "titolo": "BREADTH-1 — ampiezza di mercato dalle aziende di Nasdaq-100 e S&P 500",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "misto",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "cal-1",
+  "titolo": "CAL-1 (ottimizzatore, L27) — il calendario come filtro dei genomi",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "chop-1",
+  "titolo": "CHOP-1 — all'apertura il mercato è \"choppy\"?",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "cot-1",
+  "titolo": "COT-1 — posizionamento CFTC (Traders in Financial Futures) come segnale settimanale",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "corretto",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "crisis-1",
+  "titolo": "CRISIS-1, EIA-1, CARRY-1, OPT-ALL-ZN — altri mercati: trend nello stress, petrolio EIA, carry, ottimizzazione su ZN",
+  "data": "2026-10-19",
+  "strumenti": [
+   "TLT",
+   "IEF",
+   "GLD",
+   "SLV",
+   "USO",
+   "UNG",
+   "UUP",
+   "FXE",
+   "FXY",
+   "ZN",
+   "MGC",
+   "M6E",
+   "MCL",
+   "MBT"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "crypto-1",
+  "titolo": "CRYPTO-1 e CRYPTO-2 — regole su bitcoin (spot e future micro)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "BTC",
+   "MBT"
+  ],
+  "verdetto": "misto",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "daily-1",
+  "titolo": "DAILY-1 — quattro famiglie di effetti giornalieri (fine mese, pre-FOMC, notte contro giorno, varianti IBS)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "decay-1",
+  "titolo": "DECAY-1 — l'edge delle regole confermate si sta riducendo nel tempo?",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "dipavg-1",
+  "titolo": "DIPAVG-1 e EARLYEXIT-1 — mediare al ribasso con obiettivo cumulato; uscita anticipata del bot",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "earn-1",
+  "titolo": "EARN-1 — trimestrali delle mega-cap del Nasdaq come eventi per MNQ",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MNQ"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "ens-1",
+  "titolo": "ENS-1 e LASTHALF-OOS — insieme lineare di segnali semplici; momentum dell'ultima mezz'ora fuori campione",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "fam-book-1",
+  "titolo": "FAM-BOOK-1 — budget di rischio tra i 4 micro e tetto di posizioni per l'IBS",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "flash-1",
+  "titolo": "FLASH-1 e FLASH-2 — \"dopo un flash crash il mercato è più calmo/fragile/rimbalza?\"",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "gex-1",
+  "titolo": "GEX-1, GEXOC-1, H-NEXT-9 — gamma dei market maker (GEX/DIX SqueezeMetrics) e IBS",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "ritirato",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "harx-1",
+  "titolo": "HARX-1 — previsione dell'ampiezza del giorno dopo (HAR e HAR-X)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "hmm-1",
+  "titolo": "HMM-1 — HMM di regime e filtro di Kalman come filtri dell'IBS",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "ibs-nt",
+  "titolo": "IBS-NT, IBS-MYM, IBS-EU, L38, L40 — la regola IBS sui future (e H-NEXT-6 in carta)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "FESX",
+   "FDXM"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "ibs8-1",
+  "titolo": "IBS8-1 — la variante IBS 0,20/0,80/8 contro la regola in carta 0,20/0,90/5",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "ibsvix-1",
+  "titolo": "IBSVIX-1 — la regola IBS condizionata al regime di volatilità noto il giorno prima (storico Cboe)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "VIX"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "jm-1",
+  "titolo": "JM-1 — statistical jump model come filtro di rischio",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "keylim-1",
+  "titolo": "KEYLIM-1 e LIMALL-1 — entrata a limite su un punto chiave invece che a mercato",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "lab-3",
+  "titolo": "LAB-3 — libreria LAB-2 e ottimizzatore WFO-1 su contratti mai provati (MGC, M2K, M6E)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MGC",
+   "M2K",
+   "M6E"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "leak-1",
+  "titolo": "LEAK-1 — controllo di anticipazione (look-ahead) sui dati Cboe",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "llm-local-1",
+  "titolo": "LLM-LOCAL-1/2, RAG-2/3, EVAL-2, PROMPT-1, NOISE-1, LAT-2, NOTA-1 — il modello linguistico locale dell'app (LFM2.5-24B-A2B)",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "macro-1",
+  "titolo": "MACRO-1 — strategie sugli annunci macro (FOMC, CPI, NFP)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "M6E"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "meta-1",
+  "titolo": "META-1 — meta-labeling dei segnali IBS",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "mr-1",
+  "titolo": "MR-1 — la famiglia dell'IBS: 12 regole di mean reversion pubblicate e il comitato",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "misto",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "mr-1-adj",
+  "titolo": "MR-1-ADJ — MR-1 con segnali sui prezzi raccordati",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "mr-2",
+  "titolo": "MR-2 — la mean reversion di breve fuori dagli indici USA",
+  "data": "2026-10-19",
+  "strumenti": [
+   "FESX",
+   "FDXM",
+   "MGC",
+   "M6E"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "oc-explore-1",
+  "titolo": "OC-EXPLORE-1 e DIXCLOSE-1 — cosa condiziona aperture e chiusure; DIX basso e chiusura venduta (prova in carta)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "openlim-1",
+  "titolo": "OPENLIM-1 — ordini lontani dal prezzo alla prima candela delle 9:30",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "openpyr-1",
+  "titolo": "OPENPYR-1 e WINDAY-1 — ingresso all'apertura con aggiunte a favore (\"effetto domino\") e trailing",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "opt-1",
+  "titolo": "OPT-1 e OPT-2 — indicatori dalle options (put/call, SKEW, VVIX, VIX9D/VIX) come segnali",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "MES",
+   "MNQ"
+  ],
+  "verdetto": "misto",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "opt-all",
+  "titolo": "OPT-ALL (e OPT-ALL-ZN) — ottimizzazione vera (griglia + walk-forward) di tutte le famiglie su tutti gli strumenti",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "MGC",
+   "M6E",
+   "FESX",
+   "FDXM",
+   "MBT",
+   "MCL",
+   "ZN"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "opt-full-1",
+  "titolo": "OPT-FULL-1 / OPT-FULL-1M / OPT-COND-1 — ottimizzazione completa a forza bruta (circa 6,35 milioni di combinazioni) e per condizioni di mercato",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "MGC",
+   "M6E",
+   "FESX",
+   "FDXM",
+   "MBT",
+   "MCL",
+   "ZN"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "ovn-1",
+  "titolo": "OVN-1 e GOLDN-1 — da dove viene il guadagno della famiglia MR (notte o giorno); oro di notte",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "MGC"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "p1-p8",
+  "titolo": "P1-P8 (CANDLE-1, IBSWIN-1, ONIGHT-1, CLOSEREV-1, ONCANDLE-1, PATTERN-1, BRIDGE-1, RWNULL-1) — matematica delle candele e previsione di apertura/chiusura",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "pair-1",
+  "titolo": "PAIR-1 — spread MNQ contro MES (stat-arb intraday)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MNQ",
+   "MES"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "param-1",
+  "titolo": "PARAM-1 e PARAM-2 — ottimizzatore parametrico per fase (EMA + RSI), entrata/volatilità/timeframe",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "phase-1",
+  "titolo": "PHASE-1 — 12 fasi cicliche di mercato e assegnazione delle strategie",
+  "data": "2026-10-19",
+  "strumenti": [],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "phase-2",
+  "titolo": "PHASE-2 — le fasi per prevedere l'ampiezza e per escludere",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "phase-3",
+  "titolo": "PHASE-3 / PHASE-3-OOS / PHASE-2-OOS / SIZE-1 — quante fasi usare, previsione dell'ampiezza su dati mai usati, dimensione per fase",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL",
+   "MGC"
+  ],
+  "verdetto": "misto",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "poly-1",
+  "titolo": "POLY-1 — probabilità Polymarket sulla Fed come dato per ES/NQ",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "preopen-1",
+  "titolo": "PREOPEN-1 — breakout del range di pre-apertura su MNQ",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MNQ",
+   "NQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "res2-1",
+  "titolo": "RES2-1 — 26 strategie dalla ricerca web (articoli, blog, Reddit/forum), regole come pubblicate",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "res2-2",
+  "titolo": "RES2-2 — oro: ritracciamento dell'initial balance (tradethatswing)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MGC"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "rizzo-wfo",
+  "titolo": "RIZZO-WFO — il modello locale RizzoFlow dentro l'ottimizzatore (passo 1: ha informazione?)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "rob-1",
+  "titolo": "ROB-1 — robustezza dei risultati confermati (t sui giorni, deflated Sharpe, PBO)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MYM"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "size-2",
+  "titolo": "SIZE-2 — dimensionamento a volatilità prevista sulle regole di mean reversion",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "stop-1",
+  "titolo": "STOP-1 — stop di protezione sui trade della famiglia MR",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "tps-1",
+  "titolo": "TPS-1 — ingresso a scaglioni di Connors sulla regola IBS",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "trend-1",
+  "titolo": "TREND-1 e VRP-1 — trend multi-mercato mensile; premio di volatilità",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "VIX"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "truth-1",
+  "titolo": "TRUTH-1 e TICK-1 — prova di verità della pipeline e tenuta dei risultati a 1 minuto sui tick",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MGC",
+   "M6E",
+   "MNQ"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "turb-1",
+  "titolo": "TURB-1 — indice di turbolenza (FinRL) come protezione",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "vixts-1",
+  "titolo": "VIXTS-1 — struttura a termine del VIX (VIX/VIX3M) come regime e protezione",
+  "data": "2026-10-19",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": true
+ },
+ {
+  "id": "volrev-1",
+  "titolo": "VOLREV-1, H-NEXT-8, STBOND-1, FXHEDGE-1 — volume/VIX/Treasury/euro come condizioni dell'IBS",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "M2K",
+   "MYM",
+   "SPY",
+   "QQQ",
+   "ZN",
+   "M6E"
+  ],
+  "verdetto": "ritirato",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "wfo-1",
+  "titolo": "WFO-1 e WFO-1-LONG — ottimizzatore walk-forward che si ri-ottimizza da solo (metodo NinjaTrader riscritto)",
+  "data": "2026-10-19",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": true
+ },
+ {
+  "id": "adapt-1",
+  "titolo": "ADAPT-1 — bot adattivo: regime -> strategia, oppure nessuna",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "dir-1",
+  "titolo": "DIR-1 — long contro short: perché gli short perdono e quando spegnerli",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MNQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "h-next-4b",
+  "titolo": "H-NEXT-4b — IBS su SPY e QQQ giornalieri (dati mai usati 2006-2019)",
+  "data": "2026-10-18",
+  "strumenti": [
+   "SPY",
+   "QQQ"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "ict-1",
+  "titolo": "ICT-1 e ICT-1-OOS — modelli ICT (2022 model, OTE, Power of 3, NDOG/NWOG)",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL",
+   "NQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "ins-1",
+  "titolo": "INS-1 — compravendite degli insider (Form 4 SEC) come sentiment per ES e NQ",
+  "data": "2026-10-18",
+  "strumenti": [
+   "SPY",
+   "QQQ",
+   "ES"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "ok",
+  "grafico": false
+ },
+ {
+  "id": "sent-1",
+  "titolo": "SENT-1 — il sentiment (Technical Rating tipo TradingView) all'entrata come filtro delle strategie",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "sent-2",
+  "titolo": "SENT-2 — un motore di sentiment veritiero (TV, regressione logistica, LightGBM)",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "ES",
+   "MNQ",
+   "NQ",
+   "MCL",
+   "CL"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "sent-3",
+  "titolo": "SENT-3 — loop di miglioramento del motore di sentiment (5 giri, voto 1-100)",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "sent-4",
+  "titolo": "SENT-4 — sentiment per fasce orarie",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "sig-1",
+  "titolo": "SIG-1 — mappa dei segnali per timeframe (modo A \"media\", modo B \"setup rari\")",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "sig-2",
+  "titolo": "SIG-2 — setup rari da blog e forum (IBS, Gao-Han-Li-Zhou)",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "ES",
+   "MNQ",
+   "NQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "tail-1",
+  "titolo": "TAIL-1 / TAIL-1-OOS / TAIL-1-NT — i giorni negativissimi e le protezioni di rischio P1-P5",
+  "data": "2026-10-18",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL",
+   "NQ"
+  ],
+  "verdetto": "confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "cond-1",
+  "titolo": "COND-1 / COND-1-OOS / COND-2 / LEVELS-1 — dove vincono le strategie, esclusione dei momenti in perdita, livelli",
+  "data": "2026-10-17",
+  "strumenti": [
+   "MES",
+   "MNQ",
+   "MCL",
+   "NQ",
+   "ES",
+   "CL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "lab-2",
+  "titolo": "LAB-2 — claim di profitto da forum e paper, su più timeframe (con LAB-2-OOS e correzione IC)",
+  "data": "2026-10-17",
+  "strumenti": [
+   "MNQ",
+   "MCL",
+   "MES"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "model-eval-1",
+  "titolo": "MODEL-EVAL-1 — modelli locali: utilità del Qwen3.8 2.4T e confronto",
+  "data": "2026-10-17",
+  "strumenti": [],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "quant-1",
+  "titolo": "QUANT-1 — combinazione di segnali deboli (ridge/LightGBM), walk-forward e soglia di costo",
+  "data": "2026-10-17",
+  "strumenti": [
+   "MNQ",
+   "MCL",
+   "MES",
+   "NQ"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "lab-1",
+  "titolo": "LAB-1 — laboratorio strategie su tutti i contratti e tutto lo storico locale",
+  "data": "2026-10-16",
+  "strumenti": [
+   "ES",
+   "NQ",
+   "CL"
+  ],
+  "verdetto": "non confermata",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "setup-2",
+  "titolo": "SETUP-2 — catalogo setup futures e walk-forward adattivo con RizzoFlow",
+  "data": "2026-10-16",
+  "strumenti": [
+   "MES",
+   "ES",
+   "NQ",
+   "RTY"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "tools-1",
+  "titolo": "TOOLS-1 / SHORT-1 / SETUP-1 — walk-forward del motore RizzoFlow su ES (ottobre 2026)",
+  "data": "2026-10-15",
+  "strumenti": [
+   "ES"
+  ],
+  "verdetto": "corretto",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "bt-sim-1",
+  "titolo": "BT-SIM-1 — backtest figurativo a 10.000 EUR sui soli segnali dello screener",
+  "data": "2026-09-28",
+  "strumenti": [
+   "ES"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ },
+ {
+  "id": "jev-swap-1",
+  "titolo": "JEV-SWAP-1 — RizzoFlow al posto del cancello Jev (installato e misurato, non sostituito)",
+  "data": "2026-09-28",
+  "strumenti": [
+   "ES"
+  ],
+  "verdetto": "descrittivo",
+  "pubblicabilita": "avvertenza",
+  "grafico": false
+ }
+]

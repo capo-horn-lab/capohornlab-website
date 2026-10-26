@@ -1,0 +1,16 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["CRISIS-1", "A_ETF_2009_2018", 192, 0.7984235371250834, null, "p 0.40", 5.948159632012243, false],
+  ["CRISIS-1", "B_future_2019_2026", 128, -6.981518079950912, null, "p 0.83", 12.310275541453743, false],
+  ["EIA-1", "corr -0.001, R2 -1.2%", 195, -8.36, -2.93, "bp/trade", -0.8605395328675731, false],
+  ["CARRY-1", "insieme", 222, -25.43, -0.37, "bp/periodo", 109.41328651712845, false],
+  ["CARRY-1", "MCL", 63, 61.89634838128874, 0.47, "bp/periodo · backwardation 76%", null, false],
+  ["CARRY-1", "MGC", 37, -231.6785539927726, -1.93, "bp/periodo · backwardation 0%", null, false],
+  ["CARRY-1", "ZN", 29, -36.3815683237753, -0.8, "bp/periodo · backwardation 45%", null, false],
+  ["CARRY-1", "M6E", 29, 30.099816096874292, 0.57, "bp/periodo · backwardation 0%", null, false],
+  ["CARRY-1", "MBT", 64, -12.344019318674306, -0.07, "bp/periodo · backwardation 16%", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

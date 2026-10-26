@@ -1,0 +1,10 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["a_calmo (IBS sullo stesso periodo 31.6)", 503, 34.47, 4.95, "bp/trade", null, true],
+  ["b_tempesta (IBS sullo stesso periodo 31.6)", 211, 24.69, 1.45, "bp/trade", null, false],
+  ["c_kalman_z (IBS sullo stesso periodo 31.6)", 131, -6.23, -0.27, "bp/trade", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

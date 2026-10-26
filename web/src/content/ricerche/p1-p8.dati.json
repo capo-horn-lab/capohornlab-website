@@ -1,0 +1,33 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["CANDLE-1", "SPY", 4210, -0.06328782011312262, 0.904372720150445, "R2 %", -0.1176833575958991, false],
+  ["CANDLE-1", "QQQ", 4210, -0.00020448388838856246, 0.004813255106937552, "R2 %", -0.10501835958465215, false],
+  ["CANDLE-1", "micro", 5072, 0.11041818191099839, -0.5615986090991409, "R2 %", 0.1418545136597027, false],
+  ["IBSWIN-1", "W1 (R2 -0.34%)", 942, 39.49248254379995, 3.96, "bp/trade", 22.40690111298221, true],
+  ["IBSWIN-1", "W2 (R2 -0.31%)", 966, 35.414136790642225, 3.71, "bp/trade", 23.338149114130616, false],
+  ["IBSWIN-1", "W3 (R2 -0.12%)", 977, 24.075359291459062, 2.38, "bp/trade", 21.9731830949524, false],
+  ["IBSWIN-1", "W4 (R2 -0.38%)", 846, 35.0858454301435, 3.07, "bp/trade", 24.254281921368868, false],
+  ["ONIGHT-1", "variante a (R2 0.098%, CW p 0.17)", 4585, 1.23, 0.65, "bp/trade", 0.11105391918772886, false],
+  ["ONIGHT-1", "variante b (R2 0.046%, CW p 0.23)", 4576, 0.78, 0.42, "bp/trade", 0.09647564434512773, false],
+  ["CLOSEREV-1", "uscita A", 1837, -0.33, -0.48, "bp/trade", -1.1478234238622222, false],
+  ["CLOSEREV-1", "uscita B", 1833, 7.48, 1.77, "bp/trade", 1.9608959281716871, false],
+  ["ONCANDLE-1", "R2 -0.20%", 2097, -7.23, -1.92, "bp/trade", 2.6557822369092614, false],
+  ["PATTERN-1", "PT1 engulfing SPY+QQQ", 160, -3.52, -0.26, "bp/trade", 22.041424481904766, false],
+  ["PATTERN-1", "PT1 engulfing micro", 127, -37.81, -2.25, "bp/trade", 24.361460085032085, false],
+  ["PATTERN-1", "PT2 hammer SPY+QQQ", 41, -50.57, -1.25, "bp/trade", 33.708290724289306, false],
+  ["PATTERN-1", "PT2 hammer micro", 29, -110.71, -1.57, "bp/trade", 55.89503083627737, false],
+  ["PATTERN-1", "PT3 doji SPY+QQQ", 66, 13.03, 0.64, "bp/trade", 24.042166738790065, false],
+  ["PATTERN-1", "PT3 doji micro", 57, -9.82, -0.46, "bp/trade", 30.46440922461792, false],
+  ["BRIDGE-1", "IBS L1", 582, 8.551246350051407, -0.7566360637204109, "bp/trade (originale 31.4) · diff Sharpe", null, false],
+  ["BRIDGE-1", "IBS L2", 582, 18.533995947062355, -0.2868371255797202, "bp/trade (originale 31.4) · diff Sharpe", null, false],
+  ["BRIDGE-1", "R1b_RSI2_10 L1", 183, 17.27573513391667, 0.19345912755698566, "bp/trade (originale 38.9) · diff Sharpe", null, false],
+  ["BRIDGE-1", "R1b_RSI2_10 L2", 183, 28.090342208813823, 0.30656299414156934, "bp/trade (originale 38.9) · diff Sharpe", null, false],
+  ["BRIDGE-1", "TT L1", 83, 18.816694670102972, -0.3460606942080614, "bp/trade (originale 16.1) · diff Sharpe", null, false],
+  ["BRIDGE-1", "TT L2", 83, 25.2002891627873, -0.32889040533302066, "bp/trade (originale 16.1) · diff Sharpe", null, false],
+  ["BRIDGE-1", "3WEAK L1", 132, 26.06275680101767, 2.2289081555943993, "bp/trade (originale 39.5) · diff Sharpe", null, false],
+  ["BRIDGE-1", "3WEAK L2", 132, 38.10910679071471, 1.678561210673865, "bp/trade (originale 39.5) · diff Sharpe", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

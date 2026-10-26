@@ -1,0 +1,16 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["T1 nullo sintetico: 72 walk, candidati 0, quota t >= 2 0.0%, sopra il p95 delle t dei placebo 15.3%", 72, -4.387844918164453, null, "bp fuori campione (placebo medio -2.46)", null, false],
+  ["T2 MES libreria piantato", 180, 249.46979909676693, 18.20844472301442, "bp/trade", 38.65891495352656, true],
+  ["T2 MES tf 5m piantato", 1862, 20.88197381298588, 17.409371517310817, "bp/trade", 3.3767524998513077, true],
+  ["T2 MES tf 60m piantato", 180, 249.46979909676693, 18.20844472301442, "bp/trade", 48.99560835993672, true],
+  ["T2 MES famiglia EMA piantato", 224, 241.52374251405428, 21.54655491873821, "bp/trade", 25.993927270211238, true],
+  ["T2 MES famiglia RSI piantato", 315, 237.95819267857647, 23.353233445621097, "bp/trade", 27.853181152464433, true],
+  ["T2 MES famiglia BB piantato", 241, 234.9265709176144, 20.62395319438662, "bp/trade", 43.63996989069251, true],
+  ["T2 MES famiglia DON piantato", 419, 236.69901267740573, 27.060907560098467, "bp/trade", 61.50876545094695, true],
+  ["T2 MES famiglia MACD piantato", 419, 234.27157915340842, 28.94058079765273, "bp/trade", 45.492976498881525, true]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

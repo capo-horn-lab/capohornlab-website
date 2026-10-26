@@ -1,0 +1,15 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["IBS · rv21", 566, 2.6249784482831386, -0.014260665673613594, "Sharpe", null, false],
+  ["IBS · har", 566, 2.504151464801904, -0.021017531239777298, "Sharpe", null, false],
+  ["R1b_RSI2_10 · rv21", 173, 4.119956852615644, -0.15306731878650806, "Sharpe", null, false],
+  ["R1b_RSI2_10 · har", 173, 3.9583590096805965, -0.3399511643004393, "Sharpe", null, false],
+  ["TT · rv21", 83, 2.4384676228780005, 0.23079384354030777, "Sharpe", null, false],
+  ["TT · har", 83, 1.9134278533436662, -0.12903594231473334, "Sharpe", null, false],
+  ["3WEAK · rv21", 132, 4.822423063983869, -0.011309510219959431, "Sharpe", null, false],
+  ["3WEAK · har", 132, 4.664989296793222, -0.12151496460753561, "Sharpe", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

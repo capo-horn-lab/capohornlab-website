@@ -1,0 +1,20 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["a mercato (metro di confronto)", 328, 25.006300860824222, 1.8647959471574913, "bp/segnale in verifica", null, false],
+  ["K1V1: riempiti 61%, 35.9 bp per riempito, p 0.70", null, -3.092669239078383, 2.006642922193472, "differenza bp/segnale contro il mercato", null, false],
+  ["K1V2: riempiti 80%, 29.7 bp per riempito, p 0.53", null, -1.1759774935999188, 2.034082599982528, "differenza bp/segnale contro il mercato", null, false],
+  ["K2V1: riempiti 39%, 54.4 bp per riempito, p 0.68", null, -3.9280829983751224, 2.4862584656885267, "differenza bp/segnale contro il mercato", null, false],
+  ["K2V2: riempiti 68%, 34.8 bp per riempito, p 0.54", null, -1.2074789666080716, 2.3294367727579504, "differenza bp/segnale contro il mercato", null, false],
+  ["K3V1: riempiti 82%, 30.1 bp per riempito, p 0.51", null, -0.43015333593656946, 2.0215086978055017, "differenza bp/segnale contro il mercato", null, false],
+  ["K3V2: riempiti 91%, 27.5 bp per riempito, p 0.49", null, -0.12698286340313852, 1.9918007525331327, "differenza bp/segnale contro il mercato", null, false],
+  ["K4V1: riempiti 17%, 49.0 bp per riempito, p 0.92", null, -16.49860245130668, 1.8519320609795782, "differenza bp/segnale contro il mercato", null, false],
+  ["K4V2: riempiti 28%, 36.6 bp per riempito, p 0.95", null, -14.616437845048026, 1.741969493805453, "differenza bp/segnale contro il mercato", null, false],
+  ["K5V1: riempiti 46%, 41.2 bp per riempito, p 0.72", null, -6.028673041658274, 2.2647887771446373, "differenza bp/segnale contro il mercato", null, false],
+  ["K5V2: riempiti 73%, 28.7 bp per riempito, p 0.62", null, -3.9765849687105552, 2.083211386109578, "differenza bp/segnale contro il mercato", null, false],
+  ["K6V1: riempiti 72%, 26.4 bp per riempito, p 0.88", null, -6.010857135037752, 1.6700144243690653, "differenza bp/segnale contro il mercato", null, false],
+  ["K6V2: riempiti 84%, 23.4 bp per riempito, p 0.80", null, -5.207423037195849, 1.641220061617723, "differenza bp/segnale contro il mercato", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

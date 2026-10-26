@@ -1,0 +1,10 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["M6E R0 tutti: lungo M6E 14:00 ET vigilia -> 14:00 ET FOMC (scoperta 11.63 USD, t 1.69; verifica -8.23 bp; q 0.10)", 24, -12.11, -1.25, "USD/contratto per evento in verifica", 21.96, false],
+  ["M6E R1 VIX alto: lungo M6E 14:00 ET vigilia -> 14:00 ET FOMC (scoperta 18.26 USD, t 1.56; verifica -2.44 bp; q 0.10)", 9, -4.31, -0.36, "USD/contratto per evento in verifica", 33.61, false],
+  ["M6E R2 VIX basso: lungo M6E 14:00 ET vigilia -> 14:00 ET FOMC (scoperta 4.99 USD, t 0.69; verifica -11.7 bp; q 0.25)", 15, -16.78, -1.21, "USD/contratto per evento in verifica", 22.65, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

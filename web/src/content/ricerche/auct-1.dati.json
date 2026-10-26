@@ -1,0 +1,11 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["IEF prima (corto)", 126, 14.72, 1.99, "bp/trade", 9.94550500465731, false],
+  ["IEF dopo (lungo)", 126, -3.52, -0.37, "bp/trade", 12.967854948392034, false],
+  ["TLT prima (corto)", 93, 42.28, 1.99, "bp/trade", 41.13695803373294, false],
+  ["TLT dopo (lungo)", 93, -23.81, -1.15, "bp/trade", 26.758875015488364, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

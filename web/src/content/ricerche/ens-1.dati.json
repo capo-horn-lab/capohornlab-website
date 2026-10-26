@@ -1,0 +1,12 @@
+{
+ "tipo": "tabella",
+ "colonne": ["studio", "r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["ENS-1", "SPY combinazione", 4222, 0.4157040062566786, 1.9303159431805745, "R2 %", null, true],
+  ["ENS-1", "SPY ridge", 4222, -0.39100081278446996, 1.4677551887297393, "R2 %", null, false],
+  ["ENS-1", "QQQ combinazione", 4222, 0.3279843298398477, 2.456794278038612, "R2 %", null, true],
+  ["ENS-1", "QQQ ridge", 4222, -0.29917029826957986, 1.9784092786951697, "R2 %", null, false],
+  ["LASTHALF-OOS", "insieme 4 micro", null, null, null, "", null, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

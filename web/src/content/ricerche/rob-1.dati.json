@@ -1,0 +1,24 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["R1a_RSI2_5 · future (bp) · DSR 1.000 prove 0.61", 139, 0.8718219597213559, 2.51, "DSR", null, false],
+  ["R1b_RSI2_10 · future (bp) · DSR 1.000 prove 0.50", 255, 0.8869450901699836, 2.87, "DSR", null, false],
+  ["R3 · future (bp) · DSR 1.000 prove 0.50", 168, 0.8269998756803847, 2.0, "DSR", null, false],
+  ["3DHL · SPY+QQQ (bp) · DSR 1.000 prove 0.33", 232, 0.7638529971573357, 2.4, "DSR", null, false],
+  ["PCTB · SPY+QQQ (bp) · DSR 1.000 prove 0.59", 153, 0.8977208046627023, 2.68, "DSR", null, false],
+  ["WR2 · future (bp) · DSR 1.000 prove 0.65", 576, 0.9887889393685975, 3.74, "DSR", null, true],
+  ["WR2 · SPY+QQQ (bp) · DSR 1.000 prove 0.53", 790, 0.9885352117072466, 5.09, "DSR", null, true],
+  ["TT · future (bp) · DSR 1.000 prove 0.90", 161, 0.9964294179518877, 2.31, "DSR", null, true],
+  ["TT · SPY+QQQ (bp) · DSR 1.000 prove 0.92", 252, 0.9986791714364985, 3.59, "DSR", null, true],
+  ["3DOWN · future (bp) · DSR 1.000 prove 0.00", 678, 0.12455863735601602, 1.44, "DSR", null, false],
+  ["3DOWN · SPY+QQQ (bp) · DSR 1.000 prove 0.00", 874, 0.2972170660375042, 2.68, "DSR", null, false],
+  ["3WEAK · future (bp) · DSR 1.000 prove 0.98", 189, 0.9995783420615173, 3.2, "DSR", null, true],
+  ["3WEAK · SPY+QQQ (bp) · DSR 1.000 prove 0.12", 229, 0.547083891639135, 1.71, "DSR", null, false],
+  ["BB20 · SPY+QQQ (bp) · DSR 1.000 prove 0.14", 256, 0.6156209122788371, 2.03, "DSR", null, false],
+  ["COMITATO · future (bp) · DSR 1.000 prove 0.10", 633, 0.7774430426706059, 2.83, "DSR", null, false],
+  ["COMITATO · SPY+QQQ (bp) · DSR 1.000 prove 0.34", 889, 0.9731186963627989, 4.99, "DSR", null, true],
+  ["IBS (future, 4 indici) · future (bp) · DSR 1.000 prove 0.23", 942, 0.9673124558838865, 4.17, "DSR", null, true]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}

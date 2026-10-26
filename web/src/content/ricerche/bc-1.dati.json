@@ -1,0 +1,19 @@
+{
+ "tipo": "tabella",
+ "colonne": ["r", "n", "m", "t", "u", "p95", "ok"],
+ "righe": [
+  ["1 B1 VWAP trend", 62351, -1.02, -7.49, "bp/trade", -1.3623059248441776, false],
+  ["2 B2 r_ROD", 7289, -1.5, -1.99, "bp/trade", -1.2461840831010729, false],
+  ["3 B2 r_ROD + r_ONFH", 5453, -2.27, -2.56, "bp/trade", -1.120116569137097, false],
+  ["4 C6 VIX spike 21", 79, 115.89, 1.87, "bp/trade", 175.13589643371228, false],
+  ["5 C6 VIX spike 63", 47, 294.81, 2.32, "bp/trade", 448.6267590264151, false],
+  ["6 C5 VIX stretch", 292, 44.82, 2.48, "bp/trade", 45.03522670836288, false],
+  ["7 B6 overnight reversal 4 indici", 1913, -3.47, -2.25, "bp/trade", -1.5700984259542068, false],
+  ["8 B9 settimana OpEx", 500, 14.96, 1.02, "bp/trade", 44.44363567820093, false],
+  ["9 B4 USA -> Europa", 3544, -3.2, -4.05, "bp/trade", -2.7436709024570485, false],
+  ["10 C20 petrolio", 158, 139.9, 2.46, "bp/trade", 182.34783485566638, false],
+  ["11 C19 rame/oro", 120, 129.27, 2.05, "bp/trade", 183.37853208178055, false],
+  ["12 B19 fade VWAP", 8607, -3.42, -5.14, "bp/trade", -0.5845636881173842, false]
+ ],
+ "fonte": "runtime/research/sa-report/summary.json"
+}
