@@ -5,7 +5,7 @@ data: "2026-10-22"
 strumenti:
   - "MNQ"
 finestra: "MNQ (e gli altri micro), ultime 500 sessioni, lenti misurate allo stesso minuto; richiesta del proprietario: \"non voglio dimezzare i casi, voglio aumentarli ... analisi multiple e vedere se concordano\"."
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(retrospettiva su dati già visti; nessuna prova di vantaggio)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10363-L10371"
@@ -38,7 +38,7 @@ MNQ (e gli altri micro), ultime 500 sessioni, lenti misurate allo stesso minuto;
 | Retrospettiva "già vista" (MNQ 250 sessioni): Brier L5 posizione 0,231, L1 VWAP notte 0,234 contro base 0,2465 | docs/EXECUTION_LEDGER.md#L10363-L10371 |
 | per "chiusura sopra" base 0,2512 e "nessuna lente la batte (0,2506-0,2544)". | docs/EXECUTION_LEDGER.md#L10363-L10371 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Esattamente l'attesa dichiarata nella rubrica: concordanza sul quanto, nulla sul dove"
 - il vantaggio delle lenti di prezzo sta in nuovo minimo/massimo: "effetto meccanico della posizione".

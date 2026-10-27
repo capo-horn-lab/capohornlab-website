@@ -5,7 +5,7 @@ data: "2026-09-28"
 strumenti:
   - "ES"
 finestra: "replay di 39 intenti costruiti da barre ES 2024 reali con evidenza dello screener"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "modello e codici interni"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L2059-L2073"
@@ -33,7 +33,7 @@ Decisione singola e replay su intenti; revisione Codex indipendente. Rubrica pri
 
 1 righe della scheda non riportate: la prova citata non le contiene.
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Non promuovere rizzo-flow a veto finche non rifiuta da solo su un corpus congelato di casi da respingere"
 - è un replay del cancello, "non un backtest economico".

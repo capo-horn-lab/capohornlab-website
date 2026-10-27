@@ -8,7 +8,7 @@ strumenti:
   - "SPX"
   - "SPY"
 finestra: "catene Cboe del 23/10 (NDX 34 scadenze, QQQ, SPX, SPY), poi istantanea IBKR su NDX (49 opzioni)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "il PNG del pannello mostra valori di superficie derivati da dati licenziati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10656-L10662"
@@ -41,7 +41,7 @@ OTM con bid>0, spread/medio≤0,5; forward dalla parità put-call; SVI per scade
 
 1 righe della scheda non riportate: la prova citata non le contiene.
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - I termini Cboe vietano lo scarico automatico (cboe.com/terms sez. 2): "il motore NON scarica nulla, legge... salvato a mano" (decisione sulla fonte al proprietario).
 

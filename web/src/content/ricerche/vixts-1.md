@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "SPY/QQQ 2009-09..2026-10 (4.295 giorni, 324 in backwardation)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7990-L7994"
@@ -34,7 +34,7 @@ Test 1 direzione, Test 2 ampiezza (descrittivo), Test 3 protezione P7 sui 221 tr
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Il segno è semmai positivo (rimbalzo dopo il panico), non "stare fuori".
 

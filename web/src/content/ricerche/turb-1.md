@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "221 strategie (MES, MNQ, MCL) + dati 2026"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(sopravvivenza, campione 2026 minimo)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7596-L7596"
@@ -32,7 +32,7 @@ Come TAIL-1: differenza appaiata giornaliera in verifica, BH q≤0,10. Rubrica p
 | Dati 2026: 1 solo giorno turbolento per MES e MNQ | docs/EXECUTION_LEDGER.md#L7596-L7596 |
 | 79 casi cambiati, 47 positivi (59%), media +1,3 USD/sessione: "troppo pochi giorni per dire". | docs/EXECUTION_LEDGER.md#L7596-L7596 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Candidata regola di rischio, più debole di P4/P5 sui dati nuovi."
 - Limite: costituenti di oggi.

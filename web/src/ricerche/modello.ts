@@ -1,6 +1,6 @@
 // Lettura delle pagine generate da scripts/estrai_ricerche.py (frontmatter a valori JSON, sezioni "## ...", tabella pipe).
 
-/** Parole del registro trovate nelle righe citate, separate da " · ", oppure "senza verdetto nel registro". */
+/** Parole del registro trovate nelle righe citate, separate da " · ", oppure SENZA_VERDETTO (nessuna frase di verdetto ancorata). */
 export type Verdetto = string
 
 /**
@@ -121,7 +121,9 @@ export function dividiFonti(cella: string): string[] {
 
 export type VarianteBadge = 'default' | 'secondary' | 'destructive' | 'outline'
 
-export const SENZA_VERDETTO = 'senza verdetto nel registro'
+// il registro puo' scrivere il verdetto in una forma non ancorata (L7277 "Esito H-NEXT-4b (...). CONFERMATA"), che non si
+// estrae: il ripiego dice questo, non che il registro sia senza verdetto
+export const SENZA_VERDETTO = 'verdetto non estratto: vedi Esito'
 export const SEPARATORE = ' · '
 
 /** Le parole del registro di un verdetto ("pass · non confermata" -> ["pass", "non confermata"]); [] se senza verdetto. */
@@ -165,6 +167,6 @@ export function colonnaValori(dati: Dati): number {
   return -1
 }
 
-/** Id HTML valido da un titolo di sezione ("Cosa NON dice" -> "cosa-non-dice"): niente spazi negli IDREF. */
+/** Id HTML valido da un titolo di sezione ("Lettura e limiti (dal registro)" -> "lettura-e-limiti-dal-registro"): niente spazi negli IDREF. */
 export const idSezione = (titolo: string) =>
   titolo.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')

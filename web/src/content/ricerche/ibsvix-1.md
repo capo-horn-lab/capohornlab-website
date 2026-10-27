@@ -38,7 +38,7 @@ BH sulle 36 p di scoperta (Welch cella contro resto), placebo 200 (seme 16); una
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Il regime del giorno prima prevede bene l'ampiezza della sessione (2-3 volte tra gli estremi), non il P&L della regola... con potenza sufficiente"
 - "NULLA cambia da solo" per la carta.

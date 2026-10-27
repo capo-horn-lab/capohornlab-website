@@ -31,7 +31,7 @@ Skill CRPS contro la base B1, copertura 10-90 e 25-75; regola fissata nel PIANO 
 | TIMESTRAL-2 "FAIL, nessuna integrazione": dopo fine-tuning skill +0,17% [-0,45; +0,81] a 30 min, +0,13% [-0,47; +0,79] a 60, +0,88% [+0,22; +1,55] a 120 | docs/EXECUTION_LEDGER.md#L10664-L10667 |
 | contro il 209M originale -0,04 / -0,09 / -0,06% con intervalli che contengono 0. | docs/EXECUTION_LEDGER.md#L10664-L10667 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Post hoc (non decide): "meglio della base sull'ampiezza delle prossime 1-2 ore fuori dall'apertura (10:00-14:00 NY +2,3/+2,7%), peggio all'apertura (-8/-12%), ventaglio troppo stretto, guadagno solo nel 2025"
 - il verso della mediana "non prevede il verso"

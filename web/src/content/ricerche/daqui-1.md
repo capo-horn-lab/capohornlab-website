@@ -5,7 +5,7 @@ data: "2026-10-22"
 strumenti:
   - "MNQ"
 finestra: "MNQ; k=240 vicini scelto sulla scoperta 2019-2023 tra 60/120/240 (Brier base 0,224286, k60 0,225614, k120 0,224052, k240 0,223408); verifica congelata 2024-2026 (697 giorni, 8.361 punti)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "verifica solo su MNQ; esito descrittivo (l'intervallo contiene lo zero)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10530-L10533"
@@ -27,7 +27,7 @@ Brier dei vicini contro la base, bootstrap per giorno al 95%; prova di verità s
 |---|---|
 | "descrittivo: non migliora la frequenza di base": Brier vicini 0,237796 contro base 0,237992, differenza -0,000196, intervallo [-0,001186, +0,000699] contiene lo 0. | docs/EXECUTION_LEDGER.md#L10530-L10533 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - `escursione_residua` "senza verifica propria (descrittiva)"
 - verifica solo su MNQ

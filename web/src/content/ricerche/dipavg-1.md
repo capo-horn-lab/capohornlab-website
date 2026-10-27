@@ -39,7 +39,7 @@ Rubriche prima: sì (L9221, L9229); BH q 0,10 (DIPAVG-1); regole E1 (metà strad
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - DIPAVG-1: "è il profilo martingala atteso: 9 sequenze su 10 chiudono all'obiettivo, le altre perdono quanto decine di vincite"
 - EARLYEXIT-1: "Rileggere il trade a metà strada non aiuta in modo sistematico".

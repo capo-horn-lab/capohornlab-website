@@ -49,7 +49,7 @@ Nullo con 1.000 spostamenti circolari (CRISIS-1); R² fuori campione + Clark-Wes
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - CRISIS-1: "il 'crisis alpha'... non si vede a livello giornaliero"
 - "Per i mercati dove la mean reversion non vale non abbiamo ancora una strategia con edge"

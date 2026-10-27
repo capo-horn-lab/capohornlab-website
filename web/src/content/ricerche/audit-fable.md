@@ -4,7 +4,7 @@ titolo: "AUDIT-FABLE e REVIEW-FABLE-MAX — revisioni di tutto il codice e di tu
 data: "2026-10-19"
 strumenti: []
 finestra: "4 agenti Fable 5.1 in sola lettura sui motori, indicatori, prove del giorno e risultati confermati"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8945-L8973"
@@ -29,7 +29,7 @@ Revisione indipendente; correzioni numerate (17)-(27) applicate prima dei risult
 | REVIEW-FABLE-MAX: il criterio "sopra il p95 dei placebo" non distingue veri da nulli (39,3% contro 37,5%) | docs/EXECUTION_LEDGER.md#L9035-L9046 |
 | H-NEXT-6 "sottodimensionata" (t attesa 0,84 a 40 trade, serve test sequenziale SPRT). | docs/EXECUTION_LEDGER.md#L9035-L9046 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - PERSIST-1 regge sulla condizione STRESS (21 delle 30 coppie)
 - OVN-1 "dimezzato dal 2021"

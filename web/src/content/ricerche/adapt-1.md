@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES (70 strategie, 1.191 sessioni fuori campione), MNQ (118, 313), MCL (112)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7187-L7200"
@@ -32,7 +32,7 @@ Selettore walk-forward (macchina di COND-2) per cella di regime (tendenza, volat
 | MNQ: 719 trade -3,27 t -1,03, fermo 46,6% | docs/EXECUTION_LEDGER.md#L7187-L7200 |
 | MCL: 119 trade -3,96, fermo 82,4%. | docs/EXECUTION_LEDGER.md#L7187-L7200 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Il vantaggio non continua nel blocco successivo"
 - restare fermi riduce le perdite (MCL) "ma non le trasforma in guadagni".

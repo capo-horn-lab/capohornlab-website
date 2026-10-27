@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "API pubbliche Polymarket (16 riunioni FOMC da dicembre 2024, 292 giorni, 201 con rendimenti SPY/QQQ)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "dati pubblici Polymarket"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7451-L7451"
@@ -30,7 +30,7 @@ Spearman con Newey-West lag 1, segno uguale nelle due metà, BH q≤0,10 su 2 st
 | Stesso giorno rho -0,10 / -0,12 (t -1,3 / -1,6) ("reazione, non previsione") | docs/EXECUTION_LEDGER.md#L7451-L7451 |
 | entropia contro \\|movimento\\| del giorno della riunione rho +0,29 su 13 riunioni (descrittivo). | docs/EXECUTION_LEDGER.md#L7451-L7451 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Entra solo come contesto descrittivo."
 

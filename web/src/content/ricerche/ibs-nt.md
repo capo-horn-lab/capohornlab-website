@@ -56,7 +56,7 @@ Regola invariata (sig-2 ibs_only, motore LAB-2), ≥30 trade, media>0, t≥2, so
 
 Serie per anno dal file di prova runtime/proofs/ibsnt/portfolio.json (chiave anni). Contenuto del file secondo l'inventario: L40 portafoglio IBS 4 micro: netto per anno, giorno peggiore, giorni peggiori, drawdown, posizioni aperte insieme, correlazione giornaliera
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "L'effetto confermato è degli indici USA... non come una regola universale"
 - "Margine sul placebo stretto: una parte del guadagno è il rialzo di fondo (placebo medio +10,6 bp)"

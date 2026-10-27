@@ -9,7 +9,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "SPY e QQQ 2006-2026 (giornalieri), MES, MNQ, MCL"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7699-L7702"
@@ -36,7 +36,7 @@ A) Spearman tra le medie di fase in scoperta e verifica; B) esclusione walk-forw
 | B) 221 strategie: AIUTA (BH) in 76, differenza positiva in 173 | docs/EXECUTION_LEDGER.md#L7699-L7702 |
 | "EDGE 0". | docs/EXECUTION_LEDGER.md#L7699-L7702 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Le fasi non sono sbagliate (prevedono l'ampiezza); il limite è nelle strategie, che non hanno edge da preservare."
 

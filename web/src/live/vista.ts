@@ -79,8 +79,9 @@ export function righeEsiti(v: Vista): { id: string; testo: string }[] {
 
 const minuti = (r: Ramo) => (r.minuti ? ` · mediana ${r.minuti.mediana} min dalla radice` : '')
 
+/** The root in words; da_qui's root has no `fase` (the payload does not carry it): no word, never "undefined". */
 export function radiceRiga(r: Radice): string {
-  return `radice ${r.ora} ${r.fase} a ${prezzo(r.prezzo)}${r.percorso ? ` | ${r.percorso}` : ''}`
+  return `radice ${r.ora}${r.fase ? ` ${r.fase}` : ''} a ${prezzo(r.prezzo)}${r.percorso ? ` | ${r.percorso}` : ''}`
 }
 
 /** A drawn branch in words: label, head price and Rome time of the head (text box and the chart's screen-reader list). */

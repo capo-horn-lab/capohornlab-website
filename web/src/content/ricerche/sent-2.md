@@ -10,7 +10,7 @@ strumenti:
   - "MCL"
   - "CL"
 finestra: "MES (ES 1m), MNQ (NQ 1s), MCL (CL 1s); 5 m, 30 m, 1 h, 4 h, giornaliero (45 combinazioni motore x strumento x timeframe)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6704-L6728"
@@ -38,7 +38,7 @@ Tre motori (TV, LOG, LGB), scoperta 60% / verifica 40%, 4 criteri di "veritiero"
 | IC 0,043 (t 17,4). | docs/EXECUTION_LEDGER.md#L6704-L6728 |
 | Spostamento medio 0,1-0,4 punti base contro costo 1-1,5 punti base. | docs/EXECUTION_LEDGER.md#L6704-L6728 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "vero ma non tradabile da solo"
 - 30 m-giornaliero: nessun motore veritiero.

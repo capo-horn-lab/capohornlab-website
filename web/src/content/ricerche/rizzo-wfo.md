@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "MES"
 finestra: "400 trade MES (periodo di verifica, un trade per strategia e giorno)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "esito negativo su un modello proprietario locale."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7768-L7768"
@@ -31,7 +31,7 @@ Spearman e AUC con bootstrap 95%; "informativo" solo se rho>0 con t≥2 e AUC>0,
 | netto medio sopra la mediana di P(TAKE) -10,51 USD, sotto -8,10. | docs/EXECUTION_LEDGER.md#L7768-L7768 |
 | Passo 2 non eseguito. | docs/EXECUTION_LEDGER.md#L7768-L7768 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "approva quasi tutto" (come ER-279)
 - RizzoFlow resta come opzione dell'ottimizzatore, spenta di default.

@@ -5,7 +5,7 @@ data: "2026-10-15"
 strumenti:
   - "ES"
 finestra: "ES 12-26, 54 sessioni (2 agosto-15 ottobre 2026), 1.392 punti, 9 finestre (poi 7 finestre per SETUP-1)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["SETUP-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: "costi PROVVISORI dichiarati."
@@ -42,7 +42,7 @@ Walk-forward con selezione su sessioni passate e prova fuori campione; base rate
 
 1 righe della scheda non riportate: la prova citata non le contiene.
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "entrambe le direzioni a caso perdono circa i costi"
 - "Nessun vantaggio dimostrato; il segno del totale cambia con pochi trade"

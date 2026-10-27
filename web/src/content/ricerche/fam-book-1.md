@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "IBS-NT su MES, MNQ, M2K, MYM 2019-2026 (942 trade, gran parte già usati: prova descrittiva di gestione del rischio)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(importi in USD su 1 micro per indice: non indicano capitale consigliato)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9064-L9064"
@@ -36,7 +36,7 @@ Varianti BASE, ERC, CAP2, ERC+CAP2; bootstrap; adottata se drawdown e giorno peg
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "i giorni con molti segnali insieme rendono in media, quindi tagliarli costa più di quanto protegge"
 - ERC candidata per prova in carta (H-NEXT-6-ERC).

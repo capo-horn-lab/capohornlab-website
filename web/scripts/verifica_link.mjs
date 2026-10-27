@@ -6,7 +6,8 @@
 // gli id di primo livello, array o { ricerche: [...] }, mai i campi annidati come strumenti) e da ogni .html di
 // --dist. Da HTML estrae href/src/action; dal JS compilato i letterali tra apici che sono URL http(s), percorsi
 // con estensione di asset o .html, rotte note, chunk relativi (./x.js) e dipendenze di Vite (cartella-di-dist/x.js);
-// i nomi di proprieta' di oggetti (chiavi di import.meta.glob) non sono richieste;
+// i nomi di proprieta' di oggetti (chiavi di import.meta.glob) e i pezzi di concatenazione (`'a.html?x=' + y`, anche dentro un
+// attributo scritto in JS, `src="' + img + '"`) non sono richieste, ne' le assegnazioni JS in linea (`x.src = src`);
 // dal CSS url(...); dai .md di src/content i link ](url). Poi controlla ogni URL (2xx/3xx = ok,
 // redirect seguiti; interni con GET, esterni con HEAD e GET di riserva); mailto/tel/javascript/data saltati.
 // API: GET {API_BASE}/live/frequenze e /live/scenari, con API_BASE da $VITE_API_BASE (default Render) e ogni
@@ -117,10 +118,14 @@ function nuovaApi(b) {
 }
 // Letterali di stringa che combaciano con `re` (gruppo 1), esclusi i nomi di proprieta' di un oggetto (`{"../content/x.json":()=>...}`,
 // chiavi di import.meta.glob): non sono richieste. Un ramo di ternario (`?"./a.js":`) segue `?`, non `{` o `,`, e resta un letterale.
+// Un letterale con un `+` subito fuori (`"/grafici/" + slug + "/g.png"`, `'checkout.html?id=' + id`) e' un pezzo di una
+// concatenazione, non un URL: non e' una richiesta (falsi positivi sul JS delle pagine vecchie, valutazione 1 del sito).
+const pezzo = (testo, inizio, fine) => /\+\s*$/.test(testo.slice(Math.max(0, inizio - 8), inizio)) || /^\s*\+/.test(testo.slice(fine, fine + 8))
 function* letterali(testo, re) {
   for (const m of testo.matchAll(new RegExp(`["'\`]${re}["'\`]`, 'g'))) {
-    const chiave = /[{,]/.test(testo[m.index - 1] ?? '') && /^\s*:/.test(testo.slice(m.index + m[0].length, m.index + m[0].length + 8))
-    if (!chiave) yield m[1]
+    const fine = m.index + m[0].length
+    const chiave = /[{,]/.test(testo[m.index - 1] ?? '') && /^\s*:/.test(testo.slice(fine, fine + 8))
+    if (!chiave && !pezzo(testo, m.index, fine)) yield m[1]
   }
 }
 // cartelle di primo livello di dist (app, fonts...): solo li' stanno le dipendenze di Vite `app/x.js`; "runtime/proofs/x.png" dentro un md incorporato non lo e'
@@ -129,7 +134,12 @@ function estrai(testo, tipo, url) {
   const da = url.startsWith(base) ? url.slice(base.length) || '/' : url
   const vai = (raw) => aggiungi(raw, url, da)
   if (tipo === 'html') {
-    for (const m of testo.matchAll(/\b(?:href|src|action|poster)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+))/gi)) vai((m[1] ?? m[2] ?? m[3]).trim())
+    // un attributo segue uno spazio: `x.src = src;` e `location.href = type === ...` sono JS in linea, non attributi; un valore
+    // che e' un pezzo di concatenazione (`'<img src="' + imgSrc + '"'`: il `+` dentro le virgolette, o `href = 'a.html?x=' + y`) non e' un URL
+    for (const m of testo.matchAll(/(?<=\s)(?:href|src|action|poster)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+))/gi)) {
+      const v = (m[1] ?? m[2] ?? m[3]).trim()
+      if (!/^['"`]\s*\+|\+\s*['"`]$/.test(v) && !pezzo(testo, m.index, m.index + m[0].length)) vai(v)
+    }
   } else if (tipo === 'css') {
     for (const m of testo.matchAll(/url\(\s*(["']?)([^"')\s]+)\1\s*\)/g)) vai(m[2])
   } else if (tipo === 'js') {

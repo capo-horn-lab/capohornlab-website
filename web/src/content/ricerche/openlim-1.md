@@ -37,7 +37,7 @@ ordini OCO a p0 ± D (D 0,15-0,5 U, U = mediana del range 9:29-10:29 delle ultim
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Il caso singolo del proprietario non è una prova della regola.
 

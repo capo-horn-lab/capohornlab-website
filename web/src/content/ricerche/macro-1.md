@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "M6E"
 finestra: "indici micro, M6E, 2020-2026 (77 giorni NFP, 53 riunioni FOMC, 206 giorni di annunci)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8532-L8538"
@@ -34,7 +34,7 @@ deriva pre-NFP, reversal/fade FOMC, rally con proiezioni, euro nel giorno FOMC, 
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "gli annunci macro non danno un vantaggio direzionale semplice; restano utili come eventi di ampiezza (regime) e come giorni da evitare".
 

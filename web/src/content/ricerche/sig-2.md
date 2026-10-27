@@ -8,7 +8,7 @@ strumenti:
   - "MNQ"
   - "NQ"
 finestra: "MES (ES 1m 2020-2024), MNQ (NQ 1s 2023-01..2024-08)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "regole pubbliche di terzi"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7202-L7211"
@@ -32,7 +32,7 @@ le regole concrete di QuantifiedStrategies/QuantRocket (IBS<0,20, ultima mezz'or
 | MES IBS<0,20 -> lungo fino a IBS>0,90: scoperta 104 trade +113,5 USD, verifica 65 trade +96,2 USD t 2,28, sopra il p95 dei placebo (91,6), "bloccata solo da BH q 0,105" | docs/EXECUTION_LEDGER.md#L7202-L7211 |
 | Gao: MES -5,37 e MNQ -18,17 in verifica. | docs/EXECUTION_LEDGER.md#L7202-L7211 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Ipotesi H-NEXT-4 dichiarata per sessioni future MES dopo il 18/10/2026.
 

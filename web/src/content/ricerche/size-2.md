@@ -36,7 +36,7 @@ Sharpe giornaliero, Calmar, drawdown, CVaR 5%; adottata se differenza di Sharpe 
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "la scalatura per volatilità aiuta il momentum, non la mean reversion: queste regole rendono di più proprio nei giorni volatili"
 - le regole restano a 1 micro.

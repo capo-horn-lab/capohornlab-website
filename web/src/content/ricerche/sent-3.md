@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "riferimenti a Investing.com/Barchart/TipRanks solo come descrizione (non ricostruiti)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6730-L6860"
@@ -40,7 +40,7 @@ Rubrica a voto (V1-V4 verità 55 + F1-F4 funzionamento 45), bootstrap a blocchi 
 | Test: veritiero MES 5 m | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 | MNQ 5 m buy "dice 53,7%, succede il 56,7%". | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Spostamenti previsti 0,1-0,4 punti base sotto il costo di andata e ritorno (0,8-5,6 punti base)
 - "F1 2/15 e F2 0/10 sono strutturali con i dati disponibili".

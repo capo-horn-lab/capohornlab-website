@@ -4,7 +4,7 @@ titolo: "LLM-LOCAL-1/2, RAG-2/3, EVAL-2, PROMPT-1, NOISE-1, LAT-2, NOTA-1 — il
 data: "2026-10-19"
 strumenti: []
 finestra: "modello LiquidAI LFM2.5-24B-A2B (Q6_K) e variante uncensored/Heretic; prova di riferimento di 50"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "valutazione di un modello di terzi su domande interne; non è un benchmark generale."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9326-L9373"
@@ -34,7 +34,7 @@ Stessa prova, stesso giudice a parole chiave (mai un altro modello), 1-2 tentati
 | LAT-2: Q6_K 52,2 token/s, Q4_K_M 60,6 (+16%, sotto il +20%): NON ADOTTATA. | docs/EXECUTION_LEDGER.md#L9576-L9667 |
 | NOTA-1: nota serale 78,8 s, 0 numeri inventati. | docs/EXECUTION_LEDGER.md#L9576-L9667 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il modello non sbagliava le domande di progetto, le mancava il pezzo giusto" (recupero BM25)
 - la prova è satura a 50/50

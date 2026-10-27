@@ -4,7 +4,7 @@ titolo: "MR-1-ADJ — MR-1 con segnali sui prezzi raccordati"
 data: "2026-10-19"
 strumenti: []
 finestra: "stessi test di MR-1 con segnali calcolati sulla serie raccordata ai cambi di contratto (esecuzioni sui prezzi grezzi)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9023-L9023"
@@ -33,7 +33,7 @@ Rubrica identica a MR-1. Rubrica prima: sì (L9019).
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Quando una conferma cambia, vale MR-1-ADJ.
 

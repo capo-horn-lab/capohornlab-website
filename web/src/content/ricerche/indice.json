@@ -7,7 +7,7 @@
    "QQQ",
    "MNQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -32,7 +32,7 @@
    "SPX",
    "SPY"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -47,7 +47,7 @@
    "FESX",
    "FSXE"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -85,7 +85,7 @@
   "strumenti": [
    "MNQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -97,7 +97,7 @@
   "strumenti": [
    "MNQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -112,7 +112,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -122,7 +122,7 @@
   "titolo": "RICERCA-SNIPER-1 e BRAINSTORM-SNIPER-1/2 — ricerca estesa e brainstorming sulle strategie a basso winrate/alto RR (documenti)",
   "data": "2026-10-21",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -137,7 +137,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -220,7 +220,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -235,7 +235,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -292,7 +292,7 @@
   "titolo": "PAPER-PROGRAM (20/10/2026) — 13 studi dai paper e dalla domanda del proprietario: bilancio",
   "data": "2026-10-20",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false,
@@ -394,7 +394,7 @@
    "VX",
    "VIX"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -418,7 +418,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -446,7 +446,7 @@
    "IEF",
    "TLT"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -456,7 +456,7 @@
   "titolo": "AUDIT-FABLE e REVIEW-FABLE-MAX — revisioni di tutto il codice e di tutte le analisi (ritiri di conferme)",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -474,7 +474,7 @@
    "FDXM",
    "VIX"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -484,7 +484,7 @@
   "titolo": "BREADTH-1 — ampiezza di mercato dalle aziende di Nasdaq-100 e S&P 500",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -498,7 +498,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -518,7 +518,7 @@
   "titolo": "COT-1 — posizionamento CFTC (Traders in Financial Futures) come segnale settimanale",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": false,
@@ -557,7 +557,7 @@
    "BTC",
    "MBT"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": true
@@ -572,7 +572,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -585,7 +585,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -644,7 +644,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -656,7 +656,7 @@
   "strumenti": [
    "MES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true,
@@ -703,7 +703,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -789,7 +789,7 @@
    "M2K",
    "M6E"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -799,7 +799,7 @@
   "titolo": "LEAK-1 — controllo di anticipazione (look-ahead) sui dati Cboe",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -809,7 +809,7 @@
   "titolo": "LLM-LOCAL-1/2, RAG-2/3, EVAL-2, PROMPT-1, NOISE-1, LAT-2, NOTA-1 — il modello linguistico locale dell'app (LFM2.5-24B-A2B)",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -821,7 +821,7 @@
   "strumenti": [
    "M6E"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -854,7 +854,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -864,7 +864,7 @@
   "titolo": "MR-1-ADJ — MR-1 con segnali sui prezzi raccordati",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -879,7 +879,7 @@
    "MGC",
    "M6E"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -894,7 +894,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -939,7 +939,7 @@
    "MES",
    "MNQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -961,7 +961,7 @@
    "MCL",
    "ZN"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -983,7 +983,7 @@
    "MCL",
    "ZN"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1029,7 +1029,7 @@
    "MNQ",
    "MES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1043,7 +1043,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1053,7 +1053,7 @@
   "titolo": "PHASE-1 — 12 fasi cicliche di mercato e assegnazione delle strategie",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -1069,7 +1069,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -1084,7 +1084,7 @@
    "MCL",
    "MGC"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1097,7 +1097,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1110,7 +1110,7 @@
    "MNQ",
    "NQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -1126,7 +1126,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": true,
   "serie": false
@@ -1150,7 +1150,7 @@
   "strumenti": [
    "MES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1162,7 +1162,7 @@
   "strumenti": [
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1192,7 +1192,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1219,7 +1219,7 @@
    "QQQ",
    "VIX"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1234,7 +1234,7 @@
    "M6E",
    "MNQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": true,
@@ -1249,7 +1249,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1262,7 +1262,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": true,
   "serie": false
@@ -1296,7 +1296,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true,
@@ -1311,7 +1311,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -1323,7 +1323,7 @@
   "strumenti": [
    "MNQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1336,7 +1336,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false,
@@ -1352,7 +1352,7 @@
    "MCL",
    "NQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1366,7 +1366,7 @@
    "QQQ",
    "ES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "ok",
   "grafico": false,
   "serie": false
@@ -1380,7 +1380,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1397,7 +1397,7 @@
    "MCL",
    "CL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1411,7 +1411,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1425,7 +1425,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1439,7 +1439,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1454,7 +1454,7 @@
    "MNQ",
    "NQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1469,7 +1469,7 @@
    "MCL",
    "NQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1486,7 +1486,7 @@
    "ES",
    "CL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1500,7 +1500,7 @@
    "MCL",
    "MES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false,
@@ -1511,7 +1511,7 @@
   "titolo": "MODEL-EVAL-1 — modelli locali: utilità del Qwen3.8 2.4T e confronto",
   "data": "2026-10-17",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1526,7 +1526,7 @@
    "MES",
    "NQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1540,7 +1540,7 @@
    "NQ",
    "CL"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1555,7 +1555,7 @@
    "NQ",
    "RTY"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1567,7 +1567,7 @@
   "strumenti": [
    "ES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false,
@@ -1580,7 +1580,7 @@
   "strumenti": [
    "ES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false
@@ -1592,7 +1592,7 @@
   "strumenti": [
    "ES"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "verdetto non estratto: vedi Esito",
   "pubblicabilita": "avvertenza",
   "grafico": false,
   "serie": false

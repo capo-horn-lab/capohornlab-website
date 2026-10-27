@@ -6,7 +6,7 @@ strumenti:
   - "BTC"
   - "MBT"
 finestra: "BTC-USD giornaliero Yahoo 2014-09-17..2026-10-18 (4.414 giorni, 20 bp a giro) e MBT 1 minuto NinjaTrader 2021-05..2026-10 (1,34 milioni di barre)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(Yahoo/NinjaTrader solo aggregati; non è consulenza su criptovalute)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8504-L8510"
@@ -38,7 +38,7 @@ medie mobili, nuovi massimi, effetto lunedì, crollo e "famiglia" MR funzionano 
 
 Serie per anno dal file di prova runtime/proofs/crypto2/crypto2.json (chiave anni).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il bitcoin è l'opposto degli indici USA: premia il trend... non la mean reversion"
 - "Nessuna strategia crypto per il bot."

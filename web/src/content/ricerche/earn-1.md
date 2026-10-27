@@ -33,7 +33,7 @@ Test 1 ampiezza (\|rendimento\| e (max-min)/chiusura), scoperta/verifica; Test 2
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "le trimestrali delle mega-cap allargano MNQ di circa il 25-30% come le fasi agitate" (ampiezza, non direzione).
 

@@ -35,7 +35,7 @@ dopo il FOMC il prezzo dei Treasury continua nel verso del movimento del giorno?
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Il segno della deriva cambia tra le fasi... con 24 eventi di verifica l'errore standard è 90-300 USD per contratto, la deriva del paper... non si distingue dal rumore"
 - costo andata/ritorno 31,95 USD (≈2,9 bp).

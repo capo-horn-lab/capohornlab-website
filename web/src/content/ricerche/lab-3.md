@@ -7,7 +7,7 @@ strumenti:
   - "M2K"
   - "M6E"
 finestra: "MGC 2,65 milioni di barre, M2K 2,47 milioni, M6E 2,28 milioni (1 minuto NinjaTrader 2019-2026)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(dati NinjaTrader solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8199-L8203"
@@ -39,7 +39,7 @@ Test 1: 168 test (56 per strumento) con rubrica LAB-2; Test 2: WFO-1 invariato (
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "l'ottimizzatore WFO-1 non trova edge stabile su nessuno dei 6 strumenti provati (MES, MNQ, MCL, MGC, M2K, M6E)"
 - l'oro premia i trend solo nel rialzo 2025-2026

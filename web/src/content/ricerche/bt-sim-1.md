@@ -5,7 +5,7 @@ data: "2026-09-28"
 strumenti:
   - "ES"
 finestra: "strumento ES 1 minuto, anno 2024 intero (354.799 barre)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L2287-L2347"
@@ -32,7 +32,7 @@ Motore `backtest.py`; taratura in-sample (1ª metà 2024), risultato riportato o
 | attrito 4.271 / 957 / 314 USD. | docs/EXECUTION_LEDGER.md#L2287-L2347 |
 | Segnale invertito perde di più in tutti e tre. | docs/EXECUTION_LEDGER.md#L2287-L2347 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Testo del ledger: "esplorazione, non convalida"
 - un anno, uno strumento, un regime

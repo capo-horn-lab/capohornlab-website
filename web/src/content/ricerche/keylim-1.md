@@ -38,7 +38,7 @@ prove:
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "selezione avversa; per la regola con vantaggio l'entrata mirata non aggiunge, toglie poco o molto secondo quanto è lontano il livello."
 

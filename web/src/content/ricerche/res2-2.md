@@ -33,7 +33,7 @@ Regole originali della fonte, rubrica LAB-2. Rubrica prima: sì ("rubrica PRIMA 
 
 Serie per anno dal file di prova runtime/proofs/res2/res2_2.json (chiave anni).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "strategia di regime (oro in tendenza e agitato), non stabile".
 

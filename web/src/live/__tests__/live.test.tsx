@@ -69,6 +69,16 @@ describe('vista sulle fixture reali', () => {
     expect(righeTesto(x)[0]).toMatch(/^radice 20:08 primo movimento a 7711.*albero in testo$/)
     expect(righeTesto(x)[1]).toMatch(/^ {2}estensione \+65 25% \(5\/20 ±19\) a 7748.69 verso le /)
   })
+  it('albero in testo di da qui: la radice di da_qui non ha `fase`, la riga non stampa "undefined"', () => {
+    const dq = sc('MGC').da_qui!
+    expect('fase' in dq.radice).toBe(false) // il payload reale: la radice di da_qui non porta la fase
+    const s = { ...sc('MGC'), da_qui: { ...dq, radice: { ...dq.radice, t: '2026-10-27T14:30+01:00' } } }
+    const x = vista(s, scen.barre.MGC, fr('MGC'), true, scen.orari)
+    expect(x.daQui!.inTesto).toBe(true)
+    const riga = righeTesto(x).find((r) => r.startsWith('da qui: radice'))
+    expect(riga).toBe("da qui: radice 20:08 a 4022.4: oltre 2 ore dopo l'ultima barra, albero in testo")
+    expect(righeTesto(x).join('\n')).not.toContain('undefined')
+  })
   it('ora degli esiti senza orizzonte = chiusura del payload (21:00), mai 22:00', () => {
     const s = structuredClone(sc('MES'))
     delete s.rami[0].orizzonte

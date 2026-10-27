@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL; PARAM-1: 51.840 genomi EMA+RSI x filtri (MES 42.720, MNQ 41.688, MCL 40.514 con trade); PARAM-2: 3.456 combinazioni per strumento (3 metodi di entrata)."
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7904-L7911"
@@ -39,7 +39,7 @@ Walk-forward mobile (250/20) e ancorato, F1/F2/F3, placebo 100-200, BH q≤0,10 
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Entrare con limite o stop di conferma non migliora l'EMA + RSI"
 - con F1 l'ottimizzatore "insegue i vincitori del passato e perde".

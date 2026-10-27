@@ -35,7 +35,7 @@ Penalità scelta ogni mese sugli 8 anni precedenti, 1 giorno di ritardo, 10 bp p
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "nessun filtro di regime (JM, VIX/VIX3M, VIX alto) batte il comprare e tenere: uscire nei periodi di stress perde i rimbalzi".
 

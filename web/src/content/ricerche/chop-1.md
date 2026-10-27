@@ -33,7 +33,7 @@ Corse G1 (ritorno a p0 contro stop) e G2 per D in {0,10-0,50 U}; quota di obiett
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Limite del dato a 1 minuto: su MNQ il 36% (D 0,10) e il 13% (D 0,15) delle corse si chiude con lo stop già nella barra d'ingresso
 - per distanze piccole serve il tick (TICK-1 ha solo un mese per contratto).

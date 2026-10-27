@@ -39,7 +39,7 @@ Terzili fissi, bootstrap a blocchi di 20 giorni (2.000), BH q≤0,10 su 4 (VOLRE
 | STBOND-1: "NON CONFERMATO, direzione coerente per l'IBS": 941 trade, +54,8 bp rifugio contro +19,1 rischio, diff +35,7, t 1,77 (p 0,077, Holm 0,23). | docs/EXECUTION_LEDGER.md#L8780-L8785 |
 | FXHEDGE-1: "NON CONFERMATO": 89 trade, -5,43 bp netti, t -1,76, placebo p95 +1,5. | docs/EXECUTION_LEDGER.md#L8780-L8785 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - ATTENZIONE, RITIRO REGISTRATO (AUDIT-FABLE): "VOLREV-1 (future VOLX, registrato CONFERMATO): il VOLX della serie continua cala meccanicamente nelle sessioni intorno al cambio di contratto... Senza i trade adiacenti ai cambi (762): terzili +32,6 / +62,2 / +57,4, alto - basso +24,8, p 0,131.... CONFERMA RITIRATA, VOLREV-1 = NON CONFERMATO."
 - H-NEXT-8/9 "restano solo come osservazione descrittiva".

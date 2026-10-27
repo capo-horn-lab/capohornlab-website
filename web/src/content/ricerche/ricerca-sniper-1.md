@@ -4,7 +4,7 @@ titolo: "RICERCA-SNIPER-1 e BRAINSTORM-SNIPER-1/2 — ricerca estesa e brainstor
 data: "2026-10-21"
 strumenti: []
 finestra: "due documenti prodotti da agenti: `docs/research/SNIPER_RR_RICERCA_2026-10-21.md` (282 righe, 107 URL) e `docs/research/BRAINSTORM_SNIPER_2026-10-21.md` (55 KB)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "contengono citazioni e URL di terzi"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10215-L10226"
@@ -28,7 +28,7 @@ Ricerca con regola di onestà (ogni affermazione con URL e livello di prova); br
 | ORB 5 minuti di Zarattini-Aziz replica mql5 NQ 2015-2026: "23,2% di vincenti, +0,131 R lordo t 2,9, netto +0,002 R con 2,5 punti a giro". | docs/EXECUTION_LEDGER.md#L10215-L10226 |
 | Brainstorming: "notte +0,046 A per sessione (t +3,6) contro giorno +0,015 (t +0,9): reale ma è beta e fuori famiglia". | docs/EXECUTION_LEDGER.md#L10215-L10226 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Verdetti provvisori mai "confermata" senza prova registrata
 - fonti non raggiunte (Reddit, NexusFi, Apex) dichiarate.

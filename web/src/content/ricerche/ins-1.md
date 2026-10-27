@@ -7,7 +7,7 @@ strumenti:
   - "QQQ"
   - "ES"
 finestra: "SPY/QQQ giornalieri 2006-2026 (5230 giorni, Yahoo), ES 2020-2024, dati SEC DERA 2016q1-2026q2"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6939-L6948"
@@ -34,7 +34,7 @@ NPR a 30/90 giorni (acquirenti-venditori), classificazione routine/opportunistic
 
 1 righe della scheda non riportate: la prova citata non le contiene.
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - L'insider entra nell'app "solo come informazione descrittiva, non come sentiment"
 - dati SEC trimestrali (ultimo 30/06/2026).

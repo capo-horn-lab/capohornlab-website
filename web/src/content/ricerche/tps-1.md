@@ -33,7 +33,7 @@ Base 1 unità vs TPS; adottata (per la carta) se bp/unità ≥ base e IC90 della
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Riserva: il criterio di rischio 'per unità di esposizione massima' favorisce per costruzione l'ingresso a scaglioni... Il risultato solido è che la seconda unità comprata più in basso rende di più (+5,3 bp per unità); lo Sharpe non migliora in modo significativo."
 

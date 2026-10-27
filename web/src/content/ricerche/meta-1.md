@@ -39,7 +39,7 @@ Regressione logistica L2 in walk-forward espanso; due usi (salta se p<0,5; dimen
 | DIMENSIONE: +31,99 bp per micro esposto contro +35,03 | docs/EXECUTION_LEDGER.md#L8300-L8305 |
 | differenza giornaliera +40,4 bp (t 2,37) "solo perché si espone di più". | docs/EXECUTION_LEDGER.md#L8300-L8305 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il modello non separa i trade buoni dai cattivi;... La regola IBS resta com'è."
 

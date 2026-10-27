@@ -403,9 +403,27 @@ def test_studio_ok_ha_numero_e_fonte(mondo):
     assert "+12,34 USD" in md
     assert "| Risultato | Fonte |" in md
     assert "docs/EXECUTION_LEDGER.md#L103-L104" in md
-    assert "## Cosa NON dice" in md
+    assert "## Lettura e limiti (dal registro)" in md
     assert front(out / "alfa-1.md")["pubblicabilita"] == "ok"
     assert st["ok"] >= 1
+
+
+def test_regola_di_lettura_sotto_lettura_e_limiti_mai_sotto_un_titolo_negativo(mondo):
+    # la riga 4 dell'inventario ("Regola di lettura") contiene anche letture positive ("il rialzo di fondo spiega parte del
+    # risultato"): sotto un titolo "Cosa NON dice" la pagina le capovolgerebbe (valutazione 1, ibs-nt e h-next-4b)
+    _, out = genera(mondo)
+    md = leggi_md(out, "alfa-1")
+    sezione = md.split("## Lettura e limiti (dal registro)\n")[1].split("\n## ")[0]
+    assert "- il rialzo di fondo spiega parte del risultato." in sezione
+    assert "- Frequenze, non segnali" in sezione  # testo dell'inventario, non riscritto
+    for f in out.glob("*.md"):
+        assert not re.search(r"^## .*\bNON\b", f.read_text(encoding="utf-8"), re.M), f.name
+
+
+def test_ripiego_del_verdetto_dice_il_vero():
+    # il registro puo' scrivere il verdetto in una forma non ancorata (L7277 "Esito H-NEXT-4b (...). CONFERMATA"): il
+    # ripiego non dice che il registro non ha un verdetto, dice che l'etichetta non e' estratta
+    assert E.SENZA_VERDETTO == "verdetto non estratto: vedi Esito"
 
 
 def test_studio_no_non_genera_file(mondo):
@@ -560,7 +578,7 @@ def test_parole_di_righe_secondarie_non_sono_verdetti(mondo):
     _, out = genera(mondo)
     # ZETA cita L110 e trova i numeri su L113 ("FAIL"); OMEGA cita anche L114 ("NON CONFERMATA"): solo L110 e' il locatore
     for id_ in ("zeta-1", "omega-1"):
-        assert front(out / f"{id_}.md")["verdetto"] == "senza verdetto nel registro"
+        assert front(out / f"{id_}.md")["verdetto"] == "verdetto non estratto: vedi Esito"
     assert len(righe_tabella(leggi_md(out, "omega-1"))) == 2  # le righe secondarie restano pubblicate, con la loro Fonte
     assert "docs/EXECUTION_LEDGER.md#L114-L114" in leggi_md(out, "omega-1")
 
@@ -570,11 +588,11 @@ def test_parole_deduplicate(mondo):
     ctx = E.Contesto(radice)
     assert E.parole_registro(ctx, [(103, 103), (103, 104), (103, 103)]) == "non confermata"
     assert E.parole_registro(ctx, [(109, 109)]) == "non confermato"  # "CONFERMA RITIRATA" non e' ancorata
-    assert E.parole_registro(ctx, [(110, 110)]) == "senza verdetto nel registro"
-    assert E.parole_registro(ctx, []) == "senza verdetto nel registro"
+    assert E.parole_registro(ctx, [(110, 110)]) == "verdetto non estratto: vedi Esito"
+    assert E.parole_registro(ctx, []) == "verdetto non estratto: vedi Esito"
 
 
-SENZA = "senza verdetto nel registro"
+SENZA = "verdetto non estratto: vedi Esito"
 
 
 @pytest.mark.parametrize(
@@ -717,7 +735,7 @@ def test_avvertenza_mista_tiene_la_parte_fattuale(mondo):
 
 def test_senza_parola_nelle_righe_citate_senza_verdetto(mondo):
     _, out = genera(mondo)
-    assert front(out / "lambda-1.md")["verdetto"] == "senza verdetto nel registro"  # "aiutano" non e' un verdetto
+    assert front(out / "lambda-1.md")["verdetto"] == "verdetto non estratto: vedi Esito"  # "aiutano" non e' un verdetto
     assert front(out / "eta-1.md")["verdetto"] == "non confermata"
 
 
@@ -725,7 +743,7 @@ def test_audit_non_sovrascrive_il_verdetto(mondo):
     _, out = genera(mondo)
     fm = front(out / "delta-1.md")
     assert fm["audit"] == {"stato": "nota", "id": ["DELTA-1"]}
-    assert fm["verdetto"] == "senza verdetto nel registro"  # L108 non ha parole di verdetto
+    assert fm["verdetto"] == "verdetto non estratto: vedi Esito"  # L108 non ha parole di verdetto
     g = front(out / "gamma-1.md")
     assert "non confermato" in g["verdetto"] and g["verdetto"] != "ritirato"
 

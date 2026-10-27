@@ -40,7 +40,7 @@ Walk-forward 500/60, bootstrap a blocchi, placebo con stati spostati circolarmen
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "la mean reversion sui micro USA resta accesa in ogni stato e NON va ridotta nello stress"
 - il vantaggio dello stress è reale ma con il 7% di giorni "non si traduce in un libro migliore"

@@ -39,7 +39,7 @@ OLS a finestra espansa, perdita QLIKE, test di Diebold-Mariano con correzione di
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "le fasi aggiungono poco a ciò che l'HAR già sa dalla volatilità passata"
 - sostituisce la media per fase.

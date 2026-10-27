@@ -15,7 +15,7 @@ strumenti:
   - "MCL"
   - "ZN"
 finestra: "11 strumenti (MES, MNQ, M2K, MYM, MGC, M6E, FESX, FDXM, MBT, MCL, ZN), 7 timeframe (1 m-giornaliero), 47 setup, ~520.000 combinazioni per strumento (94.752 a 1 minuto), 198 walk"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9017-L9017"
@@ -42,7 +42,7 @@ Walk-forward mobile (8 blocchi da 60 sessioni), F3 prudente, placebo abbinato pe
 | MYM famiglia RSI 59 trade +82,9 t 2,71 | docs/EXECUTION_LEDGER.md#L9017-L9017 |
 | a 1 minuto nessun walk positivo con t sopra 0,6 e i più negativi FESX -5,58 bp t -5,88, M2K -5,19 t -4,84, MBT -6,88 t -3,78 ("i costi dominano"). | docs/EXECUTION_LEDGER.md#L9055-L9055 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "l'ottimizzazione completa a forza bruta... non trova nessuna strategia nuova oltre alla famiglia di mean reversion già nota sugli indici USA"
 

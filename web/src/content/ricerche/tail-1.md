@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "NQ"
 finestra: "tutte le strategie LAB-1/LAB-2/ICT con ≥200 trade in scoperta su MES, MNQ, MCL; dati mai usati: NQ 1m 16/08-31/12/2024 e export NinjaTrader MES/MNQ 12-26 2026"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "caso con ~20-39 sessioni per caso; dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7360-L7360"
@@ -38,7 +38,7 @@ un limite di perdita giornaliero (P4) o lo stop dopo 2 perdite (P5) riducono le 
 | P5 13 su 13 (p 0,0002), media +33,6 | docs/EXECUTION_LEDGER.md#L7474-L7474 |
 | "Non creano un edge": con protezione positive 5 strategie su 28 (senza: 1). | docs/EXECUTION_LEDGER.md#L7474-L7474 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Le protezioni riducono le perdite ma non creano edge
 - P4 e P5 diventano regole di rischio predefinite (task L13)

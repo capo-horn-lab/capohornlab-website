@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL a 5 m, 30 m, 1 h"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "esplorativo; le finestre notturne non erano in rubrica (H-NEXT-3) e non sono adottate; dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6888-L6900"
@@ -32,7 +32,7 @@ tagliare le ore fuori dalle aperture principali migliora il motore di SENT-3?
 | spostamento medio MES 2,6 punti base fuori orari contro 7,6 all'apertura USA. | docs/EXECUTION_LEDGER.md#L6888-L6900 |
 | Il modello solo-finestre non è mai tenuto. | docs/EXECUTION_LEDGER.md#L6888-L6900 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Le finestre notturne (18:00-02:00 ET) non erano nella rubrica: dichiarate H-NEXT-3, solo su sessioni future, non adottate.
 

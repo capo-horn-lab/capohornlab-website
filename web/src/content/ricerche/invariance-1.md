@@ -42,7 +42,7 @@ Regressioni log-log con errori a grappolo per strumento; CONFERMATA se le penden
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Si contano gli scambi registrati, non le scommesse del paper
 - scala per strumento (MNQ 1,9 milioni di scambi e 149 miliardi USD al giorno, ZN 526 mila e 255 miliardi).

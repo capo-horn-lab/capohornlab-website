@@ -5,7 +5,7 @@ data: "2026-10-18"
 strumenti:
   - "MNQ"
 finestra: "216 test di COND-1 (MNQ ORB 60m come caso guida)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6604-L6620"
@@ -31,7 +31,7 @@ gli short perdono sistematicamente e possono essere spenti con una regola causal
 | R3: verifica +60,96 (99 trade, t 2,44) ma NQ 16/08-31/12/2024 -9,63 contro -3,29, q 1,0. 24 test long in utile e short in perdita, 11 il contrario | docs/EXECUTION_LEDGER.md#L6604-L6620 |
 | short con regime su: media delle medie -5,75 USD, positivi in 13 test su 150. | docs/EXECUTION_LEDGER.md#L6604-L6620 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - R3 su MNQ ORB 60m dichiarata H-NEXT-2: da provare solo su sessioni future (nessun nuovo parametro).
 

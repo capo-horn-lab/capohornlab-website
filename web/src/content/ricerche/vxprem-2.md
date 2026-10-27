@@ -6,7 +6,7 @@ strumenti:
   - "VX"
   - "VIX"
 finestra: "stessi dati di VXPREM-1 (174 CSV Cboe VX, VIX)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "Avvertenza forte: strategia a rischio illimitato sulla volatilità (corto VX)"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10077-L10087"
@@ -38,7 +38,7 @@ ROBUSTA se l'originale passa e ≥4 delle 5 varianti hanno in verifica media pos
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il segno è stabile in verifica, l'ampiezza e la tempistica no; resta una pista sul premio dei future VIX, non una regola"
 - stare sempre corti rende già +48 USD/giorno

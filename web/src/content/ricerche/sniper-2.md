@@ -42,7 +42,7 @@ se il livello d'ingresso porta informazione (estremo della notte o di ieri viola
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "anche i livelli con informazione... vincono quanto serve al pareggio e non di più... La famiglia 'stop stretto, obiettivo lontano' è esaurita su questi dati" (68 righe in due studi)
 - potenza: vantaggi sotto circa +0,05 A per trade non rilevabili

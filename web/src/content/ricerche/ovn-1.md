@@ -35,7 +35,7 @@ TT, 3WEAK e IBS guadagnano nella notte (15:59-9:29 ET) o il giorno dopo? L'oro r
 | IBS notte 1.408 trade +4,3 (t 1,10, sotto il p95 5,8). | docs/EXECUTION_LEDGER.md#L8572-L8579 |
 | GOLDN-1: "NON CONFERMATO": notte lungo 1.898 trade +3,17 bp (t giorni 1,60, p95 4,62, DSR 0,72). | docs/EXECUTION_LEDGER.md#L8572-L8579 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il rimbalzo avviene in gran parte nelle prime ore della sessione notturna (prima delle 2:00 ET)"
 - "Calo forte dal 2021 per entrambe le versioni" (TT metà 2019-2020 +80,0, 2021-2026 +15,3).

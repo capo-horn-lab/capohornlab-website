@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ (e MES, M2K, MYM), ultime 250 sessioni; richiesta del proprietario: vedere sul grafico live i rami (primo movimento di 50 punti, ritorno, 50 opposto, estensione) con le probabilità statistiche."
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "il codice dell'indicatore è prodotto proprio (nessun dato di terzi)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10320-L10320"
@@ -41,7 +41,7 @@ Visualizzazione delle frequenze di FREQ-LIVE-1; ogni ramo con p, k, n, margine m
 | Indicatore: compilazione in NinjaTrader PASS (602 righe con codice generato) | docs/EXECUTION_LEDGER.md#L10320-L10320 |
 | resa a video "NOT_RUN" nel ledger. | docs/EXECUTION_LEDGER.md#L10320-L10320 · docs/EXECUTION_LEDGER.md#L10328-L10350 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "frequenze descrittive su 76-250 casi (margini 6-12 punti); nessuna prova di vantaggio economico"
 - il verso del primo movimento "è moneta (46/54 ±6)" (brainstorming)

@@ -40,7 +40,7 @@ Regressioni annidate con Newey-West (SAFEHAVEN), IC e placebo (CP-1), scoperta/v
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - SAFEHAVEN: "nel 2019-2026 oro e Treasury non hanno fatto da rifugio"
 - GAPFILL: "'il gap si chiude due volte su tre' è vero e non è un vantaggio, perché la terza volta costa più delle altre due".

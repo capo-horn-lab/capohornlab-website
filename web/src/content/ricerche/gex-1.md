@@ -35,7 +35,7 @@ Terzili del GEX del giorno prima, bootstrap, BH; GEXOC-1: Spearman Newey-West la
 | RITIRATO dall'audit: con misura relativa +18,8 / +43,0 / +56,9, diff +38,1, p 0,068: "CONFERMA RITIRATA, GEX-1 = NON CONFERMATO". | docs/EXECUTION_LEDGER.md#L8969-L8969 |
 | GEXOC-1: "NON CONFERMATA": Spearman -0,054, t NW -2,23 sul GEX grezzo ma z-score a 250 giorni t -1,41, spread +1,3 bp (segno opposto): "la stessa trappola di GEX-1 (terciles = epoche); tolta la tendenza non resta nulla". | docs/EXECUTION_LEDGER.md#L9090-L9090 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - H-NEXT-8 e H-NEXT-9 "restano solo come osservazione descrittiva".
 

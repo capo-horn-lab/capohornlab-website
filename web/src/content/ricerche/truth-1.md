@@ -8,7 +8,7 @@ strumenti:
   - "M6E"
   - "MNQ"
 finestra: "TRUTH-1: dati sintetici (passeggiata casuale con volatilità oraria reale) su MES, MGC, M6E e motore indipendente su dati reali; TICK-1: tick NinjaTrader 21/09-16/10/2026 su 11 contratti (da 159.569 tick su M6E a 42,2 milioni su MNQ), 2,47 milioni di trade"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["TRUTH-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
@@ -48,7 +48,7 @@ T1 nessun edge (72 walk), T2 edge piantato, T3 motore indipendente; TICK-1: conf
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Il test T1 "mostra che il criterio del p95 dei placebo va ristretto" (correzione 26-27)
 - la prima versione di T1/T2 era invalidata da un generatore sintetico difettoso.

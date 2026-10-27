@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "MES"
 finestra: "MES 1 minuto 2019-2026 (eventi dal 2022 in FLASH-1, dal 2019 in FLASH-2), 4 definizioni (k 1,5/2,5 x m 15/60 minuti)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["FLASH-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""
@@ -41,7 +41,7 @@ Eventi vs placebo abbinati (terzile di sigma prevista, stato di stress), Bonferr
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "dopo i crolli la volatilità resta alta per settimane; non c'è un 'reset'"
 - potenza bassa (pochi grappoli)

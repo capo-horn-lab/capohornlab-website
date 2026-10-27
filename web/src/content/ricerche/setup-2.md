@@ -8,7 +8,7 @@ strumenti:
   - "NQ"
   - "RTY"
 finestra: "MES (barre ES/NQ/RTY 1m, 55 sessioni dal 02/08 al 16/10/2026)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "costi provvisori, campione di 55 sessioni, selezione a posteriori; dati NinjaTrader (licenza)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6047-L6055"
@@ -40,7 +40,7 @@ Walk-forward su 7 finestre (`--fino 2026-10-16T17:00Z`), 1 USD/lato PROVVISORIO,
 | RizzoFlow su 755 setup: TAKE -15.72/trade (598), SKIP -43.98 (157). | docs/EXECUTION_LEDGER.md#L6047-L6055 |
 | Lordo senza costi: nessun setup robusto (t>2 solo PULLBACK 60m, ORB 15m, LATE_MOMENTUM 15m su 30 prove). | docs/EXECUTION_LEDGER.md#L6047-L6055 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il confronto tra varianti è selezione a posteriori"
 - commissione provvisoria.

@@ -6,7 +6,7 @@ strumenti:
   - "IEF"
   - "TLT"
 finestra: "IEF (10 anni) e TLT (30 anni), 314 aste a 10 anni e 232 a 30 anni dal 2006 (con riaperture)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8179-L8186"
@@ -35,7 +35,7 @@ il prezzo cala prima delle aste e recupera dopo (Robeco; Lou-Yan-Zhang)?
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il recupero dopo l'asta, forte fino al 2018, è sparito"
 - il calo prima si vede ancora ma non passa la soglia.

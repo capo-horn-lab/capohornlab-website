@@ -10,7 +10,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "MES, MNQ, M2K, MYM NinjaTrader 2019-2026 (insieme \"future\") e SPY+QQQ 2006-2026 (ETF)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8329-L8344"
@@ -42,7 +42,7 @@ le regole pubblicate di mean reversion di breve (RSI2, CUMRSI, R3, 3DHL, PCTB, W
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "un fenomeno di famiglia, non una regola isolata... non sono edge indipendenti: si sovrappongono all'IBS (dal 27% al 98% dei trade) e vivono degli stessi giorni di calo. I dati erano già stati usati per l'IBS."
 - Prova in avanti H-NEXT-7 (nessun esito ancora).

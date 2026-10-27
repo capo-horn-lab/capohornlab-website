@@ -38,7 +38,7 @@ Secchi di volume V=1/50 del volume mediano, 4 prove (volatilità oltre HAR, IC c
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "è la volatilità passata travestita"
 - "Nessun cancello VPIN per il bot: su MES toglierebbe i trade migliori"

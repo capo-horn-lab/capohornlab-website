@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "12 regole di MR-1-ADJ sui 4 micro 2019-2026 e su SPY/QQQ 2006-2026 + IBS-NT; 25 prove"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "\"non significativo\" non è assenza di decadimento (potenza)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9053-L9053"
@@ -35,7 +35,7 @@ Media prima/seconda metà e pendenza OLS del P&L per trade, BH; DECADIMENTO se p
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Valore atteso prudente = media della metà recente (IBS-NT +29,8 bp per trade invece di +39,5).
 

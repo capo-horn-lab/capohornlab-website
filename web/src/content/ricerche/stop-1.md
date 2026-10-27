@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "IBS, R1b, TT, 3WEAK su MES, MNQ, M2K, MYM dal 2022 (stessi trade di BRIDGE-1)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8836-L8841"
@@ -37,7 +37,7 @@ Varianti S2 e S3 (stop a ingresso x (1 - 2 o 3 x sigma_prev)), bootstrap a blocc
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "lo stop vende il minimo e trasforma perdite temporanee in perdite reali... Il rischio dei giorni negativissimi si gestisce con la dimensione (una posizione, un micro) e non con lo stop."
 

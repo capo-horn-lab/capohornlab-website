@@ -38,7 +38,7 @@ Finestre W0-W3, regole R0-R2 su W1, BH, placebo. Rubrica prima: sì (L9801).
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Il deprezzamento del dollaro attorno al FOMC c'era nel 2019-2023... e si è rovesciato nel 2023-2026 (W0 -17,6 bp)": scompone il -0,09 di MACRO-1 C10, "la media di due fasi di segno opposto, non un'assenza di effetto".
 

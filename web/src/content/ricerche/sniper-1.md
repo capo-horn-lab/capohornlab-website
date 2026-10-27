@@ -44,7 +44,7 @@ Ichimoku 9/26/52 a 5 minuti letta in modo causale; 36 righe per strumento (3 sto
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "la geometria 'stop 100 tick, obiettivo 800 tick' vince esattamente quanto serve al pareggio e non di più... Per avere edge non basta il rapporto: serve che il livello d'ingresso o la zona obiettivo contengano informazione."
 - Nota di onestà: la media "per giorno con trade" nasce dal 46% dei giorni con un solo strumento in trade (media per trade -0,0135 A, -3,12 USD)

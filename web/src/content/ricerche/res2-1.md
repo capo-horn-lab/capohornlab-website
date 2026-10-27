@@ -9,7 +9,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "SPY e QQQ giornalieri 2006-2026 (16 test, costo 2 bp), MES/MNQ/MCL intraday (10 test)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "regole di terzi; dati Yahoo solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7913-L7923"
@@ -40,7 +40,7 @@ Scoperta 60/verifica 40, placebo 200 (stesse durate), BH, trade minimi 50/30 (15
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "restano positive ma deboli e in gran parte spiegate dal rialzo; nessuna batte i placebo. Restano informazione di calendario... non strategie da sole."
 

@@ -41,7 +41,7 @@ entrare all'apertura, aggiungere unità a favore con trailing stop comune dà pr
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "con un mercato martingala ogni regola d'uscita ha attesa = - costi"
 - nota fuori protocollo: una variante rende +12 bp su MNQ ma "scelta dopo aver visto 80 x 4 risultati, non è una prova"

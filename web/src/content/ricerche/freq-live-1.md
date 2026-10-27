@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ (poi MES, M2K, MYM) 1 minuto NinjaTrader 2019-2026, ultime 60-250-500 sessioni, ora di Roma; documento del proprietario `docs/research/TEORIA_MOVIMENTO_2026-10-21.txt` (5.698 byte)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "prezzi e VWAP di future CME aggiornati al minuto già pubblicati sul sito con via libera del proprietario del 26/10 (L10849): licenza dati a decisione del proprietario."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10287-L10303"
@@ -39,7 +39,7 @@ Frequenze empiriche p, k, n e margine 1,96·√(p(1-p)/n); finestre fisse di Rom
 | Esempio 21/10 21:10 Roma: tondo sotto 29.900 nel 66% ±8 (91/137) | docs/EXECUTION_LEDGER.md#L10287-L10303 |
 | caso dell'apertura in fase estensione, chiusura sopra l'apertura 44% ±12 (30/69). | docs/EXECUTION_LEDGER.md#L10287-L10303 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Tesi del proprietario: "QUANTO si muove il mercato è prevedibile... QUANDO si muove è noto... DOVE va (il verso) NON è prevedibile intraday con nessuno strumento provato".
 - Nota fissa nel pannello e nel JSON: "frequenze descrittive su dati già visti, non segnali"

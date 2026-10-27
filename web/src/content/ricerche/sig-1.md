@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL a 5 m, 1 h, giornaliero (periodi come SENT-3: addestramento <60%, selezione 60-80%, test >80%)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(descrittivo, non un segnale operativo; dati licenziati solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7140-L7173"
@@ -34,7 +34,7 @@ IC di Spearman con t per giorno + BH q≤0,10 (A, 965 test); ingresso nella coda
 | 2026: 35 ingressi +1,2 bp. | docs/EXECUTION_LEDGER.md#L7140-L7173 |
 | MES giornaliero B: "oscillatori in vendita" -> lungo 5 giorni +48,7 bp, t 3,19, ma contro la deriva rialzista l'eccesso è +18,0 bp t 1,18 ("valgono soprattutto per il rialzo del mercato"). | docs/EXECUTION_LEDGER.md#L7140-L7173 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Controllo contro la deriva (sempre lunghi: 6,5 bp a 1 giorno, 32,5 a 5 giorni) aggiunto a posteriori, dichiarato "non in rubrica".
 

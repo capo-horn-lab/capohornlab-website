@@ -6,7 +6,7 @@ strumenti:
   - "MNQ"
   - "NQ"
 finestra: "MNQ base 1 s 2023-01..2024-08-15 + NQ 1m fine 2024 + MNQ 12-26 2026"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7678-L7678"
@@ -32,7 +32,7 @@ trend-following sul primo limite sfondato del range di pre-apertura (R1 notte Gl
 | Dati mai usati: NQ 1m fine 2024 positivi (R2 T1 +20,99 t 2,02), MNQ 2026 negativi (da -20,68 a -32,09; R2 T2 t -2,36). | docs/EXECUTION_LEDGER.md#L7678-L7678 |
 | "Esiti discordi tra periodi: nessun vantaggio stabile." | docs/EXECUTION_LEDGER.md#L7678-L7678 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - —
 

@@ -39,7 +39,7 @@ Evento: finestra di 60 s con volume aggressivo ≥ q95 per prezzo/minuto/fascia 
 | dopo il tocco rimbalzo 494 contro rottura 501 (49,6%) contro il 49,5% dei livelli normali. | docs/EXECUTION_LEDGER.md#L10394-L10416 |
 | ASSORB-2: rubrica registrata, NON eseguita (in attesa di ≥5 sessioni MNQ complete). | docs/EXECUTION_LEDGER.md#L10394-L10416 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "La domanda resta senza risposta; la definizione non è stata cambiata dopo i dati"
 - "i muri visibili non tengono più di un prezzo qualsiasi"

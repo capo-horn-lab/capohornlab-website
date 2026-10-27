@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "MGC"
 finestra: "MES, MNQ, MCL, MGC; PHASE-3: 7 schemi x 2 librerie x 3 strumenti = 42 test; PHASE-2-OOS: sessioni 2025-2026; SIZE-1: 221 strategie."
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8009-L8015"
@@ -45,7 +45,7 @@ Stessi genomi di PARAM-1/WFO-1, F3 prudente, placebo, BH q≤0,10. Rubrica prima
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "la fase di oggi (nota alla chiusura di ieri) dice quanto si muovera' l'indice domani"...
 - "non la direzione"

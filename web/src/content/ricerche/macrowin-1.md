@@ -37,7 +37,7 @@ Salto in bp da T0 a T0+1/5/15 minuti contro i giorni di controllo, persistenza, 
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - MACROWIN-1: "dopo l'annuncio ZN è un mercato da non inseguire"
 - MACROWIN-2: "il fatto del calendario (CPI/NFP alle 7:30 CT) serve a dimensionare lo stop, non a scegliere il lato"

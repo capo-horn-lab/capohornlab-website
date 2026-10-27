@@ -32,7 +32,7 @@ Terzile lungo / terzile corto, pesi uguali, 2 bp per unità, t Newey-West 3 rita
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Il valore sulle materie prime "poggia sui continui di Yahoo con i salti ai rolli: prezzi e rendimenti non scambiabili"
 - "il momentum tra materie prime è negativo in entrambe le fasi, l'opposto del paper"

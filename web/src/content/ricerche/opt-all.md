@@ -15,7 +15,7 @@ strumenti:
   - "MCL"
   - "ZN"
 finestra: "10 strumenti (MES, MNQ, M2K, MYM, MGC, M6E, FESX, FDXM, MBT, MCL) e ZN; 6 famiglie (IBS, RSI2, TT, NDOWN, MA, DONCHIAN), 98 combinazioni per strumento"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8622-L8626"
@@ -45,7 +45,7 @@ Walk-forward mobile 500/60, obiettivo prudente, 200 placebo con combinazioni cas
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il vantaggio è della famiglia, non della combinazione ottimizzata. Ottimizzare i parametri non aggiunge nulla (ciò che lo Strategy Analyzer non può vedere senza placebo)".
 

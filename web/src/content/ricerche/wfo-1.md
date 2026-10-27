@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL (genomi: MES 3.962, MNQ 3.962, MCL 3.832); WFO-1-LONG su MNQ 1 minuto NinjaTrader 2019-05..2026-10 (1.923 sessioni, 2,62 milioni di barre, 31 contratti)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["WFO-1", "WFO-1-LONG"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""
@@ -52,7 +52,7 @@ Finestra 250 sessioni, blocco 20, 3 funzioni obiettivo (F1 MaxNetProfit, F2 MaxS
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "potenza minima" nei dati 2026
 - MNQ ha solo 413 sessioni al secondo (9 passi)

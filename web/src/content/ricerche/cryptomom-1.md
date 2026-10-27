@@ -35,7 +35,7 @@ Regressioni e regole R1/R2/R1-4, BH q 0,10, placebo; costi MBT 0,35 USD per lato
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Nessuna strategia crypto per il bot"
 - in scoperta l'effetto non c'era (BTC k1 t 0,6): "l'effetto è del periodo recente".

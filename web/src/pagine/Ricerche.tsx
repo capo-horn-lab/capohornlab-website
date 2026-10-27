@@ -10,7 +10,7 @@ import { AuditBadge, VerdettoBadge } from '@/ricerche/Verdetto'
 
 const TUTTI = ''
 
-/** Le voci del filtro di una pagina: le parole nude del registro (mai l'ID), o "senza verdetto". */
+/** Le voci del filtro di una pagina: le parole nude del registro (mai l'ID), o SENZA_VERDETTO. */
 const vociFiltro = (verdetto: string) => {
   const parole = paroleNude(verdetto)
   return parole.length ? parole : [SENZA_VERDETTO]
@@ -70,7 +70,7 @@ export default function Ricerche() {
 
   const strumenti = useMemo(() => [...new Set(indice.flatMap((r) => r.strumenti))].sort(), [])
   const anni = useMemo(() => [...new Set(indice.map((r) => anno(r.data)))].sort().reverse(), [])
-  // le parole nude del registro presenti nell'indice (piu' "senza verdetto nel registro"), una per voce di filtro
+  // le parole nude del registro presenti nell'indice (piu' SENZA_VERDETTO), una per voce di filtro
   const verdetti = useMemo(
     () =>
       [...new Set(indice.flatMap((r) => vociFiltro(r.verdetto)))].sort(),

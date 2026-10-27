@@ -41,7 +41,7 @@ R² fuori campione contro la media espansa, Clark-West, nullo per permutazione a
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - ENS-1: "il filone 'direzione' resta aperto solo in questa forma: segnali semplici della famiglia, combinati con pesi uguali"
 - LASTHALF-OOS "chiude il momentum intraday dell'ultima mezz'ora sui micro USA 2019-2026" (con BC-1).

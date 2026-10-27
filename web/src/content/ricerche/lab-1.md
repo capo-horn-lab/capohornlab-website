@@ -7,7 +7,7 @@ strumenti:
   - "NQ"
   - "CL"
 finestra: "ES 1m 2020-2024, NQ 1m 2023-2024 (+ trade tick con aggressore), CL MBP-1 2024-2025, export NinjaTrader 2026"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "costi provvisori."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6139-L6146"
@@ -35,7 +35,7 @@ Piano unico (stop 2 ATR, scala 1/1.5/2/3 R, 4 micro, break-even dopo TP2, uscita
 | Eventi: ES CPI volatilità prima -> ampiezza dopo Spearman 0.48 p 0.0001, direzione no | docs/EXECUTION_LEDGER.md#L6139-L6146 |
 | 94.5% delle mezz'ore più ampie di ES non su FOMC/CPI/NFP. | docs/EXECUTION_LEDGER.md#L6139-L6146 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "una strategia non profittevole non si adotta"
 - 12 giornate non programmate con cause da fonti pubbliche

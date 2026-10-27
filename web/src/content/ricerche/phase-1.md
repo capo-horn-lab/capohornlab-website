@@ -4,7 +4,7 @@ titolo: "PHASE-1 — 12 fasi cicliche di mercato e assegnazione delle strategie"
 data: "2026-10-19"
 strumenti: []
 finestra: "221 strategie x 12 fasi (tendenza x volatilità x carattere)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7643-L7643"
@@ -29,7 +29,7 @@ Fase nota a chiusura precedente; assegnazione n≥30, media>0, t≥2; walk-forwa
 | walk-forward 5 strategie positive, nessuna significativa | docs/EXECUTION_LEDGER.md#L7643-L7643 |
 | media di verifica negativa in 11 fasi su 12. | docs/EXECUTION_LEDGER.md#L7643-L7643 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Il filtro esiste... ma con le strategie attuali non assegna edge provati."
 

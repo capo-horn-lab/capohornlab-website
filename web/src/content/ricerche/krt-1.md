@@ -40,7 +40,7 @@ Pannello con t Driscoll-Kraay; IC per mercato (33 righe per segnale) con BH; reg
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - MGC MM "sopra il placebo ma t < 2 e q >..." (non provato).
 

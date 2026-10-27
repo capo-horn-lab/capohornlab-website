@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "tick NinjaTrader 20/9-16/10/2026 di MNQ, MES, M2K, MYM (20 giorni di sessione)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "i tick sono dati NinjaTrader/CME"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10004-L10018"
@@ -37,7 +37,7 @@ Spread di Roll, lambda di Kyle (tick per 100 contratti), movimento nel primo sec
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "all'apertura il costo è il movimento del primo secondo, non lo spread"
 - la calibrazione è "una taratura, non una verifica" sugli stessi 20 giorni

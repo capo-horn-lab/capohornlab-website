@@ -4,7 +4,7 @@ titolo: "PAPER-PROGRAM (20/10/2026) — 13 studi dai paper e dalla domanda del p
 data: "2026-10-20"
 strumenti: []
 finestra: "programma indirizzato dal proprietario (indici, tassi, valute, energia, metalli, volatilità, crypto): rubriche per gruppo (INDICI-1, TASSI-FX-1, COMM-1) e prove VPIN-1, KRT-1, FOMCDRIFT-1, TUGWAR-1, GHLZ-1, CRYPTOMOM-1, MACROWIN-1, FXFOMC-1, VIXTS-2, SAFEHAVEN-1, CP-1, VXPREM-1, GAPFILL-1."
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["PAPER-PROGRAM"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""
@@ -32,7 +32,7 @@ Per ogni studio una rubrica con verdetti CONFERMATA/PARZIALE/NON CONFERMATA fiss
 | CONFERMATA alla lettera 1 (VXPREM-1, "con riserve forti") | docs/EXECUTION_LEDGER.md#L9931-L9932 |
 | NON CONFERMATA 9 (VPIN-1, TUGWAR-1, GHLZ-1, FOMCDRIFT-1, FXFOMC-1, CP-1, KRT-1, SAFEHAVEN-1, GAPFILL-1). | docs/EXECUTION_LEDGER.md#L9931-L9932 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Nessun cambiamento in carta o nel bot"
 - restano non misurabili con i dati in casa: Hasbrouck, carry FX multi-valuta, Ranaldo-Somogyi, curve dei future, Makarov-Schoar.

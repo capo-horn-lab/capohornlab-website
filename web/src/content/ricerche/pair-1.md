@@ -6,7 +6,7 @@ strumenti:
   - "MNQ"
   - "MES"
 finestra: "MNQ e MES 1 minuto NinjaTrader, 146.937 candele 5m comuni, 1.914 sessioni 2019-05..2026-10"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8024-L8026"
@@ -34,7 +34,7 @@ lo spread z-score tra MNQ e MES ha mean reversion sfruttabile?
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il ritorno dello spread verso la media c'è appena".
 

@@ -8,7 +8,7 @@ strumenti:
   - "MES"
   - "MNQ"
 finestra: "SPY e QQQ (put/call Cboe 2006-11..2019-10, TS9 da 2011), MES/MNQ 2019-2026"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8073-L8079"
@@ -40,7 +40,7 @@ IC di Spearman a 5 giorni, Newey-West 5 ritardi, BH q≤0,10 su 10 test (OPT-1);
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Un IC positivo può venire dal rialzo di fondo"
 - il put/call gratuito finisce il 2019-10-04 (non usabile dal vivo)

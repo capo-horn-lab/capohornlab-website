@@ -35,7 +35,7 @@ IC di Spearman Newey-West, BH sulle 20 p di verifica, regola lungo MES con VIX/V
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "gli 8 IC non sono 8 prove indipendenti ma circa 2"
 - "la regola binaria con tenuta 5 sessioni non batte ingressi casuali".

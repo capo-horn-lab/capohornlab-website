@@ -4,7 +4,7 @@ titolo: "COT-1 — posizionamento CFTC (Traders in Financial Futures) come segna
 data: "2026-10-19"
 strumenti: []
 finestra: "CFTC TFF 2010-2026 (17 file, 7,2 MB), E-mini S&P 500 e Nasdaq mini, gruppi Asset Manager e Leveraged Funds"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["COT-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
@@ -31,7 +31,7 @@ Spearman + Newey-West lag 1, scoperta 2010-2018 / verifica 2019-2026, BH q≤0,1
 |---|---|
 | "0 su 8. Nessun segnale tiene il segno tra scoperta e verifica" (il migliore: Nasdaq asset manager, variazione settimanale, -0,032 in scoperta e +0,106 t 2,19 in verifica). | docs/EXECUTION_LEDGER.md#L7572-L7572 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Posizionamento al 13/10/2026 riportato solo come descrittivo.
 

@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "30 ETF Yahoo giornalieri dal 2006 (149.803 righe): 11 settori SPDR, 11 paesi, 6 stile, controllo SPY e QQQ; scoperta 2006-2019, verifica 2020-2026"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "dati Yahoo solo aggregati"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9455-L9499"
@@ -41,7 +41,7 @@ Regola identica a H-NEXT-4b; CONFERMATO un simbolo solo se ≥30 trade in ciascu
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "È un effetto di tutto il mercato azionario USA, più debole nei settori difensivi... Non è universale, coerente con IBS-EU NON confermata"
 - i confermati "i CONFERMATI sono tutti correlati con SPY e dal 54% all'81% delle loro entrate di verifica cadono nello stesso giorno di un segnale SPY"

@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES (controllo MNQ, M2K, MYM), scoperta 2019-05..2023-12 (1.155 sessioni), verifica 2024-01..2026-10 (693 sessioni)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "(esplorativo; DIX è dato SqueezeMetrics)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9072-L9082"
@@ -35,7 +35,7 @@ quali variabili note prima condizionano gap, prima mezz'ora, apertura-chiusura, 
 | Momentum dalla distanza VWAP alle 15:00: "Morte in verifica" (scoperta t +3,66, verifica -1,74). | docs/EXECUTION_LEDGER.md#L9072-L9082 |
 | DIXCLOSE-1: esito non ancora presente (prova in avanti). | docs/EXECUTION_LEDGER.md#L9072-L9082 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Esito esplorativo, non una conferma"
 - "il DIX ha cambiato regime (giorni <= 0,430: 50-68% nel 2019-21, 0-14% dal 2022)".

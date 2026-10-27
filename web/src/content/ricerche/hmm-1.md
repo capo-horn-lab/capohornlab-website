@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES, MNQ, M2K, MYM NinjaTrader 2019-2026 (714 trade IBS dopo i primi 500 giorni)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "\"CONFERMATO secondo la rubrica\" ma migliora la qualità per trade, non il guadagno totale; usato solo come variante in carta."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8394-L8399"
@@ -36,7 +36,7 @@ un filtro di regime (HMM a 2 stati, Kalman) migliora l'IBS?
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "migliora la qualità per trade, non il guadagno" (netto totale ~17.300 bp contro ~22.500)
 - entra solo come variante in carta (H-NEXT-6a).

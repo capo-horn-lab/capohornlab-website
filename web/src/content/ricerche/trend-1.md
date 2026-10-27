@@ -7,7 +7,7 @@ strumenti:
   - "QQQ"
   - "VIX"
 finestra: "17 ETF Yahoo 2006-2026 (2,93 MB) per TREND-1; SPY/QQQ + VIX per VRP-1."
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8105-L8108"
@@ -36,7 +36,7 @@ TREND-1: scoperta 60/verifica 40 dei mesi, placebo 200; VRP-1: IC di Spearman, N
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - VRP: "effetto noto e coerente ma sotto la soglia di verifica"
 - Bollerslev-Tauchen-Zhou citato a memoria, non riletto.

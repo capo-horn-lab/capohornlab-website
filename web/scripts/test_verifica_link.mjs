@@ -200,6 +200,31 @@ describe('verifica_link --dist', () => {
     assert.match(r.out, /ternario-mancante\.js/)
   })
 
+  // falsi positivi del controllo dal vivo sulle pagine vecchie (valutazione 1, criterio 2): research-detail.html e
+  // test-strategy.html hanno script in linea con stringhe spezzate da concatenazioni e assegnazioni a proprieta' JS
+  it('script in linea e JS: pezzi di concatenazione e assegnazioni `.src =` non sono link; gli attributi veri si', async () => {
+    const script = `<script>
+      var html = '<img src="' + imgSrc + '" alt="' + chart.label + '" loading="lazy">';
+      document.getElementById('lightboxImg').src = src;
+      window.location.href = type === 'login' ? 'login.html' : 'signup.html';
+      window.location.href = 'frammento-mancante.html?request_id=' + encodeURIComponent(request.id);
+    </script>`
+    let r = await lancia({ 'pagina.html': HTML(script) })
+    assert.equal(r.code, 0, r.out)
+    assert.doesNotMatch(r.out, /imgSrc|\/src;|\/type\b|frammento-mancante/)
+    r = await lancia({ 'pagina.html': HTML(script + '<img src="/vera-mancante.png"><a\nhref="/vera-mancante.html">x</a>') })
+    assert.equal(r.code, 1, r.out)
+    assert.match(r.out, /vera-mancante\.png/)
+    assert.match(r.out, /vera-mancante\.html/)
+    // nel JS: un letterale con un `+` accanto e' un pezzo dell'URL, non l'URL; da solo resta controllato
+    r = await lancia({ 'app/i.js': 'const a="/grafici/"+slug+"/frammento.png",b=x+ "/altro-frammento.json",c="/c-frammento.css" +v' })
+    assert.equal(r.code, 0, r.out)
+    r = await lancia({ 'app/i.js': 'const a="/grafici/"+slug+"/frammento.png",d="/intero-mancante.png"' })
+    assert.equal(r.code, 1, r.out)
+    assert.match(r.out, /intero-mancante\.png/)
+    assert.doesNotMatch(r.out, /\/frammento\.png/)
+  })
+
   it('url() rotto nel CSS -> 1', async () => {
     const r = await lancia({ 'app/s.css': '@font-face{src:url(/fonts/assente.woff2)}' })
     assert.equal(r.code, 1, r.out)

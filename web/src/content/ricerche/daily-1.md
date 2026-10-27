@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES, MNQ, M2K, MYM 1 minuto 2019-05..2026-10 (1.837-1.843 sessioni valide per strumento; 58 riunioni FOMC)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "2 conferme IBS su 12 prove con margine di 5 USD sul p95 per MES (rumore di selezione, come in IBS8-1); costi del modello a 0,95 USD per lato."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9298-L9304"
@@ -39,7 +39,7 @@ Scoperta 60% / verifica 40% (taglio 2023-10-25/26), BH q≤0,10, t sui giorni≥
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Lettura onesta: tre famiglie su quattro non si distinguono dal caso su nessuno strumento... 2 su 12 prove al 5% ne vale 0,6 per caso. Non è una ragione per cambiare la regola in carta."
 

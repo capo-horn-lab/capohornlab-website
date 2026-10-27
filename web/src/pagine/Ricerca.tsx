@@ -178,8 +178,9 @@ export default function Ricerca() {
         )}
       </Sezione>
 
-      <Sezione titolo="Cosa NON dice">
-        <Elenco voci={leggiElenco(sezioni['Cosa NON dice'] ?? '')} />
+      {/* the inventory's "Regola di lettura", verbatim: readings, decisions and limits together, never under a negative title */}
+      <Sezione titolo="Lettura e limiti (dal registro)">
+        <Elenco voci={leggiElenco(sezioni['Lettura e limiti (dal registro)'] ?? '')} />
       </Sezione>
 
       <Sezione titolo="Prove">

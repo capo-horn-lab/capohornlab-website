@@ -15,7 +15,10 @@ Regole (vincolanti; "nulla di inventato": meno contenuto e' sempre accettabile, 
   dove numero e parole stanno insieme, la migliore tra i candidati (non la prima con le stesse cifre);
 - l'etichetta di verdetto e' la parola del registro (lista chiusa) trovata, in una frase di verdetto ancorata,
   nelle righe di ledger citate dalla pagina (con l'ID davanti nelle schede con piu' studi); se non c'e',
-  "senza verdetto nel registro". Ritiro/correzione dell'audit: campo `audit`, a parte;
+  "verdetto non estratto: vedi Esito" (il registro puo' scriverlo in una forma non ancorata, che non si estrae).
+  Ritiro/correzione dell'audit: campo `audit`, a parte;
+- la riga 4 della scheda ("Regola di lettura": letture, decisioni e limiti insieme) va, testo dell'inventario,
+  sotto "Lettura e limiti (dal registro)": mai sotto un titolo negativo, che capovolgerebbe le letture positive;
 - niente istruzioni di lavoro dell'inventario ("pubblicare solo...", "citare..."): si tengono le clausole fattuali;
 - pagine ritirate: banner e motivo dal registro, senza i numeri ritirati;
 - LIMALL-1 e OPT-COND-1 (senza esito chiuso) non compaiono da nessuna parte;
@@ -43,7 +46,7 @@ MAX_RIGHE_DATI = 150
 MAX_BYTE_PROVA = 12_000_000
 MARGINE_LEDGER = 3  # righe oltre l'intervallo citato in cui si accetta ancora un numero (con le parole sulla stessa riga)
 SEZIONE_DOC = 12  # in un documento: righe sopra il numero in cui cercare l'intestazione della sezione/tabella con le parole
-SENZA_VERDETTO = "senza verdetto nel registro"
+SENZA_VERDETTO = "verdetto non estratto: vedi Esito"
 
 FRONTMATTER = ("id", "titolo", "data", "strumenti", "finestra", "verdetto",
                "pubblicabilita", "avvertenza", "fonte_ledger", "prove")
@@ -73,7 +76,7 @@ PAROLE = re.compile(r"(?<![A-Za-z_])" + _PAROLA + r"(?![A-Za-z_])")
 #   Famiglia A: "Esito ID (provenienza lunga come si vuole): PAROLA", con i due punti subito dopo la parentesi chiusa
 #   (L8628, L9766). Famiglia B: "<ID della scheda> = PAROLA" (la forma dell'audit, L8968, L8969).
 # Mai una parola preceduta da un conteggio ("3643 PASS", "0 FAIL", "0 CONFERMATE"), mai seguita da "se"/"quando"/"dopo"
-# (definizione di rubrica), mai fuori da queste frasi. In dubbio: senza verdetto.
+# (definizione di rubrica), mai fuori da queste frasi. In dubbio: SENZA_VERDETTO.
 _FINE = r"(?![A-Za-z_])(?!\s+(?:solo\s+)?(?:se|quando|dopo)\b)"
 _ID = r"[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+"
 ANCORE = [re.compile(rx, fl) for rx, fl in (
@@ -854,7 +857,7 @@ def pagina(s, ctx):
     if dati:
         md += ["", "## Grafico", "", didascalia]
     regola = estrai_riferimenti(togli_esclusi(v.get(4, ""), fino_a_fine=bool(esclusi)))[0]
-    md += ["", "## Cosa NON dice", ""]
+    md += ["", "## Lettura e limiti (dal registro)", ""]
     md += [f"- {x}" for x in (pulisci_clausola(c) for c in segmenta(regola)) if x] or ["- —"]
     md += ["", "## Prove", ""]
     md += [f"- {p}" if e else f"- prova non trovata su disco: {p}" for p, t, e in stato]

@@ -7,7 +7,8 @@ export interface Radice {
   ora: string
   t: string
   prezzo: number
-  fase: string
+  /** absent on da_qui's root */
+  fase?: string
   percorso?: string
   omessi?: number
 }

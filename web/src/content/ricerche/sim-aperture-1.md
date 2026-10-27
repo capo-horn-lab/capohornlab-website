@@ -36,7 +36,7 @@ Per sessione: previsioni 7:30-8:15 CT, parere RizzoAdvisor, piani TORO/ORSO, rep
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il dibattito con RizzoFlow come arbitro non ha un vantaggio sull'apertura di MNQ: sceglie il piano migliore come una moneta e pende verso la vendita in un mercato in salita"
 - periodo coperto 2019-2020 soltanto

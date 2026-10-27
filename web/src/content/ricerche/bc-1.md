@@ -11,7 +11,7 @@ strumenti:
   - "FDXM"
   - "VIX"
 finestra: "MES, MNQ, SPY, QQQ, FESX/FDXM; 12 test eseguiti (VWAP trend, momentum del resto del giorno, primo VIX spike, VIX Stretch, inversione overnight, settimana OpEx, USA->Europa, petrolio, rame/oro, fade del VWAP)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8419-L8422"
@@ -41,7 +41,7 @@ t sui giorni≥2, placebo 200, DSR con N=13. Rubrica prima: sì (L8401).
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "Nessun edge intraday sugli indici dopo commissioni e 1 tick"
 - le idee mensili sono "il rialzo di fondo comprato in giorni a caso con una storia".

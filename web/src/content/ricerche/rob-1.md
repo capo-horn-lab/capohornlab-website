@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "MYM"
 finestra: "16 test confermati di MR-1 + IBS-NT + IBS-MYM"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8360-L8370"
@@ -37,7 +37,7 @@ t sui giorni, PSR e deflated Sharpe con N=24 (e N=1.000), PBO con CSCV a 10 bloc
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il t per trade sovrastima"
 - "le regole della famiglia sono intercambiabili"

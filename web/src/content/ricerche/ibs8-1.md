@@ -35,7 +35,7 @@ Confronto accoppiato per giorno d'ingresso, BH sulle 44 p, placebo 200 (seme 17)
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "è rumore di selezione"
 - "è la firma del rumore di selezione, non di una zona robusta"

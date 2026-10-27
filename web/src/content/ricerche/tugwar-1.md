@@ -43,7 +43,7 @@ TUGWAR: famiglia di 13 regole, BH q 0,10, placebo; GHLZ: regressione con t Newey
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - TUGWAR: "I fatti del paper... compaiono solo in verifica, non in scoperta... tutte rendono meno del compra-e-tieni"
 - GHLZ: "Il momentum intraday... non c'è nei future 2019-2026" (conferma LASTHALF-OOS e BC-1).

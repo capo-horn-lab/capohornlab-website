@@ -37,7 +37,7 @@ IC di Spearman Newey-West, regole con t NW 5, placebo 200 rotazioni, q su 16 p; 
 
 Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n campioni, m media nell'unita' u, t statistica t, p95 p95 dei placebo, ok = esito della rubrica; definizione delle colonne in runtime/research-scripts/sa_data.py).
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "una pista da ripetere, non una regola"
 - salto del VX1 di febbraio 2018 fino a 17.600 USD in un giorno per 1 contratto corto

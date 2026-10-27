@@ -232,7 +232,7 @@ describe('pagine', () => {
   it('/ricerche/:id mostra le sezioni, la colonna Fonte, le prove e id di sezione validi', async () => {
     const { container } = conRouter('/ricerche/bt-sim-1')
     expect(await screen.findByRole('heading', { name: 'Esito' })).toBeInTheDocument()
-    for (const s of ['Domanda', 'Metodo e rubrica', 'Cosa NON dice', 'Prove']) {
+    for (const s of ['Domanda', 'Metodo e rubrica', 'Lettura e limiti (dal registro)', 'Prove']) {
       expect(screen.getByRole('heading', { name: s })).toBeInTheDocument()
     }
     expect(screen.getByRole('columnheader', { name: 'Fonte' })).toBeInTheDocument()
@@ -242,7 +242,19 @@ describe('pagine', () => {
       expect(id).not.toMatch(/\s/)
       expect(container.querySelector(`#${id}`)).not.toBeNull()
     }
-    expect(idSezione('Cosa NON dice')).toBe('cosa-non-dice')
+    expect(idSezione('Lettura e limiti (dal registro)')).toBe('lettura-e-limiti-dal-registro')
+  })
+
+  // la riga "Regola di lettura" dell'inventario contiene anche letture positive del registro (ibs-nt L8248, h-next-4b):
+  // sotto un titolo "Cosa NON dice" la pagina le capovolgeva (valutazione 1, criterio 1)
+  it.each([
+    ['ibs-nt', "l'edge più solido trovato dal progetto"],
+    ['h-next-4b', 'È la prima regola del progetto confermata su dati mai usati'],
+  ])('%s: le letture positive stanno sotto "Lettura e limiti (dal registro)", mai sotto un titolo con NON', async (id, frase) => {
+    conRouter(`/ricerche/${id}`)
+    const titolo = await screen.findByRole('heading', { name: 'Lettura e limiti (dal registro)' })
+    expect(within(titolo.closest('section')!).getByText(new RegExp(frase))).toBeInTheDocument()
+    expect(screen.getAllByRole('heading').filter((h) => /\bNON\b/.test(h.textContent ?? ''))).toEqual([])
   })
 
   it("una ricerca ritirata: riquadro con le parole dell'audit, senza i numeri ritirati", async () => {
@@ -274,10 +286,20 @@ describe('pagine', () => {
     expect(screen.getAllByText("nota dell'audit")).toHaveLength(indice.filter((v) => v.audit === 'nota').length)
   })
 
-  it('la scheda senza parola di verdetto nelle righe citate dice senza verdetto nel registro', async () => {
+  it('la scheda senza parola di verdetto nelle righe citate dice verdetto non estratto: vedi Esito', async () => {
     conRouter('/ricerche/sig-1')
     expect(await screen.findByRole('heading', { name: 'Esito' })).toBeInTheDocument()
     expect(screen.getByText(SENZA_VERDETTO)).toBeInTheDocument()
+  })
+
+  // h-next-4b: il registro scrive "Esito H-NEXT-4b (...). CONFERMATA" (L7277), forma non ancorata e non estratta; il ripiego
+  // non dice piu' che il registro e' senza verdetto (valutazione 1, criterio 1b)
+  it('h-next-4b: ripiego vero, mai "senza verdetto nel registro"', async () => {
+    expect(SENZA_VERDETTO).toBe('verdetto non estratto: vedi Esito')
+    const { container } = conRouter('/ricerche/h-next-4b')
+    expect(await screen.findByRole('heading', { name: 'Esito' })).toBeInTheDocument()
+    expect(screen.getByText('verdetto non estratto: vedi Esito')).toBeInTheDocument()
+    expect(container.textContent).not.toMatch(/senza verdetto nel registro/)
   })
 
   it('nessuna pagina pubblica un elenco "non verificabile" e nessuna cita gli studi esclusi', async () => {

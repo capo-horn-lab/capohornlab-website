@@ -10,7 +10,7 @@ strumenti:
   - "ES"
   - "CL"
 finestra: "i 216 test di LAB-2 (MES, MNQ, MCL) e i livelli tondi/giornalieri di NQ, ES, CL"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 pubblicabilita: "avvertenza"
 avvertenza: "`trades.json` e `cond1.json` contengono tracce di trade derivate da dati licenziati (solo aggregati); il book L2 è catturato da NinjaTrader (licenza)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6527-L6527"
@@ -43,7 +43,7 @@ Filtro per esclusione una dimensione alla volta, scelto in scoperta e misurato i
 | NQ 29300 (descrittivo): 25 esiti, rimbalzo 36% contro 49,5% dei multipli di 100 e 50,2% dei controlli | docs/EXECUTION_LEDGER.md#L6557-L6581 |
 | muri ES 12-26 (2 sessioni, descrittivo): 1514 muri, 76% ritirati prima del tocco, rimbalzo 57% (83/145) contro 47%. | docs/EXECUTION_LEDGER.md#L6557-L6581 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - Muri e NQ 29300 sono "DESCRITTIVO (nessun verdetto)"
 - 2 sessioni di book.

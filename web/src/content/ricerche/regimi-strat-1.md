@@ -32,7 +32,7 @@ Domanda 1: Spearman tra le due metà sulle 180 differenze con nullo a spostament
 | casi singoli credibili: MGC IBS -> crisi (d +5,96; m_crisi +8,47 contro calma +0,60 / trend +0,13). | docs/EXECUTION_LEDGER.md#L10691-L10697 |
 | Regime per strumento (secondario): Spearman -0,09, NON CONFERMATO. | docs/EXECUTION_LEDGER.md#L10691-L10697 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "il 'crisi' del k-means è per lo più ALTA VOLATILITÀ (P(VOL\|crisi)=0,64), non lo STRESS VIX (P(STRESS\|crisi)=0,17)"
 - "mean-reversion sui micro USA sempre accesa, non ridurre in volatilità/crisi".

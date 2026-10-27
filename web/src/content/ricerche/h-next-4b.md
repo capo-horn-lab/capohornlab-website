@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "SPY e QQQ giornalieri rettificati da Yahoo, 2006-2019 (principale), 2025-2026 (nuovo), 2020-2024 (descrittivo)"
-verdetto: "senza verdetto nel registro"
+verdetto: "verdetto non estratto: vedi Esito"
 audit: {"stato": "nota", "id": ["H-NEXT-4b"]}
 pubblicabilita: "avvertenza"
 avvertenza: "risultato forte ma effetto già noto in letteratura"
@@ -39,7 +39,7 @@ Regola SIG-2 B1b senza modifiche; costo 2 bp; placebo 200; BH q≤0,10 su 4 test
 | Descrittivo 2020-2024: SPY +54,4 bp (t 3,15) | docs/EXECUTION_LEDGER.md#L7277-L7293 |
 | QQQ +91,8 (t 4,67). | docs/EXECUTION_LEDGER.md#L7277-L7293 |
 
-## Cosa NON dice
+## Lettura e limiti (dal registro)
 
 - "È la prima regola del progetto confermata su dati mai usati"
 - limite: "l'IBS è un effetto pubblicato da anni proprio su SPY. Il periodo è nuovo per noi, non per la letteratura."

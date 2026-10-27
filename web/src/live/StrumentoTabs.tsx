@@ -7,12 +7,12 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { residua } from '@/lib/albero'
 import { useDopoIlPrimoPaint } from '@/lib/dopo-paint'
-import { num, prezzo } from '@/lib/fmt'
+import { num } from '@/lib/fmt'
 import { type Frequenze, haErrore, type Scenari, type StrumentoFrequenze, type StrumentoScenari } from '@/lib/tipi'
 import { AlberoTesto, Esiti } from '@/live/Esiti'
 import { SegnapostoGrafico } from '@/live/Legenda'
 import { TabellePannello } from '@/live/TabellePannello'
-import { righeEsiti, righeTesto, vista } from '@/live/vista'
+import { radiceRiga, righeEsiti, righeTesto, vista } from '@/live/vista'
 
 // the chart (Bklit + Motion, the heaviest code of the page) in its own chunk: the text and the tables paint first, the chart's
 // box, legend and caption are already in place (SegnapostoGrafico), so nothing moves when it arrives; if the chunk does not
@@ -41,7 +41,7 @@ function Grafico({ s, sc, scen, fr }: { s: string; sc: StrumentoScenari; scen: S
         {sc.prezzo != null ? <NumberFlow value={sc.prezzo} locales="en-US" format={{ useGrouping: false, maximumFractionDigits: 2 }} /> : '-'}
         <span className="text-muted-foreground">{` · ${sc.cadenza} · A ${num(sc.A)}`}</span>
         <br />
-        <span className="text-muted-foreground">{`radice ${sc.radice.ora} ${sc.radice.fase} a ${prezzo(sc.radice.prezzo)}${sc.radice.percorso ? ` | ${sc.radice.percorso}` : ''}`}</span>
+        <span className="text-muted-foreground">{radiceRiga(sc.radice)}</span>
         {er ? <><br /><span className="text-muted-foreground">{er}</span></> : null}
       </p>
       <Suspense fallback={<SegnapostoGrafico v={v} />}>
