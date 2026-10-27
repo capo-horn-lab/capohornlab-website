@@ -26,6 +26,15 @@
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.stripe.com; connect-src 'self' https://capohornlab-website.onrender.com https://api.stripe.com https://m.stripe.com https://m.stripe.network; frame-src https://js.stripe.com https://hooks.stripe.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 </IfModule>
 
+# Rotte della web app (React Router): /ricerche, /ricerche/<id>, /metodo, /stato -> index.html.
+# Solo se il file o la cartella non esistono: lab.html, about.html, legali, app/, fonts/ restano serviti come sono.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(ricerche|metodo|stato)(/.*)?$ /index.html [L]
+</IfModule>
+
 # Disable directory listing
 Options -Indexes
 
