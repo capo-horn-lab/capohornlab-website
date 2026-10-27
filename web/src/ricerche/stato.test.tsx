@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import Stato from '@/pagine/Stato'
 
 function busta(eta_s: number | null) {
@@ -57,5 +57,24 @@ describe('/stato', () => {
     monta()
     await waitFor(() => expect(screen.getAllByText(/Servizio non raggiungibile/)).toHaveLength(2))
     expect(screen.queryByText(/^motore (acceso|spento|in ritardo)$/)).toBeNull()
+  })
+
+  it('aggiornamento fallito dopo un dato riuscito: l eta non resta ferma accanto all errore (n/d)', async () => {
+    let giro = 0
+    vi.stubGlobal('fetch', vi.fn(async () => {
+      giro += 1
+      return giro <= 2 ? { ok: true, status: 200, json: async () => busta(0) } : { ok: false, status: 503, json: async () => ({}) }
+    }))
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
+    render(
+      <QueryClientProvider client={client}>
+        <Stato />
+      </QueryClientProvider>,
+    )
+    await waitFor(() => expect(screen.getAllByText('0 s')).toHaveLength(2))
+    await act(() => client.refetchQueries())
+    await waitFor(() => expect(screen.getAllByText(/Servizio non raggiungibile/)).toHaveLength(2))
+    expect(screen.queryAllByText('0 s')).toHaveLength(0)
+    expect(screen.getAllByText('n/d')).toHaveLength(2)
   })
 })

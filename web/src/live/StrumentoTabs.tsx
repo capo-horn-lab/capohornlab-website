@@ -2,6 +2,7 @@
 // tree text and panel tables. The chart is keyed by instrument: recreated only when the instrument changes.
 import NumberFlow from '@number-flow/react'
 import { lazy, Suspense, useMemo } from 'react'
+import { GraficoNonDisponibile } from '@/components/grafico-non-disponibile'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { residua } from '@/lib/albero'
@@ -14,8 +15,11 @@ import { TabellePannello } from '@/live/TabellePannello'
 import { righeEsiti, righeTesto, vista } from '@/live/vista'
 
 // the chart (Bklit + Motion, the heaviest code of the page) in its own chunk: the text and the tables paint first, the chart's
-// box, legend and caption are already in place (SegnapostoGrafico), so nothing moves when it arrives
-const GraficoLive = lazy(() => import('@/live/GraficoLive').then((m) => ({ default: m.GraficoLive })))
+// box, legend and caption are already in place (SegnapostoGrafico), so nothing moves when it arrives; if the chunk does not
+// load, one line takes the chart's place and the text and tables stay
+const GraficoLive = lazy(() =>
+  import('@/live/GraficoLive').then((m) => ({ default: m.GraficoLive }), () => ({ default: GraficoNonDisponibile })),
+)
 
 /** Instruments of both channels, the main one first, then scenari's order, then frequenze's. */
 export function ordineStrumenti(scen: Scenari | null | undefined, freq: Frequenze | null | undefined): string[] {

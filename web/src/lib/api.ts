@@ -31,10 +31,16 @@ async function carica<T>(chiave: 'scenari' | 'frequenze', valida: (x: unknown) =
   }
 }
 
+/** Data younger than this are not fetched again when the page mounts (staleTime stays 0, so the polls and a focus still
+ * refetch): on load, one request per channel, the prefetch's, instead of the prefetch plus the mount's. */
+export const APPENA_LETTO_MS = 5_000
+const vecchiAlMontaggio = (q: { state: { dataUpdatedAt: number } }) => Date.now() - q.state.dataUpdatedAt > APPENA_LETTO_MS
+
 const opzioniScenari = queryOptions({
   queryKey: ['live', 'scenari'],
   queryFn: ({ signal }) => carica('scenari', validaScenari, signal),
   refetchInterval: 15_000,
+  refetchOnMount: vecchiAlMontaggio,
   placeholderData: keepPreviousData,
   retry: false,
 })
@@ -43,6 +49,7 @@ const opzioniFrequenze = queryOptions({
   queryKey: ['live', 'frequenze'],
   queryFn: ({ signal }) => carica('frequenze', validaFrequenze, signal),
   refetchInterval: 60_000,
+  refetchOnMount: vecchiAlMontaggio,
   placeholderData: keepPreviousData,
   retry: 1,
   retryDelay: 3000,

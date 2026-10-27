@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { lazy, type ReactNode, Suspense } from 'react'
 import { Link, useParams } from 'react-router'
+import { GraficoNonDisponibile } from '@/components/grafico-non-disponibile'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -12,8 +13,11 @@ import { InLinea, Paragrafi } from '@/ricerche/Testo'
 import { AuditBadge, VerdettoBadge } from '@/ricerche/Verdetto'
 
 // the chart (Bklit + Motion) in its own chunk, mounted after the page's text is painted; until then a box of the chart's
-// proportions (aspectRatio 2.6 / 1, as in Grafico.tsx) keeps the sections below in place
-const Grafico = lazy(() => import('@/ricerche/Grafico').then((m) => ({ default: m.Grafico })))
+// proportions (aspectRatio 2.6 / 1, as in Grafico.tsx) keeps the sections below in place; a chunk that does not load leaves
+// one line in its place
+const Grafico = lazy(() =>
+  import('@/ricerche/Grafico').then((m) => ({ default: m.Grafico }), () => ({ default: GraficoNonDisponibile })),
+)
 
 function GraficoDopoIlTesto({ dati }: { dati: Dati }) {
   const pronto = useDopoIlPrimoPaint()

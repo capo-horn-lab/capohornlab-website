@@ -54,7 +54,8 @@ function Canale({ chiave, titolo }: { chiave: Chiave; titolo: string }) {
           <dt className="text-muted-foreground">Ricevuto</dt>
           <dd className="font-mono">{data.ricevuto ?? 'mai'}</dd>
           <dt className="text-muted-foreground">Eta'</dt>
-          <dd className="font-mono">{data.eta_s === null ? '-' : `${data.eta_s} s`}</dd>
+          {/* after a failed refresh the server's age of the last answer would stay frozen next to the error: not known */}
+          <dd className="font-mono">{error ? 'n/d' : data.eta_s === null ? '-' : `${data.eta_s} s`}</dd>
           <dt className="text-muted-foreground">Generato</dt>
           <dd className="font-mono">{data.dati?.generato ?? '-'}</dd>
           <dt className="text-muted-foreground">Principale</dt>

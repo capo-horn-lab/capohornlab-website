@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { Footer } from './Footer'
 import { Header } from './Header'
@@ -35,6 +35,32 @@ describe('layout', () => {
     fireEvent.click(bottone)
     const pannello = await screen.findByRole('dialog')
     expect(within(pannello).getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Ricerche', 'Metodo', 'Stato'])
+  })
+
+  it('menu del telefono: chiuso con Escape, il fuoco torna sul bottone che lo ha aperto', async () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    )
+    const bottone = screen.getByRole('button', { name: 'Apri il menu' })
+    bottone.focus()
+    fireEvent.click(bottone)
+    await screen.findByRole('dialog')
+    expect(bottone.getAttribute('aria-expanded')).toBe('true')
+    fireEvent.keyDown(document.activeElement ?? document.body, { key: 'Escape' })
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull())
+    expect(document.activeElement).toBe(bottone)
+    expect(bottone.getAttribute('aria-expanded')).toBe('false')
+  })
+
+  it('in attesa del primo chunk il bottone del menu e disattivato (un tocco non si perde nel cambio di header)', () => {
+    render(
+      <MemoryRouter>
+        <Header inAttesa />
+      </MemoryRouter>,
+    )
+    expect((screen.getByRole('button', { name: 'Apri il menu' }) as HTMLButtonElement).disabled).toBe(true)
   })
 
   it('i grafici Bklit si importano da @/components/charts', () => {

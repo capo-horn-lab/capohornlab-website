@@ -116,8 +116,24 @@ describe('api: timeout delle richieste (Important 4)', () => {
     precaricaLive(client)
     expect(url.map((u) => u.split('/live/')[1])).toEqual(['scenari', 'frequenze'])
     await vi.waitFor(() => expect(client.getQueryData(['live', 'frequenze'])).toBeDefined())
-    const { result } = renderHook(() => useScenari(), { wrapper })
-    expect(result.current.data?.dati?.principale.strumento).toBe('MGC')
+    const { result } = renderHook(() => ({ s: useScenari(), f: useFrequenze() }), { wrapper })
+    expect(result.current.s.data?.dati?.principale.strumento).toBe('MGC')
+    // one request per channel on load: the page's mount does not fetch again what the prefetch just brought
+    await new Promise((r) => setTimeout(r, 50))
+    expect(url.length).toBe(2)
+    client.clear()
+  })
+
+  it('montaggio con dati vecchi (oltre 5 s): la pagina li chiede di nuovo subito', async () => {
+    const url: string[] = []
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (u) => {
+      url.push(String(u))
+      return new Response(JSON.stringify(scenariJson), { status: 200 })
+    })
+    const { client, wrapper } = cliente()
+    client.setQueryData(['live', 'scenari'], scenariJson, { updatedAt: Date.now() - 6_000 })
+    renderHook(() => useScenari(), { wrapper })
+    await vi.waitFor(() => expect(url.length).toBe(1))
     client.clear()
   })
 

@@ -494,6 +494,18 @@ def test_numero_gia_nell_intervallo_citato_niente_riga_vicina_in_piu(tmp_path):
     assert non == 0 and [r["fonte"] for r in ok] == ["docs/EXECUTION_LEDGER.md#L5-L5"]
 
 
+def test_passo_4_preferisce_la_fonte_gia_scelta_per_la_riga(tmp_path):
+    # come safehaven-1 (CP-1): la riga cita due intervalli; "0,228" sta con le parole nel secondo (L5-L7), "2019" sta in
+    # tutti e due senza le parole. Il 2019 non apre una seconda Fonte (il primo intervallo, L1-L3): basta quella gia' scelta.
+    led = ["riga 1", "anno 2019 altro studio", "riga 3", "riga 4", "CP-1 scoperta R2 0,228 portafogli verifica",
+           "2019-2025 pendenza", "riga 7"]
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs" / "EXECUTION_LEDGER.md").write_text("\n".join(led), encoding="utf-8")
+    riga = "CP-1 scoperta portafogli verifica: R2 0,228, fuori campione 2019"
+    ok, non = E.righe_esito(riga, [(1, 3), (5, 7)], [], E.Contesto(tmp_path), [])
+    assert non == 0 and [r["fonte"] for r in ok] == ["docs/EXECUTION_LEDGER.md#L5-L7"]
+
+
 def test_cella_con_studio_escluso_tiene_le_citazioni_in_coda(mondo):
     _, out = genera(mondo)
     righe = righe_tabella(leggi_md(out, "theta-1"))
@@ -785,3 +797,15 @@ def test_serie_annuale_da_prova_json(mondo):
     assert d["righe"] == [["2019", 1.5], ["2020", -0.5], ["2021", 2.0]]
     assert d["fonte"] == "runtime/proofs/eta1/eta1.json#/anni"
     assert "## Grafico" in leggi_md(out, "eta-1")
+
+
+def test_metodo_md_elenca_le_stesse_parole_del_codice():
+    # la lista mostrata in /metodo e' quella che il generatore accetta davvero (_PAROLA), ne' una in piu' ne' una in meno
+    metodo = (Path(__file__).resolve().parents[1] / "src" / "content" / "metodo.md").read_text(encoding="utf-8")
+    elenco = re.search(r"Le parole sono ([^.(]+)", metodo).group(1)
+    mostrate = {p.strip() for p in elenco.split(",")}
+    radici = ["CONFERMAT", "ADOTTAT", "RITIRAT", "PARZIAL", "DESCRITTIV"]
+    candidate = {r + s for r in radici for s in "AOIE"} | {"PASS", "FAIL", "BLOCKED_ENV", "NOT_RUN"}
+    candidate |= {"NON " + c for c in candidate}
+    accettate = {c for c in candidate if re.fullmatch(E._PAROLA, c)}
+    assert mostrate == accettate
