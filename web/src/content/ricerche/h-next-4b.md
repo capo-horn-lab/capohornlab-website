@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "SPY e QQQ giornalieri rettificati da Yahoo, 2006-2019 (principale), 2025-2026 (nuovo), 2020-2024 (descrittivo)"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 audit: {"stato": "nota", "id": ["H-NEXT-4b"]}
 pubblicabilita: "avvertenza"
 avvertenza: "risultato forte ma effetto già noto in letteratura"

@@ -12,7 +12,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "GLD e SPY 2005-2026 e MGC/ZN su MES 2019-2026 (SAFEHAVEN-1); curva GSW e ACM (784 mesi) e ZN 93 fine mese (CP-1); MNQ, MES, M2K, MYM 2019-2026 (GAPFILL-1: 334-384 giorni G1)."
-verdetto: "pass · non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9863-L9870"
@@ -32,7 +32,7 @@ Regressioni annidate con Newey-West (SAFEHAVEN), IC e placebo (CP-1), scoperta/v
 | Risultato | Fonte |
 |---|---|
 | SAFEHAVEN-1 "PASS, NON CONFERMATA": parte paper non confermata (in verifica b>0 con t 2,79; scoperta copertura debole), regola operativa non confermata (ZN in verifica perde con t -2,5). | docs/EXECUTION_LEDGER.md#L9863-L9870 |
-| CP-1 "PASS (parte DGS10 BLOCKED_ENV), NON CONFERMATA": scoperta R² 0,228 (Wald 26,2, p 0,00008) ma fuori campione 2019-2025 pendenza +0,26 (t NW12 0,44), R² 0,006 | docs/EXECUTION_LEDGER.md#L9863-L9870 · docs/EXECUTION_LEDGER.md#L9909-L9914 |
+| CP-1 "PASS (parte DGS10 BLOCKED_ENV), NON CONFERMATA": scoperta R² 0,228 (Wald 26,2, p 0,00008) ma fuori campione 2019-2025 pendenza +0,26 (t NW12 0,44), R² 0,006 | docs/EXECUTION_LEDGER.md#L9909-L9914 |
 | ZN IC CP +0,062 (t 0,56). | docs/EXECUTION_LEDGER.md#L9909-L9914 |
 | GAPFILL-1 "Esito PASS, verdetto NON CONFERMATA per G1 e G2 su entrambi gli orizzonti (0 strumenti di verifica su 3": "il gap si chiude due volte su tre" ma i giorni in cui non si chiude perdono molto (peggiore da -180 a -1.287 USD). | docs/EXECUTION_LEDGER.md#L9863-L9870 · docs/EXECUTION_LEDGER.md#L9891-L9896 |
 

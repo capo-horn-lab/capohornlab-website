@@ -5,7 +5,7 @@ data: "2026-09-28"
 strumenti:
   - "ES"
 finestra: "replay di 39 intenti costruiti da barre ES 2024 reali con evidenza dello screener"
-verdetto: "pass · fail"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "modello e codici interni"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L2059-L2073"

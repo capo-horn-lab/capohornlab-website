@@ -43,12 +43,12 @@ Regola invariata (sig-2 ibs_only, motore LAB-2), ≥30 trade, media>0, t≥2, so
 | MES 47 trade +91,53 USD t 1,42 q 0,108 | docs/EXECUTION_LEDGER.md#L8216-L8222 |
 | MNQ 43 trade +85,86 t 0,67 | docs/EXECUTION_LEDGER.md#L8216-L8222 |
 | M2K 243 trade +23,72 t 1,63. | docs/EXECUTION_LEDGER.md#L8216-L8222 |
-| IBS-MYM: "CONFERMATA": 238 trade, +66,58 USD/trade (+39,7 bp), t 3,95, 67,2% vincenti, profit factor 1,93, drawdown massimo 1.862 USD, placebo p95 45,69. | docs/EXECUTION_LEDGER.md#L8243-L8248 · docs/EXECUTION_LEDGER.md#L8216-L8222 |
+| IBS-MYM: "CONFERMATA": 238 trade, +66,58 USD/trade (+39,7 bp), t 3,95, 67,2% vincenti, profit factor 1,93, drawdown massimo 1.862 USD, placebo p95 45,69. | docs/EXECUTION_LEDGER.md#L8243-L8248 |
 | IBS-EU: "NON confermata su nessuno dei 2": FESX 232 trade -8,26 EUR t -0,14 | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8282-L8285 |
 | FDXM 208 trade -101,56 EUR t -0,86. | docs/EXECUTION_LEDGER.md#L8282-L8285 |
-| L38 (descrittivo): 892 trade, +42,16 bp/trade, t 6,34, 64,5% vincenti, profit factor 1,78 (periodi già usati: "non è una prova") | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
+| L38 (descrittivo): 892 trade, +42,16 bp/trade, t 6,34, 64,5% vincenti, profit factor 1,78 (periodi già usati: "non è una prova") | docs/EXECUTION_LEDGER.md#L8257-L8272 |
 | VIX/VIX3M>1: 72 trade +148,7 bp (t 4,79) contro +32,8. | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
-| L40 (descrittivo): 942 trade, netto +67.589 USD, nessun anno negativo | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
+| L40 (descrittivo): 942 trade, netto +67.589 USD, nessun anno negativo | docs/EXECUTION_LEDGER.md#L8257-L8272 |
 | giorni peggiori 27/02/2025 -3.297, 07/08/2024 -2.849 USD | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8243-L8248 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
 | 4 indici aperti insieme il 16% dei giorni. | docs/EXECUTION_LEDGER.md#L8257-L8272 |
 

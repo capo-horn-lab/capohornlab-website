@@ -4,7 +4,7 @@ titolo: "IBS8-1 — la variante IBS 0,20/0,80/8 contro la regola in carta 0,20/0
 data: "2026-10-19"
 strumenti: []
 finestra: "4 micro 2019-05-06..2026-10-19; esame di controllo 2024-2026"
-verdetto: "non confermata · pass"
+verdetto: "non confermata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9441-L9452"

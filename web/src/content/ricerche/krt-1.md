@@ -6,7 +6,7 @@ strumenti:
   - "MCL"
   - "MGC"
 finestra: "CFTC disaggregated futures-only 2006-2026 (34,7 MB), 11 mercati continui Yahoo 2005-01..2026-10 (60.290 barre), MCL e MGC con costi"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9766-L9771"

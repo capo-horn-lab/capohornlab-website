@@ -10,7 +10,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "MES, MNQ, M2K, MYM NinjaTrader 2019-2026 (insieme \"future\") e SPY+QQQ 2006-2026 (ETF)"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8329-L8344"

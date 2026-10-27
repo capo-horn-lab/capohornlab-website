@@ -25,7 +25,7 @@ Prove locali una alla volta (llama-server Vulkan, temperatura 0): MMLU-20, calco
 
 | Risultato | Fonte |
 |---|---|
-| "gpt-oss-120b il migliore (MMLU-20 19/20, calcoli ragionando 12/12 in 7,5 s, JSON 11/12, commenti 6/6, 37-40 tok/s)" | docs/EXECUTION_LEDGER.md#L6335-L6341 · docs/EXECUTION_LEDGER.md#L6282-L6282 |
+| "gpt-oss-120b il migliore (MMLU-20 19/20, calcoli ragionando 12/12 in 7,5 s, JSON 11/12, commenti 6/6, 37-40 tok/s)" | docs/EXECUTION_LEDGER.md#L6335-L6341 |
 | 2.4T: decode 0,355 tok/s. | docs/EXECUTION_LEDGER.md#L6282-L6282 |
 
 ## Cosa NON dice

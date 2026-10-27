@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "IBS, R1b, TT, 3WEAK su MES, MNQ, M2K, MYM dal 2022 (stessi trade di BRIDGE-1)"
-verdetto: "adottata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8836-L8841"

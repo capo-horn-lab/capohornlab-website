@@ -6,11 +6,11 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "CSV SqueezeMetrics 02/05/2011-16/10/2026 (download autorizzato dal proprietario), IBS-NT sui 4 micro 2019-2026 (942 trade) e SPY/QQQ 2011-2018 (450 trade); GEXOC-1: SPY 2011-05-03..2018-12-31 (1.929 sessioni)."
-verdetto: "confermato · ritirata · non confermato"
+verdetto: "senza verdetto nel registro"
 audit: {"stato": "ritirato", "id": ["GEX-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""
-fonte_ledger: "docs/EXECUTION_LEDGER.md#L8969-L8969"
+fonte_ledger: "docs/EXECUTION_LEDGER.md#L8968-L8970"
 prove:
   - "runtime/proofs/gex1/gex1.json"
   - "runtime/proofs/gexoc1/gexoc1.json"

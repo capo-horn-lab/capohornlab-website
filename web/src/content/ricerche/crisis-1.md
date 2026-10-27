@@ -42,7 +42,7 @@ Nullo con 1.000 spostamenti circolari (CRISIS-1); R² fuori campione + Clark-Wes
 | future d -6,98, p 0,83. | docs/EXECUTION_LEDGER.md#L8797-L8800 |
 | EIA-1: "NON CONFERMATO": 203 eventi, correlazione -0,001, R² fuori campione -1,2%, Clark-West p 0,91 | docs/EXECUTION_LEDGER.md#L8811-L8811 |
 | regola 195 trade -8,36 bp (t -2,93). | docs/EXECUTION_LEDGER.md#L8811-L8811 |
-| CARRY-1: "NON CONFERMATO": 222 periodi, -25,4 bp per periodo netti, t -0,37 (placebo p95 +109). | docs/EXECUTION_LEDGER.md#L8825-L8825 · docs/EXECUTION_LEDGER.md#L8797-L8800 |
+| CARRY-1: "NON CONFERMATO": 222 periodi, -25,4 bp per periodo netti, t -0,37 (placebo p95 +109). | docs/EXECUTION_LEDGER.md#L8825-L8825 |
 | OPT-ALL-ZN: "0 confermati su 66" (ZN: IBS -1,33 bp/sessione, t -2,08). | docs/EXECUTION_LEDGER.md#L8797-L8800 · docs/EXECUTION_LEDGER.md#L8827-L8827 |
 
 ## Grafico

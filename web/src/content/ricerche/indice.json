@@ -7,7 +7,7 @@
    "QQQ",
    "MNQ"
   ],
-  "verdetto": "pass · fail",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -16,7 +16,7 @@
   "titolo": "REGIMI-STRAT-1 — le strategie rendono solo in certi regimi del classificatore k-means?",
   "data": "2026-10-25",
   "strumenti": [],
-  "verdetto": "pass · non confermato · non confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": false
  },
@@ -30,7 +30,7 @@
    "SPX",
    "SPY"
   ],
-  "verdetto": "pass",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -44,7 +44,7 @@
    "FESX",
    "FSXE"
   ],
-  "verdetto": "pass · fail · not_run",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -55,7 +55,7 @@
   "strumenti": [
    "MNQ"
   ],
-  "verdetto": "fail · pass",
+  "verdetto": "fail",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -67,7 +67,7 @@
    "MNQ",
    "ES"
   ],
-  "verdetto": "descrittivo · pass · confermato · non confermato",
+  "verdetto": "descrittivo",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -79,7 +79,7 @@
   "strumenti": [
    "MNQ"
   ],
-  "verdetto": "pass · fail · not_run",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -90,7 +90,7 @@
   "strumenti": [
    "MNQ"
   ],
-  "verdetto": "pass · not_run",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -104,7 +104,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -127,7 +127,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass · not_run",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -141,7 +141,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass · non confermata · parziale",
+  "verdetto": "non confermata",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -155,7 +155,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass · non confermata · parziale",
+  "verdetto": "non confermata",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -168,7 +168,7 @@
    "ETH",
    "MBT"
   ],
-  "verdetto": "non confermata · confermata · pass · parziale · confermato",
+  "verdetto": "pass · parziale",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -191,7 +191,7 @@
   "strumenti": [
    "M6E"
   ],
-  "verdetto": "pass · non confermata · parziale",
+  "verdetto": "non confermata",
   "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": true
@@ -204,7 +204,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "pass · fail · confermato · parziale · confermata · non confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -251,7 +251,7 @@
    "MCL",
    "MGC"
   ],
-  "verdetto": "non confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -271,7 +271,7 @@
   "titolo": "PAPER-PROGRAM (20/10/2026) — 13 studi dai paper e dalla domanda del proprietario: bilancio",
   "data": "2026-10-20",
   "strumenti": [],
-  "verdetto": "confermata · parziale · non confermata",
+  "verdetto": "senza verdetto nel registro",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -290,7 +290,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass · non confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -329,7 +329,7 @@
    "MES",
    "SPY"
   ],
-  "verdetto": "pass · parziale",
+  "verdetto": "parziale",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -341,7 +341,7 @@
    "MES",
    "MNQ"
   ],
-  "verdetto": "non confermata · pass",
+  "verdetto": "pass · non confermata",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -354,7 +354,7 @@
    "MES",
    "SPY"
   ],
-  "verdetto": "pass · confermata",
+  "verdetto": "confermata",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -402,7 +402,7 @@
    "IWM",
    "DIA"
   ],
-  "verdetto": "non confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -423,7 +423,7 @@
   "titolo": "AUDIT-FABLE e REVIEW-FABLE-MAX — revisioni di tutto il codice e di tutte le analisi (ritiri di conferme)",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "confermato · ritirata · non confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -517,7 +517,7 @@
    "BTC",
    "MBT"
   ],
-  "verdetto": "confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -531,7 +531,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "non confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -584,7 +584,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "confermato · non confermato",
+  "verdetto": "confermato",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -598,7 +598,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "adottata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -622,7 +622,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "confermato · ritirata · non confermato",
+  "verdetto": "senza verdetto nel registro",
   "audit": "ritirato",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -653,7 +653,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -679,7 +679,7 @@
   "titolo": "IBS8-1 — la variante IBS 0,20/0,80/8 contro la regola in carta 0,20/0,90/5",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "non confermata · pass",
+  "verdetto": "non confermata",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -751,7 +751,7 @@
   "titolo": "LLM-LOCAL-1/2, RAG-2/3, EVAL-2, PROMPT-1, NOISE-1, LAT-2, NOTA-1 — il modello linguistico locale dell'app (LFM2.5-24B-A2B)",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "non confermata · confermata · pass · blocked_env",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -793,7 +793,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -830,7 +830,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -945,7 +945,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "non confermato · adottata · confermata · confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -979,7 +979,7 @@
   "titolo": "PHASE-1 — 12 fasi cicliche di mercato e assegnazione delle strategie",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "pass",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": false
  },
@@ -1032,7 +1032,7 @@
    "MNQ",
    "NQ"
   ],
-  "verdetto": "pass",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": false
  },
@@ -1108,7 +1108,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "adottata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -1173,7 +1173,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "non confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -1191,7 +1191,7 @@
    "ZN",
    "M6E"
   ],
-  "verdetto": "non confermato",
+  "verdetto": "senza verdetto nel registro",
   "audit": "ritirato",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -1205,7 +1205,7 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "confermato",
+  "verdetto": "senza verdetto nel registro",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true
@@ -1242,7 +1242,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "confermata",
+  "verdetto": "senza verdetto nel registro",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -1395,7 +1395,7 @@
    "MCL",
    "MES"
   ],
-  "verdetto": "pass · fail · not_run",
+  "verdetto": "senza verdetto nel registro",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -1480,7 +1480,7 @@
   "strumenti": [
    "ES"
   ],
-  "verdetto": "pass · fail",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  }

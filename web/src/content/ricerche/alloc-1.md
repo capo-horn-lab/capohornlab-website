@@ -8,7 +8,7 @@ strumenti:
   - "IWM"
   - "DIA"
 finestra: "857 strategie (≥30 trade) su 10 strumenti, 60 unità famiglia x strumento, 2.184 sessioni (fuori campione dalla 501ª); STRESS-OOS-1: SPY/QQQ (e IWM, DIA) 2009-2018, 2.336 sessioni, 192 giorni di stress in 65 episodi."
-verdetto: "non confermato"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8628-L8633"

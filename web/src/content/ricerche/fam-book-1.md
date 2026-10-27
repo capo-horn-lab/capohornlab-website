@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "IBS-NT su MES, MNQ, M2K, MYM 2019-2026 (942 trade, gran parte già usati: prova descrittiva di gestione del rischio)"
-verdetto: "adottata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(importi in USD su 1 micro per indice: non indicano capitale consigliato)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9064-L9064"

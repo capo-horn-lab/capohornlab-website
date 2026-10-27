@@ -6,7 +6,7 @@ strumenti:
   - "BTC"
   - "MBT"
 finestra: "BTC-USD giornaliero Yahoo 2014-09-17..2026-10-18 (4.414 giorni, 20 bp a giro) e MBT 1 minuto NinjaTrader 2021-05..2026-10 (1,34 milioni di barre)"
-verdetto: "confermato"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(Yahoo/NinjaTrader solo aggregati; non è consulenza su criptovalute)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8504-L8510"
@@ -30,7 +30,7 @@ medie mobili, nuovi massimi, effetto lunedì, crollo e "famiglia" MR funzionano 
 | CRYPTO-1: "1 confermato su 12": SMA50, 111 periodi +1.044 bp (t 2,23, placebo media 524, p95 924, DSR 0,982, q 0,025) | docs/EXECUTION_LEDGER.md#L8504-L8510 |
 | molto più forte nel 2014-2020 (+1.972) che nel 2021-2026 (+225) | docs/EXECUTION_LEDGER.md#L8504-L8510 |
 | la "nostra famiglia" sul bitcoin: IBS 482 trade -1,35 bp (t -0,05). | docs/EXECUTION_LEDGER.md#L8504-L8510 |
-| CRYPTO-2: "NON CONFERMATO": SMA50 su MBT 46 periodi, +191,5 bp (t 0,97, p95 462,3) | docs/EXECUTION_LEDGER.md#L8504-L8510 · docs/EXECUTION_LEDGER.md#L8554-L8557 |
+| CRYPTO-2: "NON CONFERMATO": SMA50 su MBT 46 periodi, +191,5 bp (t 0,97, p95 462,3) | docs/EXECUTION_LEDGER.md#L8554-L8557 |
 | Sharpe giornaliero 0,53 contro comprare e tenere 0,54 | docs/EXECUTION_LEDGER.md#L8554-L8557 |
 | rendimento +72,2% contro +79,4%. | docs/EXECUTION_LEDGER.md#L8554-L8557 |
 

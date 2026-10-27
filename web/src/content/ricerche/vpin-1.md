@@ -6,7 +6,7 @@ strumenti:
   - "MES"
   - "MNQ"
 finestra: "MES 1.915 sessioni (103.403 secchi di volume) e MNQ 1.924 (103.329), 2019-05..2026-10"
-verdetto: "non confermata · pass"
+verdetto: "pass · non confermata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9715-L9721"

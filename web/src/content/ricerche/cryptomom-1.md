@@ -7,7 +7,7 @@ strumenti:
   - "ETH"
   - "MBT"
 finestra: "BTC 631 settimane (2014-09..2026-10), ETH 467 settimane, MBT 284 settimane (2021-05..2026-10)"
-verdetto: "non confermata · confermata · pass · parziale · confermato"
+verdetto: "pass · parziale"
 pubblicabilita: "avvertenza"
 avvertenza: "(non è consulenza sulle criptovalute)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9776-L9781"

@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "SPY/QQQ 2009-09..2026-10 (4.295 giorni, 324 in backwardation)"
-verdetto: "non confermato"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7990-L7994"

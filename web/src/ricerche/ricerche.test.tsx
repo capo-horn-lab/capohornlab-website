@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router'
 import Ricerca from '@/pagine/Ricerca'
 import Ricerche from '@/pagine/Ricerche'
 import { indice } from './archivio'
-import { barreTabella, puntiSerie } from './grafico-dati'
+import { barreTabella, puntiSerie, valoriSerie } from './grafico-dati'
 import {
   dividiFonti,
   idSezione,
@@ -127,6 +127,18 @@ describe('grafici: un valore mancante non e\' zero', () => {
   })
 })
 
+describe('sparkline', () => {
+  it('un anno senza valore salta il punto: non diventa 0', () => {
+    const dati: Dati = {
+      tipo: 'serie',
+      colonne: ['anno', 'anni'],
+      righe: [['2019', 1.5], ['2020', null], ['2021', 2.0]],
+      fonte: 'x.json#/anni',
+    }
+    expect(valoriSerie(dati)).toEqual([1.5, 2.0])
+  })
+})
+
 function conRouter(percorso: string) {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false } } })
   return render(
@@ -158,6 +170,8 @@ describe('pagine', () => {
     expect(screen.getByRole('heading', { name: 'Ricerche' })).toBeInTheDocument()
     expect(screen.getByText(new RegExp(`${indice.length} di ${indice.length} ricerche`))).toBeInTheDocument()
     expect(screen.getByRole('columnheader', { name: 'Verdetto nel registro' })).toBeInTheDocument()
+    expect(screen.getAllByText(/locatore principale della scheda/).length).toBeGreaterThan(0)
+    expect(screen.queryByText(/righe del registro che la pagina cita/)).toBeNull()
     const filtro = screen.getByLabelText('Verdetto nel registro')
     const opzioni = within(filtro).getAllByRole('option').map((o) => o.textContent)
     expect(opzioni).toContain(SENZA_VERDETTO)

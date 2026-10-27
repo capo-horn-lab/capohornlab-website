@@ -4,7 +4,7 @@ titolo: "PHASE-1 — 12 fasi cicliche di mercato e assegnazione delle strategie"
 data: "2026-10-19"
 strumenti: []
 finestra: "221 strategie x 12 fasi (tendenza x volatilità x carattere)"
-verdetto: "pass"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7643-L7643"

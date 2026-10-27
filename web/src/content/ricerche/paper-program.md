@@ -4,7 +4,7 @@ titolo: "PAPER-PROGRAM (20/10/2026) — 13 studi dai paper e dalla domanda del p
 data: "2026-10-20"
 strumenti: []
 finestra: "programma indirizzato dal proprietario (indici, tassi, valute, energia, metalli, volatilità, crypto): rubriche per gruppo (INDICI-1, TASSI-FX-1, COMM-1) e prove VPIN-1, KRT-1, FOMCDRIFT-1, TUGWAR-1, GHLZ-1, CRYPTOMOM-1, MACROWIN-1, FXFOMC-1, VIXTS-2, SAFEHAVEN-1, CP-1, VXPREM-1, GAPFILL-1."
-verdetto: "confermata · parziale · non confermata"
+verdetto: "senza verdetto nel registro"
 audit: {"stato": "nota", "id": ["PAPER-PROGRAM"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""

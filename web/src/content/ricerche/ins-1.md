@@ -31,7 +31,8 @@ NPR a 30/90 giorni (acquirenti-venditori), classificazione routine/opportunistic
 | "Non vale." | docs/EXECUTION_LEDGER.md#L6939-L6948 |
 | NPR 90 giorni contro SPY a 21 giorni rho +0,113 (t 1,31), QQQ +0,071 (t 0,85) | docs/EXECUTION_LEDGER.md#L6939-L6948 |
 | a 63 giorni circa zero | docs/EXECUTION_LEDGER.md#L6939-L6948 |
-| la famiglia insider "non tiene" a 4 h e giornaliero, su MES 4 h peggiora il Brier (+59e-5, intervallo 0,7-119e-5). 1.152.849 acquisti e vendite sul mercato (284.446 acquisti, 868.403 vendite). | docs/EXECUTION_LEDGER.md#L6939-L6948 · docs/EXECUTION_LEDGER.md#L6936-L6936 |
+
+1 righe della scheda non riportate: la prova citata non le contiene.
 
 ## Cosa NON dice
 

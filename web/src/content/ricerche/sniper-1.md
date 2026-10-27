@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ, MES, M2K, MYM 1 minuto 2019-05..2026-10-20 (MES 1.780 sessioni, MNQ 1.790, M2K 1.762, MYM 1.774; scoperta 2019-05..2023-12, verifica 2024-01..2026-10)"
-verdetto: "pass · non confermata · parziale"
+verdetto: "non confermata"
 pubblicabilita: "avvertenza"
 avvertenza: "esito negativo ben documentato; `sniper1_trades.csv` contiene tracce di trade derivate da dati licenziati (solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10200-L10213"

@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ (poi MES, M2K, MYM) 1 minuto NinjaTrader 2019-2026, ultime 60-250-500 sessioni, ora di Roma; documento del proprietario `docs/research/TEORIA_MOVIMENTO_2026-10-21.txt` (5.698 byte)"
-verdetto: "pass"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "prezzi e VWAP di future CME aggiornati al minuto già pubblicati sul sito con via libera del proprietario del 26/10 (L10849): licenza dati a decisione del proprietario."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10287-L10303"
@@ -31,14 +31,13 @@ Frequenze empiriche p, k, n e margine 1,96·√(p(1-p)/n); finestre fisse di Rom
 | Risultato | Fonte |
 |---|---|
 | Rubrica di accettazione PASS (5/5 + 4/4 dell'aggiunta; MNQ 1,9 s; ciclo a regime 2,6 s per 4 strumenti). | docs/EXECUTION_LEDGER.md#L10287-L10303 |
+| Documento: escursione mediana (60 sessioni, punti) 00:00-08:00 192, 08:00-14:30 195, 14:30-15:30 88, 15:30-16:00 162, 21:00-22:00 82 | docs/EXECUTION_LEDGER.md#L10287-L10303 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
 | range medio sessione regolare 361 punti | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
 | massimo della notte superato entro le 22:00: 0,00-0,15 A 87% (n 105), 0,15-0,30 A 67% (57), 0,30-0,50 A 59% (39), 0,50-1,00 A 42% (38), oltre 1 A 36% (11) | docs/EXECUTION_LEDGER.md#L10287-L10303 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
 | sopra il massimo notturno entro le 15:30 47%, entro le 22:00 69% | docs/EXECUTION_LEDGER.md#L10287-L10303 |
 | minimo rotto 36% e 64%. | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
 | Esempio 21/10 21:10 Roma: tondo sotto 29.900 nel 66% ±8 (91/137) | docs/EXECUTION_LEDGER.md#L10287-L10303 |
 | caso dell'apertura in fase estensione, chiusura sopra l'apertura 44% ±12 (30/69). | docs/EXECUTION_LEDGER.md#L10287-L10303 |
-
-1 righe della scheda non riportate: la prova citata non le contiene.
 
 ## Cosa NON dice
 

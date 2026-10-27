@@ -6,10 +6,10 @@ strumenti:
   - "MNQ"
   - "ES"
 finestra: "cattura L1/L2 dell'app dal 14/10/2026 (MNQ 12-26: una sola sessione regolare completa, 21/10; ES 12-26 una, 15/10; letti 88.530.242.981 byte, 270.131.798 righe)"
-verdetto: "descrittivo · pass · confermato · non confermato"
+verdetto: "descrittivo"
 audit: {"stato": "nota", "id": ["ASSORB-1"]}
 pubblicabilita: "avvertenza"
-avvertenza: "ASSORB-2: NOT_RUN."
+avvertenza: "la heatmap PNG mostra il book L2 di un giorno (dati di mercato licenziati); ASSORB-2: NOT_RUN."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10394-L10416"
 prove:
   - "runtime/proofs/assorb1/heatmap-2026-10-21.png"

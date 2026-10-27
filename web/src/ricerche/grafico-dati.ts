@@ -44,3 +44,9 @@ export function barreTabella(dati: Dati): BarreTabella {
   const unita = new Set(dati.righe.map((r) => (iUnita < 0 ? '' : String(r[iUnita] ?? ''))))
   return { colonna, barre, omesse, unitaMiste: unita.size > 1 }
 }
+
+/** Valori della colonna numerica di una serie per la sparkline: i null saltano il punto, non diventano 0. */
+export function valoriSerie(dati: Dati): number[] {
+  const c = colonnaValori(dati)
+  return c < 0 ? [] : dati.righe.map((r) => numero(r[c])).filter((v): v is number => v !== null)
+}

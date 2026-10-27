@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ (e MES, M2K, MYM), ultime 250 sessioni; richiesta del proprietario: vedere sul grafico live i rami (primo movimento di 50 punti, ritorno, 50 opposto, estensione) con le probabilità statistiche."
-verdetto: "pass · not_run"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "il codice dell'indicatore è prodotto proprio (nessun dato di terzi)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10320-L10320"

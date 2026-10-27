@@ -6,7 +6,7 @@ strumenti:
   - "MNQ"
   - "NQ"
 finestra: "MNQ base 1 s 2023-01..2024-08-15 + NQ 1m fine 2024 + MNQ 12-26 2026"
-verdetto: "pass"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7678-L7678"

@@ -7,7 +7,7 @@ strumenti:
   - "MES"
   - "SPY"
 finestra: "174 CSV di scadenze mensili VX Cboe 2013-01-16..2027-06-16 (2 min 53 s di download), MES e SPY; la robustezza della regola confermata è in VXPREM-2 (scheda successiva)"
-verdetto: "pass · confermata"
+verdetto: "confermata"
 pubblicabilita: "avvertenza"
 avvertenza: "Avvertenza forte: confermata \"con riserve forti\" (76% del risultato nel 2020, t<2 senza i 5 giorni migliori)"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9919-L9927"

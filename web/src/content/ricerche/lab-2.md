@@ -7,7 +7,7 @@ strumenti:
   - "MCL"
   - "MES"
 finestra: "MNQ (base 1 s, 2023-01-01..2024-08-15), MCL (base 1 s, 2024-01..2025-12), MES (1 m, 2020-2024)"
-verdetto: "pass · fail · not_run"
+verdetto: "senza verdetto nel registro"
 audit: {"stato": "nota", "id": ["LAB-2"]}
 pubblicabilita: "avvertenza"
 avvertenza: "i claim sono di terzi; Reddit via archivio pubblico; dati licenziati solo aggregati."

@@ -17,20 +17,36 @@ LEDGER = "\n".join(
     + [
         "riga 101",
         "riga 102",
-        "NON CONFERMATA: MES 120 trade +12,34 USD (t 1,50); MNQ 80 trade -3,21 USD",
+        "Esito ALFA (alfa1.json): NON CONFERMATA: MES 120 trade +12,34 USD (t 1,50); MNQ 80 trade -3,21 USD",
         "q 0,48 placebo p95 9,9",
         "riga 105",
         "riga 106",
         "gamma +50,5 bp t 2,40 CONFERMATO",
         "riga 108",
-        "CONFERMA RITIRATA, GAMMA-1 = NON CONFERMATO; GAMMA-2 delta +3,21 bp",
+        "CONFERMA RITIRATA; verdetto NON CONFERMATO per GAMMA-1; GAMMA-2 delta +3,21 bp",
         "riga 110",
         "aiutano 10 casi",
         "riga 112",
-        "zeta MES 55 trade +7,77 USD (t 2,22) FAIL",
+        "Esito zeta: FAIL, MES 55 trade +7,77 USD (t 2,22)",
         "NON CONFERMATA classifica 1 -2,84; 2 -1,57",
+        # 115-127: casi di contesto per le parole di verdetto (sono frasi del registro, vedi ANCORE)
+        "Suite: 120 PASS, 0 FAIL, 1924 s",  # 115: conteggi di test, non un verdetto (caso lab-2)
+        "- Verdetto: CONFERMATO se media netta > 0 e t >= 2; NON CONFERMATO altrimenti",  # 116: rubrica (caso assorb-1)
+        "DIXCLOSE-1 rubrica: CONFERMATA dopo 60 giorni-segnale se media netta > 0; FALSIFICATA altrimenti",  # 117 (oc-explore-1)
+        "Esito DIXCLOSE-1: nessun esito; 2 test PASS; 0 CONFERMATE su 4",  # 118: test PASS e conteggio (phase-1)
+        "Esito X (a/b.json, run.log): NON CONFERMATA, nessuna variante",  # 119: "Esito ...: PAROLA"
+        "- Verdetto: PARZIALE",  # 120: "Verdetto: PAROLA"
+        "Esito PASS (script eseguito), verdetto NON CONFERMATA su 4 varianti",  # 121: "Esito PAROLA" + "verdetto PAROLA"
+        "Esito: **BLOCKED_ENV**, non PASS",  # 122: "Esito: PAROLA"; "non PASS" non e' ancorato
+        "il verdetto NON CONFERMATA regge anche in lettura ottimistica",  # 123: "verdetto PAROLA"
+        "- esito NON CONFERMATA (bilancio qui sopra)",  # 124: "esito PAROLA"
+        "Outcome: CONFERMATA solo se media > 0",  # 125: seguita da "solo se": rubrica
+        "Esito: 3643 PASS, 0 FAIL",  # 126: preceduta da un conteggio
+        "Outcome: DESCRITTIVO con 0 eventi",  # 127: "Outcome: PAROLA"
+        "client IB in sola lettura (ib_async 2.1.0)",  # 128
+        "test_ibkr_opzioni 9 PASS",  # 129
+        "riga 130",
     ]
-    + [f"riga {i}" for i in range(115, 131)]
 )
 
 INVENTARIO = """# Inventario finto
@@ -193,6 +209,66 @@ INVENTARIO = """# Inventario finto
 | 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
 | 6. Pubblicabilità | OK. |
 
+### CHI-1 — pagina il cui locatore contiene solo conteggi di test
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 01/10/2026; MES; domanda: conteggi? |
+| 2. Metodo | Un test. |
+| 3. Esito | MES 120 trade (L115). |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### RHO-1 — pagina il cui locatore contiene solo una rubrica futura
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 30/09/2026; MES; domanda: rubrica? |
+| 2. Metodo | Un test. |
+| 3. Esito | MES 60 giorni (L117). |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### SIGMA-1 — versione con punti come un solo numero
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 29/09/2026; MES; domanda: quale client? |
+| 2. Metodo | Un test. |
+| 3. Esito | client IB (ib_async 2.1.0), 9 test PASS (L128-L129) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### TAU-1 — numeri in una tabella di documento, intestazione 9 righe sopra
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 28/09/2026; MES; domanda: escursione? |
+| 2. Metodo | Un test. |
+| 3. Esito | Documento: escursione mediana (sessioni, punti) 00:00-08:00 192, 08:00-14:30 195. (L103; TAB.txt sez. 3) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### UPSILON-1 — numero lontano dall'intestazione del documento
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 27/09/2026; MES; domanda: escursione? |
+| 2. Metodo | Un test. |
+| 3. Esito | Documento: escursione mediana (sessioni, punti) 777. (L103; TAB.txt sez. 9) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### FI-1 — avvertenza con fatto e istruzione nella stessa clausola
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 26/09/2026; MES; domanda: avvertenza mista? |
+| 2. Metodo | Un test. |
+| 3. Esito | MES 120 trade (L103). |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK con avvertenza: la heatmap PNG mostra il book L2 di un giorno (dati licenziati): pubblicarla solo se la licenza lo consente; gli esiti numerici sì. |
+
 ## Appendice A — Non pubblicabili: infrastruttura
 
 | Gruppo | Schede |
@@ -224,6 +300,15 @@ PROVE = {
     # 99.99 e' dentro 1999.9912 (non e' un valore); 77 e 7.5 stanno nello stesso record, 12 in un altro
     "runtime/proofs/mu1/mu1.json": '{"sparso": {"a": 1999.9912, "b": 12}, "rec": {"n": 77, "mean": 7.5}}',
     "runtime/research/sa-report/summary.json": json.dumps(SUMMARY),
+    # tabella di documento: l'intestazione sta 9 righe sopra la riga con i numeri, 40 righe sopra un'altra
+    "docs/research/TAB.txt": "\n".join(
+        ["4. TABELLA ESCURSIONE MEDIANA PER FINESTRA (sessioni, punti)", "finestra Roma   escursione   meta' centrale"]
+        + [f"   altra finestra {chr(97 + i)}   senza numeri" for i in range(7)]
+        + ["00:00-08:00 Asia               192        142-235              85",
+           "08:00-14:30 Europa             195        160-232              94"]
+        + [f"   riga di riempimento {chr(97 + i % 26)}" for i in range(30)]
+        + ["    zona lontana 777"]
+    ),
 }
 
 
@@ -409,9 +494,91 @@ def test_parole_deduplicate(mondo):
     inv, radice, out = mondo
     ctx = E.Contesto(radice)
     assert E.parole_registro(ctx, [(103, 103), (103, 104), (103, 103)]) == "non confermata"
-    assert E.parole_registro(ctx, [(109, 109)]) == "ritirata · non confermato"
+    assert E.parole_registro(ctx, [(109, 109)]) == "non confermato"  # "CONFERMA RITIRATA" non e' ancorata
     assert E.parole_registro(ctx, [(110, 110)]) == "senza verdetto nel registro"
     assert E.parole_registro(ctx, []) == "senza verdetto nel registro"
+
+
+SENZA = "senza verdetto nel registro"
+
+
+@pytest.mark.parametrize(
+    "riga, atteso",
+    [
+        (115, SENZA),  # lab-2: "Suite: 120 PASS, 0 FAIL" sono conteggi di test
+        (116, SENZA),  # assorb-1: "Verdetto: CONFERMATO se ..." e' la definizione della rubrica
+        (117, SENZA),  # oc-explore-1: "CONFERMATA dopo 60 giorni-segnale se ..." e' una rubrica futura
+        (118, SENZA),  # phase-1: "2 test PASS" e "0 CONFERMATE" non sono un verdetto
+        (125, SENZA),  # "Outcome: CONFERMATA solo se ..." e' una definizione
+        (126, SENZA),  # "Esito: 3643 PASS, 0 FAIL": la parola e' preceduta da un conteggio
+        (119, "non confermata"),  # "Esito X (...): PAROLA"
+        (120, "parziale"),  # "Verdetto: PAROLA"
+        (121, "pass · non confermata"),  # "Esito PAROLA" + "verdetto PAROLA"
+        (122, "blocked_env"),  # "Esito: PAROLA" ("non PASS" non e' ancorato)
+        (123, "non confermata"),  # "verdetto PAROLA"
+        (124, "non confermata"),  # "esito PAROLA"
+        (127, "descrittivo"),  # "Outcome: PAROLA"
+    ],
+)
+def test_verdetto_solo_da_frasi_ancorate(mondo, riga, atteso):
+    inv, radice, out = mondo
+    assert E.parole_registro(E.Contesto(radice), [(riga, riga)]) == atteso
+
+
+def test_pagine_con_solo_conteggi_o_rubriche_senza_verdetto(mondo):
+    _, out = genera(mondo)
+    for id_ in ("chi-1", "rho-1"):
+        assert front(out / f"{id_}.md")["verdetto"] == SENZA
+        assert front(out / f"{id_}.md")["fonte_ledger"] in ("docs/EXECUTION_LEDGER.md#L115-L115", "docs/EXECUTION_LEDGER.md#L117-L117")
+
+
+def test_versione_con_punti_e_un_token_e_i_codici_non_danno_numeri(mondo):
+    assert E.numeri("client IB (ib_async 2.1.0), 9 test PASS") == ["2.1.0", "9"]
+    assert E.numeri("sotto il p95 dei placebo (85,83); DSR1000 su L38, 27,3") == ["85,83", "27,3"]
+    _, out = genera(mondo)
+    md = leggi_md(out, "sigma-1")
+    assert "righe della scheda non riportate" not in md
+    righe = righe_tabella(md)
+    assert len(righe) == 1 and righe[0].endswith("| docs/EXECUTION_LEDGER.md#L128-L129 |")
+
+
+def test_numeri_in_tabella_di_documento_per_sezione_non_per_riga(mondo):
+    _, out = genera(mondo)
+    md = leggi_md(out, "tau-1")
+    assert "righe della scheda non riportate" not in md
+    righe = righe_tabella(md)
+    assert len(righe) == 1 and righe[0].endswith("| docs/research/TAB.txt |")
+    # la frase compare solo se il numero manca davvero: qui sta 30 righe sotto l'intestazione
+    md = leggi_md(out, "upsilon-1")
+    assert "1 righe della scheda non riportate: la prova citata non le contiene." in md and "777" not in md
+
+
+def test_ritirato_ha_il_locatore_della_riga_dell_audit(mondo):
+    _, out = genera(mondo)
+    assert front(out / "gamma-1.md")["fonte_ledger"] == "docs/EXECUTION_LEDGER.md#L109-L109"
+    assert front(out / "gamma-1.md")["verdetto"] == "non confermato"
+
+
+@pytest.mark.parametrize(
+    "clausola, atteso",
+    [
+        ("la heatmap PNG mostra il book L2 di un giorno (dati di mercato licenziati): pubblicarla solo se la licenza lo consente",
+         "la heatmap PNG mostra il book L2 di un giorno (dati di mercato licenziati)"),
+        ("orari ufficiali di terzi: citare fonti UFF come nel documento", "orari ufficiali di terzi"),
+        ("regole pubbliche di terzi, citare fonti", "regole pubbliche di terzi"),
+        ("dati di mercato di terzi (ES 1m) non ripubblicabili", ""),  # fatto e istruzione non separabili: cade
+        ("pubblicare solo i numeri del walk-forward, non il resto", ""),  # niente frammenti sospesi
+        ("solo aggregati: citare", ""),  # il prefisso e' troppo corto per reggere da solo
+        ("dati licenziati solo aggregati", "dati licenziati solo aggregati"),  # nessuna istruzione: intatta
+    ],
+)
+def test_clausola_mista_tiene_il_prefisso_fattuale(clausola, atteso):
+    assert E.pulisci_clausola(clausola) == atteso
+
+
+def test_avvertenza_mista_tiene_la_parte_fattuale(mondo):
+    _, out = genera(mondo)
+    assert front(out / "fi-1.md")["avvertenza"] == "la heatmap PNG mostra il book L2 di un giorno (dati licenziati)"
 
 
 def test_senza_parola_nelle_righe_citate_senza_verdetto(mondo):

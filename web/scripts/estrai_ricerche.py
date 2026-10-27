@@ -37,7 +37,8 @@ LEDGER = "docs/EXECUTION_LEDGER.md"
 SUMMARY = "runtime/research/sa-report/summary.json"
 MAX_RIGHE_DATI = 150
 MAX_BYTE_PROVA = 12_000_000
-MARGINE_LEDGER = 3  # righe oltre l'intervallo citato in cui si accetta ancora un numero (con le parole della riga)
+MARGINE_LEDGER = 3  # righe oltre l'intervallo citato in cui si accetta ancora un numero (con le parole sulla stessa riga)
+SEZIONE_DOC = 12  # in un documento: righe sopra il numero in cui cercare l'intestazione della sezione/tabella con le parole
 SENZA_VERDETTO = "senza verdetto nel registro"
 
 FRONTMATTER = ("id", "titolo", "data", "strumenti", "finestra", "verdetto",
@@ -57,9 +58,23 @@ STRUMENTI = ("MES", "MNQ", "M2K", "MYM", "MCL", "MGC", "M6E", "MBT", "ES", "NQ",
 # Parole di verdetto/esito scritte nel registro (docs/EXECUTION_LEDGER.md); lista chiusa. Ognuna compare nel
 # registro (PASS, FAIL, CONFERMATA/O, NON CONFERMATA/O, RITIRATA, PARZIALE, BLOCKED_ENV, NOT_RUN, ADOTTATA,
 # NON ADOTTATA, DESCRITTIVO); RITIRATO e' nella lista del controllore anche se oggi il registro scrive RITIRATA.
-PAROLE = re.compile(
-    r"(?<![A-Za-z_])(?:NON\s+(?:CONFERMAT[AO]|ADOTTATA|[Cc]onfermat[ao]|[Aa]dottata)"
-    r"|CONFERMAT[AO]|ADOTTATA|PARZIALE|RITIRAT[AO]|DESCRITTIVO|PASS|FAIL|BLOCKED_ENV|NOT_RUN)(?![A-Za-z_])")
+_PAROLA = (r"(?:NON\s+(?:CONFERMAT[AO]|ADOTTATA|[Cc]onfermat[ao]|[Aa]dottata)"
+           r"|CONFERMAT[AO]|ADOTTATA|PARZIALE|RITIRAT[AO]|DESCRITTIVO|PASS|FAIL|BLOCKED_ENV|NOT_RUN)")
+PAROLE = re.compile(r"(?<![A-Za-z_])" + _PAROLA + r"(?![A-Za-z_])")
+
+# Una parola e' un verdetto solo se ANCORATA a una frase di verdetto che il registro usa davvero (docs/EXECUTION_LEDGER.md):
+#   "Esito X (runtime/proofs/x/x.json, run.log): NON confermato" (L8058, L8481, L8782), "Esito: BLOCKED_ENV" (L1653),
+#   "Esito PASS, verdetto NON CONFERMATA ..." e "esito NON CONFERMATA" (L9721, L9282), "Verdetto: NON CONFERMATA" (L9247),
+#   "verdetto NON CONFERMATA" (L9309). Mai una parola preceduta da un conteggio ("3643 PASS", "0 FAIL"), mai seguita da
+#   "se"/"quando"/"dopo" (definizione di rubrica), mai fuori da queste frasi. In dubbio: senza verdetto.
+_FINE = r"(?![A-Za-z_])(?!\s+(?:solo\s+)?(?:se|quando|dopo)\b)"
+ANCORE = [re.compile(rx) for rx in (
+    r"(?i:\besito\b)[^\n;]{0,100}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE,
+    r"(?i:\besito)\s+\**(?P<w>" + _PAROLA + r")" + _FINE,
+    r"(?i:\bverdetto\b)[^:\n;]{0,40}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE,
+    r"(?i:\bverdetto)\s+\**(?P<w>" + _PAROLA + r")" + _FINE,
+    r"(?i:\boutcome\b)[^\n;]{0,40}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE,
+)]
 
 # Istruzioni di lavoro dell'inventario (non sono fatti sullo studio): le clausole che le contengono non si pubblicano.
 ISTRUZIONI = re.compile("|".join([
@@ -85,8 +100,9 @@ OPERANDO = r"A-Za-z0-9_)\]}%"
 OP = re.compile("[" + OPERANDO + "]")
 NUMERO = re.compile(
     r"(?P<v>\d{4}-\d{2}-\d{2}|\d{1,2}:\d{2}(?::\d{2})?)"
-    r"|(?:(?<![" + OPERANDO + r"])(?P<s>[-" + MENO + r"]))?(?<![A-Za-z_])(?<![A-Za-z]-)"
-    r"(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:[.,]\d+)?)"
+    # un numero comincia a confine di parola ("p95" non da' "5", "DSR1000" non da' "000"); "2.1.0" e' un token solo
+    r"|(?:(?<![" + OPERANDO + r"])(?P<s>[-" + MENO + r"]))?(?<![A-Za-z_])(?<![A-Za-z]-)(?<!\d)"
+    r"(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:\.\d+){2,}(?!\d)|\d+(?:[.,]\d+)?)"
 )
 
 
@@ -319,11 +335,31 @@ def cella(t):
     return t.replace("|", "\\|")
 
 
+def prefisso_fattuale(s):
+    """Di una clausola con istruzioni, la parte iniziale fino a una virgola o a due punti (fuori da parentesi e virgolette)
+    se non ha istruzioni e regge da sola (almeno 3 parole, non comincia con "non", "ma", "e"...); altrimenti ''."""
+    depth, citato, prefisso = 0, False, ""
+    for i, c in enumerate(s):
+        if c == '"':
+            citato = not citato
+        elif not citato:
+            depth += (c in "([{") - (c in ")]}")
+            if depth == 0 and c in ",:":
+                if ISTRUZIONI.search(s[:i]):
+                    break
+                prefisso = s[:i]
+    ok = (len(re.findall(r"[A-Za-zÀ-ÿ]{3,}", prefisso)) >= 3
+          and not re.match(r"\W*(?:non|ma|e|o|con|senza|solo|quindi|cioe')\b", prefisso, re.I))
+    return prefisso.strip(" ,:;") if ok else ""
+
+
 def pulisci_clausola(seg):
-    """Toglie le parentesi con istruzioni; la clausola con istruzioni fuori dalle parentesi sparisce ('')."""
+    """Toglie le parentesi con istruzioni; di una clausola con istruzioni resta solo il prefisso fattuale (o niente)."""
     s = PAREN.sub(lambda m: "" if ISTRUZIONI.search(m.group(1)) else m.group(0), seg)
     s = re.sub(r"\s+([.,;:])", r"\1", re.sub(r"\s{2,}", " ", s)).strip()
-    return "" if ISTRUZIONI.search(s) or not re.search(r"\w", s) else s
+    if ISTRUZIONI.search(s):
+        s = prefisso_fattuale(s)
+    return s if re.search(r"\w", s) else ""
 
 
 def senza_istruzioni(testo):
@@ -533,10 +569,10 @@ def ancora(a, b):
     return f"{LEDGER}#L{a}-L{b}"
 
 
-def riga_ledger_con(ctx, tok, lo, hi):
-    """Prima riga (1-based) tra lo e hi in cui compare il numero, o None."""
+def riga_ledger_con(ctx, tok, lo, hi, parole):
+    """Prima riga (1-based) tra lo e hi che porta il numero E le parole del testo (sulla stessa riga), o None."""
     for n in range(max(1, lo), min(len(ctx.ledger), hi) + 1):
-        if ha_numero(tok, ctx.ledger[n - 1]):
+        if ha_numero(tok, ctx.ledger[n - 1]) and hanno_le_parole(parole, ctx.ledger[n - 1]):
             return n
     return None
 
@@ -571,13 +607,12 @@ def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids
             else:
                 residui.append(tok)
         resto = []
-        for tok in residui:  # (2) entro 3 righe dall'intervallo citato, con le parole della riga
+        for tok in residui:  # (2) entro 3 righe dall'intervallo citato, con le parole sulla riga che porta il numero
             n = None
             for a, b in primarie:
-                if hanno_le_parole(parole, ctx.righe_ledger(max(1, a - MARGINE_LEDGER), b + MARGINE_LEDGER)):
-                    n = riga_ledger_con(ctx, tok, a - MARGINE_LEDGER, b + MARGINE_LEDGER)
-                    if n:
-                        break
+                n = riga_ledger_con(ctx, tok, a - MARGINE_LEDGER, b + MARGINE_LEDGER, parole)
+                if n:
+                    break
             if n:
                 if all(u[0] != ancora(n, n) for u in usate):
                     usate.append((ancora(n, n), ctx.ledger[n - 1]))
@@ -585,10 +620,11 @@ def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids
                 resto.append(tok)
         residui, resto = resto, []
         elenco_docs = [d for d in dict.fromkeys([ctx.documento(x) for x in docs] + list(docs_cella)) if d]
-        for tok in residui:  # (3) documento citato: il numero con le parole della riga entro 3 righe
+        for tok in residui:  # (3) documento citato: il numero nella stessa sezione/tabella delle parole della riga
             for d in elenco_docs:
                 righe_doc = ctx.testo(d).split("\n")
-                if any(ha_numero(tok, r) and hanno_le_parole(parole, "\n".join(righe_doc[max(0, i - 3):i + 4]))
+                if any(ha_numero(tok, r) and hanno_le_parole(
+                        parole, "\n".join(righe_doc[max(0, i - SEZIONE_DOC):i + MARGINE_LEDGER + 1]))
                        for i, r in enumerate(righe_doc)):
                     if all(u[0] != d for u in usate):
                         usate.append((d, ctx.testo(d)))
@@ -626,11 +662,13 @@ def senza_ritirati(segs, ids, ritirati):
 
 
 def parole_registro(ctx, ancore):
-    """Parole di verdetto del registro (lista chiusa) nelle righe di ledger citate, nell'ordine in cui compaiono."""
+    """Parole di verdetto del registro (lista chiusa) nelle righe di ledger indicate, SOLO se ancorate a una frase di
+    verdetto del registro (ANCORE), una volta ciascuna, nell'ordine in cui compaiono."""
     viste = []
     for a, b in ancore:
-        for m in PAROLE.finditer(ctx.righe_ledger(a, b)):
-            w = re.sub(r"\s+", " ", m.group(0)).lower()
+        testo = ctx.righe_ledger(a, b)
+        for _, w in sorted((m.start("w"), re.sub(r"\s+", " ", m.group("w")).lower())
+                           for rx in ANCORE for m in rx.finditer(testo)):
             if w not in viste:
                 viste.append(w)
     return " · ".join(viste) or SENZA_VERDETTO
@@ -732,7 +770,11 @@ def pagina(s, ctx):
     esito = togli_esclusi(separa_coda(esito_orig)[0] if esclusi else esito_orig, fino_a_fine=bool(esclusi))
     ok, non = righe_esito(esito, refs, docs, ctx, prove_file, s["ritirati"], s["ids"])
     ritirata = s["audit_stato"] == "ritirato"
-    prima = ok[0]["ancore"][0] if ritirata and ok and ok[0]["ancore"] else refs[0] if refs else None
+    # pagina ritirata: il locatore principale e' la riga dell'audit che ritira lo studio, non le righe degli altri studi
+    audit_rif = next((r for a in s["audit"] if a["tipo"] == "ritirato" for r in estrai_riferimenti(a["testo"])[1]
+                      if 0 < r[0] <= r[1] <= len(ctx.ledger)), None)
+    prima = (audit_rif or (ok[0]["ancore"][0] if ok and ok[0]["ancore"] else None) or (refs[0] if refs else None)
+             ) if ritirata else refs[0] if refs else None
     fonte_ledger = ancora(*prima) if prima else ""
     # il verdetto e' scritto nel locatore principale della scheda (`fonte_ledger`): le parole delle altre righe citate
     # (rubriche, esiti di altri studi) non sono verdetti della pagina

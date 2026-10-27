@@ -6,7 +6,7 @@ strumenti:
   - "QQQ"
   - "MNQ"
 finestra: "QQQ rettificato 03/01/2006..16/10/2026 prolungato con MNQ 12-26 fino al 23/10"
-verdetto: "pass · fail"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "i PNG di pagina mostrano l'interfaccia dell'app."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10651-L10654"

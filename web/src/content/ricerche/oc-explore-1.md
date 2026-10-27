@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES (controllo MNQ, M2K, MYM), scoperta 2019-05..2023-12 (1.155 sessioni), verifica 2024-01..2026-10 (693 sessioni)"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(esplorativo; DIX è dato SqueezeMetrics)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9072-L9082"

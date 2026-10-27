@@ -37,9 +37,10 @@ Walk-forward con selezione su sessioni passate e prova fuori campione; base rate
 | SHORT-1 (due lati, forma compatta): 300 trade, -21.04 USD/trade, t -2.16 | docs/EXECUTION_LEDGER.md#L5889-L5898 |
 | BUY 154 a -16.33 (t -1.25), SELL 146 a -26.01 (t -1.78) | docs/EXECUTION_LEDGER.md#L5889-L5898 |
 | base rate BUY -30.62 (t -6.88), SELL -32.03 (t -7.14). | docs/EXECUTION_LEDGER.md#L5889-L5898 |
-| SETUP-1 adattivo (53 sessioni, 410 setup, 7 finestre): 88 trade, -14.53 USD/trade, t -0.24 | docs/EXECUTION_LEDGER.md#L5952-L5955 · docs/EXECUTION_LEDGER.md#L5951-L5951 |
 | staffa fissa 2 ATR/2R 104 trade -51.95 (t -0.74) | docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
 | cella migliore BREAK_RETEST/con 15 trade +183.0 (t 1.41). | docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
+
+1 righe della scheda non riportate: la prova citata non le contiene.
 
 ## Cosa NON dice
 

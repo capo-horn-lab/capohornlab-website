@@ -4,7 +4,7 @@ titolo: "LLM-LOCAL-1/2, RAG-2/3, EVAL-2, PROMPT-1, NOISE-1, LAT-2, NOTA-1 — il
 data: "2026-10-19"
 strumenti: []
 finestra: "modello LiquidAI LFM2.5-24B-A2B (Q6_K) e variante uncensored/Heretic; prova di riferimento di 50"
-verdetto: "non confermata · confermata · pass · blocked_env"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "valutazione di un modello di terzi su domande interne; non è un benchmark generale."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9326-L9373"

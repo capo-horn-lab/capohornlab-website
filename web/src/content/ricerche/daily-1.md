@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES, MNQ, M2K, MYM 1 minuto 2019-05..2026-10 (1.837-1.843 sessioni valide per strumento; 58 riunioni FOMC)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "2 conferme IBS su 12 prove con margine di 5 USD sul p95 per MES (rumore di selezione, come in IBS8-1); costi del modello a 0,95 USD per lato."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9298-L9304"

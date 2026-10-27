@@ -8,9 +8,9 @@ strumenti:
   - "FESX"
   - "FSXE"
 finestra: "FDXM/FDXS (1.071.095 barre dal 19/04/2021), FESX, FSXE (370.504 barre), 2019-2026"
-verdetto: "pass · fail · not_run"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: ""
+avvertenza: "orari ufficiali di terzi"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10615-L10620"
 prove:
   - "docs/research/APERTURE_MONDO_2026-10-23.md"

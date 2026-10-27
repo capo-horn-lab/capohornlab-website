@@ -4,7 +4,8 @@ import { Link } from 'react-router'
 import { LineSparkline } from '@/components/charts'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { caricaDati, indice } from '@/ricerche/archivio'
-import { anno, colonnaValori, paroleVerdetto, SENZA_VERDETTO } from '@/ricerche/modello'
+import { valoriSerie } from '@/ricerche/grafico-dati'
+import { anno, paroleVerdetto, SENZA_VERDETTO } from '@/ricerche/modello'
 import { AuditBadge, VerdettoBadge } from '@/ricerche/Testo'
 
 const TUTTI = ''
@@ -49,8 +50,8 @@ function useSerie(ids: string[]) {
     ids.forEach((id, i) => {
       const d = risultati[i]?.data
       if (d?.tipo !== 'serie') return
-      const c = colonnaValori(d)
-      if (c >= 0) mappa[id] = d.righe.map((r) => Number(r[c]))
+      const valori = valoriSerie(d) // un anno senza valore salta il punto: mai 0
+      if (valori.length > 0) mappa[id] = valori
     })
     return mappa
   }, [ids, risultati])
@@ -85,8 +86,8 @@ export default function Ricerche() {
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Ricerche</h1>
         <p className="text-muted-foreground max-w-3xl">
           Ogni pagina riporta una ricerca fatta sul motore, con i numeri copiati dalle prove e il verdetto nel
-          registro: la parola scritta nelle righe del registro che la pagina cita, oppure «{SENZA_VERDETTO}».
-          Frequenze e misure su dati gia' visti: nessuna e' un segnale.
+          registro: la parola scritta in una frase di verdetto alle righe del locatore principale della scheda,
+          oppure «{SENZA_VERDETTO}». Frequenze e misure su dati gia' visti: nessuna e' un segnale.
         </p>
       </header>
 
@@ -141,9 +142,10 @@ export default function Ricerche() {
         </Table>
       )}
       <p className="text-muted-foreground text-xs">
-        Il verdetto e' copiato dal registro (PASS, FAIL, CONFERMATA, NON CONFERMATA, PARZIALE e le altre parole
-        elencate nella pagina Metodo): le righe citate possono contenerne piu' di una. «audit» e' un segno a parte:
-        ritiro o correzione dell'audit, valido solo per gli studi indicati nella pagina.
+        Il verdetto e' la parola scritta in una frase di verdetto del registro («Esito …: PAROLA», «Verdetto: PAROLA»,
+        elencate nella pagina Metodo) alle righe del locatore principale della scheda; senza una frase cosi' la pagina
+        dice «{SENZA_VERDETTO}». «audit: ritirato» e' un segno a parte, solo per gli studi che l'inventario dichiara
+        ritirati; «nota dell'audit» e' neutra e non cambia il verdetto.
       </p>
     </section>
   )
