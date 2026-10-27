@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "221 strategie (MES, MNQ, MCL) + dati 2026"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(sopravvivenza, campione 2026 minimo)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7596-L7596"
@@ -34,7 +34,8 @@ Come TAIL-1: differenza appaiata giornaliera in verifica, BH q≤0,10. Rubrica p
 
 ## Cosa NON dice
 
-- "Candidata regola di rischio, più debole di P4/P5 sui dati nuovi." Limite: costituenti di oggi.
+- "Candidata regola di rischio, più debole di P4/P5 sui dati nuovi."
+- Limite: costituenti di oggi.
 
 ## Prove
 

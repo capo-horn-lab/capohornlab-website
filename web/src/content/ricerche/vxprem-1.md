@@ -7,9 +7,9 @@ strumenti:
   - "MES"
   - "SPY"
 finestra: "174 CSV di scadenze mensili VX Cboe 2013-01-16..2027-06-16 (2 min 53 s di download), MES e SPY; la robustezza della regola confermata è in VXPREM-2 (scheda successiva)"
-verdetto: "confermata"
+verdetto: "pass · confermata"
 pubblicabilita: "avvertenza"
-avvertenza: "Avvertenza forte: confermata \"con riserve forti\" (76% del risultato nel 2020, t<2 senza i 5 giorni migliori); non presentare come strategia; dati Cboe pubblici ma i CSV VX non vanno ridistribuiti in blocco."
+avvertenza: "Avvertenza forte: confermata \"con riserve forti\" (76% del risultato nel 2020, t<2 senza i 5 giorni migliori)"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9919-L9927"
 prove:
   - "runtime/proofs/vxprem1/vxprem1.json"
@@ -27,9 +27,7 @@ IC di Spearman Newey-West, regole con t NW 5, placebo 200 rotazioni, q su 16 p; 
 
 | Risultato | Fonte |
 |---|---|
-| VXPREM-1 "PASS, CONFERMATA secondo la rubrica per una sola regola (R-VX con P2), con riserve forti": verifica +109,1 USD/giorno (t 2,50, 709 giorni, totale 77.382 USD per contratto) contro sempre corto +48,3 (t 1,70) | docs/EXECUTION_LEDGER.md#L9919-L9927 |
-| p95 +91,8 | docs/EXECUTION_LEDGER.md#L9919-L9927 |
-| q 0,025 | docs/EXECUTION_LEDGER.md#L9919-L9927 |
+| VXPREM-1 "PASS, CONFERMATA secondo la rubrica per una sola regola (R-VX con P2), con riserve forti": verifica +109,1 USD/giorno (t 2,50, 709 giorni, totale 77.382 USD per contratto) contro sempre corto +48,3 (t 1,70); p95 +91,8; q 0,025 | docs/EXECUTION_LEDGER.md#L9919-L9927 |
 | ma in scoperta +3,0 (t 0,09), "tre quarti del risultato vengono dal 2020 e senza i 5 giorni migliori t < 2" | docs/EXECUTION_LEDGER.md#L9919-L9927 |
 | 108 entrate in verifica, costi 11.782 USD su 89.163 lordi | docs/EXECUTION_LEDGER.md#L9919-L9927 |
 | peggior giorno -6.125 USD (26/1/2021). | docs/EXECUTION_LEDGER.md#L9919-L9927 |

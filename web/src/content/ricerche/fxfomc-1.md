@@ -5,7 +5,8 @@ data: "2026-10-20"
 strumenti:
   - "M6E"
 finestra: "M6E 1.958 sessioni (1.900 valide), 60 riunioni FOMC (36 scoperta, 24 verifica), 1.840 giorni di controllo"
-verdetto: "corretto"
+verdetto: "pass · non confermata · parziale"
+audit: {"stato": "corretto", "id": ["FXFOMC-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9829-L9841"
@@ -31,8 +32,7 @@ Finestre W0-W3, regole R0-R2 su W1, BH, placebo. Rubrica prima: sì (L9801).
 |---|---|
 | "PASS, NON CONFERMATA": W0 scoperta +18,9 pip (+17,0 bp, t 1,79, n 36), verifica -20,7 pip (-17,6 bp, t -1,58, n 24) | docs/EXECUTION_LEDGER.md#L9829-L9841 |
 | W1 scoperta +11,9 pip (t 2,15), verifica -7,1 pip (t -0,92) | docs/EXECUTION_LEDGER.md#L9829-L9841 |
-| regola W1 netta R0 scoperta +11,63 USD (t 1,69, q 0,103), verifica -12,11 USD (t -1,25) | docs/EXECUTION_LEDGER.md#L9829-L9841 |
-| "0 su 3". | docs/EXECUTION_LEDGER.md#L9829-L9841 |
+| regola W1 netta R0 scoperta +11,63 USD (t 1,69, q 0,103), verifica -12,11 USD (t -1,25); "0 su 3". | docs/EXECUTION_LEDGER.md#L9829-L9841 |
 
 ## Grafico
 

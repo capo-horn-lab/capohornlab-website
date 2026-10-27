@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "MYM"
 finestra: "16 test confermati di MR-1 + IBS-NT + IBS-MYM"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8360-L8370"

@@ -9,9 +9,9 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "SPY e QQQ giornalieri 2006-2026 (16 test, costo 2 bp), MES/MNQ/MCL intraday (10 test)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "regole di terzi (citare fonti); dati Yahoo solo aggregati."
+avvertenza: "regole di terzi; dati Yahoo solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7913-L7923"
 prove:
   - "runtime/proofs/res2/res2_1.json"

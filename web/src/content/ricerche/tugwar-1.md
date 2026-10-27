@@ -10,7 +10,7 @@ strumenti:
   - "FESX"
   - "FDXM"
 finestra: "MES, MNQ, M2K, MYM (dal 2019-05) e FESX, FDXM (dal 2019-03) fino al 2026-10-19"
-verdetto: "non confermata"
+verdetto: "pass · non confermata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9744-L9752"

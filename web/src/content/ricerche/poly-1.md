@@ -6,9 +6,9 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "API pubbliche Polymarket (16 riunioni FOMC da dicembre 2024, 292 giorni, 201 con rendimenti SPY/QQQ)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "dati pubblici Polymarket; verificare termini dell'API se si ripubblicano le serie."
+avvertenza: "dati pubblici Polymarket"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7451-L7451"
 prove:
   - "runtime/proofs/poly1/poly1.json"

@@ -5,9 +5,9 @@ data: "2026-09-28"
 strumenti:
   - "ES"
 finestra: "replay di 39 intenti costruiti da barre ES 2024 reali con evidenza dello screener"
-verdetto: "descrittivo"
+verdetto: "pass · fail"
 pubblicabilita: "avvertenza"
-avvertenza: "modello e codici interni; dichiarare che non è riproducibile dal repository."
+avvertenza: "modello e codici interni"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L2059-L2073"
 prove:
   - "docs/ERROR_RULES.md"
@@ -31,9 +31,7 @@ Decisione singola e replay su intenti; revisione Codex indipendente. Rubrica pri
 | con i criteri iniziali approvava 39 su 39 e un intento BUY contro evidenza 24 short su 26. | docs/EXECUTION_LEDGER.md#L2059-L2073 |
 | Revisione Codex: FAIL sul contratto end-to-end. | docs/EXECUTION_LEDGER.md#L2059-L2073 |
 
-Non verificabile (i numeri non compaiono nelle fonti citate: restano fuori dalla tabella):
-
-- In 47 chiamate il modello "non ha mai scelto REVIEW o VETO" — non verificabile: 47
+1 righe della scheda non riportate: la prova citata non le contiene.
 
 ## Cosa NON dice
 

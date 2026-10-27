@@ -5,9 +5,10 @@ data: "2026-10-15"
 strumenti:
   - "ES"
 finestra: "ES 12-26, 54 sessioni (2 agosto-15 ottobre 2026), 1.392 punti, 9 finestre (poi 7 finestre per SETUP-1)"
-verdetto: "corretto"
+verdetto: "senza verdetto nel registro"
+audit: {"stato": "corretto", "id": ["SETUP-1"]}
 pubblicabilita: "avvertenza"
-avvertenza: "contiene riferimenti a ordini demo reali e a un conto (DEMO...) nello stesso blocco di ledger (L5560-L5568): pubblicare solo i numeri del walk-forward, non il resto; costi PROVVISORI dichiarati."
+avvertenza: "costi PROVVISORI dichiarati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L5558-L5559"
 prove:
   - "runtime/proofs/tools/walkforward.json"
@@ -31,17 +32,14 @@ Walk-forward con selezione su sessioni passate e prova fuori campione; base rate
 
 | Risultato | Fonte |
 |---|---|
+| TOOLS-1: "FUORI CAMPIONE 284 trade, vinti 35.9%, medio -25.44 USD, netto -7225.50, drawdown 7647.50, t-stat -2.68; base rate 1132 trade, 34.6%, medio -30.48, netto -34499, t -6.78" | docs/EXECUTION_LEDGER.md#L5558-L5559 · docs/EXECUTION_LEDGER.md#L5557-L5557 |
 | "il filtro RizzoFlow riduce la perdita per trade, non la inverte". | docs/EXECUTION_LEDGER.md#L5558-L5559 · docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
 | SHORT-1 (due lati, forma compatta): 300 trade, -21.04 USD/trade, t -2.16 | docs/EXECUTION_LEDGER.md#L5889-L5898 |
 | BUY 154 a -16.33 (t -1.25), SELL 146 a -26.01 (t -1.78) | docs/EXECUTION_LEDGER.md#L5889-L5898 |
 | base rate BUY -30.62 (t -6.88), SELL -32.03 (t -7.14). | docs/EXECUTION_LEDGER.md#L5889-L5898 |
+| SETUP-1 adattivo (53 sessioni, 410 setup, 7 finestre): 88 trade, -14.53 USD/trade, t -0.24 | docs/EXECUTION_LEDGER.md#L5952-L5955 · docs/EXECUTION_LEDGER.md#L5951-L5951 |
 | staffa fissa 2 ATR/2R 104 trade -51.95 (t -0.74) | docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
-| cella migliore BREAK_RETEST/con 15 trade +183.0 (t 1.41). | docs/EXECUTION_LEDGER.md#L5558-L5559 · docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
-
-Non verificabile (i numeri non compaiono nelle fonti citate: restano fuori dalla tabella):
-
-- TOOLS-1: "FUORI CAMPIONE 284 trade, vinti 35.9%, medio -25.44 USD, netto -7225.50, drawdown 7647.50, t-stat -2.68; base rate 1132 trade, 34.6%, medio -30.48, netto -34499, t -6.78" — non verificabile: 35.9
-- SETUP-1 adattivo (53 sessioni, 410 setup, 7 finestre): 88 trade, -14.53 USD/trade, t -0.24 — non verificabile: 53
+| cella migliore BREAK_RETEST/con 15 trade +183.0 (t 1.41). | docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
 
 ## Cosa NON dice
 

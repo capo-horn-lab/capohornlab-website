@@ -4,7 +4,7 @@ titolo: "LEAK-1 — controllo di anticipazione (look-ahead) sui dati Cboe"
 data: "2026-10-19"
 strumenti: []
 finestra: "ripetizione di OPT-1 e del gruppo backwardation di L38 con il valore del giorno prima"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8377-L8381"

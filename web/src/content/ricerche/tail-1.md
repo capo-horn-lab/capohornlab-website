@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "NQ"
 finestra: "tutte le strategie LAB-1/LAB-2/ICT con ≥200 trade in scoperta su MES, MNQ, MCL; dati mai usati: NQ 1m 16/08-31/12/2024 e export NinjaTrader MES/MNQ 12-26 2026"
-verdetto: "confermata"
+verdetto: "non confermata"
 pubblicabilita: "avvertenza"
 avvertenza: "caso con ~20-39 sessioni per caso; dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7360-L7360"
@@ -36,7 +36,7 @@ un limite di perdita giornaliero (P4) o lo stop dopo 2 perdite (P5) riducono le 
 | TAIL-1-OOS: "NON confermata" (NQ fine 2024: 56 sessioni, senza +29,97 USD/sessione t 1,14, con P5 +36,49 t 1,46, differenza +6,52 t 0,77). | docs/EXECUTION_LEDGER.md#L7382-L7382 |
 | TAIL-1-NT: "le protezioni VALGONO in generale": P4 differenza positiva in 14 casi su 15 (p 0,0004), media +29,3 USD per sessione | docs/EXECUTION_LEDGER.md#L7382-L7382 · docs/EXECUTION_LEDGER.md#L7360-L7360 · docs/EXECUTION_LEDGER.md#L7474-L7474 |
 | P5 13 su 13 (p 0,0002), media +33,6 | docs/EXECUTION_LEDGER.md#L7474-L7474 |
-| "Non creano un edge": con protezione positive 5 strategie su 28 (senza: 1). | docs/EXECUTION_LEDGER.md#L7360-L7360 · docs/EXECUTION_LEDGER.md#L7382-L7382 · docs/EXECUTION_LEDGER.md#L7474-L7474 |
+| "Non creano un edge": con protezione positive 5 strategie su 28 (senza: 1). | docs/EXECUTION_LEDGER.md#L7360-L7360 · docs/EXECUTION_LEDGER.md#L7474-L7474 |
 
 ## Cosa NON dice
 

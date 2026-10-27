@@ -8,9 +8,9 @@ strumenti:
   - "MNQ"
   - "NQ"
 finestra: "MES (ES 1m 2020-2024), MNQ (NQ 1s 2023-01..2024-08)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "(regole pubbliche di terzi, citare fonti)."
+avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7202-L7211"
 prove:
   - "runtime/proofs/sig2/sig2.json"

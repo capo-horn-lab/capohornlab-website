@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import Stato from '@/pagine/Stato'
 
 function busta(eta_s: number | null) {
@@ -38,6 +38,18 @@ describe('/stato', () => {
     ])
     expect(screen.getAllByText('MNQ 12-26')).toHaveLength(2)
     expect(screen.getByText('30 s')).toBeInTheDocument()
+  })
+
+  it('soglia per canale: a 100 s gli scenari sono in ritardo, le frequenze (180 s) sono accese', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => busta(100) })),
+    )
+    monta()
+    const scenari = (await screen.findByRole('heading', { name: 'Scenari' })).closest('section') as HTMLElement
+    const frequenze = screen.getByRole('heading', { name: 'Frequenze' }).closest('section') as HTMLElement
+    await waitFor(() => expect(within(scenari).getByText('motore in ritardo')).toBeInTheDocument())
+    expect(within(frequenze).getByText('motore acceso')).toBeInTheDocument()
   })
 
   it('errore di rete: messaggio visibile, nessun badge', async () => {

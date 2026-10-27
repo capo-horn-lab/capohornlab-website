@@ -10,9 +10,9 @@ strumenti:
   - "FESX"
   - "FDXM"
 finestra: "MES e MNQ 2025-01-01..2026-10-16, M2K 2019-05..2026-10, MYM 2019-05..2026-10 (2,54 milioni di barre), FESX (1,61 milioni) e FDXM (1,59 milioni) 2019-2026"
-verdetto: "confermata"
+verdetto: "confermata · non confermata"
 pubblicabilita: "avvertenza"
-avvertenza: "è lo studio centrale; chiarire che L38/L40 sono sugli stessi dati già usati e che la carta in avanti (H-NEXT-6) non ha ancora esito. Dati NinjaTrader solo aggregati."
+avvertenza: "Dati NinjaTrader solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8216-L8222"
 prove:
   - "runtime/proofs/ibsnt/ibsnt.json"
@@ -49,7 +49,7 @@ Regola invariata (sig-2 ibs_only, motore LAB-2), ≥30 trade, media>0, t≥2, so
 | VIX/VIX3M>1: 72 trade +148,7 bp (t 4,79) contro +32,8. | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
 | L40 (descrittivo): 942 trade, netto +67.589 USD, nessun anno negativo | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
 | giorni peggiori 27/02/2025 -3.297, 07/08/2024 -2.849 USD | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8243-L8248 · docs/EXECUTION_LEDGER.md#L8257-L8272 |
-| 4 indici aperti insieme il 16% dei giorni. | docs/EXECUTION_LEDGER.md#L8216-L8222 · docs/EXECUTION_LEDGER.md#L8243-L8248 · docs/EXECUTION_LEDGER.md#L8257-L8272 · docs/EXECUTION_LEDGER.md#L8282-L8285 |
+| 4 indici aperti insieme il 16% dei giorni. | docs/EXECUTION_LEDGER.md#L8257-L8272 |
 
 ## Grafico
 

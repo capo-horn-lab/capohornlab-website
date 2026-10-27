@@ -4,7 +4,8 @@ titolo: "COT-1 — posizionamento CFTC (Traders in Financial Futures) come segna
 data: "2026-10-19"
 strumenti: []
 finestra: "CFTC TFF 2010-2026 (17 file, 7,2 MB), E-mini S&P 500 e Nasdaq mini, gruppi Asset Manager e Leveraged Funds"
-verdetto: "corretto"
+verdetto: "senza verdetto nel registro"
+audit: {"stato": "corretto", "id": ["COT-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7572-L7572"

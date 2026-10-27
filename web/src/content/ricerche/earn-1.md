@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "MNQ"
 finestra: "MNQ 1 minuto NinjaTrader 2019-05..2026-10 (202 sessioni evento su 1.922); 285 pubblicazioni 8-K item 2.02 di 8 aziende dal 2019 (SEC EDGAR)"
-verdetto: "confermata"
+verdetto: "confermato"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8161-L8166"

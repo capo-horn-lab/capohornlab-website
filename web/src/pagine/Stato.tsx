@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { API_BASE } from '@/lib/config'
-import { SOGLIA_ACCESO_S, SOGLIA_SPENTO_S, statoMotore } from '@/ricerche/stato'
+import { SOGLIA_CANALE_S, SOGLIA_SPENTO_S, statoMotore } from '@/ricerche/stato'
 
 // Fetch propria e minima: la pagina Stato non dipende dai moduli della pagina Live.
 const CANALI = [
@@ -30,7 +30,7 @@ function Canale({ chiave, titolo }: { chiave: Chiave; titolo: string }) {
     queryFn: () => leggi(chiave),
     refetchInterval: 15_000,
   })
-  const stato = statoMotore(data?.eta_s ?? null)
+  const stato = statoMotore(data?.eta_s ?? null, SOGLIA_CANALE_S[chiave])
   const p = data?.dati?.principale
   return (
     <section aria-labelledby={`c-${chiave}`} className="border-border bg-card flex flex-col gap-3 rounded-md border p-5">
@@ -68,8 +68,10 @@ export default function Stato() {
       <header className="flex flex-col gap-3">
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Stato</h1>
         <p className="text-muted-foreground">
-          Il motore invia i due flussi live ogni pochi secondi. «Acceso» vale fino a {SOGLIA_ACCESO_S} s
-          dall'ultimo invio, «in ritardo» fino a {SOGLIA_SPENTO_S} s, «spento» oltre. La pagina si aggiorna da sola.
+          Il motore invia i due flussi live ogni pochi secondi. «Acceso» vale fino a {SOGLIA_CANALE_S.scenari} s
+          dall'ultimo invio per gli scenari e fino a {SOGLIA_CANALE_S.frequenze} s per le frequenze; oltre, fino a{' '}
+          {SOGLIA_SPENTO_S} s, il dato e' «in ritardo»; oltre {SOGLIA_SPENTO_S} s il motore e' «spento». La pagina si
+          aggiorna da sola.
         </p>
       </header>
       {CANALI.map((c) => (

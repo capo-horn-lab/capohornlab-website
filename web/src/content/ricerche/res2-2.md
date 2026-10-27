@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "MGC"
 finestra: "MGC 1 minuto NinjaTrader, 1.986 sessioni 2019-01-28..2026-10-16 (2,65 milioni di barre)"
-verdetto: "non confermata"
+verdetto: "non adottata"
 pubblicabilita: "avvertenza"
 avvertenza: "(dati NinjaTrader solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7975-L7980"

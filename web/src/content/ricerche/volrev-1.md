@@ -12,10 +12,11 @@ strumenti:
   - "ZN"
   - "M6E"
 finestra: "IBS-NT su MES, MNQ, M2K, MYM 2019-2026 (918-941 trade) e SPY/QQQ 2006-2018 (volume Yahoo); ZN 1 minuto NinjaTrader; M6E, 90 fine mese 2019-2026."
-verdetto: "ritirato"
+verdetto: "non confermato"
+audit: {"stato": "ritirato", "id": ["VOLREV-1"]}
 pubblicabilita: "avvertenza"
-avvertenza: "pubblicare VOLREV-1 solo con il ritiro registrato (L8968: \"VOLREV-1 = NON CONFERMATO\"); STBOND-1 e FXHEDGE-1 senza clausole oltre alla regola generale."
-fonte_ledger: "docs/EXECUTION_LEDGER.md#L8758-L8764"
+avvertenza: ""
+fonte_ledger: "docs/EXECUTION_LEDGER.md#L8780-L8785"
 prove: []
 ---
 
@@ -35,15 +36,12 @@ Terzili fissi, bootstrap a blocchi di 20 giorni (2.000), BH q≤0,10 su 4 (VOLRE
 
 | Risultato | Fonte |
 |---|---|
-| VOLREV-1: "CONFERMATA 1 prova su 4 (future VOLX), con riserva sullo stress": 918 trade, terzili +15,4 / +54,1 / +55,7 bp, alto-basso +40,3, p 0,025, q 0,098 | docs/EXECUTION_LEDGER.md#L8758-L8764 |
-| senza stress +13,1, p 0,29 | docs/EXECUTION_LEDGER.md#L8758-L8764 |
-| ETF stessa direzione, non significativa (diff +33,5, p 0,13). | docs/EXECUTION_LEDGER.md#L8758-L8764 |
 | STBOND-1: "NON CONFERMATO, direzione coerente per l'IBS": 941 trade, +54,8 bp rifugio contro +19,1 rischio, diff +35,7, t 1,77 (p 0,077, Holm 0,23). | docs/EXECUTION_LEDGER.md#L8780-L8785 |
-| FXHEDGE-1: "NON CONFERMATO": 89 trade, -5,43 bp netti, t -1,76, placebo p95 +1,5. | docs/EXECUTION_LEDGER.md#L8758-L8764 · docs/EXECUTION_LEDGER.md#L8780-L8785 |
+| FXHEDGE-1: "NON CONFERMATO": 89 trade, -5,43 bp netti, t -1,76, placebo p95 +1,5. | docs/EXECUTION_LEDGER.md#L8780-L8785 |
 
 ## Cosa NON dice
 
-- ATTENZIONE, RITIRO REGISTRATO (AUDIT-FABLE, ): "VOLREV-1 (future VOLX, registrato CONFERMATO): il VOLX della serie continua cala meccanicamente nelle sessioni intorno al cambio di contratto... Senza i trade adiacenti ai cambi (762): terzili +32,6 / +62,2 / +57,4, alto - basso +24,8, p 0,131.... CONFERMA RITIRATA, VOLREV-1 = NON CONFERMATO." Quindi la riga "CONFERMATA 1 prova su 4" va pubblicata solo insieme al ritiro.
+- ATTENZIONE, RITIRO REGISTRATO (AUDIT-FABLE): "VOLREV-1 (future VOLX, registrato CONFERMATO): il VOLX della serie continua cala meccanicamente nelle sessioni intorno al cambio di contratto... Senza i trade adiacenti ai cambi (762): terzili +32,6 / +62,2 / +57,4, alto - basso +24,8, p 0,131.... CONFERMA RITIRATA, VOLREV-1 = NON CONFERMATO."
 - H-NEXT-8/9 "restano solo come osservazione descrittiva".
 - STBOND-1 "da tenere come descrittivo".
 

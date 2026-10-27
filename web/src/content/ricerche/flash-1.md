@@ -5,9 +5,10 @@ data: "2026-10-19"
 strumenti:
   - "MES"
 finestra: "MES 1 minuto 2019-2026 (eventi dal 2022 in FLASH-1, dal 2019 in FLASH-2), 4 definizioni (k 1,5/2,5 x m 15/60 minuti)"
-verdetto: "corretto"
+verdetto: "confermata"
+audit: {"stato": "corretto", "id": ["FLASH-1"]}
 pubblicabilita: "avvertenza"
-avvertenza: "pubblicare FLASH-2, e FLASH-1 solo come disegno errato poi corretto."
+avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9002-L9002"
 prove:
   - "runtime/proofs/flash1/flash1.json"
@@ -34,7 +35,7 @@ Eventi vs placebo abbinati (terzile di sigma prevista, stato di stress), Bonferr
 | FLASH-2: "la tesi 'un flash crash stabilizza il mercato' NON è sostenuta dai dati MES 2019-2026": H1 CONFERMATA nel verso OPPOSTO (volatilità delle 20 sessioni dopo più ALTA: log +0,53 / +0,26 / +0,69 / +0,46; p 0,000 / 0,000 / 0,018 / 0,002) | docs/EXECUTION_LEDGER.md#L9010-L9015 |
 | H2 fragilità nessuna differenza | docs/EXECUTION_LEDGER.md#L9002-L9002 · docs/EXECUTION_LEDGER.md#L9010-L9015 |
 | H3 rimbalzo nessuno significativo | docs/EXECUTION_LEDGER.md#L9002-L9002 · docs/EXECUTION_LEDGER.md#L9010-L9015 |
-| grappoli indipendenti 33 / 90 / 8 / 26. | docs/EXECUTION_LEDGER.md#L9002-L9002 · docs/EXECUTION_LEDGER.md#L9010-L9015 |
+| grappoli indipendenti 33 / 90 / 8 / 26. | docs/EXECUTION_LEDGER.md#L9010-L9015 |
 
 ## Grafico
 

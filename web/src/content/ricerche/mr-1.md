@@ -10,9 +10,9 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "MES, MNQ, M2K, MYM NinjaTrader 2019-2026 (insieme \"future\") e SPY+QQQ 2006-2026 (ETF)"
-verdetto: "misto"
+verdetto: "confermata"
 pubblicabilita: "avvertenza"
-avvertenza: "presentare come \"famiglia\" correlata, non 16 strategie indipendenti; rimandare a ROB-1 per la solidità."
+avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8329-L8344"
 prove:
   - "runtime/proofs/mr1/mr1.json"
@@ -44,7 +44,8 @@ Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n ca
 
 ## Cosa NON dice
 
-- "un fenomeno di famiglia, non una regola isolata... non sono edge indipendenti: si sovrappongono all'IBS (dal 27% al 98% dei trade) e vivono degli stessi giorni di calo. I dati erano già stati usati per l'IBS." Prova in avanti H-NEXT-7 (nessun esito ancora).
+- "un fenomeno di famiglia, non una regola isolata... non sono edge indipendenti: si sovrappongono all'IBS (dal 27% al 98% dei trade) e vivono degli stessi giorni di calo. I dati erano già stati usati per l'IBS."
+- Prova in avanti H-NEXT-7 (nessun esito ancora).
 
 ## Prove
 

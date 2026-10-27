@@ -8,7 +8,7 @@ strumenti:
   - "MES"
   - "NQ"
 finestra: "MNQ, MCL, MES, 5 minuti, orizzonte 60 minuti; periodo mai usato: NQ 1m 16/08-31/12/2024 e export NinjaTrader 2026"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "dati licenziati solo aggregati; costi NinjaTrader piano Free."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6435-L6444"

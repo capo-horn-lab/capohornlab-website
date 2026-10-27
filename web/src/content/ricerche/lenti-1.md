@@ -5,7 +5,7 @@ data: "2026-10-22"
 strumenti:
   - "MNQ"
 finestra: "MNQ (e gli altri micro), ultime 500 sessioni, lenti misurate allo stesso minuto; richiesta del proprietario: \"non voglio dimezzare i casi, voglio aumentarli ... analisi multiple e vedere se concordano\"."
-verdetto: "descrittivo"
+verdetto: "pass · not_run"
 pubblicabilita: "avvertenza"
 avvertenza: "(retrospettiva su dati già visti; nessuna prova di vantaggio)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10363-L10371"

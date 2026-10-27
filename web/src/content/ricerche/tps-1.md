@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "SPY e QQQ giornalieri 2006-2018"
-verdetto: "confermata"
+verdetto: "adottata"
 pubblicabilita: "avvertenza"
 avvertenza: "(adozione per la sola carta, non edge nuovo)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9099-L9099"

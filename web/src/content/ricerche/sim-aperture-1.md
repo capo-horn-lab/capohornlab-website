@@ -7,7 +7,7 @@ strumenti:
 finestra: "MNQ 1 minuto NinjaTrader 2019-05..2026-10 (1.919 sessioni con barra delle 8:30 CT); eseguite 190 sessioni (13/5/2019-4/2/2020) per SIM-APERTURE-2; SIM-APERTURE-1 (modelli locali) fermata dopo 11 sessioni."
 verdetto: "non confermata"
 pubblicabilita: "avvertenza"
-avvertenza: "contiene riferimenti a uso di Claude Opus e a costi; i testi grezzi dei modelli non vanno pubblicati; il risultato è su 190 sessioni 2019-2020 (non su tutto il periodo)."
+avvertenza: "il risultato è su 190 sessioni 2019-2020 (non su tutto il periodo)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10116-L10123"
 prove:
   - "runtime/sim-aperture/sessioni.jsonl"

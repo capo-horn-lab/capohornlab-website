@@ -5,9 +5,9 @@ data: "2026-09-28"
 strumenti:
   - "ES"
 finestra: "strumento ES 1 minuto, anno 2024 intero (354.799 barre)"
-verdetto: "descrittivo"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "pubblicare i soli aggregati; dati di mercato di terzi (ES 1m, fornitore commerciale) non ripubblicabili; includere il caveat: esplorazione su un solo anno."
+avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L2287-L2347"
 prove:
   - "docs/evidence/BT-SIM-1-results.json"
@@ -27,9 +27,7 @@ Motore `backtest.py`; taratura in-sample (1ª metà 2024), risultato riportato o
 | Risultato | Fonte |
 |---|---|
 | Nessun verdetto PASS/FAIL di strategia: esplorazione. | docs/EXECUTION_LEDGER.md#L2287-L2347 |
-| Netto fuori campione: 1m 503 op. **-1.678,06 EUR** (-16,78%), DD 21,17% | docs/EXECUTION_LEDGER.md#L2287-L2347 |
-| 5m 181 op. **+1.710,03 EUR** (+17,10%), DD 9,64% | docs/EXECUTION_LEDGER.md#L2287-L2347 |
-| 15m 72 op. **+1.961,42 EUR** (+19,61%), DD 3,71%. | docs/EXECUTION_LEDGER.md#L2287-L2347 |
+| Netto fuori campione: 1m 503 op. **-1.678,06 EUR** (-16,78%), DD 21,17%; 5m 181 op. **+1.710,03 EUR** (+17,10%), DD 9,64%; 15m 72 op. **+1.961,42 EUR** (+19,61%), DD 3,71%. | docs/EXECUTION_LEDGER.md#L2287-L2347 |
 | Stesse operazioni senza attrito: +2.276,64 / +2.596,55 / +2.252,31 EUR | docs/EXECUTION_LEDGER.md#L2287-L2347 |
 | attrito 4.271 / 957 / 314 USD. | docs/EXECUTION_LEDGER.md#L2287-L2347 |
 | Segnale invertito perde di più in tutti e tre. | docs/EXECUTION_LEDGER.md#L2287-L2347 |

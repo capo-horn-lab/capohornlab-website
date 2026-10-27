@@ -5,9 +5,9 @@ data: "2026-10-23"
 strumenti:
   - "MNQ"
 finestra: "MNQ 1 minuto (scoperta 200 giorni 2020-2023, validazione 2023, test 2024-2026: 697 giorni, 6.970 punti); pesi Timestral 5M/28M/123M/209M da huggingface.co/mistralai, licenza Modified MIT"
-verdetto: "non confermata"
+verdetto: "fail · pass"
 pubblicabilita: "avvertenza"
-avvertenza: "valutazione di un modello di terzi (rispettare la licenza e citare); nessuna implicazione di trading."
+avvertenza: "valutazione di un modello di terzi; nessuna implicazione di trading."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10635-L10638"
 prove:
   - "docs/research/TIMESTRAL_RICERCA_2026-10-23.md"

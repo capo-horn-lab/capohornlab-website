@@ -7,9 +7,9 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL (genomi: MES 3.962, MNQ 3.962, MCL 3.832); WFO-1-LONG su MNQ 1 minuto NinjaTrader 2019-05..2026-10 (1.923 sessioni, 2,62 milioni di barre, 31 contratti)"
-verdetto: "confermata"
+verdetto: "confermato · non confermato"
 pubblicabilita: "avvertenza"
-avvertenza: "citare entrambi gli esiti insieme (confermato in-sample WFO-1, non confermato WFO-1-LONG)."
+avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7817-L7828"
 prove:
   - "runtime/proofs/wfo1/wfo1.json"

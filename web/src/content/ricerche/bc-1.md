@@ -11,7 +11,7 @@ strumenti:
   - "FDXM"
   - "VIX"
 finestra: "MES, MNQ, SPY, QQQ, FESX/FDXM; 12 test eseguiti (VWAP trend, momentum del resto del giorno, primo VIX spike, VIX Stretch, inversione overnight, settimana OpEx, USA->Europa, petrolio, rame/oro, fade del VWAP)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8419-L8422"
@@ -31,7 +31,8 @@ t sui giorni≥2, placebo 200, DSR con N=13. Rubrica prima: sì (L8401).
 
 | Risultato | Fonte |
 |---|---|
-| "0 confermati." Intraday tutti negativi dopo i costi: B1 VWAP trend MES+MNQ 62.351 trade -1,02 bp (t giorni -7,49) | docs/EXECUTION_LEDGER.md#L8419-L8422 |
+| "0 confermati." | docs/EXECUTION_LEDGER.md#L8419-L8422 |
+| Intraday tutti negativi dopo i costi: B1 VWAP trend MES+MNQ 62.351 trade -1,02 bp (t giorni -7,49) | docs/EXECUTION_LEDGER.md#L8419-L8422 |
 | B19 fade VWAP 8.607 trade -3,42 (t giorni -5,14) | docs/EXECUTION_LEDGER.md#L8419-L8422 |
 | B4 USA->Europa 3.544 trade -3,20 (t giorni -4,05). | docs/EXECUTION_LEDGER.md#L8419-L8422 |
 | Mensili/volatilità ETF positivi ma sotto i placebo: C6 VIX spike 21 sessioni 79 trade +115,9 (t 1,87, p95 175,1). | docs/EXECUTION_LEDGER.md#L8419-L8422 |

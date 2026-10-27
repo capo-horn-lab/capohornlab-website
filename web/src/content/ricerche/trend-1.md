@@ -7,7 +7,7 @@ strumenti:
   - "QQQ"
   - "VIX"
 finestra: "17 ETF Yahoo 2006-2026 (2,93 MB) per TREND-1; SPY/QQQ + VIX per VRP-1."
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8105-L8108"
@@ -30,7 +30,7 @@ TREND-1: scoperta 60/verifica 40 dei mesi, placebo 200; VRP-1: IC di Spearman, N
 |---|---|
 | TREND-1: "0 confermati su 2" (TSMOM 12-1, 16 mercati, 236 mesi: scoperta +82,99 bp (Sharpe 0,61), verifica +51,89 bp (t 1,04); Faber: drawdown 10,3% contro 16,2% sempre investito, Sharpe 1,06 contro 1,18). | docs/EXECUTION_LEDGER.md#L8105-L8108 |
 | VRP-1: "0 confermati su 4, tutti con il segno atteso": SPY 5 giorni scoperta IC +0,068 (t 2,09), verifica +0,038 (t 0,96) | docs/EXECUTION_LEDGER.md#L8105-L8108 · docs/EXECUTION_LEDGER.md#L8118-L8118 |
-| SPY 22 giorni +0,130 (t 2,55) / +0,079 (t 1,14). | docs/EXECUTION_LEDGER.md#L8105-L8108 · docs/EXECUTION_LEDGER.md#L8118-L8118 |
+| SPY 22 giorni +0,130 (t 2,55) / +0,079 (t 1,14). | docs/EXECUTION_LEDGER.md#L8118-L8118 |
 
 ## Grafico
 

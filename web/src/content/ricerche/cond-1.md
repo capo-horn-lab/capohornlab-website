@@ -10,7 +10,7 @@ strumenti:
   - "ES"
   - "CL"
 finestra: "i 216 test di LAB-2 (MES, MNQ, MCL) e i livelli tondi/giornalieri di NQ, ES, CL"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "`trades.json` e `cond1.json` contengono tracce di trade derivate da dati licenziati (solo aggregati); il book L2 è catturato da NinjaTrader (licenza)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6527-L6527"
@@ -37,11 +37,11 @@ Filtro per esclusione una dimensione alla volta, scelto in scoperta e misurato i
 |---|---|
 | COND-1: "216 test, 1728 filtri, 0 confermati (BH q minimo 0,33)" | docs/EXECUTION_LEDGER.md#L6557-L6581 |
 | "in 108 dei 188 test negativi la scelta a posteriori giorno x ora rende la media positiva" (illusione). | docs/EXECUTION_LEDGER.md#L6557-L6581 |
-| COND-1-OOS: "0 filtri confermati su 14 prove (9 filtri x periodi disponibili; q minimo 0,61)". | docs/EXECUTION_LEDGER.md#L6527-L6527 · runtime/proofs/cond1/cond1.json |
+| COND-1-OOS: "0 filtri confermati su 14 prove (9 filtri x periodi disponibili; q minimo 0,61)". | docs/EXECUTION_LEDGER.md#L6527-L6527 · docs/EXECUTION_LEDGER.md#L6528-L6528 |
 | COND-2: "216 test, 3456 filtri walk-forward, 0 confermati (q minimo 0,26)". | docs/EXECUTION_LEDGER.md#L6557-L6581 |
 | LEVELS-1: "nessun livello tiene più del caso in entrambi i periodi" | docs/EXECUTION_LEDGER.md#L6527-L6527 · docs/EXECUTION_LEDGER.md#L6557-L6581 |
 | NQ 29300 (descrittivo): 25 esiti, rimbalzo 36% contro 49,5% dei multipli di 100 e 50,2% dei controlli | docs/EXECUTION_LEDGER.md#L6557-L6581 |
-| muri ES 12-26 (2 sessioni, descrittivo): 1514 muri, 76% ritirati prima del tocco, rimbalzo 57% (83/145) contro 47%. | docs/EXECUTION_LEDGER.md#L6527-L6527 · docs/EXECUTION_LEDGER.md#L6557-L6581 |
+| muri ES 12-26 (2 sessioni, descrittivo): 1514 muri, 76% ritirati prima del tocco, rimbalzo 57% (83/145) contro 47%. | docs/EXECUTION_LEDGER.md#L6557-L6581 |
 
 ## Cosa NON dice
 

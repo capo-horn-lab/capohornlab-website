@@ -4,7 +4,7 @@ titolo: "CHOP-1 — all'apertura il mercato è \"choppy\"?"
 data: "2026-10-19"
 strumenti: []
 finestra: "4 micro 1 minuto 2019-05..2026-10-16"
-verdetto: "non confermata"
+verdetto: "non confermato"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9150-L9150"
@@ -24,7 +24,8 @@ Corse G1 (ritorno a p0 contro stop) e G2 per D in {0,10-0,50 U}; quota di obiett
 
 | Risultato | Fonte |
 |---|---|
-| "NON CONFERMATO, 0 strumenti su 4 per ogni combinazione. Dopo il tocco di un estremo il ritorno NON è più probabile del caso." D 0,25 U: obiettivo G1 primo nel 44-51% contro 50% del caso e soglia di pareggio 52-59% | docs/EXECUTION_LEDGER.md#L9150-L9150 |
+| "NON CONFERMATO, 0 strumenti su 4 per ogni combinazione. Dopo il tocco di un estremo il ritorno NON è più probabile del caso." | docs/EXECUTION_LEDGER.md#L9150-L9150 |
+| D 0,25 U: obiettivo G1 primo nel 44-51% contro 50% del caso e soglia di pareggio 52-59% | docs/EXECUTION_LEDGER.md#L9150-L9150 |
 | G2 28-34% contro 33,3% | docs/EXECUTION_LEDGER.md#L9150-L9150 |
 | P&L sempre negativo (MNQ da -0,9 a -4,7 punti per trade). | docs/EXECUTION_LEDGER.md#L9150-L9150 |
 

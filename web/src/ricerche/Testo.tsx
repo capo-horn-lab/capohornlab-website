@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Badge } from '@/components/ui/badge'
-import { ETICHETTE, type Verdetto } from './modello'
+import { AIUTO_AUDIT, paroleVerdetto, SENZA_VERDETTO, varianteParola, type Audit, type Verdetto } from './modello'
 
 /** Markdown in riga (grassetto, codice) dentro una cella o una voce di elenco. */
 export function InLinea({ testo }: { testo: string }) {
@@ -31,11 +31,33 @@ export function Paragrafi({ testo }: { testo: string }) {
   )
 }
 
-export function VerdettoBadge({ verdetto }: { verdetto: Verdetto }) {
-  const e = ETICHETTE[verdetto]
+/** Una parola del registro per badge; oltre `max` parole il resto va in "+N" (tutte nel title). */
+export function VerdettoBadge({ verdetto, max = 3 }: { verdetto: Verdetto; max?: number }) {
+  const parole = paroleVerdetto(verdetto)
+  if (parole.length === 0) {
+    return (
+      <Badge variant="outline" className="text-muted-foreground">
+        {SENZA_VERDETTO}
+      </Badge>
+    )
+  }
   return (
-    <Badge variant={e.variante} title={e.aiuto}>
-      {e.testo}
+    <span className="flex flex-wrap gap-1" title={`Parole del registro: ${parole.join(', ')}`}>
+      {parole.slice(0, max).map((p) => (
+        <Badge key={p} variant={varianteParola(p)}>
+          {p}
+        </Badge>
+      ))}
+      {parole.length > max && <Badge variant="outline">+{parole.length - max}</Badge>}
+    </span>
+  )
+}
+
+/** Secondo segno, a parte dal verdetto: ritiro o correzione dell'audit, solo per gli ID indicati nella pagina. */
+export function AuditBadge({ audit }: { audit: Audit['stato'] }) {
+  return (
+    <Badge variant="destructive" title={AIUTO_AUDIT[audit]}>
+      audit: {audit}
     </Badge>
   )
 }

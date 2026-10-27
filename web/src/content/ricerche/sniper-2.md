@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ, MES, M2K, MYM 1 minuto 2019-05..2026-10-20 (1.762-1.790 sessioni)"
-verdetto: "non confermata"
+verdetto: "pass · non confermata · parziale"
 pubblicabilita: "avvertenza"
 avvertenza: "(trades.csv derivati da dati licenziati; solo aggregati). Insieme a SNIPER-1 forma lo studio a rapporto rendimento/rischio alto e winrate basso richiesto dal proprietario."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10252-L10261"

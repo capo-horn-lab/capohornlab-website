@@ -8,9 +8,9 @@ strumenti:
   - "FESX"
   - "FSXE"
 finestra: "FDXM/FDXS (1.071.095 barre dal 19/04/2021), FESX, FSXE (370.504 barre), 2019-2026"
-verdetto: "non confermata"
+verdetto: "pass · fail · not_run"
 pubblicabilita: "avvertenza"
-avvertenza: "(orari ufficiali di terzi: citare fonti UFF/UFF-r/TERZI come nel documento)."
+avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10615-L10620"
 prove:
   - "docs/research/APERTURE_MONDO_2026-10-23.md"
@@ -28,7 +28,8 @@ Soglia S = 50 x A_indice/A_MNQ, ultime 10 sessioni; verifica congelata 2019-2023
 
 | Risultato | Fonte |
 |---|---|
-| "Verifica congelata 2019-2023 contro 2024-2026: FAIL (cambiano 8 rami su 10 per il DAX e 7 su 10 per l'EURO STOXX 50)." Orari d'apertura in ora di Roma: Sydney 01:00, Tokyo 02:00, Hong Kong 03:30, Eurex 08:00, Xetra/Euronext/SIX/LSE 09:00, New York 15:30 (14:30 dal 26 al 30/10). | docs/EXECUTION_LEDGER.md#L10615-L10620 |
+| "Verifica congelata 2019-2023 contro 2024-2026: FAIL (cambiano 8 rami su 10 per il DAX e 7 su 10 per l'EURO STOXX 50)." | docs/EXECUTION_LEDGER.md#L10615-L10620 |
+| Orari d'apertura in ora di Roma: Sydney 01:00, Tokyo 02:00, Hong Kong 03:30, Eurex 08:00, Xetra/Euronext/SIX/LSE 09:00, New York 15:30 (14:30 dal 26 al 30/10). | docs/EXECUTION_LEDGER.md#L10615-L10620 |
 
 ## Cosa NON dice
 

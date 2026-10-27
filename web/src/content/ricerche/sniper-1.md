@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MNQ, MES, M2K, MYM 1 minuto 2019-05..2026-10-20 (MES 1.780 sessioni, MNQ 1.790, M2K 1.762, MYM 1.774; scoperta 2019-05..2023-12, verifica 2024-01..2026-10)"
-verdetto: "non confermata"
+verdetto: "pass · non confermata · parziale"
 pubblicabilita: "avvertenza"
 avvertenza: "esito negativo ben documentato; `sniper1_trades.csv` contiene tracce di trade derivate da dati licenziati (solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10200-L10213"
@@ -46,7 +46,8 @@ Test della scheda dal file runtime/research/sa-report/summary.json (r riga, n ca
 
 ## Cosa NON dice
 
-- "la geometria 'stop 100 tick, obiettivo 800 tick' vince esattamente quanto serve al pareggio e non di più... Per avere edge non basta il rapporto: serve che il livello d'ingresso o la zona obiettivo contengano informazione." Nota di onestà: la media "per giorno con trade" nasce dal 46% dei giorni con un solo strumento in trade (media per trade -0,0135 A, -3,12 USD)
+- "la geometria 'stop 100 tick, obiettivo 800 tick' vince esattamente quanto serve al pareggio e non di più... Per avere edge non basta il rapporto: serve che il livello d'ingresso o la zona obiettivo contengano informazione."
+- Nota di onestà: la media "per giorno con trade" nasce dal 46% dei giorni con un solo strumento in trade (media per trade -0,0135 A, -3,12 USD)
 - da SNIPER-2 la misura è per trade con t sui giorni.
 - Sensibilità barra d'ingresso: fermati nella barra d'ingresso S 0,05 A 25,0% / 27,1%
 - 0 righe su 36 passano BH in lettura ottimistica.

@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES, MNQ, M2K, MYM NinjaTrader 2019-2026 (714 trade IBS dopo i primi 500 giorni)"
-verdetto: "confermata"
+verdetto: "confermato"
 pubblicabilita: "avvertenza"
 avvertenza: "\"CONFERMATO secondo la rubrica\" ma migliora la qualità per trade, non il guadagno totale; usato solo come variante in carta."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8394-L8399"

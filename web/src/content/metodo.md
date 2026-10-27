@@ -1,16 +1,16 @@
 # Metodo
 
-Questa pagina descrive come sono condotte le ricerche pubblicate sul sito. Ogni regola e' scritta dal progetto prima di eseguire gli script e cita il file e la riga da cui e' presa. `docs/EXECUTION_LEDGER.md` e' il registro di esecuzione del motore; `docs/research/TEORIA_MOVIMENTO_2026-10-21.txt` e' il documento del proprietario sulla tesi del movimento.
+Questa pagina descrive come sono condotte le ricerche pubblicate sul sito. Ogni regola riportata cita il file e la riga da cui e' presa. `docs/EXECUTION_LEDGER.md` e' il registro di esecuzione del motore; `docs/research/TEORIA_MOVIMENTO_2026-10-21.txt` e' il documento del proprietario sulla tesi del movimento.
 
-## La rubrica viene prima dei risultati
+## La rubrica prima dei risultati, dove la scheda lo dice
 
-Per ogni ricerca soglie, test e verdetti sono scritti nel registro prima di lanciare lo script: «Rubrica congelata PRIMA dei risultati» (`docs/EXECUTION_LEDGER.md` riga 6101, ripetuta alle righe 6541, 6588, 6625) e, per LAB-2, «rubrica congelata PRIMA di qualsiasi backtest» (riga 6177). La regola comune del progetto e' che «il verificatore applica la rubrica fissata prima dei risultati» (`AGENTS.md` riga 14).
+Dove la scheda del registro lo dice, la rubrica (soglie, test e verdetti) e' fissata prima dei risultati: «Rubrica congelata PRIMA dei risultati» (`docs/EXECUTION_LEDGER.md` riga 6101, ripetuta alle righe 6541, 6588, 6625) e, per LAB-2, «rubrica congelata PRIMA di qualsiasi backtest» (riga 6177). Non vale per ogni scheda: la sezione «Metodo e rubrica» di ogni pagina riporta se la rubrica era fissata prima. La regola comune del progetto e' che «il verificatore applica la rubrica fissata prima dei risultati» (`AGENTS.md` riga 14).
 
-## Scoperta e verifica
+## Scoperta e verifica nel laboratorio LAB-1
 
-I dati di ogni strumento sono divisi in ordine di tempo: scoperta = primo 60% delle sessioni, verifica = ultimo 40% (`docs/EXECUTION_LEDGER.md` righe 6106-6107). Le regole si scelgono sulla scoperta e si giudicano sulla verifica.
+Nel laboratorio LAB-1 i dati di ogni strumento sono divisi in ordine di tempo: scoperta = primo 60% delle sessioni, verifica = ultimo 40% (`docs/EXECUTION_LEDGER.md` righe 6106-6107); la stessa divisione e' scritta per LAB-2 (riga 6199). Il giudizio sulla regola (media, t, placebo, correzione per test multipli) si fa sulla verifica.
 
-## Quando una regola e' adottata
+## Quando una strategia e' adottata nel laboratorio LAB-1
 
 Una strategia e' ADOTTATA solo se valgono tutte queste condizioni; altrimenti e' NON ADOTTATA (`docs/EXECUTION_LEDGER.md` righe 6108-6111):
 
@@ -26,13 +26,15 @@ Il metodo di LAB-2 aggiunge: regole prese dal claim e mai ottimizzate, conteggio
 
 Ogni consegna distingue quattro esiti di esecuzione (`AGENTS.md` riga 14). Due regole del progetto ne fissano il confine: uno strumento assente e' `BLOCKED_ENV`, «mai un PASS né una failure del codice» (`docs/ERROR_RULES.md` riga 2317); un output che non contiene né un difetto né la negazione esplicita di difetti si registra come `NOT_RUN`, «mai come assenza di difetti» (`docs/ERROR_RULES.md` righe 2579-2581). L'esito di esecuzione non e' il verdetto della ricerca: uno script puo' essere PASS e il verdetto NON CONFERMATA.
 
-## Verdetto della ricerca
+## Verdetto nel registro
 
-Il registro usa CONFERMATA, PARZIALE, NON CONFERMATA e DESCRITTIVO. Per una famiglia di simboli: CONFERMATA se almeno meta' dei simboli e' confermata, PARZIALE se almeno uno, NON CONFERMATA se nessuno (`docs/EXECUTION_LEDGER.md` riga 9406). DESCRITTIVO vale quando la scheda riporta misure e frequenze senza un test di ipotesi: per FREQ-LIVE-1 il registro dichiara «frequenze descrittive su sessioni gia' viste, nessun placebo ne' correzione per prove multiple» (`docs/EXECUTION_LEDGER.md` riga 10292). Le etichette dell'elenco delle ricerche sono una guida alla lettura: il testo esatto del verdetto e' nella pagina di ogni ricerca.
+Nell'elenco e in ogni pagina il verdetto e' una parola scritta nel registro, trovata nelle righe di `docs/EXECUTION_LEDGER.md` che la pagina cita (le righe della colonna Fonte e `fonte_ledger`): PASS, FAIL, CONFERMATA, CONFERMATO, NON CONFERMATA, NON CONFERMATO, PARZIALE, ADOTTATA, NON ADOTTATA, DESCRITTIVO, RITIRATA, BLOCKED_ENV, NOT_RUN. Se nelle righe citate non c'e' nessuna di queste parole, la pagina dice «senza verdetto nel registro»: nessuna etichetta e' dedotta dal testo. Le righe citate possono contenere piu' parole, per esempio la regola di una rubrica oltre all'esito: le parole sono elencate nell'ordine in cui compaiono, e il testo esatto e' nella sezione «Esito» della pagina.
+
+Per una famiglia di simboli il registro scrive: CONFERMATA se almeno meta' dei simboli e' confermata, PARZIALE se almeno uno, NON CONFERMATA se nessuno (`docs/EXECUTION_LEDGER.md` riga 9406). Per FREQ-LIVE-1 dichiara «frequenze descrittive su sessioni gia' visti, nessun placebo ne' correzione per prove multiple» (`docs/EXECUTION_LEDGER.md` riga 10292).
 
 ## Ritiri e correzioni
 
-Quando un controllo successivo smentisce una conferma, la pagina lo dice. Due conferme (VOLREV-1 e GEX-1) sono state ritirate dall'audit: «CONFERMA RITIRATA» e ora NON CONFERMATO (`docs/EXECUTION_LEDGER.md` righe 8968-8970). Le pagine con ritiri o correzioni portano il verdetto `ritirato` o `corretto` e le parole dell'audit in evidenza.
+Quando un controllo successivo smentisce una conferma, la pagina lo dice. Due conferme (VOLREV-1 e GEX-1) sono state ritirate dall'audit: «CONFERMA RITIRATA» e ora NON CONFERMATO (`docs/EXECUTION_LEDGER.md` righe 8968-8970). Le pagine con ritiri o correzioni portano, accanto al verdetto del registro, un secondo segno `ritirato` o `corretto`: vale solo per gli studi nominati nella sezione «Ritiri e correzioni» della pagina e non cambia il verdetto. Le parole dell'audit sono in evidenza; di una conferma ritirata la pagina non riporta i numeri.
 
 ## La tesi: quanto e quando, non dove
 
@@ -49,4 +51,4 @@ Le sezioni descrittive del documento riguardano tutto il periodo o le ultime 60-
 
 ## Come si leggono i numeri
 
-Ogni numero delle tabelle «Esito» e' copiato dal registro o dal file di prova indicato nella colonna Fonte, senza arrotondamenti ne' conversioni. Un numero che non si ritrova nelle fonti citate non entra in tabella ed e' elencato come non verificabile. Se un file di prova citato non e' sul disco, la pagina dice «prova non trovata su disco». I costi di transazione usati nelle prove sono provvisori, come dichiarato nelle singole schede.
+Ogni numero delle tabelle «Esito» e' copiato dal registro o dal file di prova indicato nella colonna Fonte, senza arrotondamenti ne' conversioni. Una riga con un numero che non si ritrova nella fonte citata non e' pubblicata: sotto la tabella la pagina dice quante righe della scheda non sono riportate. Si accetta un numero fuori dall'intervallo citato dal registro solo se sta entro 3 righe e la riga ha le stesse parole; la Fonte indica allora la riga vera. In un file di prova JSON un numero conta solo come valore, insieme agli altri numeri della riga nello stesso record. Se un file di prova citato non e' sul disco, la pagina dice «prova non trovata su disco». I costi di transazione usati nelle prove sono provvisori, come dichiarato nelle singole schede.

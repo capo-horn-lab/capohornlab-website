@@ -7,9 +7,9 @@ strumenti:
   - "NQ"
   - "CL"
 finestra: "ES 1m 2020-2024, NQ 1m 2023-2024 (+ trade tick con aggressore), CL MBP-1 2024-2025, export NinjaTrader 2026"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "dati Databento/NinjaTrader non ripubblicabili (solo aggregati); costi provvisori."
+avvertenza: "costi provvisori."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6139-L6146"
 prove:
   - "runtime/proofs/lab/lab.json"

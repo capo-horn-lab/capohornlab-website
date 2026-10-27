@@ -6,7 +6,7 @@ strumenti:
   - "MES"
   - "SPY"
 finestra: "MES 1.831 sessioni valide 2019-05-06..2026-10-19 e SPY 5.232 sedute 2006-2026"
-verdetto: "parziale"
+verdetto: "pass · parziale"
 pubblicabilita: "avvertenza"
 avvertenza: "(IC correlati, 2 prove indipendenti)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9845-L9861"

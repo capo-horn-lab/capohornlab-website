@@ -7,9 +7,9 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL"
-verdetto: "descrittivo"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "riportare il voto come misura interna (voto 64,5/100 su rubrica propria); riferimenti a Investing.com/Barchart/TipRanks solo come descrizione (non ricostruiti)."
+avvertenza: "riferimenti a Investing.com/Barchart/TipRanks solo come descrizione (non ricostruiti)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6730-L6860"
 prove:
   - "runtime/proofs/sent3/valutazioni.json"
@@ -34,7 +34,8 @@ Rubrica a voto (V1-V4 verità 55 + F1-F4 funzionamento 45), bootstrap a blocchi 
 | giro 3 = 64,5 | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 | giro 4 = 64,5 | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 | giro 5 = 64,5. | docs/EXECUTION_LEDGER.md#L6730-L6860 |
-| "FINE DEL LOOP: tre valutazioni consecutive uguali... Voto finale 64,5/100." Affidabili solo MES 5 m (strong sell, sell, buy), MNQ 5 m (sell, buy) e MCL 5 m (sell, buy) | docs/EXECUTION_LEDGER.md#L6730-L6860 |
+| "FINE DEL LOOP: tre valutazioni consecutive uguali... Voto finale 64,5/100." | docs/EXECUTION_LEDGER.md#L6730-L6860 |
+| Affidabili solo MES 5 m (strong sell, sell, buy), MNQ 5 m (sell, buy) e MCL 5 m (sell, buy) | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 | gli altri timeframe "non affidabile". | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 | Test: veritiero MES 5 m | docs/EXECUTION_LEDGER.md#L6730-L6860 |
 | MNQ 5 m buy "dice 53,7%, succede il 56,7%". | docs/EXECUTION_LEDGER.md#L6730-L6860 |

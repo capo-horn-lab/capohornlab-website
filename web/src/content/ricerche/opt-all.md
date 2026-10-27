@@ -15,7 +15,7 @@ strumenti:
   - "MCL"
   - "ZN"
 finestra: "10 strumenti (MES, MNQ, M2K, MYM, MGC, M6E, FESX, FDXM, MBT, MCL) e ZN; 6 famiglie (IBS, RSI2, TT, NDOWN, MA, DONCHIAN), 98 combinazioni per strumento"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8622-L8626"
@@ -35,10 +35,11 @@ Walk-forward mobile 500/60, obiettivo prudente, 200 placebo con combinazioni cas
 
 | Risultato | Fonte |
 |---|---|
-| "0 confermati su 60." Migliori fuori campione: MES IBS +4,41 bp/sessione (t 2,85, q 0,089) ma sotto il p95 dei placebo 5,04 e DSR 0,34 | docs/EXECUTION_LEDGER.md#L8622-L8626 · docs/EXECUTION_LEDGER.md#L8644-L8644 |
+| "0 confermati su 60." | docs/EXECUTION_LEDGER.md#L8622-L8626 |
+| Migliori fuori campione: MES IBS +4,41 bp/sessione (t 2,85, q 0,089) ma sotto il p95 dei placebo 5,04 e DSR 0,34 | docs/EXECUTION_LEDGER.md#L8622-L8626 · docs/EXECUTION_LEDGER.md#L8644-L8644 |
 | MNQ IBS +5,08 (t 2,58, p95 6,56) | docs/EXECUTION_LEDGER.md#L8622-L8626 |
 | MCL nessuna famiglia con t sopra 1,3 | docs/EXECUTION_LEDGER.md#L8644-L8644 |
-| PBO medio 0,43. | docs/EXECUTION_LEDGER.md#L8622-L8626 · docs/EXECUTION_LEDGER.md#L8644-L8644 |
+| PBO medio 0,43. | docs/EXECUTION_LEDGER.md#L8644-L8644 |
 
 ## Grafico
 

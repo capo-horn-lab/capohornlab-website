@@ -6,9 +6,9 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "30 ETF Yahoo giornalieri dal 2006 (149.803 righe): 11 settori SPDR, 11 paesi, 6 stile, controllo SPY e QQQ; scoperta 2006-2019, verifica 2020-2026"
-verdetto: "parziale"
+verdetto: "pass · fail · confermato · parziale · confermata · non confermata"
 pubblicabilita: "avvertenza"
-avvertenza: "(dati Yahoo solo aggregati; tabella per simbolo ripubblicabile come dato derivato, con le correlazioni descritte)."
+avvertenza: "dati Yahoo solo aggregati"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9455-L9499"
 prove:
   - "runtime/proofs/sig2/ibs_etf_settori.json"

@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "(non è il CAL-1 di calibrazione del 4/10, che è infrastruttura); MES, MNQ, MCL"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8148-L8151"
@@ -27,7 +27,8 @@ Libreria WFO-1 con 2 filtri per genoma, F3 prudente, BH q≤0,10 su 3. Rubrica p
 
 | Risultato | Fonte |
 |---|---|
-| "0 confermati su 3." Con i filtri di calendario: MES +3,85 (t 1,73) contro +4,09 (t 1,54) senza | docs/EXECUTION_LEDGER.md#L8148-L8151 |
+| "0 confermati su 3." | docs/EXECUTION_LEDGER.md#L8148-L8151 |
+| Con i filtri di calendario: MES +3,85 (t 1,73) contro +4,09 (t 1,54) senza | docs/EXECUTION_LEDGER.md#L8148-L8151 |
 | MNQ +34,37 (t 2,72) contro +36,01 (t 2,88) | docs/EXECUTION_LEDGER.md#L8148-L8151 |
 | MCL -0,77 contro -0,31. | docs/EXECUTION_LEDGER.md#L8148-L8151 |
 

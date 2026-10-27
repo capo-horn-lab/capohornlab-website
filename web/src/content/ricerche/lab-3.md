@@ -7,7 +7,7 @@ strumenti:
   - "M2K"
   - "M6E"
 finestra: "MGC 2,65 milioni di barre, M2K 2,47 milioni, M6E 2,28 milioni (1 minuto NinjaTrader 2019-2026)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(dati NinjaTrader solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8199-L8203"
@@ -33,7 +33,7 @@ Test 1: 168 test (56 per strumento) con rubrica LAB-2; Test 2: WFO-1 invariato (
 | Test 1: "0 adottate su 168". | docs/EXECUTION_LEDGER.md#L8199-L8203 |
 | Test 2: "0 confermati su 3": MGC F3 -1,90 (t -0,77) | docs/EXECUTION_LEDGER.md#L8199-L8203 · docs/EXECUTION_LEDGER.md#L8230-L8234 |
 | M2K F3 +1,21 (t 0,81) | docs/EXECUTION_LEDGER.md#L8230-L8234 |
-| M6E F3 -1,84 (t -5,26). | docs/EXECUTION_LEDGER.md#L8199-L8203 · docs/EXECUTION_LEDGER.md#L8230-L8234 |
+| M6E F3 -1,84 (t -5,26). | docs/EXECUTION_LEDGER.md#L8230-L8234 |
 
 ## Grafico
 

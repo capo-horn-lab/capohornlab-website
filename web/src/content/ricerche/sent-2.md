@@ -10,9 +10,9 @@ strumenti:
   - "MCL"
   - "CL"
 finestra: "MES (ES 1m), MNQ (NQ 1s), MCL (CL 1s); 5 m, 30 m, 1 h, 4 h, giornaliero (45 combinazioni motore x strumento x timeframe)"
-verdetto: "descrittivo"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "citare l'esito complessivo (2 su 45) e il caveat sul costo; dati licenziati solo aggregati."
+avvertenza: "dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6704-L6728"
 prove:
   - "runtime/proofs/sent2/sent2.json"

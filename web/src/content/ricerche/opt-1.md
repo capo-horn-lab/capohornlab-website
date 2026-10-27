@@ -8,7 +8,7 @@ strumenti:
   - "MES"
   - "MNQ"
 finestra: "SPY e QQQ (put/call Cboe 2006-11..2019-10, TS9 da 2011), MES/MNQ 2019-2026"
-verdetto: "misto"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8073-L8079"
@@ -34,7 +34,7 @@ IC di Spearman a 5 giorni, Newey-West 5 ritardi, BH q≤0,10 su 10 test (OPT-1);
 | TS9 +0,109 (t 2,58) SPY. | docs/EXECUTION_LEDGER.md#L8073-L8079 |
 | SKEW e VVIX non confermati. | docs/EXECUTION_LEDGER.md#L8073-L8079 · docs/EXECUTION_LEDGER.md#L8090-L8094 |
 | OPT-2: "0 confermati su 4": MES 50 segnali, verifica 18 trade +159,14 USD (t 0,80), placebo p95 306,64 | docs/EXECUTION_LEDGER.md#L8073-L8079 · docs/EXECUTION_LEDGER.md#L8090-L8094 |
-| SPY 107 segnali verifica +43,65 bp (t 0,89), placebo p95 80,15. | docs/EXECUTION_LEDGER.md#L8073-L8079 · docs/EXECUTION_LEDGER.md#L8090-L8094 |
+| SPY 107 segnali verifica +43,65 bp (t 0,89), placebo p95 80,15. | docs/EXECUTION_LEDGER.md#L8090-L8094 |
 
 ## Grafico
 

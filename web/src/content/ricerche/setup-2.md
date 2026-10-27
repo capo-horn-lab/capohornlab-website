@@ -8,7 +8,7 @@ strumenti:
   - "NQ"
   - "RTY"
 finestra: "MES (barre ES/NQ/RTY 1m, 55 sessioni dal 02/08 al 16/10/2026)"
-verdetto: "descrittivo"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "costi provvisori, campione di 55 sessioni, selezione a posteriori; dati NinjaTrader (licenza)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6047-L6055"

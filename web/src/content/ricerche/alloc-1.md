@@ -8,7 +8,7 @@ strumenti:
   - "IWM"
   - "DIA"
 finestra: "857 strategie (≥30 trade) su 10 strumenti, 60 unità famiglia x strumento, 2.184 sessioni (fuori campione dalla 501ª); STRESS-OOS-1: SPY/QQQ (e IWM, DIA) 2009-2018, 2.336 sessioni, 192 giorni di stress in 65 episodi."
-verdetto: "non confermata"
+verdetto: "non confermato · confermato"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8628-L8633"
@@ -27,15 +27,14 @@ Walk-forward 500/60, bootstrap a blocchi, placebo con stati spostati circolarmen
 
 | Risultato | Fonte |
 |---|---|
-| ALLOC-1: "NON CONFERMATO": A tutte accese +1,34 bp/sessione (t 4,16, Sharpe 1,61) | docs/EXECUTION_LEDGER.md#L8628-L8633 |
-| C +1,70 (t 4,15, Sharpe 1,61) | docs/EXECUTION_LEDGER.md#L8628-L8633 |
+| ALLOC-1: "NON CONFERMATO": A tutte accese +1,34 bp/sessione (t 4,16, Sharpe 1,61); C +1,70 (t 4,15, Sharpe 1,61) | docs/EXECUTION_LEDGER.md#L8628-L8633 |
 | Sharpe(C)-Sharpe(B) +0,08, bootstrap p 0,105. | docs/EXECUTION_LEDGER.md#L8628-L8633 |
 | PERSIST-1: "CONFERMATO, la premessa regge": Spearman tra le due metà sulle 180 coppie 0,30 (p 0,006), 30 coppie con q≤0,10 | docs/EXECUTION_LEDGER.md#L8646-L8650 |
 | condizione che conta lo STRESS (7% delle sessioni, 128 giorni): IBS MES d +17,0 bp/sessione, MNQ +23,5, M2K +19,9. | docs/EXECUTION_LEDGER.md#L8646-L8650 |
 | ALLOC-2: "NON CONFERMATO, nessuna delle due varianti": B +0,59 (t 2,81, Sharpe 1,09) | docs/EXECUTION_LEDGER.md#L8662-L8667 |
 | C8 +0,64 (Sharpe 1,25), C8 contro B +0,15 di Sharpe, p 0,26. | docs/EXECUTION_LEDGER.md#L8662-L8667 |
 | STRESS-OOS-1: A mean reversion "NON CONFERMATO per poco, direzione confermata": +77,9 bp in stress contro +18,1 bp (318 e 1.861 trade), d +59,8, p unilaterale 0,034 (serviva <0,025) | docs/EXECUTION_LEDGER.md#L8679-L8682 |
-| B trend: nei giorni di stress -10,0 bp contro -0,1 (p 0,98). | docs/EXECUTION_LEDGER.md#L8628-L8633 · docs/EXECUTION_LEDGER.md#L8646-L8650 · docs/EXECUTION_LEDGER.md#L8662-L8667 · docs/EXECUTION_LEDGER.md#L8679-L8682 |
+| B trend: nei giorni di stress -10,0 bp contro -0,1 (p 0,98). | docs/EXECUTION_LEDGER.md#L8679-L8682 |
 
 ## Grafico
 

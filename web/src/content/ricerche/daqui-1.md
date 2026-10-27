@@ -5,7 +5,7 @@ data: "2026-10-22"
 strumenti:
   - "MNQ"
 finestra: "MNQ; k=240 vicini scelto sulla scoperta 2019-2023 tra 60/120/240 (Brier base 0,224286, k60 0,225614, k120 0,224052, k240 0,223408); verifica congelata 2024-2026 (697 giorni, 8.361 punti)"
-verdetto: "descrittivo"
+verdetto: "pass · fail · not_run"
 pubblicabilita: "avvertenza"
 avvertenza: "verifica solo su MNQ; esito descrittivo (l'intervallo contiene lo zero)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10530-L10533"

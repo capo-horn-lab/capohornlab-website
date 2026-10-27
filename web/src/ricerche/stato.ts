@@ -1,10 +1,13 @@
-/** Motore acceso fino a 60 s dall'ultimo invio, in ritardo fino a 180 s, spento oltre (o senza dati). */
-export const SOGLIA_ACCESO_S = 60
+/**
+ * Soglie del dato "vecchio" per canale (design §4.2): scenari 60 s, frequenze 180 s. Oltre 180 s dall'ultimo invio, o
+ * senza dati, il motore risulta spento (stessa soglia della fase 1).
+ */
+export const SOGLIA_CANALE_S = { scenari: 60, frequenze: 180 } as const
 export const SOGLIA_SPENTO_S = 180
 
 export type StatoMotore = 'acceso' | 'in ritardo' | 'spento'
 
-export function statoMotore(etaS: number | null): StatoMotore {
+export function statoMotore(etaS: number | null, sogliaS: number = SOGLIA_CANALE_S.scenari): StatoMotore {
   if (etaS === null || !Number.isFinite(etaS) || etaS > SOGLIA_SPENTO_S) return 'spento'
-  return etaS <= SOGLIA_ACCESO_S ? 'acceso' : 'in ritardo'
+  return etaS <= sogliaS ? 'acceso' : 'in ritardo'
 }

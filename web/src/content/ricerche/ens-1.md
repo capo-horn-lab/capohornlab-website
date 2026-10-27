@@ -10,9 +10,9 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "ENS-1: SPY e QQQ 2006-2026 (previsioni dal 2010); LASTHALF-OOS: MES, MNQ, M2K, MYM 2019-2026"
-verdetto: "confermata"
+verdetto: "confermato · non confermato"
 pubblicabilita: "avvertenza"
-avvertenza: "(R² dello 0,3-0,4%: effetto minuscolo; non va presentato come previsione sfruttabile)."
+avvertenza: "R² dello 0,3-0,4%: effetto minuscolo"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8481-L8490"
 prove:
   - "runtime/proofs/ens1/ens1.json"

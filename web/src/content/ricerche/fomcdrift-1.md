@@ -6,7 +6,7 @@ strumenti:
   - "ZN"
   - "MES"
 finestra: "ZN 1 minuto 2019-02-25..2026-10-16 (1.969 sessioni), 60 riunioni (36 scoperta, 24 verifica), controllo MES"
-verdetto: "non confermata"
+verdetto: "pass · non confermata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9729-L9734"

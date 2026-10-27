@@ -7,9 +7,9 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "i 216 test di COND-1 (MES, MNQ, MCL; 5 m, 30 m, 1 h, 4 h, giornaliero)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "usa la definizione pubblica del Technical Rating TradingView (citare come rating in stile TradingView, senza usare il marchio come prodotto); dati licenziati solo aggregati."
+avvertenza: "usa la definizione pubblica del Technical Rating TradingView; dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6662-L6674"
 prove:
   - "runtime/proofs/sent1/sent1.json"
@@ -30,16 +30,13 @@ il rating (strong sell...strong buy) al momento dell'entrata separa i trade buon
 |---|---|
 | "0 regole adottate su 4752 (q minimo 1,0)" | docs/EXECUTION_LEDGER.md#L6662-L6674 |
 | 6 regole arrivano in verifica a 100 trade, media>0, t≥2 ma "nessuna regge i periodi mai usati". | docs/EXECUTION_LEDGER.md#L6662-L6674 |
-| P&L in verifica per numero di timeframe a favore (media delle medie): 0 su 5 -2,96 | docs/EXECUTION_LEDGER.md#L6662-L6674 |
-| 1 -2,84 | docs/EXECUTION_LEDGER.md#L6662-L6674 |
-| 2 -1,57 | docs/EXECUTION_LEDGER.md#L6662-L6674 |
-| 3 -2,24 | docs/EXECUTION_LEDGER.md#L6662-L6674 |
-| 4 -2,55 | docs/EXECUTION_LEDGER.md#L6662-L6674 |
+| P&L in verifica per numero di timeframe a favore (media delle medie): 0 su 5 -2,96; 1 -2,84; 2 -1,57; 3 -2,24; 4 -2,55 | docs/EXECUTION_LEDGER.md#L6662-L6674 |
 | 5 -1,22 USD a trade. | docs/EXECUTION_LEDGER.md#L6662-L6674 |
 
 ## Cosa NON dice
 
-- "Il sentiment non separa i trade buoni dai cattivi." Per l'ORB il sentiment a 30 m/1 h dipende in parte dal segnale stesso (nota dichiarata).
+- "Il sentiment non separa i trade buoni dai cattivi."
+- Per l'ORB il sentiment a 30 m/1 h dipende in parte dal segnale stesso (nota dichiarata).
 
 ## Prove
 

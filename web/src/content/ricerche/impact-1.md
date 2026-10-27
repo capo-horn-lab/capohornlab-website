@@ -8,9 +8,9 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "tick NinjaTrader 20/9-16/10/2026 di MNQ, MES, M2K, MYM (20 giorni di sessione)"
-verdetto: "non confermata"
+verdetto: "pass"
 pubblicabilita: "avvertenza"
-avvertenza: "(i tick sono dati NinjaTrader/CME; pubblicare solo gli aggregati)."
+avvertenza: "i tick sono dati NinjaTrader/CME"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10004-L10018"
 prove:
   - "runtime/proofs/impact1/impact1.json"

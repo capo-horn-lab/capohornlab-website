@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL; PARAM-1: 51.840 genomi EMA+RSI x filtri (MES 42.720, MNQ 41.688, MCL 40.514 con trade); PARAM-2: 3.456 combinazioni per strumento (3 metodi di entrata)."
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7904-L7911"
@@ -33,7 +33,7 @@ Walk-forward mobile (250/20) e ancorato, F1/F2/F3, placebo 100-200, BH q≤0,10 
 | PARAM-2: "0 confermati su 12" | docs/EXECUTION_LEDGER.md#L7904-L7911 |
 | media dei trade per metodo di entrata (USD): MES mercato -1,22, limite -2,83, conferma -4,51 | docs/EXECUTION_LEDGER.md#L7904-L7911 |
 | MNQ F3 mobile +21,10 (t 1,64, placebo p95 8,98), ancorato +17,11 (t 1,31), "t sotto 2 con 163 sessioni" | docs/EXECUTION_LEDGER.md#L7904-L7911 |
-| MCL tutti negativi (da -7,96 a -12,77). | docs/EXECUTION_LEDGER.md#L7904-L7911 · docs/EXECUTION_LEDGER.md#L7937-L7943 |
+| MCL tutti negativi (da -7,96 a -12,77). | docs/EXECUTION_LEDGER.md#L7904-L7911 |
 
 ## Grafico
 

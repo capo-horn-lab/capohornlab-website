@@ -8,9 +8,9 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES, MNQ, M2K, MYM 1 minuto 2019-05..2026-10-16"
-verdetto: "non confermata"
+verdetto: "non confermata · confermato"
 pubblicabilita: "avvertenza"
-avvertenza: "(WINDAY-1: \"confermato secondo la rubrica\" ma riserve pesanti; riportare insieme)."
+avvertenza: "WINDAY-1: \"confermato secondo la rubrica\" ma riserve pesanti"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9113-L9113"
 prove:
   - "runtime/proofs/openpyr1/openpyr1.json"
@@ -35,7 +35,7 @@ entrare all'apertura, aggiungere unità a favore con trailing stop comune dà pr
 | OPENPYR-1: "NON CONFERMATA, nessuna combinazione passa BH in scoperta": 0 combinazioni positive su 80 (convenzione prudente), migliore t -0,23, peggiore t -35,9 | docs/EXECUTION_LEDGER.md#L9113-L9113 |
 | con aggiunte i vincenti scendono al 20-40%, "il 60-90% dei guadagni sta nel 10% dei giorni migliori". | docs/EXECUTION_LEDGER.md#L9113-L9113 |
 | WINDAY-1 MNQ: 1.761 giorni, media +0,156 U, il 10% migliore fa il 67% dei guadagni | docs/EXECUTION_LEDGER.md#L9123-L9123 |
-| "CONFERMATO SECONDO LA RUBRICA, con riserve" per il range notturno terzile medio (235 giorni, +0,395 U, t 1,83, p 0,035) ma differenza dagli altri giorni +0,16 U con t di Welch 0,65 (non significativa). | docs/EXECUTION_LEDGER.md#L9113-L9113 · docs/EXECUTION_LEDGER.md#L9123-L9123 |
+| "CONFERMATO SECONDO LA RUBRICA, con riserve" per il range notturno terzile medio (235 giorni, +0,395 U, t 1,83, p 0,035) ma differenza dagli altri giorni +0,16 U con t di Welch 0,65 (non significativa). | docs/EXECUTION_LEDGER.md#L9123-L9123 |
 
 ## Grafico
 

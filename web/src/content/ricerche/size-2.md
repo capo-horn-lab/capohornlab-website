@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "IBS, R1b, TT, 3WEAK su MES, MNQ, M2K, MYM 2019-2026 (trade dal 2022)"
-verdetto: "non confermata"
+verdetto: "non adottata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8512-L8518"
@@ -28,7 +28,8 @@ Sharpe giornaliero, Calmar, drawdown, CVaR 5%; adottata se differenza di Sharpe 
 
 | Risultato | Fonte |
 |---|---|
-| "NON ADOTTATA nessuna variante." RV21 1 su 4 (solo TT: Sharpe 2,44 vs 2,33, DD 997 vs 1.242), HAR 0. | docs/EXECUTION_LEDGER.md#L8512-L8518 |
+| "NON ADOTTATA nessuna variante." | docs/EXECUTION_LEDGER.md#L8512-L8518 |
+| RV21 1 su 4 (solo TT: Sharpe 2,44 vs 2,33, DD 997 vs 1.242), HAR 0. | docs/EXECUTION_LEDGER.md#L8512-L8518 |
 | IBS 566 trade: Sharpe 2,54 (non scalata) vs 2,62 (RV21). | docs/EXECUTION_LEDGER.md#L8512-L8518 |
 
 ## Grafico

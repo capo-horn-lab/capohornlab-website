@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "MGC"
 finestra: "MES, MNQ, MCL, MGC; PHASE-3: 7 schemi x 2 librerie x 3 strumenti = 42 test; PHASE-2-OOS: sessioni 2025-2026; SIZE-1: 221 strategie."
-verdetto: "misto"
+verdetto: "confermato · non confermato"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8009-L8015"
@@ -39,7 +39,7 @@ Stessi genomi di PARAM-1/WFO-1, F3 prudente, placebo, BH q≤0,10. Rubrica prima
 | PHASE-2-OOS: "CONFERMATO su MES e MNQ, non su MGC": MES rho 0,939 (460 sessioni, 10 fasi) agitato/calmo 1,50 | docs/EXECUTION_LEDGER.md#L8036-L8046 |
 | MNQ rho 0,952 agitato/calmo 1,69 | docs/EXECUTION_LEDGER.md#L8036-L8046 |
 | MGC rho 0,285 (p 0,25). | docs/EXECUTION_LEDGER.md#L8036-L8046 |
-| SIZE-1: "NON confermato": Sharpe migliore in 134 su 221 (60,6%, p del segno 0,001) ma giorno peggiore mediano -367,13 contro -357,80. | docs/EXECUTION_LEDGER.md#L8009-L8015 · docs/EXECUTION_LEDGER.md#L8036-L8046 · docs/EXECUTION_LEDGER.md#L8058-L8061 |
+| SIZE-1: "NON confermato": Sharpe migliore in 134 su 221 (60,6%, p del segno 0,001) ma giorno peggiore mediano -367,13 contro -357,80. | docs/EXECUTION_LEDGER.md#L8058-L8061 |
 
 ## Grafico
 

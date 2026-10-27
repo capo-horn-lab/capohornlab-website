@@ -8,7 +8,8 @@ strumenti:
   - "M6E"
   - "MNQ"
 finestra: "TRUTH-1: dati sintetici (passeggiata casuale con volatilità oraria reale) su MES, MGC, M6E e motore indipendente su dati reali; TICK-1: tick NinjaTrader 21/09-16/10/2026 su 11 contratti (da 159.569 tick su M6E a 42,2 milioni su MNQ), 2,47 milioni di trade"
-verdetto: "corretto"
+verdetto: "senza verdetto nel registro"
+audit: {"stato": "corretto", "id": ["TRUTH-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8928-L8943"
@@ -41,7 +42,7 @@ T1 nessun edge (72 walk), T2 edge piantato, T3 motore indipendente; TICK-1: conf
 | TICK-1: "il motore a 1 minuto è ATTENDIBILE su tutti gli 11 contratti": barre da tick identiche a quelle NT nel 99,99-100% dei minuti | docs/EXECUTION_LEDGER.md#L8928-L8943 |
 | esito diverso tra 0,15% (ZN) e 0,74% (MNQ) | docs/EXECUTION_LEDGER.md#L8928-L8943 |
 | differenza media per trade da -0,19 bp (MBT) a +0,08 bp (MCL) | docs/EXECUTION_LEDGER.md#L8928-L8943 |
-| segno del mese uguale tra 95,1% e 99,8%. | docs/EXECUTION_LEDGER.md#L8928-L8943 · docs/EXECUTION_LEDGER.md#L9025-L9028 · docs/EXECUTION_LEDGER.md#L8938-L8942 |
+| segno del mese uguale tra 95,1% e 99,8%. | docs/EXECUTION_LEDGER.md#L8928-L8943 |
 
 ## Grafico
 

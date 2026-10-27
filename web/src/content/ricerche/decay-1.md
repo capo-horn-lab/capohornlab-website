@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "12 regole di MR-1-ADJ sui 4 micro 2019-2026 e su SPY/QQQ 2006-2026 + IBS-NT; 25 prove"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "\"non significativo\" non è assenza di decadimento (potenza)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9053-L9053"

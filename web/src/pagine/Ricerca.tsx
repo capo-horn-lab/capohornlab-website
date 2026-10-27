@@ -6,13 +6,14 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { caricaDati, caricaRicerca } from '@/ricerche/archivio'
 import { Grafico } from '@/ricerche/Grafico'
-import { dividiFonti, leggiElenco, leggiPrefazio, leggiTabella } from '@/ricerche/modello'
-import { InLinea, Paragrafi, VerdettoBadge } from '@/ricerche/Testo'
+import { dividiFonti, idSezione, leggiElenco, leggiPrefazio, leggiTabella } from '@/ricerche/modello'
+import { AuditBadge, InLinea, Paragrafi, VerdettoBadge } from '@/ricerche/Testo'
 
 function Sezione({ titolo, children }: { titolo: string; children: ReactNode }) {
+  const id = `s-${idSezione(titolo)}`
   return (
-    <section aria-labelledby={`s-${titolo}`} className="flex flex-col gap-3">
-      <h2 id={`s-${titolo}`} className="font-serif text-2xl font-semibold tracking-tight">
+    <section aria-labelledby={id} className="flex flex-col gap-3">
+      <h2 id={id} className="font-serif text-2xl font-semibold tracking-tight">
         {titolo}
       </h2>
       {children}
@@ -52,9 +53,12 @@ export default function Ricerca() {
 
   const { fm, sezioni } = r
   const esito = leggiTabella(sezioni['Esito'] ?? '')
-  const nonVerificabili = leggiElenco(sezioni['Esito'] ?? '')
-  const audit = leggiElenco(sezioni['Ritiri e correzioni'] ?? '')
-  const grave = fm.verdetto === 'ritirato' || fm.verdetto === 'corretto'
+  const nonRiportate = leggiPrefazio(sezioni['Esito'] ?? '')
+  const note = leggiElenco(sezioni['Ritiri e correzioni'] ?? '')
+  const stato = fm.audit?.stato
+  const titoloNota = stato
+    ? `${stato === 'ritirato' ? "Ritirato dall'audit" : "Corretto dall'audit"}: ${fm.audit?.id.join(', ')}`
+    : "Nota dell'audit"
 
   return (
     <article className="flex max-w-4xl flex-col gap-8">
@@ -66,25 +70,25 @@ export default function Ricerca() {
         <div className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <span className="font-mono">{fm.data}</span>
           {fm.strumenti.length > 0 && <span className="font-mono">{fm.strumenti.join(' · ')}</span>}
-          <VerdettoBadge verdetto={fm.verdetto} />
-          {fm.pubblicabilita === 'avvertenza' && <Badge variant="outline">con avvertenza</Badge>}
+          <VerdettoBadge verdetto={fm.verdetto} max={6} />
+          {stato && <AuditBadge audit={stato} />}
+          {fm.avvertenza && <Badge variant="outline">con avvertenza</Badge>}
         </div>
         {fm.finestra && <p className="text-muted-foreground text-sm">Dati: {fm.finestra.replace(/`/g, '')}</p>}
       </header>
 
-      {audit.length > 0 && (
+      {note.length > 0 && (
         <aside
           role="note"
-          className={`rounded-md border p-4 ${grave ? 'border-destructive bg-destructive/10' : 'border-border bg-card'}`}
+          className={`rounded-md border p-4 ${stato ? 'border-destructive bg-destructive/10' : 'border-border bg-card'}`}
         >
-          <h2 className="mb-2 font-mono text-xs tracking-[0.12em] uppercase">
-            {fm.verdetto === 'ritirato'
-              ? "Ritirato dall'audit"
-              : fm.verdetto === 'corretto'
-                ? "Corretto dall'audit"
-                : "Nota dell'audit"}
-          </h2>
-          <Elenco voci={audit} />
+          <h2 className="mb-2 font-mono text-xs tracking-[0.12em] uppercase">{titoloNota}</h2>
+          <Elenco voci={note} />
+          {stato === 'ritirato' && (
+            <p className="text-muted-foreground mt-3 text-sm">
+              I numeri della conferma ritirata non sono riportati su questa pagina.
+            </p>
+          )}
         </aside>
       )}
 
@@ -133,15 +137,7 @@ export default function Ricerca() {
             ))}
           </TableBody>
         </Table>
-        {nonVerificabili.length > 0 && (
-          <div className="border-border rounded-md border p-4">
-            <h3 className="mb-2 font-mono text-xs tracking-[0.12em] uppercase">Non verificabile</h3>
-            <p className="text-muted-foreground mb-2 text-sm">
-              I numeri di queste righe non compaiono nelle fonti citate: restano fuori dalla tabella.
-            </p>
-            <Elenco voci={nonVerificabili} />
-          </div>
-        )}
+        {nonRiportate && <p className="text-muted-foreground text-sm">{nonRiportate}</p>}
         {dati && (
           <div className="flex flex-col gap-2">
             <Grafico dati={dati} />
@@ -152,7 +148,6 @@ export default function Ricerca() {
 
       <Sezione titolo="Cosa NON dice">
         <Elenco voci={leggiElenco(sezioni['Cosa NON dice'] ?? '')} />
-        {leggiPrefazio(sezioni['Cosa NON dice'] ?? '') && <Paragrafi testo={leggiPrefazio(sezioni['Cosa NON dice'] ?? '')} />}
       </Sezione>
 
       <Sezione titolo="Prove">

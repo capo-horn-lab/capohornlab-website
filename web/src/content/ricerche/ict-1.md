@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "NQ"
 finestra: "MES, MNQ, MCL (1m, 5m); fuori campione NQ 1m 16/08-31/12/2024 e export NinjaTrader 2026"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(regole \"ICT\" implementate in forma meccanica propria: non equivale al metodo discrezionale)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7089-L7102"
@@ -36,7 +36,8 @@ Rubrica di adozione = LAB-2 (scoperta 60/verifica 40, placebo 200, BH q≤0,10 s
 
 ## Cosa NON dice
 
-- "I modelli ICT non reggono fuori campione." Potenza bassa (~95 e 55 sessioni).
+- "I modelli ICT non reggono fuori campione."
+- Potenza bassa (~95 e 55 sessioni).
 
 ## Prove
 

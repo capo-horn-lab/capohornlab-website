@@ -5,11 +5,17 @@ Legge `inventario-ricerche.md` (sorgente unica) e per ogni scheda classificata O
 "OK con avvertenza" scrive `<id>.md` (+ `<id>.dati.json` quando esiste una tabella strutturata)
 in `web/src/content/ricerche/`, piu' `indice.json`. Schede NO / da verificare: nessun file.
 
-Regole (vincolanti):
+Regole (vincolanti; "nulla di inventato": meno contenuto e' sempre accettabile, mai contenuto in piu'):
 - i numeri sono COPIATI dal testo dell'inventario: lo script non calcola, non arrotonda, non parafrasa;
-- ogni riga della tabella "Esito" ha una colonna Fonte (ledger `docs/EXECUTION_LEDGER.md#La-Lb`
-  e/o file di prova); una riga con un numero che non compare nelle fonti citate NON entra in tabella:
-  va nell'elenco "non verificabile";
+- ogni riga della tabella "Esito" ha una colonna Fonte (ledger `docs/EXECUTION_LEDGER.md#La-Lb` e/o prova);
+  una riga con un numero che non si ritrova nella fonte citata NON si pubblica: la pagina dice soltanto
+  quante righe non sono riportate. Si ammette solo il recupero entro 3 righe dall'intervallo citato dal
+  registro (stesso numero e stesse parole), con la Fonte alla riga vera;
+- l'etichetta di verdetto e' la parola del registro (lista chiusa) trovata nelle righe di ledger citate dalla
+  pagina; se non c'e', "senza verdetto nel registro". Ritiro/correzione dell'audit: campo `audit`, a parte;
+- niente istruzioni di lavoro dell'inventario ("pubblicare solo...", "citare..."): si tengono le clausole fattuali;
+- pagine ritirate: banner e motivo dal registro, senza i numeri ritirati;
+- LIMALL-1 e OPT-COND-1 (senza esito chiuso) non compaiono da nessuna parte;
 - prova citata e assente su disco: "prova non trovata su disco: <percorso>";
 - deterministico: stesso input, stessi byte (LF).
 
@@ -20,6 +26,8 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
+from math import ceil
 from pathlib import Path
 
 INVENTARIO = r"C:\Users\farne\TradingAgent-NinjaTrader\runtime\proofs\freqsito3\inventario-ricerche.md"
@@ -29,11 +37,14 @@ LEDGER = "docs/EXECUTION_LEDGER.md"
 SUMMARY = "runtime/research/sa-report/summary.json"
 MAX_RIGHE_DATI = 150
 MAX_BYTE_PROVA = 12_000_000
+MARGINE_LEDGER = 3  # righe oltre l'intervallo citato in cui si accetta ancora un numero (con le parole della riga)
+SENZA_VERDETTO = "senza verdetto nel registro"
 
 FRONTMATTER = ("id", "titolo", "data", "strumenti", "finestra", "verdetto",
                "pubblicabilita", "avvertenza", "fonte_ledger", "prove")
 
-# Studi elencati nelle schede ma senza esito chiuso nel ledger: mai pubblicati (regola del proprietario).
+# Studi elencati nelle schede ma senza esito chiuso nel ledger: non compaiono da nessuna parte
+# (valore: pezzi di percorso delle loro prove, anch'esse escluse).
 SENZA_ESITO = {
     "LIMALL-1": ("optfull_lim025", "optfull_lim05", "optfull_barra"),
     "OPT-COND-1": ("optcond",),
@@ -43,6 +54,25 @@ STRUMENTI = ("MES", "MNQ", "M2K", "MYM", "MCL", "MGC", "M6E", "MBT", "ES", "NQ",
              "SPY", "QQQ", "IWM", "DIA", "TLT", "IEF", "GLD", "SLV", "USO", "UNG", "UUP", "FXE", "FXY",
              "SPX", "NDX", "VIX", "VX", "BTC", "ETH", "FESX", "FDXM", "FDXS", "FSXE")
 
+# Parole di verdetto/esito scritte nel registro (docs/EXECUTION_LEDGER.md); lista chiusa. Ognuna compare nel
+# registro (PASS, FAIL, CONFERMATA/O, NON CONFERMATA/O, RITIRATA, PARZIALE, BLOCKED_ENV, NOT_RUN, ADOTTATA,
+# NON ADOTTATA, DESCRITTIVO); RITIRATO e' nella lista del controllore anche se oggi il registro scrive RITIRATA.
+PAROLE = re.compile(
+    r"(?<![A-Za-z_])(?:NON\s+(?:CONFERMAT[AO]|ADOTTATA|[Cc]onfermat[ao]|[Aa]dottata)"
+    r"|CONFERMAT[AO]|ADOTTATA|PARZIALE|RITIRAT[AO]|DESCRITTIVO|PASS|FAIL|BLOCKED_ENV|NOT_RUN)(?![A-Za-z_])")
+
+# Istruzioni di lavoro dell'inventario (non sono fatti sullo studio): le clausole che le contengono non si pubblicano.
+ISTRUZIONI = re.compile("|".join([
+    r"\bpubblicar\w*", r"\bpubblicabil\w*", r"\bripubblic\w*", r"\bridistribu\w*", r"\bcitar[ei]\b",
+    r"\bdichiarar\w*", r"\briportar[ei]\b", r"\bincluder\w*", r"\bpresentar[ei]\b", r"\bchiarir\w*",
+    r"\bserve prima\b", r"\bverificar[ei] (?:termini|diritti|la licenza)\b", r"\bvalutar[ei]\b", r"\bdescriver[ei]\b",
+    r"\bda omettere\b", r"\brimandar[ei]\b", r"\brispettar[ei]\b", r"\bnon riprodurre\b",
+    r"\bnon va(?:nno)? (?:pubblicat|ridistribuit|presentat|riprodott|usat)\w*",
+    r"\bva pubblicat\w*", r"\bgli esiti numerici s[iì]\b", r"\bnulla da mostrare\b", r"\bcontiene riferimenti\b",
+    r"\bNO per\b", r"\bsolo per gli indicatori\b", r"\bper il sito\b", r"\bstudio centrale\b",
+    r"\badatt\w+ al sito\b", r"\bmolto utile\b", r"\bsenza clausole\b",
+]), re.I)
+
 ID_RE = re.compile(r"\b[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+\b|\b[A-Z]+\d+[A-Za-z]*\b")
 RIF = r"L\d{3,5}(?:\s*-\s*L?\d{3,5})?"
 RIF_SOLO = re.compile(rf"^(?:docs/EXECUTION_LEDGER\.md:)?({RIF})$")
@@ -51,16 +81,20 @@ PAREN = re.compile(r"\(([^()]*)\)")
 CORREZIONE = re.compile(r"artefatto|NON VALIDO|corrett[ao]|look-ahead|scartat|incompatibile|rettific|non passa|"
                         r"ristrett|difettos|contava due volte", re.I)
 
-# --- numeri: stesse regole di verifica_numeri.py (un numero e' verificato se compare come cifre nella fonte) ---
+# --- numeri: stesse regole di verifica_numeri.py (segno compreso): un numero e' verificato se compare come cifre ---
+MENO = "\N{MINUS SIGN}"
+OPERANDO = r"A-Za-z0-9_)\]}%"
+OP = re.compile("[" + OPERANDO + "]")
 NUMERO = re.compile(
     r"(?P<v>\d{4}-\d{2}-\d{2}|\d{1,2}:\d{2}(?::\d{2})?)"
-    r"|(?<![A-Za-z_])(?<![A-Za-z]-)(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:[.,]\d+)?)"
+    r"|(?:(?<![" + OPERANDO + r"])(?P<s>[-" + MENO + r"]))?(?<![A-Za-z_])(?<![A-Za-z]-)"
+    r"(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:[.,]\d+)?)"
 )
 
 
 def numeri(testo):
     t = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", testo).replace("`", "").replace("*", "")
-    return [m.group("v") or m.group("n") for m in NUMERO.finditer(t)]
+    return [m.group("v") or ("-" if m.group("s") else "") + m.group("n") for m in NUMERO.finditer(t)]
 
 
 def varianti(tok):
@@ -72,8 +106,35 @@ def varianti(tok):
     return v
 
 
+def _negativo(testo, i):
+    return i > 0 and testo[i - 1] in "-" + MENO and not (i > 1 and OP.match(testo[i - 2]))
+
+
 def ha_numero(tok, testo):
-    return any(re.search(rf"(?<!\d)(?<!\d\.){re.escape(v)}(?!\d)(?!\.\d)", testo) for v in varianti(tok))
+    """Le cifre del numero compaiono (stesso segno) come numero intero nel testo, mai dentro un numero piu' lungo."""
+    neg, num = tok.startswith("-"), tok.lstrip("-")
+    for v in varianti(num):
+        for m in re.finditer(rf"(?<!\d)(?<!\d\.){re.escape(v)}(?!\d)(?!\.\d)", testo):
+            if _negativo(testo, m.start()) == neg:
+                return True
+    return False
+
+
+def normalizza(t):
+    t = unicodedata.normalize("NFKD", t.lower())
+    return "".join(c for c in t if not unicodedata.combining(c)).replace("'", " ")
+
+
+def parole_riga(testo):
+    return {normalizza(w) for w in re.findall(r"[A-Za-zÀ-ÿ]{4,}", testo)}
+
+
+def hanno_le_parole(parole, finestra):
+    """Almeno il 40% (minimo una) delle parole della riga compare nella finestra di testo."""
+    if not parole:
+        return False
+    f = normalizza(finestra)
+    return sum(1 for p in parole if p in f) >= max(1, ceil(0.4 * len(parole)))
 
 
 # --- frontmatter ---
@@ -106,7 +167,7 @@ def leggi_frontmatter(testo):
 
 # --- lettura dell'inventario ---
 def leggi_inventario(testo):
-    sez, schede, ritiri, indice, cur = "", [], [], [], None
+    sez, schede, ritiri, cur = "", [], [], None
     for n, r in enumerate(testo.split("\n"), 1):
         if r.startswith("## "):
             sez, cur = r[3:].strip(), None
@@ -114,24 +175,22 @@ def leggi_inventario(testo):
         if sez.startswith("Ritiri"):
             if m := re.match(r"^\d+\.\s+(.*)$", r):
                 ritiri += leggi_ritiro(m.group(1))
-        elif sez.startswith("Indice sintetico"):
-            if re.match(r"^\|\s*\d+\s*\|", r):
-                c = re.split(r"(?<!\\)\|", r.strip()[1:-1])
-                indice.append((int(c[0]), "|".join(c[3:-1]).strip()))
         elif sez.startswith("Schede studio"):
             if r.startswith("### "):
                 cur = {"titolo": r[4:].strip(), "riga": n, "voci": {}}
                 schede.append(cur)
             elif cur is not None and (m := re.match(r"^\|\s*(\d)\.\s*[^|]*?\|\s*(.*?)\s*\|\s*$", r)):
                 cur["voci"][int(m.group(1))] = m.group(2)
+    esclusi = {Path(p).name for r in ritiri for p in r["non_usare"]}
     for s in schede:
         completa_scheda(s)
-    for num, verdetto in indice:  # il numero dell'indice = ordine delle schede
-        if 0 < num <= len(schede):
-            schede[num - 1]["verdetto_indice"] = verdetto
-    for s in schede:
         s["audit"] = [r for r in ritiri if set(r["ids"]) & set(s["ids"])]
-        s["verdetto"] = verdetto_scheda(s)
+        gravi = [r for r in s["audit"] if r["tipo"] in ("ritirato", "corretto")]
+        s["audit_stato"] = ("ritirato" if any(r["tipo"] == "ritirato" for r in gravi)
+                            else "corretto" if gravi else "")
+        s["audit_id"] = [i for i in s["ids"] if any(i in r["ids"] for r in gravi)]
+        s["ritirati"] = [i for i in s["ids"] if any(i in r["ids"] for r in s["audit"] if r["tipo"] == "ritirato")]
+        s["file_esclusi"] = esclusi
     return schede, ritiri
 
 
@@ -141,7 +200,8 @@ def leggi_ritiro(item):
         ids = ID_RE.findall(" ".join(re.findall(r"\*\*(.+?)\*\*", sub)))
         testo = sub.replace("**", "").strip()
         tipo = "ritirato" if re.search("ritirat", testo, re.I) else "corretto" if CORREZIONE.search(testo) else "nota"
-        out.append({"ids": ids, "testo": testo, "tipo": tipo})
+        non_usare = re.findall(r"`([^`]+\.(?:json|csv|md|txt))`[^.;]{0,30}\bnon usare\b", testo)
+        out.append({"ids": ids, "testo": testo, "tipo": tipo, "non_usare": non_usare})
     return out
 
 
@@ -178,63 +238,54 @@ def completa_scheda(s):
     s["strumenti"] = sorted(pos, key=pos.get)
 
 
-# --- verdetto ---
-NEG = re.compile(r"NON\s+(?:CONFERMAT|ADOTTAT|AIUTA|VALE|PRECISO|INFORMATIV|VALID)|NESSUNA\s+VARIANTE\s+ADOTTATA|"
-                 r"\b0\s+(?:\w+\s+){0,3}?(?:confermat|adottat|adottabil|candidat)|\b0\s+su\s+\d+|"
-                 r"nessun[ao]?\s+(?:vantaggio|segnale|decadimento|regola|variante|candidat)|\bFAIL\b|OTTIMISTA", re.I)
-POS = re.compile(r"CONFERMAT|ADOTTAT|ROBUST|REGGONO|\bAIUTA|\bVALE\b|RIPRODOTT", re.I)
-PAR = re.compile(r"PARZIAL", re.I)
+# --- testo: segmentazione, riferimenti, istruzioni, studi esclusi ---
+ABBREVIAZIONE = re.compile(r"(?<![A-Za-zÀ-ÿ])(?:es|ecc|cfr|vs|sez|fig)$", re.I)
 
 
-KSUN = re.compile(r"\b(\d+)\s+(?:\w+\s+)?(?:conferma\w+|adottat\w+|aiuta\w*|veritier\w+)\s+su\s+(\d+)", re.I)
-
-
-def verdetto_vocabolario(testo):
-    """Etichetta di navigazione dal vocabolario del ledger; il testo esatto resta nella pagina.
-    Senza alcuna parola di verdetto: descrittivo (la scheda riporta misure, non un test)."""
-    t = re.sub(r"\b0\s+(?:\w+\s+)?parzial\w*", " ", testo, flags=re.I)
-    if re.match(r"\W*Nessun verdetto", t):
-        return "descrittivo"
-    if PAR.search(t):
-        return "parziale"
-    kn = KSUN.search(t)
-    if (kn and 0 < int(kn.group(1)) < int(kn.group(2))) or re.search(r"\b[1-9]\d*\s+AIUTA\b", t):
-        return "misto"
-    n, p = NEG.search(t), POS.search(NEG.sub(lambda m: " " * len(m.group(0)), t))
-    if n and p:  # la parola di verdetto che compare per prima vale come verdetto scritto
-        return "non confermata" if n.start() < p.start() else "misto"
-    return "non confermata" if n else "confermata" if p else "descrittivo"
-
-
-def verdetto_scheda(s):
-    tipi = [r["tipo"] for r in s["audit"]]
-    if "ritirato" in tipi:
-        return "ritirato"
-    if "corretto" in tipi:
-        return "corretto"
-    return verdetto_vocabolario(s.get("verdetto_indice") or s["voci"].get(3, "")[:300])
-
-
-# --- testo: segmentazione e riferimenti ---
-def segmenta(testo):
-    out, buf, depth, citato, i = [], [], 0, False, 0
-    while i < len(testo):
+def _spans(testo):
+    """Intervalli (inizio, fine) dei segmenti: ';' e fine frase fuori da parentesi e virgolette. I frammenti senza
+    soggetto ("1 -2,84", "q 0,025", "es.") si uniscono al precedente."""
+    out, inizio, depth, citato, i, n = [], 0, 0, False, 0, len(testo)
+    while i < n:
         c = testo[i]
-        buf.append(c)
         if c == '"':
             citato = not citato
+            if not citato and testo[i - 1:i] == "." and testo[i + 1:i + 2] == " " \
+                    and re.match(r"[A-ZÀ-Ý]", testo[i + 2:i + 3] or " "):  # frase che finisce dentro la citazione
+                out.append((inizio, i + 1))
+                inizio, i = i + 2, i + 1
         elif not citato:
             if c in "([{":
                 depth += 1
             elif c in ")]}":
                 depth = max(0, depth - 1)
             elif depth == 0 and testo[i + 1:i + 2] == " ":
-                if c == ";" or (c == "." and re.match(r'["A-ZÀ-Ý]', testo[i + 2:i + 3] or " ")):
-                    out.append("".join(buf[:-1] if c == ";" else buf).strip())
-                    buf, i = [], i + 1
+                if c == ";" or (c == "." and re.match(r'["A-ZÀ-Ý]', testo[i + 2:i + 3] or " ")
+                                and not ABBREVIAZIONE.search(testo[:i])):
+                    out.append((inizio, i if c == ";" else i + 1))
+                    inizio, i = i + 2, i + 1
         i += 1
-    out.append("".join(buf).strip())
-    return [x for x in out if x]
+    out.append((inizio, n))
+    merged = []
+    for s, e in (x for x in out if testo[x[0]:x[1]].strip()):
+        # soggetto = una parola di 3 lettere nei primi 14 caratteri, o un codice con la maiuscola (R1a, TT, M2K)
+        if merged and not (re.search(r"[A-Za-zÀ-ÿ]{3,}", testo[s:s + 14])
+                           or re.match(r"\W*[A-ZÀ-Ý][A-Za-z0-9À-ÿ_-]+", testo[s:e])):
+            merged[-1] = (merged[-1][0], e)
+        else:
+            merged.append((s, e))
+    return merged
+
+
+def segmenta(testo):
+    return [testo[s:e].strip() for s, e in _spans(testo)]
+
+
+def unisci(segmenti):
+    out = ""
+    for seg in segmenti:
+        out += ("" if not out else " " if out.endswith(".") else "; ") + seg
+    return out
 
 
 def estrai_riferimenti(testo):
@@ -247,7 +298,7 @@ def estrai_riferimenti(testo):
 
     def paren(m):
         parti = [p.strip() for p in re.split(r"\s*[;,]\s*", m.group(1))]
-        if not parti or not RIF_SOLO.match(parti[0]) and not re.match(rf"{RIF}\b", parti[0]):
+        if not any(RIF_SOLO.match(p) or re.match(r"[\w./-]+\.(?:txt|md|json)\b", p) for p in parti):
             return m.group(0)
         resto = []
         for p in parti:
@@ -261,6 +312,7 @@ def estrai_riferimenti(testo):
 
     t = PAREN.sub(paren, testo)
     t = RIF_NUDO.sub(lambda m: (intervallo(m.group(1)), "")[1], t)
+    t = re.sub(r"\(\s*[,;]?\s*\)", "", t)
     t = re.sub(r"\s+([.,;:])", r"\1", t)
     t = re.sub(r"\s{2,}", " ", t).strip()
     return t, refs, docs
@@ -270,13 +322,96 @@ def cella(t):
     return t.replace("|", "\\|")
 
 
+def pulisci_clausola(seg):
+    """Toglie le parentesi con istruzioni; la clausola con istruzioni fuori dalle parentesi sparisce ('')."""
+    s = PAREN.sub(lambda m: "" if ISTRUZIONI.search(m.group(1)) else m.group(0), seg)
+    s = re.sub(r"\s+([.,;:])", r"\1", re.sub(r"\s{2,}", " ", s)).strip()
+    return "" if ISTRUZIONI.search(s) or not re.search(r"\w", s) else s
+
+
+def senza_istruzioni(testo):
+    t = testo.strip()
+    if (m := re.fullmatch(r"\((.*)\)\.?", t, re.S)) and m.group(1).count("(") == m.group(1).count(")"):
+        t = m.group(1)
+    segs = segmenta(t)
+    puliti = [pulisci_clausola(x) for x in segs]
+    return testo if puliti == segs else unisci([c for c in puliti if c])  # intatto se non c'e' nulla da togliere
+
+
+def cita_escluso(testo):
+    return any(i in testo or any(h in testo for h in hint) for i, hint in SENZA_ESITO.items())
+
+
+def togli_esclusi(testo, fino_a_fine=False):
+    """Toglie le clausole che citano LIMALL-1 / OPT-COND-1 (o le loro prove); con `fino_a_fine` anche tutto cio' che segue."""
+    if not cita_escluso(testo):
+        return testo
+    segs, out = segmenta(testo), []
+    for i, seg in enumerate(segs):
+        if cita_escluso(seg):
+            if fino_a_fine:
+                break
+            continue
+        out.append(seg)
+    return unisci(out)
+
+
+CODA = re.compile(rf"\s*\(((?:docs/EXECUTION_LEDGER\.md:)?{RIF}(?:\s*[;,]\s*(?:docs/EXECUTION_LEDGER\.md:)?{RIF})*)\)\.?\s*$")
+
+
+def separa_coda(testo):
+    """Citazione condivisa in coda alla cella, "(L9161, L10178)": -> (testo senza coda, coda o '')."""
+    m = CODA.search(testo)
+    return (testo[:m.start()], m.group(1)) if m else (testo, "")
+
+
+def citazioni_cella(esito, con_esclusi):
+    """-> (righe di ledger, documenti) citati dalla cella. Se la scheda ha uno studio escluso, le citazioni delle
+    clausole che lo nominano non contano (restano quelle in coda, che valgono per tutta la cella)."""
+    if not con_esclusi:
+        _, refs, docs = estrai_riferimenti(esito)
+        return refs, docs
+    corpo, coda = separa_coda(esito)
+    refs, docs = [], []
+    for seg in segmenta(corpo):
+        if not any(i in seg for i in SENZA_ESITO):
+            _, r, d = estrai_riferimenti(seg)
+            refs, docs = refs + r, docs + d
+    _, r, d = estrai_riferimenti(f"({coda})") if coda else ("", [], [])
+    return refs + r, docs + d
+
+
+def titolo_senza_esclusi(titolo):
+    for i in SENZA_ESITO:
+        e = re.escape(i)
+        titolo = re.sub(rf"\s*(?:/|,|\+|\be\b)\s*{e}", "", titolo)
+        titolo = re.sub(rf"{e}\s*(?:/|,|\+|\be\b)\s*", "", titolo)
+        titolo = re.sub(rf"{e}\s*", "", titolo)
+    return titolo.strip()
+
+
 # --- contesto: ledger, prove, summary ---
+class Raw(str):
+    """Numero JSON con le cifre come scritte nel file."""
+
+
+def _foglie(o, out):
+    """Insiemi di foglie scalari (numeri grezzi e stringhe) per ogni oggetto/lista: i 'record' di un JSON."""
+    figli = o.values() if isinstance(o, dict) else o
+    scalari = [v for v in figli if isinstance(v, str)]
+    if scalari:
+        out.append(scalari)
+    for v in figli:
+        if isinstance(v, (dict, list)):
+            _foglie(v, out)
+
+
 class Contesto:
     def __init__(self, radice):
         self.radice = Path(radice)
         f = self.radice / LEDGER
         self.ledger = f.read_text(encoding="utf-8", errors="replace").split("\n") if f.is_file() else []
-        self._testi = {}
+        self._testi, self._record = {}, {}
         self.contenuti = {}
         self.esiti = {}
         s = self.radice / SUMMARY
@@ -297,12 +432,37 @@ class Contesto:
             self._testi[rel] = f.read_text(encoding="utf-8", errors="replace") if ok else ""
         return self._testi[rel]
 
+    def record(self, rel):
+        """Record di un JSON di prova: liste di foglie (numeri grezzi come `Raw`, stringhe) per ogni oggetto/lista."""
+        if rel not in self._record:
+            out = []
+            try:
+                o = json.loads(self.testo(rel) or "null", parse_float=Raw, parse_int=Raw)
+                if isinstance(o, (dict, list)):
+                    _foglie(o, out)
+            except ValueError:
+                pass
+            self._record[rel] = out
+        return self._record[rel]
+
     def documento(self, nome):
         base = nome.split()[0]
         if "/" in base:
             return base if (self.radice / base).is_file() else None
         trovati = sorted((self.radice / "docs").rglob(base)) if (self.radice / "docs").is_dir() else []
         return trovati[0].relative_to(self.radice).as_posix() if trovati else None
+
+
+def record_ha(foglie, tok):
+    neg, num = tok.startswith("-"), tok.lstrip("-")
+    var = varianti(num)
+    for f in foglie:
+        if isinstance(f, Raw):
+            if f.lstrip("-") in var and f.startswith("-") == neg:
+                return True
+        elif f in varianti(tok):
+            return True
+    return False
 
 
 # --- prove ---
@@ -324,8 +484,8 @@ RADICI = ("runtime/", "docs/", "ninjatrader/", "src/", "scripts/", "tests/", "co
 RADICI_GENERICHE = {"runtime", "runtime/proofs", "runtime/research", "docs", "docs/research"}
 
 
-def percorsi_prove(cella_prove, radice):
-    """-> ([(percorso, tipo)], [fuori repo]); tipo: file | cartella | schema."""
+def percorsi_prove(cella_prove, radice, file_esclusi=()):
+    """-> ([(percorso, tipo)], [fuori repo]); tipo: file | cartella | schema. `file_esclusi`: nomi da non usare."""
     out, fuori, ultima = [], [], ""
     for tok in re.findall(r"`([^`]+)`", cella_prove):
         for p in espandi(tok.strip()):
@@ -344,6 +504,8 @@ def percorsi_prove(cella_prove, radice):
                     cand = [ultima + "/" + p if ultima else p, ultima.rsplit("/", 1)[0] + "/" + p if "/" in ultima else p,
                             "runtime/proofs/" + p]
                     p = next((c for c in cand if (radice / c.rstrip("/")).exists()), cand[0] if ext else cand[2])
+            if p.rsplit("/", 1)[-1] in file_esclusi:
+                continue
             if p.endswith("/") or "*" in p or "<" in p or ".." in p.rsplit("/", 1)[-1]:
                 out.append((p, "cartella" if p.endswith("/") else "schema"))
             else:
@@ -370,37 +532,111 @@ def esiste(p, tipo, radice):
 
 
 # --- righe dell'esito ---
-def righe_esito(esito, scheda, ctx, prove_file):
-    """-> (righe verificate [(testo, fonte)], non verificabili [(testo, [numeri])])."""
-    _, refs_cella, docs_cella = estrai_riferimenti(esito)
-    refs_cella = [r for r in dict.fromkeys(refs_cella) if 0 < r[0] <= r[1] <= len(ctx.ledger)]
-    docs_cella = [d for d in (ctx.documento(x) for x in docs_cella) if d]
-    ok, no = [], []
-    for seg in segmenta(esito):
+def ancora(a, b):
+    return f"{LEDGER}#L{a}-L{b}"
+
+
+def riga_ledger_con(ctx, tok, lo, hi):
+    """Prima riga (1-based) tra lo e hi in cui compare il numero, o None."""
+    for n in range(max(1, lo), min(len(ctx.ledger), hi) + 1):
+        if ha_numero(tok, ctx.ledger[n - 1]):
+            return n
+    return None
+
+
+def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids=()):
+    """-> (righe pubblicate [{testo, fonte, ancore}], numero di righe non riportate).
+
+    Per ogni numero, nell'ordine: (1) righe di ledger citate; (2) entro 3 righe dall'intervallo citato, solo se la
+    riga ha anche le parole del testo (Fonte = riga vera); (3) documento citato (testo con le parole vicine);
+    (4) file di prova JSON, solo se tutti i numeri restanti sono valori dello stesso record. Altrimenti la riga non
+    si pubblica."""
+    segs = segmenta(esito)
+    if ritirati:
+        segs = senza_ritirati(segs, ids, ritirati)
+    ok, non = [], 0
+    for seg in segs:
         testo, refs, docs = estrai_riferimenti(seg)
-        if not testo or not re.search(r"\w", testo):
+        if not testo or not re.search(r"\w", testo) or ISTRUZIONI.search(testo):
             continue
         proprie = [r for r in dict.fromkeys(refs) if 0 < r[0] <= r[1] <= len(ctx.ledger)]
         primarie = proprie or refs_cella
-        fonti = [(f"{LEDGER}#L{a}-L{b}", ctx.righe_ledger(a, b)) for a, b in primarie]
-        extra = [(f"{LEDGER}#L{a}-L{b}", ctx.righe_ledger(a, b)) for a, b in refs_cella if (a, b) not in primarie]
-        extra += [(d, ctx.testo(d)) for d in dict.fromkeys(docs + docs_cella)]
-        extra += [(p, ctx.testo(p)) for p in prove_file]
-        # citazioni proprie del segmento: sempre in Fonte; altrimenti solo le fonti dove i numeri si ritrovano
-        usate, mancanti = (list(fonti) if proprie else []), []
-        for tok in numeri(testo):
+        fonti = [(ancora(a, b), ctx.righe_ledger(a, b)) for a, b in primarie]
+        usate = []  # in Fonte solo dove i numeri si ritrovano davvero (senza numeri: le citazioni della riga)
+        parole = parole_riga(testo)
+        residui = []
+        for tok in numeri(testo):  # (1) righe di ledger citate
             if any(ha_numero(tok, t) for _, t in usate):
                 continue
-            trovata = next(((n, t) for n, t in fonti + extra if ha_numero(tok, t)), None)
+            trovata = next(((n, t) for n, t in fonti if ha_numero(tok, t)), None)
             if trovata:
                 usate.append(trovata)
             else:
-                mancanti.append(tok)
-        if mancanti:
-            no.append((testo, list(dict.fromkeys(mancanti))))
-        else:
-            ok.append((testo, " · ".join(n for n, _ in (usate or fonti)) or "—"))
-    return ok, no
+                residui.append(tok)
+        resto = []
+        for tok in residui:  # (2) entro 3 righe dall'intervallo citato, con le parole della riga
+            n = None
+            for a, b in primarie:
+                if hanno_le_parole(parole, ctx.righe_ledger(max(1, a - MARGINE_LEDGER), b + MARGINE_LEDGER)):
+                    n = riga_ledger_con(ctx, tok, a - MARGINE_LEDGER, b + MARGINE_LEDGER)
+                    if n:
+                        break
+            if n:
+                if all(u[0] != ancora(n, n) for u in usate):
+                    usate.append((ancora(n, n), ctx.ledger[n - 1]))
+            else:
+                resto.append(tok)
+        residui, resto = resto, []
+        elenco_docs = [d for d in dict.fromkeys([ctx.documento(x) for x in docs] + list(docs_cella)) if d]
+        for tok in residui:  # (3) documento citato: il numero con le parole della riga entro 3 righe
+            for d in elenco_docs:
+                righe_doc = ctx.testo(d).split("\n")
+                if any(ha_numero(tok, r) and hanno_le_parole(parole, "\n".join(righe_doc[max(0, i - 3):i + 4]))
+                       for i, r in enumerate(righe_doc)):
+                    if all(u[0] != d for u in usate):
+                        usate.append((d, ctx.testo(d)))
+                    break
+            else:
+                resto.append(tok)
+        if resto:  # (4) prova JSON: tutti i numeri restanti come valori di uno stesso record
+            for p in prove_file:
+                if p.endswith(".json") and any(all(record_ha(rec, t) for t in resto) for rec in ctx.record(p)):
+                    usate.append((p, ""))
+                    resto = []
+                    break
+        if resto:
+            non += 1
+            continue
+        scelte = usate or fonti
+        ancore = [tuple(int(x) for x in re.findall(r"\d+", n.split("#")[1])) for n, _ in scelte if n.startswith(LEDGER + "#")]
+        ok.append({"testo": testo, "fonte": " · ".join(n for n, _ in scelte) or "—", "ancore": ancore})
+    return ok, non
+
+
+def senza_ritirati(segs, ids, ritirati):
+    """Toglie le righe dei soli studi ritirati dall'audit; restano quelle dell'audit (RITIRAT*) e degli altri studi."""
+    if not ids:
+        return segs
+    ordine = sorted(ids, key=len, reverse=True)
+    rx = re.compile(r"^\W*(" + "|".join(re.escape(i) for i in ordine) + r")(?![\w-])")
+    out, proprietario = [], ids[0]
+    for seg in segs:
+        if m := rx.match(seg):
+            proprietario = m.group(1)
+        if re.search("RITIRAT", seg) or proprietario not in ritirati:
+            out.append(seg)
+    return out
+
+
+def parole_registro(ctx, ancore):
+    """Parole di verdetto del registro (lista chiusa) nelle righe di ledger citate, nell'ordine in cui compaiono."""
+    viste = []
+    for a, b in ancore:
+        for m in PAROLE.finditer(ctx.righe_ledger(a, b)):
+            w = re.sub(r"\s+", " ", m.group(0)).lower()
+            if w not in viste:
+                viste.append(w)
+    return " · ".join(viste) or SENZA_VERDETTO
 
 
 # --- dati strutturati per i grafici ---
@@ -475,17 +711,9 @@ def dump_dati(d):
 
 
 # --- pagina ---
-def senza_esito(s, ctx_testo):
-    """Toglie da un testo cio' che riguarda studi senza esito chiuso (dal primo accenno alla fine del blocco)."""
-    for i in s["ids"]:
-        if i in SENZA_ESITO:
-            segs, out = segmenta(ctx_testo), []
-            for seg in segs:
-                if i in seg:
-                    break
-                out.append(seg)
-            ctx_testo = "; ".join(out)
-    return ctx_testo
+def pulito(testo, esclusi=False):
+    """Testo di prosa senza citazioni dei file ne' istruzioni di lavoro ne' studi esclusi."""
+    return senza_istruzioni(togli_esclusi(testo, fino_a_fine=esclusi))
 
 
 def pagina(s, ctx):
@@ -494,46 +722,56 @@ def pagina(s, ctx):
         raise ValueError(f"scheda {s['id']}: pubblicabilita '{s['pubblicabilita']}', nessuna pagina")
     v = s["voci"]
     esclusi = [i for i in s["ids"] if i in SENZA_ESITO]
-    verdetto = s["verdetto"]
-    percorsi, fuori = percorsi_prove(v.get(5, ""), ctx.radice)
+    percorsi, fuori = percorsi_prove(v.get(5, ""), ctx.radice, s.get("file_esclusi", ()))
     percorsi = [(p, t) for p, t in percorsi if p.rstrip("/") not in RADICI_GENERICHE
-                and not any(h in p for i in esclusi for h in SENZA_ESITO[i])]
+                and not any(h in p for hint in SENZA_ESITO.values() for h in hint)]
     stato = [(p, t, esiste(p, t, ctx.radice)) for p, t in percorsi]
     prove_file = [p for p, t, e in stato if t == "file" and e]
     mancanti = [p for p, t, e in stato if not e]
-    esito = senza_esito(s, v.get(3, ""))
-    ok, no = righe_esito(esito, s, ctx, prove_file)
-    _, refs, _ = estrai_riferimenti(v.get(3, ""))
+    esito_orig = v.get(3, "")
+    refs, docs = citazioni_cella(esito_orig, bool(esclusi))
     refs = [r for r in dict.fromkeys(refs) if 0 < r[0] <= r[1] <= len(ctx.ledger)]
-    avv = s["avvertenza"]
-    for i in esclusi:
-        avv = (avv + " " if avv else "") + f"{i}: esito non chiuso nel ledger, non pubblicato."
-    fm = {"id": s["id"], "titolo": s["titolo"], "data": s["data"], "strumenti": s["strumenti"],
-          "finestra": s["finestra"], "verdetto": verdetto, "pubblicabilita": s["pubblicabilita"],
-          "avvertenza": avv, "fonte_ledger": f"{LEDGER}#L{refs[0][0]}-L{refs[0][1]}" if refs else "",
-          "prove": prove_file}
-    dati, didascalia = (None, "") if verdetto == "ritirato" else dati_scheda(s, ctx, prove_file)
+    docs = [d for d in (ctx.documento(x) for x in docs) if d]
+    esito = togli_esclusi(separa_coda(esito_orig)[0] if esclusi else esito_orig, fino_a_fine=bool(esclusi))
+    ok, non = righe_esito(esito, refs, docs, ctx, prove_file, s["ritirati"], s["ids"])
+    ritirata = s["audit_stato"] == "ritirato"
+    prima = ok[0]["ancore"][0] if ritirata and ok and ok[0]["ancore"] else refs[0] if refs else None
+    fonte_ledger = ancora(*prima) if prima else ""
+    cited = [prima] if prima else []
+    for r in ok:
+        cited += [a for a in r["ancore"] if a not in cited]
+    verdetto = parole_registro(ctx, cited)
+    avv_prima = s["avvertenza"]
+    avv = pulito(avv_prima)
+    fm = {"id": s["id"], "titolo": titolo_senza_esclusi(s["titolo"]), "data": s["data"], "strumenti": s["strumenti"],
+          "finestra": togli_esclusi(s["finestra"]), "verdetto": verdetto, "pubblicabilita": s["pubblicabilita"],
+          "avvertenza": avv, "fonte_ledger": fonte_ledger, "prove": prove_file}
+    if s["audit_stato"]:
+        fm = {**{k: fm[k] for k in ("id", "titolo", "data", "strumenti", "finestra", "verdetto")},
+              "audit": {"stato": s["audit_stato"], "id": s["audit_id"]},
+              **{k: fm[k] for k in ("pubblicabilita", "avvertenza", "fonte_ledger", "prove")}}
+    dati, didascalia = (None, "") if ritirata else dati_scheda(s, ctx, prove_file)
     md = [frontmatter_testo(fm), ""]
     if s["audit"]:
         md += ["## Ritiri e correzioni", ""] + [f"- {a['testo']}" for a in s["audit"]] + [""]
-    md += ["## Domanda", "", senza_esito(s, estrai_riferimenti(s["domanda"])[0]) or s["domanda"], "",
-           "## Metodo e rubrica", "", senza_esito(s, v.get(2, "")), "", "## Esito", "",
+    domanda = pulito(estrai_riferimenti(s["domanda"])[0]) or "-"
+    md += ["## Domanda", "", domanda, "",
+           "## Metodo e rubrica", "", pulito(v.get(2, "")) or "-", "", "## Esito", "",
            "| Risultato | Fonte |", "|---|---|"]
-    md += [f"| {cella(t)} | {cella(f)} |" for t, f in ok]
-    if no:
-        md += ["", "Non verificabile (i numeri non compaiono nelle fonti citate: restano fuori dalla tabella):", ""]
-        md += [f"- {t} — non verificabile: {', '.join(n)}" for t, n in no]
+    md += [f"| {cella(r['testo'])} | {cella(r['fonte'])} |" for r in ok]
+    if non:
+        md += ["", f"{non} righe della scheda non riportate: la prova citata non le contiene."]
     if dati:
         md += ["", "## Grafico", "", didascalia]
+    regola = estrai_riferimenti(togli_esclusi(v.get(4, ""), fino_a_fine=bool(esclusi)))[0]
     md += ["", "## Cosa NON dice", ""]
-    md += [f"- {x}" for x in segmenta(estrai_riferimenti(senza_esito(s, v.get(4, "")))[0])]
-    md += [f"- {i}: esito non chiuso nel ledger, non pubblicato." for i in esclusi]
+    md += [f"- {x}" for x in (pulisci_clausola(c) for c in segmenta(regola)) if x] or ["- —"]
     md += ["", "## Prove", ""]
     md += [f"- {p}" if e else f"- prova non trovata su disco: {p}" for p, t, e in stato]
     if not stato:
         md += [f"- Nessun file di prova indicato dall'inventario: {estrai_riferimenti(v.get(5, ''))[0]}"]
     stats = {"prove_mancanti": len(mancanti), "mancanti": mancanti, "fuori_repo": fuori,
-             "non_verificabili": sum(len(n) for _, n in no), "righe": len(ok)}
+             "non_riportate": non, "righe": len(ok), "avvertenza": (avv_prima, avv)}
     return "\n".join(md) + "\n", fm, dati, stats
 
 
@@ -551,8 +789,9 @@ def genera(inventario, radice, out, limit=None):
     out.mkdir(parents=True, exist_ok=True)
     for f in [*out.glob("*.md"), *out.glob("*.dati.json"), out / "indice.json"]:
         f.unlink(missing_ok=True)
-    st = {"ok": 0, "avvertenza": 0, "no": 0, "skipped": 0, "prove_mancanti": 0, "non_verificabili": 0,
-          "dati": 0, "mancanti": [], "fuori_repo": [], "ids_senza_esito": [], "righe": 0, "id_duplicati": []}
+    st = {"ok": 0, "avvertenza": 0, "no": 0, "skipped": 0, "prove_mancanti": 0, "non_riportate": 0,
+          "dati": 0, "mancanti": [], "fuori_repo": [], "righe": 0, "id_duplicati": [], "avvertenze": [],
+          "verdetti": {}}
     indice, usati = [], set()
     for s in schede:
         if s["pubblicabilita"] == "no":
@@ -574,13 +813,18 @@ def genera(inventario, radice, out, limit=None):
             st["dati"] += 1
         st[s["pubblicabilita"]] += 1
         st["prove_mancanti"] += ps["prove_mancanti"]
-        st["non_verificabili"] += ps["non_verificabili"]
+        st["non_riportate"] += ps["non_riportate"]
         st["righe"] += ps["righe"]
         st["mancanti"] += [(fm["id"], p) for p in ps["mancanti"]]
         st["fuori_repo"] += [(fm["id"], p) for p in ps["fuori_repo"]]
-        st["ids_senza_esito"] += [i for i in s["ids"] if i in SENZA_ESITO]
-        indice.append({"id": fm["id"], "titolo": fm["titolo"], "data": fm["data"], "strumenti": fm["strumenti"],
-                       "verdetto": fm["verdetto"], "pubblicabilita": fm["pubblicabilita"], "grafico": bool(dati)})
+        if ps["avvertenza"][0] != ps["avvertenza"][1]:
+            st["avvertenze"].append((fm["id"],) + ps["avvertenza"])
+        st["verdetti"][fm["verdetto"]] = st["verdetti"].get(fm["verdetto"], 0) + 1
+        voce = {"id": fm["id"], "titolo": fm["titolo"], "data": fm["data"], "strumenti": fm["strumenti"],
+                "verdetto": fm["verdetto"]}
+        if "audit" in fm:
+            voce["audit"] = fm["audit"]["stato"]
+        indice.append({**voce, "pubblicabilita": fm["pubblicabilita"], "grafico": bool(dati)})
     indice = sorted(sorted(indice, key=lambda r: r["id"]), key=lambda r: r["data"], reverse=True)
     scrivi(out / "indice.json", json.dumps(indice, ensure_ascii=False, indent=1) + "\n")
     return st
@@ -592,17 +836,23 @@ def main(argv=None):
     ap.add_argument("--root", default=RADICE, help="radice del repo del motore (sola lettura)")
     ap.add_argument("--out", default=str(USCITA))
     ap.add_argument("--limit", type=int, default=None, help="genera al massimo N pagine (test)")
+    ap.add_argument("--dettagli", action="store_true", help="stampa anche i verdetti e le avvertenze modificate")
     a = ap.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     st = genera(a.inventario, a.root, a.out, a.limit)
     print(f"ok={st['ok']} avvertenza={st['avvertenza']} no={st['no']} skipped={st['skipped']} "
           f"prove_mancanti={st['prove_mancanti']} dati={st['dati']} righe={st['righe']} "
-          f"non_verificabili={st['non_verificabili']} ids_senza_esito={','.join(sorted(set(st['ids_senza_esito']))) or '-'}")
+          f"non_riportate={st['non_riportate']}")
     for i, p in st["mancanti"]:
         print(f"prova non trovata su disco: {p} ({i})")
     for i, p in st["fuori_repo"]:
         print(f"fuori dal repo (non pubblicato): {p} ({i})")
+    if a.dettagli:
+        for k, n in sorted(st["verdetti"].items(), key=lambda kv: (-kv[1], kv[0])):
+            print(f"verdetto {n:3d} {k}")
+        for i, prima, dopo in st["avvertenze"]:
+            print(f"avvertenza {i}\n  prima: {prima}\n  dopo:  {dopo}")
     return 0
 
 

@@ -4,7 +4,7 @@ titolo: "BREADTH-1 — ampiezza di mercato dalle aziende di Nasdaq-100 e S&P 500
 data: "2026-10-19"
 strumenti: []
 finestra: "518 titoli unici, prezzi Yahoo 2015-01..2026-10-16 (1.463.618 righe, 52 MB)"
-verdetto: "misto"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "sopravvivenza; dati Yahoo/Wikipedia solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7541-L7541"

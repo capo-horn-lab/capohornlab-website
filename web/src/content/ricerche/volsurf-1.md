@@ -8,9 +8,9 @@ strumenti:
   - "SPX"
   - "SPY"
 finestra: "catene Cboe del 23/10 (NDX 34 scadenze, QQQ, SPX, SPY), poi istantanea IBKR su NDX (49 opzioni)"
-verdetto: "descrittivo"
+verdetto: "pass · blocked_env · not_run"
 pubblicabilita: "avvertenza"
-avvertenza: "solo per gli indicatori di qualità del fit (RMSE, violazioni); NO per le catene grezze (dati Cboe/IBKR sotto licenza); il PNG del pannello mostra valori di superficie derivati da dati licenziati (valutare)."
+avvertenza: "il PNG del pannello mostra valori di superficie derivati da dati licenziati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10656-L10662"
 prove:
   - "runtime/proofs/volsurf1/pannello_640x300.png"
@@ -38,10 +38,7 @@ OTM con bid>0, spread/medio≤0,5; forward dalla parità put-call; SVI per scade
 | 22 test PASS in 3B | docs/EXECUTION_LEDGER.md#L10761-L10761 |
 | chiamate reali NOT_RUN. | docs/EXECUTION_LEDGER.md#L10656-L10662 · docs/EXECUTION_LEDGER.md#L10673-L10682 · docs/EXECUTION_LEDGER.md#L10761-L10761 |
 
-Non verificabile (i numeri non compaiono nelle fonti citate: restano fuori dalla tabella):
-
-- valutazione di revisione A 95, B 96, C 94. — non verificabile: 95, 96, 94
-- VOLSURF-3/3B: client IB Gateway/TWS in sola lettura (`ib_async 2.1.0`), 9 test PASS — non verificabile: 2.1
+2 righe della scheda non riportate: la prova citata non le contiene.
 
 ## Cosa NON dice
 

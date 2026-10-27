@@ -6,7 +6,7 @@ strumenti:
   - "MNQ"
   - "MES"
 finestra: "MNQ e MES 1 minuto NinjaTrader, 146.937 candele 5m comuni, 1.914 sessioni 2019-05..2026-10"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8024-L8026"

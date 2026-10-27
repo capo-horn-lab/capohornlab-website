@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL a 5 m, 30 m, 1 h"
-verdetto: "descrittivo"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "esplorativo; le finestre notturne non erano in rubrica (H-NEXT-3) e non sono adottate; dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6888-L6900"

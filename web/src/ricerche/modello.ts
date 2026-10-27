@@ -1,13 +1,13 @@
 // Lettura delle pagine generate da scripts/estrai_ricerche.py (frontmatter a valori JSON, sezioni "## ...", tabella pipe).
 
-export type Verdetto =
-  | 'ritirato'
-  | 'corretto'
-  | 'confermata'
-  | 'parziale'
-  | 'misto'
-  | 'non confermata'
-  | 'descrittivo'
+/** Parole del registro trovate nelle righe citate, separate da " · ", oppure "senza verdetto nel registro". */
+export type Verdetto = string
+
+/** Segno dell'audit (sezione "Ritiri e correzioni" dell'inventario): vale solo per gli ID indicati, non cambia il verdetto. */
+export interface Audit {
+  stato: 'ritirato' | 'corretto'
+  id: string[]
+}
 
 export interface VoceIndice {
   id: string
@@ -15,6 +15,7 @@ export interface VoceIndice {
   data: string
   strumenti: string[]
   verdetto: Verdetto
+  audit?: Audit['stato']
   pubblicabilita: 'ok' | 'avvertenza'
   grafico: boolean
 }
@@ -26,6 +27,7 @@ export interface Frontmatter {
   strumenti: string[]
   finestra: string
   verdetto: Verdetto
+  audit?: Audit
   pubblicabilita: 'ok' | 'avvertenza'
   avvertenza: string
   fonte_ledger: string
@@ -114,14 +116,24 @@ export function dividiFonti(cella: string): string[] {
 
 export type VarianteBadge = 'default' | 'secondary' | 'destructive' | 'outline'
 
-export const ETICHETTE: Record<Verdetto, { testo: string; variante: VarianteBadge; aiuto: string }> = {
-  ritirato: { testo: 'ritirato', variante: 'destructive', aiuto: "Conferma ritirata dall'audit: i numeri restano per trasparenza." },
-  corretto: { testo: 'corretto', variante: 'destructive', aiuto: "Misura o conclusione corretta in seguito: leggere l'audit." },
-  confermata: { testo: 'confermata', variante: 'secondary', aiuto: 'Confermata secondo la rubrica fissata prima.' },
-  parziale: { testo: 'parziale', variante: 'secondary', aiuto: 'PARZIALE nel vocabolario del ledger.' },
-  misto: { testo: 'misto', variante: 'secondary', aiuto: 'Alcune prove confermate, altre no.' },
-  'non confermata': { testo: 'non confermata', variante: 'outline', aiuto: 'Nessuna prova confermata dalla rubrica.' },
-  descrittivo: { testo: 'descrittivo', variante: 'outline', aiuto: 'Misure e frequenze senza verdetto di ipotesi.' },
+export const SENZA_VERDETTO = 'senza verdetto nel registro'
+export const SEPARATORE = ' · '
+
+/** Le parole del registro di un verdetto ("pass · non confermata" -> ["pass", "non confermata"]); [] se senza verdetto. */
+export function paroleVerdetto(v: Verdetto): string[] {
+  return v === SENZA_VERDETTO || !v ? [] : v.split(SEPARATORE)
+}
+
+/** Aspetto del badge di una parola del registro. */
+export function varianteParola(parola: string): VarianteBadge {
+  if (/^ritirat|^fail$/.test(parola)) return 'destructive'
+  if (/^(confermat|adottata|parziale)/.test(parola)) return 'secondary'
+  return 'outline'
+}
+
+export const AIUTO_AUDIT: Record<Audit['stato'], string> = {
+  ritirato: "Conferma ritirata dall'audit: vale solo per gli studi indicati nella pagina.",
+  corretto: "Misura o conclusione corretta dall'audit: vale solo per gli studi indicati nella pagina.",
 }
 
 export const anno = (data: string) => data.slice(0, 4)
@@ -137,3 +149,7 @@ export function colonnaValori(dati: Dati): number {
   }
   return -1
 }
+
+/** Id HTML valido da un titolo di sezione ("Cosa NON dice" -> "cosa-non-dice"): niente spazi negli IDREF. */
+export const idSezione = (titolo: string) =>
+  titolo.toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')

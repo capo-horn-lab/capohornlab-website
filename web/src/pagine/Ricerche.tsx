@@ -4,8 +4,8 @@ import { Link } from 'react-router'
 import { LineSparkline } from '@/components/charts'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { caricaDati, indice } from '@/ricerche/archivio'
-import { anno, colonnaValori, ETICHETTE, type Verdetto } from '@/ricerche/modello'
-import { VerdettoBadge } from '@/ricerche/Testo'
+import { anno, colonnaValori, paroleVerdetto, SENZA_VERDETTO } from '@/ricerche/modello'
+import { AuditBadge, VerdettoBadge } from '@/ricerche/Testo'
 
 const TUTTI = ''
 
@@ -63,12 +63,17 @@ export default function Ricerche() {
 
   const strumenti = useMemo(() => [...new Set(indice.flatMap((r) => r.strumenti))].sort(), [])
   const anni = useMemo(() => [...new Set(indice.map((r) => anno(r.data)))].sort().reverse(), [])
-  const verdetti = useMemo(() => [...new Set(indice.map((r) => r.verdetto))].sort(), [])
+  // le parole del registro presenti nell'indice (piu' "senza verdetto nel registro"), una per voce di filtro
+  const verdetti = useMemo(
+    () =>
+      [...new Set(indice.flatMap((r) => (paroleVerdetto(r.verdetto).length ? paroleVerdetto(r.verdetto) : [SENZA_VERDETTO])))].sort(),
+    [],
+  )
 
   const righe = indice.filter(
     (r) =>
       (strumento === TUTTI || r.strumenti.includes(strumento)) &&
-      (verdetto === TUTTI || r.verdetto === verdetto) &&
+      (verdetto === TUTTI || (paroleVerdetto(r.verdetto).length ? paroleVerdetto(r.verdetto) : [SENZA_VERDETTO]).includes(verdetto)) &&
       (annoSel === TUTTI || anno(r.data) === annoSel),
   )
   const conGrafico = useMemo(() => indice.filter((r) => r.grafico).map((r) => r.id), [])
@@ -79,14 +84,15 @@ export default function Ricerche() {
       <header className="flex flex-col gap-3">
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Ricerche</h1>
         <p className="text-muted-foreground max-w-3xl">
-          Ogni pagina riporta una ricerca fatta sul motore, con i numeri copiati dalle prove e il verdetto scritto
-          nel ledger. Frequenze e misure su dati gia' visti: nessuna e' un segnale.
+          Ogni pagina riporta una ricerca fatta sul motore, con i numeri copiati dalle prove e il verdetto nel
+          registro: la parola scritta nelle righe del registro che la pagina cita, oppure «{SENZA_VERDETTO}».
+          Frequenze e misure su dati gia' visti: nessuna e' un segnale.
         </p>
       </header>
 
       <div className="flex flex-wrap items-end gap-4">
         <Filtro etichetta="Strumento" valore={strumento} opzioni={strumenti} onChange={setStrumento} />
-        <Filtro etichetta="Verdetto" valore={verdetto} opzioni={verdetti} onChange={setVerdetto} />
+        <Filtro etichetta="Verdetto nel registro" valore={verdetto} opzioni={verdetti} onChange={setVerdetto} />
         <Filtro etichetta="Anno" valore={annoSel} opzioni={anni} onChange={setAnnoSel} />
         <p className="text-muted-foreground ml-auto text-sm" aria-live="polite">
           {righe.length} di {indice.length} ricerche
@@ -104,7 +110,7 @@ export default function Ricerche() {
               <TableHead>Data</TableHead>
               <TableHead>Ricerca</TableHead>
               <TableHead>Strumenti</TableHead>
-              <TableHead>Verdetto</TableHead>
+              <TableHead>Verdetto nel registro</TableHead>
               <TableHead className="text-right">Serie</TableHead>
             </TableRow>
           </TableHeader>
@@ -119,7 +125,10 @@ export default function Ricerche() {
                 </TableCell>
                 <TableCell className="text-muted-foreground font-mono text-xs">{r.strumenti.join(' ')}</TableCell>
                 <TableCell>
-                  <VerdettoBadge verdetto={r.verdetto as Verdetto} />
+                  <div className="flex flex-col items-start gap-1">
+                    <VerdettoBadge verdetto={r.verdetto} />
+                    {r.audit && <AuditBadge audit={r.audit} />}
+                  </div>
                 </TableCell>
                 <TableCell className="w-28 text-right">
                   {serie[r.id] && (
@@ -132,11 +141,9 @@ export default function Ricerche() {
         </Table>
       )}
       <p className="text-muted-foreground text-xs">
-        Etichette del verdetto:{' '}
-        {Object.entries(ETICHETTE)
-          .map(([k, e]) => `${k} (${e.aiuto.replace(/\.$/, '')})`)
-          .join('; ')}
-        .
+        Il verdetto e' copiato dal registro (PASS, FAIL, CONFERMATA, NON CONFERMATA, PARZIALE e le altre parole
+        elencate nella pagina Metodo): le righe citate possono contenerne piu' di una. «audit» e' un segno a parte:
+        ritiro o correzione dell'audit, valido solo per gli studi indicati nella pagina.
       </p>
     </section>
   )

@@ -7,7 +7,7 @@ strumenti:
   - "QQQ"
   - "ES"
 finestra: "SPY/QQQ giornalieri 2006-2026 (5230 giorni, Yahoo), ES 2020-2024, dati SEC DERA 2016q1-2026q2"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6939-L6948"
@@ -28,12 +28,10 @@ NPR a 30/90 giorni (acquirenti-venditori), classificazione routine/opportunistic
 
 | Risultato | Fonte |
 |---|---|
-| "Non vale." NPR 90 giorni contro SPY a 21 giorni rho +0,113 (t 1,31), QQQ +0,071 (t 0,85) | docs/EXECUTION_LEDGER.md#L6939-L6948 |
+| "Non vale." | docs/EXECUTION_LEDGER.md#L6939-L6948 |
+| NPR 90 giorni contro SPY a 21 giorni rho +0,113 (t 1,31), QQQ +0,071 (t 0,85) | docs/EXECUTION_LEDGER.md#L6939-L6948 |
 | a 63 giorni circa zero | docs/EXECUTION_LEDGER.md#L6939-L6948 |
-
-Non verificabile (i numeri non compaiono nelle fonti citate: restano fuori dalla tabella):
-
-- la famiglia insider "non tiene" a 4 h e giornaliero, su MES 4 h peggiora il Brier (+59e-5, intervallo 0,7-119e-5). 1.152.849 acquisti e vendite sul mercato (284.446 acquisti, 868.403 vendite). — non verificabile: 1.152.849, 284.446, 868.403
+| la famiglia insider "non tiene" a 4 h e giornaliero, su MES 4 h peggiora il Brier (+59e-5, intervallo 0,7-119e-5). 1.152.849 acquisti e vendite sul mercato (284.446 acquisti, 868.403 vendite). | docs/EXECUTION_LEDGER.md#L6939-L6948 · docs/EXECUTION_LEDGER.md#L6936-L6936 |
 
 ## Cosa NON dice
 

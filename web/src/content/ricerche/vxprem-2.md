@@ -6,9 +6,9 @@ strumenti:
   - "VX"
   - "VIX"
 finestra: "stessi dati di VXPREM-1 (174 CSV Cboe VX, VIX)"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "Avvertenza forte: strategia a rischio illimitato sulla volatilità (corto VX); pubblicare solo come ricerca descrittiva, mai come regola."
+avvertenza: "Avvertenza forte: strategia a rischio illimitato sulla volatilità (corto VX)"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10077-L10087"
 prove:
   - "runtime/proofs/vxprem2/vxprem2.json"

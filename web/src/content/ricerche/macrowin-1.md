@@ -5,7 +5,7 @@ data: "2026-10-20"
 strumenti:
   - "ZN"
 finestra: "ZN 1 minuto (1.886 sessioni valide), NFP 80, CPI 79, FOMC 60, 1.671 giorni di controllo (MACROWIN-1); micro azionari NFP/CPI 8:30 ET (MACROWIN-2)"
-verdetto: "parziale"
+verdetto: "pass · parziale"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9793-L9798"
@@ -31,7 +31,7 @@ Salto in bp da T0 a T0+1/5/15 minuti contro i giorni di controllo, persistenza, 
 | MACROWIN-2 "Esito PASS, verdetto PARZIALE": salto dalle 8:30 ET a 1 minuto 6,1-13,0 volte i giorni normali (MNQ NFP 36,1 contro 5,3 bp in scoperta e 29,5 contro 4,5 in verifica; MNQ CPI 63,9 contro 5,3 e 44,1 contro 4,5) | docs/EXECUTION_LEDGER.md#L10150-L10157 |
 | volatilità 8:30-9:30 ET 2,1-3,9 volte | docs/EXECUTION_LEDGER.md#L10150-L10157 |
 | prima ora regolare 9:30-10:30 solo 1,10-1,22 volte | docs/EXECUTION_LEDGER.md#L9793-L9798 · docs/EXECUTION_LEDGER.md#L10150-L10157 |
-| regole nette: "nessuna scelta in scoperta (q 0,978-0,993)", R1 su NFP negativa in tutte le 8 celle (MNQ -38,65 USD, t -2,13 in scoperta). | docs/EXECUTION_LEDGER.md#L9793-L9798 · docs/EXECUTION_LEDGER.md#L10150-L10157 |
+| regole nette: "nessuna scelta in scoperta (q 0,978-0,993)", R1 su NFP negativa in tutte le 8 celle (MNQ -38,65 USD, t -2,13 in scoperta). | docs/EXECUTION_LEDGER.md#L10150-L10157 |
 
 ## Grafico
 

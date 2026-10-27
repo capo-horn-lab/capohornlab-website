@@ -10,7 +10,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "MES, MNQ, M2K, MYM (~1.020 previsioni dal 2023) e SPY/QQQ (2.732 previsioni dal 2016)"
-verdetto: "confermata"
+verdetto: "confermato"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8452-L8455"

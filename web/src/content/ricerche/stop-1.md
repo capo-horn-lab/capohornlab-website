@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "IBS, R1b, TT, 3WEAK su MES, MNQ, M2K, MYM dal 2022 (stessi trade di BRIDGE-1)"
-verdetto: "non confermata"
+verdetto: "adottata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8836-L8841"
@@ -28,7 +28,8 @@ Varianti S2 e S3 (stop a ingresso x (1 - 2 o 3 x sigma_prev)), bootstrap a blocc
 
 | Risultato | Fonte |
 |---|---|
-| "NESSUNA VARIANTE ADOTTATA; gli stop peggiorano la famiglia MR anche nei giorni negativissimi." IBS 582 trade +31,4 bp: S2 +17,5 bp (34% stoppati, Sharpe -0,87, DD 4.655 contro 3.525) | docs/EXECUTION_LEDGER.md#L8836-L8841 |
+| "NESSUNA VARIANTE ADOTTATA; gli stop peggiorano la famiglia MR anche nei giorni negativissimi." | docs/EXECUTION_LEDGER.md#L8836-L8841 |
+| IBS 582 trade +31,4 bp: S2 +17,5 bp (34% stoppati, Sharpe -0,87, DD 4.655 contro 3.525) | docs/EXECUTION_LEDGER.md#L8836-L8841 |
 | R1b S2 Sharpe -2,59, DD 2.811 contro 1.409 | docs/EXECUTION_LEDGER.md#L8836-L8841 |
 | solo 3WEAK S3 migliora (+40,1, Sharpe +0,18, DD 453 contro 576). | docs/EXECUTION_LEDGER.md#L8836-L8841 |
 

@@ -6,7 +6,7 @@ strumenti:
   - "IEF"
   - "TLT"
 finestra: "IEF (10 anni) e TLT (30 anni), 314 aste a 10 anni e 232 a 30 anni dal 2006 (con riaperture)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8179-L8186"
@@ -26,7 +26,8 @@ il prezzo cala prima delle aste e recupera dopo (Robeco; Lou-Yan-Zhang)?
 
 | Risultato | Fonte |
 |---|---|
-| "0 confermati su 4." Con riaperture: IEF corto prima -0,42 / +14,72 bp (t 1,99), placebo p95 9,95 | docs/EXECUTION_LEDGER.md#L8179-L8186 |
+| "0 confermati su 4." | docs/EXECUTION_LEDGER.md#L8179-L8186 |
+| Con riaperture: IEF corto prima -0,42 / +14,72 bp (t 1,99), placebo p95 9,95 | docs/EXECUTION_LEDGER.md#L8179-L8186 |
 | TLT corto prima +22,73 (t 1,50) / +42,28 (t 1,99), placebo p95 41,14 | docs/EXECUTION_LEDGER.md#L8179-L8186 |
 | IEF lungo dopo +16,44 (t 2,55) / -3,52. | docs/EXECUTION_LEDGER.md#L8179-L8186 |
 

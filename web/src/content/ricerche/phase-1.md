@@ -4,7 +4,7 @@ titolo: "PHASE-1 — 12 fasi cicliche di mercato e assegnazione delle strategie"
 data: "2026-10-19"
 strumenti: []
 finestra: "221 strategie x 12 fasi (tendenza x volatilità x carattere)"
-verdetto: "non confermata"
+verdetto: "pass"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7643-L7643"
@@ -24,7 +24,8 @@ Fase nota a chiusura precedente; assegnazione n≥30, media>0, t≥2; walk-forwa
 
 | Risultato | Fonte |
 |---|---|
-| "221 strategie x 12 fasi; 0 CONFERMATE." Solo 3 strategie con almeno una fase significativa in scoperta (verifica +5,10 t 0,68, +1,80 t 0,19, -2,45) | docs/EXECUTION_LEDGER.md#L7643-L7643 |
+| "221 strategie x 12 fasi; 0 CONFERMATE." | docs/EXECUTION_LEDGER.md#L7643-L7643 |
+| Solo 3 strategie con almeno una fase significativa in scoperta (verifica +5,10 t 0,68, +1,80 t 0,19, -2,45) | docs/EXECUTION_LEDGER.md#L7643-L7643 |
 | walk-forward 5 strategie positive, nessuna significativa | docs/EXECUTION_LEDGER.md#L7643-L7643 |
 | media di verifica negativa in 11 fasi su 12. | docs/EXECUTION_LEDGER.md#L7643-L7643 |
 

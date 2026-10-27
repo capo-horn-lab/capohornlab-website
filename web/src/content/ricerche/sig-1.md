@@ -7,7 +7,7 @@ strumenti:
   - "MNQ"
   - "MCL"
 finestra: "MES, MNQ, MCL a 5 m, 1 h, giornaliero (periodi come SENT-3: addestramento <60%, selezione 60-80%, test >80%)"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "(descrittivo, non un segnale operativo; dati licenziati solo aggregati)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7140-L7173"

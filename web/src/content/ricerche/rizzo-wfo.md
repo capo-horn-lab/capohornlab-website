@@ -5,9 +5,9 @@ data: "2026-10-19"
 strumenti:
   - "MES"
 finestra: "400 trade MES (periodo di verifica, un trade per strategia e giorno)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "esito negativo su un modello proprietario locale (descrivere come \"modello locale\")."
+avvertenza: "esito negativo su un modello proprietario locale."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7768-L7768"
 prove:
   - "runtime/proofs/rizzo_wfo/step1.json"

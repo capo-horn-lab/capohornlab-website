@@ -4,7 +4,7 @@ titolo: "MR-1-ADJ — MR-1 con segnali sui prezzi raccordati"
 data: "2026-10-19"
 strumenti: []
 finestra: "stessi test di MR-1 con segnali calcolati sulla serie raccordata ai cambi di contratto (esecuzioni sui prezzi grezzi)"
-verdetto: "confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9023-L9023"

@@ -4,9 +4,9 @@ titolo: "RICERCA-SNIPER-1 e BRAINSTORM-SNIPER-1/2 — ricerca estesa e brainstor
 data: "2026-10-21"
 strumenti: []
 finestra: "due documenti prodotti da agenti: `docs/research/SNIPER_RR_RICERCA_2026-10-21.md` (282 righe, 107 URL) e `docs/research/BRAINSTORM_SNIPER_2026-10-21.md` (55 KB)"
-verdetto: "descrittivo"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
-avvertenza: "contengono citazioni e URL di terzi (non riprodurre testi); verificare diritti sulle citazioni."
+avvertenza: "contengono citazioni e URL di terzi"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10215-L10226"
 prove: []
 ---

@@ -9,7 +9,7 @@ strumenti:
   - "MYM"
   - "MGC"
 finestra: "MES, MNQ, M2K, MYM 2019-2026 (OVN-1); MGC 2019-2026 (GOLDN-1)"
-verdetto: "confermata"
+verdetto: "non confermato"
 pubblicabilita: "avvertenza"
 avvertenza: "(decadimento dal 2021; stessi dati usati per l'IBS)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8572-L8579"

@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti:
   - "M6E"
 finestra: "indici micro, M6E, 2020-2026 (77 giorni NFP, 53 riunioni FOMC, 206 giorni di annunci)"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8532-L8538"
