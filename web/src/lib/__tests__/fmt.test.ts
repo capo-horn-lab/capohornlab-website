@@ -17,6 +17,21 @@ describe('fmt (D8)', () => {
     expect(intero(7729.5)).toBe('7730')
     expect(intero(2784.6000000000004)).toBe('2785')
   })
+  it('pareggi a 2 decimali al pari come Python (f"{x:.2f}")', () => {
+    expect(num(0.125)).toBe('0.12')
+    expect(num(52.125)).toBe('52.12')
+    expect(num(0.375)).toBe('0.38')
+    expect(num(-0.125)).toBe('-0.12')
+    expect(num(2.675)).toBe('2.67') // 2.67499999... in binario: nessun pareggio, come Python
+    expect(prezzo(29416.125)).toBe('29416.12')
+    expect(quart({ mediana: 0.125, q1: 0.375, q3: 0.625 }, 2)).toBe('0.12 (0.38-0.62)')
+  })
+  it('valori non numerici: un trattino, mai NaN', () => {
+    expect(num('x' as unknown as number)).toBe('-')
+    expect(num(Number.NaN)).toBe('-')
+    expect(prezzo('29000' as unknown as number)).toBe('-')
+    expect(p({ p: 'x' as unknown as number, k: 1, n: 2 })).toBe('-')
+  })
   it('num, quart, prezzo', () => {
     expect(num(4021.072551314183)).toBe('4021.07')
     expect(num(41.8, 0)).toBe('42')

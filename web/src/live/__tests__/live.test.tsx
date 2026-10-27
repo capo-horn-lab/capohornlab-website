@@ -1,10 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import fs from 'node:fs'
 import path from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { haErrore, type Frequenze, type Scenari, type StrumentoFrequenze, type StrumentoScenari, validaFrequenze, validaScenari } from '@/lib/tipi'
-import { avvisi } from '@/live/AvvisoFreschezza'
+import { avvisi, etaCorrente } from '@/live/AvvisoFreschezza'
 import { Esiti } from '@/live/Esiti'
 import { GraficoLive } from '@/live/GraficoLive'
 import { sessioneAperta } from '@/live/StatoLive'
@@ -19,24 +19,30 @@ const scen = validaScenari(scenariJson).dati as Scenari
 const freq = validaFrequenze(frequenzeJson).dati as Frequenze
 const sc = (s: string) => scen.strumenti[s] as StrumentoScenari
 const fr = (s: string) => freq.strumenti[s] as StrumentoFrequenze
-const v = (s: string) => vista(sc(s), scen.barre[s], fr(s), s === scen.principale.strumento)
+const v = (s: string) => vista(sc(s), scen.barre[s], fr(s), s === scen.principale.strumento, scen.orari)
+type Rec = Record<string, unknown>
+const copia = (x: unknown) => structuredClone(x) as { dati: Rec & { strumenti: Record<string, Rec>; barre: Record<string, Rec> } }
 
-// desktop_trader.esito_ramo on the same fixture (.venv-quant, 2026-10-27): the site adds only D8's " ±m" when the engine gives it
+// The Trader's outcomes box (desktop_trader.esiti + esito_ramo, box rows as desktop_trader.py ~2625-2633) on the same fixture, from
+// runtime/proofs/freqsito3/task3/strumenti/esiti_trader.py (.venv-quant, 2026-10-27): the site adds only D8's " ±m" and writes the
+// children's "  poi " without the indent
 const TRADER: Record<string, string[]> = {
-  MGC: ["chiusura sotto l'apertura 4022: 52% (46/88) · mediana 3998", "chiusura sopra l'apertura 4022: 48% (42/88) · mediana 4040"],
+  MGC: ["chiusura sotto l'apertura 4022: 52% (46/88) · mediana 3998", "chiusura sopra l'apertura 4022: 48% (42/88) · mediana 4040",
+    'da qui: nessun movimento di 5.7 dal punto 4022 (4017-4028) entro 21:00: 55% (131/240)'],
   MNQ: ["chiusura sotto l'apertura 29231: 54% (37/69) · mediana 29099", "chiusura sopra l'apertura 29231: 46% (32/69) · mediana 29391"],
   MES: ["mai ritorno all'apertura 7683 entro 21:00: 19 su 20, pochi casi · mediana dell'estensione 7728"],
-  M2K: ["nessun 4.6 sotto l'apertura (2785) entro 21:00: 30 su 31, pochi casi", "poi chiusura sopra l'apertura 2789: 29 su 30, pochi casi · mediana 2818",
+  M2K: ["nessun 4.6 sotto l'apertura (2785) entro 21:00: 30 su 31, pochi casi", "  poi chiusura sopra l'apertura 2789: 29 su 30, pochi casi · mediana 2818",
     "chiusura sopra l'apertura 2789: 29 su 31, pochi casi · mediana 2818"],
   MYM: ["chiusura sopra l'apertura 52643: 53% (34/64) · mediana 52752", "chiusura sotto l'apertura 52643: 47% (30/64) · mediana 52517"],
 }
 
 describe('vista sulle fixture reali', () => {
-  it('esiti come il Trader (riferimento, arrotondamento, pochi casi), con ±m D8', () => {
+  it('esiti come il riquadro del Trader, righe da qui comprese (riferimento, arrotondamento, pochi casi), con ±m D8', () => {
     for (const [s, attesi] of Object.entries(TRADER)) {
-      const righe = righeEsiti(v(s)).filter((r) => !r.id.startsWith('da-qui-')).map((r) => r.testo)
-      expect(righe.map((t) => t.replace(/ ±\d+/, ''))).toEqual(attesi)
+      const righe = righeEsiti(v(s)).map((r) => r.testo.replace(/ ±\d+/, ''))
+      expect(righe).toEqual(attesi.map((t) => t.replace(/^(da qui: )? {2}poi /, '$1poi ')))
     }
+    expect(righeEsiti(v('MGC')).filter((r) => r.id.startsWith('da-qui-')).map((r) => r.id)).toEqual(['da-qui-q1'])
     expect(righeEsiti(v('MGC'))[0].testo).toBe("chiusura sotto l'apertura 4022: 52% (46/88 ±10) · mediana 3998")
   })
   it('rami disegnati: gli stessi del Trader (MES r2; da qui q2, q3, q3.2) e nessun ramo senza minuti sul grafico', () => {
@@ -58,10 +64,16 @@ describe('vista sulle fixture reali', () => {
   })
   it('albero in testo quando la radice e oltre 2 ore dopo l ultima barra', () => {
     const s = { ...sc('MES'), radice: { ...sc('MES').radice, t: '2026-10-27T14:30+01:00' } }
-    const x = vista(s, scen.barre.MES, fr('MES'), false)
+    const x = vista(s, scen.barre.MES, fr('MES'), false, scen.orari)
     expect(x.inTesto).toBe(true)
     expect(righeTesto(x)[0]).toMatch(/^radice 20:08 primo movimento a 7711.*albero in testo$/)
     expect(righeTesto(x)[1]).toMatch(/^ {2}estensione \+65 25% \(5\/20 ±19\) a 7748.69 verso le /)
+  })
+  it('ora degli esiti senza orizzonte = chiusura del payload (21:00), mai 22:00', () => {
+    const s = structuredClone(sc('MES'))
+    delete s.rami[0].orizzonte
+    const righe = righeEsiti(vista(s, scen.barre.MES, fr('MES'), false, scen.orari))
+    expect(righe[0].testo).toBe("mai ritorno all'apertura 7683 entro 21:00: 19 su 20, pochi casi · mediana dell'estensione 7728")
   })
   it('principale per primo nelle schede', () => {
     expect(ordineStrumenti(scen, freq)).toEqual(['MGC', 'MNQ', 'MES', 'M2K', 'MYM'])
@@ -87,17 +99,46 @@ describe('pannello', () => {
     const corrente = fr('MGC').finestre.find((w) => w.corrente)!
     expect(screen.getByText(`> ${corrente.finestra}`, { exact: false })).toBeInTheDocument()
   })
+  it('orari del payload nei titoli e nelle note (14:30-21:00 questa settimana), testo del pannello completo', () => {
+    const { container } = render(<TabellePannello r={fr('MGC')} orari={freq.orari} />)
+    const teste = screen.getAllByRole('columnheader').map((h) => h.textContent)
+    expect(teste).toContain('entro 14:30')
+    expect(teste).toContain('entro 21:00')
+    expect(teste.some((t) => /15:30|22:00/.test(t ?? ''))).toBe(false)
+    const testo = container.textContent ?? ''
+    expect(testo).toContain('tocco entro le 14:30 e le 21:00 nelle ultime 250 sessioni')
+    expect(testo).toContain('entro le 21:00, 0.3 A = 13 punti; margine = max(1,96 sqrt(p(1-p)/n), 3/n)')
+    expect(testo).toContain('range medio 14:30-21:00 delle ultime 20 sessioni')
+    expect(teste).toContain('oggi dalle 00:00 max / min')
+    expect(teste).toContain('notte 00:00-14:29 max / min')
+    expect(teste).toContain('sessione dalle 14:30 max / min')
+  })
+  it('frequenza senza casi: "n/d (0 casi)" come il pannello', () => {
+    const r = structuredClone(fr('MGC'))
+    r.lenti!.base!.nuovo_minimo = { p: null, k: 0, n: 0, margine: null }
+    render(<TabellePannello r={r} orari={freq.orari} />)
+    const base = screen.getAllByRole('row').find((x) => within(x).queryAllByRole('cell')[0]?.textContent === 'tutte le sessioni')!
+    expect(within(base).getAllByRole('cell')[4].textContent).toBe('n/d (0 casi)')
+  })
 })
 
 describe('stato e freschezza', () => {
   const base = { isError: false, dataUpdatedAt: Date.UTC(2026, 9, 26, 19, 8), errorUpdatedAt: Date.UTC(2026, 9, 26, 19, 9) }
+  const t0 = base.dataUpdatedAt
   it('messaggi', () => {
-    expect(avvisi({ ...base, data: { ricevuto: null, eta_s: null, dati: null } }, 60)).toEqual(['Nessun dato dal motore (spento, o non ha ancora pubblicato).'])
-    expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 60, dati: {} } }, 60)).toEqual([])
-    expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 61, dati: {} } }, 60)).toEqual(['Motore spento o scollegato da 1 minuto'])
-    expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 600, dati: {} } }, 180)).toEqual(['Motore spento o scollegato da 10 minuti'])
-    expect(avvisi({ ...base, isError: true, data: { ricevuto: 'x', eta_s: 5, dati: {} } }, 60))
+    expect(avvisi({ ...base, data: { ricevuto: null, eta_s: null, dati: null } }, 60, t0)).toEqual(['Nessun dato dal motore (spento, o non ha ancora pubblicato).'])
+    expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 60, dati: {} } }, 60, t0)).toEqual([])
+    expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 61, dati: {} } }, 60, t0)).toEqual(['Motore spento o scollegato da 1 minuto'])
+    expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 600, dati: {} } }, 180, t0)).toEqual(['Motore spento o scollegato da 10 minuti'])
+    expect(avvisi({ ...base, isError: true, data: { ricevuto: 'x', eta_s: 5, dati: {} } }, 60, t0))
       .toEqual(['Aggiornamento fallito alle 20:09; ultimo caricamento riuscito alle 20:08'])
+  })
+  it('l eta avanza con l orologio dall ultimo caricamento riuscito, anche se la richiesta resta appesa', () => {
+    const q = { ...base, data: { ricevuto: 'x', eta_s: 10, dati: {} } }
+    expect(etaCorrente(q, t0 + 30_000)).toBe(40)
+    expect(avvisi(q, 60, t0 + 30_000)).toEqual([])
+    expect(avvisi(q, 60, t0 + 120_000)).toEqual(['Motore spento o scollegato da 2 minuti'])
+    expect(etaCorrente({ ...base, data: { ricevuto: null, eta_s: null, dati: null } }, t0)).toBeNull()
   })
   it('sessione regolare aperta o chiusa all ora del calcolo', () => {
     expect(sessioneAperta(scen.generato, scen.orari)).toBe(true)
@@ -108,6 +149,13 @@ describe('stato e freschezza', () => {
     render(<Esiti righe={righeEsiti(v('M2K'))} />)
     expect(screen.getByText('Esiti a fine sessione (non livelli da toccare)')).toBeInTheDocument()
     expect(screen.getAllByRole('listitem').length).toBe(3)
+  })
+  it('righe esiti con chiave stabile: un numero che cambia aggiorna la riga, non la rimonta', () => {
+    const { rerender } = render(<Esiti righe={[{ id: 'r1', testo: 'chiusura sopra: 52% (46/88 ±10)' }]} />)
+    const prima = screen.getByRole('listitem')
+    rerender(<Esiti righe={[{ id: 'r1', testo: 'chiusura sopra: 53% (47/88 ±10)' }]} />)
+    expect(screen.getByRole('listitem')).toBe(prima)
+    expect(prima.textContent).toBe('chiusura sopra: 53% (47/88 ±10)')
   })
 })
 
@@ -142,11 +190,57 @@ describe('grafico e pagina', () => {
     for (let i = 1; i < ore.length; i++) expect(ore[i] - ore[i - 1]).toBeGreaterThanOrEqual(44)
   })
 
+  it('telefono: etichette di livelli e rami mai sovrapposte, tutte >= 11 px, orari del payload nella didascalia', () => {
+    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(343)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(400)
+    const { container } = render(<GraficoLive v={v('MGC')} />)
+    const testi = [...container.querySelectorAll('.chl-sovrapposizione text')]
+    for (const t of testi) expect(Number(t.getAttribute('font-size'))).toBeGreaterThanOrEqual(11)
+    const scatole = testi.filter((t) => !/^\d\d:\d\d$/.test(t.textContent ?? '')).map((t) => {
+      const x = Number(t.getAttribute('x'))
+      const w = (t.textContent ?? '').length * 6
+      const a = t.getAttribute('text-anchor')
+      const x0 = a === 'end' ? x - w : a === 'middle' ? x - w / 2 : x
+      return { y: Number(t.getAttribute('y')), x0, x1: x0 + w, testo: t.textContent }
+    })
+    for (let i = 0; i < scatole.length; i++) {
+      for (let j = i + 1; j < scatole.length; j++) {
+        const [a, b] = [scatole[i], scatole[j]]
+        expect(Math.abs(a.y - b.y) < 11 && a.x0 < b.x1 && b.x0 < a.x1, `${a.testo} | ${b.testo}`).toBe(false)
+      }
+    }
+    expect(container.querySelector('figcaption')!.textContent).toContain('entro le 21:00')
+  })
+
+  it('accessibile: lista per i lettori di schermo con radice, rami disegnati e livelli (l SVG di Bklit e aria-hidden)', () => {
+    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(900)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(450)
+    render(<GraficoLive v={v('MGC')} />)
+    const voci = within(within(screen.getByRole('figure')).getByRole('list')).getAllByRole('listitem').map((li) => li.textContent)
+    expect(voci).toContain('da qui: primo movimento di 5.7 su da qui 22% (53/240 ±5) a 4028.1 verso le 20:28')
+    expect(voci).toContain('livello massimo notte 4039.4: 10% (3/31 ±10)')
+    expect(voci.some((t) => t?.startsWith('radice 20:08 estensione a 4022.4'))).toBe(true)
+  })
+
+  it('payload con prezzi non numerici: il ramo non e disegnato, nessun NaN nel grafico', () => {
+    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(900)
+    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(450)
+    const s = copia(scenariJson)
+    ;(s.dati.strumenti.MES.rami as Rec[])[1].prezzo = 'x'
+    ;(s.dati.strumenti.MES.livelli as Rec[])[0].prezzo = 'y'
+    const d = validaScenari(s).dati!
+    const { container } = render(<GraficoLive v={vista(d.strumenti.MES as StrumentoScenari, d.barre.MES, fr('MES'), false, d.orari)} />)
+    expect([...container.querySelectorAll('.chl-sovrapposizione text')].some((t) => t.textContent?.includes('estensione +65'))).toBe(false)
+    for (const el of container.querySelectorAll('svg *')) {
+      for (const a of el.getAttributeNames()) expect(el.getAttribute(a), `${el.tagName} ${a}`).not.toMatch(/NaN/)
+    }
+  })
+
   it('albero in testo: niente rami disegnati e asse dei tempi fermo ai 36 slot futuri', () => {
     vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(900)
     vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(450)
     const s = { ...sc('MES'), radice: { ...sc('MES').radice, t: '2026-10-27T14:30+01:00' } }
-    const { container } = render(<GraficoLive v={vista(s, scen.barre.MES, fr('MES'), false)} />)
+    const { container } = render(<GraficoLive v={vista(s, scen.barre.MES, fr('MES'), false, scen.orari)} />)
     const testi = [...container.querySelectorAll('.chl-sovrapposizione text')].map((t) => t.textContent ?? '')
     expect(testi.filter((t) => /^\d\d:\d\d$/.test(t)).at(-1)).toBe('23:00')
     expect(testi.some((t) => t.includes('estensione +65'))).toBe(false)
@@ -161,6 +255,27 @@ describe('grafico e pagina', () => {
     expect(await screen.findByText('STATO')).toBeInTheDocument()
     expect(screen.getByText(/sessione regolare 14:30-21:00 Roma: aperta/)).toBeInTheDocument()
     expect(screen.getByText('LIMITI')).toBeInTheDocument()
+  })
+
+  it('pagina con barre del principale non lista: le schede restano, il grafico dice che mancano le barre', async () => {
+    const s = copia(scenariJson)
+    s.dati.barre.MGC.righe = {}
+    s.dati.barre.MGC.viva = null
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (u) =>
+      new Response(JSON.stringify(String(u).endsWith('/live/scenari') ? s : frequenzeJson), { status: 200 }))
+    render(<QueryClientProvider client={new QueryClient()}><Live /></QueryClientProvider>)
+    expect(await screen.findByRole('tab', { name: /MGC/ })).toBeInTheDocument()
+    expect(await screen.findByText('Nessuna barra a 5 minuti per questo strumento.')).toBeInTheDocument()
+  })
+
+  it('pagina con scenari senza principale: le tabelle restano, il canale dice che il caricamento e fallito', async () => {
+    const s = copia(scenariJson)
+    delete s.dati.principale
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (u) =>
+      new Response(JSON.stringify(String(u).endsWith('/live/scenari') ? s : frequenzeJson), { status: 200 }))
+    render(<QueryClientProvider client={new QueryClient()}><Live /></QueryClientProvider>)
+    await waitFor(() => expect(screen.getByText(/Grafico e albero:/).parentElement!.textContent).toMatch(/Aggiornamento fallito/))
+    expect(await screen.findByText('STATO')).toBeInTheDocument()
   })
 
   it('pagina con il motore senza dati', async () => {

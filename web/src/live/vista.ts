@@ -1,8 +1,8 @@
 // What one instrument's chart, outcomes box and text box show, from the two channels (pure: no React, tested on the fixtures).
 import { type Candela, candele as aggregaCandele } from '@/lib/aggrega'
-import { alberoInTesto, esitoTesto, etichetta, type Geometria, geometria, type Radice, type Ramo, riferimento, sceltiDaQui, segnoPrimo } from '@/lib/albero'
+import { alberoInTesto, esitoTesto, etichetta, type Geometria, geometria, type Radice, type Ramo, riferimento, type Segmento, sceltiDaQui, segnoPrimo } from '@/lib/albero'
 import { oraRoma, prezzo } from '@/lib/fmt'
-import type { Barre, Livello, StrumentoFrequenze, StrumentoScenari } from '@/lib/tipi'
+import type { Barre, Livello, Orari, StrumentoFrequenze, StrumentoScenari } from '@/lib/tipi'
 
 export const OPZIONI = { massimoMinuti: 180, padriConFigli: 2 }
 
@@ -23,9 +23,13 @@ export interface Vista {
   dominio: [number, number] | null
   livelli: Livello[]
   fuori: Livello[]
+  /** the regular session in Rome time from the payload's `orari` (14:30-21:00 in the DST-change weeks), as the panel prints it */
+  apertura: string
+  chiusura: string
 }
 
-export function vista(s: StrumentoScenari, barre: Barre | null | undefined, f: StrumentoFrequenze | null | undefined, principale: boolean): Vista {
+export function vista(s: StrumentoScenari, barre: Barre | null | undefined, f: StrumentoFrequenze | null | undefined, principale: boolean,
+  orari?: Orari | null): Vista {
   const { candele, futuri } = aggregaCandele(barre)
   const ultimaT = candele.length ? candele.at(-1)!.date.getTime() / 1000 + 300 : null
   const g = geometria(s.radice, s.rami, OPZIONI)
@@ -54,27 +58,33 @@ export function vista(s: StrumentoScenari, barre: Barre | null | undefined, f: S
   }
   return {
     candele, futuri, ultimaT, radice: s.radice, g, inTesto, daQui, rif, rifNome, S: f?.soglia ?? f?.apertura?.soglia ?? null,
-    segno: segnoPrimo(s.radice.percorso), dominio, livelli, fuori,
+    segno: segnoPrimo(s.radice.percorso), dominio, livelli, fuori, apertura: orari?.apertura ?? '15:30', chiusura: orari?.chiusura ?? '22:00',
   }
 }
 
 const poi = (r: Ramo) => (r.padre ? 'poi ' : '')
 
-/** The outcomes box (D8): the tree's branches without minutes, then da_qui's, one line each (Trader esito_ramo). */
+/** The outcomes box (D8, the Trader's esiti()): the tree's outcomes, then da_qui's, one line each (Trader esito_ramo, the
+ * session's close from `orari` when a branch has no horizon). */
 export function righeEsiti(v: Vista): { id: string; testo: string }[] {
-  const righe = v.g.esiti.map((r) => ({ id: r.id, testo: poi(r) + esitoTesto(r, v.rif, v.rifNome, v.S, v.segno) }))
+  const righe = v.g.esiti.map((r) => ({ id: r.id, testo: poi(r) + esitoTesto(r, v.rif, v.rifNome, v.S, v.segno, v.chiusura) }))
   if (v.daQui) {
     const rq = v.daQui.radice
-    righe.push(...v.daQui.g.esiti.map((r) => ({ id: `da-qui-${r.id}`, testo: `da qui: ${poi(r)}${esitoTesto(r, rq.prezzo, 'il punto', rq.soglia ?? v.S, null)}` })))
+    righe.push(...v.daQui.g.esiti.map((r) => ({
+      id: `da-qui-${r.id}`, testo: `da qui: ${poi(r)}${esitoTesto(r, rq.prezzo, 'il punto', rq.soglia ?? v.S, null, v.chiusura)}`,
+    })))
   }
   return righe
 }
 
 const minuti = (r: Ramo) => (r.minuti ? ` · mediana ${r.minuti.mediana} min dalla radice` : '')
 
-function radiceRiga(r: Radice): string {
+export function radiceRiga(r: Radice): string {
   return `radice ${r.ora} ${r.fase} a ${prezzo(r.prezzo)}${r.percorso ? ` | ${r.percorso}` : ''}`
 }
+
+/** A drawn branch in words: label, head price and Rome time of the head (text box and the chart's screen-reader list). */
+export const rigaSegmento = (x: Segmento): string => `${poi(x.ramo)}${x.etichetta} a ${prezzo(x.a.prezzo)} verso le ${oraRoma(x.a.t * 1000)}`
 
 /** The text box: the whole tree when it is in text (root > last bar + 2 h), else the branches not drawn. */
 export function righeTesto(v: Vista): string[] {
@@ -82,7 +92,7 @@ export function righeTesto(v: Vista): string[] {
   const parte = (g: Geometria, radice: Radice, inTesto: boolean, pre: string) => {
     if (inTesto) {
       out.push(`${pre}${radiceRiga(radice)}: oltre 2 ore dopo l'ultima barra, albero in testo`)
-      for (const x of g.segmenti) out.push(`${pre}  ${poi(x.ramo)}${x.etichetta} a ${prezzo(x.a.prezzo)} verso le ${oraRoma(x.a.t * 1000)}`)
+      for (const x of g.segmenti) out.push(`${pre}  ${rigaSegmento(x)}`)
     }
     if (g.testo.length) {
       out.push(`${pre}rami non disegnati (oltre 180 min dalla radice, o figli dei padri meno probabili):`)

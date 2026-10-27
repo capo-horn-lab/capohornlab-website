@@ -65,11 +65,16 @@ export function secondi(iso: string | null | undefined): number | null {
   return Number.isFinite(ms) ? ms / 1000 : null
 }
 
+/** A branch realized by touching its price (the Trader's `tocca`, DAQUI-1 `tocco`); one without minutes is never touched. */
+export const tocca = (r: Ramo): boolean => r.tocco !== false && r.minuti != null
+
 /**
- * Head of a branch at radiceT + minuti.mediana (minutes from the ROOT, children too), a child at least 1 min after its
- * parent's head; q1/q3 likewise, a child's never before its parent's head. Branches without `minuti` -> esiti; beyond
- * `massimoMinuti` -> testo; children drawn only for the `padriConFigli` most probable drawn parents, any other child
- * (and a child of a branch in testo or esiti, and deeper levels) -> testo.
+ * The outcomes are the Trader's esiti() (D8): first-level branches without a touch and every descendant of a listed branch;
+ * a child without a touch of a touched branch is neither listed nor drawn (it comes when the engine's bridge promotes it).
+ * The touched ones: head at radiceT + minuti.mediana (minutes from the ROOT, children too), a child at least 1 min after its
+ * parent's head; q1/q3 likewise, a child's never before its parent's head; beyond `massimoMinuti` (median, or a child's head
+ * pushed past it) -> testo; children drawn only for the `padriConFigli` most probable drawn parents, any other child (a
+ * child of a branch in testo, deeper levels) -> testo.
  */
 export function geometria(radice: Radice | null | undefined, rami: Ramo[] | null | undefined, opzioni: Opzioni = {}): Geometria {
   const { massimoMinuti = 180, padriConFigli = 2 } = opzioni
@@ -86,17 +91,23 @@ export function geometria(radice: Radice | null | undefined, rami: Ramo[] | null
       p: r.p!, k: r.k, n: r.n, margine: r.margine ?? null, etichetta: etichetta(r), padre: r.padre, classe: classe(r.p!),
     }
   }
-  const padri = validi.filter((r) => r.padre == null && r.minuti && r.minuti.mediana <= massimoMinuti)
+  const limite = radiceT + massimoMinuti * 60
+  const padri = validi.filter((r) => r.padre == null && tocca(r) && r.minuti!.mediana <= massimoMinuti)
   const conFigli = new Set([...padri].sort((a, b) => b.p! - a.p!).slice(0, padriConFigli).map((r) => r.id))
   for (const r of padri) capi.set(r.id, segmento(r, { t: radiceT, prezzo: radice.prezzo }, null))
+  const elencati = new Set<string>()
   for (const r of validi) {
-    if (!r.minuti) out.esiti.push(r)
+    if ((r.padre == null && !tocca(r)) || (r.padre != null && elencati.has(r.padre))) {
+      out.esiti.push(r)
+      elencati.add(r.id)
+    } else if (!tocca(r)) continue
     else if (r.padre == null) {
       if (capi.has(r.id)) out.segmenti.push(capi.get(r.id)!)
       else out.testo.push(r)
     } else {
       const padre = capi.get(r.padre)
-      if (padre && conFigli.has(r.padre) && r.minuti.mediana <= massimoMinuti) out.segmenti.push(segmento(r, padre.a, padre.a.t))
+      const s = padre && conFigli.has(r.padre) ? segmento(r, padre.a, padre.a.t) : null
+      if (s && s.a.t <= limite) out.segmenti.push(s)
       else out.testo.push(r)
     }
   }

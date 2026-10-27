@@ -1,12 +1,13 @@
-// The app's "Frequenze live" panel for one instrument (desktop_tools.frequenze_text), same order and columns: STATO, FINESTRE,
-// LIVELLI, CASO DELL'APERTURA, LENTI, CONCORDANZA. Frequencies in D8 (p% (k/n ±m), "k su n" at the extremes), quartiles
-// "mediana (q1-q3)". The clock times of the opening path count from the payload's own open (orari.apertura).
+// The app's "Frequenze live" panel for one instrument (desktop_tools.frequenze_text), same order, columns and text: STATO,
+// FINESTRE, LIVELLI, CASO DELL'APERTURA, LENTI, CONCORDANZA. Frequencies in D8 (p% (k/n ±m), "k su n" at the extremes; a
+// frequency without cases "n/d (0 casi)" as the panel), quartiles "mediana (q1-q3)". Hours from the payload's `orari`
+// (DST-1: 14:30-21:00 in the weeks Europe and the US change clock on different dates), as the panel does.
 import type { ReactNode } from 'react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { type Frequenza, intero, num, p, type Quartili, quart } from '@/lib/fmt'
+import { finito, type Frequenza, intero, num, p, type Quartili, quart } from '@/lib/fmt'
 import type { Orari, Percorso, RigaLente, StrumentoFrequenze } from '@/lib/tipi'
 
-const segnato = (x: number) => `${x >= 0 ? '+' : ''}${x.toFixed(2)}`
+const segnato = (x: unknown) => (finito(x) ? `${x >= 0 ? '+' : ''}${num(x)}` : '-')
 
 function orologio(minuti: number, base: string): string {
   const [h, m] = base.split(':').map(Number)
@@ -71,31 +72,37 @@ const barreOggi = (b: StrumentoFrequenze['barre_oggi']) =>
 
 const isP = (v: Frequenza | Quartili | null): v is Frequenza | null => v == null || 'p' in v
 
+/** desktop_tools._pct's empty case: a frequency without cases reads "n/d (0 casi)". */
+const pp = (f: Frequenza | null | undefined) => (f && finito(f.p) ? p(f) : 'n/d (0 casi)')
+
 export function TabellePannello({ r, orari }: { r: StrumentoFrequenze; orari?: Orari | null }) {
   const st = r.stato ?? {}
-  const n = (k: string) => num(st[k] as number | null)
-  const base = orari?.apertura ?? '15:30'
-  const ap = r.apertura
-  const S = ap?.soglia ?? 0
-  const h = ap?.storico
+  const n = (k: string) => num(st[k])
+  const ap = orari?.apertura ?? '15:30'
+  const ch = orari?.chiusura ?? '22:00'
+  const caso = r.apertura
+  const S = caso?.soglia ?? 0
+  const h = caso?.storico
   const L = r.lenti
-  const pende = (x: RigaLente, e: keyof RigaLente) => p(x[e] as Frequenza | null) + ({ su: ' ^', giu: ' v' }[x.pende?.[e] ?? ''] ?? '')
+  const rif = L?.riferimento ?? {}
+  const pende = (x: RigaLente, e: keyof RigaLente) => pp(x[e] as Frequenza | null) + ({ su: ' ^', giu: ' v' }[x.pende?.[e] ?? ''] ?? '')
   return (
     <div className="space-y-8">
-      <Sezione titolo="STATO" nota={orari && base !== '15:30' ? `Questa settimana la sessione regolare e' ${orari.apertura}-${orari.chiusura} Roma: "15:30" e "22:00" nelle colonne sono nomi convenzionali.` : undefined}>
+      <Sezione titolo="STATO">
         <Tabella
-          teste={['contratto', 'cadenza', "eta' (min)", 'barre di oggi', 'prezzo', `A (${r.A_sessioni ?? '-'} sessioni)`, 'soglia', 'tondo', 'sessioni storiche']}
+          teste={['contratto', 'cadenza', "eta' del dato (min)", 'barre di oggi', 'prezzo', `A (range medio ${ap}-${ch} delle ultime ${r.A_sessioni ?? '-'} sessioni)`,
+            'soglia (punti)', 'tondo', 'sessioni regolari nello storico']}
           righe={[{ chiave: 'stato', celle: [r.contratto, r.cadenza, r.eta_min ?? '-', barreOggi(r.barre_oggi), n('prezzo'), num(r.A), r.soglia ?? '-', r.passo_tondo ?? '-', r.n_storiche ?? '-'] }]}
         />
         <Tabella
-          teste={['oggi max / min', 'notte max / min', 'sessione max / min', `apertura ${base}`, 'VWAP giorno', 'VWAP sessione', `ieri ${st.ieri ?? ''} max / min`, 'chiusura ieri']}
-          righe={[{ chiave: 'livelli', celle: [`${n('massimo_oggi')} / ${n('minimo_oggi')}`, `${n('massimo_notte')} / ${n('minimo_notte')}`,
-            `${n('massimo_sessione')} / ${n('minimo_sessione')}`, n('apertura_1530'), n('vwap_giorno'), n('vwap_sessione'),
-            `${n('massimo_ieri')} / ${n('minimo_ieri')}`, n('chiusura_ieri')] }]}
+          teste={['oggi dalle 00:00 max / min', `notte 00:00-${orologio(-1, ap)} max / min`, `apertura ${ap}`, `sessione dalle ${ap} max / min`, 'VWAP giorno',
+            'VWAP sessione', `ieri ${typeof st.ieri === 'string' ? st.ieri : ''} max / min`, 'chiusura ieri']}
+          righe={[{ chiave: 'livelli', celle: [`${n('massimo_oggi')} / ${n('minimo_oggi')}`, `${n('massimo_notte')} / ${n('minimo_notte')}`, n('apertura_1530'),
+            `${n('massimo_sessione')} / ${n('minimo_sessione')}`, n('vwap_giorno'), n('vwap_sessione'), `${n('massimo_ieri')} / ${n('minimo_ieri')}`, n('chiusura_ieri')] }]}
         />
       </Sezione>
 
-      <Sezione titolo="FINESTRE" nota="Finestre di Roma (ultime 60 sessioni): escursione massimo-minimo (mediana, quartili), netto |fine-inizio| (mediana), oggi finora; > = corrente.">
+      <Sezione titolo="FINESTRE" nota="FINESTRE di Roma (ultime 60 sessioni): escursione max-min (mediana, quartili), netto |fine-inizio| (mediana), oggi finora; > = corrente">
         <Tabella
           teste={['finestra', 'n', 'escursione', 'netto', 'oggi']}
           righe={(r.finestre ?? []).map((w) => ({
@@ -106,37 +113,37 @@ export function TabellePannello({ r, orari }: { r: StrumentoFrequenze; orari?: O
         />
       </Sezione>
 
-      <Sezione titolo="LIVELLI" nota="Tocco entro le 15:30 e le 22:00 nelle ultime 250 sessioni allo stesso minuto, stesso livello, stesso lato e stessa fascia di distanza in A.">
+      <Sezione titolo="LIVELLI" nota={`tocco entro le ${ap} e le ${ch} nelle ultime 250 sessioni allo stesso minuto, stesso livello, stesso lato e stessa fascia di distanza in A`}>
         <Tabella
-          teste={['livello', 'prezzo', 'dist', 'in A', 'fascia', 'entro 15:30', 'entro 22:00']}
+          teste={['livello', 'prezzo', 'dist', 'in A', 'fascia', `entro ${ap}`, `entro ${ch}`]}
           righe={(r.livelli ?? []).map((x) => ({
             chiave: x.nome,
-            celle: [x.nome, num(x.prezzo), segnato(x.distanza), segnato(x.distanza_A), x.fascia || '-', p(x.entro_1530), p(x.entro_2200)],
+            celle: [x.nome, num(x.prezzo), segnato(x.distanza), segnato(x.distanza_A), x.fascia || '-', x.entro_1530 ? pp(x.entro_1530) : '-', x.entro_2200 ? pp(x.entro_2200) : '-'],
           }))}
         />
       </Sezione>
 
-      <Sezione titolo="CASO DELL'APERTURA" nota={ap ? `Soglia ${S} punti dall'apertura delle ${base}; fase: ${ap.fase}; ${ap.minuti} minuti dalle ${base}${ap.barre === '5 min' ? "; ATTENZIONE: oggi barre a 5 minuti (il feed a 1 minuto manca): tempi a 5 minuti e piu' fasi possono cadere nella stessa barra" : ''}.` : 'n/d'}>
-        {ap ? (
+      <Sezione titolo="CASO DELL'APERTURA" nota={caso ? `soglia ${S} punti dall'apertura delle ${ap}; fase: ${caso.fase}; ${caso.minuti} minuti dalle ${ap}${caso.barre === '5 min' ? "; ATTENZIONE: oggi barre a 5 minuti (il feed a 1 minuto manca): tempi a 5 minuti e piu' fasi possono cadere nella stessa barra" : ''}` : 'n/d'}>
+        {caso ? (
           <>
-            <p className="font-mono text-xs leading-relaxed">{`oggi: ${percorsoTesto(ap.percorso, S, base)}`}</p>
+            <p className="font-mono text-xs leading-relaxed">{`oggi: ${percorsoTesto(caso.percorso, S, ap)}`}</p>
             <p className="font-mono text-xs leading-relaxed">{`storico: ${h?.n ?? '-'} sessioni su ${h?.n_totale ?? '-'} nella stessa fase con lo stesso verso a questo minuto; tempi ${h?.riferimento ?? '-'}`}</p>
             <Tabella
               teste={['frequenza', 'valore']}
-              righe={Object.entries(h?.frequenze ?? {}).map(([nome, v]) => ({ chiave: nome, celle: [nome, isP(v) ? p(v) : `${quart(v)} (n ${v.n ?? '-'})`] }))}
+              righe={Object.entries(h?.frequenze ?? {}).map(([nome, v]) => ({ chiave: nome, celle: [nome, isP(v) ? pp(v) : `${quart(v)} (n ${v.n ?? '-'})`] }))}
             />
           </>
         ) : null}
       </Sezione>
 
-      <Sezione titolo="LENTI" nota={L?.base ? `Ciascuna da sola sulle ultime ${L.campione?.n ?? '-'} sessioni regolari allo stesso minuto di Roma (${String(L.riferimento?.ora ?? '-')}), mai in intersezione; esiti dal prezzo ${num(L.riferimento?.prezzo as number | null)} entro le 22:00, 0.3 A = ${num(0.3 * (r.A ?? 0), 0)} punti; ^ pende su, v pende giu' (oltre il proprio margine dalla base)${L.riferimento?.mercato === 'chiuso' ? `; ${String(L.riferimento?.nota ?? '').toUpperCase()}` : ''}.` : 'n/d'}>
+      <Sezione titolo="LENTI" nota={L?.base ? `ciascuna DA SOLA sulle ultime ${L.campione?.n ?? '-'} sessioni regolari allo stesso minuto di Roma (${String(rif.ora ?? '-')}), mai in intersezione; esiti dal prezzo ${num(rif.prezzo)} entro le ${ch}, 0.3 A = ${num(0.3 * (r.A ?? 0), 0)} punti; margine = max(1,96 sqrt(p(1-p)/n), 3/n); ^ pende su, v pende giu' (oltre il proprio margine dalla base)${rif.mercato === 'chiuso' ? `; ${String(rif.nota ?? '').toUpperCase()}` : ''}` : 'n/d'}>
         {L?.base ? (
           <Tabella
             teste={['lente', 'stato', 'n', 'chiusura sopra', 'nuovo min notte', 'nuovo max notte', '+0.3 A', '-0.3 A', 'est. sopra (A)', 'est. sotto (A)']}
             righe={[L.base, ...(L.righe ?? [])].map((x) => ({
               chiave: x.lente,
               celle: [x.lente, x.stato == null ? '-' : `${x.stato}${x.valore ? ` (${x.valore})` : ''}`, x.n ?? 0, pende(x, 'chiusura_sopra'),
-                p(x.nuovo_minimo), p(x.nuovo_massimo), pende(x, 'arrivo_sopra'), pende(x, 'arrivo_sotto'), quart(x.estensione_sopra_A, 2), quart(x.estensione_sotto_A, 2)],
+                pp(x.nuovo_minimo), pp(x.nuovo_massimo), pende(x, 'arrivo_sopra'), pende(x, 'arrivo_sotto'), quart(x.estensione_sopra_A, 2), quart(x.estensione_sotto_A, 2)],
             }))}
           />
         ) : null}

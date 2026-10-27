@@ -20,7 +20,7 @@ export function ordineStrumenti(scen: Scenari | null | undefined, freq: Frequenz
 
 function Grafico({ s, sc, scen, fr }: { s: string; sc: StrumentoScenari; scen: Scenari; fr: StrumentoFrequenze | null }) {
   const barre = scen.barre[s]
-  const v = useMemo(() => vista(sc, barre, fr, s === scen.principale.strumento), [sc, barre, fr, s, scen.principale.strumento])
+  const v = useMemo(() => vista(sc, barre, fr, s === scen.principale.strumento, scen.orari), [sc, barre, fr, s, scen.principale.strumento, scen.orari])
   const esiti = useMemo(() => righeEsiti(v), [v])
   const testo = useMemo(() => righeTesto(v), [v])
   const er = residua(sc.escursione_residua)
@@ -59,7 +59,7 @@ export function StrumentoTabs({ scen, freq, valore, onCambia }: {
         {strumenti.map((x) => (
           <TabsTrigger key={x} value={x} className="gap-1.5">
             {x}
-            {x === principale ? <Badge variant="outline" className="px-1 py-0 text-[10px]">principale</Badge> : null}
+            {x === principale ? <Badge variant="outline" className="px-1 py-0 text-[11px]">principale</Badge> : null}
           </TabsTrigger>
         ))}
       </TabsList>

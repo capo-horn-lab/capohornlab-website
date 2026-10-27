@@ -2,6 +2,7 @@
 // SVG overlay on the chart's own scales (useChartStable: xScale Date->px, yScale price->px, in the plot's inner space).
 // The y scale is re-provided (ScalaPrezzi) so candles, grid, axis and overlay share a domain that also holds the tree's heads
 // and the levels near the candles (the Trader's rule); the x domain is widened by xDomain/xDomainSlotCount to 36 future slots.
+// Bklit renders its SVG aria-hidden: the figure carries the same root, branches and levels as a list for screen readers.
 import { scaleLinear } from '@visx/scale'
 import { useReducedMotion } from 'motion/react'
 import { type ReactNode, useMemo } from 'react'
@@ -11,10 +12,12 @@ import { DEFAULT_Y_AXIS_ID } from '@/components/charts/y-axis-scales'
 import type { Candela } from '@/lib/aggrega'
 import { nomeBreve, type Segmento } from '@/lib/albero'
 import { num, oraRoma, p, prezzo } from '@/lib/fmt'
-import type { Vista } from '@/live/vista'
+import { radiceRiga, rigaSegmento, type Vista } from '@/live/vista'
 
 const MARGINE = { top: 16, right: 64, bottom: 28, left: 8 }
 const ALONE = { stroke: 'var(--ch-ink)', strokeWidth: 3, paintOrder: 'stroke' as const, strokeLinejoin: 'round' as const }
+const FONT = 11
+const CARATTERE = 6 // px per character at 11 px (DM Sans): labels that would leave the plot on the left are shortened
 
 function ScalaPrezzi({ dominio, children }: { dominio: [number, number]; children: ReactNode }) {
   const ctx = useChart()
@@ -27,8 +30,6 @@ function ScalaPrezzi({ dominio, children }: { dominio: [number, number]; childre
   return <ChartProvider value={{ ...ctx, yScale, yScales }}>{children}</ChartProvider>
 }
 
-const CARATTERE = 5.5 // px per character at 10 px (DM Sans): labels that would leave the plot on the left are shortened
-
 /** testa + nome + coda in `px` pixels: the name gives way with '…', the head and the frequency never (the Trader's `adatta`). */
 function adatta(testa: string, nome: string, coda: string, px: number): string {
   const posto = Math.floor(px / CARATTERE) - testa.length - coda.length - 1
@@ -37,13 +38,14 @@ function adatta(testa: string, nome: string, coda: string, px: number): string {
 
 const taglia = (s: string, px: number) => (s.length * CARATTERE <= px ? s : `${s.slice(0, Math.max(1, Math.floor(px / CARATTERE) - 1)).trimEnd()}…`)
 
-/** Labels at the same height are stacked upwards, 12 px apart (the indicator's `pila`). */
-function impila(): (y: number) => number {
-  const usati: number[] = []
-  return (y) => {
+/** One stack for every label (levels, branches, roots): a label that would cover another one moves up 12 px (the indicator's
+ * `pila`, extended to the labels' horizontal extent). */
+function impila(): (y: number, x0: number, x1: number) => number {
+  const usate: { y: number; x0: number; x1: number }[] = []
+  return (y, x0, x1) => {
     let v = y
-    while (usati.some((u) => Math.abs(u - v) < 11)) v -= 12
-    usati.push(v)
+    while (usate.some((u) => Math.abs(u.y - v) < 12 && u.x0 < x1 && x0 < u.x1)) v -= 12
+    usate.push({ y: v, x0, x1 })
     return v
   }
 }
@@ -59,34 +61,46 @@ function Sovrapposizione({ v, viva }: { v: Vista; viva: Candela | null }) {
   const passo = Math.max(1, Math.ceil(44 / Math.max(1, x(d0 + 3600) - x(d0))))
   const ore: number[] = []
   for (let t = Math.ceil(d0 / 3600) * 3600; t <= d1 + 300; t += 3600) if (Number(oraRoma(t * 1000).slice(0, 2)) % passo === 0) ore.push(t)
-  const pilaLivelli = impila()
-  const pilaRami = impila()
+  const pila = impila()
+  const largo = (s: string) => s.length * CARATTERE
+
+  const livello = (l: Vista['livelli'][number]) => {
+    const testo = `${l.nome} ${p(l.entro_2200)}`
+    return (
+      <g key={l.nome}>
+        <line x1={0} x2={innerWidth} y1={y(l.prezzo)} y2={y(l.prezzo)} stroke="var(--ch-info)" strokeDasharray="2 4" strokeOpacity={0.8} />
+        <text x={4} y={pila(y(l.prezzo) - 3, 4, 4 + largo(testo))} fontSize={FONT} fill="var(--ch-info)" {...ALONE}>{testo}</text>
+      </g>
+    )
+  }
 
   const ramo = (s: Segmento, tratteggio?: string, prefisso = '') => {
     const yA = y(s.a.prezzo)
     const colore = s.classe >= 2 ? 'var(--ch-fog)' : 'var(--ch-quiet)'
     const xa = x(s.a.t)
-    const yl = pilaRami(yA - 5)
+    const testo = adatta(prefisso, nomeBreve(s.ramo.etichetta), p(s.ramo), xa - 4)
     return (
       <g key={prefisso + s.id}>
         <title>{prefisso + s.etichetta}</title>
         <line x1={x(s.da.t)} y1={y(s.da.prezzo)} x2={xa} y2={yA} stroke={colore} strokeWidth={s.classe} strokeDasharray={tratteggio} strokeOpacity={0.9} />
         <line x1={x(s.q1.t)} y1={yA} x2={x(s.q3.t)} y2={yA} stroke={colore} strokeWidth={1} strokeOpacity={0.45} />
         <circle cx={xa} cy={yA} r={2.5} fill={colore} />
-        <text x={xa - 4} y={yl} textAnchor="end" fontSize={10} fill={colore} {...ALONE}>
-          {adatta(prefisso, nomeBreve(s.ramo.etichetta), p(s.ramo), xa - 4)}
-        </text>
+        <text x={xa - 4} y={pila(yA - 5, xa - 4 - largo(testo), xa - 4)} textAnchor="end" fontSize={FONT} fill={colore} {...ALONE}>{testo}</text>
       </g>
     )
   }
 
-  const radice = (r: { t: number; prezzo: number; testo: string; vuota?: boolean }) => (
-    <g>
-      <title>{r.testo}</title>
-      <circle cx={x(r.t)} cy={y(r.prezzo)} r={3.5} fill={r.vuota ? 'var(--ch-ink)' : 'var(--ch-fog)'} stroke="var(--ch-fog)" strokeWidth={1.5} />
-      <text x={x(r.t) - 6} y={pilaRami(y(r.prezzo) + 14)} textAnchor="end" fontSize={10} fill="var(--ch-quiet)" {...ALONE}>{taglia(r.testo, x(r.t) - 6)}</text>
-    </g>
-  )
+  const radice = (r: { t: number; prezzo: number; testo: string; vuota?: boolean }) => {
+    const xr = x(r.t)
+    const testo = taglia(r.testo, xr - 6)
+    return (
+      <g>
+        <title>{r.testo}</title>
+        <circle cx={xr} cy={y(r.prezzo)} r={3.5} fill={r.vuota ? 'var(--ch-ink)' : 'var(--ch-fog)'} stroke="var(--ch-fog)" strokeWidth={1.5} />
+        <text x={xr - 6} y={pila(y(r.prezzo) + 14, xr - 6 - largo(testo), xr - 6)} textAnchor="end" fontSize={FONT} fill="var(--ch-quiet)" {...ALONE}>{testo}</text>
+      </g>
+    )
+  }
 
   const percorso = v.radice.percorso && v.radice.percorso.length > 40 ? `${v.radice.percorso.slice(0, 37)}...` : v.radice.percorso
   return (
@@ -94,15 +108,10 @@ function Sovrapposizione({ v, viva }: { v: Vista; viva: Candela | null }) {
       {ore.map((t) => (
         <g key={t}>
           <line x1={x(t)} x2={x(t)} y1={0} y2={innerHeight} stroke="var(--ch-line)" strokeOpacity={0.5} />
-          <text x={x(t)} y={innerHeight + 18} textAnchor="middle" fontSize={10} fill="var(--ch-quiet)">{oraRoma(t * 1000)}</text>
+          <text x={x(t)} y={innerHeight + 18} textAnchor="middle" fontSize={FONT} fill="var(--ch-quiet)">{oraRoma(t * 1000)}</text>
         </g>
       ))}
-      {v.livelli.map((l) => (
-        <g key={l.nome}>
-          <line x1={0} x2={innerWidth} y1={y(l.prezzo)} y2={y(l.prezzo)} stroke="var(--ch-info)" strokeDasharray="2 4" strokeOpacity={0.8} />
-          <text x={4} y={pilaLivelli(y(l.prezzo) - 3)} fontSize={10} fill="var(--ch-info)" {...ALONE}>{`${l.nome} ${p(l.entro_2200)}`}</text>
-        </g>
-      ))}
+      {v.livelli.map(livello)}
       {viva ? (
         <g opacity={0.5}>
           <rect x={x(viva.date.getTime() / 1000 + 150) - 0.75} width={1.5} y={y(viva.high)} height={Math.max(1, y(viva.low) - y(viva.high))}
@@ -137,6 +146,16 @@ function Suggerimento({ point }: { point: Record<string, unknown> }) {
       <div className="text-muted-foreground">{`volume ${num(c.volume, 0)}`}</div>
     </div>
   )
+}
+
+/** What the overlay draws, in words, for screen readers (the SVG is aria-hidden). */
+function Elenco({ v }: { v: Vista }) {
+  const voci: string[] = []
+  if (!v.inTesto) voci.push(radiceRiga(v.radice), ...v.g.segmenti.map(rigaSegmento))
+  if (v.daQui && !v.daQui.inTesto)
+    voci.push(`da qui: radice ${v.daQui.radice.ora} a ${prezzo(v.daQui.radice.prezzo)}`, ...v.daQui.g.segmenti.map((s) => `da qui: ${rigaSegmento(s)}`))
+  voci.push(...v.livelli.map((l) => `livello ${l.nome} ${prezzo(l.prezzo)}: ${p(l.entro_2200)}`))
+  return <ul className="sr-only">{voci.map((t) => <li key={t}>{t}</li>)}</ul>
 }
 
 export function GraficoLive({ v }: { v: Vista }) {
@@ -175,8 +194,9 @@ export function GraficoLive({ v }: { v: Vista }) {
         </ScalaPrezzi>
         <ChartTooltip showDots={false} showDatePill={false} content={({ point }) => <Suggerimento point={point} />} />
       </CandlestickChart>
+      <Elenco v={v} />
       <figcaption className="text-muted-foreground mt-2 text-xs">
-        {`Candele a 5 minuti in ora di Roma${viva ? ' (l\'ultima, attenuata, e\' in formazione)' : ''}; linee tratteggiate: livelli con la frequenza di tocco entro le 22:00 (nome convenzionale)`}
+        {`Candele a 5 minuti in ora di Roma${viva ? ' (l\'ultima, attenuata, e\' in formazione)' : ''}; linee tratteggiate: livelli con la frequenza di tocco entro le ${v.chiusura}`}
         {v.fuori.length ? `; fuori dal grafico: ${v.fuori.map((l) => `${l.nome} ${prezzo(l.prezzo)} ${p(l.entro_2200)}`).join(', ')}` : ''}.
       </figcaption>
     </figure>

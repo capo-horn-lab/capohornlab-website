@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router'
 import { RouterProvider } from 'react-router/dom'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { Shell } from '@/layout/Shell'
+import { ErroreLive } from '@/live/ErroreLive'
 
 const Live = lazy(() => import('@/pagine/Live'))
 const Ricerche = lazy(() => import('@/pagine/Ricerche'))
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
   {
     element: <Shell />,
     children: [
-      { path: '/', element: <Live /> },
+      { path: '/', element: <Live />, errorElement: <ErroreLive /> },
       { path: '/ricerche', element: <Ricerche /> },
       { path: '/ricerche/:id', element: <Ricerca /> },
       { path: '/metodo', element: <Metodo /> },

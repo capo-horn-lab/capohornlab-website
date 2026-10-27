@@ -69,6 +69,26 @@ describe('geometria: figli fuori dai due padri, nipoti, figli di rami in testo',
     const c = (p: number) => geometria(radice, [r('x', null, 'primo_movimento', p, 10)], opz).segmenti[0].classe
     expect([c(0.32), c(0.33), c(0.65), c(0.66)]).toEqual([1, 2, 2, 3])
   })
+  it('esiti come esiti() del Trader: il figlio senza tocco di un ramo toccato non e ne elencato ne disegnato', () => {
+    const g2 = geometria(radice, [r('r1', null, 'primo_movimento', 0.6, 30), r('r1.1', 'r1', 'chiusura', 0.9, null)], opz)
+    expect(g2.esiti).toEqual([])
+    expect(g2.testo).toEqual([])
+    expect(g2.segmenti.map((s) => s.id)).toEqual(['r1'])
+  })
+  it('esiti come esiti() del Trader: ogni discendente di un ramo elencato e elencato, anche con i minuti', () => {
+    const g2 = geometria(radice, [r('r2', null, 'chiusura', 0.7, null), r('r2.1', 'r2', 'ritorno', 0.5, 20), r('r2.1.1', 'r2.1', 'chiusura', 0.5, null)], opz)
+    expect(ids(g2.esiti)).toEqual(['r2', 'r2.1', 'r2.1.1'])
+    expect(g2.segmenti).toEqual([])
+  })
+  it('un ramo con tocco false e i minuti resta un esito (tocco esplicito)', () => {
+    const g2 = geometria(radice, [{ ...r('r1', null, 'primo_movimento', 0.6, 30), tocco: false }], opz)
+    expect(ids(g2.esiti)).toEqual(['r1'])
+  })
+  it('figlio il cui capo, spinto a capo del padre + 60 s, cade oltre 180 min: in testo', () => {
+    const g2 = geometria(radice, [r('r1', null, 'primo_movimento', 0.6, 180), r('r1.1', 'r1', 'ritorno', 0.5, 100)], opz)
+    expect(g2.segmenti.map((s) => s.id)).toEqual(['r1'])
+    expect(ids(g2.testo)).toEqual(['r1.1'])
+  })
   it('rami senza prezzo non disegnati', () => {
     const g2 = geometria(radice, [{ ...r('x', null, 'primo_movimento', 0.5, 10), prezzo: null }], opz)
     expect(g2.segmenti).toEqual([])

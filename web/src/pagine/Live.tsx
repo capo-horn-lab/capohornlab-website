@@ -16,7 +16,7 @@ export default function Live() {
     <section className="space-y-6">
       <header className="space-y-2">
         <h1 className="font-serif text-3xl font-semibold tracking-tight md:text-4xl">Frequenze live</h1>
-        <StatoLive busta={scenari.data?.dati ? scenari.data : frequenze.data} />
+        <StatoLive q={scenari.data?.dati ? scenari : frequenze} />
       </header>
       <div className="space-y-2">
         <AvvisoFreschezza canale="Grafico e albero" q={scenari} sogliaS={60} />

@@ -1,5 +1,5 @@
 // D8 formatting, as the Trader (desktop_trader._pct/_estremo/_p) and the panel (desktop_tools._num/_quart): Python's rounding
-// (round half to even on the float) so the site prints the same digits as the app.
+// (round half to even on the exact float) so the site prints the same digits as the app; anything not a finite number prints "-".
 
 export interface Frequenza {
   p: number | null
@@ -15,29 +15,44 @@ export interface Quartili {
   n?: number
 }
 
+export const finito = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x)
+
 /** Python's round(x) on a float: halves go to the even neighbour (7728.5 -> 7728, 0.125*100 -> 12). */
 function tondo(x: number): number {
   const r = Math.round(x)
   return Math.abs(x - Math.trunc(x)) === 0.5 && r % 2 !== 0 ? r - 1 : r
 }
 
-/** f"{x:.0f}" */
-export const intero = (x: number): string => String(tondo(x))
+/**
+ * f"{x:.{nd}f}". toFixed rounds the exact binary value like Python, except on an exact tie (0.125, 52.125, 7728.5), which it
+ * rounds up where Python goes to the even digit: the tie is read from the exact expansion (toFixed with 30 more digits).
+ */
+function fisso(x: number, nd: number): string {
+  const a = Math.abs(x)
+  const lungo = a.toFixed(Math.min(100, nd + 30))
+  const punto = lungo.indexOf('.')
+  const tenuto = lungo.slice(0, nd ? punto + 1 + nd : punto)
+  const pari = /^50*$/.test(lungo.slice(punto + 1 + nd)) && Number(tenuto.at(-1)) % 2 === 0
+  return (x < 0 ? '-' : '') + (pari ? tenuto : a.toFixed(nd))
+}
 
-/** f"{x:.{nd}f}" (Python and toFixed agree away from exact halves; the halves of the panel's 2 decimals are not exact floats). */
-export const num = (x: number | null | undefined, nd = 2): string => (x == null ? '-' : nd === 0 ? intero(x) : x.toFixed(nd))
+/** f"{x:.0f}" */
+export const intero = (x: unknown): string => (finito(x) ? fisso(x, 0) : '-')
+
+/** f"{x:.{nd}f}" (desktop_tools._num), "-" without a number. */
+export const num = (x: unknown, nd = 2): string => (finito(x) ? fisso(x, nd) : '-')
 
 /** A price at the tick: 29416.25, 29008, 4022.4 (desktop_trader._p). */
-export const prezzo = (x: number | null | undefined): string => (x == null ? '-' : x.toFixed(2).replace(/0+$/, '').replace(/\.$/, ''))
+export const prezzo = (x: unknown): string => (finito(x) ? fisso(x, 2).replace(/0+$/, '').replace(/\.$/, '') : '-')
 
 /** A frequency that would read 0% or 100% (also by rounding: 249/250): said as "k su n" (D8). */
-export const estremo = (f: Frequenza): boolean => Boolean(f.n) && f.p != null && [0, 100].includes(tondo(f.p * 100))
+export const estremo = (f: Frequenza): boolean => Boolean(f.n) && finito(f.p) && [0, 100].includes(tondo(f.p * 100))
 
 /** D8: "73% (22/30 ±16)", "21 su 21" at the extremes, "-" without a frequency. */
 export function p(f: Frequenza | null | undefined): string {
-  if (!f || f.p == null) return '-'
+  if (!f || !finito(f.p)) return '-'
   if (estremo(f)) return `${f.k} su ${f.n}`
-  return `${tondo(f.p * 100)}% (${f.k}/${f.n}${f.margine == null ? '' : ` ±${tondo(f.margine * 100)}`})`
+  return `${tondo(f.p * 100)}% (${f.k}/${f.n}${finito(f.margine) ? ` ±${tondo(f.margine * 100)}` : ''})`
 }
 
 /** "mediana (q1-q3)", "n/d" without cases. */
