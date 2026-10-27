@@ -16,6 +16,8 @@ Cosa NON controlla: i numeri nella prosa fuori dalle tabelle; le tabelle senza c
 gli identificatori con lettere prima delle cifre (S1, LENTI-1); i numeri della cella Fonte.
 Virgola e punto decimali sono equivalenti ("57,9" = "57.9") e i separatori di migliaia si
 ignorano ("1.234" = "1234"). Le percentuali si confrontano come scritte: "57.9%" cerca "57.9".
+Un numero comincia solo a confine di parola: "p95", "DSR1000", "MMLU-20" non danno 5, 1000, 0. Una versione
+a punti ("2.1.0") e' UN numero e si cerca intera, non come "2.1" e "0".
 Il segno conta: "-0.5" (o con il meno Unicode U+2212) richiede "-0.5" nella fonte e "0.5" richiede "0.5" non preceduto
 da un meno. Un "-" e' un segno se non segue una lettera, una cifra, "_", ")", "]", "}" o "%":
 "10-20", "L10-L20", "2026-10-26", "LENTI-1" restano intervalli, date, identificatori. I numeri di
@@ -38,9 +40,10 @@ LEDGER = "docs/EXECUTION_LEDGER.md"
 MENO = "\N{MINUS SIGN}"
 OPERANDO = r"A-Za-z0-9_)\]}%"  # subito prima di un '-' ne fanno un trattino (intervallo, identificatore), non un segno
 OP = re.compile("[" + OPERANDO + "]")
+# un numero comincia solo a confine di parola: "p95", "DSR1000", "MMLU-20" non danno 5, 1000, 20 (ne' il 0 di 20); una versione a punti ("2.1.0") e' un token solo
 NUMERO = re.compile(
     r"(?P<v>\d{4}-\d{2}-\d{2}|\d{1,2}:\d{2}(?::\d{2})?)"
-    r"|(?:(?<![" + OPERANDO + r"])(?P<s>[-" + MENO + r"]))?(?<![A-Za-z_])(?<![A-Za-z]-)(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:[.,]\d+)?)"
+    r"|(?:(?<![" + OPERANDO + r"])(?P<s>[-" + MENO + r"]))?(?<![A-Za-z_])(?<![A-Za-z]-)(?<!\d)(?P<n>\d{1,3}(?:[.,]\d{3})+(?:[.,]\d+)?(?!\d)|\d+(?:\.\d+){2,}(?!\d)|\d+(?:[.,]\d+)?)"
 )
 PERCORSO = re.compile(r"[\w./\\-]+\.[A-Za-z][A-Za-z0-9]{0,4}")
 LOC = re.compile(r"\s*(?:#|:|@)?\s*L(\d+)(?:\s*[-–—]\s*L?(\d+))?")

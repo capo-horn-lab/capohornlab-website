@@ -191,3 +191,40 @@ def test_crlf_non_sposta_le_righe(tmp_path):
 
 def test_opzione_sconosciuta_esce_2():
     assert esegui("--non-esiste")[0] == 2
+
+
+# ---- fix round 2: un numero comincia solo a confine di parola; una versione a punti e' un token solo
+
+def test_cifre_dopo_lettere_o_cifre_non_sono_numeri(tmp_path):
+    # "p95" non e' 5, "MMLU-20" non e' 0, "DSR1000" non e' 1000: la fonte non ha ne' 5 ne' 0 ne' 1000 da soli
+    rc, out = prova(tmp_path, "placebo 109 e valori 19, 20 su DSR1000\n", ["placebo p95 109", "MMLU-20 19/20", "DSR1000"])
+    assert rc == 0, out
+    assert "3 numeri verificati" in out, out  # 109, 19, 20: nient'altro e' un numero
+
+
+def test_versione_a_punti_e_un_token_e_si_confronta_intera(tmp_path):
+    rc, out = prova(tmp_path, "client ib_async 2.1.0 e 3.2.10.\n", ["ib_async 2.1.0", "versione 3.2.10"])
+    assert rc == 0, out
+    assert "2 numeri verificati" in out, out
+
+
+def test_versione_a_punti_assente_e_mancante_col_numero_intero(tmp_path):
+    # la fonte ha 2.1 e 0 ma non 2.1.0: manca UN numero, "2.1.0", non "2.1" e "0"
+    rc, out = prova(tmp_path, "client ib_async 2.1 e 0\n", ["ib_async 2.1.0"])
+    assert rc == 1 and out.count("non trovato") == 1 and "numero 2.1.0 non trovato" in out, out
+
+
+def test_lettera_trattino_numero_non_e_un_numero_firmato(tmp_path):
+    # "x-5" e' un identificatore: dalla tabella non esce un numero, e nella fonte "x-5" non vale "-5"
+    rc, out = prova(tmp_path, "7\n", ["x-5", "7"])
+    assert rc == 0 and "1 numeri verificati" in out, out
+    rc, out = prova(tmp_path, "x-5 e 7\n", ["-5"])
+    assert rc == 1 and "numero -5 non trovato" in out, out
+
+
+def test_confine_di_parola_non_rompe_negativi_kn_date_virgola_e_migliaia(tmp_path):
+    sorgente = "d -0.5; 110/190; 2026-10-26 10:45; 3,5; 1.234; 1.234.567,89 e -2,64 (-3)\n"
+    celle = ["-0.5", "110/190", "2026-10-26 10:45", "3,5", "1.234", "1.234.567,89", "-2,64", "(-3)"]
+    rc, out = prova(tmp_path, sorgente, celle)
+    assert rc == 0, out
+    assert "10 numeri verificati" in out, out  # -0.5, 110, 190, data, ora, 3,5, 1.234, 1.234.567,89, -2,64, -3
