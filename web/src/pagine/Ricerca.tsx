@@ -1,13 +1,32 @@
 import { useQuery } from '@tanstack/react-query'
-import type { ReactNode } from 'react'
+import { lazy, type ReactNode, Suspense } from 'react'
 import { Link, useParams } from 'react-router'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { useDopoIlPrimoPaint } from '@/lib/dopo-paint'
 import { caricaDati, caricaRicerca } from '@/ricerche/archivio'
-import { Grafico } from '@/ricerche/Grafico'
-import { dividiFonti, idSezione, leggiElenco, leggiPrefazio, leggiTabella } from '@/ricerche/modello'
-import { AuditBadge, InLinea, Paragrafi, VerdettoBadge } from '@/ricerche/Testo'
+import { disegnaUnGrafico } from '@/ricerche/grafico-dati'
+import { type Dati, dividiFonti, idSezione, leggiElenco, leggiPrefazio, leggiTabella } from '@/ricerche/modello'
+import { InLinea, Paragrafi } from '@/ricerche/Testo'
+import { AuditBadge, VerdettoBadge } from '@/ricerche/Verdetto'
+
+// the chart (Bklit + Motion) in its own chunk, mounted after the page's text is painted; until then a box of the chart's
+// proportions (aspectRatio 2.6 / 1, as in Grafico.tsx) keeps the sections below in place
+const Grafico = lazy(() => import('@/ricerche/Grafico').then((m) => ({ default: m.Grafico })))
+
+function GraficoDopoIlTesto({ dati }: { dati: Dati }) {
+  const pronto = useDopoIlPrimoPaint()
+  // the box only where Grafico draws a chart (a table, or nothing, has another height: no box, no false space)
+  const segnaposto = disegnaUnGrafico(dati) ? <div className="w-full" style={{ aspectRatio: '2.6 / 1' }} aria-hidden="true" /> : null
+  return pronto ? (
+    <Suspense fallback={segnaposto}>
+      <Grafico dati={dati} />
+    </Suspense>
+  ) : (
+    segnaposto
+  )
+}
 
 function Sezione({ titolo, children }: { titolo: string; children: ReactNode }) {
   const id = `s-${idSezione(titolo)}`
@@ -36,9 +55,16 @@ function Elenco({ voci }: { voci: string[] }) {
 export default function Ricerca() {
   const { id = '' } = useParams()
   const { data: r, isPending } = useQuery({ queryKey: ['ricerca', id], queryFn: () => caricaRicerca(id), staleTime: Infinity })
-  const { data: dati } = useQuery({ queryKey: ['dati', id], queryFn: () => caricaDati(id), staleTime: Infinity })
+  const { data: dati, isPending: datiInAttesa } = useQuery({ queryKey: ['dati', id], queryFn: () => caricaDati(id), staleTime: Infinity })
 
-  if (isPending) return <Skeleton className="h-10 w-96" />
+  // the page and its chart data arrive together (two small chunks), and until then the footer stays below the fold:
+  // nothing on screen moves when they do (Lighthouse CLS)
+  if (isPending || datiInAttesa)
+    return (
+      <div className="min-h-svh">
+        <Skeleton className="h-10 w-96" />
+      </div>
+    )
   if (!r) {
     return (
       <section className="flex flex-col gap-3">
@@ -142,7 +168,7 @@ export default function Ricerca() {
         {nonRiportate && <p className="text-muted-foreground text-sm">{nonRiportate}</p>}
         {dati && (
           <div className="flex flex-col gap-2">
-            <Grafico dati={dati} />
+            <GraficoDopoIlTesto dati={dati} />
             {sezioni['Grafico'] && <p className="text-muted-foreground text-xs">{sezioni['Grafico']}</p>}
           </div>
         )}

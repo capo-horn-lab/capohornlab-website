@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { renderHook } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { TIMEOUT_MS, useFrequenze, useScenari } from '@/lib/api'
+import { precaricaLive, TIMEOUT_MS, useFrequenze, useScenari } from '@/lib/api'
 import { avvisi } from '@/live/AvvisoFreschezza'
 import frequenzeJson from '@/test/fixtures/frequenze.json'
 import scenariJson from '@/test/fixtures/scenari.json'
@@ -81,6 +81,44 @@ describe('api: timeout delle richieste (Important 4)', () => {
     } finally {
       AbortSignal.any = any
     }
+  })
+
+  it('browser senza AbortSignal.any: dopo una risposta riuscita il timer di riserva e azzerato (nessun abort 20 s dopo)', async () => {
+    const any = AbortSignal.any
+    // @ts-expect-error -- an older browser without the API
+    delete AbortSignal.any
+    try {
+      vi.useFakeTimers()
+      const segnali: AbortSignal[] = []
+      vi.spyOn(globalThis, 'fetch').mockImplementation(async (_u, init) => {
+        segnali.push(init!.signal!)
+        return new Response(JSON.stringify(scenariJson), { status: 200 })
+      })
+      const { client, wrapper } = cliente()
+      const { result } = renderHook(() => useScenari(), { wrapper })
+      await vi.advanceTimersByTimeAsync(0)
+      expect(result.current.data?.dati?.principale.strumento).toBe('MGC')
+      await vi.advanceTimersByTimeAsync(TIMEOUT_MS + 1_000)
+      expect(segnali[0].aborted).toBe(false)
+      client.clear()
+    } finally {
+      AbortSignal.any = any
+    }
+  })
+
+  it('precaricaLive: le due richieste partono subito e la pagina trova i dati senza un altra attesa', async () => {
+    const url: string[] = []
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (u) => {
+      url.push(String(u))
+      return new Response(JSON.stringify(String(u).endsWith('/scenari') ? scenariJson : frequenzeJson), { status: 200 })
+    })
+    const { client, wrapper } = cliente()
+    precaricaLive(client)
+    expect(url.map((u) => u.split('/live/')[1])).toEqual(['scenari', 'frequenze'])
+    await vi.waitFor(() => expect(client.getQueryData(['live', 'frequenze'])).toBeDefined())
+    const { result } = renderHook(() => useScenari(), { wrapper })
+    expect(result.current.data?.dati?.principale.strumento).toBe('MGC')
+    client.clear()
   })
 
   it('frequenze: un errore isolato si riprova dopo 3 s e non accende l avviso', async () => {

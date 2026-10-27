@@ -41,7 +41,8 @@ export function percorsoTesto(pc: Percorso | null | undefined, S: number, base =
 function Sezione({ titolo, nota, children }: { titolo: string; nota?: ReactNode; children?: ReactNode }) {
   return (
     <section className="space-y-2">
-      <h3 className="font-mono text-xs font-medium tracking-wider">{titolo}</h3>
+      {/* h2: under the page's h1 there is no other heading level (Lighthouse heading-order) */}
+      <h2 className="font-mono text-xs font-medium tracking-wider">{titolo}</h2>
       {nota ? <div className="text-muted-foreground text-xs leading-relaxed">{nota}</div> : null}
       {children}
     </section>

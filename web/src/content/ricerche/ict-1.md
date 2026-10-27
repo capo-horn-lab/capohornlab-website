@@ -32,7 +32,7 @@ Rubrica di adozione = LAB-2 (scoperta 60/verifica 40, placebo 200, BH q≤0,10 s
 | ICT-1: "0 ADOTTATE su 24 test" | docs/EXECUTION_LEDGER.md#L7089-L7102 |
 | MES 2022 model 1m verifica -5,25 USD t -3,01 | docs/EXECUTION_LEDGER.md#L7089-L7102 |
 | MNQ 2022 model 5m 158/90 trade +4,89 / +23,69 t 1,99 (a un passo). | docs/EXECUTION_LEDGER.md#L7089-L7102 |
-| ICT-1-OOS: "0 confermate su 5, tutte negative sui dati nuovi" (NQ fine 2024: 2022 model 5m 54 trade -7,08 t -0,43; OTE 1m 46 trade -19,71 t -2,43). | docs/EXECUTION_LEDGER.md#L7175-L7185 · docs/EXECUTION_LEDGER.md#L7089-L7102 |
+| ICT-1-OOS: "0 confermate su 5, tutte negative sui dati nuovi" (NQ fine 2024: 2022 model 5m 54 trade -7,08 t -0,43; OTE 1m 46 trade -19,71 t -2,43). | docs/EXECUTION_LEDGER.md#L7175-L7185 |
 
 ## Cosa NON dice
 

@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { Footer } from './Footer'
+import { Header } from './Header'
 import { Nav } from './Nav'
 import * as charts from '@/components/charts'
 
@@ -20,6 +21,20 @@ describe('layout', () => {
       </MemoryRouter>,
     )
     expect(screen.getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Ricerche', 'Metodo', 'Stato'])
+  })
+
+  it('menu del telefono: il pannello si carica alla prima pressione e porta le quattro voci', async () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>,
+    )
+    const bottone = screen.getByRole('button', { name: 'Apri il menu' })
+    expect(bottone.getAttribute('aria-expanded')).toBe('false')
+    expect(screen.queryByRole('dialog')).toBeNull()
+    fireEvent.click(bottone)
+    const pannello = await screen.findByRole('dialog')
+    expect(within(pannello).getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Ricerche', 'Metodo', 'Stato'])
   })
 
   it('i grafici Bklit si importano da @/components/charts', () => {

@@ -45,6 +45,21 @@ export function barreTabella(dati: Dati): BarreTabella {
   return { colonna, barre, omesse, unitaMiste: unita.size > 1 }
 }
 
+/** Oltre questo numero di barre il grafico a barre non si disegna (resta la tabella della pagina). */
+export const MAX_BARRE = 60
+
+/** Grafico.tsx disegna un grafico (riquadro 2.6 / 1) per questi dati? Serie senza buchi con almeno 2 punti, oppure tabella
+ * con 2..MAX_BARRE barre; matrice, serie con buchi o dati senza colonna di valori no (tabella o niente). */
+export function disegnaUnGrafico(dati: Dati): boolean {
+  if (dati.tipo === 'serie') {
+    const s = puntiSerie(dati)
+    return s.colonna >= 0 && s.buchi === 0 && s.punti.length >= 2
+  }
+  if (dati.tipo === 'matrice') return false
+  const b = barreTabella(dati)
+  return b.colonna >= 0 && b.barre.length >= 2 && b.barre.length <= MAX_BARRE
+}
+
 /** Valori della colonna numerica di una serie per la sparkline: i null saltano il punto, non diventano 0. */
 export function valoriSerie(dati: Dati): number[] {
   const c = colonnaValori(dati)

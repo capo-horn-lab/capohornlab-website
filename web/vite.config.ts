@@ -9,16 +9,7 @@ export default defineConfig({
   resolve: { alias: { '@': path.resolve(import.meta.dirname, 'src') } },
   build: {
     assetsDir: 'app',
-    // Vite 8 usa Rolldown: rolldownOptions al posto di rollupOptions, codeSplitting.groups al posto di manualChunks.
-    rolldownOptions: {
-      output: {
-        codeSplitting: {
-          groups: [
-            { name: 'motion', test: /node_modules[\\/](motion|motion-dom|motion-utils|framer-motion)[\\/]/, priority: 30 },
-            { name: 'bklit', test: /node_modules[\\/](@visx|d3-[a-z-]+|internmap|@number-flow)[\\/]|src[\\/]components[\\/]charts[\\/]/, priority: 20 },
-          ],
-        },
-      },
-    },
+    // Nessun gruppo manuale di chunk: i gruppi "motion"/"bklit" catturavano anche le dipendenze (react, utils) e l'entry li
+    // importava staticamente su OGNI rotta (modulepreload di ~130 kB gz). Lo split per rotta (React.lazy) basta.
   },
 })

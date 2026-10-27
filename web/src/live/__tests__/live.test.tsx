@@ -89,7 +89,7 @@ describe('pannello', () => {
   })
   it('cinque sezioni e concordanza nell ordine del pannello, numeri D8', () => {
     render(<TabellePannello r={fr('MGC')} orari={freq.orari} />)
-    expect(screen.getAllByRole('heading', { level: 3 }).map((h) => h.textContent)).toEqual(['STATO', 'FINESTRE', 'LIVELLI', "CASO DELL'APERTURA", 'LENTI', 'CONCORDANZA'])
+    expect(screen.getAllByRole('heading', { level: 2 }).map((h) => h.textContent)).toEqual(['STATO', 'FINESTRE', 'LIVELLI', "CASO DELL'APERTURA", 'LENTI', 'CONCORDANZA'])
     const riga = (nome: string) => screen.getAllByRole('row').find((r) => within(r).queryAllByRole('cell')[0]?.textContent === nome)!
     expect(within(riga('massimo notte')).getAllByRole('cell').map((c) => c.textContent))
       .toEqual(['massimo notte', '4039.40', '+16.20', '+0.38', '0.30-0.50 A', '-', '10% (3/31 ±10)'])
@@ -285,13 +285,46 @@ describe('grafico e pagina', () => {
     ancorate(container)
   })
 
-  it('accessibile: legenda numerata con radice, rami disegnati e livelli (l SVG di Bklit e aria-hidden)', () => {
+  it('accessibile: legenda con radice, rami disegnati e livelli (l SVG di Bklit e aria-hidden); in linea = pallino, nessun numero', () => {
     schermo(900, 450)
     render(<GraficoLive v={v('MGC')} />)
     const voci = legenda().map((li) => li.textContent)
-    expect(voci).toContain('4 · da qui: primo movimento di 5.7 su da qui 22% (53/240 ±5) a 4028.1 verso le 20:28')
-    expect(voci.some((t) => /^\d+ · livello massimo notte 4039.4: 10% \(3\/31 ±10\)$/.test(t ?? ''))).toBe(true)
-    expect(voci[0]?.startsWith('1 · radice 20:08 estensione a 4022.4')).toBe(true)
+    expect(voci).toContain('• da qui: primo movimento di 5.7 su da qui 22% (53/240 ±5) a 4028.1 verso le 20:28')
+    expect(voci).toContain('• livello massimo notte 4039.4: 10% (3/31 ±10)')
+    expect(voci[0]?.startsWith('• radice 20:08 estensione a 4022.4')).toBe(true)
+  })
+
+  it('telefono (343 px): ogni numero della legenda compare anche sul grafico; i livelli in linea hanno il pallino', () => {
+    schermo(343, 400)
+    const { container } = render(<GraficoLive v={v('MGC')} />)
+    const sulGrafico = [...container.querySelectorAll('.chl-sovrapposizione text')].map((t) => t.textContent ?? '').filter((t) => /^\d+$/.test(t))
+    const voci = legenda().map((li) => li.textContent ?? '')
+    const numeriLegenda = voci.map((t) => /^(\d+) · /.exec(t)?.[1]).filter((n): n is string => n != null)
+    expect(numeriLegenda.length).toBeGreaterThan(0)
+    expect([...numeriLegenda].sort()).toEqual([...sulGrafico].sort())
+    const livelli = voci.filter((t) => t.includes('livello '))
+    expect(livelli.length).toBe(v('MGC').livelli.length)
+    for (const t of livelli) expect(t, t).toMatch(sulGrafico.some((n) => t.startsWith(`${n} · `)) ? /^\d+ · livello / : /^• livello /)
+  })
+
+  it('telefono: 8 capi sullo stesso punto, i numeri senza posto restano all ancora, dentro il plot', () => {
+    schermo(343, 400)
+    const s = structuredClone(sc('MES'))
+    s.rami = Array.from({ length: 8 }, (_, i) => ({ id: `y${i}`, padre: null, tipo: 'primo_movimento', etichetta: 'primo movimento di 8 su', prezzo: 7720,
+      p: 0.5 - i * 0.02, k: 10 - i, n: 20, margine: 0.2, orizzonte: '21:00', minuti: { mediana: 30, q1: 20, q3: 40 }, tocco: true, omessi: 0 }))
+    const { container } = render(<GraficoLive v={vista(s, scen.barre.MES, fr('MES'), false, scen.orari)} />)
+    const numeri = [...container.querySelectorAll('.chl-sovrapposizione text')].filter((t) => /^\d+$/.test(t.textContent ?? ''))
+    // radice + 8 rami: tutti come numeri, anche quelli che non trovano posto (forzati all'ancora)
+    expect(numeri.length).toBeGreaterThanOrEqual(9)
+    const fondo = 400 - 16 - 28 + 6 // innerHeight + 6, come impila(): altezza meno margini top/bottom
+    for (const t of numeri) {
+      const y = Number(t.getAttribute('y'))
+      expect(y, t.textContent ?? '').toBeGreaterThanOrEqual(11)
+      expect(y, t.textContent ?? '').toBeLessThanOrEqual(fondo)
+    }
+    ancorate(container)
+    const voci = legenda().map((li) => li.textContent ?? '')
+    for (const t of numeri) expect(voci.some((x) => x.startsWith(`${t.textContent} · `)), t.textContent ?? '').toBe(true)
   })
 
   it('payload con prezzi non numerici: il ramo non e disegnato, nessun NaN nel grafico', () => {

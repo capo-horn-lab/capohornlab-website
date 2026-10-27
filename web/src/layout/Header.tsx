@@ -1,18 +1,15 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Link } from 'react-router'
 import { Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
 import { Nav } from './Nav'
+
+// the phone menu's Radix Dialog is not in the entry: it loads on the first press of the button and then stays mounted
+const MenuMobile = lazy(() => import('./MenuMobile'))
 
 export function Header() {
   const [aperto, setAperto] = useState(false)
+  const [usato, setUsato] = useState(false)
   return (
     <header className="border-border bg-background/90 sticky top-0 z-40 border-b backdrop-blur">
       <div className="ch-wrap flex h-16 items-center justify-between">
@@ -20,18 +17,25 @@ export function Header() {
           Capo Horn Lab
         </Link>
         <Nav className="hidden md:flex" />
-        <Sheet open={aperto} onOpenChange={setAperto}>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Apri il menu">
-              <Menu />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right" className="w-64">
-            <SheetTitle className="px-4 pt-4 font-serif">Capo Horn Lab</SheetTitle>
-            <SheetDescription className="sr-only">Navigazione del sito</SheetDescription>
-            <Nav className="flex-col px-2" onNavigate={() => setAperto(false)} />
-          </SheetContent>
-        </Sheet>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          aria-label="Apri il menu"
+          aria-haspopup="dialog"
+          aria-expanded={aperto}
+          onClick={() => {
+            setUsato(true)
+            setAperto(true)
+          }}
+        >
+          <Menu />
+        </Button>
+        {usato ? (
+          <Suspense fallback={null}>
+            <MenuMobile aperto={aperto} onCambia={setAperto} />
+          </Suspense>
+        ) : null}
       </div>
     </header>
   )

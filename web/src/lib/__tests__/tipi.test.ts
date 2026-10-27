@@ -116,6 +116,15 @@ describe('tipi: payload rotti non fanno cadere la pagina (Important 3)', () => {
     expect((v.strumenti.MNQ as StrumentoFrequenze).apertura).toBeNull()
     expect((v.strumenti.MES as StrumentoFrequenze).apertura!.storico).toBeNull()
   })
+  it('lenti.concordanza malformata (frase non testo, non oggetto): null, mai un oggetto passato a React', () => {
+    const f = copia(frequenze)
+    ;((f.dati.strumenti.MGC.lenti as Rec).concordanza as Rec).frase = { x: 1 }
+    ;(f.dati.strumenti.MNQ.lenti as Rec).concordanza = 'concordano'
+    const v = validaFrequenze(f).dati!
+    expect((v.strumenti.MGC as StrumentoFrequenze).lenti!.concordanza).toBeNull()
+    expect((v.strumenti.MNQ as StrumentoFrequenze).lenti!.concordanza).toBeNull()
+    expect(typeof (v.strumenti.MES as StrumentoFrequenze).lenti!.concordanza!.frase).toBe('string')
+  })
   it('radice malformata o rami non lista: errore di quello strumento, gli altri restano', () => {
     const s = copia(scenari)
     ;(s.dati.strumenti.MES.radice as Rec).prezzo = 'x'

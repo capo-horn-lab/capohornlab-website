@@ -628,7 +628,7 @@ def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids
 
     La Fonte di un numero e' la posizione in cui il numero E le parole della riga stanno insieme, scelta tra i candidati
     nell'ordine: (1) righe di ledger citate, sulla stessa riga; (2) entro 3 righe dall'intervallo citato, sulla stessa
-    riga (Fonte = la riga vera); (3) documento citato, nella stessa sezione/tabella; (4) righe di ledger citate dove il
+    riga (Fonte = la riga vera), solo se il numero non e' gia' nell'intervallo citato; (3) documento citato, nella stessa sezione/tabella; (4) righe di ledger citate dove il
     numero c'e' ma le parole no (citato cosi' dall'inventario); (5) file di prova JSON, solo se tutti i numeri
     restanti sono valori dello stesso record. Altrimenti la riga non si pubblica. Il numero e' sempre un token intero
     (non cifre dentro un orario, un codice o un numero piu' lungo)."""
@@ -653,7 +653,9 @@ def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids
             # punteggio piu' alto (piu' numeri della riga di tabella sulla stessa riga, poi piu' parole), a parita' il primo.
             cand = [(punteggio(r, toks, parole), (nome, t)) for (a, b), (nome, t) in zip(primarie, fonti)
                     for r in ctx.ledger[a - 1:b] if ha_numero(tok, r) and hanno_le_parole(parole, r)]
-            if not cand:
+            # (2) solo se il numero non e' gia' nell'intervallo citato: altrimenti una riga vicina con le stesse cifre
+            # (es. le soglie di una rubrica) diventerebbe una Fonte in piu'; vale l'intervallo citato (passo 4)
+            if not cand and not any(ha_numero(tok, t) for _, t in fonti):
                 for a, b in primarie:
                     if n := riga_ledger_con(ctx, tok, a - MARGINE_LEDGER, b + MARGINE_LEDGER, parole, toks):
                         cand.append((punteggio(ctx.ledger[n - 1], toks, parole), (ancora(n, n), ctx.ledger[n - 1])))
@@ -664,8 +666,9 @@ def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids
                          if ha_numero(tok, r) and hanno_le_parole(
                              parole, "\n".join(righe_doc[max(0, i - SEZIONE_DOC):i + MARGINE_LEDGER + 1]))]
             scelta = max(enumerate(cand), key=lambda e: (e[1][0], -e[0]))[1][1] if cand else None
-            if not scelta:
-                scelta = next(((n, t) for n, t in fonti if ha_numero(tok, t)), None)
+            if not scelta:  # (4) prima una Fonte gia' scelta per questa riga che ha il numero, poi gli intervalli citati
+                scelta = next((u for u in usate if ha_numero(tok, u[1])), None) or next(
+                    ((n, t) for n, t in fonti if ha_numero(tok, t)), None)
             if not scelta:
                 resto.append(tok)
             elif all(u[0] != scelta[0] for u in usate):
@@ -911,7 +914,9 @@ def genera(inventario, radice, out, limit=None):
                 "verdetto": fm["verdetto"]}
         if "audit" in fm:
             voce["audit"] = fm["audit"]["stato"]
-        indice.append({**voce, "pubblicabilita": fm["pubblicabilita"], "grafico": bool(dati)})
+        # "serie": l'indice /ricerche disegna una sparkline solo per queste e carica solo i loro dati.json
+        indice.append({**voce, "pubblicabilita": fm["pubblicabilita"], "grafico": bool(dati),
+                       "serie": bool(dati) and dati["tipo"] == "serie"})
     indice = sorted(sorted(indice, key=lambda r: r["id"]), key=lambda r: r["data"], reverse=True)
     scrivi(out / "indice.json", json.dumps(indice, ensure_ascii=False, indent=1) + "\n")
     return st

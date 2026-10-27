@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router'
 import Ricerca from '@/pagine/Ricerca'
 import Ricerche from '@/pagine/Ricerche'
 import { indice } from './archivio'
-import { barreTabella, puntiSerie, valoriSerie } from './grafico-dati'
+import { barreTabella, disegnaUnGrafico, puntiSerie, valoriSerie } from './grafico-dati'
 import {
   dividiFonti,
   idSezione,
@@ -139,6 +139,17 @@ describe('grafici: un valore mancante non e\' zero', () => {
     expect(buchi).toBe(1)
     expect(punti.map((p) => p.valore)).toEqual([1.5, 2.0])
   })
+
+  it('riquadro del grafico solo dove Grafico disegna un grafico (serie piena, 2..60 barre)', () => {
+    const serie = (righe: unknown[][]): Dati => ({ tipo: 'serie', colonne: ['anno', 'v'], righe, fonte: 'x' }) as Dati
+    expect(disegnaUnGrafico(serie([['2019', 1], ['2020', 2]]))).toBe(true)
+    expect(disegnaUnGrafico(serie([['2019', 1], ['2020', null], ['2021', 2]]))).toBe(false) // buco: tabella
+    expect(disegnaUnGrafico(serie([['2019', 1]]))).toBe(false)
+    const tabella = (n: number): Dati => ({ tipo: 'tabella', colonne: ['r', 'm'], righe: Array.from({ length: n }, (_, i) => [`r${i}`, i + 1]), fonte: 'x' }) as Dati
+    expect(disegnaUnGrafico(tabella(2))).toBe(true)
+    expect(disegnaUnGrafico(tabella(60))).toBe(true)
+    expect(disegnaUnGrafico(tabella(61))).toBe(false)
+  })
 })
 
 describe('sparkline', () => {
@@ -170,10 +181,13 @@ function conRouter(percorso: string) {
 describe('pagine', () => {
   it("l'indice ha le voci fissate (e `audit` solo dove c'e')", () => {
     expect(indice.length).toBeGreaterThan(100)
-    const base = ['data', 'grafico', 'id', 'pubblicabilita', 'strumenti', 'titolo', 'verdetto']
+    const base = ['data', 'grafico', 'id', 'pubblicabilita', 'serie', 'strumenti', 'titolo', 'verdetto']
     for (const v of indice) {
       expect(Object.keys(v).filter((k) => k !== 'audit').sort()).toEqual(base)
     }
+    // l'indice carica i dati.json solo delle serie (sparkline): oggi 3, non le 62 ricerche con grafico
+    expect(indice.filter((v) => v.serie).map((v) => v.id).sort()).toEqual(['crypto-1', 'ibs-nt', 'res2-2'])
+    expect(indice.filter((v) => v.grafico).length).toBeGreaterThan(50)
     const stati = new Set(indice.filter((v) => v.audit).map((v) => v.audit))
     expect([...stati].sort()).toEqual(['nota', 'ritirato']) // nessun "corretto": l'audit non lo dice
     expect(indice.filter((v) => v.audit === 'ritirato').map((v) => v.id).sort()).toEqual(['gex-1', 'volrev-1'])

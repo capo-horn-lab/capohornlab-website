@@ -4,8 +4,8 @@
 // and the levels near the candles (the Trader's rule); the x domain is widened by xDomain/xDomainSlotCount to 36 future slots.
 // Labels: on a price chart a label's height reads as a price, so no label moves more than one row (12 px) from what it labels.
 // From md up the labels are inline and one that finds no place within a row becomes a number; below md the roots and the
-// branches are numbers. The numbered legend under the chart (the same rows for screen readers: Bklit's SVG is aria-hidden)
-// is visible on phones and, from md up, shows the rows whose label became a number.
+// branches are numbers. The legend under the chart (the same rows for screen readers: Bklit's SVG is aria-hidden) is visible
+// on phones and, from md up, shows the rows whose label became a number; only those rows carry their number.
 import { scaleLinear } from '@visx/scale'
 import { useReducedMotion } from 'motion/react'
 import { type ReactNode, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
@@ -15,14 +15,14 @@ import { DEFAULT_Y_AXIS_ID } from '@/components/charts/y-axis-scales'
 import type { Candela } from '@/lib/aggrega'
 import { nomeBreve, type Segmento } from '@/lib/albero'
 import { num, oraRoma, p, prezzo } from '@/lib/fmt'
-import { radiceRiga, rigaSegmento, type Vista } from '@/live/vista'
+import { ALTEZZA_GRAFICO, Didascalia, Legenda, MD, voci } from '@/live/Legenda'
+import type { Vista } from '@/live/vista'
 
 const MARGINE = { top: 16, right: 64, bottom: 28, left: 8 }
 const ALONE = { stroke: 'var(--ch-ink)', strokeWidth: 3, paintOrder: 'stroke' as const, strokeLinejoin: 'round' as const }
 const FONT = 11
 const CARATTERE = 6 // px per character at 11 px (DM Sans): labels that would leave the plot on the left are shortened
 const RIGA = 12
-const MD = '(min-width: 48rem)' // Tailwind's md, the same breakpoint as the legend's md:sr-only
 
 /** Viewport at md or wider (true where matchMedia is missing). */
 function useLargo(): boolean {
@@ -72,23 +72,6 @@ function impila(fondo: number) {
     },
     forza: (y: number, x0: number, x1: number) => metti(Math.min(fondo, Math.max(FONT, y)), x0, x1),
   }
-}
-
-export interface Voce {
-  id: string
-  n: number
-  testo: string
-}
-
-/** The legend's rows (numbered in this order): root, branches, da_qui's root and branches, levels. */
-export function voci(v: Vista): Voce[] {
-  const r: Omit<Voce, 'n'>[] = []
-  if (!v.inTesto) r.push({ id: 'radice', testo: radiceRiga(v.radice) }, ...v.g.segmenti.map((s) => ({ id: `ramo:${s.id}`, testo: rigaSegmento(s) })))
-  if (v.daQui && !v.daQui.inTesto)
-    r.push({ id: 'qui:radice', testo: `da qui: radice ${v.daQui.radice.ora} a ${prezzo(v.daQui.radice.prezzo)}` },
-      ...v.daQui.g.segmenti.map((s) => ({ id: `qui:${s.id}`, testo: `da qui: ${rigaSegmento(s)}` })))
-  r.push(...v.livelli.map((l) => ({ id: `livello:${l.nome}`, testo: `livello ${l.nome} ${prezzo(l.prezzo)}: ${p(l.entro_2200)}` })))
-  return r.map((x, i) => ({ ...x, n: i + 1 }))
 }
 
 function Sovrapposizione({ v, viva, numeri, largo, avvisa }: {
@@ -217,15 +200,6 @@ function Suggerimento({ point }: { point: Record<string, unknown> }) {
   )
 }
 
-/** The numbered legend: visible below md; from md up only the rows whose label became a number (the rest for screen readers). */
-function Legenda({ righe, numerati }: { righe: Voce[]; numerati: Set<string> }) {
-  return (
-    <ul className="text-muted-foreground mt-2 space-y-0.5 font-mono text-xs leading-relaxed tabular-nums">
-      {righe.map((r) => <li key={r.id} className={numerati.has(r.id) ? undefined : 'md:sr-only'}>{`${r.n} · ${r.testo}`}</li>)}
-    </ul>
-  )
-}
-
 export function GraficoLive({ v }: { v: Vista }) {
   const ridotto = useReducedMotion() ?? false
   const largo = useLargo()
@@ -255,22 +229,21 @@ export function GraficoLive({ v }: { v: Vista }) {
         xDomainSlotCount={slot}
         margin={MARGINE}
         aspectRatio="auto"
-        className="h-[50vh] max-h-[44rem] min-h-72 md:h-[60vh]"
+        className={ALTEZZA_GRAFICO}
         animationDuration={ridotto ? 0 : 900}
       >
         <ScalaPrezzi dominio={v.dominio}>
           <Grid numTicksRows={6} fadeHorizontal={false} />
-          <Candlestick animate={!ridotto} showHoverFade={false} />
+          {/* no per-candle entry animation: ~100 Motion springs on mount, then a second full render when they end, were the
+              page's longest task (Lighthouse TBT); the chart's own reveal (animationDuration) stays */}
+          <Candlestick animate={false} showHoverFade={false} />
           <Sovrapposizione v={v} viva={viva} numeri={numeri} largo={largo} avvisa={setNumerati} />
           <YAxis orientation="right" formatValue={prezzo} />
         </ScalaPrezzi>
         <ChartTooltip showDots={false} showDatePill={false} content={({ point }) => <Suggerimento point={point} />} />
       </CandlestickChart>
       <Legenda righe={righe} numerati={new Set(numerati.split('|'))} />
-      <figcaption className="text-muted-foreground mt-2 text-xs">
-        {`Candele a 5 minuti in ora di Roma${viva ? ' (l\'ultima, attenuata, e\' in formazione)' : ''}; linee tratteggiate: livelli con la frequenza di tocco entro le ${v.chiusura}`}
-        {v.fuori.length ? `; fuori dal grafico: ${v.fuori.map((l) => `${l.nome} ${prezzo(l.prezzo)} ${p(l.entro_2200)}`).join(', ')}` : ''}.
-      </figcaption>
+      <Didascalia v={v} viva={viva} />
     </figure>
   )
 }

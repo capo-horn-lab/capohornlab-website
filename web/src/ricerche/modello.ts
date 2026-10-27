@@ -21,6 +21,8 @@ export interface VoceIndice {
   audit?: Audit['stato']
   pubblicabilita: 'ok' | 'avvertenza'
   grafico: boolean
+  /** Il dati.json e' una serie annuale: l'indice carica solo questi per le sparkline. */
+  serie: boolean
 }
 
 export interface Frontmatter {

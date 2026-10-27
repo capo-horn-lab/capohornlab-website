@@ -1,16 +1,21 @@
 // One tab per instrument (the main one first, then the JSON's order); the selected one shows its status, chart, outcomes,
 // tree text and panel tables. The chart is keyed by instrument: recreated only when the instrument changes.
 import NumberFlow from '@number-flow/react'
-import { useMemo } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { residua } from '@/lib/albero'
+import { useDopoIlPrimoPaint } from '@/lib/dopo-paint'
 import { num, prezzo } from '@/lib/fmt'
 import { type Frequenze, haErrore, type Scenari, type StrumentoFrequenze, type StrumentoScenari } from '@/lib/tipi'
 import { AlberoTesto, Esiti } from '@/live/Esiti'
-import { GraficoLive } from '@/live/GraficoLive'
+import { SegnapostoGrafico } from '@/live/Legenda'
 import { TabellePannello } from '@/live/TabellePannello'
 import { righeEsiti, righeTesto, vista } from '@/live/vista'
+
+// the chart (Bklit + Motion, the heaviest code of the page) in its own chunk: the text and the tables paint first, the chart's
+// box, legend and caption are already in place (SegnapostoGrafico), so nothing moves when it arrives
+const GraficoLive = lazy(() => import('@/live/GraficoLive').then((m) => ({ default: m.GraficoLive })))
 
 /** Instruments of both channels, the main one first, then scenari's order, then frequenze's. */
 export function ordineStrumenti(scen: Scenari | null | undefined, freq: Frequenze | null | undefined): string[] {
@@ -24,6 +29,7 @@ function Grafico({ s, sc, scen, fr }: { s: string; sc: StrumentoScenari; scen: S
   const esiti = useMemo(() => righeEsiti(v), [v])
   const testo = useMemo(() => righeTesto(v), [v])
   const er = residua(sc.escursione_residua)
+  const pronto = useDopoIlPrimoPaint()
   return (
     <div className="space-y-4">
       <p className="font-mono text-xs leading-relaxed tabular-nums">
@@ -34,7 +40,9 @@ function Grafico({ s, sc, scen, fr }: { s: string; sc: StrumentoScenari; scen: S
         <span className="text-muted-foreground">{`radice ${sc.radice.ora} ${sc.radice.fase} a ${prezzo(sc.radice.prezzo)}${sc.radice.percorso ? ` | ${sc.radice.percorso}` : ''}`}</span>
         {er ? <><br /><span className="text-muted-foreground">{er}</span></> : null}
       </p>
-      <GraficoLive key={s} v={v} />
+      <Suspense fallback={<SegnapostoGrafico v={v} />}>
+        {pronto ? <GraficoLive key={s} v={v} /> : <SegnapostoGrafico v={v} />}
+      </Suspense>
       <Esiti righe={esiti} />
       <AlberoTesto righe={testo} />
     </div>

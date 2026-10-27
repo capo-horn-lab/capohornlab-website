@@ -2,7 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
 import { API_BASE } from '@/lib/config'
-import { SOGLIA_CANALE_S, SOGLIA_SPENTO_S, statoMotore } from '@/ricerche/stato'
+import { SOGLIA_CANALE_S, SOGLIA_SPENTO_S, type StatoMotore, statoMotore } from '@/ricerche/stato'
+
+const COLORE: Record<StatoMotore, string> = { acceso: 'var(--ch-success)', 'in ritardo': 'var(--ch-warm)', spento: 'var(--ch-danger)' }
 
 // Fetch propria e minima: la pagina Stato non dipende dai moduli della pagina Live.
 const CANALI = [
@@ -39,7 +41,8 @@ function Canale({ chiave, titolo }: { chiave: Chiave; titolo: string }) {
           {titolo}
         </h2>
         {!isPending && !error && (
-          <Badge variant={stato === 'acceso' ? 'default' : stato === 'in ritardo' ? 'secondary' : 'destructive'}>
+          // semaforo con i colori dei token: acceso = verificato, in ritardo = caldo, spento = errore (il rosso del brand e' il primario)
+          <Badge variant="outline" style={{ color: COLORE[stato], borderColor: COLORE[stato] }}>
             motore {stato}
           </Badge>
         )}
@@ -68,10 +71,9 @@ export default function Stato() {
       <header className="flex flex-col gap-3">
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Stato</h1>
         <p className="text-muted-foreground">
-          Il motore invia i due flussi live ogni pochi secondi. «Acceso» vale fino a {SOGLIA_CANALE_S.scenari} s
-          dall'ultimo invio per gli scenari e fino a {SOGLIA_CANALE_S.frequenze} s per le frequenze; oltre, fino a{' '}
-          {SOGLIA_SPENTO_S} s, il dato e' «in ritardo»; oltre {SOGLIA_SPENTO_S} s il motore e' «spento». La pagina si
-          aggiorna da sola.
+          Il motore invia gli scenari ogni 15 s e le frequenze ogni 60 s. Gli scenari sono «acceso» fino a{' '}
+          {SOGLIA_CANALE_S.scenari} s dall'ultimo invio e «in ritardo» fino a {SOGLIA_SPENTO_S} s; le frequenze sono «acceso»
+          fino a {SOGLIA_CANALE_S.frequenze} s. Oltre {SOGLIA_SPENTO_S} s il motore e' «spento». La pagina si aggiorna da sola.
         </p>
       </header>
       {CANALI.map((c) => (

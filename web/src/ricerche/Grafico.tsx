@@ -12,7 +12,7 @@ import {
 } from '@/components/charts'
 import { BarXAxis } from '@/components/charts/bar-x-axis'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { barreTabella, puntiSerie } from './grafico-dati'
+import { barreTabella, MAX_BARRE, puntiSerie } from './grafico-dati'
 import type { Dati } from './modello'
 
 const numero = (x: unknown): number | null => (typeof x === 'number' && Number.isFinite(x) ? x : null)
@@ -70,8 +70,6 @@ function GraficoSerie({ dati }: { dati: Dati }) {
     </figure>
   )
 }
-
-const MAX_BARRE = 60
 
 function GraficoTabella({ dati }: { dati: Dati }) {
   const { colonna, barre, omesse, unitaMiste } = useMemo(() => barreTabella(dati), [dati])

@@ -437,7 +437,7 @@ def test_indice_ordinato_e_chiavi(mondo):
     indice = json.loads((out / "indice.json").read_text(encoding="utf-8"))
     date = [r["data"] for r in indice]
     assert date == sorted(date, reverse=True) and date[0] == "2026-10-16"
-    base = {"id", "titolo", "data", "strumenti", "verdetto", "pubblicabilita", "grafico"}
+    base = {"id", "titolo", "data", "strumenti", "verdetto", "pubblicabilita", "grafico", "serie"}
     for r in indice:
         assert set(r) - {"audit"} == base
     assert {r["id"]: r.get("audit") for r in indice if "audit" in r} == {
@@ -481,6 +481,17 @@ def test_numero_entro_tre_righe_si_pubblica_con_la_fonte_vera(mondo):
     assert len(righe) == 1 and "+7,77 USD" in righe[0]
     assert righe[0].endswith("| docs/EXECUTION_LEDGER.md#L113-L113 |")
     assert "righe della scheda non riportate" not in leggi_md(out, "zeta-1")
+
+
+def test_numero_gia_nell_intervallo_citato_niente_riga_vicina_in_piu(tmp_path):
+    # come trend-1: "0" e "2" stanno nell'intervallo citato (L5) senza le parole della riga; due righe sopra (L3) una rubrica
+    # ha le stesse cifre e le parole. Il ripiego a +-3 righe vale solo per un numero che nell'intervallo non c'e'.
+    led = ["riga 1", "riga 2", "rubrica TSMOM portafogli: CONFERMATO se media mensile > 0 con t >= 2", "riga 4",
+           "TSMOM: 0 su 2", "riga 6"]
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs" / "EXECUTION_LEDGER.md").write_text("\n".join(led), encoding="utf-8")
+    ok, non = E.righe_esito("TSMOM portafogli mensile: 0 confermati su 2", [(5, 5)], [], E.Contesto(tmp_path), [])
+    assert non == 0 and [r["fonte"] for r in ok] == ["docs/EXECUTION_LEDGER.md#L5-L5"]
 
 
 def test_cella_con_studio_escluso_tiene_le_citazioni_in_coda(mondo):
@@ -763,6 +774,8 @@ def test_dati_json_da_summary_e_indice_con_grafico(mondo):
     assert d["colonne"][0] == "r" and d["righe"][0][0] == "riga A"
     ind = {r["id"]: r for r in json.loads((out / "indice.json").read_text(encoding="utf-8"))}
     assert ind["eps-1"]["grafico"] is True and ind["alfa-1"]["grafico"] is False
+    # serie solo per i dati.json di tipo serie (l'indice carica solo quelli per le sparkline)
+    assert ind["eps-1"]["serie"] is False and ind["eta-1"]["serie"] is True and ind["alfa-1"]["serie"] is False
 
 
 def test_serie_annuale_da_prova_json(mondo):

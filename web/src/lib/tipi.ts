@@ -240,8 +240,10 @@ function aperturaOk(a: unknown) {
 
 function lentiOk(l: unknown) {
   if (!oggetto(l)) return null
+  // concordanza: only a sentence (a string) is shown; anything else would reach React as a child object and crash the page
+  const c = o(l.concordanza)
   return { ...l, riferimento: o(l.riferimento) ?? {}, campione: o(l.campione), base: o(l.base), righe: Array.isArray(l.righe) ? l.righe.filter(oggetto) : [],
-    concordanza: o(l.concordanza) }
+    concordanza: c && typeof c.frase === 'string' ? c : null }
 }
 
 export function validaFrequenze(x: unknown): Busta<Frequenze> {

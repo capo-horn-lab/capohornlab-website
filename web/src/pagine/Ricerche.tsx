@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { caricaDati, indice } from '@/ricerche/archivio'
 import { valoriSerie } from '@/ricerche/grafico-dati'
 import { anno, paroleNude, SENZA_VERDETTO } from '@/ricerche/modello'
-import { AuditBadge, VerdettoBadge } from '@/ricerche/Testo'
+import { AuditBadge, VerdettoBadge } from '@/ricerche/Verdetto'
 
 const TUTTI = ''
 
@@ -83,8 +83,9 @@ export default function Ricerche() {
       (verdetto === TUTTI || vociFiltro(r.verdetto).includes(verdetto)) &&
       (annoSel === TUTTI || anno(r.data) === annoSel),
   )
-  const conGrafico = useMemo(() => indice.filter((r) => r.grafico).map((r) => r.id), [])
-  const serie = useSerie(conGrafico)
+  // solo i dati.json che sono serie (indice.json lo dice): 3 import invece di uno per ogni ricerca con grafico
+  const conSerie = useMemo(() => indice.filter((r) => r.serie).map((r) => r.id), [])
+  const serie = useSerie(conSerie)
 
   return (
     <section className="flex flex-col gap-6">
