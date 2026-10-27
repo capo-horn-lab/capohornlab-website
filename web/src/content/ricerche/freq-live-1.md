@@ -30,12 +30,12 @@ Frequenze empiriche p, k, n e margine 1,96·√(p(1-p)/n); finestre fisse di Rom
 
 | Risultato | Fonte |
 |---|---|
-| Rubrica di accettazione PASS (5/5 + 4/4 dell'aggiunta; MNQ 1,9 s; ciclo a regime 2,6 s per 4 strumenti). | docs/EXECUTION_LEDGER.md#L10287-L10303 |
-| Documento: escursione mediana (60 sessioni, punti) 00:00-08:00 192, 08:00-14:30 195, 14:30-15:30 88, 15:30-16:00 162, 21:00-22:00 82 | docs/EXECUTION_LEDGER.md#L10287-L10303 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
-| range medio sessione regolare 361 punti | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
-| massimo della notte superato entro le 22:00: 0,00-0,15 A 87% (n 105), 0,15-0,30 A 67% (57), 0,30-0,50 A 59% (39), 0,50-1,00 A 42% (38), oltre 1 A 36% (11) | docs/EXECUTION_LEDGER.md#L10287-L10303 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
-| sopra il massimo notturno entro le 15:30 47%, entro le 22:00 69% | docs/EXECUTION_LEDGER.md#L10287-L10303 |
-| minimo rotto 36% e 64%. | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt |
+| Rubrica di accettazione PASS (5/5 + 4/4 dell'aggiunta; MNQ 1,9 s; ciclo a regime 2,6 s per 4 strumenti). | docs/EXECUTION_LEDGER.md#L10287-L10303 · docs/EXECUTION_LEDGER.md#L10285-L10285 |
+| Documento: escursione mediana (60 sessioni, punti) 00:00-08:00 192, 08:00-14:30 195, 14:30-15:30 88, 15:30-16:00 162, 21:00-22:00 82 | docs/EXECUTION_LEDGER.md#L10287-L10303 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L27-L27 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L28-L28 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L29-L29 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L30-L30 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L84-L84 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L35-L35 |
+| range medio sessione regolare 361 punti | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L37-L37 |
+| massimo della notte superato entro le 22:00: 0,00-0,15 A 87% (n 105), 0,15-0,30 A 67% (57), 0,30-0,50 A 59% (39), 0,50-1,00 A 42% (38), oltre 1 A 36% (11) | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L69-L69 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L53-L53 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L54-L54 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L55-L55 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L56-L56 · docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L57-L57 |
+| sopra il massimo notturno entro le 15:30 47%, entro le 22:00 69% | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L58-L58 |
+| minimo rotto 36% e 64%. | docs/research/TEORIA_MOVIMENTO_2026-10-21.txt#L59-L59 |
 | Esempio 21/10 21:10 Roma: tondo sotto 29.900 nel 66% ±8 (91/137) | docs/EXECUTION_LEDGER.md#L10287-L10303 |
 | caso dell'apertura in fase estensione, chiusura sopra l'apertura 44% ±12 (30/69). | docs/EXECUTION_LEDGER.md#L10287-L10303 |
 

@@ -28,8 +28,8 @@ Walk-forward mobile (250/20) e ancorato, F1/F2/F3, placebo 100-200, BH q≤0,10 
 
 | Risultato | Fonte |
 |---|---|
-| PARAM-1: "0 confermati su 18" | docs/EXECUTION_LEDGER.md#L7904-L7911 · docs/EXECUTION_LEDGER.md#L7937-L7943 |
-| "dividere per 12 fasi PEGGIORA in 13 casi su 18 rispetto al senza fasi" (≈21 sessioni per fase). | docs/EXECUTION_LEDGER.md#L7904-L7911 · docs/EXECUTION_LEDGER.md#L7937-L7943 |
+| PARAM-1: "0 confermati su 18" | docs/EXECUTION_LEDGER.md#L7937-L7943 |
+| "dividere per 12 fasi PEGGIORA in 13 casi su 18 rispetto al senza fasi" (≈21 sessioni per fase). | docs/EXECUTION_LEDGER.md#L7937-L7943 |
 | PARAM-2: "0 confermati su 12" | docs/EXECUTION_LEDGER.md#L7904-L7911 |
 | media dei trade per metodo di entrata (USD): MES mercato -1,22, limite -2,83, conferma -4,51 | docs/EXECUTION_LEDGER.md#L7904-L7911 |
 | MNQ F3 mobile +21,10 (t 1,64, placebo p95 8,98), ancorato +17,11 (t 1,31), "t sotto 2 con 163 sessioni" | docs/EXECUTION_LEDGER.md#L7904-L7911 |

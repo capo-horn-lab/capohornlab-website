@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router'
 import Ricerca from '@/pagine/Ricerca'
 import Ricerche from '@/pagine/Ricerche'
@@ -12,6 +12,8 @@ import {
   leggiPrefazio,
   leggiRicerca,
   leggiTabella,
+  parolaNuda,
+  paroleNude,
   paroleVerdetto,
   SENZA_VERDETTO,
   varianteParola,
@@ -83,6 +85,18 @@ describe('verdetto dal registro', () => {
     expect(varianteParola('confermata')).toBe('secondary')
     expect(varianteParola('non confermata')).toBe('outline')
     expect(varianteParola('pass')).toBe('outline')
+  })
+  it("in una scheda con piu' studi la voce porta l'ID; la parola nuda resta quella del registro", () => {
+    const v = 'OVN-1: confermati · GOLDN-1: non confermato'
+    expect(paroleVerdetto(v)).toEqual(['OVN-1: confermati', 'GOLDN-1: non confermato'])
+    expect(paroleVerdetto(v).map(parolaNuda)).toEqual(['confermati', 'non confermato'])
+    expect(paroleNude(v)).toEqual(['confermati', 'non confermato'])
+    expect(paroleNude('ENS-1: pass · LASTHALF-OOS: pass')).toEqual(['pass']) // una parola nuda una volta sola
+    expect(parolaNuda('non confermata')).toBe('non confermata') // senza ID resta com'e'
+    expect(paroleNude(SENZA_VERDETTO)).toEqual([])
+    expect(varianteParola('confermati')).toBe('secondary')
+    expect(varianteParola('adottate')).toBe('secondary')
+    expect(varianteParola(parolaNuda('OVN-1: confermati'))).toBe('secondary')
   })
 })
 
@@ -177,7 +191,28 @@ describe('pagine', () => {
     expect(opzioni).toContain(SENZA_VERDETTO)
     expect(opzioni).toContain('non confermata')
     for (const inventata of ['misto', 'ritirato', 'corretto']) expect(opzioni).not.toContain(inventata)
+    expect(opzioni).toContain('confermati') // il plurale e' una parola del registro
+    expect(opzioni.filter((o) => /^[A-Z0-9]+(-[A-Za-z0-9]+)+: /.test(o ?? ''))).toEqual([]) // mai un ID nel filtro
     expect(screen.getAllByRole('link').some((a) => a.getAttribute('href') === '/ricerche/bt-sim-1')).toBe(true)
+  })
+
+  it("/ricerche: filtrare per una parola nuda trova anche le schede con piu' studi (ovn-1)", () => {
+    conRouter('/ricerche')
+    const filtro = screen.getByLabelText('Verdetto nel registro')
+    const ha = (id: string) => screen.queryAllByRole('link').some((a) => a.getAttribute('href') === `/ricerche/${id}`)
+    fireEvent.change(filtro, { target: { value: 'confermati' } })
+    expect(ha('ovn-1')).toBe(true)
+    expect(ha('bt-sim-1')).toBe(false)
+    fireEvent.change(filtro, { target: { value: 'non confermato' } })
+    expect(ha('ovn-1')).toBe(true) // GOLDN-1: non confermato
+  })
+
+  it("ovn-1: l'etichetta dice quale studio ha quale verdetto", async () => {
+    conRouter('/ricerche/ovn-1')
+    expect(await screen.findByRole('heading', { name: 'Esito' })).toBeInTheDocument()
+    expect(screen.getByText('OVN-1: confermati')).toBeInTheDocument()
+    expect(screen.getByText('GOLDN-1: non confermato')).toBeInTheDocument()
+    expect(screen.queryByText('non confermato', { exact: true })).toBeNull() // niente parola nuda senza l'ID
   })
 
   it('/ricerche/:id mostra le sezioni, la colonna Fonte, le prove e id di sezione validi', async () => {

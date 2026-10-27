@@ -127,10 +127,20 @@ export function paroleVerdetto(v: Verdetto): string[] {
   return v === SENZA_VERDETTO || !v ? [] : v.split(SEPARATORE)
 }
 
-/** Aspetto del badge di una parola del registro. */
+/** La parola del registro senza l'ID che la precede nelle schede con piu' studi ("OVN-1: confermati" -> "confermati"). */
+export function parolaNuda(voce: string): string {
+  return voce.replace(/^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+: /, '')
+}
+
+/** Le parole nude di un verdetto, ciascuna una volta: sono le voci del filtro. */
+export function paroleNude(v: Verdetto): string[] {
+  return [...new Set(paroleVerdetto(v).map(parolaNuda))]
+}
+
+/** Aspetto del badge di una parola del registro (nuda: l'ID non conta). */
 export function varianteParola(parola: string): VarianteBadge {
   if (/^ritirat|^fail$/.test(parola)) return 'destructive'
-  if (/^(confermat|adottata|parziale)/.test(parola)) return 'secondary'
+  if (/^(confermat|adottat|parziale)/.test(parola)) return 'secondary'
   return 'outline'
 }
 

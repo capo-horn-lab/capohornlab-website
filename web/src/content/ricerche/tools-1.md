@@ -32,13 +32,13 @@ Walk-forward con selezione su sessioni passate e prova fuori campione; base rate
 
 | Risultato | Fonte |
 |---|---|
-| TOOLS-1: "FUORI CAMPIONE 284 trade, vinti 35.9%, medio -25.44 USD, netto -7225.50, drawdown 7647.50, t-stat -2.68; base rate 1132 trade, 34.6%, medio -30.48, netto -34499, t -6.78" | docs/EXECUTION_LEDGER.md#L5558-L5559 · docs/EXECUTION_LEDGER.md#L5557-L5557 |
+| TOOLS-1: "FUORI CAMPIONE 284 trade, vinti 35.9%, medio -25.44 USD, netto -7225.50, drawdown 7647.50, t-stat -2.68; base rate 1132 trade, 34.6%, medio -30.48, netto -34499, t -6.78" | docs/EXECUTION_LEDGER.md#L5557-L5557 · docs/EXECUTION_LEDGER.md#L5558-L5559 |
 | "il filtro RizzoFlow riduce la perdita per trade, non la inverte". | docs/EXECUTION_LEDGER.md#L5558-L5559 · docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
 | SHORT-1 (due lati, forma compatta): 300 trade, -21.04 USD/trade, t -2.16 | docs/EXECUTION_LEDGER.md#L5889-L5898 |
 | BUY 154 a -16.33 (t -1.25), SELL 146 a -26.01 (t -1.78) | docs/EXECUTION_LEDGER.md#L5889-L5898 |
 | base rate BUY -30.62 (t -6.88), SELL -32.03 (t -7.14). | docs/EXECUTION_LEDGER.md#L5889-L5898 |
-| staffa fissa 2 ATR/2R 104 trade -51.95 (t -0.74) | docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
-| cella migliore BREAK_RETEST/con 15 trade +183.0 (t 1.41). | docs/EXECUTION_LEDGER.md#L5889-L5898 · docs/EXECUTION_LEDGER.md#L5952-L5955 |
+| staffa fissa 2 ATR/2R 104 trade -51.95 (t -0.74) | docs/EXECUTION_LEDGER.md#L5952-L5955 |
+| cella migliore BREAK_RETEST/con 15 trade +183.0 (t 1.41). | docs/EXECUTION_LEDGER.md#L5952-L5955 |
 
 1 righe della scheda non riportate: la prova citata non le contiene.
 

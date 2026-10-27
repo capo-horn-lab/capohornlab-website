@@ -6,7 +6,7 @@ strumenti:
   - "SPY"
   - "QQQ"
 finestra: "CSV SqueezeMetrics 02/05/2011-16/10/2026 (download autorizzato dal proprietario), IBS-NT sui 4 micro 2019-2026 (942 trade) e SPY/QQQ 2011-2018 (450 trade); GEXOC-1: SPY 2011-05-03..2018-12-31 (1.929 sessioni)."
-verdetto: "senza verdetto nel registro"
+verdetto: "GEX-1: non confermato"
 audit: {"stato": "ritirato", "id": ["GEX-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""

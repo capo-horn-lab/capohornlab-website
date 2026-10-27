@@ -37,7 +37,7 @@ T1 nessun edge (72 walk), T2 edge piantato, T3 motore indipendente; TICK-1: conf
 | Risultato | Fonte |
 |---|---|
 | TRUTH-1: T3 "PASSA con un'eccezione dichiarata" (M6E ingressi uguali 98,6%, sotto la soglia 99%) | docs/EXECUTION_LEDGER.md#L8928-L8943 |
-| T1 (v2) "candidati 0 (soglia <= 1 per seme: PASSA), t >= 2 nello 0% (soglia 5%: PASSA)" ma "media fuori campione sopra il p95 dei placebo nel 37,5% dei walk (soglia 10%: NON PASSA)" -> criterio ristretto con placebo abbinato | docs/EXECUTION_LEDGER.md#L8928-L8943 · docs/EXECUTION_LEDGER.md#L9025-L9028 |
+| T1 (v2) "candidati 0 (soglia <= 1 per seme: PASSA), t >= 2 nello 0% (soglia 5%: PASSA)" ma "media fuori campione sopra il p95 dei placebo nel 37,5% dei walk (soglia 10%: NON PASSA)" -> criterio ristretto con placebo abbinato | docs/EXECUTION_LEDGER.md#L9025-L9028 |
 | T2 "trovato con ampio margine" (+249 bp t 18,2) e controllo negativo PASSA. | docs/EXECUTION_LEDGER.md#L9025-L9028 |
 | TICK-1: "il motore a 1 minuto è ATTENDIBILE su tutti gli 11 contratti": barre da tick identiche a quelle NT nel 99,99-100% dei minuti | docs/EXECUTION_LEDGER.md#L8928-L8943 |
 | esito diverso tra 0,15% (ZN) e 0,74% (MNQ) | docs/EXECUTION_LEDGER.md#L8928-L8943 |

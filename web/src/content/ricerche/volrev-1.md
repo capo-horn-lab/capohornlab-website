@@ -12,7 +12,7 @@ strumenti:
   - "ZN"
   - "M6E"
 finestra: "IBS-NT su MES, MNQ, M2K, MYM 2019-2026 (918-941 trade) e SPY/QQQ 2006-2018 (volume Yahoo); ZN 1 minuto NinjaTrader; M6E, 90 fine mese 2019-2026."
-verdetto: "senza verdetto nel registro"
+verdetto: "VOLREV-1: non confermato"
 audit: {"stato": "ritirato", "id": ["VOLREV-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""

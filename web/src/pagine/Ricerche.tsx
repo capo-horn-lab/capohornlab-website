@@ -5,10 +5,16 @@ import { LineSparkline } from '@/components/charts'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { caricaDati, indice } from '@/ricerche/archivio'
 import { valoriSerie } from '@/ricerche/grafico-dati'
-import { anno, paroleVerdetto, SENZA_VERDETTO } from '@/ricerche/modello'
+import { anno, paroleNude, SENZA_VERDETTO } from '@/ricerche/modello'
 import { AuditBadge, VerdettoBadge } from '@/ricerche/Testo'
 
 const TUTTI = ''
+
+/** Le voci del filtro di una pagina: le parole nude del registro (mai l'ID), o "senza verdetto". */
+const vociFiltro = (verdetto: string) => {
+  const parole = paroleNude(verdetto)
+  return parole.length ? parole : [SENZA_VERDETTO]
+}
 
 function Filtro({
   etichetta,
@@ -64,17 +70,17 @@ export default function Ricerche() {
 
   const strumenti = useMemo(() => [...new Set(indice.flatMap((r) => r.strumenti))].sort(), [])
   const anni = useMemo(() => [...new Set(indice.map((r) => anno(r.data)))].sort().reverse(), [])
-  // le parole del registro presenti nell'indice (piu' "senza verdetto nel registro"), una per voce di filtro
+  // le parole nude del registro presenti nell'indice (piu' "senza verdetto nel registro"), una per voce di filtro
   const verdetti = useMemo(
     () =>
-      [...new Set(indice.flatMap((r) => (paroleVerdetto(r.verdetto).length ? paroleVerdetto(r.verdetto) : [SENZA_VERDETTO])))].sort(),
+      [...new Set(indice.flatMap((r) => vociFiltro(r.verdetto)))].sort(),
     [],
   )
 
   const righe = indice.filter(
     (r) =>
       (strumento === TUTTI || r.strumenti.includes(strumento)) &&
-      (verdetto === TUTTI || (paroleVerdetto(r.verdetto).length ? paroleVerdetto(r.verdetto) : [SENZA_VERDETTO]).includes(verdetto)) &&
+      (verdetto === TUTTI || vociFiltro(r.verdetto).includes(verdetto)) &&
       (annoSel === TUTTI || anno(r.data) === annoSel),
   )
   const conGrafico = useMemo(() => indice.filter((r) => r.grafico).map((r) => r.id), [])

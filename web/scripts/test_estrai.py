@@ -46,6 +46,21 @@ LEDGER = "\n".join(
         "client IB in sola lettura (ib_async 2.1.0)",  # 128
         "test_ibkr_opzioni 9 PASS",  # 129
         "riga 130",
+        # 131-140: famiglie A e B, plurali, "esito PAROLA" solo a inizio riga
+        "Esito KRT-1 (runtime/proofs/krt1/krt1.json, run.log, yahoo_daily.csv, 7 PASS nel pannello, "
+        "rubrica congelata prima di ogni risultato): NON CONFERMATA, segni del paper",  # 131: famiglia A (parentesi lunga)
+        "Esito Y (" + "p" * 120 + ") poi altre note: NON CONFERMATA",  # 132: i due punti non seguono la parentesi
+        "Esito OVN-1 (a.json): CONFERMATI TT e WEAK; Esito GOLDN-1 (b.json): NON CONFERMATO",  # 133: plurale + ID
+        "Esito Z-1 (a.json): 0 CONFERMATE su 4",  # 134: plurale dopo un conteggio
+        "- Esito PASS, 2 test; il resto segue",  # 135: "esito PAROLA" a inizio di punto elenco
+        "ma un esito NON CONFERMATA e' informativo quanto uno confermato",  # 136: frase ipotetica
+        "VOLREV-1 (future VOLX, registrato CONFERMATO): CONFERMA RITIRATA, VOLREV-1 = NON CONFERMATO",  # 137: famiglia B
+        "ripartito alle 20:47 su 69 sessioni (30/69), orari 15:30 e 22:00",  # 138: numeri dentro orari e rapporti
+        "Esito (a.json): DESCRITTIVO senza ID",  # 139: Esito + parentesi + due punti, senza ID
+        "Esito SAFE-1 (run.log, 3 PASS nel pannello): PASS, NON CONFERMATA",  # 140: famiglia A, PASS e verdetto di ricerca in catena
+        "Esito W-1 (a.json): PASS, 2 CONFERMATE su 4",  # 141: la catena si ferma davanti a un conteggio
+        "Esito W-2 (a.json): PASS, CONFERMATA se la media > 0",  # 142: la catena si ferma davanti a "se"
+        "Esito W-3 (a.json): BLOCKED_ENV, NON CONFERMATA",  # 143: la catena parte solo da PASS o FAIL
     ]
 )
 
@@ -269,6 +284,36 @@ INVENTARIO = """# Inventario finto
 | 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
 | 6. Pubblicabilità | OK con avvertenza: la heatmap PNG mostra il book L2 di un giorno (dati licenziati): pubblicarla solo se la licenza lo consente; gli esiti numerici sì. |
 
+### OVN-1 e GOLDN-1 — due studi con verdetti diversi nello stesso locatore
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 25/09/2026; MES; domanda: quale studio ha quale verdetto? |
+| 2. Metodo | Un test. |
+| 3. Esito | Esito OVN-1 (a.json): CONFERMATI TT e WEAK; Esito GOLDN-1 (b.json): NON CONFERMATO. (L133) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### TEO-1 — numero dentro orari e rapporti nel registro, riga vera nel documento
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 24/09/2026; MNQ; domanda: quando si supera il massimo notturno? |
+| 2. Metodo | Un test. |
+| 3. Esito | sopra il massimo notturno entro le 15:30 47%, entro le 22:00 69%. (L138; TEO.txt sez. 5) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### TEO-2 — numero che nel registro sta solo dentro un orario
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 23/09/2026; MNQ; domanda: quanti trade? |
+| 2. Metodo | Un test. |
+| 3. Esito | MES 47 trade. (L138) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
 ## Appendice A — Non pubblicabili: infrastruttura
 
 | Gruppo | Schede |
@@ -300,6 +345,13 @@ PROVE = {
     # 99.99 e' dentro 1999.9912 (non e' un valore); 77 e 7.5 stanno nello stesso record, 12 in un altro
     "runtime/proofs/mu1/mu1.json": '{"sparso": {"a": 1999.9912, "b": 12}, "rec": {"n": 77, "mean": 7.5}}',
     "runtime/research/sa-report/summary.json": json.dumps(SUMMARY),
+    "docs/research/TEO.txt": "\n".join(
+        ["5. MASSIMO E MINIMO DELLA NOTTE: PROBABILITA' DI SUPERAMENTO",
+         "Riferimento: range medio fino alle 15:30 e alle 22:00 della notte",  # L2: due dei numeri, ma non il 47
+         "Quale sia il lato grande e' moneta (sopra nel 47% dei giorni)",  # L3: il 47 e una parola, ma non gli orari
+         "Tutte le sessioni:",
+         "massimo superato entro le 15:30 nel 47%, entro le 22:00 nel 69%"]  # L5: tutti i numeri e le parole insieme
+    ),
     # tabella di documento: l'intestazione sta 9 righe sopra la riga con i numeri, 40 righe sopra un'altra
     "docs/research/TAB.txt": "\n".join(
         ["4. TABELLA ESCURSIONE MEDIANA PER FINESTRA (sessioni, punti)", "finestra Roma   escursione   meta' centrale"]
@@ -518,11 +570,70 @@ SENZA = "senza verdetto nel registro"
         (123, "non confermata"),  # "verdetto PAROLA"
         (124, "non confermata"),  # "esito PAROLA"
         (127, "descrittivo"),  # "Outcome: PAROLA"
+        (131, "non confermata"),  # famiglia A: "Esito ID (provenienza lunga, 7 PASS ...): PAROLA"; il "7 PASS" dentro la parentesi non conta
+        (132, SENZA),  # famiglia A, negativo: i due punti non seguono la parentesi e la frase supera i 100 caratteri
+        (134, SENZA),  # "Esito Z-1 (a.json): 0 CONFERMATE su 4": plurale dopo un conteggio
+        (135, "pass"),  # "- Esito PASS" a inizio di punto elenco
+        (136, SENZA),  # "ma un esito NON CONFERMATA e' informativo ...": frase ipotetica a meta' riga
+        (139, "descrittivo"),  # "Esito (a.json): PAROLA" senza ID
+        (140, "pass · non confermata"),  # famiglia A: "PASS, NON CONFERMATA" (SAFEHAVEN-1, L9863): il PASS della prova e il verdetto di ricerca
+        (141, "pass"),  # catena: "PASS, 2 CONFERMATE su 4" -> il conteggio non e' un verdetto
+        (142, "pass"),  # catena: "PASS, CONFERMATA se ..." -> definizione di rubrica
+        (143, "blocked_env"),  # catena: solo dopo PASS o FAIL
     ],
 )
 def test_verdetto_solo_da_frasi_ancorate(mondo, riga, atteso):
     inv, radice, out = mondo
     assert E.parole_registro(E.Contesto(radice), [(riga, riga)]) == atteso
+
+
+def test_plurali_e_id_nelle_schede_con_piu_studi(mondo):
+    inv, radice, out = mondo
+    ctx = E.Contesto(radice)
+    # L133: "Esito OVN-1 (a.json): CONFERMATI ...; Esito GOLDN-1 (b.json): NON CONFERMATO"
+    assert E.parole_registro(ctx, [(133, 133)], ("OVN-1", "GOLDN-1")) == "OVN-1: confermati · GOLDN-1: non confermato"
+    assert E.parole_registro(ctx, [(133, 133)], ("GOLDN-1", "OVN-1")) == "GOLDN-1: non confermato · OVN-1: confermati"
+    assert E.parole_registro(ctx, [(133, 133)], ("OVN-1",)) == "confermati"  # un solo ID: nessun prefisso; il fratello e' escluso
+    assert E.parole_registro(ctx, [(133, 133)]) == "confermati · non confermato"  # senza ID di scheda: parole nude
+    assert E.parole_registro(ctx, [(134, 134)], ("Z-1", "W-1")) == SENZA  # "0 CONFERMATE": il conteggio blocca il plurale
+
+
+def test_famiglia_b_id_uguale_parola_solo_per_gli_id_della_scheda(mondo):
+    inv, radice, out = mondo
+    ctx = E.Contesto(radice)
+    # L137: "... CONFERMA RITIRATA, VOLREV-1 = NON CONFERMATO" ("registrato CONFERMATO" non e' ancorato)
+    assert E.parole_registro(ctx, [(137, 137)], ("VOLREV-1", "H-NEXT-8")) == "VOLREV-1: non confermato"
+    assert E.parole_registro(ctx, [(137, 137)], ("VOLREV-1",)) == "non confermato"
+    assert E.parole_registro(ctx, [(137, 137)], ("ALTRO-1", "H-NEXT-8")) == SENZA  # non e' un ID della scheda
+    assert E.parole_registro(ctx, [(137, 137)]) == SENZA  # senza ID di scheda la famiglia B non si applica
+
+
+def test_pagina_con_due_studi_porta_gli_id_nell_etichetta(mondo):
+    _, out = genera(mondo)
+    assert front(out / "ovn-1.md")["verdetto"] == "OVN-1: confermati · GOLDN-1: non confermato"
+
+
+def test_numero_sorgente_dentro_orari_e_rapporti(mondo):
+    assert not E.ha_numero("47", "ripartito alle 20:47 su 250")  # "20:47" e' un orario, un token solo
+    assert E.ha_numero("20:47", "ripartito alle 20:47")
+    assert E.ha_numero("69", "69 sessioni su 250") and E.ha_numero("69", "casi 30/69")  # k/n restano due numeri
+    assert not E.ha_numero("5", "sotto il p95") and not E.ha_numero("0", "MMLU-20")
+    assert E.ha_numero("2.1.0", "client ib_async 2.1.0") and not E.ha_numero("2.1", "client ib_async 2.1.0")
+    assert E.ha_numero("1,5", "media 1.5") and E.ha_numero("29.900", "tondo 29900")
+    assert E.ha_numero("-3,21", "MNQ -3,21 USD") and not E.ha_numero("3,21", "MNQ -3,21 USD")
+
+
+def test_fonte_e_dove_numero_e_parole_stanno_insieme(mondo):
+    _, out = genera(mondo)
+    md = leggi_md(out, "teo-1")
+    righe = righe_tabella(md)
+    # L138 ha "69" (in "69 sessioni") e gli orari, ma non "47" e non le parole della riga: la riga vera e' nel documento
+    # il documento ha il 47 anche alla L3 e gli orari alla L2: la Fonte e' la L5, dove ci sono tutti i numeri e le parole
+    assert len(righe) == 1 and righe[0].endswith("| docs/research/TEO.txt#L5-L5 |")
+    assert "righe della scheda non riportate" not in md
+    # un numero che nel registro sta solo dentro "20:47" non e' verificato: nessuna riga, frase vera
+    md2 = leggi_md(out, "teo-2")
+    assert "1 righe della scheda non riportate: la prova citata non le contiene." in md2 and "MES 47" not in md2
 
 
 def test_pagine_con_solo_conteggi_o_rubriche_senza_verdetto(mondo):
@@ -547,7 +658,7 @@ def test_numeri_in_tabella_di_documento_per_sezione_non_per_riga(mondo):
     md = leggi_md(out, "tau-1")
     assert "righe della scheda non riportate" not in md
     righe = righe_tabella(md)
-    assert len(righe) == 1 and righe[0].endswith("| docs/research/TAB.txt |")
+    assert len(righe) == 1 and righe[0].endswith("| docs/research/TAB.txt#L10-L10 · docs/research/TAB.txt#L11-L11 |")
     # la frase compare solo se il numero manca davvero: qui sta 30 righe sotto l'intestazione
     md = leggi_md(out, "upsilon-1")
     assert "1 righe della scheda non riportate: la prova citata non le contiene." in md and "777" not in md

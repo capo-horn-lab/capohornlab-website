@@ -36,11 +36,11 @@ Walk-forward mobile (8 blocchi da 60 sessioni), F3 prudente, placebo abbinato pe
 
 | Risultato | Fonte |
 |---|---|
-| FINALE: "0 CANDIDATI e 0 CONFERMATI su 198 walk" | docs/EXECUTION_LEDGER.md#L9017-L9017 · docs/EXECUTION_LEDGER.md#L9055-L9055 |
-| migliori M2K famiglia MACD 69 trade +59,4 bp t 2,87 (q 0,29) | docs/EXECUTION_LEDGER.md#L9017-L9017 · docs/EXECUTION_LEDGER.md#L9055-L9055 |
+| FINALE: "0 CANDIDATI e 0 CONFERMATI su 198 walk" | docs/EXECUTION_LEDGER.md#L9055-L9055 |
+| migliori M2K famiglia MACD 69 trade +59,4 bp t 2,87 (q 0,29) | docs/EXECUTION_LEDGER.md#L9055-L9055 |
 | MES famiglia STO 79 trade +52,7 t 2,79 | docs/EXECUTION_LEDGER.md#L9017-L9017 |
 | MYM famiglia RSI 59 trade +82,9 t 2,71 | docs/EXECUTION_LEDGER.md#L9017-L9017 |
-| a 1 minuto nessun walk positivo con t sopra 0,6 e i più negativi FESX -5,58 bp t -5,88, M2K -5,19 t -4,84, MBT -6,88 t -3,78 ("i costi dominano"). | docs/EXECUTION_LEDGER.md#L9017-L9017 · docs/EXECUTION_LEDGER.md#L9055-L9055 |
+| a 1 minuto nessun walk positivo con t sopra 0,6 e i più negativi FESX -5,58 bp t -5,88, M2K -5,19 t -4,84, MBT -6,88 t -3,78 ("i costi dominano"). | docs/EXECUTION_LEDGER.md#L9055-L9055 |
 
 ## Cosa NON dice
 

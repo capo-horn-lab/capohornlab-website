@@ -36,7 +36,7 @@ OTM con bid>0, spread/medio≤0,5; forward dalla parità put-call; SVI per scade
 | VOLSURF-2: "NinjaTrader: NO" (opzioni non supportate in NinjaScript) | docs/EXECUTION_LEDGER.md#L10656-L10662 · docs/EXECUTION_LEDGER.md#L10673-L10682 · docs/EXECUTION_LEDGER.md#L10761-L10761 |
 | IBKR: API BLOCKED_ENV, connettore claude.ai PASS su NDX (bid/ask identici a Cboe su 49/49), RMSE 0,070 / 0,067 / 0,044, ATM entro 0,27 punti contro Cboe. | docs/EXECUTION_LEDGER.md#L10673-L10682 |
 | VOLSURF-3/3B: client IB Gateway/TWS in sola lettura (`ib_async 2.1.0`), 9 test PASS | docs/EXECUTION_LEDGER.md#L10673-L10682 |
-| 22 test PASS in 3B | docs/EXECUTION_LEDGER.md#L10761-L10761 |
+| 22 test PASS in 3B | docs/EXECUTION_LEDGER.md#L10761-L10761 · docs/EXECUTION_LEDGER.md#L10673-L10682 |
 | chiamate reali NOT_RUN. | docs/EXECUTION_LEDGER.md#L10656-L10662 · docs/EXECUTION_LEDGER.md#L10673-L10682 · docs/EXECUTION_LEDGER.md#L10761-L10761 |
 
 1 righe della scheda non riportate: la prova citata non le contiene.

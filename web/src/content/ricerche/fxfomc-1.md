@@ -5,7 +5,7 @@ data: "2026-10-20"
 strumenti:
   - "M6E"
 finestra: "M6E 1.958 sessioni (1.900 valide), 60 riunioni FOMC (36 scoperta, 24 verifica), 1.840 giorni di controllo"
-verdetto: "non confermata"
+verdetto: "pass · non confermata"
 audit: {"stato": "nota", "id": ["FXFOMC-1"]}
 pubblicabilita: "ok"
 avvertenza: ""

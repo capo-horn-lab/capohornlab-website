@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Badge } from '@/components/ui/badge'
-import { AIUTO_AUDIT, paroleVerdetto, SENZA_VERDETTO, varianteParola, type Audit, type Verdetto } from './modello'
+import { AIUTO_AUDIT, parolaNuda, paroleVerdetto, SENZA_VERDETTO, varianteParola, type Audit, type Verdetto } from './modello'
 
 /** Markdown in riga (grassetto, codice) dentro una cella o una voce di elenco. */
 export function InLinea({ testo }: { testo: string }) {
@@ -31,7 +31,7 @@ export function Paragrafi({ testo }: { testo: string }) {
   )
 }
 
-/** Una parola del registro per badge; oltre `max` parole il resto va in "+N" (tutte nel title). */
+/** Una voce del registro per badge (con l'ID, se la scheda ha piu' studi); oltre `max` voci il resto va in "+N" (tutte nel title). */
 export function VerdettoBadge({ verdetto, max = 3 }: { verdetto: Verdetto; max?: number }) {
   const parole = paroleVerdetto(verdetto)
   if (parole.length === 0) {
@@ -42,9 +42,9 @@ export function VerdettoBadge({ verdetto, max = 3 }: { verdetto: Verdetto; max?:
     )
   }
   return (
-    <span className="flex flex-wrap gap-1" title={`Parole del registro: ${parole.join(', ')}`}>
+    <span className="flex flex-wrap gap-1" title={`Verdetto nel registro: ${parole.join(', ')}`}>
       {parole.slice(0, max).map((p) => (
-        <Badge key={p} variant={varianteParola(p)}>
+        <Badge key={p} variant={varianteParola(parolaNuda(p))}>
           {p}
         </Badge>
       ))}

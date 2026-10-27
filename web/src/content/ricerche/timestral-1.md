@@ -28,8 +28,8 @@ Skill CRPS contro la base B1, copertura 10-90 e 25-75; regola fissata nel PIANO 
 |---|---|
 | TIMESTRAL-1 "FAIL, nessuna integrazione": 209M passo 1 L 8192, skill CRPS contro B1 +0,21% [-0,41; +0,85] a 30 min, +0,23% [-0,38; +0,89] a 60 min, +0,94% [+0,31; +1,58] a 120 min | docs/EXECUTION_LEDGER.md#L10635-L10638 |
 | copertura 10-90 74,6 / 75,5 / 77,8% (B1 78,4 / 79,2 / 80,1). | docs/EXECUTION_LEDGER.md#L10635-L10638 |
-| TIMESTRAL-2 "FAIL, nessuna integrazione": dopo fine-tuning skill +0,17% [-0,45; +0,81] a 30 min, +0,13% [-0,47; +0,79] a 60, +0,88% [+0,22; +1,55] a 120 | docs/EXECUTION_LEDGER.md#L10664-L10667 |
-| contro il 209M originale -0,04 / -0,09 / -0,06% con intervalli che contengono 0. | docs/EXECUTION_LEDGER.md#L10635-L10638 · docs/EXECUTION_LEDGER.md#L10664-L10667 |
+| TIMESTRAL-2 "FAIL, nessuna integrazione": dopo fine-tuning skill +0,17% [-0,45; +0,81] a 30 min, +0,13% [-0,47; +0,79] a 60, +0,88% [+0,22; +1,55] a 120 | docs/EXECUTION_LEDGER.md#L10664-L10667 · docs/EXECUTION_LEDGER.md#L10635-L10638 |
+| contro il 209M originale -0,04 / -0,09 / -0,06% con intervalli che contengono 0. | docs/EXECUTION_LEDGER.md#L10664-L10667 |
 
 ## Cosa NON dice
 

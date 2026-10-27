@@ -4,7 +4,7 @@ titolo: "REGIMI-STRAT-1 — le strategie rendono solo in certi regimi del classi
 data: "2026-10-25"
 strumenti: []
 finestra: "60 unità famiglia x strumento (6 x 10) con P&L OPT-ALL, 180 celle (60 x 3 regimi), 2.184 giorni (oos dalla 501ª)"
-verdetto: "senza verdetto nel registro"
+verdetto: "non confermato"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10691-L10697"

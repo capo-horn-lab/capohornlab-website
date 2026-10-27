@@ -10,9 +10,12 @@ Regole (vincolanti; "nulla di inventato": meno contenuto e' sempre accettabile, 
 - ogni riga della tabella "Esito" ha una colonna Fonte (ledger `docs/EXECUTION_LEDGER.md#La-Lb` e/o prova);
   una riga con un numero che non si ritrova nella fonte citata NON si pubblica: la pagina dice soltanto
   quante righe non sono riportate. Si ammette solo il recupero entro 3 righe dall'intervallo citato dal
-  registro (stesso numero e stesse parole), con la Fonte alla riga vera;
-- l'etichetta di verdetto e' la parola del registro (lista chiusa) trovata nelle righe di ledger citate dalla
-  pagina; se non c'e', "senza verdetto nel registro". Ritiro/correzione dell'audit: campo `audit`, a parte;
+  registro (stesso numero e stesse parole), con la Fonte alla riga vera. Lato fonte i numeri si leggono come
+  in tabella (un orario e' un token, numeri a confine di parola, k/n sono due numeri) e la Fonte e' la riga
+  dove numero e parole stanno insieme, la migliore tra i candidati (non la prima con le stesse cifre);
+- l'etichetta di verdetto e' la parola del registro (lista chiusa) trovata, in una frase di verdetto ancorata,
+  nelle righe di ledger citate dalla pagina (con l'ID davanti nelle schede con piu' studi); se non c'e',
+  "senza verdetto nel registro". Ritiro/correzione dell'audit: campo `audit`, a parte;
 - niente istruzioni di lavoro dell'inventario ("pubblicare solo...", "citare..."): si tengono le clausole fattuali;
 - pagine ritirate: banner e motivo dal registro, senza i numeri ritirati;
 - LIMALL-1 e OPT-COND-1 (senza esito chiuso) non compaiono da nessuna parte;
@@ -27,6 +30,7 @@ import json
 import re
 import sys
 import unicodedata
+from functools import lru_cache
 from math import ceil
 from pathlib import Path
 
@@ -56,25 +60,55 @@ STRUMENTI = ("MES", "MNQ", "M2K", "MYM", "MCL", "MGC", "M6E", "MBT", "ES", "NQ",
              "SPX", "NDX", "VIX", "VX", "BTC", "ETH", "FESX", "FDXM", "FDXS", "FSXE")
 
 # Parole di verdetto/esito scritte nel registro (docs/EXECUTION_LEDGER.md); lista chiusa. Ognuna compare nel
-# registro (PASS, FAIL, CONFERMATA/O, NON CONFERMATA/O, RITIRATA, PARZIALE, BLOCKED_ENV, NOT_RUN, ADOTTATA,
+# registro (PASS, FAIL, CONFERMATA/O/I/E, NON CONFERMATA/O, RITIRATA, PARZIALE, BLOCKED_ENV, NOT_RUN, ADOTTATA/I/E,
 # NON ADOTTATA, DESCRITTIVO); RITIRATO e' nella lista del controllore anche se oggi il registro scrive RITIRATA.
 _PAROLA = (r"(?:NON\s+(?:CONFERMAT[AO]|ADOTTATA|[Cc]onfermat[ao]|[Aa]dottata)"
-           r"|CONFERMAT[AO]|ADOTTATA|PARZIALE|RITIRAT[AO]|DESCRITTIVO|PASS|FAIL|BLOCKED_ENV|NOT_RUN)")
+           r"|CONFERMAT[AOIE]|ADOTTAT[AIE]|PARZIALE|RITIRAT[AO]|DESCRITTIVO|PASS|FAIL|BLOCKED_ENV|NOT_RUN)")
 PAROLE = re.compile(r"(?<![A-Za-z_])" + _PAROLA + r"(?![A-Za-z_])")
 
 # Una parola e' un verdetto solo se ANCORATA a una frase di verdetto che il registro usa davvero (docs/EXECUTION_LEDGER.md):
 #   "Esito X (runtime/proofs/x/x.json, run.log): NON confermato" (L8058, L8481, L8782), "Esito: BLOCKED_ENV" (L1653),
-#   "Esito PASS, verdetto NON CONFERMATA ..." e "esito NON CONFERMATA" (L9721, L9282), "Verdetto: NON CONFERMATA" (L9247),
-#   "verdetto NON CONFERMATA" (L9309). Mai una parola preceduta da un conteggio ("3643 PASS", "0 FAIL"), mai seguita da
-#   "se"/"quando"/"dopo" (definizione di rubrica), mai fuori da queste frasi. In dubbio: senza verdetto.
+#   "Esito PASS, verdetto NON CONFERMATA ..." (L9721; "esito PAROLA" solo a inizio riga o di punto elenco: a meta' riga
+#   sono frasi ipotetiche, L9282), "Verdetto: NON CONFERMATA" (L9247), "verdetto NON CONFERMATA" (L9309).
+#   Famiglia A: "Esito ID (provenienza lunga come si vuole): PAROLA", con i due punti subito dopo la parentesi chiusa
+#   (L8628, L9766). Famiglia B: "<ID della scheda> = PAROLA" (la forma dell'audit, L8968, L8969).
+# Mai una parola preceduta da un conteggio ("3643 PASS", "0 FAIL", "0 CONFERMATE"), mai seguita da "se"/"quando"/"dopo"
+# (definizione di rubrica), mai fuori da queste frasi. In dubbio: senza verdetto.
 _FINE = r"(?![A-Za-z_])(?!\s+(?:solo\s+)?(?:se|quando|dopo)\b)"
-ANCORE = [re.compile(rx) for rx in (
-    r"(?i:\besito\b)[^\n;]{0,100}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE,
-    r"(?i:\besito)\s+\**(?P<w>" + _PAROLA + r")" + _FINE,
-    r"(?i:\bverdetto\b)[^:\n;]{0,40}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE,
-    r"(?i:\bverdetto)\s+\**(?P<w>" + _PAROLA + r")" + _FINE,
-    r"(?i:\boutcome\b)[^\n;]{0,40}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE,
+_ID = r"[A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+"
+ANCORE = [re.compile(rx, fl) for rx, fl in (
+    (r"(?i:\besito\b)(?:\s+(?P<id>" + _ID + r"))?[^\n;]{0,100}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE, 0),
+    (r"^[ \t]*(?:[-*>][ \t]*)*\**[ \t]*(?i:esito)\s+\**(?P<w>" + _PAROLA + r")" + _FINE, re.M),
+    (r"(?i:\bverdetto\b)[^:\n;]{0,40}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE, 0),
+    (r"(?i:\bverdetto)\s+\**(?P<w>" + _PAROLA + r")" + _FINE, 0),
+    (r"(?i:\boutcome\b)[^\n;]{0,40}?:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE, 0),
 )]
+_A_INIZIO = re.compile(r"(?i:\besito\b)(?:\s+(?P<id>" + _ID + r"))?[^():;\n]{0,60}\(")
+_A_FINE = re.compile(r"\s*:\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE)
+# "PASS, NON CONFERMATA" (L9863): dopo un PASS/FAIL ancorato la catena con la virgola porta anche il verdetto di ricerca,
+# mai un conteggio ("PASS, 2 CONFERMATE"), mai una definizione ("PASS, CONFERMATA se ..."), mai BLOCKED_ENV/NOT_RUN.
+_A_CATENA = re.compile(r"\s*,\s*\**\s*(?P<w>NON\s+(?:CONFERMAT[AO]|ADOTTATA)|CONFERMAT[AOIE]|ADOTTAT[AIE]|PARZIALE)" + _FINE)
+
+
+def _famiglia_a(testo):
+    """(posizione, ID|None, parola) di "Esito [ID] (provenienza): PAROLA" con la parentesi lunga quanto serve."""
+    for m in _A_INIZIO.finditer(testo):
+        profondita, i = 1, m.end()
+        while i < len(testo) and profondita and i - m.end() < 1500:
+            profondita += (testo[i] == "(") - (testo[i] == ")")
+            i += 1
+        if profondita == 0 and (f := _A_FINE.match(testo, i)):
+            yield f.start("w"), m.group("id"), f.group("w")
+            if f.group("w") in ("PASS", "FAIL") and (c := _A_CATENA.match(testo, f.end("w"))):
+                yield c.start("w"), m.group("id"), c.group("w")
+
+
+def _famiglia_b(testo, ids):
+    """(posizione, ID, parola) di "<ID> = PAROLA", solo per gli ID della scheda."""
+    for i_d in ids:
+        for m in re.finditer(r"(?<![\w-])" + re.escape(i_d) + r"\s*=\s*\**\s*(?P<w>" + _PAROLA + r")" + _FINE, testo):
+            yield m.start("w"), i_d, m.group("w")
+
 
 # Istruzioni di lavoro dell'inventario (non sono fatti sullo studio): le clausole che le contengono non si pubblicano.
 ISTRUZIONI = re.compile("|".join([
@@ -120,18 +154,18 @@ def varianti(tok):
     return v
 
 
-def _negativo(testo, i):
-    return i > 0 and testo[i - 1] in "-" + MENO and not (i > 1 and OP.match(testo[i - 2]))
+@lru_cache(maxsize=8192)
+def _numeri_fonte(testo):
+    """I numeri di un testo di fonte come (negativo, cifre), con la stessa tokenizzazione delle righe di tabella:
+    un orario (20:47) e' un token solo, i numeri cominciano a confine di parola, k/n (30/69) sono due numeri."""
+    return frozenset((t.startswith("-"), t.lstrip("-")) for t in numeri(testo))
 
 
 def ha_numero(tok, testo):
-    """Le cifre del numero compaiono (stesso segno) come numero intero nel testo, mai dentro un numero piu' lungo."""
+    """Il numero (stesso segno) e' uno dei numeri della fonte; mai cifre dentro un orario, un codice o un numero piu' lungo."""
     neg, num = tok.startswith("-"), tok.lstrip("-")
-    for v in varianti(num):
-        for m in re.finditer(rf"(?<!\d)(?<!\d\.){re.escape(v)}(?!\d)(?!\.\d)", testo):
-            if _negativo(testo, m.start()) == neg:
-                return True
-    return False
+    presenti = _numeri_fonte(testo)
+    return any((neg, v) in presenti for v in varianti(num))
 
 
 def normalizza(t):
@@ -569,21 +603,35 @@ def ancora(a, b):
     return f"{LEDGER}#L{a}-L{b}"
 
 
-def riga_ledger_con(ctx, tok, lo, hi, parole):
-    """Prima riga (1-based) tra lo e hi che porta il numero E le parole del testo (sulla stessa riga), o None."""
+def punteggio(riga, toks, parole):
+    """(quanti numeri della riga di tabella stanno in questa riga della fonte, quante parole): serve a scegliere la riga
+    vera tra piu' candidati, invece del primo posto in cui compaiono le stesse cifre."""
+    n = normalizza(riga)
+    return (sum(1 for t in toks if ha_numero(t, riga)), sum(1 for p in parole if p in n))
+
+
+def riga_ledger_con(ctx, tok, lo, hi, parole, toks=()):
+    """Riga (1-based) tra lo e hi che porta il numero E le parole del testo (sulla stessa riga), la migliore per
+    `punteggio` (a parita' la prima); None se non c'e'."""
+    migliore = None
     for n in range(max(1, lo), min(len(ctx.ledger), hi) + 1):
-        if ha_numero(tok, ctx.ledger[n - 1]) and hanno_le_parole(parole, ctx.ledger[n - 1]):
-            return n
-    return None
+        r = ctx.ledger[n - 1]
+        if ha_numero(tok, r) and hanno_le_parole(parole, r):
+            p = punteggio(r, toks or (tok,), parole)
+            if migliore is None or p > migliore[0]:
+                migliore = (p, n)
+    return migliore[1] if migliore else None
 
 
 def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids=()):
     """-> (righe pubblicate [{testo, fonte, ancore}], numero di righe non riportate).
 
-    Per ogni numero, nell'ordine: (1) righe di ledger citate; (2) entro 3 righe dall'intervallo citato, solo se la
-    riga ha anche le parole del testo (Fonte = riga vera); (3) documento citato (testo con le parole vicine);
-    (4) file di prova JSON, solo se tutti i numeri restanti sono valori dello stesso record. Altrimenti la riga non
-    si pubblica."""
+    La Fonte di un numero e' la posizione in cui il numero E le parole della riga stanno insieme, scelta tra i candidati
+    nell'ordine: (1) righe di ledger citate, sulla stessa riga; (2) entro 3 righe dall'intervallo citato, sulla stessa
+    riga (Fonte = la riga vera); (3) documento citato, nella stessa sezione/tabella; (4) righe di ledger citate dove il
+    numero c'e' ma le parole no (citato cosi' dall'inventario); (5) file di prova JSON, solo se tutti i numeri
+    restanti sono valori dello stesso record. Altrimenti la riga non si pubblica. Il numero e' sempre un token intero
+    (non cifre dentro un orario, un codice o un numero piu' lungo)."""
     segs = segmenta(esito)
     if ritirati:
         segs = senza_ritirati(segs, ids, ritirati)
@@ -595,43 +643,34 @@ def righe_esito(esito, refs_cella, docs_cella, ctx, prove_file, ritirati=(), ids
         proprie = [r for r in dict.fromkeys(refs) if 0 < r[0] <= r[1] <= len(ctx.ledger)]
         primarie = proprie or refs_cella
         fonti = [(ancora(a, b), ctx.righe_ledger(a, b)) for a, b in primarie]
-        usate = []  # in Fonte solo dove i numeri si ritrovano davvero (senza numeri: le citazioni della riga)
-        parole = parole_riga(testo)
-        residui = []
-        for tok in numeri(testo):  # (1) righe di ledger citate
-            if any(ha_numero(tok, t) for _, t in usate):
-                continue
-            trovata = next(((n, t) for n, t in fonti if ha_numero(tok, t)), None)
-            if trovata:
-                usate.append(trovata)
-            else:
-                residui.append(tok)
-        resto = []
-        for tok in residui:  # (2) entro 3 righe dall'intervallo citato, con le parole sulla riga che porta il numero
-            n = None
-            for a, b in primarie:
-                n = riga_ledger_con(ctx, tok, a - MARGINE_LEDGER, b + MARGINE_LEDGER, parole)
-                if n:
-                    break
-            if n:
-                if all(u[0] != ancora(n, n) for u in usate):
-                    usate.append((ancora(n, n), ctx.ledger[n - 1]))
-            else:
-                resto.append(tok)
-        residui, resto = resto, []
         elenco_docs = [d for d in dict.fromkeys([ctx.documento(x) for x in docs] + list(docs_cella)) if d]
-        for tok in residui:  # (3) documento citato: il numero nella stessa sezione/tabella delle parole della riga
+        parole = parole_riga(testo)
+        usate, resto = [], []  # in Fonte solo dove i numeri si ritrovano davvero (senza numeri: le citazioni della riga)
+        toks = numeri(testo)
+        for tok in toks:
+            # Candidati (punteggio, fonte): (1) righe di ledger citate, (2) se non ce ne sono, entro 3 righe dall'intervallo,
+            # (3) righe dei documenti citati (la riga vera, es. TEORIA_MOVIMENTO riga 58, non il file intero). Vince il
+            # punteggio piu' alto (piu' numeri della riga di tabella sulla stessa riga, poi piu' parole), a parita' il primo.
+            cand = [(punteggio(r, toks, parole), (nome, t)) for (a, b), (nome, t) in zip(primarie, fonti)
+                    for r in ctx.ledger[a - 1:b] if ha_numero(tok, r) and hanno_le_parole(parole, r)]
+            if not cand:
+                for a, b in primarie:
+                    if n := riga_ledger_con(ctx, tok, a - MARGINE_LEDGER, b + MARGINE_LEDGER, parole, toks):
+                        cand.append((punteggio(ctx.ledger[n - 1], toks, parole), (ancora(n, n), ctx.ledger[n - 1])))
+                        break
             for d in elenco_docs:
                 righe_doc = ctx.testo(d).split("\n")
-                if any(ha_numero(tok, r) and hanno_le_parole(
-                        parole, "\n".join(righe_doc[max(0, i - SEZIONE_DOC):i + MARGINE_LEDGER + 1]))
-                       for i, r in enumerate(righe_doc)):
-                    if all(u[0] != d for u in usate):
-                        usate.append((d, ctx.testo(d)))
-                    break
-            else:
+                cand += [(punteggio(r, toks, parole), (f"{d}#L{i + 1}-L{i + 1}", r)) for i, r in enumerate(righe_doc)
+                         if ha_numero(tok, r) and hanno_le_parole(
+                             parole, "\n".join(righe_doc[max(0, i - SEZIONE_DOC):i + MARGINE_LEDGER + 1]))]
+            scelta = max(enumerate(cand), key=lambda e: (e[1][0], -e[0]))[1][1] if cand else None
+            if not scelta:
+                scelta = next(((n, t) for n, t in fonti if ha_numero(tok, t)), None)
+            if not scelta:
                 resto.append(tok)
-        if resto:  # (4) prova JSON: tutti i numeri restanti come valori di uno stesso record
+            elif all(u[0] != scelta[0] for u in usate):
+                usate.append(scelta)
+        if resto:  # (5) prova JSON: tutti i numeri restanti come valori di uno stesso record
             for p in prove_file:
                 if p.endswith(".json") and any(all(record_ha(rec, t) for t in resto) for rec in ctx.record(p)):
                     usate.append((p, ""))
@@ -661,17 +700,27 @@ def senza_ritirati(segs, ids, ritirati):
     return out
 
 
-def parole_registro(ctx, ancore):
+def parole_registro(ctx, ancore, ids=()):
     """Parole di verdetto del registro (lista chiusa) nelle righe di ledger indicate, SOLO se ancorate a una frase di
-    verdetto del registro (ANCORE), una volta ciascuna, nell'ordine in cui compaiono."""
-    viste = []
+    verdetto del registro (ANCORE e famiglie A/B), una volta ciascuna. In una scheda con piu' ID, quando la frase nomina
+    uno degli ID della scheda la parola porta l'ID ("OVN-1: confermati · GOLDN-1: non confermato"); le voci sono nell'ordine
+    degli ID della scheda (prima quelle senza ID), poi in quello in cui compaiono."""
+    ids = tuple(i for i in ids if i not in SENZA_ESITO)
+    con_id = len(ids) > 1
+    viste, ordine = {}, 0
     for a, b in ancore:
         testo = ctx.righe_ledger(a, b)
-        for _, w in sorted((m.start("w"), re.sub(r"\s+", " ", m.group("w")).lower())
-                           for rx in ANCORE for m in rx.finditer(testo)):
-            if w not in viste:
-                viste.append(w)
-    return " · ".join(viste) or SENZA_VERDETTO
+        trovate = [(m.start("w"), m.groupdict().get("id"), m.group("w")) for rx in ANCORE for m in rx.finditer(testo)]
+        trovate += list(_famiglia_a(testo)) + (list(_famiglia_b(testo, ids)) if ids else [])
+        for _, i_d, w in sorted(trovate, key=lambda t: t[0]):
+            if i_d and ids and i_d not in ids:
+                continue  # la frase nomina un altro studio (un fratello, o uno escluso): non e' il verdetto di questa scheda
+            voce = (i_d if con_id and i_d in ids else None, re.sub(r"\s+", " ", w).lower())
+            if voce not in viste:
+                viste[voce] = ordine
+                ordine += 1
+    voci = sorted(viste, key=lambda v: (ids.index(v[0]) if v[0] else -1, viste[v]))
+    return " · ".join(f"{i}: {w}" if i else w for i, w in voci) or SENZA_VERDETTO
 
 
 # --- dati strutturati per i grafici ---
@@ -778,7 +827,7 @@ def pagina(s, ctx):
     fonte_ledger = ancora(*prima) if prima else ""
     # il verdetto e' scritto nel locatore principale della scheda (`fonte_ledger`): le parole delle altre righe citate
     # (rubriche, esiti di altri studi) non sono verdetti della pagina
-    verdetto = parole_registro(ctx, [prima] if prima else [])
+    verdetto = parole_registro(ctx, [prima] if prima else [], s["ids"])
     avv_prima = s["avvertenza"]
     avv = pulito(avv_prima)
     fm = {"id": s["id"], "titolo": titolo_senza_esclusi(s["titolo"]), "data": s["data"], "strumenti": s["strumenti"],

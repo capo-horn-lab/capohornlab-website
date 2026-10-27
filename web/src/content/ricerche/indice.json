@@ -16,7 +16,7 @@
   "titolo": "REGIMI-STRAT-1 — le strategie rendono solo in certi regimi del classificatore k-means?",
   "data": "2026-10-25",
   "strumenti": [],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "non confermato",
   "pubblicabilita": "ok",
   "grafico": false
  },
@@ -191,7 +191,7 @@
   "strumenti": [
    "M6E"
   ],
-  "verdetto": "non confermata",
+  "verdetto": "pass · non confermata",
   "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": true
@@ -218,7 +218,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -251,7 +251,7 @@
    "MCL",
    "MGC"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "non confermata",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -290,7 +290,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "pass · non confermata",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -354,7 +354,7 @@
    "MES",
    "SPY"
   ],
-  "verdetto": "confermata",
+  "verdetto": "pass · confermata",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -402,7 +402,7 @@
    "IWM",
    "DIA"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "ALLOC-1: non confermato",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -505,7 +505,7 @@
    "MCL",
    "MBT"
   ],
-  "verdetto": "non confermato",
+  "verdetto": "CRISIS-1: non confermato",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -584,7 +584,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "confermato",
+  "verdetto": "ENS-1: confermato · LASTHALF-OOS: non confermato",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -622,7 +622,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "GEX-1: non confermato",
   "audit": "ritirato",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -669,7 +669,7 @@
    "FESX",
    "FDXM"
   ],
-  "verdetto": "confermata",
+  "verdetto": "IBS-NT: confermata",
   "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true
@@ -858,7 +858,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "non confermata",
+  "verdetto": "OPENPYR-1: non confermata",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -929,7 +929,7 @@
    "MYM",
    "MGC"
   ],
-  "verdetto": "non confermato",
+  "verdetto": "OVN-1: confermati · GOLDN-1: non confermato",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -945,7 +945,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "non confermato",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -1191,7 +1191,7 @@
    "ZN",
    "M6E"
   ],
-  "verdetto": "senza verdetto nel registro",
+  "verdetto": "VOLREV-1: non confermato",
   "audit": "ritirato",
   "pubblicabilita": "avvertenza",
   "grafico": false

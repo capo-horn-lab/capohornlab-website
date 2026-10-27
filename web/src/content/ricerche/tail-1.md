@@ -34,9 +34,9 @@ un limite di perdita giornaliero (P4) o lo stop dopo 2 perdite (P5) riducono le 
 | AIUTANO P1 22, P2 37, P3 19, P4 110, P5 115 | docs/EXECUTION_LEDGER.md#L7360-L7360 |
 | "EDGE REALE (protetta e anche positiva con t >= 2): 1, MNQ noise area griglia 5m intera con P5". | docs/EXECUTION_LEDGER.md#L7360-L7360 |
 | TAIL-1-OOS: "NON confermata" (NQ fine 2024: 56 sessioni, senza +29,97 USD/sessione t 1,14, con P5 +36,49 t 1,46, differenza +6,52 t 0,77). | docs/EXECUTION_LEDGER.md#L7382-L7382 |
-| TAIL-1-NT: "le protezioni VALGONO in generale": P4 differenza positiva in 14 casi su 15 (p 0,0004), media +29,3 USD per sessione | docs/EXECUTION_LEDGER.md#L7382-L7382 · docs/EXECUTION_LEDGER.md#L7360-L7360 · docs/EXECUTION_LEDGER.md#L7474-L7474 |
+| TAIL-1-NT: "le protezioni VALGONO in generale": P4 differenza positiva in 14 casi su 15 (p 0,0004), media +29,3 USD per sessione | docs/EXECUTION_LEDGER.md#L7474-L7474 |
 | P5 13 su 13 (p 0,0002), media +33,6 | docs/EXECUTION_LEDGER.md#L7474-L7474 |
-| "Non creano un edge": con protezione positive 5 strategie su 28 (senza: 1). | docs/EXECUTION_LEDGER.md#L7360-L7360 · docs/EXECUTION_LEDGER.md#L7474-L7474 |
+| "Non creano un edge": con protezione positive 5 strategie su 28 (senza: 1). | docs/EXECUTION_LEDGER.md#L7474-L7474 |
 
 ## Cosa NON dice
 

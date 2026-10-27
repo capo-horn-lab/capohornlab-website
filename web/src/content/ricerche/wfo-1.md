@@ -46,7 +46,7 @@ Finestra 250 sessioni, blocco 20, 3 funzioni obiettivo (F1 MaxNetProfit, F2 MaxS
 | Tutti gli altri NON confermati (MES F1 +4,90 t 1,21; MNQ F1 +16,88 t 0,53). | docs/EXECUTION_LEDGER.md#L7817-L7828 |
 | WFO-1-LONG (storico MNQ mai usato 2020-05..2022-12, 695 sessioni): "NON CONFERMATO": +6,62 USD/sessione, t 1,45, metà +9,41 / +3,85 | docs/EXECUTION_LEDGER.md#L8129-L8135 |
 | serie intera F3 -0,25/sessione | docs/EXECUTION_LEDGER.md#L8129-L8135 |
-| per anno 2024 +17,38, 2025 -28,42 (257 sessioni). | docs/EXECUTION_LEDGER.md#L7817-L7828 · docs/EXECUTION_LEDGER.md#L8129-L8135 |
+| per anno 2024 +17,38, 2025 -28,42 (257 sessioni). | docs/EXECUTION_LEDGER.md#L8129-L8135 |
 
 ## Grafico
 
