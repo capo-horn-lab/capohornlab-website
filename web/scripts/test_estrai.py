@@ -113,6 +113,26 @@ INVENTARIO = """# Inventario finto
 | 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
 | 6. Pubblicabilità | OK. |
 
+### OMEGA-1 — parola di verdetto solo in una riga secondaria
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 03/10/2026; MES; domanda: il locatore principale ha un verdetto? |
+| 2. Metodo | Un test. |
+| 3. Esito | MES 55 trade +7,77 USD (t 2,22) (L110); "NON CONFERMATA" classifica: 1 -2,84; 2 -1,57. (L114) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
+### PSI-1 — parola FAIL nel locatore principale
+| Voce | Contenuto |
+|---|---|
+| 1. Identità | 02/10/2026; MES; domanda: quanti trade? |
+| 2. Metodo | Un test. |
+| 3. Esito | MES 55 trade +7,77 USD (t 2,22). (L113) |
+| 4. Regola di lettura | Nessuna. |
+| 5. Prove | `runtime/proofs/alfa1/alfa1.json` |
+| 6. Pubblicabilità | OK. |
+
 ### THETA-1 e LIMALL-1 — prova con uno studio senza esito
 | Voce | Contenuto |
 |---|---|
@@ -283,7 +303,9 @@ def test_indice_ordinato_e_chiavi(mondo):
     base = {"id", "titolo", "data", "strumenti", "verdetto", "pubblicabilita", "grafico"}
     for r in indice:
         assert set(r) - {"audit"} == base
-    assert {r["id"]: r.get("audit") for r in indice if "audit" in r} == {"gamma-1": "ritirato", "delta-1": "corretto"}
+    assert {r["id"]: r.get("audit") for r in indice if "audit" in r} == {
+        "gamma-1": "ritirato", "delta-1": "nota", "lambda-1": "nota",
+    }
 
 
 def test_limit_e_determinismo(mondo):
@@ -367,11 +389,29 @@ def test_ritirato_senza_numeri_ritirati_ma_con_i_fratelli(mondo):
 
 
 # --- regola (d): l'etichetta viene dal registro ---
-def test_verdetto_dalle_righe_citate(mondo):
+def test_verdetto_dal_solo_locatore_principale(mondo):
     _, out = genera(mondo)
     assert front(out / "alfa-1.md")["verdetto"] == "non confermata"
-    assert front(out / "zeta-1.md")["verdetto"] == "fail"
+    assert front(out / "psi-1.md")["verdetto"] == "fail"  # L113 e' il locatore della scheda
     assert front(out / "eps-1.md")["verdetto"] == "non confermata"
+
+
+def test_parole_di_righe_secondarie_non_sono_verdetti(mondo):
+    _, out = genera(mondo)
+    # ZETA cita L110 e trova i numeri su L113 ("FAIL"); OMEGA cita anche L114 ("NON CONFERMATA"): solo L110 e' il locatore
+    for id_ in ("zeta-1", "omega-1"):
+        assert front(out / f"{id_}.md")["verdetto"] == "senza verdetto nel registro"
+    assert len(righe_tabella(leggi_md(out, "omega-1"))) == 2  # le righe secondarie restano pubblicate, con la loro Fonte
+    assert "docs/EXECUTION_LEDGER.md#L114-L114" in leggi_md(out, "omega-1")
+
+
+def test_parole_deduplicate(mondo):
+    inv, radice, out = mondo
+    ctx = E.Contesto(radice)
+    assert E.parole_registro(ctx, [(103, 103), (103, 104), (103, 103)]) == "non confermata"
+    assert E.parole_registro(ctx, [(109, 109)]) == "ritirata · non confermato"
+    assert E.parole_registro(ctx, [(110, 110)]) == "senza verdetto nel registro"
+    assert E.parole_registro(ctx, []) == "senza verdetto nel registro"
 
 
 def test_senza_parola_nelle_righe_citate_senza_verdetto(mondo):
@@ -383,10 +423,18 @@ def test_senza_parola_nelle_righe_citate_senza_verdetto(mondo):
 def test_audit_non_sovrascrive_il_verdetto(mondo):
     _, out = genera(mondo)
     fm = front(out / "delta-1.md")
-    assert fm["audit"]["stato"] == "corretto"
+    assert fm["audit"] == {"stato": "nota", "id": ["DELTA-1"]}
     assert fm["verdetto"] == "senza verdetto nel registro"  # L108 non ha parole di verdetto
     g = front(out / "gamma-1.md")
     assert "non confermato" in g["verdetto"] and g["verdetto"] != "ritirato"
+
+
+def test_ritirato_solo_per_gli_id_dichiarati_ritirati_il_resto_e_nota(mondo):
+    _, out = genera(mondo)
+    stati = {p.stem: front(p)["audit"]["stato"] for p in out.glob("*.md") if "audit" in front(p)}
+    assert stati == {"gamma-1": "ritirato", "delta-1": "nota", "lambda-1": "nota"}  # "corretto" non esiste piu'
+    assert front(out / "gamma-1.md")["audit"]["id"] == ["GAMMA-1"]  # non GAMMA-2
+    assert "corretto" not in (out / "indice.json").read_text(encoding="utf-8")
 
 
 # --- LIMALL-1 / OPT-COND-1 non compaiono ---

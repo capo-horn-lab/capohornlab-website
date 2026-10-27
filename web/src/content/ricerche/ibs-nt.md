@@ -10,7 +10,8 @@ strumenti:
   - "FESX"
   - "FDXM"
 finestra: "MES e MNQ 2025-01-01..2026-10-16, M2K 2019-05..2026-10, MYM 2019-05..2026-10 (2,54 milioni di barre), FESX (1,61 milioni) e FDXM (1,59 milioni) 2019-2026"
-verdetto: "confermata · non confermata"
+verdetto: "confermata"
+audit: {"stato": "nota", "id": ["IBS-NT"]}
 pubblicabilita: "avvertenza"
 avvertenza: "Dati NinjaTrader solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8216-L8222"

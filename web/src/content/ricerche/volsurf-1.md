@@ -8,7 +8,7 @@ strumenti:
   - "SPX"
   - "SPY"
 finestra: "catene Cboe del 23/10 (NDX 34 scadenze, QQQ, SPX, SPY), poi istantanea IBKR su NDX (49 opzioni)"
-verdetto: "pass · blocked_env · not_run"
+verdetto: "pass"
 pubblicabilita: "avvertenza"
 avvertenza: "il PNG del pannello mostra valori di superficie derivati da dati licenziati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10656-L10662"

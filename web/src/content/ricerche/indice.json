@@ -30,7 +30,7 @@
    "SPX",
    "SPY"
   ],
-  "verdetto": "pass · blocked_env · not_run",
+  "verdetto": "pass",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -68,7 +68,7 @@
    "ES"
   ],
   "verdetto": "descrittivo · pass · confermato · non confermato",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -127,7 +127,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass · not_run · non confermata · fail",
+  "verdetto": "pass · not_run",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -192,7 +192,7 @@
    "M6E"
   ],
   "verdetto": "pass · non confermata · parziale",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -272,7 +272,7 @@
   "data": "2026-10-20",
   "strumenti": [],
   "verdetto": "confermata · parziale · non confermata",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -290,7 +290,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "pass · non confermata · blocked_env",
+  "verdetto": "pass · non confermata",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -402,7 +402,7 @@
    "IWM",
    "DIA"
   ],
-  "verdetto": "non confermato · confermato",
+  "verdetto": "non confermato",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -423,7 +423,7 @@
   "titolo": "AUDIT-FABLE e REVIEW-FABLE-MAX — revisioni di tutto il codice e di tutte le analisi (ritiri di conferme)",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "confermato · ritirata · non confermato · adottata",
+  "verdetto": "confermato · ritirata · non confermato",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -481,7 +481,7 @@
   "data": "2026-10-19",
   "strumenti": [],
   "verdetto": "senza verdetto nel registro",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": false
  },
@@ -517,7 +517,7 @@
    "BTC",
    "MBT"
   ],
-  "verdetto": "confermato · non confermato",
+  "verdetto": "confermato",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -609,8 +609,8 @@
   "strumenti": [
    "MES"
   ],
-  "verdetto": "confermata",
-  "audit": "corretto",
+  "verdetto": "senza verdetto nel registro",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -622,7 +622,7 @@
    "SPY",
    "QQQ"
   ],
-  "verdetto": "confermato · ritirata · non confermato · non confermata",
+  "verdetto": "confermato · ritirata · non confermato",
   "audit": "ritirato",
   "pubblicabilita": "avvertenza",
   "grafico": false
@@ -669,7 +669,8 @@
    "FESX",
    "FDXM"
   ],
-  "verdetto": "confermata · non confermata",
+  "verdetto": "confermata",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -750,7 +751,7 @@
   "titolo": "LLM-LOCAL-1/2, RAG-2/3, EVAL-2, PROMPT-1, NOISE-1, LAT-2, NOTA-1 — il modello linguistico locale dell'app (LFM2.5-24B-A2B)",
   "data": "2026-10-19",
   "strumenti": [],
-  "verdetto": "non confermata · confermata · pass · blocked_env · not_run · fail · non adottata",
+  "verdetto": "non confermata · confermata · pass · blocked_env",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -776,7 +777,7 @@
    "MYM"
   ],
   "verdetto": "non confermato",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": false
  },
@@ -857,7 +858,7 @@
    "M2K",
    "MYM"
   ],
-  "verdetto": "non confermata · confermato",
+  "verdetto": "non confermata",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -1007,7 +1008,7 @@
    "MCL",
    "MGC"
   ],
-  "verdetto": "confermato · non confermato",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -1147,7 +1148,7 @@
    "MNQ"
   ],
   "verdetto": "senza verdetto nel registro",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "ok",
   "grafico": true
  },
@@ -1204,7 +1205,8 @@
    "MNQ",
    "MCL"
   ],
-  "verdetto": "confermato · non confermato",
+  "verdetto": "confermato",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": true
  },
@@ -1241,7 +1243,7 @@
    "QQQ"
   ],
   "verdetto": "confermata",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -1364,7 +1366,7 @@
    "MCL",
    "NQ"
   ],
-  "verdetto": "non confermata",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -1393,8 +1395,8 @@
    "MCL",
    "MES"
   ],
-  "verdetto": "pass · fail · not_run · non adottata",
-  "audit": "corretto",
+  "verdetto": "pass · fail · not_run",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -1403,7 +1405,7 @@
   "titolo": "MODEL-EVAL-1 — modelli locali: utilità del Qwen3.8 2.4T e confronto",
   "data": "2026-10-17",
   "strumenti": [],
-  "verdetto": "not_run",
+  "verdetto": "senza verdetto nel registro",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },
@@ -1456,7 +1458,7 @@
    "ES"
   ],
   "verdetto": "senza verdetto nel registro",
-  "audit": "corretto",
+  "audit": "nota",
   "pubblicabilita": "avvertenza",
   "grafico": false
  },

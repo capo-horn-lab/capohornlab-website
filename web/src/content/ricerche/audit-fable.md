@@ -4,7 +4,7 @@ titolo: "AUDIT-FABLE e REVIEW-FABLE-MAX — revisioni di tutto il codice e di tu
 data: "2026-10-19"
 strumenti: []
 finestra: "4 agenti Fable 5.1 in sola lettura sui motori, indicatori, prove del giorno e risultati confermati"
-verdetto: "confermato · ritirata · non confermato · adottata"
+verdetto: "confermato · ritirata · non confermato"
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8945-L8973"

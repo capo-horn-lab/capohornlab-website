@@ -12,7 +12,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "GLD e SPY 2005-2026 e MGC/ZN su MES 2019-2026 (SAFEHAVEN-1); curva GSW e ACM (784 mesi) e ZN 93 fine mese (CP-1); MNQ, MES, M2K, MYM 2019-2026 (GAPFILL-1: 334-384 giorni G1)."
-verdetto: "pass · non confermata · blocked_env"
+verdetto: "pass · non confermata"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9863-L9870"

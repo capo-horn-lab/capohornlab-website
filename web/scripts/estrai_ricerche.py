@@ -78,8 +78,6 @@ RIF = r"L\d{3,5}(?:\s*-\s*L?\d{3,5})?"
 RIF_SOLO = re.compile(rf"^(?:docs/EXECUTION_LEDGER\.md:)?({RIF})$")
 RIF_NUDO = re.compile(rf"(?<![\w-])({RIF})(?![\w])")
 PAREN = re.compile(r"\(([^()]*)\)")
-CORREZIONE = re.compile(r"artefatto|NON VALIDO|corrett[ao]|look-ahead|scartat|incompatibile|rettific|non passa|"
-                        r"ristrett|difettos|contava due volte", re.I)
 
 # --- numeri: stesse regole di verifica_numeri.py (segno compreso): un numero e' verificato se compare come cifre ---
 MENO = "\N{MINUS SIGN}"
@@ -185,11 +183,10 @@ def leggi_inventario(testo):
     for s in schede:
         completa_scheda(s)
         s["audit"] = [r for r in ritiri if set(r["ids"]) & set(s["ids"])]
-        gravi = [r for r in s["audit"] if r["tipo"] in ("ritirato", "corretto")]
-        s["audit_stato"] = ("ritirato" if any(r["tipo"] == "ritirato" for r in gravi)
-                            else "corretto" if gravi else "")
-        s["audit_id"] = [i for i in s["ids"] if any(i in r["ids"] for r in gravi)]
+        # `ritirato` solo per gli ID che la sezione dell'inventario dichiara ritirati; per gli altri una nota dell'audit
         s["ritirati"] = [i for i in s["ids"] if any(i in r["ids"] for r in s["audit"] if r["tipo"] == "ritirato")]
+        s["audit_stato"] = "ritirato" if s["ritirati"] else "nota" if s["audit"] else ""
+        s["audit_id"] = s["ritirati"] or [i for i in s["ids"] if any(i in r["ids"] for r in s["audit"])]
         s["file_esclusi"] = esclusi
     return schede, ritiri
 
@@ -199,7 +196,7 @@ def leggi_ritiro(item):
     for sub in re.split(r";\s+(?=\*\*)", item):
         ids = ID_RE.findall(" ".join(re.findall(r"\*\*(.+?)\*\*", sub)))
         testo = sub.replace("**", "").strip()
-        tipo = "ritirato" if re.search("ritirat", testo, re.I) else "corretto" if CORREZIONE.search(testo) else "nota"
+        tipo = "ritirato" if re.search("ritirat", testo, re.I) else "nota"  # l'audit non dice "corretto": nessuna deduzione
         non_usare = re.findall(r"`([^`]+\.(?:json|csv|md|txt))`[^.;]{0,30}\bnon usare\b", testo)
         out.append({"ids": ids, "testo": testo, "tipo": tipo, "non_usare": non_usare})
     return out
@@ -737,10 +734,9 @@ def pagina(s, ctx):
     ritirata = s["audit_stato"] == "ritirato"
     prima = ok[0]["ancore"][0] if ritirata and ok and ok[0]["ancore"] else refs[0] if refs else None
     fonte_ledger = ancora(*prima) if prima else ""
-    cited = [prima] if prima else []
-    for r in ok:
-        cited += [a for a in r["ancore"] if a not in cited]
-    verdetto = parole_registro(ctx, cited)
+    # il verdetto e' scritto nel locatore principale della scheda (`fonte_ledger`): le parole delle altre righe citate
+    # (rubriche, esiti di altri studi) non sono verdetti della pagina
+    verdetto = parole_registro(ctx, [prima] if prima else [])
     avv_prima = s["avvertenza"]
     avv = pulito(avv_prima)
     fm = {"id": s["id"], "titolo": titolo_senza_esclusi(s["titolo"]), "data": s["data"], "strumenti": s["strumenti"],

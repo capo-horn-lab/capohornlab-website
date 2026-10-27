@@ -7,7 +7,7 @@ strumenti:
   - "ES"
 finestra: "cattura L1/L2 dell'app dal 14/10/2026 (MNQ 12-26: una sola sessione regolare completa, 21/10; ES 12-26 una, 15/10; letti 88.530.242.981 byte, 270.131.798 righe)"
 verdetto: "descrittivo · pass · confermato · non confermato"
-audit: {"stato": "corretto", "id": ["ASSORB-1"]}
+audit: {"stato": "nota", "id": ["ASSORB-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: "ASSORB-2: NOT_RUN."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L10394-L10416"

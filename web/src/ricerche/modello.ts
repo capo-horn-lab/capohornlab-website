@@ -3,9 +3,12 @@
 /** Parole del registro trovate nelle righe citate, separate da " · ", oppure "senza verdetto nel registro". */
 export type Verdetto = string
 
-/** Segno dell'audit (sezione "Ritiri e correzioni" dell'inventario): vale solo per gli ID indicati, non cambia il verdetto. */
+/**
+ * Segno dell'audit (sezione "Ritiri e correzioni" dell'inventario): vale solo per gli ID indicati, non cambia il verdetto.
+ * `ritirato` solo per gli ID che l'inventario dichiara ritirati; per gli altri una nota dell'audit.
+ */
 export interface Audit {
-  stato: 'ritirato' | 'corretto'
+  stato: 'ritirato' | 'nota'
   id: string[]
 }
 
@@ -133,7 +136,7 @@ export function varianteParola(parola: string): VarianteBadge {
 
 export const AIUTO_AUDIT: Record<Audit['stato'], string> = {
   ritirato: "Conferma ritirata dall'audit: vale solo per gli studi indicati nella pagina.",
-  corretto: "Misura o conclusione corretta dall'audit: vale solo per gli studi indicati nella pagina.",
+  nota: "Nota dell'audit sugli studi indicati nella pagina: non cambia il verdetto.",
 }
 
 export const anno = (data: string) => data.slice(0, 4)

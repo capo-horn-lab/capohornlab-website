@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "NQ"
 finestra: "tutte le strategie LAB-1/LAB-2/ICT con ≥200 trade in scoperta su MES, MNQ, MCL; dati mai usati: NQ 1m 16/08-31/12/2024 e export NinjaTrader MES/MNQ 12-26 2026"
-verdetto: "non confermata"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "caso con ~20-39 sessioni per caso; dati licenziati solo aggregati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7360-L7360"

@@ -53,11 +53,15 @@ export function VerdettoBadge({ verdetto, max = 3 }: { verdetto: Verdetto; max?:
   )
 }
 
-/** Secondo segno, a parte dal verdetto: ritiro o correzione dell'audit, solo per gli ID indicati nella pagina. */
+/** Secondo segno, a parte dal verdetto: `ritirato` (solo ID dichiarati ritirati) oppure la nota neutra dell'audit. */
 export function AuditBadge({ audit }: { audit: Audit['stato'] }) {
-  return (
+  return audit === 'ritirato' ? (
     <Badge variant="destructive" title={AIUTO_AUDIT[audit]}>
-      audit: {audit}
+      audit: ritirato
+    </Badge>
+  ) : (
+    <Badge variant="outline" title={AIUTO_AUDIT[audit]}>
+      nota dell'audit
     </Badge>
   )
 }

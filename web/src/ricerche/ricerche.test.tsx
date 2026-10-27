@@ -148,7 +148,9 @@ describe('pagine', () => {
     for (const v of indice) {
       expect(Object.keys(v).filter((k) => k !== 'audit').sort()).toEqual(base)
     }
-    expect(indice.filter((v) => v.audit).map((v) => v.audit)).toContain('ritirato')
+    const stati = new Set(indice.filter((v) => v.audit).map((v) => v.audit))
+    expect([...stati].sort()).toEqual(['nota', 'ritirato']) // nessun "corretto": l'audit non lo dice
+    expect(indice.filter((v) => v.audit === 'ritirato').map((v) => v.id).sort()).toEqual(['gex-1', 'volrev-1'])
   })
 
   it('/ricerche: verdetto nel registro, filtro con le parole del registro e senza verdetto', () => {
@@ -187,6 +189,26 @@ describe('pagine', () => {
     expect(screen.getAllByText(/RITIRATE dall'audit/).length).toBeGreaterThan(0)
     expect(screen.getByText(/I numeri della conferma ritirata non sono riportati/)).toBeInTheDocument()
     for (const ritirato of ['+13,6', '+70,0', '+56,4']) expect(container.textContent).not.toContain(ritirato)
+  })
+
+  it("`ritirato` copre solo l'ID dichiarato ritirato: volrev-1 non copre STBOND-1 e FXHEDGE-1", async () => {
+    conRouter('/ricerche/volrev-1')
+    expect(await screen.findByText("Ritirato dall'audit: VOLREV-1")).toBeInTheDocument()
+    expect(screen.queryByText(/Ritirato dall'audit:.*(STBOND|FXHEDGE)/)).toBeNull()
+    expect(screen.getAllByText(/STBOND-1/).length).toBeGreaterThan(0) // le righe degli studi non ritirati restano
+  })
+
+  it("gli altri ID dell'audit hanno un badge neutro `nota dell'audit`, mai ritirato ne' corretto", async () => {
+    const { container } = conRouter('/ricerche/ibs-nt')
+    expect(await screen.findByText("Nota dell'audit: IBS-NT")).toBeInTheDocument()
+    expect(screen.getByText("nota dell'audit")).toBeInTheDocument()
+    expect(container.textContent).not.toMatch(/ritirato|corretto|I numeri della conferma ritirata/i)
+  })
+
+  it('/ricerche: i segni audit in elenco sono `audit: ritirato` e `nota dell\'audit`', () => {
+    conRouter('/ricerche')
+    expect(screen.getAllByText('audit: ritirato')).toHaveLength(indice.filter((v) => v.audit === 'ritirato').length)
+    expect(screen.getAllByText("nota dell'audit")).toHaveLength(indice.filter((v) => v.audit === 'nota').length)
   })
 
   it('la scheda senza parola di verdetto nelle righe citate dice senza verdetto nel registro', async () => {

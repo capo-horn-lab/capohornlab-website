@@ -5,8 +5,8 @@ data: "2026-10-19"
 strumenti:
   - "MES"
 finestra: "MES 1 minuto 2019-2026 (eventi dal 2022 in FLASH-1, dal 2019 in FLASH-2), 4 definizioni (k 1,5/2,5 x m 15/60 minuti)"
-verdetto: "confermata"
-audit: {"stato": "corretto", "id": ["FLASH-1"]}
+verdetto: "senza verdetto nel registro"
+audit: {"stato": "nota", "id": ["FLASH-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9002-L9002"

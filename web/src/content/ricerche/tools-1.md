@@ -6,7 +6,7 @@ strumenti:
   - "ES"
 finestra: "ES 12-26, 54 sessioni (2 agosto-15 ottobre 2026), 1.392 punti, 9 finestre (poi 7 finestre per SETUP-1)"
 verdetto: "senza verdetto nel registro"
-audit: {"stato": "corretto", "id": ["SETUP-1"]}
+audit: {"stato": "nota", "id": ["SETUP-1"]}
 pubblicabilita: "avvertenza"
 avvertenza: "costi PROVVISORI dichiarati."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L5558-L5559"

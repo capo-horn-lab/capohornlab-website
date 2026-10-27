@@ -6,7 +6,7 @@ strumenti:
   - "BTC"
   - "MBT"
 finestra: "BTC-USD giornaliero Yahoo 2014-09-17..2026-10-18 (4.414 giorni, 20 bp a giro) e MBT 1 minuto NinjaTrader 2021-05..2026-10 (1,34 milioni di barre)"
-verdetto: "confermato · non confermato"
+verdetto: "confermato"
 pubblicabilita: "avvertenza"
 avvertenza: "(Yahoo/NinjaTrader solo aggregati; non è consulenza su criptovalute)."
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8504-L8510"

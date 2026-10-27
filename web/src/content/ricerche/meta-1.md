@@ -9,7 +9,7 @@ strumenti:
   - "MYM"
 finestra: "942 trade IBS su MES, MNQ, M2K, MYM 2019-2026 (757 con previsione dal 2020-10-06)"
 verdetto: "non confermato"
-audit: {"stato": "corretto", "id": ["META-1"]}
+audit: {"stato": "nota", "id": ["META-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8300-L8305"

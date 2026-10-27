@@ -56,9 +56,9 @@ export default function Ricerca() {
   const nonRiportate = leggiPrefazio(sezioni['Esito'] ?? '')
   const note = leggiElenco(sezioni['Ritiri e correzioni'] ?? '')
   const stato = fm.audit?.stato
-  const titoloNota = stato
-    ? `${stato === 'ritirato' ? "Ritirato dall'audit" : "Corretto dall'audit"}: ${fm.audit?.id.join(', ')}`
-    : "Nota dell'audit"
+  const titoloNota = `${stato === 'ritirato' ? "Ritirato dall'audit" : "Nota dell'audit"}${
+    fm.audit ? `: ${fm.audit.id.join(', ')}` : ''
+  }`
 
   return (
     <article className="flex max-w-4xl flex-col gap-8">
@@ -80,7 +80,9 @@ export default function Ricerca() {
       {note.length > 0 && (
         <aside
           role="note"
-          className={`rounded-md border p-4 ${stato ? 'border-destructive bg-destructive/10' : 'border-border bg-card'}`}
+          className={`rounded-md border p-4 ${
+            stato === 'ritirato' ? 'border-destructive bg-destructive/10' : 'border-border bg-card'
+          }`}
         >
           <h2 className="mb-2 font-mono text-xs tracking-[0.12em] uppercase">{titoloNota}</h2>
           <Elenco voci={note} />

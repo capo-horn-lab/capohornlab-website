@@ -9,7 +9,7 @@ strumenti:
   - "MNQ"
 finestra: "TRUTH-1: dati sintetici (passeggiata casuale con volatilità oraria reale) su MES, MGC, M6E e motore indipendente su dati reali; TICK-1: tick NinjaTrader 21/09-16/10/2026 su 11 contratti (da 159.569 tick su M6E a 42,2 milioni su MNQ), 2,47 milioni di trade"
 verdetto: "senza verdetto nel registro"
-audit: {"stato": "corretto", "id": ["TRUTH-1"]}
+audit: {"stato": "nota", "id": ["TRUTH-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8928-L8943"

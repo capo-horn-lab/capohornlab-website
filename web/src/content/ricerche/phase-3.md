@@ -8,7 +8,7 @@ strumenti:
   - "MCL"
   - "MGC"
 finestra: "MES, MNQ, MCL, MGC; PHASE-3: 7 schemi x 2 librerie x 3 strumenti = 42 test; PHASE-2-OOS: sessioni 2025-2026; SIZE-1: 221 strategie."
-verdetto: "confermato · non confermato"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L8009-L8015"

@@ -4,7 +4,7 @@ titolo: "MODEL-EVAL-1 — modelli locali: utilità del Qwen3.8 2.4T e confronto"
 data: "2026-10-17"
 strumenti: []
 finestra: "non è uno studio di mercato: valutazione di modelli linguistici locali (Qwen3.8-2.4T, Qwen3.8-27B, LFM2.5-24B-A2B, gpt-oss-120b)."
-verdetto: "not_run"
+verdetto: "senza verdetto nel registro"
 pubblicabilita: "avvertenza"
 avvertenza: "è un confronto di modelli di terzi su prove interne di 20 domande, non un benchmark generale"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L6282-L6282"

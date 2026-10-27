@@ -8,7 +8,7 @@ strumenti:
   - "M2K"
   - "MYM"
 finestra: "MES, MNQ, M2K, MYM 1 minuto 2019-05..2026-10-16"
-verdetto: "non confermata · confermato"
+verdetto: "non confermata"
 pubblicabilita: "avvertenza"
 avvertenza: "WINDAY-1: \"confermato secondo la rubrica\" ma riserve pesanti"
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L9113-L9113"

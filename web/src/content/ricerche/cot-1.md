@@ -5,7 +5,7 @@ data: "2026-10-19"
 strumenti: []
 finestra: "CFTC TFF 2010-2026 (17 file, 7,2 MB), E-mini S&P 500 e Nasdaq mini, gruppi Asset Manager e Leveraged Funds"
 verdetto: "senza verdetto nel registro"
-audit: {"stato": "corretto", "id": ["COT-1"]}
+audit: {"stato": "nota", "id": ["COT-1"]}
 pubblicabilita: "ok"
 avvertenza: ""
 fonte_ledger: "docs/EXECUTION_LEDGER.md#L7572-L7572"
