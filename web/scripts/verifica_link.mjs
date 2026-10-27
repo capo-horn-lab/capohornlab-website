@@ -134,6 +134,9 @@ function estrai(testo, tipo, url) {
   const da = url.startsWith(base) ? url.slice(base.length) || '/' : url
   const vai = (raw) => aggiungi(raw, url, da)
   if (tipo === 'html') {
+    // `<link rel="preconnect|dns-prefetch" href="https://fonts.gstatic.com">` nomina un'origine da pre-collegare, non una risorsa:
+    // la radice di quell'origine puo' rispondere 404 (fonts.googleapis.com) senza che nulla sia rotto
+    testo = testo.replace(/<link\b[^>]*\brel\s*=\s*["']?(?:preconnect|dns-prefetch)["']?[^>]*>/gi, '')
     // un attributo segue uno spazio: `x.src = src;` e `location.href = type === ...` sono JS in linea, non attributi; un valore
     // che e' un pezzo di concatenazione (`'<img src="' + imgSrc + '"'`: il `+` dentro le virgolette, o `href = 'a.html?x=' + y`) non e' un URL
     for (const m of testo.matchAll(/(?<=\s)(?:href|src|action|poster)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>"']+))/gi)) {

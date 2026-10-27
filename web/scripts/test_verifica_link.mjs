@@ -294,6 +294,23 @@ describe('verifica_link --dist', () => {
     }
   })
 
+  it('<link rel=preconnect|dns-prefetch> nomina un\'origine, non una risorsa: la sua radice 404 non e\' un link rotto', async () => {
+    const ext = await finto((req) => (req.url === '/' ? [404, ''] : [200, 'ok']))
+    const api = await apiOk()
+    try {
+      const env = { VITE_API_BASE: api.url + '/api/v1' }
+      const testa = `<link rel="preconnect" href="${ext.url}"><link rel='dns-prefetch' href='${ext.url}'><link rel="preconnect" href="${ext.url}" crossorigin>`
+      let r = await esegui(LINK, ['--dist', sito({ ...base, 'pagina.html': HTML(`${testa}<a href="${ext.url}/pagina">p</a>`) }), ...ISOLA], env)
+      assert.equal(r.code, 0, r.out)
+      // lo stesso URL come link vero resta controllato
+      r = await esegui(LINK, ['--dist', sito({ ...base, 'pagina.html': HTML(`${testa}<a href="${ext.url}/">radice</a>`) }), ...ISOLA], env)
+      assert.equal(r.code, 1, r.out)
+    } finally {
+      await ext.chiudi()
+      await api.chiudi()
+    }
+  })
+
   it('--statici: una cartella di riserva fornisce le pagine legali', async () => {
     const legale = sito({ 'cookie.html': HTML('c') })
     const files = { 'pagina.html': HTML('<a href="/cookie.html">c</a>') }
