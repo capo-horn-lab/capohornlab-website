@@ -2,8 +2,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { renderHook } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { TIMEOUT_MS, useScenari } from '@/lib/api'
+import { TIMEOUT_MS, useFrequenze, useScenari } from '@/lib/api'
 import { avvisi } from '@/live/AvvisoFreschezza'
+import frequenzeJson from '@/test/fixtures/frequenze.json'
+import scenariJson from '@/test/fixtures/scenari.json'
+
+const cliente = () => {
+  const client = new QueryClient()
+  const wrapper = ({ children }: { children: ReactNode }) => <QueryClientProvider client={client}>{children}</QueryClientProvider>
+  return { client, wrapper }
+}
 
 describe('api: timeout delle richieste (Important 4)', () => {
   afterEach(() => {
@@ -31,6 +39,64 @@ describe('api: timeout delle richieste (Important 4)', () => {
     await vi.advanceTimersByTimeAsync(2_000)
     expect(result.current.isError).toBe(true)
     expect(avvisi(result.current, 60)[0]).toMatch(/^Aggiornamento fallito alle \d\d:\d\d; nessun caricamento riuscito finora$/)
+    client.clear()
+  })
+
+  it('browser senza AbortSignal.any (Safari < 17.4): la richiesta parte lo stesso e carica', async () => {
+    const any = AbortSignal.any
+    // @ts-expect-error -- an older browser without the API
+    delete AbortSignal.any
+    try {
+      const chiamate: (AbortSignal | null | undefined)[] = []
+      vi.spyOn(globalThis, 'fetch').mockImplementation(async (_u, init) => {
+        chiamate.push(init?.signal)
+        return new Response(JSON.stringify(scenariJson), { status: 200 })
+      })
+      const { client, wrapper } = cliente()
+      const { result } = renderHook(() => useScenari(), { wrapper })
+      await vi.waitFor(() => expect(result.current.data?.dati?.principale.strumento).toBe('MGC'))
+      expect(chiamate[0]).toBeInstanceOf(AbortSignal)
+      client.clear()
+    } finally {
+      AbortSignal.any = any
+    }
+  })
+
+  it('browser senza AbortSignal.any: il timeout di 20 s vale lo stesso', async () => {
+    const any = AbortSignal.any
+    // @ts-expect-error -- an older browser without the API
+    delete AbortSignal.any
+    try {
+      vi.useFakeTimers()
+      vi.spyOn(globalThis, 'fetch').mockImplementation((_u, init) => new Promise((_, rifiuta) => {
+        init?.signal?.addEventListener('abort', () => rifiuta(init.signal!.reason))
+      }))
+      const { client, wrapper } = cliente()
+      const { result } = renderHook(() => useScenari(), { wrapper })
+      await vi.advanceTimersByTimeAsync(19_000)
+      expect(result.current.isError).toBe(false)
+      await vi.advanceTimersByTimeAsync(2_000)
+      expect(result.current.isError).toBe(true)
+      client.clear()
+    } finally {
+      AbortSignal.any = any
+    }
+  })
+
+  it('frequenze: un errore isolato si riprova dopo 3 s e non accende l avviso', async () => {
+    vi.useFakeTimers()
+    let n = 0
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async () => {
+      n += 1
+      if (n === 1) throw new TypeError('rete')
+      return new Response(JSON.stringify(frequenzeJson), { status: 200 })
+    })
+    const { client, wrapper } = cliente()
+    const { result } = renderHook(() => useFrequenze(), { wrapper })
+    await vi.advanceTimersByTimeAsync(3_500)
+    expect(n).toBe(2)
+    expect(result.current.isError).toBe(false)
+    expect(result.current.data?.dati?.principale.strumento).toBe('MGC')
     client.clear()
   })
 })

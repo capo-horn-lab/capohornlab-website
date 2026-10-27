@@ -113,6 +113,20 @@ describe('pannello', () => {
     expect(teste).toContain('notte 00:00-14:29 max / min')
     expect(teste).toContain('sessione dalle 14:30 max / min')
   })
+  it('campi malformati del pannello (percorso, storico, lenti) ripuliti in validazione: la tabella si mostra', () => {
+    const f = copia(frequenzeJson)
+    const ap = f.dati.strumenti.MGC.apertura as Rec
+    ;(ap.percorso as Rec).direzione = 5
+    ;((ap.storico as Rec).frequenze as Rec)["chiusura sopra l'apertura"] = 3
+    ;(f.dati.strumenti.MGC.lenti as Rec).righe = 'x'
+    const r = validaFrequenze(f).dati!.strumenti.MGC as StrumentoFrequenze
+    render(<TabellePannello r={r} orari={freq.orari} />)
+    expect(screen.getByText('oggi: nessuna barra della sessione')).toBeInTheDocument()
+    const riga = screen.getAllByRole('row').find((x) => within(x).queryAllByRole('cell')[0]?.textContent === "chiusura sopra l'apertura")!
+    expect(within(riga).getAllByRole('cell')[1].textContent).toBe('n/d (0 casi)')
+    expect(screen.queryByText('L1 VWAP notte')).toBeNull()
+    expect(screen.getByText('tutte le sessioni')).toBeInTheDocument()
+  })
   it('frequenza senza casi: "n/d (0 casi)" come il pannello', () => {
     const r = structuredClone(fr('MGC'))
     r.lenti!.base!.nuovo_minimo = { p: null, k: 0, n: 0, margine: null }
@@ -132,6 +146,10 @@ describe('stato e freschezza', () => {
     expect(avvisi({ ...base, data: { ricevuto: 'x', eta_s: 600, dati: {} } }, 180, t0)).toEqual(['Motore spento o scollegato da 10 minuti'])
     expect(avvisi({ ...base, isError: true, data: { ricevuto: 'x', eta_s: 5, dati: {} } }, 60, t0))
       .toEqual(['Aggiornamento fallito alle 20:09; ultimo caricamento riuscito alle 20:08'])
+  })
+  it('richiesta fallita e dati oltre la soglia: "dati vecchi", non "motore spento" (il guasto puo essere della rete)', () => {
+    expect(avvisi({ ...base, isError: true, data: { ricevuto: 'x', eta_s: 600, dati: {} } }, 60, t0))
+      .toEqual(['Aggiornamento fallito alle 20:09; ultimo caricamento riuscito alle 20:08', 'Dati vecchi di 10 minuti'])
   })
   it('l eta avanza con l orologio dall ultimo caricamento riuscito, anche se la richiesta resta appesa', () => {
     const q = { ...base, data: { ricevuto: 'x', eta_s: 10, dati: {} } }
@@ -159,8 +177,31 @@ describe('stato e freschezza', () => {
   })
 })
 
+/** The chart's width (ParentSize reads clientWidth in jsdom) and the viewport's md breakpoint (matchMedia), together. */
+function schermo(largo: number, alto: number) {
+  vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(largo)
+  vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(alto)
+  vi.stubGlobal('matchMedia', (q: string) => ({ matches: largo >= 768, media: q, addEventListener() {}, removeEventListener() {} }))
+}
+
+/** Every overlay label or number: within one row (12 px) of its anchor, never above the plot. */
+function ancorate(container: HTMLElement) {
+  const testi = [...container.querySelectorAll('.chl-sovrapposizione text[data-ancora]')]
+  expect(testi.length).toBeGreaterThan(0)
+  for (const t of testi) {
+    const y = Number(t.getAttribute('y'))
+    expect(Math.abs(y - Number(t.getAttribute('data-ancora'))), t.textContent ?? '').toBeLessThanOrEqual(12)
+    expect(y, t.textContent ?? '').toBeGreaterThanOrEqual(0)
+  }
+}
+
+const legenda = () => within(within(screen.getByRole('figure')).getByRole('list')).getAllByRole('listitem')
+
 describe('grafico e pagina', () => {
-  afterEach(() => vi.restoreAllMocks())
+  afterEach(() => {
+    vi.restoreAllMocks()
+    vi.unstubAllGlobals()
+  })
 
   it('overlay: radice, rami, livelli, candela viva sulle scale del grafico', () => {
     vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(900)
@@ -177,22 +218,27 @@ describe('grafico e pagina', () => {
     expect(container.querySelectorAll('.chart-candlesticks g').length).toBeGreaterThan(90)
   })
 
-  it('su telefono le etichette dei rami accorciano il nome, mai la frequenza', () => {
-    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(343)
-    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(400)
+  it('telefono: rami e radici come numeri accanto ai capi, legenda visibile con una riga per segmento disegnato', () => {
+    schermo(343, 400)
     const { container } = render(<GraficoLive v={v('MGC')} />)
-    const rami = [...container.querySelectorAll('.chl-sovrapposizione text')].map((t) => t.textContent ?? '').filter((t) => t.startsWith('da qui: '))
-    expect(rami.length).toBe(3)
-    expect(rami.some((t) => t.includes('…'))).toBe(true)
-    for (const t of rami) expect(t).toMatch(/\d+% \(\d+\/\d+ ±\d+\)$/)
+    const testi = [...container.querySelectorAll('.chl-sovrapposizione text')].map((t) => t.textContent ?? '')
+    expect(testi.some((t) => t.startsWith('da qui: ') || t.startsWith('20:08 '))).toBe(false)
+    const numeri = testi.filter((t) => /^\d+$/.test(t))
+    expect(numeri.length).toBe(2 + 3)
+    const voci = legenda()
+    expect(within(screen.getByRole('figure')).getByRole('list').className).not.toMatch(/(^| )sr-only/)
+    for (const n of numeri) expect(voci.some((li) => li.textContent?.startsWith(`${n} · `)), n).toBe(true)
+    const segmenti = voci.map((li) => li.textContent ?? '').filter((t) => / verso le \d\d:\d\d$/.test(t))
+    expect(segmenti).toEqual(v('MGC').daQui!.g.segmenti.map((s) => expect.stringMatching(new RegExp(`^\\d+ · da qui: .* a ${s.a.prezzo} verso le `))))
+    expect(segmenti).toContain('5 · da qui: poi estensione +6 76% (40/53 ±12) a 4028.88 verso le 20:31')
+    ancorate(container)
     const ore = [...container.querySelectorAll('.chl-sovrapposizione text')].filter((t) => /^\d\d:\d\d$/.test(t.textContent ?? '')).map((t) => Number(t.getAttribute('x')))
     expect(ore.length).toBeGreaterThan(2)
     for (let i = 1; i < ore.length; i++) expect(ore[i] - ore[i - 1]).toBeGreaterThanOrEqual(44)
   })
 
-  it('telefono: etichette di livelli e rami mai sovrapposte, tutte >= 11 px, orari del payload nella didascalia', () => {
-    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(343)
-    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(400)
+  it('telefono: etichette e numeri mai sovrapposti, tutti >= 11 px, orari del payload nella didascalia', () => {
+    schermo(343, 400)
     const { container } = render(<GraficoLive v={v('MGC')} />)
     const testi = [...container.querySelectorAll('.chl-sovrapposizione text')]
     for (const t of testi) expect(Number(t.getAttribute('font-size'))).toBeGreaterThanOrEqual(11)
@@ -210,16 +256,42 @@ describe('grafico e pagina', () => {
       }
     }
     expect(container.querySelector('figcaption')!.textContent).toContain('entro le 21:00')
+    ancorate(container)
   })
 
-  it('accessibile: lista per i lettori di schermo con radice, rami disegnati e livelli (l SVG di Bklit e aria-hidden)', () => {
-    vi.spyOn(HTMLElement.prototype, 'clientWidth', 'get').mockReturnValue(900)
-    vi.spyOn(HTMLElement.prototype, 'clientHeight', 'get').mockReturnValue(450)
+  it('da md in su: etichette in linea come prima, nessun numero, legenda solo per i lettori di schermo', () => {
+    schermo(900, 450)
+    const { container } = render(<GraficoLive v={v('MGC')} />)
+    const testi = [...container.querySelectorAll('.chl-sovrapposizione text')].map((t) => t.textContent ?? '')
+    expect(testi).toContain('da qui: estensione +6 76% (40/53 ±12)')
+    expect(testi.filter((t) => /^\d+$/.test(t))).toEqual([])
+    for (const li of legenda()) expect(li.className).toContain('md:sr-only')
+    ancorate(container)
+  })
+
+  it('da md in su: un etichetta che dovrebbe salire di piu di una riga diventa un numero, visibile in legenda', () => {
+    schermo(900, 450)
+    const s = structuredClone(sc('MES'))
+    s.rami = [0, 1, 2, 3].map((i) => ({ id: `x${i}`, padre: null, tipo: 'primo_movimento', etichetta: 'primo movimento di 8 su', prezzo: 7720, p: 0.5 - i * 0.05,
+      k: 10 - i, n: 20, margine: 0.2, orizzonte: '21:00', minuti: { mediana: 30 + i, q1: 20, q3: 40 }, tocco: true, omessi: 0 }))
+    const { container } = render(<GraficoLive v={vista(s, scen.barre.MES, fr('MES'), false, scen.orari)} />)
+    const testi = [...container.querySelectorAll('.chl-sovrapposizione text')].map((t) => t.textContent ?? '')
+    const numeri = testi.filter((t) => /^\d+$/.test(t))
+    expect(numeri.length).toBeGreaterThan(0)
+    expect(testi.filter((t) => t.startsWith('8 su ')).length).toBeLessThan(4)
+    const visibili = legenda().filter((li) => !li.className.includes('md:sr-only')).map((li) => li.textContent ?? '')
+    expect(visibili.map((t) => t.split(' · ')[0]).sort()).toEqual([...numeri].sort())
+    expect(visibili.some((t) => /^\d+ · 8 su \d+% \(\d+\/20 ±20\) a 7720 verso le /.test(t))).toBe(true)
+    ancorate(container)
+  })
+
+  it('accessibile: legenda numerata con radice, rami disegnati e livelli (l SVG di Bklit e aria-hidden)', () => {
+    schermo(900, 450)
     render(<GraficoLive v={v('MGC')} />)
-    const voci = within(within(screen.getByRole('figure')).getByRole('list')).getAllByRole('listitem').map((li) => li.textContent)
-    expect(voci).toContain('da qui: primo movimento di 5.7 su da qui 22% (53/240 ±5) a 4028.1 verso le 20:28')
-    expect(voci).toContain('livello massimo notte 4039.4: 10% (3/31 ±10)')
-    expect(voci.some((t) => t?.startsWith('radice 20:08 estensione a 4022.4'))).toBe(true)
+    const voci = legenda().map((li) => li.textContent)
+    expect(voci).toContain('4 · da qui: primo movimento di 5.7 su da qui 22% (53/240 ±5) a 4028.1 verso le 20:28')
+    expect(voci.some((t) => /^\d+ · livello massimo notte 4039.4: 10% \(3\/31 ±10\)$/.test(t ?? ''))).toBe(true)
+    expect(voci[0]?.startsWith('1 · radice 20:08 estensione a 4022.4')).toBe(true)
   })
 
   it('payload con prezzi non numerici: il ramo non e disegnato, nessun NaN nel grafico', () => {

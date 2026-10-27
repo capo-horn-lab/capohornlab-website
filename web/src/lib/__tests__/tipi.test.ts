@@ -92,6 +92,30 @@ describe('tipi: payload rotti non fanno cadere la pagina (Important 3)', () => {
     expect(mes.livelli.length).toBe(10)
     expect((v.dati!.strumenti.MGC as StrumentoScenari).da_qui!.rami.length).toBe(15)
   })
+  it('ramo senza etichetta testuale scartato', () => {
+    const s = copia(scenari)
+    ;(s.dati.strumenti.MES.rami as Rec[])[0].etichetta = 5
+    expect((validaScenari(s).dati!.strumenti.MES as StrumentoScenari).rami.map((r) => r.id)).toEqual(['r2'])
+  })
+  it('frequenze: percorso, storico.frequenze e lenti malformati ripuliti', () => {
+    const f = copia(frequenze)
+    const ap = f.dati.strumenti.MGC.apertura as Rec
+    ;(ap.percorso as Rec).direzione = 5
+    ;((ap.storico as Rec).frequenze as Rec).x = 3
+    const lenti = f.dati.strumenti.MGC.lenti as Rec
+    lenti.righe = 'x'
+    lenti.base = 7
+    f.dati.strumenti.MNQ.apertura = 'x'
+    ;(f.dati.strumenti.MES.apertura as Rec).storico = 4
+    const v = validaFrequenze(f).dati!
+    const mgc = v.strumenti.MGC as StrumentoFrequenze
+    expect(mgc.apertura!.percorso).toBeNull()
+    expect(mgc.apertura!.storico!.frequenze!.x).toBeNull()
+    expect(mgc.lenti!.righe).toEqual([])
+    expect(mgc.lenti!.base).toBeNull()
+    expect((v.strumenti.MNQ as StrumentoFrequenze).apertura).toBeNull()
+    expect((v.strumenti.MES as StrumentoFrequenze).apertura!.storico).toBeNull()
+  })
   it('radice malformata o rami non lista: errore di quello strumento, gli altri restano', () => {
     const s = copia(scenari)
     ;(s.dati.strumenti.MES.radice as Rec).prezzo = 'x'

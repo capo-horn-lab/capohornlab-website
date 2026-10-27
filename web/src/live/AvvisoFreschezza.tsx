@@ -38,7 +38,9 @@ export function avvisi(q: StatoCanale, sogliaS: number, adesso = Date.now()): st
   if (q.data && q.data.dati == null) out.push("Nessun dato dal motore (spento, o non ha ancora pubblicato).")
   else if (eta != null && eta > sogliaS) {
     const m = Math.max(1, Math.round(eta / 60))
-    out.push(`Motore spento o scollegato da ${m} ${m === 1 ? 'minuto' : 'minuti'}`)
+    const unita = m === 1 ? 'minuto' : 'minuti'
+    // a failed request may be the network or the site's server, not the engine: then only the data's age is said
+    out.push(q.isError ? `Dati vecchi di ${m} ${unita}` : `Motore spento o scollegato da ${m} ${unita}`)
   }
   return out
 }

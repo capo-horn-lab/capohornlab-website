@@ -182,7 +182,7 @@ const rotto = (r: Rec, campo: string): StrumentoErrore => ({ contratto: typeof r
 const radiceOk = (x: unknown): x is Rec => oggetto(x) && typeof x.t === 'string' && finito(x.prezzo)
 const minutiOk = (m: unknown) => m == null || (oggetto(m) && finito(m.mediana) && finito(m.q1) && finito(m.q3))
 const ramoOk = (r: unknown): r is Rec =>
-  oggetto(r) && typeof r.id === 'string' && finito(r.prezzo) && finito(r.p) && finito(r.k) && finito(r.n) && minutiOk(r.minuti)
+  oggetto(r) && typeof r.id === 'string' && typeof r.etichetta === 'string' && finito(r.prezzo) && finito(r.p) && finito(r.k) && finito(r.n) && minutiOk(r.minuti)
 const rigaOk = (r: unknown): r is Riga => Array.isArray(r) && r.length === 6 && r.every(finito)
 
 /**
@@ -226,6 +226,23 @@ export function validaScenari(x: unknown): Busta<Scenari> {
 }
 
 const frequenzaOk = (f: unknown) => (oggetto(f) ? { ...f, p: finito(f.p) ? f.p : null } : null)
+const o = (x: unknown): Rec | null => (oggetto(x) ? x : null)
+
+/** Today's opening path as the panel reads it: a direction (a word, or null before the first move) and, with one, a minute. */
+const percorsoOk = (p: unknown) => (oggetto(p) && (p.direzione === null || (typeof p.direzione === 'string' && finito(p.t1))) ? p : null)
+
+function aperturaOk(a: unknown) {
+  if (!oggetto(a)) return null
+  const h = o(a.storico)
+  const fr = h && oggetto(h.frequenze) ? Object.fromEntries(Object.entries(h.frequenze).map(([k, f]) => [k, o(f)])) : null
+  return { ...a, percorso: percorsoOk(a.percorso), storico: h && { ...h, frequenze: fr } }
+}
+
+function lentiOk(l: unknown) {
+  if (!oggetto(l)) return null
+  return { ...l, riferimento: o(l.riferimento) ?? {}, campione: o(l.campione), base: o(l.base), righe: Array.isArray(l.righe) ? l.righe.filter(oggetto) : [],
+    concordanza: o(l.concordanza) }
+}
 
 export function validaFrequenze(x: unknown): Busta<Frequenze> {
   const v = valida<Frequenze>(x, (r) => {
@@ -236,6 +253,7 @@ export function validaFrequenze(x: unknown): Busta<Frequenze> {
       ...r, finestre: r.finestre.filter((w) => oggetto(w) && typeof w.finestra === 'string'),
       livelli: r.livelli.filter((l): l is Rec => oggetto(l) && finito(l.prezzo))
         .map((l) => ({ ...l, entro_1530: frequenzaOk(l.entro_1530), entro_2200: frequenzaOk(l.entro_2200) })),
+      apertura: aperturaOk(r.apertura), lenti: lentiOk(r.lenti),
     }
   })
   if (v.dati && !Array.isArray(v.dati.limiti)) v.dati.limiti = []

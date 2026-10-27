@@ -14,7 +14,9 @@ describe('rotta Live: errorElement', () => {
   it('messaggio in italiano e footer con la nota fissa', async () => {
     vi.spyOn(console, 'error').mockImplementation(() => {})
     render(<App />)
-    expect(await screen.findByText(/La pagina live non si puo' mostrare/)).toBeInTheDocument()
+    expect(await screen.findByText(/La pagina live non si puo' mostrare in questo momento/)).toBeInTheDocument()
+    // neutral: the same element also catches a page chunk that failed to load, not only odd data
+    expect(screen.queryByText(/motore/)).toBeNull()
     expect(screen.getByText("Frequenze descrittive su dati gia' visti, non segnali.")).toBeInTheDocument()
   })
 })

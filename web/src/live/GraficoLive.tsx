@@ -2,10 +2,13 @@
 // SVG overlay on the chart's own scales (useChartStable: xScale Date->px, yScale price->px, in the plot's inner space).
 // The y scale is re-provided (ScalaPrezzi) so candles, grid, axis and overlay share a domain that also holds the tree's heads
 // and the levels near the candles (the Trader's rule); the x domain is widened by xDomain/xDomainSlotCount to 36 future slots.
-// Bklit renders its SVG aria-hidden: the figure carries the same root, branches and levels as a list for screen readers.
+// Labels: on a price chart a label's height reads as a price, so no label moves more than one row (12 px) from what it labels.
+// From md up the labels are inline and one that finds no place within a row becomes a number; below md the roots and the
+// branches are numbers. The numbered legend under the chart (the same rows for screen readers: Bklit's SVG is aria-hidden)
+// is visible on phones and, from md up, shows the rows whose label became a number.
 import { scaleLinear } from '@visx/scale'
 import { useReducedMotion } from 'motion/react'
-import { type ReactNode, useMemo } from 'react'
+import { type ReactNode, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { Candlestick, CandlestickChart, ChartTooltip, Grid, YAxis } from '@/components/charts'
 import { ChartProvider, useChart, useChartStable } from '@/components/charts/chart-context'
 import { DEFAULT_Y_AXIS_ID } from '@/components/charts/y-axis-scales'
@@ -18,6 +21,21 @@ const MARGINE = { top: 16, right: 64, bottom: 28, left: 8 }
 const ALONE = { stroke: 'var(--ch-ink)', strokeWidth: 3, paintOrder: 'stroke' as const, strokeLinejoin: 'round' as const }
 const FONT = 11
 const CARATTERE = 6 // px per character at 11 px (DM Sans): labels that would leave the plot on the left are shortened
+const RIGA = 12
+const MD = '(min-width: 48rem)' // Tailwind's md, the same breakpoint as the legend's md:sr-only
+
+/** Viewport at md or wider (true where matchMedia is missing). */
+function useLargo(): boolean {
+  return useSyncExternalStore(
+    (avvisa) => {
+      const m = typeof window.matchMedia === 'function' ? window.matchMedia(MD) : null
+      m?.addEventListener('change', avvisa)
+      return () => m?.removeEventListener('change', avvisa)
+    },
+    () => (typeof window.matchMedia === 'function' ? window.matchMedia(MD).matches : true),
+    () => true,
+  )
+}
 
 function ScalaPrezzi({ dominio, children }: { dominio: [number, number]; children: ReactNode }) {
   const ctx = useChart()
@@ -38,19 +56,48 @@ function adatta(testa: string, nome: string, coda: string, px: number): string {
 
 const taglia = (s: string, px: number) => (s.length * CARATTERE <= px ? s : `${s.slice(0, Math.max(1, Math.floor(px / CARATTERE) - 1)).trimEnd()}…`)
 
-/** One stack for every label (levels, branches, roots): a label that would cover another one moves up 12 px (the indicator's
- * `pila`, extended to the labels' horizontal extent). */
-function impila(): (y: number, x0: number, x1: number) => number {
+/** One stack for every label and number: a place at the anchor, one row up or one row down, inside the plot, not covering
+ * a label already placed (horizontal extent included); null when there is none. */
+function impila(fondo: number) {
   const usate: { y: number; x0: number; x1: number }[] = []
-  return (y, x0, x1) => {
-    let v = y
-    while (usate.some((u) => Math.abs(u.y - v) < 12 && u.x0 < x1 && x0 < u.x1)) v -= 12
-    usate.push({ y: v, x0, x1 })
-    return v
+  const libero = (y: number, x0: number, x1: number) => y >= FONT && y <= fondo && !usate.some((u) => Math.abs(u.y - y) < RIGA && u.x0 < x1 && x0 < u.x1)
+  const metti = (y: number, x0: number, x1: number) => {
+    usate.push({ y, x0, x1 })
+    return y
+  }
+  return {
+    posto(y: number, x0: number, x1: number): number | null {
+      const v = [y, y - RIGA, y + RIGA].find((c) => libero(c, x0, x1))
+      return v == null ? null : metti(v, x0, x1)
+    },
+    forza: (y: number, x0: number, x1: number) => metti(Math.min(fondo, Math.max(FONT, y)), x0, x1),
   }
 }
 
-function Sovrapposizione({ v, viva }: { v: Vista; viva: Candela | null }) {
+export interface Voce {
+  id: string
+  n: number
+  testo: string
+}
+
+/** The legend's rows (numbered in this order): root, branches, da_qui's root and branches, levels. */
+export function voci(v: Vista): Voce[] {
+  const r: Omit<Voce, 'n'>[] = []
+  if (!v.inTesto) r.push({ id: 'radice', testo: radiceRiga(v.radice) }, ...v.g.segmenti.map((s) => ({ id: `ramo:${s.id}`, testo: rigaSegmento(s) })))
+  if (v.daQui && !v.daQui.inTesto)
+    r.push({ id: 'qui:radice', testo: `da qui: radice ${v.daQui.radice.ora} a ${prezzo(v.daQui.radice.prezzo)}` },
+      ...v.daQui.g.segmenti.map((s) => ({ id: `qui:${s.id}`, testo: `da qui: ${rigaSegmento(s)}` })))
+  r.push(...v.livelli.map((l) => ({ id: `livello:${l.nome}`, testo: `livello ${l.nome} ${prezzo(l.prezzo)}: ${p(l.entro_2200)}` })))
+  return r.map((x, i) => ({ ...x, n: i + 1 }))
+}
+
+function Sovrapposizione({ v, viva, numeri, largo, avvisa }: {
+  v: Vista
+  viva: Candela | null
+  numeri: Map<string, number>
+  largo: boolean
+  avvisa: (numerati: string) => void
+}) {
   const { xScale, yScale, innerWidth, innerHeight, columnWidth } = useChartStable()
   // a time inside a 5-minute slot falls on its candle: the candle's date is the slot start, drawn at the slot's centre
   const x = (t: number) => xScale(new Date(t * 1000 - 150_000)) ?? 0
@@ -61,49 +108,68 @@ function Sovrapposizione({ v, viva }: { v: Vista; viva: Candela | null }) {
   const passo = Math.max(1, Math.ceil(44 / Math.max(1, x(d0 + 3600) - x(d0))))
   const ore: number[] = []
   for (let t = Math.ceil(d0 / 3600) * 3600; t <= d1 + 300; t += 3600) if (Number(oraRoma(t * 1000).slice(0, 2)) % passo === 0) ore.push(t)
-  const pila = impila()
-  const largo = (s: string) => s.length * CARATTERE
+  const pila = impila(innerHeight + 6)
+  const largoTesto = (s: string) => s.length * CARATTERE
+  const numerati: string[] = []
+
+  /** The label at its anchor (within one row), else the item's number next to its point (within one row, or forced there). */
+  const scritta = (id: string, testo: string | null, ancora: { x: number; y: number; fine: boolean }, punto: { x: number; y: number }, colore: string) => {
+    if (testo != null) {
+      const [x0, x1] = ancora.fine ? [ancora.x - largoTesto(testo), ancora.x] : [ancora.x, ancora.x + largoTesto(testo)]
+      const yy = pila.posto(ancora.y, x0, x1)
+      if (yy != null)
+        return <text x={ancora.x} y={yy} data-ancora={ancora.y} textAnchor={ancora.fine ? 'end' : 'start'} fontSize={FONT} fill={colore} {...ALONE}>{testo}</text>
+    }
+    numerati.push(id)
+    const n = String(numeri.get(id) ?? '')
+    const w = largoTesto(n)
+    const ya = punto.y + 4
+    const destra = pila.posto(ya, punto.x + 5, punto.x + 5 + w)
+    const sinistra = destra == null ? pila.posto(ya, punto.x - 5 - w, punto.x - 5) : null
+    const [xn, yn, fine] = destra != null ? [punto.x + 5, destra, false] : sinistra != null ? [punto.x - 5, sinistra, true] : [punto.x + 5, pila.forza(ya, punto.x + 5, punto.x + 5 + w), false]
+    return <text x={xn} y={yn} data-ancora={ya} textAnchor={fine ? 'end' : 'start'} fontSize={FONT} fontWeight={600} fill={colore} {...ALONE}>{n}</text>
+  }
 
   const livello = (l: Vista['livelli'][number]) => {
-    const testo = `${l.nome} ${p(l.entro_2200)}`
+    const yl = y(l.prezzo)
     return (
       <g key={l.nome}>
-        <line x1={0} x2={innerWidth} y1={y(l.prezzo)} y2={y(l.prezzo)} stroke="var(--ch-info)" strokeDasharray="2 4" strokeOpacity={0.8} />
-        <text x={4} y={pila(y(l.prezzo) - 3, 4, 4 + largo(testo))} fontSize={FONT} fill="var(--ch-info)" {...ALONE}>{testo}</text>
+        <line x1={0} x2={innerWidth} y1={yl} y2={yl} stroke="var(--ch-info)" strokeDasharray="2 4" strokeOpacity={0.8} />
+        {scritta(`livello:${l.nome}`, `${l.nome} ${p(l.entro_2200)}`, { x: 4, y: yl - 3, fine: false }, { x: 4, y: yl }, 'var(--ch-info)')}
       </g>
     )
   }
 
-  const ramo = (s: Segmento, tratteggio?: string, prefisso = '') => {
+  const ramo = (s: Segmento, id: string, tratteggio?: string, prefisso = '') => {
     const yA = y(s.a.prezzo)
     const colore = s.classe >= 2 ? 'var(--ch-fog)' : 'var(--ch-quiet)'
     const xa = x(s.a.t)
-    const testo = adatta(prefisso, nomeBreve(s.ramo.etichetta), p(s.ramo), xa - 4)
+    const testo = largo ? adatta(prefisso, nomeBreve(s.ramo.etichetta), p(s.ramo), xa - 4) : null
     return (
-      <g key={prefisso + s.id}>
+      <g key={id}>
         <title>{prefisso + s.etichetta}</title>
         <line x1={x(s.da.t)} y1={y(s.da.prezzo)} x2={xa} y2={yA} stroke={colore} strokeWidth={s.classe} strokeDasharray={tratteggio} strokeOpacity={0.9} />
         <line x1={x(s.q1.t)} y1={yA} x2={x(s.q3.t)} y2={yA} stroke={colore} strokeWidth={1} strokeOpacity={0.45} />
         <circle cx={xa} cy={yA} r={2.5} fill={colore} />
-        <text x={xa - 4} y={pila(yA - 5, xa - 4 - largo(testo), xa - 4)} textAnchor="end" fontSize={FONT} fill={colore} {...ALONE}>{testo}</text>
+        {scritta(id, testo, { x: xa - 4, y: yA - 5, fine: true }, { x: xa, y: yA }, colore)}
       </g>
     )
   }
 
-  const radice = (r: { t: number; prezzo: number; testo: string; vuota?: boolean }) => {
+  const radice = (id: string, r: { t: number; prezzo: number; testo: string; vuota?: boolean }) => {
     const xr = x(r.t)
-    const testo = taglia(r.testo, xr - 6)
+    const yr = y(r.prezzo)
     return (
-      <g>
+      <g key={id}>
         <title>{r.testo}</title>
-        <circle cx={xr} cy={y(r.prezzo)} r={3.5} fill={r.vuota ? 'var(--ch-ink)' : 'var(--ch-fog)'} stroke="var(--ch-fog)" strokeWidth={1.5} />
-        <text x={xr - 6} y={pila(y(r.prezzo) + 14, xr - 6 - largo(testo), xr - 6)} textAnchor="end" fontSize={FONT} fill="var(--ch-quiet)" {...ALONE}>{testo}</text>
+        <circle cx={xr} cy={yr} r={3.5} fill={r.vuota ? 'var(--ch-ink)' : 'var(--ch-fog)'} stroke="var(--ch-fog)" strokeWidth={1.5} />
+        {scritta(id, largo ? taglia(r.testo, xr - 6) : null, { x: xr - 6, y: yr + 14, fine: true }, { x: xr, y: yr }, 'var(--ch-quiet)')}
       </g>
     )
   }
 
   const percorso = v.radice.percorso && v.radice.percorso.length > 40 ? `${v.radice.percorso.slice(0, 37)}...` : v.radice.percorso
-  return (
+  const disegno = (
     <g className="chl-sovrapposizione">
       {ore.map((t) => (
         <g key={t}>
@@ -122,18 +188,21 @@ function Sovrapposizione({ v, viva }: { v: Vista; viva: Candela | null }) {
       ) : null}
       {!v.inTesto && v.g.radiceT != null ? (
         <>
-          {v.g.segmenti.map((s) => ramo(s))}
-          {radice({ t: v.g.radiceT, prezzo: v.radice.prezzo, testo: `${v.radice.ora} ${v.radice.fase}${percorso ? ` | ${percorso}` : ''}` })}
+          {v.g.segmenti.map((s) => ramo(s, `ramo:${s.id}`))}
+          {radice('radice', { t: v.g.radiceT, prezzo: v.radice.prezzo, testo: `${v.radice.ora} ${v.radice.fase}${percorso ? ` | ${percorso}` : ''}` })}
         </>
       ) : null}
       {v.daQui && !v.daQui.inTesto && v.daQui.g.radiceT != null ? (
         <>
-          {v.daQui.g.segmenti.map((s) => ramo(s, '5 4', 'da qui: '))}
-          {radice({ t: v.daQui.g.radiceT, prezzo: v.daQui.radice.prezzo, testo: `da qui ${v.daQui.radice.ora}`, vuota: true })}
+          {v.daQui.g.segmenti.map((s) => ramo(s, `qui:${s.id}`, '5 4', 'da qui: '))}
+          {radice('qui:radice', { t: v.daQui.g.radiceT, prezzo: v.daQui.radice.prezzo, testo: `da qui ${v.daQui.radice.ora}`, vuota: true })}
         </>
       ) : null}
     </g>
   )
+  const chiave = numerati.join('|')
+  useEffect(() => avvisa(chiave), [avvisa, chiave])
+  return disegno
 }
 
 function Suggerimento({ point }: { point: Record<string, unknown> }) {
@@ -148,18 +217,21 @@ function Suggerimento({ point }: { point: Record<string, unknown> }) {
   )
 }
 
-/** What the overlay draws, in words, for screen readers (the SVG is aria-hidden). */
-function Elenco({ v }: { v: Vista }) {
-  const voci: string[] = []
-  if (!v.inTesto) voci.push(radiceRiga(v.radice), ...v.g.segmenti.map(rigaSegmento))
-  if (v.daQui && !v.daQui.inTesto)
-    voci.push(`da qui: radice ${v.daQui.radice.ora} a ${prezzo(v.daQui.radice.prezzo)}`, ...v.daQui.g.segmenti.map((s) => `da qui: ${rigaSegmento(s)}`))
-  voci.push(...v.livelli.map((l) => `livello ${l.nome} ${prezzo(l.prezzo)}: ${p(l.entro_2200)}`))
-  return <ul className="sr-only">{voci.map((t) => <li key={t}>{t}</li>)}</ul>
+/** The numbered legend: visible below md; from md up only the rows whose label became a number (the rest for screen readers). */
+function Legenda({ righe, numerati }: { righe: Voce[]; numerati: Set<string> }) {
+  return (
+    <ul className="text-muted-foreground mt-2 space-y-0.5 font-mono text-xs leading-relaxed tabular-nums">
+      {righe.map((r) => <li key={r.id} className={numerati.has(r.id) ? undefined : 'md:sr-only'}>{`${r.n} · ${r.testo}`}</li>)}
+    </ul>
+  )
 }
 
 export function GraficoLive({ v }: { v: Vista }) {
   const ridotto = useReducedMotion() ?? false
+  const largo = useLargo()
+  const [numerati, setNumerati] = useState('')
+  const righe = useMemo(() => voci(v), [v])
+  const numeri = useMemo(() => new Map(righe.map((r) => [r.id, r.n])), [righe])
   const chiuse = useMemo(() => v.candele.filter((c) => !c.viva), [v.candele])
   const viva = v.candele.find((c) => c.viva) ?? null
   const xDomain = useMemo((): [Date, Date] | null => {
@@ -189,12 +261,12 @@ export function GraficoLive({ v }: { v: Vista }) {
         <ScalaPrezzi dominio={v.dominio}>
           <Grid numTicksRows={6} fadeHorizontal={false} />
           <Candlestick animate={!ridotto} showHoverFade={false} />
-          <Sovrapposizione v={v} viva={viva} />
+          <Sovrapposizione v={v} viva={viva} numeri={numeri} largo={largo} avvisa={setNumerati} />
           <YAxis orientation="right" formatValue={prezzo} />
         </ScalaPrezzi>
         <ChartTooltip showDots={false} showDatePill={false} content={({ point }) => <Suggerimento point={point} />} />
       </CandlestickChart>
-      <Elenco v={v} />
+      <Legenda righe={righe} numerati={new Set(numerati.split('|'))} />
       <figcaption className="text-muted-foreground mt-2 text-xs">
         {`Candele a 5 minuti in ora di Roma${viva ? ' (l\'ultima, attenuata, e\' in formazione)' : ''}; linee tratteggiate: livelli con la frequenza di tocco entro le ${v.chiusura}`}
         {v.fuori.length ? `; fuori dal grafico: ${v.fuori.map((l) => `${l.nome} ${prezzo(l.prezzo)} ${p(l.entro_2200)}`).join(', ')}` : ''}.
