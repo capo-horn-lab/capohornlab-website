@@ -35,6 +35,11 @@
   RewriteRule ^(ricerche|metodo|stato)(/.*)?$ /index.html [L]
 </IfModule>
 
+# Compressione: il proxy Aruba comprime html e css ma non i file JS della web app (337 KB il principale).
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript application/json image/svg+xml
+</IfModule>
+
 # Disable directory listing
 Options -Indexes
 
