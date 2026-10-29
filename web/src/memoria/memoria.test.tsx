@@ -154,14 +154,14 @@ describe('che cosa riconosce', () => {
     expect(FAMIGLIE[0].definizioni[0].fonte).toBe('docs/EXECUTION_LEDGER.md#L10998')
   })
 
-  it('liquidità: prima la docstring del codice (ritiro L71-L79, muro L80-L81), poi la registrazione L11002 e le ricalibrazioni L11009', async () => {
+  it('liquidità: prima la docstring del codice (ritiro L71-L79, muro L80-L82), poi la registrazione L11002 e le ricalibrazioni L11009', async () => {
     monta(fixture)
     const sez = regione('Che cosa riconosce')
     const liq = FAMIGLIE.find((f) => f.id === 'liquidita')!
     const fonti = liq.definizioni.map((d) => d.fonte)
     expect(fonti).toEqual([
       'src/trading_stack/memoria_mercato.py#L71-L79',
-      'src/trading_stack/memoria_mercato.py#L80-L81',
+      'src/trading_stack/memoria_mercato.py#L80-L82',
       'docs/EXECUTION_LEDGER.md#L11002',
       'docs/EXECUTION_LEDGER.md#L11009',
     ])
@@ -174,6 +174,8 @@ describe('che cosa riconosce', () => {
     expect(within(sez).getByText('registrazione prima del codice')).toBeInTheDocument()
     expect(within(sez).getByText(/A PARITA' DI PREZZO/)).toBeInTheDocument()
     expect(liq.definizioni[1].testo).toContain('MURO_MIN_SIZE (25)')
+    // la citazione del muro si ferma dentro la riga 81 della docstring: l'omissione e' segnata
+    expect(liq.definizioni[1].testo).toMatch(/GIU'\. \[…\]$/)
     expect(liq.definizioni[1].testo).not.toContain('(100)')
     expect(liq.definizioni[3].testo).toContain('MURO_MIN_SIZE 25')
   })
@@ -197,7 +199,8 @@ describe('che cosa riconosce', () => {
     expect(citazioni).toHaveLength(2)
     for (const d of citazioni) {
       const [, da, a] = d.fonte.match(/#L(\d+)-L(\d+)$/)!
-      expect(norm(r.slice(Number(da) - 1, Number(a)).join(' ')), d.fonte).toContain(norm(d.testo))
+      // un « […]» finale segna un'omissione dichiarata (la citazione si ferma dentro l'ultima riga): non e' testo della docstring
+      expect(norm(r.slice(Number(da) - 1, Number(a)).join(' ')), d.fonte).toContain(norm(d.testo.replace(/ \[…\]$/, '')))
     }
   })
 })
@@ -264,6 +267,8 @@ describe('eventi nella memoria (fixture reale)', () => {
     const righeOggi = [...oggi.querySelectorAll('tbody tr')].map((r) => [...r.querySelectorAll('td')].map((c) => c.textContent))
     expect(righeOggi).toEqual(Object.entries(fixture.dati.oggi.conteggi).map(([k, n]) => [...k.split('/'), String(n)]))
     expect(righeOggi).toHaveLength(4)
+    // la pagina dichiara da dove vengono i conteggi di oggi (design §2: COUNT dal database, calcolato dal pubblicatore)
+    expect(regione('Eventi nella memoria').textContent).toContain('Conteggio (COUNT) dal database della memoria da mezzanotte di Roma, calcolato dal pubblicatore')
     expect(voce(regione('Eventi nella memoria'), 'Totale oggi')).toBe('446')
   })
 

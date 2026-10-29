@@ -92,7 +92,7 @@ export default function Stato() {
       <header className="flex flex-col gap-3">
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Stato</h1>
         <p className="text-muted-foreground">
-          Il motore invia gli scenari ogni 15 s, le frequenze ogni 60 s e la memoria del mercato almeno ogni 300 s. Gli scenari sono «acceso» fino a{' '}
+          Il motore invia gli scenari ogni 15 s, le frequenze ogni 60 s e la memoria del mercato almeno ogni 120 s. Gli scenari sono «acceso» fino a{' '}
           {SOGLIA_CANALE_S.scenari} s dall'ultimo invio e «in ritardo» fino a {SOGLIA_SPENTO_CANALE_S.scenari} s; le frequenze sono «acceso»
           fino a {SOGLIA_CANALE_S.frequenze} s e «in ritardo» fino a {SOGLIA_SPENTO_CANALE_S.frequenze} s; la memoria e' «acceso» fino a{' '}
           {SOGLIA_CANALE_S.memoria} s e «in ritardo» fino a {SOGLIA_SPENTO_CANALE_S.memoria} s. Oltre, il motore e' «spento». La pagina si

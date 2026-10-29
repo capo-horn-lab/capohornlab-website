@@ -106,7 +106,7 @@ const opzioniFrequenze = queryOptions({
   retryDelay: 3000,
 })
 
-// Memoria del mercato: the publisher sends at least every 300 s. Like frequenze: one retry after 3 s,
+// Memoria del mercato: the publisher sends at least every 120 s. Like frequenze: one retry after 3 s,
 // except for a payload the site cannot show (the same payload would come back: the next poll is the retry).
 const opzioniMemoria = queryOptions({
   queryKey: ['live', 'memoria'],

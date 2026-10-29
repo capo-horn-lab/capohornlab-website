@@ -148,6 +148,9 @@ export function Eventi({ d, errore, attesa }: Canale) {
             <h3 className={H3}>Totale nel database dal {DATA_INIZIO_DATABASE}</h3>
             <TabellaConteggi nome={`Totale nel database dal ${DATA_INIZIO_DATABASE}`} conteggi={stato.conteggi} />
             <h3 className={H3}>Oggi ({dataItaliana(oggi.data)})</h3>
+            <p className="text-muted-foreground text-sm">
+              Conteggio (COUNT) dal database della memoria da mezzanotte di Roma, calcolato dal pubblicatore: il sito non calcola nulla.
+            </p>
             <TabellaConteggi nome={`Oggi (${dataItaliana(oggi.data)})`} conteggi={oggi.conteggi} />
             <Elenco>
               <Voce etichetta="Totale oggi" valore={intero(oggi.totale)} />

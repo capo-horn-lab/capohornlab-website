@@ -1,7 +1,7 @@
 /**
  * Soglie del dato "vecchio" per canale (design §4.2): scenari 60 s, frequenze 180 s, memoria 180 s. Oltre la soglia di spento del
  * canale dall'ultimo invio, o senza dati, il motore risulta spento: 180 s per scenari e frequenze (stessa soglia della fase 1),
- * 600 s per la memoria (il pubblicatore invia almeno ogni 300 s).
+ * 600 s per la memoria (il pubblicatore invia almeno ogni 120 s, sotto la soglia dei 180 s anche con il giro di 15 s).
  */
 export const SOGLIA_CANALE_S = { scenari: 60, frequenze: 180, memoria: 180 } as const
 export const SOGLIA_SPENTO_CANALE_S = { scenari: 180, frequenze: 180, memoria: 600 } as const

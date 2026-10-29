@@ -1,6 +1,6 @@
 // Testo della pagina /memoria che non viene dal motore: le definizioni delle famiglie e la frase dei tempi, COPIATE alla lettera
 // da docs/EXECUTION_LEDGER.md del repo del motore (numeri di riga = quelli del registro al 29/10/2026), ciascuna con la sua Fonte;
-// la liquidita' cita anche la docstring di src/trading_stack/memoria_mercato.py (righe 71-81), che e' la definizione in vigore.
+// la liquidita' cita anche la docstring di src/trading_stack/memoria_mercato.py (righe 71-82), che e' la definizione in vigore.
 // Niente riformulazioni: se il registro cambia si ricopia. Una definizione non trovata nel registro si scrive come tale, non si inventa.
 
 export interface Citazione {
@@ -37,14 +37,15 @@ export const FAMIGLIE: Famiglia[] = [
     id: 'liquidita',
     titolo: 'Liquidità: muro e ritiro',
     definizioni: [
-      // copiate dalla docstring di memoria_mercato.py (righe 71-79 e 80-81), a-capo ridotti a uno spazio
+      // copiate dalla docstring di memoria_mercato.py (righe 71-79 e 80-82), a-capo ridotti a uno spazio
       {
         testo: `FAMIGLIA "liquidita'" (famiglia = 'liquidita', tipo = 'ritiro' | 'muro'; lato = 'bid' | 'ask' = lato del book): "ritiro": la profondita' entro N_LIVELLI di un lato cala di almeno RITIRO_PCT (50%) A PARITA' DI PREZZO (stessi prezzi, visibili sia a t_rif sia ora: lo spostamento del prezzo non e' un ritiro; candidato annullato se il miglior prezzo del lato e' migliorato; alla conferma la profondita' deve essere ancora <= (1-RITIRO_PCT) x massimo) rispetto al suo massimo negli ultimi RITIRO_FINESTRA_S (10 s; massimo >= RITIRO_MIN_DEPTH = 50 contratti), mentre il volume scambiato su quel lato fra quel massimo e la conferma e' < RITIRO_FRAZ_SCAMBI (25%) della quantita' sparita. Lato scambiato: sul bid contano le vendite aggressive, sull'ask gli acquisti, e gli scambi di verso ignoto (prudenza: nel dubbio e' consumo, non ritiro). Il consumo per scambi NON e' un ritiro. CONFERMA ritardata di RITIRO_ATTESA_S (1 s): uno scambio puo' arrivare dopo l'L2 che lo riflette; l'evento ha l'istante della conferma. Verso favorevole: ritiro del bid = GIU', ritiro dell'ask = SU.`,
         fonte: 'src/trading_stack/memoria_mercato.py#L71-L79',
       },
       {
-        testo: `"muro": un livello fra le prime N_LIVELLI con size >= MURO_K (5) volte la mediana delle size di quei livelli e >= MURO_MIN_SIZE (25), che persiste >= MURO_T_S (10 s); l'evento ha l'istante del primo record dopo T.`,
-        fonte: 'src/trading_stack/memoria_mercato.py#L80-L81',
+        // copiata dalle righe 80-82; la riga 82 prosegue con il DESTINO del muro (fino alla riga 83): omesso, segnato con […]
+        testo: `"muro": un livello fra le prime N_LIVELLI con size >= MURO_K (5) volte la mediana delle size di quei livelli e >= MURO_MIN_SIZE (25), che persiste >= MURO_T_S (10 s); l'evento ha l'istante del primo record dopo T. Verso favorevole: muro sul bid (supporto) = SU, muro sull'ask = GIU'. […]`,
+        fonte: 'src/trading_stack/memoria_mercato.py#L80-L82',
       },
       {
         etichetta: 'registrazione prima del codice',
