@@ -20,7 +20,7 @@ describe('layout', () => {
         <Nav />
       </MemoryRouter>,
     )
-    expect(screen.getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Ricerche', 'Metodo', 'Stato'])
+    expect(screen.getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Memoria', 'Ricerche', 'Metodo', 'Stato'])
   })
 
   it('menu del telefono: il pannello si carica alla prima pressione e porta le quattro voci', async () => {
@@ -34,7 +34,7 @@ describe('layout', () => {
     expect(screen.queryByRole('dialog')).toBeNull()
     fireEvent.click(bottone)
     const pannello = await screen.findByRole('dialog')
-    expect(within(pannello).getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Ricerche', 'Metodo', 'Stato'])
+    expect(within(pannello).getAllByRole('link').map((a) => a.textContent)).toEqual(['Live', 'Memoria', 'Ricerche', 'Metodo', 'Stato'])
   })
 
   it('menu del telefono: chiuso con Escape, il fuoco torna sul bottone che lo ha aperto', async () => {

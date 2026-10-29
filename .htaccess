@@ -32,7 +32,7 @@
   RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(ricerche|metodo|stato)(/.*)?$ /index.html [L]
+  RewriteRule ^(ricerche|metodo|stato|memoria)(/.*)?$ /index.html [L]
 </IfModule>
 
 # Compressione: il proxy Aruba comprime html e css ma non i file JS della web app (337 KB il principale).

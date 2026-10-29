@@ -67,6 +67,7 @@ const router = createBrowserRouter([
         errorElement: <PaginaNonDisponibile />,
         children: [
           { path: '/', lazy: pagina(() => import('@/pagine/Live'), ErroreLive), errorElement: <ErroreLive /> },
+          { path: '/memoria', lazy: pagina(() => import('@/pagine/Memoria')) },
           { path: '/ricerche', lazy: pagina(() => import('@/pagine/Ricerche')) },
           { path: '/ricerche/:id', lazy: pagina(() => import('@/pagine/Ricerca')) },
           { path: '/metodo', lazy: pagina(() => import('@/pagine/Metodo')) },

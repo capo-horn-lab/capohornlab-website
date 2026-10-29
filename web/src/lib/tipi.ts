@@ -172,8 +172,11 @@ export const haErrore = (r: unknown): r is StrumentoErrore => typeof (r as Strum
 type Rec = Record<string, unknown>
 const oggetto = (x: unknown): x is Rec => typeof x === 'object' && x !== null && !Array.isArray(x)
 
+/** A payload the site cannot show: the channel's error (a retry would get the same payload, the next poll is the retry). */
+export class RispostaNonValida extends Error {}
+
 function fallisci(dove: string): never {
-  throw new Error(`risposta del motore non valida: ${dove}`)
+  throw new RispostaNonValida(`risposta del motore non valida: ${dove}`)
 }
 
 /** An instrument that cannot be shown becomes an error record of that instrument only, never of the page. */
@@ -260,4 +263,89 @@ export function validaFrequenze(x: unknown): Busta<Frequenze> {
   })
   if (v.dati && !Array.isArray(v.dati.limiti)) v.dati.limiti = []
   return v
+}
+
+// ---- memoria del mercato (GET /live/memoria): {generato, stato, oggi, verdetti}. The site keeps only the fields it shows, so
+// nothing else of the engine's files (file names, paths of the history) can reach the page.
+
+export interface GruppoVerdetto {
+  verdetto: string
+  frase: string
+  n: number | null
+  orizzonte: number | null
+  metrica: string | null
+  p_minimo: number | null
+}
+
+export interface Rubrica {
+  controlli: number | null
+  placebo: number | null
+  bootstrap: number | null
+  q_bh: number | null
+}
+
+export interface Memoria {
+  generato: string
+  stato: {
+    strumento: string | null
+    ultimo_giro: string | null
+    eventi_nuovi: number | null
+    conteggi: Record<string, number>
+    diagnostica: { quota_libro_caldo: number | null; quota_ambigui: number | null; scambi_verso: number | null; scambi_ambigui: number | null; l2_record: number | null; salti_a_freddo: number | null }
+  }
+  oggi: { data: string | null; conteggi: Record<string, number>; totale: number | null }
+  verdetti: {
+    divisione: string | null
+    generato: string | null
+    n_test_bh: number | null
+    rubrica: Rubrica | null
+    verdetti: Record<string, GruppoVerdetto>
+  }
+}
+
+const interi = (x: unknown): x is Record<string, number> => oggetto(x) && Object.values(x).every((v) => Number.isInteger(v))
+const numero = (x: unknown) => (finito(x) ? x : null)
+const testo = (x: unknown) => (typeof x === 'string' ? x : null)
+/** A field that is a finite number or null (absent too); anything else makes the payload invalid. */
+const numeroONull = (x: unknown, dove: string) => (x == null ? null : finito(x) ? x : fallisci(dove))
+
+function gruppoOk(chiave: string, g: unknown): GruppoVerdetto {
+  const dove = `verdetti.verdetti.${chiave}`
+  if (!oggetto(g) || typeof g.verdetto !== 'string' || typeof g.frase !== 'string') fallisci(dove)
+  if (g.metrica != null && typeof g.metrica !== 'string') fallisci(`${dove}.metrica`)
+  return {
+    verdetto: g.verdetto, frase: g.frase, metrica: (g.metrica as string | null | undefined) ?? null,
+    n: numeroONull(g.n, `${dove}.n`), orizzonte: numeroONull(g.orizzonte, `${dove}.orizzonte`), p_minimo: numeroONull(g.p_minimo, `${dove}.p_minimo`),
+  }
+}
+
+export function validaMemoria(x: unknown): Busta<Memoria> {
+  if (!oggetto(x) || !('dati' in x) || !('eta_s' in x) || !('ricevuto' in x)) fallisci('busta')
+  if (x.eta_s != null && !finito(x.eta_s)) fallisci('eta_s')
+  const busta = { ricevuto: (x.ricevuto as string | null) ?? null, eta_s: (x.eta_s as number | null) ?? null }
+  if (x.dati == null) return { ...busta, dati: null }
+  const d = x.dati
+  if (!oggetto(d) || typeof d.generato !== 'string') fallisci('generato')
+  const { stato, oggi, verdetti } = d
+  if (!oggetto(stato) || !interi(stato.conteggi)) fallisci('stato.conteggi')
+  if (!oggetto(oggi) || !interi(oggi.conteggi)) fallisci('oggi.conteggi')
+  if (!oggetto(verdetti) || !oggetto(verdetti.verdetti)) fallisci('verdetti.verdetti')
+  const dg: Rec = o(stato.diagnostica) ?? {}
+  const rubrica = o(o(verdetti.blocco)?.rubrica)
+  return {
+    ...busta,
+    dati: {
+      generato: d.generato,
+      stato: {
+        strumento: testo(stato.strumento), ultimo_giro: testo(stato.ultimo_giro), eventi_nuovi: numero(stato.eventi_nuovi), conteggi: stato.conteggi,
+        diagnostica: { quota_libro_caldo: numero(dg.quota_libro_caldo), quota_ambigui: numero(dg.quota_ambigui), scambi_verso: numero(dg.scambi_verso), scambi_ambigui: numero(dg.scambi_ambigui), l2_record: numero(dg.l2_record), salti_a_freddo: numero(dg.salti_a_freddo) },
+      },
+      oggi: { data: testo(oggi.data), conteggi: oggi.conteggi, totale: numero(oggi.totale) },
+      verdetti: {
+        divisione: testo(verdetti.divisione), generato: testo(verdetti.generato), n_test_bh: numero(verdetti.n_test_bh),
+        rubrica: rubrica && { controlli: numero(rubrica.controlli), placebo: numero(rubrica.placebo), bootstrap: numero(rubrica.bootstrap), q_bh: numero(rubrica.q_bh) },
+        verdetti: Object.fromEntries(Object.entries(verdetti.verdetti).map(([k, g]) => [k, gruppoOk(k, g)])),
+      },
+    },
+  }
 }

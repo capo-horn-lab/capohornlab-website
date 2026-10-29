@@ -79,7 +79,7 @@ describe('servi_dist', () => {
       assert.match(await tipo('/f.woff2'), /font\/woff2/)
       assert.match(await tipo('/i.svg'), /image\/svg\+xml/)
       assert.match(await tipo('/favicon.ico'), /icon/)
-      for (const rotta of ['/ricerche', '/ricerche/phase-1', '/metodo', '/stato/']) {
+      for (const rotta of ['/ricerche', '/ricerche/phase-1', '/metodo', '/stato/', '/memoria', '/memoria/']) {
         const r = await get(rotta)
         assert.equal(r.status, 200, rotta)
         assert.match(await r.text(), /home/, rotta)
@@ -87,6 +87,7 @@ describe('servi_dist', () => {
       assert.equal((await get('/non-esiste')).status, 404)
       assert.equal((await get('/app/mancante.js')).status, 404)
       assert.equal((await get('/ricerche/x.js')).status, 404)
+      assert.equal((await get('/memoria/x.js')).status, 404)
       const h = await get('/', { method: 'HEAD' })
       assert.equal(h.status, 200)
       assert.equal(await h.text(), '')
@@ -263,6 +264,29 @@ describe('verifica_link --dist', () => {
       assert.match(r.out, /503/)
     } finally {
       await ko.chiudi()
+    }
+  })
+
+  it('rotta /memoria e API /live/memoria tra quelle controllate: 503 della memoria -> 1', async () => {
+    const visti = []
+    const api = await finto((req) => (visti.push(req.url), req.url.endsWith('/memoria') ? [503, 'giu'] : [200, '{}']))
+    try {
+      const r = await esegui(LINK, ['--dist', sito(base), '--no-esterni', ...ISOLA], { VITE_API_BASE: api.url + '/api/v1' })
+      assert.equal(r.code, 1, r.out)
+      assert.match(r.out, /\/live\/memoria/)
+      assert.match(r.out, /503/)
+      assert.match(r.out, /\n(?:ok|ROTTO)\s+\S+\s+interno\s+\/memoria\s/) // la rotta SPA e' nell'elenco, servita con il fallback
+      assert.ok(visti.includes('/api/v1/live/frequenze') && visti.includes('/api/v1/live/scenari') && visti.includes('/api/v1/live/memoria'), visti.join())
+    } finally {
+      await api.chiudi()
+    }
+    const ok = await apiOk()
+    try {
+      const r = await esegui(LINK, ['--dist', sito(base), '--no-esterni', ...ISOLA], { VITE_API_BASE: ok.url + '/api/v1' })
+      assert.equal(r.code, 0, r.out)
+      assert.match(r.out, /\/memoria\s/)
+    } finally {
+      await ok.chiudi()
     }
   })
 

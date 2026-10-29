@@ -19,7 +19,7 @@ import {
   varianteParola,
   type Dati,
 } from './modello'
-import { statoMotore } from './stato'
+import { SOGLIA_CANALE_S, SOGLIA_SPENTO_CANALE_S, statoMotore } from './stato'
 
 const RAW = `---
 id: "x-1"
@@ -110,6 +110,18 @@ describe('stato del motore', () => {
     expect(statoMotore(181, 180)).toBe('spento')
     expect(statoMotore(181, 60)).toBe('spento')
     expect(statoMotore(null, 60)).toBe('spento')
+  })
+
+  it('canale memoria: acceso fino a 180 s, in ritardo fino a 600 s, poi spento; scenari e frequenze invariati', () => {
+    expect(SOGLIA_CANALE_S).toEqual({ scenari: 60, frequenze: 180, memoria: 180 })
+    expect(SOGLIA_SPENTO_CANALE_S).toEqual({ scenari: 180, frequenze: 180, memoria: 600 })
+    const m = (eta: number | null) => statoMotore(eta, SOGLIA_CANALE_S.memoria, SOGLIA_SPENTO_CANALE_S.memoria)
+    expect(m(180)).toBe('acceso')
+    expect(m(181)).toBe('in ritardo')
+    expect(m(600)).toBe('in ritardo')
+    expect(m(601)).toBe('spento')
+    expect(m(null)).toBe('spento')
+    expect(statoMotore(181, SOGLIA_CANALE_S.frequenze, SOGLIA_SPENTO_CANALE_S.frequenze)).toBe('spento')
   })
 })
 

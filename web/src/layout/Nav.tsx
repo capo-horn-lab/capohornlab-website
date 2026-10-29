@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 
 const VOCI = [
   { to: '/', label: 'Live', end: true },
+  { to: '/memoria', label: 'Memoria', end: false },
   { to: '/ricerche', label: 'Ricerche', end: false },
   { to: '/metodo', label: 'Metodo', end: false },
   { to: '/stato', label: 'Stato', end: false },

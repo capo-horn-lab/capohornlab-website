@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import { API_BASE } from '@/lib/config'
-import { SOGLIA_CANALE_S, SOGLIA_SPENTO_S, type StatoMotore, statoMotore } from '@/ricerche/stato'
+import { carica, OPZIONI_COMUNI } from '@/lib/api'
+import { etaCorrente, useAdesso } from '@/live/AvvisoFreschezza'
+import { SOGLIA_CANALE_S, SOGLIA_SPENTO_CANALE_S, type StatoMotore, statoMotore } from '@/ricerche/stato'
 
 const COLORE: Record<StatoMotore, string> = { acceso: 'var(--ch-success)', 'in ritardo': 'var(--ch-warm)', spento: 'var(--ch-danger)' }
 
@@ -10,6 +11,7 @@ const COLORE: Record<StatoMotore, string> = { acceso: 'var(--ch-success)', 'in r
 const CANALI = [
   { chiave: 'scenari', titolo: 'Scenari' },
   { chiave: 'frequenze', titolo: 'Frequenze' },
+  { chiave: 'memoria', titolo: 'Memoria' },
 ] as const
 
 type Chiave = (typeof CANALI)[number]['chiave']
@@ -17,23 +19,35 @@ type Chiave = (typeof CANALI)[number]['chiave']
 interface Busta {
   ricevuto: string | null
   eta_s: number | null
-  dati: { generato?: string; principale?: { strumento?: string; contratto?: string | null } } | null
+  dati: {
+    generato?: string
+    principale?: { strumento?: string; contratto?: string | null }
+    stato?: { strumento?: string | null }
+    verdetti?: { generato?: string | null }
+  } | null
 }
 
-async function leggi(chiave: Chiave): Promise<Busta> {
-  const r = await fetch(`${API_BASE}/live/${chiave}`, { cache: 'no-store' })
-  if (!r.ok) throw new Error(`HTTP ${r.status}`)
-  return (await r.json()) as Busta
+/** Lo strumento del canale: il principale per scenari e frequenze, quello della memoria per la memoria. */
+function strumentoDi(chiave: Chiave, dati: Busta['dati']): string {
+  if (chiave === 'memoria') return dati?.stato?.strumento || '-'
+  const p = dati?.principale
+  return p?.strumento ? `${p.strumento}${p.contratto ? ` ${p.contratto}` : ''}` : '-'
 }
+
+// Same conditional poll as the live channels (If-None-Match / 304), without their payload validation.
+const comeArriva = (x: unknown) => x as Busta
 
 function Canale({ chiave, titolo }: { chiave: Chiave; titolo: string }) {
-  const { data, error, isPending } = useQuery({
+  const q = useQuery({
     queryKey: ['stato', chiave],
-    queryFn: () => leggi(chiave),
-    refetchInterval: 15_000,
+    queryFn: ({ signal, client, queryKey }) => carica(client, queryKey, chiave, comeArriva, signal),
+    ...OPZIONI_COMUNI,
   })
-  const stato = statoMotore(data?.eta_s ?? null, SOGLIA_CANALE_S[chiave])
-  const p = data?.dati?.principale
+  const { data, error, isPending } = q
+  const adesso = useAdesso()
+  // the age keeps growing between the polls, and after a 304 the envelope's own eta_s is the old one
+  const eta = data ? etaCorrente({ data, isError: q.isError, dataUpdatedAt: q.dataUpdatedAt, errorUpdatedAt: q.errorUpdatedAt }, adesso) : null
+  const stato = statoMotore(eta ?? data?.eta_s ?? null, SOGLIA_CANALE_S[chiave], SOGLIA_SPENTO_CANALE_S[chiave])
   return (
     <section aria-labelledby={`c-${chiave}`} className="border-border bg-card flex flex-col gap-3 rounded-md border p-5">
       <div className="flex items-center justify-between gap-3">
@@ -55,11 +69,17 @@ function Canale({ chiave, titolo }: { chiave: Chiave; titolo: string }) {
           <dd className="font-mono">{data.ricevuto ?? 'mai'}</dd>
           <dt className="text-muted-foreground">Eta'</dt>
           {/* after a failed refresh the server's age of the last answer would stay frozen next to the error: not known */}
-          <dd className="font-mono">{error ? 'n/d' : data.eta_s === null ? '-' : `${data.eta_s} s`}</dd>
+          <dd className="font-mono">{error ? 'n/d' : (eta ?? data.eta_s) === null ? '-' : `${Math.round((eta ?? data.eta_s)!)} s`}</dd>
           <dt className="text-muted-foreground">Generato</dt>
           <dd className="font-mono">{data.dati?.generato ?? '-'}</dd>
-          <dt className="text-muted-foreground">Principale</dt>
-          <dd className="font-mono">{p?.strumento ? `${p.strumento}${p.contratto ? ` ${p.contratto}` : ''}` : '-'}</dd>
+          <dt className="text-muted-foreground">{chiave === 'memoria' ? 'Strumento' : 'Principale'}</dt>
+          <dd className="font-mono">{strumentoDi(chiave, data.dati)}</dd>
+          {chiave === 'memoria' && (
+            <>
+              <dt className="text-muted-foreground">Verifica del</dt>
+              <dd className="font-mono">{data.dati?.verdetti?.generato ?? '-'}</dd>
+            </>
+          )}
         </dl>
       )}
     </section>
@@ -72,9 +92,11 @@ export default function Stato() {
       <header className="flex flex-col gap-3">
         <h1 className="font-serif text-4xl font-semibold tracking-tight">Stato</h1>
         <p className="text-muted-foreground">
-          Il motore invia gli scenari ogni 15 s e le frequenze ogni 60 s. Gli scenari sono «acceso» fino a{' '}
-          {SOGLIA_CANALE_S.scenari} s dall'ultimo invio e «in ritardo» fino a {SOGLIA_SPENTO_S} s; le frequenze sono «acceso»
-          fino a {SOGLIA_CANALE_S.frequenze} s. Oltre {SOGLIA_SPENTO_S} s il motore e' «spento». La pagina si aggiorna da sola.
+          Il motore invia gli scenari ogni 15 s, le frequenze ogni 60 s e la memoria del mercato almeno ogni 300 s. Gli scenari sono «acceso» fino a{' '}
+          {SOGLIA_CANALE_S.scenari} s dall'ultimo invio e «in ritardo» fino a {SOGLIA_SPENTO_CANALE_S.scenari} s; le frequenze sono «acceso»
+          fino a {SOGLIA_CANALE_S.frequenze} s e «in ritardo» fino a {SOGLIA_SPENTO_CANALE_S.frequenze} s; la memoria e' «acceso» fino a{' '}
+          {SOGLIA_CANALE_S.memoria} s e «in ritardo» fino a {SOGLIA_SPENTO_CANALE_S.memoria} s. Oltre, il motore e' «spento». La pagina si
+          aggiorna da sola.
         </p>
       </header>
       {CANALI.map((c) => (

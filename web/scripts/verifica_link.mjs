@@ -2,7 +2,7 @@
 // Verifica che nessun link del sito sia rotto: crawl di web/dist (servito in locale con fallback SPA) o di un URL.
 //   node scripts/verifica_link.mjs [--dist dist] [--statici ..] [--base https://sito] [--timeout 30] [--no-esterni]
 //
-// Parte da: /, /ricerche, /metodo, /stato, /ricerche/<id> (da src/content/ricerche/indice.json, se c'e': solo
+// Parte da: /, /ricerche, /metodo, /stato, /memoria, /ricerche/<id> (da src/content/ricerche/indice.json, se c'e': solo
 // gli id di primo livello, array o { ricerche: [...] }, mai i campi annidati come strumenti) e da ogni .html di
 // --dist. Da HTML estrae href/src/action; dal JS compilato i letterali tra apici che sono URL http(s), percorsi
 // con estensione di asset o .html, rotte note, chunk relativi (./x.js) e dipendenze di Vite (cartella-di-dist/x.js);
@@ -10,7 +10,7 @@
 // attributo scritto in JS, `src="' + img + '"`) non sono richieste, ne' le assegnazioni JS in linea (`x.src = src`);
 // dal CSS url(...); dai .md di src/content i link ](url). Poi controlla ogni URL (2xx/3xx = ok,
 // redirect seguiti; interni con GET, esterni con HEAD e GET di riserva); mailto/tel/javascript/data saltati.
-// API: GET {API_BASE}/live/frequenze e /live/scenari, con API_BASE da $VITE_API_BASE (default Render) e ogni
+// API: GET {API_BASE}/live/frequenze, /live/scenari e /live/memoria, con API_BASE da $VITE_API_BASE (default Render) e ogni
 // letterale ".../api/v1" trovato nel bundle; la risposta 200 deve essere JSON valido.
 // --statici <dir> (ripetibile): cartelle di riserva per i file che dist non ha (favicon, pagine legali del
 // sito) come nel deploy; di quei file si verifica che esistano, ma non li si esplora. Uscita: 0 nessun link rotto, 1 almeno uno rotto, 2 uso errato.
@@ -22,8 +22,8 @@ import { creaServer } from './servi_dist.mjs'
 
 const QUI = dirname(fileURLToPath(import.meta.url))
 const API_DEFAULT = 'https://capohornlab-website.onrender.com/api/v1'
-const API_PERCORSI = ['/live/frequenze', '/live/scenari']
-const ROTTE = ['/', '/ricerche', '/metodo', '/stato']
+const API_PERCORSI = ['/live/frequenze', '/live/scenari', '/live/memoria']
+const ROTTE = ['/', '/ricerche', '/metodo', '/stato', '/memoria']
 const IGNORA = [/^https?:\/\/www\.w3\.org\//, /^https?:\/\/localhost(:\d+)?(\/|$)/, /^https:\/\/react\.dev\/errors/] // namespace XML, segnaposto, messaggi di errore
 const ASSET = /\.(?:js|mjs|css|json|html|woff2?|png|jpe?g|svg|webp|ico|txt|xml|webmanifest|map)$/i
 const SALTA = /^(?:mailto|tel|javascript|data|blob|about):/i

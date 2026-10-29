@@ -4,7 +4,7 @@
 // --dir si puo' ripetere: vince la prima cartella che ha il file (le altre fanno da riserva,
 // per esempio il repo del sito con favicon e pagine legali accanto a dist).
 // Comprime in gzip html/js/css/json/svg se il client lo accetta (come fa un hosting reale: Lighthouse locale resta attendibile).
-// Fallback: percorsi sconosciuti sotto /ricerche, /metodo, /stato (senza estensione) -> index.html.
+// Fallback: percorsi sconosciuti sotto /ricerche, /metodo, /stato, /memoria (senza estensione) -> index.html.
 import { createReadStream, statSync } from 'node:fs'
 import http from 'node:http'
 import { pipeline } from 'node:stream'
@@ -13,7 +13,7 @@ import { dirname, extname, join, resolve, sep } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { leggiArgomenti } from './args.mjs'
 
-export const ROTTE_SPA = ['ricerche', 'metodo', 'stato']
+export const ROTTE_SPA = ['ricerche', 'metodo', 'stato', 'memoria']
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8',
   '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.woff2': 'font/woff2', '.woff': 'font/woff',
