@@ -1,4 +1,4 @@
-"""Live snapshots (``frequenze``, ``scenari``): the engine PUTs each every few seconds, the home page GETs them."""
+"""Live snapshots (``frequenze``, ``scenari``, ``memoria``): the engine PUTs each every few seconds, the pages GET them."""
 from __future__ import annotations
 
 import hmac
@@ -16,7 +16,7 @@ from app.models.live_snapshot import LiveSnapshot
 router = APIRouter(prefix="/live", tags=["live"])
 alias = APIRouter(prefix="/frequenze", tags=["live"])  # fase 1 URL, same storage row as /live/frequenze
 
-CHIAVI = ("frequenze", "scenari")
+CHIAVI = ("frequenze", "scenari", "memoria")
 MAX_BYTE = 2_097_152
 _FORMATO = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -62,7 +62,11 @@ async def _salva(chiave: str, request: Request, db: AsyncSession) -> Response:
         json.dumps(dati, ensure_ascii=False, allow_nan=False).encode("utf-8")
     except (UnicodeDecodeError, ValueError, RecursionError):
         raise HTTPException(status_code=422, detail="Body must be a UTF-8 JSON object.") from None
-    if not (
+    if chiave == "memoria":
+        # the memoria payload has no per-instrument map: {generato, stato, oggi, verdetti}
+        if not (isinstance(dati, dict) and isinstance(dati.get("generato"), str)):
+            raise HTTPException(status_code=422, detail="Body needs 'generato' (string).")
+    elif not (
         isinstance(dati, dict)
         and isinstance(dati.get("generato"), str)
         and isinstance(dati.get("strumenti"), dict)

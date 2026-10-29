@@ -6,6 +6,7 @@ import json
 import os
 import unittest
 from datetime import datetime, timezone
+from pathlib import Path
 
 # Must be set before `app` is imported: settings and the engine are built at import time.
 os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///./test_frequenze.db"
@@ -24,6 +25,7 @@ from app.models.live_snapshot import LiveSnapshot  # noqa: E402
 OK = {"generato": "2026-10-26 15:31", "strumenti": {"MNQ": {"contratto": "MNQ 12-26"}}}
 TOKEN = {"X-Publish-Token": "test-token"}
 LIVE = "/api/v1/live"
+MEMORIA_FIXTURE = Path(__file__).parent / "fixtures" / "memoria-payload.json"  # real engine payload, no local paths
 
 
 def run(coro_fn):
@@ -187,6 +189,40 @@ class FrequenzeApiTest(unittest.TestCase):
         self.assertIsNone(self.get(f"{LIVE}/frequenze").json()["dati"])  # keys are independent
         self.assertIsNone(self.get().json()["dati"])
         self.assertEqual(self.put(json.dumps(OK), None, f"{LIVE}/scenari").status_code, 401)  # same token rules
+
+    def test_live_memoria_put_poi_get(self):
+        memoria = json.loads(MEMORIA_FIXTURE.read_text(encoding="utf-8"))
+        self.assertEqual(self.put(json.dumps(memoria), TOKEN, f"{LIVE}/memoria").status_code, 204)
+        g = self.get(f"{LIVE}/memoria")
+        self.assertEqual(g.status_code, 200)
+        self.assertEqual(g.headers["cache-control"], "no-store")
+        corpo = g.json()
+        self.assertEqual(corpo["dati"], memoria)
+        self.assertGreaterEqual(corpo["eta_s"], 0)
+        self.assertEqual(self.put(json.dumps(memoria), None, f"{LIVE}/memoria").status_code, 401)  # same token rules
+
+    def test_live_x_ancora_403(self):
+        self.assertEqual(self.put(json.dumps(OK), TOKEN, f"{LIVE}/x").status_code, 403)
+        self.assertEqual(self.get(f"{LIVE}/x").status_code, 403)
+
+    def test_live_memoria_corpo_senza_generato_422(self):
+        for corpo in (b"[]", json.dumps({}), json.dumps({"generato": 1}), json.dumps({"stato": {}, "verdetti": {}})):
+            with self.subTest(corpo=corpo):
+                self.assertEqual(self.put(corpo, TOKEN, f"{LIVE}/memoria").status_code, 422)
+        self.assertIsNone(self.get(f"{LIVE}/memoria").json()["dati"])  # nothing stored by the refused PUTs
+
+    def test_memoria_e_frequenze_sono_righe_distinte(self):
+        memoria = json.loads(MEMORIA_FIXTURE.read_text(encoding="utf-8"))
+        self.assertEqual(self.put(json.dumps(OK), TOKEN, f"{LIVE}/frequenze").status_code, 204)
+        self.assertEqual(self.put(json.dumps(memoria), TOKEN, f"{LIVE}/memoria").status_code, 204)
+        self.assertEqual(self.get(f"{LIVE}/frequenze").json()["dati"], OK)
+        self.assertEqual(self.get(f"{LIVE}/memoria").json()["dati"], memoria)
+
+        async def conta():
+            async with AsyncSessionLocal() as db:
+                return (await db.execute(select(func.count()).select_from(LiveSnapshot))).scalar_one()
+
+        self.assertEqual(run(conta), 2)
 
     def test_alias_frequenze_equivale(self):
         self.assertEqual(self.put(json.dumps(OK), TOKEN).status_code, 204)  # alias -> live/frequenze

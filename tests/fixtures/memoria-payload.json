@@ -1,0 +1,316 @@
+{
+ "generato": "2026-10-29T10:03:19+00:00",
+ "stato": {
+  "versione": 1,
+  "ultimo_giro": "2026-10-29T10:03:00+00:00",
+  "strumento": "MNQ 12-26",
+  "byte_letti": 21144680,
+  "byte_nuovi": 21144680,
+  "sovrapposizione_byte": 0,
+  "sovrapposizione_s": 0,
+  "record": 63800,
+  "eventi_salvati": 3,
+  "eventi_nuovi": 1,
+  "conteggi": {
+   "assorbimento/assorbimento": 652,
+   "liquidita/muro": 5,
+   "liquidita/ritiro": 5026,
+   "order_flow/flusso_con_esito": 2986,
+   "order_flow/flusso_senza_esito": 65
+  },
+  "diagnostica": {
+   "l2_record": 41987359,
+   "l2_record_caldo": 41339864,
+   "salti_a_freddo": 2683,
+   "muri_rinviati_a_freddo": 1,
+   "quota_libro_caldo": 0.9845788109702256,
+   "ritiri_candidati": 71062,
+   "muri_candidati": 6078,
+   "muri_soppressi": 0,
+   "persistenza_max_muro_s": 35.899372816085815,
+   "size_max_livello": 336.0,
+   "scambi_verso": 841784,
+   "scambi_ambigui": 0,
+   "scambi_verso_record": 841784,
+   "scambi_ambigui_record": 0,
+   "scambi_verso_dedotto": 0,
+   "scambi_ambigui_dedotto": 0,
+   "quota_ambigui": 0.0,
+   "quota_ambigui_record": 0.0,
+   "quota_ambigui_dedotto": 0.0,
+   "ofi_valutazioni": 23485,
+   "ofi_valutazioni_con_soglia": 22885,
+   "ofi_non_valutabili": 5,
+   "ofi_soglia": 181.0,
+   "ofi_scatti_senza_esito": 2,
+   "ofi_scatti_con_esito": 407,
+   "ofi_zona_intermedia": 7,
+   "ofi_eventi_senza_esito": 2,
+   "ofi_eventi_con_esito": 125
+  },
+  "errori": [],
+  "evento": null,
+  "cambi_strumento": [],
+  "file_byte": 14833122661,
+  "modo": "continuo",
+  "eventi_totali": 8734,
+  "durata_s": 7.36
+ },
+ "oggi": {
+  "data": "2026-10-29",
+  "conteggi": {
+   "assorbimento/assorbimento": 29,
+   "liquidita/ritiro": 302,
+   "order_flow/flusso_con_esito": 113,
+   "order_flow/flusso_senza_esito": 2
+  },
+  "totale": 446,
+  "da": "2026-10-28T23:00:00+00:00"
+ },
+ "verdetti": {
+  "versione": 2,
+  "divisione": "2026-10-21",
+  "blocco": {
+   "divisione": "2026-10-21",
+   "divisione_iniziale": "2026-10-21",
+   "rubrica": {
+    "seed": 0,
+    "controlli": 5,
+    "placebo": 200,
+    "bootstrap": 2000,
+    "q_bh": 0.1
+   },
+   "storico": "9965a5d408cf48febc8ab214edfeab17d0fc3b4a3f90da34f61d4bbee406b9d9",
+   "fissato": "2026-10-28",
+   "cambi": [
+    {
+     "da": "2026-10-21",
+     "a": "2026-10-21",
+     "motivo": "registrazione dell'elenco dei file dopo la correzione D1 (stessa divisione 2026-10-21)",
+     "data": "2026-10-29",
+     "storico_cambiato": true
+    }
+   ],
+   "file_storico": [
+    [
+     "2026-10-14.zip",
+     49070245
+    ],
+    [
+     "2026-10-15.zip",
+     233579244
+    ],
+    [
+     "2026-10-16.zip",
+     221621994
+    ],
+    [
+     "2026-10-17.zip",
+     209180
+    ],
+    [
+     "2026-10-18.zip",
+     8970
+    ],
+    [
+     "2026-10-19.zip",
+     304969134
+    ],
+    [
+     "2026-10-20.zip",
+     743711174
+    ],
+    [
+     "2026-10-21.zip",
+     861180729
+    ],
+    [
+     "2026-10-22.zip",
+     1010845163
+    ],
+    [
+     "2026-10-23.zip",
+     1011971714
+    ],
+    [
+     "2026-10-24.zip",
+     217574
+    ],
+    [
+     "2026-10-25.zip",
+     100895
+    ],
+    [
+     "2026-10-26.zip",
+     934427668
+    ],
+    [
+     "2026-10-27.zip",
+     817910473
+    ],
+    [
+     "2026-10-28-2.zip",
+     282535368
+    ],
+    [
+     "2026-10-28.zip",
+     541747357
+    ]
+   ]
+  },
+  "generato": "2026-10-29T07:12:39+00:00",
+  "n_test_bh": 150,
+  "verdetti": {
+   "assorbimento/assorbimento/acquisto": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 6 sessioni con dati, ne servono 8 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 244,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "assorbimento/assorbimento/vendita": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 6 sessioni con dati, ne servono 8 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 278,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "liquidita/muro/ask": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 0 eventi, ne servono 50 (verifica dal 2026-10-21); con 0 sessioni il p minimo e' 1.0000 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 0,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 1.0,
+    "sessioni_necessarie": 8
+   },
+   "liquidita/muro/bid": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 0 eventi, ne servono 50 (verifica dal 2026-10-21); con 0 sessioni il p minimo e' 1.0000 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 0,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 1.0,
+    "sessioni_necessarie": 8
+   },
+   "liquidita/ritiro/ask": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 6 sessioni con dati, ne servono 8 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 1960,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "liquidita/ritiro/bid": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 6 sessioni con dati, ne servono 8 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 1948,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "order_flow/flusso_con_esito/acquisto": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 6 sessioni con dati, ne servono 8 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 1180,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "order_flow/flusso_con_esito/vendita": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 6 sessioni con dati, ne servono 8 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 1241,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "order_flow/flusso_senza_esito/acquisto": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 27 eventi, ne servono 50 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 27,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   },
+   "order_flow/flusso_senza_esito/vendita": {
+    "verdetto": "DESCRITTIVO",
+    "frase": "DESCRITTIVO: campione di verifica insufficiente: 28 eventi, ne servono 50 (verifica dal 2026-10-21); con 6 sessioni il p minimo e' 0.0312 e CONFERMATO non e' raggiungibile: servono almeno 8 sessioni di verifica prima che sia possibile",
+    "direzione": null,
+    "orizzonte": 30,
+    "metrica": "quota_favorevole",
+    "n": 28,
+    "primario": true,
+    "n_test_gruppo": 15,
+    "controllo_condizionato": false,
+    "quota_sessioni_condizionate": 0.0,
+    "quota_eventi_condizionati": 0.0,
+    "p_minimo": 0.03125,
+    "sessioni_necessarie": 8
+   }
+  }
+ }
+}
