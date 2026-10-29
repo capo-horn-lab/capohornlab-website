@@ -49,6 +49,7 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["ETag"],  # the web app (another origin) must read it to send If-None-Match and get 304s
 )
 
 # Gzip the larger JSON (the scenari snapshot is ~100 KB); small bodies stay uncompressed.

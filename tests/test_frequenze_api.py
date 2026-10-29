@@ -4,7 +4,9 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import time
 import unittest
+import unittest.mock
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -16,7 +18,7 @@ import httpx  # noqa: E402
 from sqlalchemy import func, select  # noqa: E402
 
 import app.models  # noqa: E402,F401  # register every table on Base.metadata
-from app.api.v1.frequenze import eta_secondi  # noqa: E402
+from app.api.v1.frequenze import CHIAVI, eta_secondi  # noqa: E402
 from app.core.config import settings  # noqa: E402
 from app.core.database import AsyncSessionLocal, Base, async_engine  # noqa: E402
 from app.main import app as fastapi_app  # noqa: E402
@@ -256,6 +258,91 @@ class FrequenzeApiTest(unittest.TestCase):
         self.assertEqual(g.headers["content-encoding"], "gzip")
         self.assertEqual(g.json()["dati"], grande)
         self.assertEqual(g.headers["cache-control"], "no-store")
+
+    # --- conditional requests (ETag / If-None-Match) ---
+
+    def etag_di(self, chiave: str) -> str:
+        return f'W/"{chiave}-{self.get(f"{LIVE}/{chiave}").json()["ricevuto"]}"'
+
+    def test_etag_su_200(self):
+        self.put(json.dumps(OK), TOKEN)
+        g = self.get(f"{LIVE}/frequenze")
+        self.assertEqual(g.status_code, 200)
+        self.assertEqual(g.headers["etag"], f'W/"frequenze-{g.json()["ricevuto"]}"')
+        self.assertEqual(g.headers["cache-control"], "no-store")
+        self.assertEqual(set(g.json()), {"ricevuto", "eta_s", "dati"})
+
+    def test_if_none_match_uguale_304(self):
+        self.put(json.dumps(OK), TOKEN)
+        etag = self.etag_di("frequenze")
+        for valore in (etag, f'"altro", {etag}'):
+            with self.subTest(valore=valore):
+                g = self.get(f"{LIVE}/frequenze", {"If-None-Match": valore})
+                self.assertEqual(g.status_code, 304)
+                self.assertEqual(g.content, b"")
+                self.assertNotIn("content-length", g.headers)
+                self.assertEqual(g.headers["etag"], etag)
+                self.assertEqual(g.headers["cache-control"], "no-store")
+
+    def test_if_none_match_diverso_o_asterisco_200(self):
+        self.put(json.dumps(OK), TOKEN)
+        for valore in ('W/"frequenze-1999-01-01T00:00:00Z"', "*", ""):
+            with self.subTest(valore=valore):
+                g = self.get(f"{LIVE}/frequenze", {"If-None-Match": valore})
+                self.assertEqual(g.status_code, 200)
+                self.assertEqual(g.json()["dati"], OK)
+                self.assertIn("etag", g.headers)
+
+    def test_etag_cambia_dopo_nuovo_put(self):
+        self.put(json.dumps(OK), TOKEN)
+        vecchio = self.etag_di("frequenze")
+        altro = {"generato": "2026-10-26 15:40", "strumenti": {"MES": {}}}
+        with unittest.mock.patch("app.api.v1.frequenze.adesso_iso", return_value="2099-01-01T00:00:00Z"):  # a later second, no sleep
+            self.put(json.dumps(altro), TOKEN)
+        g = self.get(f"{LIVE}/frequenze", {"If-None-Match": vecchio})
+        self.assertEqual(g.status_code, 200)
+        self.assertNotEqual(g.headers["etag"], vecchio)
+        self.assertEqual(g.json()["dati"], altro)
+        self.assertEqual(self.get(f"{LIVE}/frequenze", {"If-None-Match": g.headers["etag"]}).status_code, 304)
+
+    def test_canale_vuoto_etag_vuoto_e_304(self):
+        for chiave in CHIAVI:
+            with self.subTest(chiave=chiave):
+                g = self.get(f"{LIVE}/{chiave}")
+                self.assertEqual(g.status_code, 200)
+                self.assertEqual(g.headers["etag"], f'W/"{chiave}-vuoto"')
+                c = self.get(f"{LIVE}/{chiave}", {"If-None-Match": f'W/"{chiave}-vuoto"'})
+                self.assertEqual(c.status_code, 304)
+                self.assertEqual(c.content, b"")
+                self.assertEqual(c.headers["cache-control"], "no-store")
+        self.assertEqual(self.get(f"{LIVE}/memoria", {"If-None-Match": '*'}).status_code, 200)
+
+    def test_etag_esposto_al_browser_cross_origin(self):
+        # the web app runs on another origin: without Access-Control-Expose-Headers the browser hides ETag from fetch()
+        self.put(json.dumps(OK), TOKEN)
+        origine = os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173").split(",")[0].strip()
+        for intestazioni, atteso in (({"Origin": origine}, 200), ({"Origin": origine, "If-None-Match": self.etag_di("frequenze")}, 304)):
+            with self.subTest(atteso=atteso):
+                g = self.get(f"{LIVE}/frequenze", intestazioni)
+                self.assertEqual(g.status_code, atteso)
+                self.assertIn("etag", g.headers.get("access-control-expose-headers", "").lower())
+
+    def test_alias_frequenze_etag_come_live(self):
+        self.assertEqual(self.get().headers["etag"], 'W/"frequenze-vuoto"')
+        self.put(json.dumps(OK), TOKEN)
+        etag = self.etag_di("frequenze")
+        a = self.get("/api/v1/frequenze")
+        self.assertEqual(a.headers["etag"], etag)
+        self.assertEqual(self.get("/api/v1/frequenze", {"If-None-Match": etag}).status_code, 304)
+        self.assertEqual(self.get("/api/v1/frequenze", {"If-None-Match": "*"}).status_code, 200)
+        # an ETag of another channel never matches
+        self.assertEqual(self.get("/api/v1/frequenze", {"If-None-Match": 'W/"scenari-vuoto"'}).status_code, 200)
+
+    def test_get_senza_if_none_match_invariato(self):
+        self.put(json.dumps(OK), TOKEN)
+        g = self.get(f"{LIVE}/frequenze")
+        self.assertEqual(g.status_code, 200)
+        self.assertEqual(g.json()["dati"], OK)
 
     def test_eta_mai_negativa(self):
         adesso = datetime.now(timezone.utc)

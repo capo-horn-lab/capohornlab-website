@@ -82,10 +82,28 @@ async def _salva(chiave: str, request: Request, db: AsyncSession) -> Response:
     return Response(status_code=204)
 
 
-async def _leggi(chiave: str, db: AsyncSession) -> JSONResponse:
-    """Public: latest snapshot under ``chiave`` with its age, or nulls when nothing was published yet."""
+def _corrisponde(if_none_match: str | None, etag: str) -> bool:
+    """Exact string match of ``etag`` against a (possibly comma-separated) ``If-None-Match``; ``*`` never matches."""
+    if not if_none_match:
+        return False
+    return any(parte.strip() == etag for parte in if_none_match.split(","))
+
+
+async def _leggi(chiave: str, request: Request, db: AsyncSession) -> Response:
+    """Public: latest snapshot under ``chiave`` with its age, or nulls when nothing was published yet.
+
+    Conditional GET: the weak ``ETag`` is ``W/"<chiave>-<ricevuto>"`` (``W/"<chiave>-vuoto"`` with no row),
+    never derived from ``eta_s``, which changes every second. A matching ``If-None-Match`` gets a bodyless 304.
+    ``Cache-Control: no-store`` stays on both: the app revalidates itself with ``fetch`` and an in-memory ETag.
+    Limit: ``ricevuto`` has one-second resolution, so two PUTs in the same second share an ETag; the
+    publisher sends at most every 15 s.
+    """
     _verifica_chiave(chiave)
     riga = await db.get(LiveSnapshot, chiave)
+    etag = f'W/"{chiave}-{riga.ricevuto if riga is not None else "vuoto"}"'
+    intestazioni = {"Cache-Control": "no-store", "ETag": etag}
+    if _corrisponde(request.headers.get("if-none-match"), etag):
+        return Response(status_code=304, headers=intestazioni)
     if riga is None:
         risposta = {"ricevuto": None, "eta_s": None, "dati": None}
     else:
@@ -94,7 +112,7 @@ async def _leggi(chiave: str, db: AsyncSession) -> JSONResponse:
             "eta_s": eta_secondi(riga.ricevuto, datetime.now(timezone.utc)),
             "dati": riga.payload,
         }
-    return JSONResponse(risposta, headers={"Cache-Control": "no-store"})
+    return JSONResponse(risposta, headers=intestazioni)
 
 
 @router.put("/{chiave}", status_code=204)
@@ -103,8 +121,8 @@ async def pubblica(chiave: str, request: Request, db: AsyncSession = Depends(get
 
 
 @router.get("/{chiave}")
-async def leggi(chiave: str, db: AsyncSession = Depends(get_async_db)) -> JSONResponse:
-    return await _leggi(chiave, db)
+async def leggi(chiave: str, request: Request, db: AsyncSession = Depends(get_async_db)) -> Response:
+    return await _leggi(chiave, request, db)
 
 
 @alias.put("", status_code=204)
@@ -113,5 +131,5 @@ async def pubblica_frequenze(request: Request, db: AsyncSession = Depends(get_as
 
 
 @alias.get("")
-async def leggi_frequenze(db: AsyncSession = Depends(get_async_db)) -> JSONResponse:
-    return await _leggi("frequenze", db)
+async def leggi_frequenze(request: Request, db: AsyncSession = Depends(get_async_db)) -> Response:
+    return await _leggi("frequenze", request, db)
