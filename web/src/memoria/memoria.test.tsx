@@ -168,12 +168,13 @@ describe('che cosa riconosce', () => {
     expect(liq.definizioni.some((d) => d.fonte.startsWith('src/trading_stack/memoria_mercato.py#L'))).toBe(true)
     expect(liq.definizioni[0].testo).toContain("A PARITA' DI PREZZO")
     expect(liq.definizioni[2].etichetta).toBe('registrazione prima del codice')
-    // la nota sul 100 della docstring contro il 25 della ricalibrazione
-    expect(liq.nota).toBe('Nota: la docstring riporta 100, la ricalibrazione registrata il 28/10 (L11009) 25.')
-    expect(within(sez).getByText(liq.nota!)).toBeInTheDocument()
+    // docstring e ricalibrazione concordano (MURO_MIN_SIZE 25 dal 29/10/2026): nessuna nota di discrepanza
+    expect(liq.nota).toBeUndefined()
+    expect(within(sez).queryByText(/docstring riporta/)).toBeNull()
     expect(within(sez).getByText('registrazione prima del codice')).toBeInTheDocument()
     expect(within(sez).getByText(/A PARITA' DI PREZZO/)).toBeInTheDocument()
-    expect(liq.definizioni[1].testo).toContain('MURO_MIN_SIZE (100)')
+    expect(liq.definizioni[1].testo).toContain('MURO_MIN_SIZE (25)')
+    expect(liq.definizioni[1].testo).not.toContain('(100)')
     expect(liq.definizioni[3].testo).toContain('MURO_MIN_SIZE 25')
   })
 

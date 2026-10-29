@@ -43,7 +43,7 @@ export const FAMIGLIE: Famiglia[] = [
         fonte: 'src/trading_stack/memoria_mercato.py#L71-L79',
       },
       {
-        testo: `"muro": un livello fra le prime N_LIVELLI con size >= MURO_K (5) volte la mediana delle size di quei livelli e >= MURO_MIN_SIZE (100), che persiste >= MURO_T_S (10 s); l'evento ha l'istante del primo record dopo T.`,
+        testo: `"muro": un livello fra le prime N_LIVELLI con size >= MURO_K (5) volte la mediana delle size di quei livelli e >= MURO_MIN_SIZE (25), che persiste >= MURO_T_S (10 s); l'evento ha l'istante del primo record dopo T.`,
         fonte: 'src/trading_stack/memoria_mercato.py#L80-L81',
       },
       {
@@ -57,8 +57,7 @@ export const FAMIGLIE: Famiglia[] = [
         fonte: 'docs/EXECUTION_LEDGER.md#L11009',
       },
     ],
-    // un fatto verificabile fra due fonti (docstring e registro), non un'interpretazione
-    nota: 'Nota: la docstring riporta 100, la ricalibrazione registrata il 28/10 (L11009) 25.',
+    // docstring (riga 81) e ricalibrazione registrata (L11009) concordano su MURO_MIN_SIZE 25 dal 29/10/2026: nessuna nota
   },
   {
     id: 'order-flow',
